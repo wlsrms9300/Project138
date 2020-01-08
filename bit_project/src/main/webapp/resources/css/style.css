@@ -12,7 +12,7 @@
 }
 
 
-/*메인 사이즈*/
+/*硫붿씤 �궗�씠利�*/
 .main {
     width: 100%;
     margin-left: 40px;
@@ -24,8 +24,9 @@
     height:50px;
 }
 
-/*밑줄*/
+/*諛묒쨪*/
 .header{
+background-color:white;
 position: fixed;
 display: flex;
 width: 100%;
@@ -94,7 +95,7 @@ div[class="sidebar"] {
     height:60px;
     text-align: center;
     border: 0;
-    background: rgba(255,235,205,0.5);
+    background-color: rgba(255,235,205,0.95);
     position: relative;
     display: none;
 }
@@ -109,35 +110,34 @@ input[id ="menuicon"]:checked +label +div {
     -webkit-transition-delay: 0.9s;
     transition: all 1s;
     transition-delay: 1s;
-    padding: 20px 20px 0px 0px;
+    padding: 20px 0px 0px 0px;
     transition-property: initial; 
+    justify-content:center;
 }
 
 .nav ul{display: none;}
 
 #sidemenu {
     display: flex;
-   
+    width:80%;
 }
 
 .menu_w {
-    position: fixed;
-    width: 80%;
     height: 150px;
     -webkit-transition: all 0.9s;
     -webkit-transition-delay: 0.9s;
     transition: all 0.5s;
     transition-delay: 0.5s;
+    width:100%;
 }
 
 .menu_m
  {
     display: none;
     text-align: center;
-    margin-left: 28%;
     padding: 10px;
-    height: 450px;
     border-radius:12px;
+    width:100%;
 }
 
 div[class="sidebar"] button {
@@ -152,19 +152,21 @@ div[class="sidebar"] button {
     font-weight: 400;   
     text-align: center;
     z-index: 1;
+  	box-shadow: 0px 3px 5px rgb(216, 216, 216);
     
 }
 
+.login_text  {
+		padding-top: 14px;
+	}   
+
 
 /*mediaquery*/
-/*화면 너비 0~1220px*/
 @media (max-width: 1220px){
     .container {width:100%;}
     .row{padding: 0 15px;}
 }
 
-
-/*화면 너비 0~768px*/
 @media (max-width: 480px){
    
     .header{
@@ -182,11 +184,16 @@ div[class="sidebar"] button {
         width: calc(900px - 60px);
         line-height: 45px;
     }
-
-    .nav li a{
-        font-size: 13px;
-        
-    }       
+	.login_text  {
+		font-size:14px;
+		padding-top:4px;
+		padding-left:30px;
+	}   
+    
+    #sidemenu {
+     margin:0 auto;
+     width:auto;
+    }
         
     div[class="sidebar"] {
         height:60px;
@@ -203,7 +210,7 @@ div[class="sidebar"] button {
     }
     .menu_m {
         display: flex;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         margin-top: -20px;
         padding: 31px;
     }
@@ -214,21 +221,16 @@ div[class="sidebar"] button {
     }
     div[class="sidebar"] {
         background-color: #fff;
-        width: 400px;
+        width:100%;
         position: fixed; 
-        background:  rgba(255,235,205,0.5);
-        margin-left: -19%;
-        margin-top: -3%;
+        background:  rgba(255,235,205,0.95);
         height: 10px;
-        
-        
+ 	   
 }
 input[id ="menuicon"]:checked +label +div {
     top:60px;
-    height: 650px;
-    left: 60px;
+    height: 430px;
     display: flex;
-    overflow-y: scroll; 
 
 
     

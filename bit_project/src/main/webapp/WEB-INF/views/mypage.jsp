@@ -26,11 +26,11 @@
         <div id="intro_bg">
             <div class="header">
                 <div class="main">
-                    <li><img src="로고4.jpg"></li>
+                    <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
                 </div>
                 <ul class="nav">
 
-                    <li><a href="#">로그인</a></li>
+                    <div class="login_text"><a href="#">로그인</a></div>
 
                     <li><input type="checkbox" id="menuicon">
                         <label for="menuicon">
@@ -40,7 +40,7 @@
                         </label>
 
                         <div class="sidebar">
-                            <ul id="sidemenu">
+                            <div id="sidemenu">
                                 <table class="menu_w">
                                     <tbody>
                                         <tr>  
@@ -63,7 +63,7 @@
                                     <tbody>       
                                                                
                                      <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='//'"
-                                                    type="button" >구독하기</button> <tr><td>
+                                                    type="button" >구독하기</button></td></tr>
                                         <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='//'"
                                                     type="button">회원가입</button></td></tr>
                                         <tr><td><a href="#a">이용방법</a></td></tr>
@@ -72,10 +72,10 @@
                                         <tr><td><a href="#a">커뮤니티</a></td></tr>
                                         <tr><td><a href="#a">상품보기</a></td></tr>
                                         <tr><td><a href="#a">QnA</a></td></tr>
-                                    </ol>
+                                   
                                     </tbody>
                                 </table>                       
-                            </ul>
+                            </div>
                         </div>
                         
                     </li>
