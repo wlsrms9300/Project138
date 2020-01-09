@@ -6,7 +6,9 @@
 }
 html, body {
     height:100%;
-    box-sizing: border-box;
+    b
+
+
 }
 html {
     display:flex;
@@ -173,7 +175,6 @@ a {
     outline: none;
     position: relative;
     text-transform: uppercase;
-    z-index:-1;
 }
 
 /* profile css 끝============================================================================== */
@@ -181,7 +182,6 @@ a {
 
 /* profile mobile 시작==============================================================================*/
 @media (max-width: 480px) {
-
 .wrapper {
     padding-left:0;
     padding-left:0;
@@ -274,7 +274,7 @@ a {
     display:none;
     max-width:900px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:30px;
+    padding:50px;
     border-radius:10px;
 }
 .subscribe_wrap > h2 {
@@ -343,7 +343,11 @@ a {
 .subscribe_content_2 > a {
     color:#EA7475;
 }
-
+@media(max-width:480px) {
+.subscribe_wrap {
+    padding:10px;
+}
+}
 /* myPage subscribe 끝==============================================================================*/
 
 
@@ -352,7 +356,7 @@ a {
     display:none;
     max-width:900px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:30px;
+    padding:50px;
     border-radius:10px;
 }
 .point_wrap > h2 {
@@ -442,6 +446,12 @@ a {
     width:110px;
     height:20px;
 }
+
+@media(max-width:480px) {
+.point_wrap{
+    padding:10px;
+}
+}
 /* myPage point 끝==============================================================================*/
 
 
@@ -453,7 +463,7 @@ a {
     display:none;
     max-width:1110px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:30px;
+    padding:50px;
     border-radius:10px;
 }
 .list_menu > table {
@@ -466,6 +476,10 @@ a {
     border-bottom:solid 3px rgb(206, 207, 205);
     border-collapse:collapse;
 }
+.product > img {
+	width:225px;
+	height:225px;
+} 
 .menu_line > th {
     width:33.3%;
     padding-bottom:5px;
@@ -491,7 +505,18 @@ a {
 @media(max-width:480px) {
     .product > img {
         width:170px;
+        height:170px;
     }
+    .list {
+    	padding:10px;
+    }
+   	.product {
+   		padding-left:0;
+   		margin:0 auto;
+   	}
+   	.profile_menu1, .profile_menu2, .profile_menu3 > b {
+   		font-size:1.2rem;
+   	}
 }
 /* mypage list 끝 ==============================================================================*/
 
@@ -565,6 +590,12 @@ a {
     border-bottom:solid 1px rgb(206, 207, 205);
     padding:10px;
 }
+
+@media(max-width:480px) {
+.share {
+    padding:10px;
+}
+}
 /* mypage share 끝 ==============================================================================*/
 
 
@@ -573,7 +604,7 @@ a {
     display:none;
     max-width:900px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:30px;
+    padding:50px;
     border-radius:10px;
     min-height:450px;
 }
@@ -627,13 +658,19 @@ a {
     height:40px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
 }
+
+@media(max-width:480px) {
+.member_bye {
+    padding:10px;
+}
+}
 /* mypage 회원탈퇴 끝 ==============================================================================*/
 
 /* mypage 회원수정 시작 ==============================================================================*/
 .member_update {
     display:none;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:30px;
+    padding:50px;
     border-radius:10px;
 }
 .member_img > h1 {
@@ -682,6 +719,30 @@ a {
     width:200px;
     height:25px;
 }
+
+@media(max-width:480px) {
+.member_update {
+    padding:10px;
+}
+
+.button1, .button2, .button4 {
+	width:75px;
+}
+.update_table {
+    margin-top:30px;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.add {
+	font-size:1rem;
+}
+.update_btn {
+	text-align:center;
+}
+
+}
+
 /* mypage 회원수정 끝 ==============================================================================*/
 
            /* footer 시작 */          
@@ -710,6 +771,7 @@ a {
            .footer_infor li:last-child:after {width: 0; height: 0;}
            .footer_infor li a {color: #8f8f8f;}
            .footer_infor address p {color: #8f8f8f; padding-bottom: 15px;}
+           .bar2{color: #8f8f8f;}
            
            .container {position: relative; width: 100%; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
            
@@ -720,7 +782,7 @@ a {
                .footer_infor {width: 100%; text-align: center;}
                .footer_infor {padding: 30px 0;}
                .footer_infor address p br {display: none;}
-           }
+            } 
            .icon {background-image: url(../img/icon.png);}
 
 
@@ -737,5 +799,4 @@ a {
                    
                    .tel em{font-style: normal;}
                    /* footer 끝 */
-                
-
+            

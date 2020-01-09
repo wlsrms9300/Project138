@@ -121,7 +121,7 @@
                     <li><a href="#" id="num1" class="oh"><b>구독정보</b></a></li>
                     <li><a href="#" id="num3" class="oh"><b>쉐어/정산</b></a></li>
                     <li>
-                        <a href="#" class="member"><b class="oh">회원관리&nbsp;&nbsp;▼</b></a>
+                        <a href="#" class="member"><b class="oh">회원관리&nbsp;&nbsp;</b><b class="o1">▼</b></a>
                         <ul class="sub_list1">
                             <li><a href="#" id="num2" class="oh">포인트</a></li>
                             <li><a href="#" id="num4" class="oh">정보수정</a></li>
@@ -129,7 +129,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="activity"><b class="oh">나의활동&nbsp;&nbsp;▼</b></a>
+                        <a href="#" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
                         <ul class="sub_list2">
                             <li><a href="#" class="oh">자유게시판</a></li>
                             <li><a href="#" class="oh">육아사진</a></li>
@@ -472,7 +472,7 @@
                          </tr>
                          <tr>
                              <td></td>
-                             <td><input type="button" value="회원정보 수정" class="button3"></td>
+                             <td class="update_btn"><input type="button" value="회원정보 수정" class="button3"></td>
                          </tr>   
                      </table>
                  </form>
@@ -521,7 +521,7 @@
                         <address>
                             <p>서울특별시 서초구 강남대로 459 <br><span class="bar2">대표자명 김진근</span>
                                 <br><span class="bar2">사업자등록번호
-                                    111-11-1111</span> 통신판매업신고번호 제 111호</p>
+                                    111-11-1111</span> 통신판매업신고번호 제 111호</p><br>
                             <p>Copyright 2020 by Bit Inc. All right reserved</p>
                         </address>
                     </div>

@@ -1,13 +1,17 @@
 $(document).ready(function(){
 
+	
+	
     $('.member').click(function(){
         var submenu = $(this).next("ul");
         if(submenu.is(":visible")) {
             submenu.slideUp();
-            $('.member').css('color', 'black');
+            $('.o1').css('color', 'black');
+            $('.o1').text('▼');
         } else {
             submenu.slideDown();
-            $('.member').css('color', 'rgb(231, 60, 63)');
+            $('.o1').css('color', 'rgb(231, 60, 63)');
+            $('.o1').text('▲');
         }
     });
 
@@ -15,10 +19,12 @@ $(document).ready(function(){
         var submenu = $(this).next("ul");
         if(submenu.is(":visible")) {
             submenu.slideUp();
-            $('.activity').css('color', 'black');
+            $('.o2').css('color', 'black');
+            $('.o2').text('▼');
         } else {
             submenu.slideDown();
-            $('.activity').css('color', 'rgb(231, 60, 63)');
+            $('.o2').css('color', 'rgb(231, 60, 63)');
+            $('.o2').text('▲');
         }
     });
 
@@ -33,11 +39,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu0.css("display") == "none") {
             $('#num0').css('color', '#EA7475');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
             list.hide();
             menu0.show();
             menu1.hide();
@@ -58,11 +64,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu1.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', '#EA7475');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
+            $('#num1 > b').css('color', '#EA7475');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
             list.hide();
             menu0.hide();
             menu1.show();
@@ -83,11 +89,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu2.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', '#EA7475');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', '#EA7475');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -108,11 +114,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu3.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', '#EA7475');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', '#EA7475');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -133,11 +139,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu4.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', '#EA7475');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', '#EA7475');
+            $('#num5 > b').css('color', 'black');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -159,11 +165,11 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(menu5.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', '#EA7475');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', '#EA7475');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -192,14 +198,14 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(list.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
-            $('.profile_menu1').css('color', '#EA7475');
-            $('.profile_menu2').css('color', 'black');
-            $('.profile_menu3').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('.profile_menu1 > b').css('color', '#EA7475');
+            $('.profile_menu2 > b').css('color', 'black');
+            $('.profile_menu3 > b').css('color', 'black');
             list.show();
             menu0.hide();
             menu1.hide();
@@ -208,9 +214,9 @@ $(document).ready(function(){
             menu4.hide();
             menu5.hide();
         } else {
-            $('.profile_menu1').css('color', '#EA7475');
-            $('.profile_menu2').css('color', 'black');
-            $('.profile_menu3').css('color', 'black');
+            $('.profile_menu1 > b').css('color', '#EA7475');
+            $('.profile_menu2 > b').css('color', 'black');
+            $('.profile_menu3 > b').css('color', 'black');
         }
     });
     $('.btn2').click(function() {
@@ -223,14 +229,14 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(list.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
-            $('.profile_menu1').css('color', 'black');
-            $('.profile_menu2').css('color', '#EA7475');
-            $('.profile_menu3').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('.profile_menu1 > b').css('color', 'black');
+            $('.profile_menu2 > b').css('color', '#EA7475');
+            $('.profile_menu3 > b').css('color', 'black');
             list.show();
             menu0.hide();
             menu1.hide();
@@ -239,9 +245,9 @@ $(document).ready(function(){
             menu4.hide();
             menu5.hide();
         } else {
-            $('.profile_menu1').css('color', 'black');
-            $('.profile_menu2').css('color', '#EA7475');
-            $('.profile_menu3').css('color', 'black');
+            $('.profile_menu1 > b').css('color', 'black');
+            $('.profile_menu2 > b').css('color', '#EA7475');
+            $('.profile_menu3 > b').css('color', 'black');
         }
     });
     $('.btn3').click(function() {
@@ -254,14 +260,14 @@ $(document).ready(function(){
         var menu5= $('.member_bye');
         if(list.css("display") == "none") {
             $('#num0').css('color', 'black');
-            $('#num1').css('color', 'black');
-            $('#num2').css('color', 'black');
-            $('#num3').css('color', 'black');
-            $('#num4').css('color', 'black');
-            $('#num5').css('color', 'black');
-            $('.profile_menu1').css('color', 'black');
-            $('.profile_menu2').css('color', 'black');
-            $('.profile_menu3').css('color', '#EA7475');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('.profile_menu1 > b').css('color', 'black');
+            $('.profile_menu2 > b').css('color', 'black');
+            $('.profile_menu3 > b').css('color', '#EA7475');
             list.show();
             menu0.hide();
             menu1.hide();
@@ -270,26 +276,26 @@ $(document).ready(function(){
             menu4.hide();
             menu5.hide();
         } else {
-            $('.profile_menu1').css('color', 'black');
-            $('.profile_menu2').css('color', 'black');
-            $('.profile_menu3').css('color', '#EA7475');
+            $('.profile_menu1 > b').css('color', 'black');
+            $('.profile_menu2 > b').css('color', 'black');
+            $('.profile_menu3 > b').css('color', '#EA7475');
         }
     });
 
     $('.profile_menu1').click(function() {
-        $('.profile_menu1').css('color', '#EA7475');
-        $('.profile_menu2').css('color', 'black');
-        $('.profile_menu3').css('color', 'black');
+        $('.profile_menu1 > b').css('color', '#EA7475');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', 'black');
     });
     $('.profile_menu2').click(function() {
-        $('.profile_menu1').css('color', 'black');
-        $('.profile_menu2').css('color', '#EA7475');
-        $('.profile_menu3').css('color', 'black');
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', '#EA7475');
+        $('.profile_menu3 > b').css('color', 'black');
     });
     $('.profile_menu3').click(function() {
-        $('.profile_menu1').css('color', 'black');
-        $('.profile_menu2').css('color', 'black');
-        $('.profile_menu3').css('color', '#EA7475');
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', '#EA7475');
     });
     /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 끝 */
 

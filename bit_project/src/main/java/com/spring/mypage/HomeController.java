@@ -14,7 +14,7 @@ public class HomeController {
 	public String home(Model model) {
 		
 		//test
-		return "qna";
+		return "mypage";
 		}
 	
 }
