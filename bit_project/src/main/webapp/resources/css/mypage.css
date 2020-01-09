@@ -173,13 +173,14 @@ a {
     outline: none;
     position: relative;
     text-transform: uppercase;
+    z-index:-1;
 }
 
 /* profile css 끝============================================================================== */
 
 
 /* profile mobile 시작==============================================================================*/
-@media (max-width: 600px) {
+@media (max-width: 480px) {
 
 .wrapper {
     padding-left:0;
@@ -487,9 +488,9 @@ a {
     padding-left:30px;
 }
 
-@media(max-width:600px) {
+@media(max-width:480px) {
     .product > img {
-        width:180px;
+        width:170px;
     }
 }
 /* mypage list 끝 ==============================================================================*/
@@ -712,7 +713,7 @@ a {
            
            .container {position: relative; width: 100%; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
            
-           @media (max-width:600px){
+           @media (max-width:480px){
                .container {width: 100%;}
                .footer_sns {position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
                .footer_sns .tel {display: none;}
