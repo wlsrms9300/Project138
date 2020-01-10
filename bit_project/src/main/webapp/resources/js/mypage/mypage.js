@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-	
-	
     $('.member').click(function(){
         var submenu = $(this).next("ul");
         if(submenu.is(":visible")) {
