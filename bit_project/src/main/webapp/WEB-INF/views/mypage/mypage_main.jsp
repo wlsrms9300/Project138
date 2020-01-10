@@ -132,14 +132,14 @@
                     <li>
                         <a href="#" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
                         <ul class="sub_list2">
-                            <li><a href="#" class="oh">자유게시판</a></li>
-                            <li><a href="#" class="oh">육아사진</a></li>
-                            <li><a href="#" class="oh">정보공유(팁)</a></li>
-                            <li><a href="#" class="oh">공구게시판</a></li>
-                            <li><a href="#" class="oh">육아관련질문</a></li>
-                            <li><a href="#" class="oh">이슈/토론</a></li>
-                            <li><a href="#" class="oh">댓글</a></li>
-                            <li><a href="#" class="oh">후기</a></li> 
+                            <li><a href="#" id="m1" class="oh">자유게시판</a></li>
+                            <li><a href="#" id="m2" class="oh">육아사진</a></li>
+                            <li><a href="#" id="m3" class="oh">정보공유(팁)</a></li>
+                            <li><a href="#" id="m4" class="oh">공구게시판</a></li>
+                            <li><a href="#" id="m5" class="oh">육아관련질문</a></li>
+                            <li><a href="#" id="m6" class="oh">이슈/토론</a></li>
+                            <li><a href="#" id="m7" class="oh">댓글</a></li>
+                            <li><a href="#" id="m8" class="oh">후기</a></li> 
                         </ul>
                     </li>
                 </ul>
@@ -151,6 +151,7 @@
     <!-- main article 시작 -->
     <div id="right_article">
         <article id="article_main">
+       	 	<%@ include file="/WEB-INF/views/mypage/mypage_calendar.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_bye.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_list.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_point.jsp" %>
@@ -162,7 +163,6 @@
     </div>
     <!-- main article 끝 -->
     </div>
-
 
     <!-- footer 시작 -->
     <footer id="footer">
