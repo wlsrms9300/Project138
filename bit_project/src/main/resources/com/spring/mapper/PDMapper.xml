@@ -47,7 +47,7 @@
 	gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product	
     order by rnum asc 
 	)
-	<![CDATA[where rnum>=1 AND rnum<=4]]>	
+	<![CDATA[where rnum>=1 AND rnum<=8]]>	
 	</select>
 	 
 	 
