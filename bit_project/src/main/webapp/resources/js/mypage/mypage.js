@@ -29,7 +29,7 @@ $(document).ready(function(){
     /* 메뉴버튼 이벤트 시작 */
     $('#num0').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -54,7 +54,7 @@ $(document).ready(function(){
 
     $('#num1').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
     $('#num2').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -104,7 +104,7 @@ $(document).ready(function(){
 
     $('#num3').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -129,7 +129,7 @@ $(document).ready(function(){
 
     $('#num4').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -155,7 +155,7 @@ $(document).ready(function(){
 
     $('#num5').click(function(){
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -188,7 +188,7 @@ $(document).ready(function(){
     /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 시작 */
     $('.btn1').click(function() {
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -219,7 +219,7 @@ $(document).ready(function(){
     });
     $('.btn2').click(function() {
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');
@@ -250,7 +250,7 @@ $(document).ready(function(){
     });
     $('.btn3').click(function() {
         var list= $('.list');
-        var menu0= $('.elegant-calencar');
+        var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
         var menu2= $('.point_wrap');
         var menu3= $('.share');

@@ -143,6 +143,25 @@
                         </ul>
                     </li>
                 </ul>
+                <div id="sub_list11">
+       		 				<div class="sub_list11_bar">
+            					<a class="sub_list11_menu" href="#">포인트</a>
+            					<a class="sub_list11_menu" href="#">정보수정</a>
+            					<a class="sub_list11_menu" href="#">회원탈퇴</a>
+        					</div>
+    					</div>
+    			<div id="sub_list22">
+       						 <div class="sub_list22_bar">
+            					<a class="sub_list22_menu" href="#">자유게시판</a>
+           						<a class="sub_list22_menu" href="#">육아사진</a>
+            					<a class="sub_list22_menu" href="#">정보공유(팁)</a>
+            					<a class="sub_list22_menu" href="#">공구게시판</a>
+            					<a class="sub_list22_menu" href="#">육아게시판</a>
+            					<a class="sub_list22_menu" href="#">이슈,토론</a>
+            					<a class="sub_list22_menu" href="#">댓글</a>
+            					<a class="sub_list22_menu" href="#">후기</a>
+        					</div>
+    					</div>
             </div> 
         </div>
     </div>

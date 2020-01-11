@@ -85,7 +85,7 @@
  }
  
  .next-button {
-     float: right;
+     float: left;
      margin-right: 0.5em;
  }
  
@@ -124,11 +124,11 @@
      text-transform: uppercase;
  }
  
- tbody tr {
+ .tbody tr {
      color: #252a25;
  }
  
- tbody td{
+ .tbody td{
      width: 14%;
      border-radius: 50%;
      cursor: pointer;
@@ -136,13 +136,13 @@
      transition:all 0.2s ease-in;
  }
  
- tbody td:hover, .selected {
+ .tbody td:hover, .selected {
      color: #fff;
      background-color: #2a3246;
      border: none;
  }
  
- tbody td:active {
+ .tbody td:active {
      -webkit-transform: scale(0.7);
      -ms-transform: scale(0.7);
      transform: scale(0.7);
@@ -192,6 +192,50 @@
      -ms-transform: scale(0.8);
      transform: scale(0.8);     
  }
+ 
+.calendar-content {
+	width:45em;
+	margin:0 auto;
+}
+#des1 {
+	margin-bottom: 50px;
+    height: 35px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #e4e4e4;
+}
+
+.des1-content1 {
+	line-height: 35px;
+    padding-left: 20px;
+}
+.des1-content1 > b {
+	font-size:1.3em;
+	color:rgb(109, 109, 109);
+}
+.des1-content2 {
+	line-height: 35px;
+    padding-right: 20px;
+}
+.des1-content2 > b {
+	font-size:1.3em;
+	color:#EA7475;
+}
+
+#des2 {
+	text-align:center;
+	width:100%;
+	margin-top:30px;
+	font-size:1.3em;
+}
+#des2 tr td {
+	padding:8px;
+}
+#des2 tr td b {
+	color:rgb(73, 69, 69);
+}
+
 @media (max-width: 600px) {
 .elegant-calencar {
      width: 100%;
@@ -204,4 +248,10 @@
 
 #calendar tr {
 	height:3.5em;
+}
+
+.calendar-content {
+	width:100%;
+}
+
 }
