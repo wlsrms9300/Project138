@@ -2,29 +2,49 @@ $(document).ready(function(){
 
     $('.member').click(function(){
         var submenu = $(this).next("ul");
-        if(submenu.is(":visible")) {
-            submenu.slideUp();
+        var submenu2 = $('#sub_list11');
+        if(submenu.is(":visible") || submenu2.is(":visible")) {
             $('.o1').css('color', 'black');
             $('.o1').text('▼');
+            if($(window).width() > 480) {
+            	submenu.slideUp();
+            } else {
+            	submenu2.slideUp();
+        	}
         } else {
-            submenu.slideDown();
             $('.o1').css('color', 'rgb(231, 60, 63)');
             $('.o1').text('▲');
+            if($(window).width() > 480) {
+            	submenu.slideDown();
+            } else {
+            	submenu2.slideDown();
+            }
         }
     });
 
     $('.activity').click(function(){
         var submenu = $(this).next("ul");
-        if(submenu.is(":visible")) {
-            submenu.slideUp();
+        var submenu2 = $('#sub_list22');
+        if(submenu.is(":visible") || submenu2.is(":visible")) {
             $('.o2').css('color', 'black');
             $('.o2').text('▼');
+            if($(window).width() > 480) {
+            	submenu.slideUp();
+            } else {
+            	submenu2.slideUp();
+        	}
         } else {
-            submenu.slideDown();
             $('.o2').css('color', 'rgb(231, 60, 63)');
             $('.o2').text('▲');
+            if($(window).width() > 480) {
+            	submenu.slideDown();
+            } else {
+            	submenu2.slideDown();
+            }
         }
     });
+    
+    
 
     /* 메뉴버튼 이벤트 시작 */
     $('#num0').click(function(){

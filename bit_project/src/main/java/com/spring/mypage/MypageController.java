@@ -13,8 +13,8 @@ public class MypageController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		
-		//test
+		
 		return "mypage_main";
-		}
+	}
 	
 }

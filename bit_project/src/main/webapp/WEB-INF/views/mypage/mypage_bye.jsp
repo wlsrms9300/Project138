@@ -37,7 +37,7 @@
             </div>
             <div class="content_confirm">
                 <input type="radio" name="confirm"><h5>안내사항을 모두 확인하였으며, 이에 동의합니다.</h5><br>
-                <input type="button" value="회원탈퇴" class="member_button" onclick="location.href='member_confirm.html'">
+                <input type="button" value="회원탈퇴" class="member_button" onclick="location.href='mypage_bye_confirm.jsp'">
             </div>
             </form>
         </div>

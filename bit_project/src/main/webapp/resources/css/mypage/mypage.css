@@ -116,7 +116,7 @@ a {
 }
 
 .oh {
-	font-size:1.2em;
+	font-size:1em;
 }
 #right_article {
     width:100%;
@@ -136,6 +136,9 @@ a {
     margin-right:auto;
     padding-left:30px;
     padding-right:30px;
+}
+.login_text > a {
+	font-size:1.2em;
 }
 .wrapper {
     margin-left:auto;
@@ -186,7 +189,7 @@ a {
 
 /*서브 메뉴바 <모바일> 시작*/
 #sub_list22, #sub_list11 {
-	
+	display:none;
 }
 
 #sub_list11, #sub_list22{
@@ -329,11 +332,11 @@ a {
         overflow:auto;
         }
 #sub_list11 > .sub_list11_bar > .sub_list11_menu {
-        font-size: 19px; 
+        font-size: 1.05em; 
         line-height: 23px; 
         margin: 11px 4px; 
         padding: 6px 8px 4px; 
-        color: slategrey; 
+        color: rgb(109, 109, 109); 
         display: inline-block; 
         text-decoration:none;
         }        
@@ -346,11 +349,11 @@ a {
         overflow:auto;
         }
 #sub_list22 > .sub_list22_bar > .sub_list22_menu {
-        font-size: 19px; 
+        font-size: 1.05em; 
         line-height: 23px; 
         margin: 11px 4px; 
         padding: 6px 8px 4px; 
-        color: slategrey; 
+        color: rgb(109, 109, 109); 
         display: inline-block; 
         text-decoration:none;
         }
