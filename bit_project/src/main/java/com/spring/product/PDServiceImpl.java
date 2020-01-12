@@ -60,8 +60,22 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("상품 데이터 추가 조회 실패.", e);			
 		}
 	}
+
+	@Override
+	public List<ProductVO> filterSearch(ProductVO pdVO) throws Exception {
+		try {
+			List<ProductVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.filterSearch(pdVO);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("필터 검색 실패.", e);	
+		}
+		
+	}
 	
 			
+	
 	
 	
 	

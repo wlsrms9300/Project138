@@ -12,5 +12,6 @@ public interface PDMapper {
 	List<ProductVO> allSearch();
 	List<ProductVO> startSearch();
 	List<ProductVO> scrollSearch(@Param("pno") int pno);
+	List<ProductVO> filterSearch(ProductVO pdVO);
 	
 }

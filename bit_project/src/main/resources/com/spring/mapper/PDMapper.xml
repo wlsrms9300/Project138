@@ -45,7 +45,7 @@
 	select * from (
     select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
 	gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product	
-    order by rnum asc 
+    order by product_num asc 
 	)
 	<![CDATA[where rnum>=1 AND rnum<=8]]>	
 	</select>
@@ -56,13 +56,18 @@
 	select * from (
 		select * FROM (
 		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist FROM product ORDER BY regist ASC
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist FROM product ORDER BY product_num ASC
 		)
 	)
-	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
-	order by rnum asc;
+	<![CDATA[WHERE rnum>#{pno}-8 and rnum<=#{pno}]]>
 	</select>
 	
+	<select id="filterSearch" parameterType="map" resultType="com.spring.product.ProductVO">
+	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product
+	where category_l=#{category_l} AND category_m=#{category_m} AND category_s=#{category_s}
+	order by product_num asc;
+	</select>
 
   
 </mapper>

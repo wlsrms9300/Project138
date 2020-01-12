@@ -39,68 +39,9 @@
 <!-- 자바스크립트 라이브러리 -->
 	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/munscroll.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			var cnt = 1;
-			var scnt = 1;
-			//$('.product_chart').empty();
-			$.ajax({
-				url: '/bit_project/startSearch.pr',
-				type: 'post',
-				dataType: "json",
-				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-				success: function (data) {				
-					$.each(data, function (index, item) {
-					if(cnt==1 || cnt==5){
-						var op = 
-						'<div class="swiper-container'+scnt+'">'+
-						'<div class="chart_cont'+scnt+' swiper-wrapper">';
-						$('.product_chart').append(op);
-					}
-					var output = '';
-					output += 
-					'<div class="swiper-slide">'+
-					'<div class="pr_img">';
-					output +=
-					'<figure>'+
-					'<a href="productDetail.pr">'+
-					'<img src="/bit_project/image/'+item.img_sum+'">'+
-					'</a>'+
-					'</figure>';
-					output +=
-					'<div class="rank">'+
-					'<strong>1</strong>'+
-					'</div></div>';
-					output +=
-					'<div class="infor">';
-					output +=
-					'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
-					output +=
-					'<div class="infor_btn">';
-					output +=
-					'<a href="productDetail.pr">상세정보</a>';
-					output +=
-					'<a href="#">위시리스트</a>';
-					output +=
-					'</div></div></div></div>';
-					$('.chart_cont'+scnt).append(output);
-					if(cnt==4 || cnt==8){
-						var output2 = '</div></div></div>';
-						$('.product_chart').append(output2);
-					}
-					cnt++;
-					});
-					
-				},
-				error: function () {
-					alert("ajax통신 실패 !!!");
-				}
-			});
-			
-		});
-
-	</script>
+	
 </head>
 
 <body>
@@ -269,7 +210,7 @@
 						</div>
 					</li>
 
-					<li class="btn">
+					<li class="filterbtn">
 						<!-- <input type='reset'> --> <a href="javascript:void(0)" onclick="formReset();">초기화</a> <a
 							href="javascript:void(0)">적용</a>
 
