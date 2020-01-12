@@ -18,7 +18,36 @@
 </head>
 <body>
 	<div class="board_list_wrap">
-			
+		<div id="board_history">
+			<div class="board_history_content">
+				<b>활동내역</b>
+			</div>
+			<div class="board_history_btn">
+				<b>+</b>
+			</div>
+		</div>
+		<div class="history_drop">
+			<table id="history_drop_table">
+				<tr>
+					<td style="text-align:left;">마지막 접속일 :</td>
+					<td>2020.01.12</td>
+					<td>최근 글 등록일 :</td>
+					<td>2020.01.12</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;">게시글 :</td>
+					<td>5</td>
+					<td>댓글 :</td>
+					<td>20</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;">후기 :</td>
+					<td>20</td>
+					<td>스크랩 :</td>
+					<td>20</td>
+				</tr>
+			</table>
+		</div>
             <h2>자유게시판</h2>		
             <table class="board">
                 <colgroup>

@@ -1,6 +1,35 @@
 @charset "UTF-8";
 @import url("https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css");
 
+#board_history {
+	margin-bottom:5px;
+    height: 35px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #e4e4e4;
+    box-shadow: 3px 3px 5px 0 rgb(172, 171, 171);
+    cursor:pointer;
+}
+.history_drop {
+	background-color:#f9f9f9;
+	margin-bottom:60px;
+	display:none;
+}
+.board_history_content {
+	line-height: 35px;
+    padding-left: 20px;
+}
+.board_history_content > b, .board_history_btn > b {
+	font-size:1.1em;
+	color:rgb(109, 109, 109);
+}
+.board_history_btn {
+	line-height: 40px;
+    padding-right: 20px;
+}
+
+
 .board_list_wrap {
 	display:none;
 }
@@ -32,6 +61,7 @@
     max-width:900px;
 }
 .board_list_wrap h2 {
+	margin-top:40px;
     margin-bottom: 15px;
 }
 

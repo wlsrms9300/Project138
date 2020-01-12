@@ -33,6 +33,8 @@ $(document).ready(function(){
             }
         }
     });
+    
+    
 
     $('.activity').on('click', function(){
         var submenu = $(this).next("ul");
@@ -56,7 +58,16 @@ $(document).ready(function(){
         }
     });
     
-    
+    $('#board_history').click(function() {
+    	var history = $('.history_drop');
+    	if(history.is(":visible")) {
+    		$('.board_history_btn > b').text('+');
+    		history.slideUp();
+    	} else {
+    		$('.board_history_btn > b').text('-');
+    		history.slideDown();
+    	}
+    });
 
     /* 메뉴버튼 이벤트 시작 */
     $('#num0').click(function(){
