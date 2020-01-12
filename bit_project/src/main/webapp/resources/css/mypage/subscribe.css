@@ -71,7 +71,7 @@
     border:solid 2.2px rgb(112, 111, 111);
     border-radius:7px;
 }
-.subscribe_content_2 > a {
+.subscribe_content_2 a b{
     color:#EA7475;
 }
 .pay_block table tr:nth-child(1) {

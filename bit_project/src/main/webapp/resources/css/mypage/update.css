@@ -24,13 +24,15 @@
     margin-right:30px;
     background-color: #EA7475;
     color:white;
-    font-size: 15px;
+    font-size: 14px;
     border:0;
     outline:0;
     border-radius:8px;
-    width:85px;
-    height:35px;
+    width:80px;
+    height:25px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 .button3 {
     background-color: #EA7475;
@@ -43,6 +45,19 @@
     height:40px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
     margin-top:40px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.button3:active {	
+     -webkit-transform: scale(0.9);
+     -ms-transform: scale(0.9);
+     transform: scale(0.9);     
+}
+
+.button1:active, .button2:active, .button4:active {	
+     -webkit-transform: scale(0.9);
+     -ms-transform: scale(0.9);
+     transform: scale(0.9);     
 }
 .add {
     color:#EA7475;

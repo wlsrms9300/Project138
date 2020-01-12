@@ -37,6 +37,13 @@
     float:right;
     margin-right:40px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.share_history > input:active {
+	-webkit-transform: scale(0.9);
+     -ms-transform: scale(0.9);
+     transform: scale(0.9);    
 }
 .application > table {
     font-size: 15px;

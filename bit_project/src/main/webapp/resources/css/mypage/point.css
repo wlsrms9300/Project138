@@ -85,10 +85,18 @@
     font-size:15px;
     margin-top:30px;
     background-color:#EA7475 ;
+    color:white;
     border:0;
     outline:0;
     border-radius:8px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.point_button:active {
+	-webkit-transform: scale(0.9);
+     -ms-transform: scale(0.9);
+     transform: scale(0.9);    
 }
 .point_text {
     border-radius:8px;
