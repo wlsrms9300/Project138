@@ -11,7 +11,7 @@
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function (data) {				
 					$.each(data, function (index, item) {
-					if(cnt==1 || cnt==5){
+					if(cnt%4==1){
 						var op = 
 						'<div class="swiper-container'+scnt+'">'+
 						'<div class="chart_cont'+scnt+' swiper-wrapper">';
@@ -44,7 +44,7 @@
 					output +=
 					'</div></div></div></div>';
 					$('.chart_cont'+scnt).append(output);
-					if(cnt==4 || cnt==8){
+					if(cnt%4==0){
 						var output2 = '</div></div></div>';
 						$('.product_chart').append(output2);
 						scnt++;
@@ -87,7 +87,7 @@ $(window).scroll(function(){
 			success: function (data) {
 				if(data!=null){
 					$.each(data, function (index, item) {
-						if(slide_cnt==1 || slide_cnt==5){
+						if(slide_cnt%4==1){
 							var op5 = 
 							'<div class="swiper-container'+con_cnt+'">'+
 							'<div class="chart_cont'+con_cnt+' swiper-wrapper">';
@@ -120,7 +120,7 @@ $(window).scroll(function(){
 						output5 +=
 						'</div></div></div></div>';
 						$('.chart_cont'+con_cnt).append(output5);
-						if(slide_cnt==4 || slide_cnt==8){
+						if(slide_cnt%4==0){
 							var output6 = '</div></div></div>';
 							$('.product_chart').append(output6);
 							con_cnt++;
@@ -139,11 +139,7 @@ $(window).scroll(function(){
 				alert("ajax통신 실패 !!!");
 			}
 		});
-		
 	}
-	
-
- 
 })
 
 

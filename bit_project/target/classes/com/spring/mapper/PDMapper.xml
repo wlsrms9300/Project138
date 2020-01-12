@@ -66,7 +66,7 @@
 	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product
 	where category_l=#{category_l} AND category_m=#{category_m} AND category_s=#{category_s}
-	order by product_num asc;
+	order by product_num asc
 	</select>
 
   

@@ -37,14 +37,19 @@ public class ProductAjaxController {
 	}
 	
 	@PostMapping(value = "/filterSearch.pr", produces = "application/json;charset=UTF-8")
-	public List<ProductVO> filterSearch(ProductVO prVO) {
-		System.out.println(prVO.getCategory_l());
-		System.out.println(prVO.getCategory_m());
-		System.out.println(prVO.getCategory_s());
+	public List<ProductVO> filterSearch(String category_l, String category_m, String category_s) {
+		
+		String c_l = category_l.substring(9);
+		String c_m = category_m.substring(9);
+		String c_s = category_s.substring(9);
+		
+		System.out.println(c_l);
+		System.out.println(c_m);
+		System.out.println(c_s);
 		List<ProductVO> list = null;
 		try {
 		
-			list = service.filterSearch(prVO);
+			list = service.filterSearch(c_l, c_m, c_s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

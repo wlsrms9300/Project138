@@ -62,21 +62,16 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
-	public List<ProductVO> filterSearch(ProductVO pdVO) throws Exception {
+	public List<ProductVO> filterSearch(String category_l, String category_m, String category_s) throws Exception {
 		try {
 			List<ProductVO> list = null;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			list = pdMapper.filterSearch(pdVO);
+			list = pdMapper.filterSearch(category_l, category_m, category_s);
 			return list;
 		} catch (Exception e) {
 			throw new Exception("필터 검색 실패.", e);	
 		}
 		
 	}
-	
-			
-	
-	
-	
 	
 }

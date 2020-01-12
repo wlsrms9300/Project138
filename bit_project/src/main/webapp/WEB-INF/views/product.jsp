@@ -41,6 +41,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/munscroll.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
 	
 </head>
 
@@ -168,9 +169,9 @@
 						</a>
 						<div id="list2" style="display: none;">
 							<ul>
-								<li><input type="checkbox" name="check2" class="c2" value="0~4" onclick="Chk(2);" />
+								<li><input type="checkbox" name="check2" class="c2" value="04" onclick="Chk(2);" />
 									<label for="c2">0~4</label></li>
-								<li><input type="checkbox" name="check2" class="c2" value="5~7" onclick="Chk(2);" />
+								<li><input type="checkbox" name="check2" class="c2" value="57" onclick="Chk(2);" />
 									<label for="c2">5~7</label></li>
 							</ul>
 						</div>
@@ -211,8 +212,8 @@
 					</li>
 
 					<li class="filterbtn">
-						<!-- <input type='reset'> --> <a href="javascript:void(0)" onclick="formReset();">초기화</a> <a
-							href="javascript:void(0)">적용</a>
+<a href="javascript:void(0)" onclick="formReset();">초기화</a>
+<a href="javascript:void(0)" onclick="filSearch();">적용</a>
 
 					</li>
 					<li class="total_count"><a href="javascript:void(0)">전체보기</a>
