@@ -124,42 +124,42 @@
                     <li>
                         <a href="#" class="member"><b class="oh">회원관리&nbsp;&nbsp;</b><b class="o1">▼</b></a>
                         <ul class="sub_list1">
-                            <li><a href="#" id="num2" class="oh">포인트</a></li>
-                            <li><a href="#" id="num4" class="oh">정보수정</a></li>
-                            <li><a href="#" id="num5" class="oh">회원탈퇴</a></li>
+                            <li><a href="#" id="num2" class="oh"><b>포인트</b></a></li>
+                            <li><a href="#" id="num4" class="oh"><b>정보수정</b></a></li>
+                            <li><a href="#" id="num5" class="oh"><b>회원탈퇴</b></a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
                         <ul class="sub_list2">
-                            <li><a href="#" id="m1" class="oh">자유게시판</a></li>
-                            <li><a href="#" id="m2" class="oh">육아사진</a></li>
-                            <li><a href="#" id="m3" class="oh">정보공유(팁)</a></li>
-                            <li><a href="#" id="m4" class="oh">공구게시판</a></li>
-                            <li><a href="#" id="m5" class="oh">육아관련질문</a></li>
-                            <li><a href="#" id="m6" class="oh">이슈/토론</a></li>
-                            <li><a href="#" id="m7" class="oh">댓글</a></li>
-                            <li><a href="#" id="m8" class="oh">후기</a></li> 
+                            <li><a href="#" id="m1" class="oh"><b>자유게시판</b></a></li>
+                            <li><a href="#" id="m2" class="oh"><b>육아사진</b></a></li>
+                            <li><a href="#" id="m3" class="oh"><b>정보공유(팁)</b></a></li>
+                            <li><a href="#" id="m4" class="oh"><b>공구게시판</b></a></li>
+                            <li><a href="#" id="m5" class="oh"><b>육아관련질문</b></a></li>
+                            <li><a href="#" id="m6" class="oh"><b>이슈/토론</b></a></li>
+                            <li><a href="#" id="m7" class="oh"><b>댓글</b></a></li>
+                            <li><a href="#" id="m8" class="oh"><b>후기</b></a></li> 
                         </ul>
                     </li>
                 </ul>
                 <div id="sub_list11">
        		 				<div class="sub_list11_bar">
-            					<a class="sub_list11_menu" href="#">포인트</a>
-            					<a class="sub_list11_menu" href="#">정보수정</a>
-            					<a class="sub_list11_menu" href="#">회원탈퇴</a>
+            					<a class="sub_list11_menu" id="num22" href="#"><b>포인트</b></a>
+            					<a class="sub_list11_menu" id="num44" href="#"><b>정보수정</b></a>
+            					<a class="sub_list11_menu" id="num55" href="#"><b>회원탈퇴</b></a>
         					</div>
     					</div>
     			<div id="sub_list22">
        						 <div class="sub_list22_bar">
-            					<a class="sub_list22_menu" href="#">자유게시판</a>
-           						<a class="sub_list22_menu" href="#">육아사진</a>
-            					<a class="sub_list22_menu" href="#">정보공유(팁)</a>
-            					<a class="sub_list22_menu" href="#">공구게시판</a>
-            					<a class="sub_list22_menu" href="#">육아게시판</a>
-            					<a class="sub_list22_menu" href="#">이슈,토론</a>
-            					<a class="sub_list22_menu" href="#">댓글</a>
-            					<a class="sub_list22_menu" href="#">후기</a>
+            					<a class="sub_list22_menu" id="m11" href="#"><b>자유게시판</b></a>
+           						<a class="sub_list22_menu" href="#"><b>육아사진</b></a>
+            					<a class="sub_list22_menu" href="#"><b>정보공유(팁)</b></a>
+            					<a class="sub_list22_menu" href="#"><b>공구게시판</b></a>
+            					<a class="sub_list22_menu" href="#"><b>육아게시판</b></a>
+            					<a class="sub_list22_menu" href="#"><b>이슈,토론</b></a>
+            					<a class="sub_list22_menu" href="#"><b>댓글</b></a>
+            					<a class="sub_list22_menu" href="#"><b>후기</b></a>
         					</div>
     					</div>
             </div> 
@@ -177,7 +177,7 @@
             <%@ include file="/WEB-INF/views/mypage/mypage_share.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_subscribe.jsp"%>
             <%@ include file="/WEB-INF/views/mypage/mypage_update.jsp"%>
-            <%@ include file="/WEB-INF/views/mypage/mypage_board.jsp"%>
+            <%@ include file="/WEB-INF/views/mypage/mypage_board.jsp"%>           
         </article>
     </div>
     <!-- main article 끝 -->

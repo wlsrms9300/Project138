@@ -3,6 +3,7 @@
 
 .member_bye {
     display:none;
+    height:520px;
     max-width:900px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
     padding:50px;

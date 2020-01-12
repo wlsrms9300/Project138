@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
+<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
+
 <!-- 폰트어썸 아이콘 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <!-- 웹 폰트 -->
@@ -15,8 +18,8 @@
 </head>
 <body>
 	<div class="board_list_wrap">
-            <h2>자유게시판</h2>
-
+			
+            <h2>자유게시판</h2>		
             <table class="board">
                 <colgroup>
                     <col width="10%" />
