@@ -28,10 +28,10 @@
                     <table>
                         <tr class="line">
                             <th>결제일</th>
-                            <th>서비스등급</th>
-                            <th>결제금액</th>
-                            <th>결제상태</th>
-                            <th>결제정보</th>
+                            <th>등급</th>
+                            <th>금액</th>
+                            <th>상태</th>
+                            <th>계좌</th>
                         </tr>
                         <tr class="line">
                             <td>2020.01.01 ~ 2020.01.20</td>
@@ -53,19 +53,19 @@
                     <h3>히스토리</h3>
                     <table>
                         <tr class="line">
-                            <th colspan="1">대여기간</th>
+                            <th colspan="1">기간</th>
                             <th colspan="2">상품명</th>
                             <th colspan="2">상태</th>
                         </tr>
                         <tr class="line">
                             <td colspan="1">2020.01.01 ~ 2020.01.20</td>
-                            <td colspan="2">장난감1호</td>
-                            <td colspan="2">대여중</td>                           
+                            <td colspan="2">장난감</td>
+                            <td colspan="2">대여</td>                           
                         </tr>
                         <tr class="line">
                             <td colspan="1">2020.01.01 ~ 2020.01.20</td>
-                            <td colspan="2">장난감2호</td>
-                            <td colspan="2">반납완료</td>
+                            <td colspan="2">장난감</td>
+                            <td colspan="2">반납</td>
                             
                         </tr>
                     </table>

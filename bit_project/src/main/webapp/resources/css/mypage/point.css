@@ -95,6 +95,12 @@
     width:110px;
     height:20px;
 }
+.point_history table tr:nth-child(1) {
+	background-color:#f9f9f9;
+}
+.point_history table tr:hover {
+	background-color:#fafafa;
+}
 
 @media(max-width:480px) {
 .point_wrap{

@@ -44,10 +44,10 @@
                 </table>
             </div>
             <div class="share_history">
-                <h3>쉐어 내역</h3><input type="button" value="정산">
+                <h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn">
                 <table>
                     <tr class="share_line">
-                        <th>쉐어기간</th>
+                        <th>기간</th>
                         <th>상품명</th>
                         <th>등급</th>
                         <th>수익</th>
@@ -55,17 +55,17 @@
                     </tr>
                     <tr class="share_line">
                         <td>2020.01.01 ~ 2020.01.20</td>
-                        <td>장난감1호</td>
+                        <td>장난감</td>
                         <td>골드</td>
                         <td>2,000</td>
-                        <td>대여중</td>                           
+                        <td>대여</td>                           
                     </tr>
                     <tr class="share_line">
                         <td>2020.01.01 ~ 2020.01.20</td>
-                        <td>장난감2호</td>
+                        <td>장난감</td>
                         <td>플래티넘</td>
                         <td>2,000</td>
-                        <td>대기중</td> 
+                        <td>대기</td> 
                     </tr>
                 </table>
             </div>

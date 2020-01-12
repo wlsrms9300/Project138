@@ -511,5 +511,9 @@ $(document).ready(function(){
     });
     /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 끝 */
 
+    
+    $('.share_btn').click(function() {
+    	confirm('모두 정산하시겠습니까?');
+    });
 });
 

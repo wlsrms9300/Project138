@@ -74,6 +74,18 @@
 .subscribe_content_2 > a {
     color:#EA7475;
 }
+.pay_block table tr:nth-child(1) {
+	background-color:#f9f9f9;
+}
+.pay_block table tr:hover {
+	background-color:#fafafa;
+}
+.product_history table tr:nth-child(1) {
+	background-color:#f9f9f9;
+}
+.product_history table tr:hover {
+	background-color:#fafafa;
+}
 @media(max-width:480px) {
 .subscribe_wrap {
     padding:10px;

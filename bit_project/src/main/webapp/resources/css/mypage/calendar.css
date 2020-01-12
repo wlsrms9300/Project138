@@ -181,6 +181,38 @@
      -webkit-transition: all 0.3s ease;
      transition: all 0.3s ease;
  }
+ #true {
+     display: block;
+     position: absolute;
+     right: 0.5em;
+     top: 10em;
+     z-index: 999;
+     color: #fff;
+     font-family: serif;
+     cursor: pointer;
+     padding: 0 0.5em;
+     height: 1.5em;
+     border: 0.1em solid #fff;
+     border-radius: 4px;
+     -webkit-transition: all 0.3s ease;
+     transition: all 0.3s ease;
+ }
+ #false {
+     display: block;
+     position: absolute;
+     right: 0.5em;
+     top: 12em;
+     z-index: 999;
+     color: #fff;
+     font-family: serif;
+     cursor: pointer;
+     padding: 0 0.5em;
+     height: 1.5em;
+     border: 0.1em solid #fff;
+     border-radius: 4px;
+     -webkit-transition: all 0.3s ease;
+     transition: all 0.3s ease;
+ }
  
  #reset:hover {
      color: #e66b6b;
@@ -188,6 +220,28 @@
  }
  
  #reset:active{
+     -webkit-transform: scale(0.8);
+     -ms-transform: scale(0.8);
+     transform: scale(0.8);     
+ }
+ 
+ #true:hover {
+     color: #e66b6b;
+     border-color: #e66b6b;
+ }
+ 
+ #true:active{
+     -webkit-transform: scale(0.8);
+     -ms-transform: scale(0.8);
+     transform: scale(0.8);     
+ }
+ 
+ #false:hover {
+     color: #e66b6b;
+     border-color: #e66b6b;
+ }
+ 
+ #false:active{
      -webkit-transform: scale(0.8);
      -ms-transform: scale(0.8);
      transform: scale(0.8);     
@@ -234,6 +288,10 @@
 }
 #des2 tr td b {
 	color:rgb(73, 69, 69);
+}
+
+thead tr th {
+	color:#EA7475;
 }
 
 @media (max-width: 600px) {

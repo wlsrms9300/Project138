@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
         selectedDay,
         setDate,
         daysLen = days.length;
-// options should like '2014-01-01'
+
     function Calendar(selector, options) {
         this.options = options;
         this.draw();
@@ -124,8 +124,15 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     };
     
-     
+    Calendar.prototype.reset = function() {
+        month = today.getMonth();
+        year = today.getFullYear();
+        day = today.getDate();
+        this.options = undefined;
+        this.drawDays();
+    };
     
+      
     Calendar.prototype.setCookie = function(name, expiredays){
         if(expiredays) {
             var date = new Date();

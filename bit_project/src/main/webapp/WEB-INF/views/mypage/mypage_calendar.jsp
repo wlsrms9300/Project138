@@ -32,6 +32,12 @@ $(document).ready(function(){
                 <div class="head-month"></div>
             </div>
             <div class="next-button">></div>
+            <div class="return-true">
+            	<p id="true">반납신청</p>
+            </div>
+            <div class="return-false">
+            	<p id="false">반납취소</p>
+            </div>
         </div>
         <table id="calendar">
             <thead>
