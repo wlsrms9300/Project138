@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		
 		
-		return "mypage_main";
+		return "mypage/mypage_main";
 
 	}
 	
