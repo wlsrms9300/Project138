@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\Project138\bitmun\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2265389543.index
-2942979542.index
-1575226498.index
-1086627614.index
-3993163823.index
-2906572742.index
