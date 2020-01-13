@@ -1,93 +1,13 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-.settings/
-.project
-.classpath
-.metadata
-bin/
-tmp/
-# Directories #
-/build/
-/bin/
-target/
-/Server/
-# OS Files #
-.DS_Store
-  
-*.class
-  
-# Package Files #
-*.jar
-*.war
-*.ear
-*.db
-  
-######################
-# Windows
-######################
-  
-# Windows image file caches
-Thumbs.db 
-  
-# Folder config file
-Desktop.ini
-  
-######################
-# OSX
-######################
-  
-.DS_Store
-.svn
-  
-# Thumbnails
-._*
-  
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-  
-  
-
-# Eclipse
-
-  
-*.pydevproject
-
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-
-
-=======
-=======
->>>>>>> 081a22deea61ff91f543345dd4dbab1caa5fef1f
 ### Eclipse ###
 .metadata
 bin/
 tmp/
-<<<<<<< HEAD
->>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
-=======
->>>>>>> 081a22deea61ff91f543345dd4dbab1caa5fef1f
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-
-
-=======
 .settings/
->>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
-=======
-.settings/
->>>>>>> 081a22deea61ff91f543345dd4dbab1caa5fef1f
 .loadpath
 .recommenders
 
@@ -135,33 +55,12 @@ local.properties
 .scala_dependencies
 .worksheet
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-.loadpath
-/src/main/resources/rebel.xml
-# External tool builders
-.externalToolBuilders/
-# Locally stored "Eclipse launch configurations"
-*.launch
-# CDT-specific
-.cproject
-# PDT-specific
-.buildpath 
-.worksheet
-=======
-=======
->>>>>>> 081a22deea61ff91f543345dd4dbab1caa5fef1f
 ### Eclipse Patch ###
 # Eclipse Core
 .project
 
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
-<<<<<<< HEAD
->>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
-=======
->>>>>>> 081a22deea61ff91f543345dd4dbab1caa5fef1f
 
 # Annotation Processing
 .apt_generated
@@ -169,4 +68,3 @@ local.properties
 .sts4-cache/
 
 # End of https://www.gitignore.io/api/eclipse
-/bit_project/
