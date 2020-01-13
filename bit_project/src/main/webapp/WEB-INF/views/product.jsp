@@ -216,7 +216,7 @@
 <a href="javascript:void(0)" onclick="filSearch();">적용</a>
 
 					</li>
-					<li class="total_count"><a href="javascript:void(0)">전체보기</a>
+					<li class="total_count"><a href="javascript:void(0)" onclick="allSearch();">전체보기</a>
 					</li>
 				</ul>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .settings/
 .project
 .classpath
@@ -57,16 +58,26 @@ tmp/**
 tmp/**/*
 
 
+=======
+### Eclipse ###
+.metadata
+bin/
+tmp/
+>>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
+<<<<<<< HEAD
 
 
 
 
 
+=======
+.settings/
+>>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
 .loadpath
 .recommenders
 
@@ -108,13 +119,13 @@ local.properties
 
 # Annotation Processing
 .apt_generated/
-.apt_generated_test/
 
 # Scala IDE specific (Scala & Java development for Eclipse)
 .cache-main
 .scala_dependencies
 .worksheet
 
+<<<<<<< HEAD
 
 .loadpath
 /src/main/resources/rebel.xml
@@ -127,4 +138,18 @@ local.properties
 # PDT-specific
 .buildpath 
 .worksheet
+=======
+### Eclipse Patch ###
+# Eclipse Core
+.project
 
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+>>>>>>> 469cb7dcee5b3a4d1c05c3e0754cab06b6587880
+
+# Annotation Processing
+.apt_generated
+
+.sts4-cache/
+
+# End of https://www.gitignore.io/api/eclipse

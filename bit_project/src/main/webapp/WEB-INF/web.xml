@@ -32,11 +32,6 @@
 	
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.my</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.pr</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>

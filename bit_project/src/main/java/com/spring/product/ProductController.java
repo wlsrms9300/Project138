@@ -20,13 +20,13 @@ public class ProductController {
 	@Autowired(required=false)
 	private PDService service;
 	
-	/*@RequestMapping(value = "/")
+	@RequestMapping(value = "/")
 	public String productPage(Model model, HttpSession session) {
 		//String id = (String)session.getAttribute("id");
 		//model.addAttribute("id", id);				
 		return "product";
 	}
-	*/
+	
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session) {
 		String id = (String)session.getAttribute("id");
@@ -42,7 +42,7 @@ public class ProductController {
 		return "productForm";
 	}
 	
-	// �긽�뭹�벑濡앸쾭�듉 �닃���쓣�뻹 �쟾�넚�뻽�쓣 �븣 泥섎━ 遺�遺�
+	// 상품등록버튼 눌렀을떄 전송했을 때 처리 부분
 	@RequestMapping("/productAdd.pr")
 	public String productAddProcess(Model model, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		/*String pname = request.getParameter("product_name");
@@ -71,9 +71,9 @@ public class ProductController {
 			System.out.println(request.getParameter("category_l"));
 			System.out.println(request.getParameter("category_m"));
 			System.out.println(request.getParameter("category_s"));
-			MultipartFile mf1 = request.getFile("img_sum"); // �뙆�씪
-			MultipartFile mf2 = request.getFile("img_main"); // �뙆�씪
-			MultipartFile mf3 = request.getFile("img_detail"); // �뙆�씪
+			MultipartFile mf1 = request.getFile("img_sum"); // 파일
+			MultipartFile mf2 = request.getFile("img_main"); // 파일
+			MultipartFile mf3 = request.getFile("img_detail"); // 파일
 		
 			
 			String uploadPath = "C:\\Project138\\upload\\";
@@ -82,7 +82,7 @@ public class ProductController {
 			for(int i=0; i<3; i++) {			
 				if(i==0) {
 					pdVO.setImg_sum(storedFileName);
-					System.out.println("�씠誘몄� storedFileName : "+storedFileName);
+					System.out.println("이미지 storedFileName : "+storedFileName);
 					if (mf1.getSize() != 0) {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf1.transferTo(new File(uploadPath + storedFileName));
@@ -90,7 +90,7 @@ public class ProductController {
 				}else if(i==1) {
 					originalFileExtension = mf2.getOriginalFilename().substring(mf2.getOriginalFilename().lastIndexOf("."));
 					storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-					System.out.println("�씠誘몄� storedFileName : "+storedFileName);
+					System.out.println("이미지 storedFileName : "+storedFileName);
 					pdVO.setImg_main(storedFileName);
 					if (mf2.getSize() != 0) {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
@@ -100,7 +100,7 @@ public class ProductController {
 					originalFileExtension = mf3.getOriginalFilename().substring(mf3.getOriginalFilename().lastIndexOf("."));
 					storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 					pdVO.setImg_detail(storedFileName);
-					System.out.println("�씠誘몄� storedFileName : "+storedFileName);
+					System.out.println("이미지 storedFileName : "+storedFileName);
 					if (mf3.getSize() != 0) {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf3.transferTo(new File(uploadPath + storedFileName));
