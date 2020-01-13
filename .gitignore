@@ -1,4 +1,4 @@
-.settings/
+
 .project
 .classpath
 .metadata
@@ -115,7 +115,7 @@ local.properties
 .scala_dependencies
 .worksheet
 
-.settings/
+
 .loadpath
 /src/main/resources/rebel.xml
 # External tool builders
