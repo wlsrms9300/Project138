@@ -1,72 +1,13 @@
-.settings/
-.project
-.classpath
+### Eclipse ###
 .metadata
 bin/
 tmp/
-# Directories #
-/build/
-/bin/
-target/
-/Server/
-# OS Files #
-.DS_Store
-  
-*.class
-  
-# Package Files #
-*.jar
-*.war
-*.ear
-*.db
-  
-######################
-# Windows
-######################
-  
-# Windows image file caches
-Thumbs.db 
-  
-# Folder config file
-Desktop.ini
-  
-######################
-# OSX
-######################
-  
-.DS_Store
-.svn
-  
-# Thumbnails
-._*
-  
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-  
-  
-
-# Eclipse
-
-  
-*.pydevproject
-
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-
-
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-
-
-
-
-
+.settings/
 .loadpath
 .recommenders
 
@@ -108,23 +49,22 @@ local.properties
 
 # Annotation Processing
 .apt_generated/
-.apt_generated_test/
 
 # Scala IDE specific (Scala & Java development for Eclipse)
 .cache-main
 .scala_dependencies
 .worksheet
 
+### Eclipse Patch ###
+# Eclipse Core
+.project
 
-.loadpath
-/src/main/resources/rebel.xml
-# External tool builders
-.externalToolBuilders/
-# Locally stored "Eclipse launch configurations"
-*.launch
-# CDT-specific
-.cproject
-# PDT-specific
-.buildpath 
-.worksheet
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
 
+# Annotation Processing
+.apt_generated
+
+.sts4-cache/
+
+# End of https://www.gitignore.io/api/eclipse
