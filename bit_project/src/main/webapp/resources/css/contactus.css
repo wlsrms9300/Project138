@@ -1,0 +1,121 @@
+#contact-us-wrapper{
+	width:1280px;
+	margin:0 auto;
+}
+#logo{
+    text-align: center;
+    padding: 13px;
+    background-color: #EA7475;
+    color: white;
+}
+#contact-us-form form table{
+	margin:0 auto;
+}
+#contact-us-form form table .span{
+		text-align:center;
+}
+
+td{
+    padding: 3px;
+}
+
+.submit{
+    color: white;
+    border-radius: 0.3em;
+}
+
+#map-wrapper {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+#map {
+	width: 500px;
+	height: 400px;
+	display: inline-block;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#information {
+	display: inline-block;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.btn{
+    color: #fff;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #EA7475;
+    width: 65px;
+    height: 35px;
+    font-size: 15px;
+    margin: 0 auto;
+}
+
+.span {
+	width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+
+.field-text{
+	
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    height: 20px;
+    
+}
+
+@media screen and (max-width: 480px) {
+	#contact-us-wrapper {
+		width: 100%;
+	}
+	
+	#contact-us-form {
+		width: 100%;
+	}
+	
+	.field-text {
+		width: 250px;
+		font-size: 20px;
+		padding: 4px;
+		height: 35px;
+		border: 1px solid #000000;
+    	border-radius: 3px;
+    	opacity: 0.6;
+	}
+	
+	.field-text value {
+		opacity: 0.6;
+	}
+	
+	.field-text2 {
+		width: 250px;
+		font-size: 20px;
+		padding: 4px;
+	}
+	
+	.text-area {
+		width: 250px;
+		border: 1px solid #000000;
+    	border-radius: 3px;
+    	opacity: 0.6;
+	}
+	
+	#map {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		float: left;
+	}
+	
+	#information {
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		float: left;
+	}
+}
