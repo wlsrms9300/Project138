@@ -123,6 +123,3 @@ local.properties
 .buildpath 
 .worksheet
 
-.settings/
-.project
-.classpath
