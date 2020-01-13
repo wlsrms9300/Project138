@@ -47,7 +47,7 @@ Desktop.ini
 
   
 *.pydevproject
-.project
+
 .metadata
 bin/**
 tmp/**
@@ -63,7 +63,7 @@ local.properties
 
 
 
-.settings/
+
 .loadpath
 .recommenders
 
@@ -111,7 +111,7 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
-.classpath
+
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
