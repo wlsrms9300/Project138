@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+C:\Users\bitcamp\Desktop\bit\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3993163823.index
+\bit_project\src\main\java
+C:\Users\bitcamp\Desktop\bit\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2265389543.index
+\bit_project\src\main\java

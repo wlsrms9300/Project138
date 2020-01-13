@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-/.metadata/
 .metadata
 bin/
 tmp/
-=======
 # Directories #
 /build/
 /bin/
@@ -45,9 +42,9 @@ Desktop.ini
 .Trashes
   
   
-######################
+
 # Eclipse
-######################
+
   
 *.pydevproject
 .project
@@ -55,13 +52,17 @@ Desktop.ini
 bin/**
 tmp/**
 tmp/**/*
->>>>>>> 192461a98be215ae884589a33065b363fac4cb78
+
+
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-<<<<<<< HEAD
+
+
+
+
 .settings/
 .loadpath
 .recommenders
@@ -110,20 +111,17 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
-=======
 .classpath
 .settings/
 .loadpath
 /src/main/resources/rebel.xml
 # External tool builders
 .externalToolBuilders/
-  
 # Locally stored "Eclipse launch configurations"
 *.launch
-  
 # CDT-specific
 .cproject
-  
 # PDT-specific
 .buildpath 
->>>>>>> 192461a98be215ae884589a33065b363fac4cb78
+.worksheet
+
