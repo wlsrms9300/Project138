@@ -14,7 +14,7 @@ public class MypageController {
 	public String home(Model model) {
 		
 		
-		return "mypage_main";
+		return "mypage/mypage_main";
 	}
 	
 }
