@@ -16,11 +16,7 @@
 			<property name="driverClass" value="oracle.jdbc.OracleDriver"/>
 			<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
 			<property name="username" value="scott"/>	
-<<<<<<< HEAD
-			<property name="password" value="123456"/>
-=======
 			<property name="password" value="123456"/> <!-- 본인 비밀번호로 변경 후 사용 -->
->>>>>>> 2c3250f8029c1d933d31a0a4f5614baaa03c60bf
 		</bean>
 		
 		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
