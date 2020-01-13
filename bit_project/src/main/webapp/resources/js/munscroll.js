@@ -29,7 +29,7 @@
 					'</figure>';
 					output +=
 					'<div class="rank">'+
-					'<strong>1</strong>'+
+					'<strong>'+item.product_num+'</strong>'+
 					'</div></div>';
 					output +=
 					'<div class="infor">';
@@ -105,7 +105,7 @@ $(window).scroll(function(){
 						'</figure>';
 						output5 +=
 						'<div class="rank">'+
-						'<strong>1</strong>'+
+						'<strong>'+item.product_num+'</strong>'+
 						'</div></div>';
 						output5 +=
 						'<div class="infor">';
