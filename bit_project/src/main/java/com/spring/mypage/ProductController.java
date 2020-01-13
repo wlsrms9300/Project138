@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProductController {
 
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/hkhjkhj.do", method = RequestMethod.GET)
 	public String mun(Model model) {
 
-		System.out.println("조성현 ㅋ");
+		System.out.println("議곗꽦�쁽 �뀑");
 		
 		return "qna";
 		}
