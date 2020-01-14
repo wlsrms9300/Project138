@@ -33,7 +33,7 @@
 				<div class="ipt">
 					<input type="text" name="phoneNum" placeholder="핸드폰번호">
 				</div>
-				<button type="submit" class="find-btn">이메일 찾기</button>
+				<button type="submit" class="find-btn" onclick="location.href='findemail.me'">이메일 찾기</button>
 			</div>
 			<!-- 비밀번호 찾기 tab -->
 			<div id="tab-2" class="tab-content">

@@ -37,7 +37,7 @@
           <h1 class="text-field">결제 상세 내역을 확인해주세요.</h1>
 
         </div>
-        <form id="subscribe-term" action="" onsubmit="return checkForm();" method="post">
+        <form id="subscribe-term" action="subscribestep3.me" onsubmit="return checkForm();" method="post">
         <div class="choiceTerm">
           <div class="">
             <input type="radio" id="choiceTerm01" name="choiceTerm" value="s1MsalePrice" checked>

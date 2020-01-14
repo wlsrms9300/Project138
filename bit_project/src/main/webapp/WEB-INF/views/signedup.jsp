@@ -23,10 +23,10 @@
 			<h1>가입이 완료되었습니다.</h1>
 			<div class="btnfield">
 				<span>
-					<button class="home-btn" onclick="location.href='#'">홈으로
+					<button class="home-btn" onclick="location.href='main.ma'">홈으로
 						가기</button>
 				</span> <span>
-					<button class="subscription-btn" onclick="location.href='#'">
+					<button class="subscription-btn" onclick="location.href='subscribestep1.me'">
 						구독하러 가기</button>
 				</span>
 			</div>

@@ -41,12 +41,12 @@
 				</div>
 				<div class="login-append">
 					<div class="txt-signup">
-						<label for="signup" class="link-signup"> <a href="#"
+						<label for="signup" class="link-signup"> <a href="signup.me"
 							class="link-find">회원가입</a>
 						</label>
 					</div>
-					<span class="txt-find"> <a href="#" class="link-find">이메일</a>
-						/ <a href="#" class="link-find">비밀번호 찾기</a>
+					<span class="txt-find"> <a href="findemail.me" class="link-find">이메일</a>
+						/ <a href="forgotIdPw.me" class="link-find">비밀번호 찾기</a>
 					</span>
 				</div>
 				<button type="submit" class="btn-login">로그인</button>

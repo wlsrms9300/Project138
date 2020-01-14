@@ -30,7 +30,7 @@
 					style="margin: 0 auto; width: 85px; height: 85px; background: url(${pageContext.request.contextPath}/resources/img/profile.png)  50% 50% / cover no-repeat;"></div>
 			</div>
 			<div id="signup-ipt">
-				<form method="POST" name="signupForm" action="">
+				<form method="POST" name="signupForm" action="signedup.me">
 					<div class="checkfield">
 						<span><input type="email" class="checkfield"
 							placeholder="이메일주소" required="required"></span> <span><button
@@ -54,7 +54,7 @@
 						<input type="text" name="phoneNum" placeholder="핸드폰번호" required="required">
 					</div>
 					<div class="formfield">
-						<input type="text" name="" placeholder="우편번호">
+						<input type="text" name="postal_num" placeholder="우편번호">
 					</div>
 					<div class="formfield">
 						<input type="text" name="address1" placeholder="주소" required="required">

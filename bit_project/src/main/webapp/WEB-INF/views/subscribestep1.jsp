@@ -72,7 +72,7 @@
 			</div>
 		</div>
 		<div class="subscribeNext">
-			<button id="termSelect" type="submit">다음단계로</button>
+			<button id="termSelect" type="submit" onclick="location.href='subscribestep2.me'">다음단계로</button>
 		</div>
 	</div>
 	

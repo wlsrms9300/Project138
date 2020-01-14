@@ -23,10 +23,10 @@
 			<h4>찾으시는 이메일은 gggg@gmail.com 입니다.</h4>
 			<div class="btnfield">
 				<span>
-					<button class="login-btn" onclick="location.href='#'">
+					<button class="login-btn" onclick="location.href='login.me'">
 						로그인하러 가기</button>
 				</span> <span>
-					<button class="home-btn" onclick="location.href='#'">홈으로
+					<button class="home-btn" onclick="location.href='main.ma'">홈으로
 						가기</button>
 				</span>
 			</div>

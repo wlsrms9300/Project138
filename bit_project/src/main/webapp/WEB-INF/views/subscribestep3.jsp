@@ -52,7 +52,7 @@
        
           </div>
           <div class="subscribeEnd">
-            <button type="submit" name="button">위시리스트 설정</button>
+            <button type="submit" name="button" onclick="location.href='product.pr'">위시리스트 설정</button>
           </div>
           </div>
           

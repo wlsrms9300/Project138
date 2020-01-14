@@ -54,6 +54,10 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.ma</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>	<!-- 성운 -->
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.se</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Korean Filter -->
 	<filter>

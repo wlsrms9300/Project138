@@ -8,6 +8,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MailSendController {
 	
+	
+	@RequestMapping(value = "/kindergarten.ms")
+	public String kindergarten(Model model) {
+
+		return "kindergarten";
+	}
+	@RequestMapping(value = "/partner.ms")
+	public String partner(Model model) {
+
+		return "partner";
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/contactus_mailsend.ms")
 	public String mailsend_contactus(Model model) {
 
@@ -49,11 +64,4 @@ public class MailSendController {
 		return "share_mailsend";
 	}
 	
-	@RequestMapping(value = "/share.ms")
-	public String share(Model model) {
-
-		System.out.println("share.jsp 로 보냄");
-
-		return "share";
-	}
 }
