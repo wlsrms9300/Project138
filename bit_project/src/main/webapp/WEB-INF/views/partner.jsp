@@ -8,8 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Partner</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/partner.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/partner.css" />">
 <script src="http://code.jquery.com/jquery-3.4.1.js">
+	
 </script>
 <style>
 #container {
@@ -18,7 +20,7 @@
 }
 
 #logo {
-	padding: 13px 0 13px 0;
+	padding: 40px 0 40px 0;
 	background-color: #EA7475;
 	color: white;
 	width: 100%;
@@ -101,6 +103,11 @@
 </head>
 
 <body>
+	<div style="height: 50px;">
+		<header>
+			<%@ include file="/WEB-INF/views/header3.jsp"%>
+		</header>
+	</div>
 	<div id="container">
 
 		<div id="logo">
@@ -123,7 +130,8 @@
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.naver.com/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
 
 			</figure>
@@ -132,48 +140,61 @@
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.daum.net/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
-				<a href="#"></a>
 			</figure>
 			<figure class="snip1273">
 				<img src="./resources/img/partner03.PNG">
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.naver.com/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
-				<a href="#"></a>
 			</figure>
 			<figure class="snip1273">
 				<img src="./resources/img/partner04.PNG">
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.daum.net/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
-				<a href="#"></a>
 			</figure>
 			<figure class="snip1273">
 				<img src="./resources/img/partner05.jpg">
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.naver.com/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
-				<a href="#"></a>
 			</figure>
 			<figure class="snip1273">
 				<img src="./resources/img/partner06.jpg">
 				<figcaption>
 					<h3>Hello</h3>
 					<p>mutherfucker</p>
-					<br> <a href="#" style="text-align: right;">GO!</a>
+					<br> <a href="https://www.daum.net/" target="_blank"
+						style="text-align: right;">GO!</a>
 				</figcaption>
-				<a href="#"></a>
 			</figure>
+			
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		</div>
 
+	</div>
+	<div style="height: 50px;">
+		<footer>
+			<%@ include file="/WEB-INF/views/footer.jsp"%>
+		</footer>
 	</div>
 </body>
 

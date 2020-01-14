@@ -1,66 +1,80 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700)
+	;
 
-body{
-    font-family: 'Raleway', Arial, sans-serif;
-    background-color: #fcfcfc;
+body {
+	font-family: 'Raleway', Arial, sans-serif;
+	background-color: #fcfcfc;
+	margin: 0 auto;
 }
 
-.container{
-    width: 1280px;
-    margin: 0 auto;
-    
+h1 {
+	margin: 30px;
 }
 
-.content{
-    margin-left: 5%;
-    margin-right: 5%;
+.container {
+	width: 1280px;
+	margin: 0 auto;
 }
 
-#share p{
-    color: gray;
+.content {
+	margin-left: 5%;
+	margin-right: 5%;
 }
 
-#share-info td{
-    width: 300px;
-    height: 30px;
+#share p {
+	color: gray;
 }
 
-#share-chk td{
-    width: 450px;
-    height: 30px;
+#share-info td {
+	width: 300px;
+	height: 30px;
 }
 
-.btn{
-    color: #fff;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: #EA7475;
-    width: 65px;
-    height: 35px;
-    font-size: 15px;
+#share-chk td {
+	width: 450px;
+	height: 30px;
 }
 
-.field-text{
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    height: 20px;
+#share-chk b {
+	color: red;
 }
 
-.select{
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    height: 20px;
+.btn {
+	color: #fff;
+	border: 1px solid;
+	border-radius: 5px;
+	background-color: #EA7475;
+	width: 65px;
+	height: 35px;
+	font-size: 15px;
+	margin: 30px 0 30px 0;
 }
 
-@media (max-width: 480px) {
-    .container {
-        width: 100%;
-    }
+.field-text {
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	height: 20px;
+}
 
-    #share-chk td {
-        width: 100%;
-        display: block;
-        position: relative;
-        height: 45px;
-    }
+.select {
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	height: 20px;
+}
+
+#select {
+	height: 22px;
+	border-radius: 3px;
+}
+
+@media ( max-width : 480px) {
+	.container {
+		width: 100%;
+	}
+	#share-chk td {
+		width: 100%;
+		display: block;
+		position: relative;
+		height: 45px;
+	}
 }
