@@ -1,16 +1,13 @@
 @charset "UTF-8";
-
-
-/* @media (max-width: 1280px){
- */
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css");
 
 /*********************************************************************************/
 /* Header                                                                        */
 /*********************************************************************************/
-body{ margin: 0px; padding: 0px;  font-size: 14pt; font-weight: 400; color: #000000; width: 100%;}
-
+body{ margin: 0px; padding: 0px;  font-size: 14pt; font-weight: 400; color: #000000; width: 100%; font-family: 'NanumBarunGothic', sans-serif;}
 #chat { position: fixed; right: 5%; bottom: 5%; z-index: 1; }
 #chat img { height: 80px;  width: 75px;}
+.fas{margin: 10px;}
 
 
 /*********************************************************************************/
@@ -21,7 +18,6 @@ body{ margin: 0px; padding: 0px;  font-size: 14pt; font-weight: 400; color: #000
 {
 	position:relative;
 	padding-bottom:45%;
-	padding-top:10px;
 	height: 0;
 	overflow:hidden;
 	margin : 0 auto;
@@ -147,7 +143,7 @@ main scroll icon
   
 #wrapper1
 {
-	right: 50%;
+	margin: auto;
 	padding: 30px 0;
 	text-align: center;
 	width: 1280px;
@@ -459,9 +455,7 @@ main scroll icon
 	height: 600px;
 }
 
-/* 
-}
- */
+
 /*********************************************************************************/
 /* main mobile                                                                   			              */
 /*********************************************************************************/
@@ -470,11 +464,11 @@ body{ margin: 0px; padding: 0px;  font-size: 13pt; color: #000000; width: 100%;}
 h1{margin: 30px 0;}
 hr {display: none;}
 
-.video-container {padding-bottom: 40px; padding-top: 0; height: 500px; } 
+.video-container {padding-bottom: 40px; padding-top: 0; height: 600px; } 
 .video-main > #myVideo {display: none;}
-.video-main > img {width: 100%; height: 500px; display: block;} 
-.video-container > button.banner_btn1 {top:50%;}
-.video-container > button.banner_btn2 {left:10%;top:60%;}
+.video-main > img {width: 100%; height: 700px; display: block;} 
+.video-container > button.banner_btn1 {top:80%; left: 40%;}
+.video-container > button.banner_btn2 {left:40%; top:90%;}
 .icon-scroll {display: none;}
 .join_btn1 {width:150px;}
 .sub_btn1 {width:150px;}
@@ -517,3 +511,4 @@ hr {display: none;}
 #wrapper4 > .wrapper4_module > .wrapper4_2 > img{text-align: center; width: 100%;}
 
 }
+

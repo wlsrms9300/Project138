@@ -4,12 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"  content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+
 <title>community_detail</title>
-<link href="<%=request.getContextPath()%>/resources/css/community.css" rel="stylesheet" type="text/css" /> <!-- css -->
+<link href="<%=request.getContextPath()%>/resources/css/community_detail.css" rel="stylesheet" type="text/css" /> <!-- css -->
 <script src="https://kit.fontawesome.com/fa509a9993.js" crossorigin="anonymous"></script> <!--icon--> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> <!-- wow -->
 </head>
 <body>
+
+<div style="height: 50px;">
+<header >
+ 	<%@ include file="/WEB-INF/views/header1.jsp" %> 
+</header>
+</div>
 
     <div id="community_container_menubar">
         <div class="community_menubar">
@@ -27,8 +34,6 @@
             <h2>자유게시판</h2>
         </div>
     </div>
-
-    <div id="community_search">
 
     </div>
     <!--게시글 시작-->
@@ -78,6 +83,7 @@
         <hr>
     </div>
     <!-- 게시글  끝 -->
+    <!-- 댓글창 시작 -->
     <div id="community_container_comments">
         <div class="community_comments_count">
             <h2>댓글</h2><div class="count_circle">5</div>
@@ -94,12 +100,35 @@
                     <button class="community_comments_form_photo" aria-label="사진업로드" type="button">
                         <i class="fas fa-camera fa-2x"></i>
                     </button>
+                    <button class="community_comments_form_enter" type="button" >등록</button>
                 </div>
             </div>
         </div>
+       <!--  댓글 보기 -->
         <div class="community_comments_view">
             <div class="community_comments_view_user">
-                <img><i class="fas fa-user-circle fa-2x"></i>
+                <img>
+            </div>
+            <div class="community_comments_view_container">
+	            <div class="community_comments_view_comments">
+	           		<span class="community_mt_footer_users"><닉네임></span>
+	                <input type="text">
+	            </div>
+	            <div class="community_comments_view_actions">
+	                <span class="community_comments_view_time">
+	                    <2020.01.01>
+	                </span>
+	                <div class="community_comments_view_add">
+	                    <button type="button">댓글 달기</button>
+	                </div>
+	            </div>
+	    	</div>
+        </div>
+<!--         
+                댓글 보기
+        <div class="community_comments_view">
+            <div class="community_comments_view_user">
+                <img>
                 <span class="community_mt_footer_users"><닉네임></span>
             </div>
             <div class="community_comments_view_comments">
@@ -113,7 +142,13 @@
                     <button type="button">댓글 달기</button>
                 </div>
             </div>
-        </div>
+        </div> -->
+        
     </div>
+    
+<footer>
+	<%@ include file="/WEB-INF/views/footer.jsp" %> 
+</footer>
+
 </body>
 </html>

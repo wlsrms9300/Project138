@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <!-- 폰트어썸 아이콘 -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -19,7 +19,7 @@
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
      rel="stylesheet">
 
-<link href="<%=request.getContextPath()%>/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 
 <footer id="footer">
         <div id="footer_sns">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       	</div>
         <div id="footer_infor">
             <div class="container">
                 <div class="row">
