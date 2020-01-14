@@ -22,6 +22,7 @@
    <result property="regist" column="regist"  />
    </resultMap>
    
+   
 	<insert id="prAdd" parameterType="com.spring.product.ProductVO">
   <selectKey keyProperty="product_num" resultType="int" order="BEFORE">
     SELECT product_sequence.NEXTVAL FROM DUAL
@@ -69,5 +70,22 @@
 	order by product_num asc
 	</select>
 
-  
+	<select id="selectList" parameterType="hashMap" resultType="com.spring.product.ProductVO">
+	select *
+	from product
+	where category_l IN 
+	<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
+	#{i}
+	</foreach>
+	AND category_m IN 
+	<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
+	#{i}
+	</foreach>
+	AND category_s IN 
+	<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
+	#{i}
+	</foreach>
+	
+	
+  	</select>
 </mapper>

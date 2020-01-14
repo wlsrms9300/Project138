@@ -1,46 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="format-detection" content="telephone=no">
-<title>상품리스트</title>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>상품리스트</title>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<!-- css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/reset19.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style19.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/swiper.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mchk.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+	<!-- css -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reset19.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style19.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/swiper.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mchk.css">
 
 
-<!-- 페이스북 메타 태그 -->
-<meta property="og:title" content="" />
-<meta property="og:url" content="https://" />
-<meta property="og:image" content="https://.jpg" />
-<meta property="og:description" content="" />
+	<!-- 페이스북 메타 태그 -->
+	<meta property="og:title" content="" />
+	<meta property="og:url" content="https://" />
+	<meta property="og:image" content="https://.jpg" />
+	<meta property="og:description" content="" />
 
-<!-- 트위터 메타 태그 -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="">
-<meta name="twitter:url" content="https:///">
-<meta name="twitter:image" content="https://.jpg">
-<meta name="twitter:description" content="">
+	<!-- 트위터 메타 태그 -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="">
+	<meta name="twitter:url" content="https:///">
+	<meta name="twitter:image" content="https://.jpg">
+	<meta name="twitter:description" content="">
 
-<!-- 웹 폰트 -->
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
-	rel="stylesheet">
+	<!-- 웹 폰트 -->
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
+		rel="stylesheet">
+<!-- 자바스크립트 라이브러리 -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/munscroll.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
+	
 </head>
 
 <body>
@@ -50,7 +52,8 @@
 			<div class="row">
 				<div class="header clearfix">
 					<h1>
-						<a href="#"> <!-- 
+						<a href="#">
+							<!-- 
                             <em><img src="assets/img/logo.png" alt="MEGABOX"></em>
                             <strong><img src="assets/img/logo-sub.png" alt="LIFE THEATER"></strong>
                             --> <em>로고1</em>
@@ -78,7 +81,6 @@
 	</header>
 	<!-- //header -->
 	<section id="banner">
-
 		<div class="slider">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
@@ -138,57 +140,61 @@
                 <input type="hidden" id="rememberPage" name="rememberPage" value="">
                 -->
 				<ul class="cate clearfix">
-					<li class="product_tier"><a href="javascript:void(0)"
-						onclick="select(1)"> 등급 <span id="tier"></span> <span><i
-								class="fas fa-angle-down"></i></span>
-					</a>
+					<li class="product_tier"><a href="javascript:void(0)" onclick="select(1)"> 등급 <span
+								id="tier"></span> <span><i class="fas fa-angle-down"></i></span>
+						</a>
 						<div id="list1" style="display: none;">
 							<ul>
-								<li><input type="checkbox" name="check1" class="c1"
-									value="실버" onclick="Chk(1);" />&nbsp;실버 <!--<label for="f1" id="label_f1">실버</label>-->
+								<li><input type="checkbox" name="check1" class="c1" value="실버"
+										onclick="Chk(1);" />&nbsp;실버
+									<!--<label for="f1" id="label_f1">실버</label>-->
 								</li>
-								<li><input type="checkbox" name="check1" class="c1"
-									value="골드" onclick="Chk(1);" />&nbsp;골드 <!-- <label for="f2" id="label_f2">골드</label>-->
+								<li><input type="checkbox" name="check1" class="c1" value="골드"
+										onclick="Chk(1);" />&nbsp;골드
+									<!-- <label for="f2" id="label_f2">골드</label>-->
 								</li>
-								<li><input type="checkbox" name="check1" class="c1"
-									value="플레티넘" onclick="Chk(1);" />&nbsp;플레티넘 <!-- <label for="f3" id="label_f3">플레티넘</label> -->
+								<li><input type="checkbox" name="check1" class="c1" value="플레티넘"
+										onclick="Chk(1);" />&nbsp;플레티넘
+									<!-- <label for="f3" id="label_f3">플레티넘</label> -->
 								</li>
-								<li><input type="checkbox" name="check1" class="c1"
-									value="개인쉐어" onclick="Chk(1);" />&nbsp;개인쉐어 <!--<label for="f4" id="label_f4">개인쉐어</label>-->
+								<li><input type="checkbox" name="check1" class="c1" value="개인쉐어"
+										onclick="Chk(1);" />&nbsp;개인쉐어
+									<!--<label for="f4" id="label_f4">개인쉐어</label>-->
 								</li>
 							</ul>
-						</div></li>
-					<li class="product_age"><a href="javascript:void(0)"
-						onclick="select(2)"> 연령 <span id="age"></span> <span><i
-								class="fas fa-angle-down"></i></span>
-					</a>
+						</div>
+					</li>
+					<li class="product_age"><a href="javascript:void(0)" onclick="select(2)"> 연령 <span id="age"></span>
+							<span><i class="fas fa-angle-down"></i></span>
+						</a>
 						<div id="list2" style="display: none;">
 							<ul>
-								<li><input type="checkbox" name="check2" class="c2"
-									value="0~4" onclick="Chk(2);" /> <label for="c2">0~4</label></li>
-								<li><input type="checkbox" name="check2" class="c2"
-									value="5~7" onclick="Chk(2);" /> <label for="c2">5~7</label></li>
+								<li><input type="checkbox" name="check2" class="c2" value="04" onclick="Chk(2);" />
+									<label for="c2">0~4</label></li>
+								<li><input type="checkbox" name="check2" class="c2" value="57" onclick="Chk(2);" />
+									<label for="c2">5~7</label></li>
 							</ul>
-						</div></li>
-					<li class="product_type"><a href="javascript:void(0)"
-						onclick="select(3)"> 종류 <span id="type"></span> <span><i
-								class="fas fa-angle-down"></i></span>
-					</a>
+						</div>
+					</li>
+					<li class="product_type"><a href="javascript:void(0)" onclick="select(3)"> 종류 <span
+								id="type"></span> <span><i class="fas fa-angle-down"></i></span>
+						</a>
 						<div id="list3" style="display: none;">
 							<ul>
-								<li><input type="checkbox" name="check3" class="c3"
-									value="과학박스" onclick="Chk(3);" /> <label for="c3">과학박스</label>
+								<li><input type="checkbox" name="check3" class="c3" value="과학박스" onclick="Chk(3);" />
+									<label for="c3">과학박스</label>
 								</li>
-								<li><input type="checkbox" name="check3" class="c3"
-									value="자동차" onclick="Chk(3);" /> <label for="c3">자동차</label></li>
-								<li><input type="checkbox" name="check3" class="c3"
-									value="로보트" onclick="Chk(3);" /> <label for="c3">로보트</label></li>
+								<li><input type="checkbox" name="check3" class="c3" value="자동차" onclick="Chk(3);" />
+									<label for="c3">자동차</label></li>
+								<li><input type="checkbox" name="check3" class="c3" value="로보트" onclick="Chk(3);" />
+									<label for="c3">로보트</label></li>
 							</ul>
-						</div></li>
-					<li class="product_sort"><a href="javascript:void(0)"
-						id="select4" onclick="select(4)"> 등급 <span id="sort">신상품</span>
+						</div>
+					</li>
+					<li class="product_sort"><a href="javascript:void(0)" id="select4" onclick="select(4)"> 등급 <span
+								id="sort">신상품</span>
 							<span><i class="fas fa-angle-down"></i></span>
-					</a>
+						</a>
 						<div id="list4" style="display: none;">
 							<ul>
 
@@ -202,14 +208,15 @@
 								<li><a href="javascript:productSort('QNA','후기순');">후기순</a>
 								</li>
 							</ul>
-						</div></li>
+						</div>
+					</li>
 
-					<li class="btn">
-						<!-- <input type='reset'> --> <a href="javascript:void(0)"
-						onclick="formReset();">초기화</a> <a href="javascript:void(0)">적용</a>
+					<li class="filterbtn">
+<a href="javascript:void(0)" onclick="formReset();">초기화</a>
+<a href="javascript:void(0)" onclick="filSearch();">적용</a>
 
 					</li>
-					<li class="total_count"><a href="javascript:void(0)" onclick="allSearch();">전체보기</a>
+					<li class="total_count"><a href="javascript:void(0)">전체보기</a>
 					</li>
 				</ul>
 
@@ -224,72 +231,67 @@
 		<input type="checkbox" id="menu_state">
 		<nav id="mFilter">
 			<label for="menu_state"><i class="fa"></i></label>
-			<div class="fildivision"
-				style="text-align: center; padding: 5px 0 5px 0; display: none;">
+			<div class="fildivision" style="text-align: center; padding: 5px 0 5px 0; display: none;">
 				필터링 <a href="javascript:testfun();"> <i class="fas fa-times"
-					style="float: right; padding: 5px; margin-right: 3px;"></i></a>
+						style="float: right; padding: 5px; margin-right: 3px;"></i></a>
 			</div>
 			<br>
 			<ul id="mFilter_menu" class="clearfix" style="display: none;">
-				<li id="mFilter_menu_li1"><a href="javascript:void(0)"> <span
-						id="js-Exchange_Bank_Btn">등급</span> <span id="mtier"></span>
-				</a></li>
+				<li id="mFilter_menu_li1"><a href="javascript:void(0)"> <span id="js-Exchange_Bank_Btn">등급</span> <span
+							id="mtier"></span>
+					</a></li>
 				<div id="mFilter_menu_list1" style="display: none; height: 100%;">
 					<ul>
-						<li><input type="checkbox" name="check1" class="m1"
-							value="실버" onclick="mChk(1);" />&nbsp;실버 <!--<label for="f1" id="label_f1">실버</label>-->
+						<li><input type="checkbox" name="check1" class="m1" value="실버" onclick="mChk(1);" />&nbsp;실버
+							<!--<label for="f1" id="label_f1">실버</label>-->
 						</li>
-						<li><input type="checkbox" name="check1" class="m1"
-							value="골드" onclick="mChk(1);" />&nbsp;골드 <!-- <label for="f2" id="label_f2">골드</label>-->
+						<li><input type="checkbox" name="check1" class="m1" value="골드" onclick="mChk(1);" />&nbsp;골드
+							<!-- <label for="f2" id="label_f2">골드</label>-->
 						</li>
-						<li><input type="checkbox" name="check1" class="m1"
-							value="플레티넘" onclick="mChk(1);" />&nbsp;플레티넘 <!-- <label for="f3" id="label_f3">플레티넘</label> -->
+						<li><input type="checkbox" name="check1" class="m1" value="플레티넘" onclick="mChk(1);" />&nbsp;플레티넘
+							<!-- <label for="f3" id="label_f3">플레티넘</label> -->
 						</li>
-						<li><input type="checkbox" name="check1" class="m1"
-							value="개인쉐어" onclick="mChk(1);" />&nbsp;개인쉐어 <!--<label for="f4" id="label_f4">개인쉐어</label>-->
+						<li><input type="checkbox" name="check1" class="m1" value="개인쉐어" onclick="mChk(1);" />&nbsp;개인쉐어
+							<!--<label for="f4" id="label_f4">개인쉐어</label>-->
 						</li>
 					</ul>
 				</div>
 
 				<li id="mFilter_menu_li2"><a href="javascript:void(0)"> <span>연령</span>
 						<span id="mage"></span>
-				</a></li>
+					</a></li>
 				<div id="mFilter_menu_list2" style="display: none;">
 					<ul>
-						<li><input type="checkbox" name="check2" class="m2"
-							value="0~4" onclick="mChk(2);" /> <label for="c2">0~4</label></li>
-						<li><input type="checkbox" name="check2" class="m2"
-							value="5~7" onclick="mChk(2);" /> <label for="c2">5~7</label></li>
+						<li><input type="checkbox" name="check2" class="m2" value="0~4" onclick="mChk(2);" /> <label
+								for="c2">0~4</label></li>
+						<li><input type="checkbox" name="check2" class="m2" value="5~7" onclick="mChk(2);" /> <label
+								for="c2">5~7</label></li>
 					</ul>
 				</div>
 
 				<li id="mFilter_menu_li3"><a href="javascript:void(0)"> <span>종류</span>
 						<span id="mtype"></span>
-				</a></li>
+					</a></li>
 				<div id="mFilter_menu_list3" style="display: none;">
 					<ul>
-						<li><input type="checkbox" name="check3" class="m3"
-							value="과학박스" onclick="mChk(3);" /> <label for="c3">과학박스</label>
+						<li><input type="checkbox" name="check3" class="m3" value="과학박스" onclick="mChk(3);" /> <label
+								for="c3">과학박스</label>
 						</li>
-						<li><input type="checkbox" name="check3" class="m3"
-							value="자동차" onclick="mChk(3);" /> <label for="c3">자동차</label></li>
-						<li><input type="checkbox" name="check3" class="m3"
-							value="로보트" onclick="mChk(3);" /> <label for="c3">로보트</label></li>
+						<li><input type="checkbox" name="check3" class="m3" value="자동차" onclick="mChk(3);" /> <label
+								for="c3">자동차</label></li>
+						<li><input type="checkbox" name="check3" class="m3" value="로보트" onclick="mChk(3);" /> <label
+								for="c3">로보트</label></li>
 					</ul>
 				</div>
 
 				<div
 					style="line-height: 70px; position: fixed; left: 0; bottom: 0; width: 100%; height: 70px; text-align: center;">
-					<div
-						style="width: 50%; height: 100%; float: left; background: #4c515d;">
-						<input type="button" value="검색"
-							style="background: none; color: #fff;" />
+					<div style="width: 50%; height: 100%; float: left; background: #4c515d;">
+						<input type="button" value="검색" style="background: none; color: #fff;" />
 					</div>
 
-					<div
-						style="width: 50%; height: 100%; float: right; background: black;">
-						<input type="button" value="초기화" onclick="fclear();"
-							style="background: none; color: #fff;" />
+					<div style="width: 50%; height: 100%; float: right; background: black;">
+						<input type="button" value="초기화" onclick="fclear();" style="background: none; color: #fff;" />
 					</div>
 				</div>
 				<br>
@@ -299,199 +301,18 @@
 	</form>
 	<!-- 모바일 용 상품 필터 -->
 
+	
+	
 	<section id="product_section">
 		<div class="container">
 			<div class="row">
 				<div class="product">
 					<h3 class="product-normal">일반상품</h3>
 					<div class="product_chart">
-						<div class="swiper-container2">
-							<div class="chart_cont1 swiper-wrapper">
-								<div class="swiper-slide">
-									<div class="pr_img">
-										
-										<figure>
-										<a href="detail.do">
-											<img src="${pageContext.request.contextPath}/resources/img/item01.jpg" alt="pro1">
-										</a>
-										</figure>
-
-										<div class="rank">
-											<strong>1</strong>
-										</div>
-
-									</div>
-									<div class="infor">
-										<h3>
-											<em>Juun.j</em> <strong>조거</strong>
-										</h3>
-										<div class="infor_btn">
-											<a href="detail.do">상세정보</a> 
-											<a href="#">위시리스트</a>
-										</div>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="pr_img">
-										<figure>
-
-											<img
-												src="${pageContext.request.contextPath}/resources/img/item02.jpg">
-
-										</figure>
-										<div class="rank">
-											<strong>2</strong>
-										</div>
-
-									</div>
-									<div class="infor">
-										<h3>
-											<em>브랜드</em> <strong>상품명</strong>
-										</h3>
-										<div class="infor_btn">
-											<a href="#">상세정보</a> <a href="#">위시리스트</a>
-										</div>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="pr_img">
-										<figure>
-											<img
-												src="${pageContext.request.contextPath}/resources/img/item03.jpg">
-										</figure>
-										<div class="rank">
-											<strong>3</strong>
-										</div>
-
-									</div>
-									<div class="infor">
-										<h3>
-											<em>브랜드</em> <strong>상품명</strong>
-										</h3>
-										<div class="infor_btn">
-											<a href="#">상세정보</a> <a href="#">위시리스트</a>
-										</div>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="pr_img">
-										<figure>
-											<img
-												src="${pageContext.request.contextPath}/resources/img/item01.jpg">
-										</figure>
-										<div class="rank">
-											<strong>4</strong>
-										</div>
-
-									</div>
-									<div class="infor">
-										<h3>
-											<em>브랜드</em> <strong>상품명</strong>
-										</h3>
-										<div class="infor_btn">
-											<a href="#">상세정보</a> <a href="#">위시리스트</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						
-					</div>
-					<!-- //chart_cont1-->
-					
-					<div class="swiper-container2">
-						<div class="chart_cont1 swiper-wrapper">
-							<div class="swiper-slide">
-								<div class="pr_img">
-									<figure>
-										<img
-											src="${pageContext.request.contextPath}/resources/img/item01.jpg">
-									</figure>
-									<div class="rank">
-										<strong>1</strong>
-									</div>
-
-								</div>
-								<div class="infor">
-									<h3>
-										<em>브랜드</em> <strong>상품명</strong>
-									</h3>
-									<div class="infor_btn">
-										<a href="#">상세정보</a> <a href="#">위시리스트</a>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div class="pr_img">
-									<figure>
-										<img
-											src="${pageContext.request.contextPath}/resources/img/item02.jpg">
-									</figure>
-									<div class="rank">
-										<strong>2</strong>
-									</div>
-
-								</div>
-								<div class="infor">
-									<h3>
-										<em>브랜드</em> <strong>상품명</strong>
-									</h3>
-									<div class="infor_btn">
-										<a href="#">상세정보</a> <a href="#">위시리스트</a>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div class="pr_img">
-									<figure>
-										<img
-											src="${pageContext.request.contextPath}/resources/img/item03.jpg">
-									</figure>
-									<div class="rank">
-										<strong>3</strong>
-									</div>
-
-								</div>
-								<div class="infor">
-									<h3>
-										<em>브랜드</em> <strong>상품명</strong>
-									</h3>
-									<div class="infor_btn">
-										<a href="#">상세정보</a> <a href="#">위시리스트</a>
-									</div>
-								</div>
-							</div>
-							<div class="swiper-slide">
-								<div class="pr_img">
-									<figure>
-										<img
-											src="${pageContext.request.contextPath}/resources/img/item01.jpg">
-									</figure>
-									<div class="rank">
-										<strong>4</strong>
-									</div>
-
-								</div>
-								<div class="infor">
-									<h3>
-										<em>브랜드</em> <strong>상품명</strong>
-									</h3>
-									<div class="infor_btn">
-										<a href="#">상세정보</a> <a href="#">위시리스트</a>
-									</div>
-								</div>
-							</div>
-
-							<!-- //chart_cont2-->
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 	</section>
 	<!-- //product -->
-
+	<button onclick="location.href='productForm.pr'">상품등록하기</button>
+	<button onclick="location.href='main.pr'">메인</button>
 	<footer id="footer">
 		<div id="footer_sns">
 			<div class="container">
@@ -543,32 +364,27 @@
 
 
 
-	<!-- 자바스크립트 라이브러리 -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+
 	<script>
 		//배너 이미지 슬라이드
 		var swiper = new Swiper('.swiper-container', {
-			pagination : {
-				el : '.swiper-pagination',
+			pagination: {
+				el: '.swiper-pagination',
 			},
-			navigation : {
-				nextEl : '.swiper-button-next',
-				prevEl : '.swiper-button-prev',
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
 			},
-			autoplay : {
-				delay : 5000,
+			autoplay: {
+				delay: 5000,
 			},
 		});
 
 		//이미지 슬라이드
 
 		var swiper = new Swiper('.swiper-container2', {
-			slidesPerView : 4,
-			spaceBetween : 24,
+			slidesPerView: 4,
+			spaceBetween: 24,
 			//            mousewheel: {
 			//                invert: true,
 			//            },
@@ -582,18 +398,18 @@
 			    delay: 6000,
 			},
 			 */
-			breakpoints : {
-				600 : {
-					slidesPerView : 2,
-					spaceBetween : 24
+			breakpoints: {
+				600: {
+					slidesPerView: 2,
+					spaceBetween: 24
 				},
-				768 : {
-					slidesPerView : 2,
-					spaceBetween : 24
+				768: {
+					slidesPerView: 2,
+					spaceBetween: 24
 				},
-				960 : {
-					slidesPerView : 3,
-					spaceBetween : 24
+				960: {
+					slidesPerView: 3,
+					spaceBetween: 24
 				}
 			}
 		});

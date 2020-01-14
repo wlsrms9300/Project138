@@ -25,29 +25,34 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
+		
+	<servlet-mapping>	<!-- 처음시작 메인페이지 -->
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>	<!-- 수민 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.me</url-pattern>
+		<url-pattern>*.me</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 진근 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.my</url-pattern>
+		<url-pattern>*.my</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 용민 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.pr</url-pattern>
+		<url-pattern>*.pr</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 성현 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.ms</url-pattern>
+		<url-pattern>*.ms</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 나겸 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.co</url-pattern>
+		<url-pattern>*.co</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 나겸 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>.ma</url-pattern>
+		<url-pattern>*.ma</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Korean Filter -->
@@ -68,6 +73,11 @@
 		<filter-name>CharacterEncodingFilter</filter-name>	
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- 메인 시작 -->
+	<welcome-file-list>
+		<welcome-file>main.ma</welcome-file>
+	</welcome-file-list>
 	
 
 </web-app>

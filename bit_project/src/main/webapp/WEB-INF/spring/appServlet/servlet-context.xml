@@ -27,6 +27,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.spring.mypage" />
+	<context:component-scan base-package="com.spring.member" />
+	<context:component-scan base-package="com.spring.product" />
+	<context:component-scan base-package="com.spring.community" />
+	<context:component-scan base-package="com.spring.tazo" />
 	
 	
 </beans:beans>

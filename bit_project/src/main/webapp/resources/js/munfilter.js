@@ -25,26 +25,24 @@ $('.filterbtn').click(function () {
 
 function filSearch(){
 		$('.product_chart').empty();
-		 var fil = new Array();
-		 for(var j=1; j<4;j++){
-		fil[0]= "";
+		 var fil = new Array(3);
+		 for(var j=1; j<4;j++){		
 		 var chkbox = $(".c" + j);
 			 for (var i = 0; i < chkbox.length; i++) {
 				 if (chkbox[i].checked == true) {
-				      fil[j] += chkbox[i].value;
+				      fil[j-1] += chkbox[i].value;
+				      fil[j-1] += ",";				      
 				 }
 			 }
 			 
 		 }
-		var fil1 = fil[1];
-		var fil2 = fil[2];
-		var fil3 = fil[3];
+		 alert(fil[0]);
 		var cnt = 1;
 		var scnt = 1;
 		$.ajax({
 			url:'/bit_project/filterSearch.pr',
 			type:'post', 
-			data:{category_l : fil1, category_m : fil2, category_s : fil3}, 
+			data:{category_l : fil[0], category_m : fil[1], category_s : fil[2]}, 
 			contentType:'application/x-www-form-urlencoded; charset=utf-8',
 			dataType:"json",
 			success: function (data) {

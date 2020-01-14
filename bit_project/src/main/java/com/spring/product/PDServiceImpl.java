@@ -1,7 +1,10 @@
 package com.spring.product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +76,20 @@ public class PDServiceImpl implements PDService {
 		}
 		
 	}
+
+	@Override
+	public List<ProductVO> selectList(HashMap cateMap1, HashMap cateMap2, HashMap cateMap3) throws Exception {
+		try {
+			List<ProductVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.selectList(cateMap1, cateMap2, cateMap3);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("필터 검색 실패.", e);	
+		}
+		
+	}
+	
+	
 	
 }

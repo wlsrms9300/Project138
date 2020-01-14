@@ -20,17 +20,9 @@ public class CommunityController {
 		return "about";
 	}
 
-	@RequestMapping(value = "/community.co", method = RequestMethod.GET)
-	public String community(Model model) {
-
-		return "community";
-	}
-
-	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
-	public String community_detail(Model model) {
-
-		return "community_detail";
-	}
+	
+	
+	
 
 	@RequestMapping(value = "/community_img.co", method = RequestMethod.GET)
 	public String community_img(Model model) {

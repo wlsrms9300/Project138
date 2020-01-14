@@ -28,8 +28,8 @@
 
 
 <div class="video-container">
-	<button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='community.co'">회원가입</button>
-	<button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='community_img.co'">구  독</button>
+	<button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='signup.ma'">회원가입</button>
+	<button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='subscribe.ma'">구  독</button>
 	<div class="video-main">
 		<video id="myVideo" autoplay loop muted >
 			<source src="${pageContext.request.contextPath}/resources/video/Musicbox.mp4" type="video/mp4">
@@ -117,9 +117,9 @@
 		<div class="wrapper3_1">
 			<span><h2>우리 아이를 위한<br><br>새로운 선물<br><br>지금 바로<br><br>시작하세요</h2><br><br></span>
 			<div class="wrapper3_btn1">
-				<button type="button" name="join_btn" class="join_btn1" onclick="location.href='#'">회원가입</button>
+				<button type="button" name="join_btn" class="join_btn1" onclick="location.href='signup.ma'">회원가입</button>
 				<br>
-				<button type="button" name="sub_btn" class="sub_btn1" onclick="location.href='#'">구독신청</button>
+				<button type="button" name="sub_btn" class="sub_btn1" onclick="location.href='subscribe.ma'">구독신청</button>
 			</div>
 		</div>
 		<div class="wrapper3_2">
@@ -137,8 +137,8 @@
 		</div>
 		<br>
 		<div class="wrapper3_btn2">
-			<button type="button" name="join_btn" class="join_btn1" onclick="location.href='#'">회원가입</button>  
-			<button type="button" name="sub_btn" class="sub_btn1" onclick="location.href='#'">구독신청</button>
+			<button type="button" name="join_btn" class="join_btn1" onclick="location.href='signup.ma'">회원가입</button>  
+			<button type="button" name="sub_btn" class="sub_btn1" onclick="location.href='subscribe.ma'">구독신청</button>
 		</div>
 		<br>
 	</div>
