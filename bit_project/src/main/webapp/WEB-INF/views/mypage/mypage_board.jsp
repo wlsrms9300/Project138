@@ -16,6 +16,43 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
+<script type="text/javascript">
+    $(function($) {
+        var lang_kor = {
+        "decimal" : "",
+        "emptyTable" : "데이터가 없습니다.",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+        "infoEmpty" : "0명",
+        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+        "infoPostFix" : "",
+        "thousands" : ",",
+        "lengthMenu" : "_MENU_ 개씩 보기",
+        "loadingRecords" : "로딩중...",
+        "processing" : "처리중...",
+        "search" : "검색 : ",
+        "zeroRecords" : "검색된 데이터가 없습니다.",
+        "paginate" : {
+            "first" : "첫 페이지",
+            "last" : "마지막 페이지",
+            "next" : "다음",
+            "previous" : "이전"
+        },
+        "aria" : {
+            "sortAscending" : " :  오름차순 정렬",
+            "sortDescending" : " :  내림차순 정렬"
+        }
+    };
+
+
+        $('#foo-table').DataTable( {
+        	
+            language:lang_kor
+        });  
+    });
+</script>
+
+
 <body>
 	<div class="board_list_wrap">
 		<div id="board_history">
@@ -48,62 +85,31 @@
 				</tr>
 			</table>
 		</div>
-            <h2>자유게시판</h2>		
-            <table class="board">
-                <colgroup>
-                    <col width="10%" />
-                    <col width="20%" />
-                    <col width="auto" />
-                    <col width="15%" />
-                    <col width="10%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>구분</th>
-                        <th>제목</th>
-                        <th>등록일</th>
-                        <th>조회수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>구분1</td>
-                        <td><a href="#">제목입니다</a></td>
-                        <td>2020.01.10</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>구분2</td>
-                        <td><a href="#">제목입니다</a></td>
-                        <td>2020.01.10</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>구분3</td>
-                        <td><a href="#">제목입니다</a></td>
-                        <td>2020.01.10</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>구분4</td>
-                        <td><a href="#">제목입니다</a></td>
-                        <td>2020.01.10</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>구분5</td>
-                        <td><a href="#">제목입니다</a></td>
-                        <td>2020.01.10</td>
-                        <td>1000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        
+    	<table id="foo-table" class="foo-ex">
+    		<h2>자유게시판</h2>
+			<thead>
+            	<tr>
+                	<th>No</th>
+                	<th>글제목</th>
+                	<th>등록일</th>
+                	<th>조회수</th>
+            	</tr>        
+			</thead>
+			<tbody>
+				<tr><td>1</td><td>책을</td><td>2020.01.13</td><td>20</td></tr>
+				<tr><td>2</td><td>꾸준히</td><td>2020.01.13</td><td>20</td></tr>
+				<tr><td>3</td><td>읽어요</td><td>2020.01.13</td><td>12</td></tr>
+				<tr><td>4</td><td>비싼가</td><td>2020.01.13</td><td>10</td></tr>
+				<tr><td>5</td><td>인가요</td><td>2020.01.13</td><td>25</td></tr>
+				<tr><td>6</td><td>오백원</td><td>2020.01.13</td><td>30</td></tr>
+				<tr><td>7</td><td>한권은</td><td>2020.01.13</td><td>20</td></tr>
+				<tr><td>8</td><td>안난다</td><td>2020.01.13</td><td>33</td></tr>
+				<tr><td>9</td><td>끝이</td><td>2020.01.13</td><td>10</td></tr>
+				<tr><td>10</td><td>읽어도</td><td>2020.01.13</td><td>55</td></tr>
+				<tr><td>99</td><td>꾸준히</td><td>2020.01.13</td><td>88</td></tr>
+			</tbody>
+    	</table>
+     </div>
 </body>
 </html>

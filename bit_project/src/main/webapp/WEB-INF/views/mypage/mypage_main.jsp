@@ -19,7 +19,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
     <title>마이페이지</title>
 </head>
-
 <body>
 
 <header>

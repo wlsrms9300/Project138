@@ -33,7 +33,11 @@
 
 .board_list_wrap {
 	display:none;
+	max-width:900px;
 }
+
+
+
 .board_free {
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
     padding:30px;
@@ -107,4 +111,29 @@
         border-radius:0;
         padding:0;
     }
+}
+#foo-table tbody tr td:nth-child(2) {
+	cursor:pointer;
+}
+#foo-table tbody tr td:nth-child(2):hover {
+	color:#EA7475;
+}
+#foo-table_wrapper {
+	margin-top:40px;
+}
+#foo-table h2 {
+	margin-top:60px;
+	margin-bottom:0;
+}
+#foo-table thead tr {
+    background-color: rgb(243, 243, 243);
+} 
+/*
+#foo-table tbody tr:hover {
+    background-color: rgb(243, 243, 243);
+}
+*/
+
+#foo-table_length {
+	margin-bottom:15px;
 }

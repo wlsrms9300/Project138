@@ -153,6 +153,7 @@ $(document).ready(function(){
             menu6.hide();
         }
     });
+    
 
     $('#num3').click(function(){
         var list= $('.list');
