@@ -26,7 +26,7 @@
 	<a href="productadd.ma"><img src="${pageContext.request.contextPath}/resources/img/chat.png"/></a>  <!-- 임시 -->
 </div>
 
-
+<!-- 지은 -->
 <div class="video-container">
 	<button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='signup.me'">회원가입</button>
 	<button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='subscribestep1.me'">구  독</button>
