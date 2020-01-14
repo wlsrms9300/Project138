@@ -1,31 +1,6 @@
-/*
-$('.filterbtn').click(function () {
-		var filterform = document.getElementById("categoryListForm");
-		filterform.action = 'filterSearch.pr';
-		filterform.submit();
-		
-		$.ajax({
-			url: '/bit_project/filterSearch.pr',
-			type: 'post',
-			dataType: "json",
-			async:false,
-			data:{pno : pno},
-			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-			success: function (data) {
-					$.each(data, function (index, item) {
-					
-					});
-			},
-			error: function () {
-				alert("ajax통신 실패 !!!");
-			}
-	});
-});
-*/
-
 function filSearch(){
 		$('.product_chart').empty();
-		 var fil = new Array(3);
+		var fil = new Array(3);
 		 for(var j=1; j<4;j++){		
 		 var chkbox = $(".c" + j);
 			 for (var i = 0; i < chkbox.length; i++) {
@@ -34,9 +9,7 @@ function filSearch(){
 				      fil[j-1] += ",";				      
 				 }
 			 }
-			 
 		 }
-		 alert(fil[0]);
 		var cnt = 1;
 		var scnt = 1;
 		$.ajax({

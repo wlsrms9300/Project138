@@ -1,8 +1,8 @@
 $(document).ready(function () {
 	allSearch();
+	
 });
-
-
+var pNum = 0;
 function allSearch() {
 	$('.product_chart').empty();
 	//event.preventDefault();
@@ -29,7 +29,7 @@ function allSearch() {
 			'<div class="pr_img">';
 			output +=
 			'<figure>'+
-			'<a href="productDetail.pr">'+
+			'<a href="productDetail.pr?num='+item.product_num+'">'+
 			'<img src="/bit_project/image/'+item.img_sum+'">'+
 			'</a>'+
 			'</figure>';
@@ -64,6 +64,8 @@ function allSearch() {
 		}
 		
 	});
+	document.getElementById('printNumber').value = 8;
+	pNum = parseInt(document.getElementById('printNumber').value); //8
 	event.preventDefault();
 }
 
@@ -82,17 +84,30 @@ if(currentScrollTop - lastScrollTop > 800){
 }*/
 var pno = 2;
 $(window).scroll(function(){
-	
-	if($(window).scrollTop()+100 >= $(document).height() - $(window).height()){
+	if($(window).scrollTop()+50 >= $(document).height() - $(window).height()){
+		alert('현재 위치에서 ajax 데이터 호출');
+		//1 필터값을 가져온다. 
+		var fil = new Array(3);
+		 for(var j=1; j<4;j++){		
+		 var chkbox = $(".c" + j);
+			 for (var i = 0; i < chkbox.length; i++) {
+				 if (chkbox[i].checked == true) {
+				      fil[j-1] += chkbox[i].value;
+				      fil[j-1] += ",";				      
+				 }
+			 }
+		 }
+		//2. pNum을 넘긴다. 3. 데이터 받아온다.
+		pNum = parseInt(document.getElementById('printNumber').value);
 		var con_cnt = 3;
+//		con_cnt = pNum%4+con_cnt;
 		var slide_cnt = 1;
-		alert(pno);
 		$.ajax({
 			url: '/bit_project/scrollSearch.pr',
 			type: 'post',
 			dataType: "json",
 			async:false,
-			data:{pno : pno},
+			data:{pno : pNum, category_l : fil[0], category_m : fil[1], category_s : fil[2]},
 			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 			success: function (data) {
 				if(data!=null){
@@ -138,7 +153,10 @@ $(window).scroll(function(){
 						slide_cnt++;
 						
 						});
-						pno += 1;	
+						//pno += 1;
+						pNum += 8;
+						document.getElementById('printNumber').value = pNum;
+						
 				}else {
 					alert('읽어올 데이터가 없습니다.');
 				}

@@ -1,10 +1,8 @@
 package com.spring.product;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,7 @@ public class PDServiceImpl implements PDService {
 			pdMapper.prAdd(pdVO);
 		} catch (Exception e) {
 			throw new Exception("상품등록 실패.", e);
-			
+
 		}
 	}
 
@@ -33,10 +31,10 @@ public class PDServiceImpl implements PDService {
 		try {
 			List<ProductVO> productList = null;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			productList = pdMapper.allSearch();			
+			productList = pdMapper.allSearch();
 			return productList;
 		} catch (Exception e) {
-			throw new Exception("전체상품조회 실패.", e);			
+			throw new Exception("전체상품조회 실패.", e);
 		}
 	}
 
@@ -49,9 +47,10 @@ public class PDServiceImpl implements PDService {
 			return productList;
 		} catch (Exception e) {
 			throw new Exception("초기 상품리스트 조회 실패.", e);
-		
+
 		}
 	}
+
 	@Override
 	public List<ProductVO> scrollSearch(int pno) throws Exception {
 		try {
@@ -60,7 +59,20 @@ public class PDServiceImpl implements PDService {
 			productList = pdMapper.scrollSearch(pno);
 			return productList;
 		} catch (Exception e) {
-			throw new Exception("상품 데이터 추가 조회 실패.", e);			
+			throw new Exception("상품 데이터 추가 조회 실패.", e);
+		}
+	}
+	
+	@Override
+	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2,
+			HashMap<String, String> cateMap3) throws Exception {
+		try {
+			List<ProductVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("필터설정 후 스크롤 실패.", e);
 		}
 	}
 
@@ -72,24 +84,38 @@ public class PDServiceImpl implements PDService {
 			list = pdMapper.filterSearch(category_l, category_m, category_s);
 			return list;
 		} catch (Exception e) {
-			throw new Exception("필터 검색 실패.", e);	
+			throw new Exception("필터 검색 실패.", e);
 		}
-		
+
 	}
 
 	@Override
-	public List<ProductVO> selectList(HashMap cateMap1, HashMap cateMap2, HashMap cateMap3) throws Exception {
+	public List<ProductVO> selectList(HashMap<String, String> cateMap1, HashMap<String, String> cateMap2,
+			HashMap<String, String> cateMap3) throws Exception {
 		try {
 			List<ProductVO> list = null;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
 			list = pdMapper.selectList(cateMap1, cateMap2, cateMap3);
 			return list;
 		} catch (Exception e) {
-			throw new Exception("필터 검색 실패.", e);	
+			throw new Exception("필터 검색 실패.", e);
 		}
-		
+
 	}
+
+	@Override
+	public List<ProductVO> getProductDetail(int pNum) throws Exception {
+		try {
+			List<ProductVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.getProductDetail(pNum);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("상품상세 검색 실패.", e);
+		}
+
+	}
+
 	
-	
-	
+
 }

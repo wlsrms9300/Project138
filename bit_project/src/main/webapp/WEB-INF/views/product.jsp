@@ -137,8 +137,8 @@
                 <input type="hidden" id="checkSaleCode" name="checkSaleCode" value="">
                 <input type="hidden" id="checkQuickCode" name="checkQuickCode" value="">
                 <input type="hidden" id="checkDeliveryCode" name="checkDeliveryCode" value="">
-                <input type="hidden" id="rememberPage" name="rememberPage" value="">
                 -->
+                <input type="hidden" id="printNumber" value="">
 				<ul class="cate clearfix">
 					<li class="product_tier"><a href="javascript:void(0)" onclick="select(1)"> 등급 <span
 								id="tier"></span> <span><i class="fas fa-angle-down"></i></span>
