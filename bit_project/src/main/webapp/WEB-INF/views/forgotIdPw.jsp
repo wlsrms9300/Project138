@@ -2,117 +2,22 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/member.css" rel="stylesheet">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+        content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+<script src="${pageContext.request.contextPath}/resources/js/forgotIdPw.js"></script>
 <title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
 
-		$('ul.tabs li').click(function() {
-			var tab_id = $(this).attr('data-tab');
-
-			$('ul.tabs li').removeClass('current');
-			$('.tab-content').removeClass('current');
-
-			$(this).addClass('current');
-			$("#" + tab_id).addClass('current');
-		})
-
-	});
-
-</script>
-<style>
-#content {
-	margin-top: 15%;
-	text-align: center;
-	position: absolute;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: nowrap;
-}
-
-.content-box {
-	position: relative;
-	width: 400px;
-	height: 280px;
-	margin: 0 auto;
-	border: 1px solid #cccccc;
-	border-radius: 3px;
-}
-
-ul.tabs {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-
-/*탭 선택 전*/
-ul.tabs li {
-	background: none;
-	color: #9f9f9f;
-	background: #EFEFEF;
-	display: inline-block;
-	width: 177px;
-	height: 30px;
-	cursor: pointer;
-	text-align: center;
-	padding: 10px;
-}
-/*탭 선택 시*/
-ul.tabs li.current {
-	background: #fff;
-	color: #000000;
-	text-align: center;
-	border-bottom: #fff;
-}
-/*탭 선택 시 박스 안*/
-.tab-content {
-	display: none;
-	background: #fff;
-	padding: 15px;
-}
-
-.tab-content.current {
-	display: inherit;
-	margin: 20px;
-	padding: 5px;
-}
-
-#tab-1 {
-	padding-top: 20px;
-}
-
-
-/*이메일 찾기 비밀번호 찾기 텍스트 박스, 버튼*/
-.tab-content > .ipt > input {
-	height: 18px;
-    width: 280px;
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 8px;
-}
-.find-btn {
-	height: 40px;
-    width: 302px;
-    border: 1px solid #cccccc;
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 8px;
-    background: #ea7475;
-    color: #fff;
-}
-
-
-   
-
-</style>
 </head>
 <body>
-	<div id="header"></div>
+	<div style="height: 50px;">
+	<header >
+	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 
+	</header>
+	</div>
 	<div id="content">
 		<div class="content-box">
 
@@ -148,7 +53,51 @@ ul.tabs li.current {
 		</div>
 	</div>
 
-	<div id="footer"></div>
+	 <!-- footer 시작 -->
+    <footer id="footer">
+        <div id="footer_sns">
+            <div class="container">
+                <div class="footer_sns">
+                    <ul>
+                        <li class="icon s1"><a href="#"><span class="ir_pm">트위터</span></a></li>
+                        <li class="icon s2"><a href="#"><span class="ir_pm">페이스북</span></a></li>
+                        <li class="icon s3"><a href="#"><span class="ir_pm">인스타그램</span></a></li>
+                        <li class="icon s4"><a href="#"><span class="ir_pm">구글 플레이</span></a></li>
+                        <li class="icon s5"><a href="#"><span class="ir_pm">아이폰 앱스토어</span></a></li>
+                    </ul>
+                    <div class="tel">
+                        <a href="#">ARS <em>1544-5252</em></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer_infor">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_infor">
+                        <!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
+                        <h2>로고1</h2>
+                        <ul>
+                            <li><a href="#">회사소개</a></li>
+                            <li><a href="#">채용정보</a></li>
+                            <li><a href="#">제휴/광고/부대사업 문의</a></li>
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보처리방침</a></li>
+                            <li><a href="#">고객센터</a></li>
+                            <li><a href="#">윤리경영</a></li>
+                        </ul>
+                        <address>
+                            <p>서울특별시 서초구 강남대로 459 <br><span class="bar2">대표자명 김진근</span>
+                                <br><span class="bar2">사업자등록번호
+                                    111-11-1111</span> 통신판매업신고번호 제 111호</p>
+                            <p>Copyright 2020 by Bit Inc. All right reserved</p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer 끝 -->
 
 </body>
 </html>
