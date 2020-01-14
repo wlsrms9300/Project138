@@ -23,12 +23,12 @@
 
     <div id="community_container_menubar">
         <div class="community_menubar">
-            <a class="community_menubar_item" href="#">자유게시판</a>
-            <a class="community_menubar_item" href="#">육아사진</a>
-            <a class="community_menubar_item" href="#">정보공유(팁)</a>
-            <a class="community_menubar_item" href="#">공구게시판</a>
-            <a class="community_menubar_item" href="#">육아게시판</a>
-            <a class="community_menubar_item" href="#">이슈,토론게시판</a>
+            <a class="community_menubar_item" href="community.co">자유게시판</a>
+            <a class="community_menubar_item" href="community_img.co">육아사진</a>
+            <a class="community_menubar_item" href="community.co">정보공유(팁)</a>
+            <a class="community_menubar_item" href="community.co">공구게시판</a>
+            <a class="community_menubar_item" href="community.co">육아게시판</a>
+            <a class="community_menubar_item" href="co_writeForm.co">이슈,토론게시판</a>
         </div>
     </div>
 

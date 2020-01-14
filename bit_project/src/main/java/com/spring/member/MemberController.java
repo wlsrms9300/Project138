@@ -31,10 +31,12 @@ public class MemberController {
 	public String subscribestep3(Model model) {
 		return "subscribestep3";
 		}
+	
 	@RequestMapping(value = "/login.me", method = RequestMethod.GET)
 	public String login(Model model) {
 		return "login";
 		}
+	
 	@RequestMapping(value = "/findemail.me", method = RequestMethod.GET)
 	public String findemail(Model model) {
 		return "findemail";
@@ -51,18 +53,18 @@ public class MemberController {
 		}
 	
 	
+	//연결할곳이 없어서 안함 - 파트너/어린이집 신청폼
 	
-	
-	 //연결안한부분
+	/*
 	@RequestMapping(value = "/B2BJoinForm.me", method = RequestMethod.GET)
 	public String B2BJoinForm(Model model) {
 		return "B2BJoinForm";
 		}
+	*/
 	
-	@RequestMapping(value = "/co_writeForm.me", method = RequestMethod.GET)
-	public String co_writeForm(Model model) {
-		return "co_writeForm";
-	}
+	
+	
+	
 	
 	
 //	@RequestMapping(value = "/board/**/boardAdd")

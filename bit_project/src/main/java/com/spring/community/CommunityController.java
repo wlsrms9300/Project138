@@ -25,22 +25,26 @@ public class CommunityController {
 		return "community";
 	}
 
-	
-	
-	
-	
 	@RequestMapping(value = "/community_img.co", method = RequestMethod.GET)
 	public String community_img(Model model) {
 
 		return "community_img";
 	}
 	
+	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
+	public String community_detail(Model model) {
 
-	@RequestMapping(value = "/contactus.ma", method = RequestMethod.GET)
-	public String contactus(Model model) {
-
-		return "contactus";
+		return "community_detail";
 	}
+	
+	@RequestMapping(value = "/co_writeForm.co", method = RequestMethod.GET)
+	public String co_writeForm(Model model) {
+
+		return "co_writeForm";
+	}
+	
+	
+	
 	
 
 }
