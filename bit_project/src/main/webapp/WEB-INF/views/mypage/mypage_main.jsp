@@ -116,29 +116,29 @@
         <!-- myPage 메뉴 시작 -->
         <div id="list_nav_wrap">
             <div class="wrapper">
-            <h3><a href="#" id="num0" class="oh">MY 페이지</a></h3>
+            <h3><a href="#1" id="num0" class="oh">MY 페이지</a></h3>
                 <ul class="main_list">
-                    <li><a href="#" id="num1" class="oh"><b>구독정보</b></a></li>
-                    <li><a href="#" id="num3" class="oh"><b>쉐어/정산</b></a></li>
+                    <li><a href="#2" id="num1" class="oh"><b>구독정보</b></a></li>
+                    <li><a href="#3" id="num3" class="oh"><b>쉐어/정산</b></a></li>
                     <li>
-                        <a href="#" class="member"><b class="oh">회원관리&nbsp;&nbsp;</b><b class="o1">▼</b></a>
+                        <a href="#4" class="member"><b class="oh">회원관리&nbsp;&nbsp;</b><b class="o1">▼</b></a>
                         <ul class="sub_list1">
-                            <li><a href="#" id="num2" class="oh"><b>포인트</b></a></li>
-                            <li><a href="#" id="num4" class="oh"><b>정보수정</b></a></li>
-                            <li><a href="#" id="num5" class="oh"><b>회원탈퇴</b></a></li>
+                            <li><a href="#5" id="num2" class="oh"><b>포인트</b></a></li>
+                            <li><a href="#6" id="num4" class="oh"><b>정보수정</b></a></li>
+                            <li><a href="#7" id="num5" class="oh"><b>회원탈퇴</b></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
+                        <a href="#8" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
                         <ul class="sub_list2">
-                            <li><a href="#" id="m1" class="oh"><b>자유게시판</b></a></li>
-                            <li><a href="#" id="m2" class="oh"><b>육아사진</b></a></li>
-                            <li><a href="#" id="m3" class="oh"><b>정보공유(팁)</b></a></li>
-                            <li><a href="#" id="m4" class="oh"><b>공구게시판</b></a></li>
-                            <li><a href="#" id="m5" class="oh"><b>육아관련질문</b></a></li>
-                            <li><a href="#" id="m6" class="oh"><b>이슈/토론</b></a></li>
-                            <li><a href="#" id="m7" class="oh"><b>댓글</b></a></li>
-                            <li><a href="#" id="m8" class="oh"><b>후기</b></a></li> 
+                            <li><a href="#9" id="m1" class="oh"><b>자유게시판</b></a></li>
+                            <li><a href="#10" id="m2" class="oh"><b>육아사진</b></a></li>
+                            <li><a href="#11" id="m3" class="oh"><b>정보공유(팁)</b></a></li>
+                            <li><a href="#12" id="m4" class="oh"><b>공구게시판</b></a></li>
+                            <li><a href="#13" id="m5" class="oh"><b>육아관련질문</b></a></li>
+                            <li><a href="#14" id="m6" class="oh"><b>이슈/토론</b></a></li>
+                            <li><a href="#15" id="m7" class="oh"><b>댓글</b></a></li>
+                            <li><a href="#16" id="m8" class="oh"><b>후기</b></a></li> 
                         </ul>
                     </li>
                 </ul>

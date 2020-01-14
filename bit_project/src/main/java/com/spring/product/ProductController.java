@@ -19,13 +19,14 @@ public class ProductController {
 
 	@Autowired(required=false)
 	private PDService service;
-	
+	/*
 	@RequestMapping(value = "/")
 	public String productPage(Model model, HttpSession session) {
 		//String id = (String)session.getAttribute("id");
 		//model.addAttribute("id", id);				
 		return "product";
 	}
+	*/
 	
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session) {

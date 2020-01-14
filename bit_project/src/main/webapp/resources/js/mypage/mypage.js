@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	
     $('.member').on('click', function(){
         var submenu = $(this).next("ul");
         var submenu2 = $('#sub_list11');
