@@ -1,3 +1,4 @@
+//필터 초기화 시 input hidden pNum 값 초기화 해줘야됨 by 0114
 function filSearch(){
 		$('.product_chart').empty();
 		var fil = new Array(3);
