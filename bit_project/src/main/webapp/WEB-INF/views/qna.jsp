@@ -130,8 +130,34 @@
 			$('a').removeClass()
 			$(this).addClass('on')
 		})
+		
+		$('#1').click(function() {
+			total();
+		})
+		$('#2').click(function() {
+			member();
+		})
+		$('#3').click(function() {
+			reservation();
+		})
+		$('#4').click(function() {
+			delivery();
+		})
+		$('#5').click(function() {
+			change();
+		})
 	})
 	
+	
+	$(function(){
+		$('th').click(function(){
+			$('th').removeClass()
+			$(this).addClass('on1')
+			;
+		})
+	})
+	
+	a=th
 	
 </script>
 
@@ -263,10 +289,10 @@
                                             <td ><a href="#a">커뮤니티</a></td>
                                             <td><a href="#a">상품보기</a></td>
                                             <td><a href="#a">QnA</a></td>
-                                            <td><a href="#a">Contect Us</a></td>
+                                           
                                         </tr>
                                         <tr>
-                                            <td><button name="button" class="subscribe-btn" onclick="location.href='//'"
+                                            <td><button name="button" class="subscribe-btn2" onclick="location.href='//'"
                                                     type="button">회원가입</button></td>
                                             <td><a href="#a">이용방법</a></td>
                                             <td><a href="#a">어린이집</a></td>
@@ -287,7 +313,7 @@
                                         <tr><td><a href="#a">커뮤니티</a></td></tr>
                                         <tr><td><a href="#a">상품보기</a></td></tr>
                                         <tr><td><a href="#a">QnA</a></td></tr>
-                                        <tr><td><a href="#a">Contect Us</a></td></tr>
+                                     
                                    
                                     </tbody>
                                 </table>                       
@@ -317,7 +343,7 @@
 					<colgroup>
 
 						<col width="20%">
-						<col width="20%">
+						<col width="20%">	
 						<col width="20%">
 						<col width="20%">
 						<col width="20%">
@@ -332,7 +358,7 @@
 								</th>
 
 
-							<th scope="col" id="member"><a href="javascript:void(1)"
+							<th scope="col" id="2"><a href="javascript:void(1)"
 								onclick="member()"><h2>회원</a>
 								</h2></th>
 
@@ -462,9 +488,17 @@
 					</ul>
 				</div>
 			</div>
-
+			<div id="anotherQna">
+				<p style="font-size: 30px; text-align: center; padding-top: 30px;">다른 질문 있으신가요?</p>
+				<div class=anotherQna1>
+				<button name="button" class="subscribe-btn3" onclick="location.href='//'"
+                                                    type="button">1:1 채팅</button>
+				<button name="button" class="subscribe-btn4" onclick="location.href='//'"
+                                                    type="button">이메일 문의</button>
+				</div>
+			</div>
 		</div>
-		</div>
+	
 		<footer id="footer">
 			<div id="footer_right">
 				<div id="footer_sns">
