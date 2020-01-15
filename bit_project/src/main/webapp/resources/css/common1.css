@@ -5,8 +5,6 @@ html,body,div,span,ul,li,select,a,h1,h2,h3,h4,h5,h6,dl,dt,dd,button,label,p,pre,
   margin:0;
   padding:0;
   font-size:16px;
-  box-sizing: border-box;
-  display:block;
   color:#616161;
 
 }
@@ -20,6 +18,15 @@ html,body {
 figure {
   margin:0;
   padding:0;
+}
+#termSelect, .subscribeNext button, .subscribeEnd button {
+	display:block;
+}
+.txt label {
+	display:block;
+}
+.loop {
+	display:block;
 }
 
 /*등급 아이콘 */
@@ -55,7 +62,7 @@ figure {
 .choiceBox > div > input[type=radio]:checked + label > span.checked {visibility: visible;}
 .choiceBox > div > label:hover {border:2px solid #ff7276; border-radius: 5px; transform: scale(1.03); transition: all 0.2s;
   box-shadow: 0 4px 4px rgba(0,23,80,.02), 0 1px 6px rgba(0,23,80,.03), 0 8px 8px rgba(0,23,80,.024), 0 16px 16px rgba(0,23,80,.024), 8px 32px 32px rgba(0,23,80,.036), 8px 64px 64px rgba(0,23,80,.036); }
-.choiceBox > div > label {border:1px solid #ddd; margin-top:20px; text-align: left; position: relative; transition: all 0.2s; cursor: pointer;}
+.choiceBox > div > label {border:1px solid #ddd; margin-top:20px; text-align: left; position: relative; transition: all 0.2s; cursor: pointer; display:block;}
 
 /*choiceBox size*/
 .choiceBox > div > label > div {text-align: left; height:300px; display: flex; flex-direction: column; padding-left:12px; }
@@ -109,7 +116,7 @@ figure {
 }
 .choiceTerm > div > input[type=radio]:checked + label > div > img {opacity: 1; transition: all 0.2s;}
 .choiceTerm > div > input[type=radio]:checked + label > span.checked {visibility: visible;}
-.choiceTerm > div > label {padding:44px 30px; height:270px; border:1px solid #ddd; margin-top:60px; text-align: left; position: relative; transition: all 0.2s; cursor: pointer; position: relative;}
+.choiceTerm > div > label { display:block; padding:44px 30px; height:270px; border:1px solid #ddd; margin-top:60px; text-align: left; position: relative; transition: all 0.2s; cursor: pointer; position: relative;}
 .choiceTerm > div > label:hover {
   border:2px solid #ff7276;
   transform: scale(1.03);
@@ -159,6 +166,7 @@ figure {
 .subscribeEndBox  {padding:0 25px 25px 25px;}
 .subscribeEndBox > div > input[type=radio] {display: none;}
 .subscribeEndBox > div > input[type=radio]:checked + label {
+  display:block;
   border:2px solid #ff7276;
   transform: scale(1.03);
   transition: all 0.2s;
