@@ -244,7 +244,7 @@
                 </div>
                 <ul class="nav">
 
-                    <div class="login_text"><a href="#">로그인</a></div>
+                    <div class="login_text"><a href="login.me">로그인</a></div>
 
                     <li><input type="checkbox" id="menuicon">
                         <label for="menuicon">
@@ -263,10 +263,12 @@
                                             <td ><a href="community.co">커뮤니티</a></td>
                                             <td><a href="product.pr">상품보기</a></td>
                                             <td><a href="qna.se">QnA</a></td>
+                                            <td><a href="contactus.tazo">Contact Us</a></td>
                                         </tr>
                                         <tr>
                                             <td><button name="button" class="subscribe-btn" onclick="location.href='signup.me'"
                                                     type="button">회원가입</button></td>
+                                            <td></td>
                                             <td><a href="about.ma">이용방법</a></td>
                                             <td><a href="kindergarten.ms">어린이집</a></td>
                                             <td><a href="partner.ms">파트너</a></td> 
@@ -276,17 +278,17 @@
                                 <table class="menu_m" >   
                                     <tbody>       
                                                                
-                                     <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
+                                     	<tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
                                                     type="button" >구독하기</button></td></tr>
                                         <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='signup.me'"
                                                     type="button">회원가입</button></td></tr>
                                         <tr><td><a href="about.ma">이용방법</a></td></tr>
                                         <tr><td><a href="kindergarten.ms">어린이집</a></td></tr>
-                                        <tr><
-                                        td><a href="partner.ms">파트너</a></td></tr> 
+                                        <tr><td><a href="partner.ms">파트너</a></td></tr> 
                                         <tr><td><a href="community.co">커뮤니티</a></td></tr>
                                         <tr><td><a href="product.pr">상품보기</a></td></tr>
                                         <tr><td><a href="qna.se">QnA</a></td></tr>
+                                        <tr><td><a href="contactus.tazo">Contact Us</a></td></tr>
                                    
                                     </tbody>
                                 </table>                       

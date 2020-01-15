@@ -68,7 +68,7 @@
 			<div ><i class="fas fa-angle-double-down fa-3x"></i></div>
 		</div>
 		<div class="wrapper1_module">
-			<button type="button" name="about_btn" class="about_btn" onclick="location.href='about.ma'">자세히 보기</button>
+			<button type="button" name="about_btn" class="about_btn" onclick="location.href='mypage_main.my'">자세히 보기</button>
 		</div>
 		<hr>
 	</div>
