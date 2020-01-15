@@ -30,16 +30,16 @@ public class ProductController {
 	
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
-		int pNum = Integer.parseInt(request.getParameter("product_num"));
-		List<ProductVO> list = null;
+		int pNum = Integer.parseInt(request.getParameter("num"));
+		ProductVO prVO = new ProductVO();
 		try {
-			list = service.getProductDetail(pNum);
-			model.addAttribute("prList", list);
+			prVO = service.getProductDetail(pNum);
+			model.addAttribute("prVO", prVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());
 		}
-		return "productDetail";
+		return "product_detail";
 	}
 
 	

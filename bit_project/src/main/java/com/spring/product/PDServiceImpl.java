@@ -76,40 +76,34 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	@Override
-	public List<ProductVO> filterSearch(String category_l, String category_m, String category_s) throws Exception {
-		try {
-			List<ProductVO> list = null;
-			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			list = pdMapper.filterSearch(category_l, category_m, category_s);
-			return list;
-		} catch (Exception e) {
-			throw new Exception("필터 검색 실패.", e);
-		}
+	/*
+	 * @Override public List<ProductVO> filterSearch(String category_l, String
+	 * category_m, String category_s) throws Exception { try { List<ProductVO> list
+	 * = null; PDMapper pdMapper = sqlSession.getMapper(PDMapper.class); list =
+	 * pdMapper.filterSearch(category_l, category_m, category_s); return list; }
+	 * catch (Exception e) { throw new Exception("필터 검색 실패.", e); }
+	 * 
+	 * }
+	 */
 
-	}
-
-	@Override
-	public List<ProductVO> selectList(HashMap<String, String> cateMap1, HashMap<String, String> cateMap2,
-			HashMap<String, String> cateMap3) throws Exception {
-		try {
-			List<ProductVO> list = null;
-			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			list = pdMapper.selectList(cateMap1, cateMap2, cateMap3);
-			return list;
-		} catch (Exception e) {
-			throw new Exception("필터 검색 실패.", e);
-		}
-
-	}
+	/*
+	 * @Override public List<ProductVO> selectList(int pno, HashMap<String, String>
+	 * cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3)
+	 * throws Exception { try { List<ProductVO> list = null; PDMapper pdMapper =
+	 * sqlSession.getMapper(PDMapper.class); list = pdMapper.selectList(pno,
+	 * cateMap1, cateMap2, cateMap3); return list; } catch (Exception e) { throw new
+	 * Exception("필터 검색 실패.", e); }
+	 * 
+	 * }
+	 */
 
 	@Override
-	public List<ProductVO> getProductDetail(int pNum) throws Exception {
+	public ProductVO getProductDetail(int product_num) throws Exception {
 		try {
-			List<ProductVO> list = null;
+			ProductVO prVO = new ProductVO();
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			list = pdMapper.getProductDetail(pNum);
-			return list;
+			prVO = pdMapper.getProductDetail(product_num);
+			return prVO;
 		} catch (Exception e) {
 			throw new Exception("상품상세 검색 실패.", e);
 		}

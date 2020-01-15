@@ -97,19 +97,22 @@
 	)
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
-	
+	<!-- 
 	<select id="filterSearch" parameterType="map" resultType="com.spring.product.ProductVO">
 	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product
 	where category_l=#{category_l} AND category_m=#{category_m} AND category_s=#{category_s}
 	order by product_num asc
-	</select>
+	</select> -->
 
-	<select id="selectList" parameterType="hashMap" resultType="com.spring.product.ProductVO">
-	select *
-	from product
-	where 1=1 
-	<choose>
+	<!-- <select id="selectList" parameterType="map" resultType="com.spring.product.ProductVO">
+	select * from (
+		select * FROM (
+		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
+		FROM product 
+		where 1=1 
+		<choose>
 		<when test="cateMap1.size != 0">
 		AND category_l IN 
 		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
@@ -128,10 +131,14 @@
 		#{i}
 		</foreach>
 		</when>
-	</choose>
-  	</select>
+		</choose>
+		ORDER BY product_num ASC
+		)
+	)
+	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
+  	</select> -->
   	
   	<select id="getProductDetail" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from product where product_num=#{num}
+	select * from product where product_num=#{product_num}
 	</select>
 </mapper>
