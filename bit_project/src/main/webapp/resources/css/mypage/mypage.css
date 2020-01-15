@@ -363,38 +363,9 @@ a {
 /* profile mobile 끝============================================================================== */
 
 
-/* myPage subscribe 시작==============================================================================*/
-
-
-/* myPage subscribe 끝==============================================================================*/
-
-
-/* myPage point 시작==============================================================================*/
-
-/* myPage point 끝==============================================================================*/
-
-
-/* mypage list 시작 ==============================================================================*/
-
-/* mypage list 끝 ==============================================================================*/
-
-
-/* mypage share 시작 ==============================================================================*/
-
-/* mypage share 끝 ==============================================================================*/
-
-
-/* mypage 회원탈퇴 시작 ==============================================================================*/
-
-/* mypage 회원탈퇴 끝 ==============================================================================*/
-
-/* mypage 회원수정 시작 ==============================================================================*/
-
-/* mypage 회원수정 끝 ==============================================================================*/
-
-
-
-           /* footer 시작 */          
+           /* footer 시작 */   
+           
+           em,address {font-style: normal;}
            #footer {background: #211f1f; margin-top:50px;}
            .footer_sns {position: absolute; right: 17px; top: 33px; z-index: 1;}
            .footer_sns li {display: inline-block; width: 36px; height: 36px; margin-left: 4px;}
@@ -415,6 +386,8 @@ a {
            .footer_infor {padding: 50px 0; width: 80%;}
            .footer_infor h2 img {width: 150px;}
            .footer_infor ul {padding: 15px 0;}
+           .footer_infor ul li {font-size:13px;}
+           .footer_infor address p {font-size:13px;}
            .footer_infor li {position: relative; display: inline; padding-right: 16px; white-space: nowrap;}
            .footer_infor li:after {content: ''; position: absolute; right: 5px; top: 5px; width: 1px; height: 11px; background: #8f8f8f;}
            .footer_infor li:last-child:after {width: 0; height: 0;}
@@ -422,10 +395,11 @@ a {
            .footer_infor address p {color: #8f8f8f; padding-bottom: 15px;}
            .bar2{color: #8f8f8f;}
            
-           .container {position: relative; width: 100%; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
+           .container {position: relative; max-width:1280px; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
            
            @media (max-width:480px){
                .container {width: 100%;}
+               .footer_sns ul {padding-left:0;}
                .footer_sns {position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
                .footer_sns .tel {display: none;}
                .footer_infor {width: 100%; text-align: center;}
