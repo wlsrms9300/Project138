@@ -263,6 +263,7 @@
                                             <td ><a href="#a">커뮤니티</a></td>
                                             <td><a href="#a">상품보기</a></td>
                                             <td><a href="#a">QnA</a></td>
+                                            <td><a href="#a">Contect Us</a></td>
                                         </tr>
                                         <tr>
                                             <td><button name="button" class="subscribe-btn" onclick="location.href='//'"
@@ -286,6 +287,7 @@
                                         <tr><td><a href="#a">커뮤니티</a></td></tr>
                                         <tr><td><a href="#a">상품보기</a></td></tr>
                                         <tr><td><a href="#a">QnA</a></td></tr>
+                                        <tr><td><a href="#a">Contect Us</a></td></tr>
                                    
                                     </tbody>
                                 </table>                       
