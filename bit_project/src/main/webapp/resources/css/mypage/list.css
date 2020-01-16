@@ -6,10 +6,10 @@
 }
 .list {
     display:none;
-    max-width:1px;
+    max-width:1020px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:50px;
     border-radius:10px;
+    margin:0 auto;
 }
 .list_menu > table {
     margin-top:10px;

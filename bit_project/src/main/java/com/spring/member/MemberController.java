@@ -32,11 +32,6 @@ public class MemberController {
 		return "subscribestep3";
 		}
 	
-	@RequestMapping(value = "/login.me", method = RequestMethod.GET)
-	public String login(Model model) {
-		return "login";
-		}
-	
 	@RequestMapping(value = "/findemail.me", method = RequestMethod.GET)
 	public String findemail(Model model) {
 		return "findemail";

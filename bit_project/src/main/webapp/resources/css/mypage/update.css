@@ -4,8 +4,8 @@
 .member_update {
     display:none;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
-    padding:50px;
     border-radius:10px;
+    margin: 0 auto;
 }
 .member_img > h1 {
     margin-bottom:40px;
@@ -33,6 +33,9 @@
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+.update_table tr td {
+	padding:10px;
 }
 .button3 {
     background-color: #EA7475;
@@ -66,14 +69,16 @@
 .nickname, .postal_num, .password, .new_password, .new_password_confirm, .address, .address_detail, .instagram_id, .children_name, .children_birth {
     border-radius:5px;
     width:200px;
-    height:25px;
+    height:30px;
 }
 
 @media(max-width:480px) {
 .member_update {
     padding:10px;
 }
-
+.update_table tr td {
+	padding:0 10px 0 0;
+}
 .button1, .button2, .button4 {
 	width:75px;
 }

@@ -33,7 +33,7 @@
 
 .board_list_wrap {
 	display:none;
-	max-width:900px;
+	margin:0 auto;
 }
 
 
