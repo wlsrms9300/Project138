@@ -33,7 +33,9 @@ public class ProductController {
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
 		try {
+			
 			prVO = service.getProductDetail(pNum);
+			service.getProductReadCount(prVO.getReadcount(), pNum);
 			model.addAttribute("prVO", prVO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,16 +119,12 @@ public class ProductController {
 				}		
 			}
 			
-			
-		} catch (Exception e) {
-			
-		}
-		try {
 			service.prAdd(pdVO);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
+		
 		//return "product";
 		return "redirect:/";
 	}

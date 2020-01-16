@@ -114,6 +114,7 @@ public class ProductAjaxController {
 					}
 				}
 				list = service.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+				System.out.println(list.size());
 			}
 			
 		} catch (Exception e) {
@@ -132,7 +133,7 @@ public class ProductAjaxController {
 		List<ProductVO> list = null;
 		try {
 			if (category_l == null && category_m == null && category_s == null) {
-//				list = service.scrollSearch(pno);
+				list = service.scrollSearch(pno);
 			} else {
 				// 문자열 끝만 지우기string=string.substring(0, string.length()-1);
 				if (category_l != null) {
@@ -214,6 +215,7 @@ public class ProductAjaxController {
 					}
 				}
 				list = service.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+				System.out.println(list.size());
 			}
 			
 		} catch (Exception e) {

@@ -110,6 +110,17 @@ public class PDServiceImpl implements PDService {
 
 	}
 
+	@Override
+	public void getProductReadCount(int readcount, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.getProductReadCount(readcount, product_num);
+		} catch (Exception e) {
+			throw new Exception("상품상세 조회수 증가 실패.", e);
+		}
+	}
+
+	
 	
 
 }

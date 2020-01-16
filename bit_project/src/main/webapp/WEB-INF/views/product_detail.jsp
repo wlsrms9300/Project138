@@ -139,9 +139,16 @@
 
 
             <!-- 상품상세 content 오른쪽 상품정보 div -->
+            <form>
             <div class="product_right">
-                <span class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %></span>
-                <span class="product_cate2">♡찜</span>
+                <span class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %> 조회수 : <%=prVO.getReadcount() %></span>
+                <span class="product_cate2">
+                <input type="checkbox" id="wishlist-pid-0001">
+                <label for="wishlist-pid-0001">
+                		<i class="far fa-heart" aria-hidden="true" ></i>
+		                <i class="fas fa-heart" aria-hidden="true" ></i>
+                </label>
+                </span>
 
                 <br>
                 <hr>
@@ -164,6 +171,7 @@
 
 
             </div>
+            </form>
             <!-- 상품상세 content 오른쪽 상품정보 div -->
 
             <!-- 버튼 -->
@@ -441,7 +449,7 @@
                         <td>4</td>
                         <td><strong>답변대기</strong></td>
                         <td>기타</td>
-                        <td><a href="#">교환&nbsp;</a></td>
+                        <td><a href="javascript:void(0)">교환&nbsp;</a></td>
                         <td>문용민</td>
                         <td>2020.01.02</td>
                     </tr>

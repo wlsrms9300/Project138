@@ -21,8 +21,8 @@ img { min-width: 50% !important; max-width: 50% !important; min-height: 50% !imp
 .product_left {position: relative; float: left; width: 45%; height:100%;}
 .product_right {float: right; width: 50%; font-size: 16px;height:100%;}
 .product_right hr {border: 1px solid #c6c6c6;}
-.product_cate1 {float: left;}
-.product_cate2 {float: right;}
+.product_right .product_cate1 {float: left; height:5%;}
+.product_right .product_cate2 {float: right; height: 5%; margin-right: 3%;}
 .filter-search {position: relative; text-align: center;}
 .filter-search div {position: relative; display: inline-block; }
 .filter-search div button {background: #EA7475; border-radius: 10px; font-size: 25px;border: none; text-decoration: none; width: 150px;  color: #fff; padding: 10px; margin: 20px;}
@@ -213,6 +213,33 @@ div[class="sidebar"] button {
 .slider .swiper-slide p {font-size: 24px; color: #bbb; margin-bottom: 200px; font-weight: 100;}
 */
 
+/* 찜 */
+.product_right input[type="checkbox"] {
+	display:none;
+}
+.product_right label {
+position:relative;
+width:16px;
+height:16px;
+display:block;
+}
+.product_right span label {
+	position: absolute;
+}
+.product_right span label i{
+	position:absolute;
+	color:#dd5e46;
+}
+.product_right span label i:last-child{
+	opacity:0;
+	transition:0.3s;
+}
+
+.product_right input:checked + label i:last-child{
+opacity:1;
+}
+
+
 
 
 
@@ -227,7 +254,7 @@ div[class="sidebar"] button {
 
 
 /* 상품 이미지 */
-.product_content {position: relative; width: 100%; height: 620rem;}
+.product_content {position: relative; width: 100%; height: 100%;}
 
 
 /* 상품 상세 페이지 title 글자 크기 일괄 부여 */
@@ -239,7 +266,7 @@ div[class="sidebar"] button {
 .review_text {float: left; width: 75%; height: 15rem;}
 .review_text div:nth-child(1) {font-size: 1.5rem; font-weight: 900 bold;}
 .review_img {float: right; width: 20%; height: 15rem; line-height: 0;}
-.starRev {font-size: 30px; height: 10rem; }
+.starRev {font-size: 30px; height: 100%; }
 .starR1{
     background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
@@ -401,7 +428,7 @@ colgroup {display: table-column-group;}
     /* 상품 상세 쪽 수많은 이미지 */
 
     /* 상품 리뷰 */
-    .product_review {height: 35rem;}
+    .product_review {height: 100%;}
     .review_img {width: 100%; height: 20%;}
     .review_text {width: 100%; }
     /* 상품 리뷰 */

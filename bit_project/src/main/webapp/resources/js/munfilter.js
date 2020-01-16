@@ -1,20 +1,24 @@
-$(document).ready(function () {
+	var con_cnt = 3;
+	var slide_cnt = 1;
 	var pNum = 0;
+	var deviceChk = 0;
+$(document).ready(function () {
+
 	document.getElementById('printNumber').value = 0;
 	var filter = "win16|win32|win64|mac|macintel";
 	if ( navigator.platform ) {
 		if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
 			alert('mobile 접속');
-			allSearch(2);
+			deviceChk=2;
+			allSearch(deviceChk);
 		}
 		else { 
 			alert('pc 접속');
-			allSearch(1);
+			deviceChk=1;
+			allSearch(deviceChk);
 		}
 	}
-
-	
-	
+	//var pno = 2;
 });
 function allSearch(params) {
 	$('.product_chart').empty();
@@ -69,7 +73,6 @@ function allSearch(params) {
 						var output2 = '</div>';
 						$('.product_chart').append(output2);
 						var output3 = "";
-					
 						output3+='<script>';
 						output3+='var swiper'+scnt+' ='+' new Swiper(\'.swiper-container'+scnt+'\', {';				
 						output3+='slidesPerView : 4, spaceBetween : 24,';
@@ -81,6 +84,7 @@ function allSearch(params) {
 						scnt++;
 					}
 					cnt++;
+					
 				}else {
 					if(cnt%2==1){
 						var op = 
@@ -131,13 +135,15 @@ function allSearch(params) {
 						scnt++;
 					}
 					cnt++;
+					
 				}
-			
+				
+				
 			});
-			
-			
 			document.getElementById('printNumber').value = 8;
 			pNum = parseInt(document.getElementById('printNumber').value); //8
+			alert('전체pnum='+pNum);
+			
 		}
 		},
 		error: function () {
@@ -149,102 +155,12 @@ function allSearch(params) {
 	//event.preventDefault();
 }
 
-
-//var pno = 2;
-$(window).scroll(function(){
-	if($(window).scrollTop() == $(document).height() - $(window).height()){
-		alert('현재 위치에서 ajax 데이터 호출');	
-		alert('pNum='+pNum);
-		var con_cnt = 3;
-		var slide_cnt = 1;
-		var fil = new Array(3);
-		 for(var j=1; j<4;j++){		
-		 var chkbox = $(".c" + j);
-			 for (var i = 0; i < chkbox.length; i++) {
-				 if (chkbox[i].checked == true) {
-				      fil[j-1] += chkbox[i].value;
-				      fil[j-1] += ",";				      
-				 }
-			 }
-		 }
-		//2. pNum을 넘긴다. 3. 데이터 받아온다.
-		//pNum = parseInt(document.getElementById('printNumber').value);
-		if(pNum==0){
-			
-		}else {
-			$.ajax({
-				url: '/bit_project/filterAndScroll.pr',
-				type: 'post',
-				dataType: "json",
-				async:false,
-				data:{pno : pNum, category_l : fil[0], category_m : fil[1], category_s : fil[2]},
-				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-				success: function (data) {
-					if(data!=null){
-						$.each(data, function (index, item) {
-							if(slide_cnt%4==1){
-								var op5 = 
-								'<div class="swiper-container'+con_cnt+'">'+
-								'<div class="chart_cont'+con_cnt+' swiper-wrapper">';
-								$('.product_chart').append(op5);
-							}
-							var output5 = '';
-							output5 += 
-							'<div class="swiper-slide">'+
-							'<div class="pr_img">';
-							output5 +=
-							'<figure>'+
-							'<a href="productDetail.pr">'+
-							'<img src="/bit_project/image/'+item.img_sum+'">'+
-							'</a>'+
-							'</figure>';
-							output5 +=
-							'<div class="rank">'+
-							'<strong>'+item.product_num+'</strong>'+
-							'</div></div>';
-							output5 +=
-							'<div class="infor">';
-							output5 +=
-							'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
-							output5 +=
-							'<div class="infor_btn">';
-							output5 +=
-							'<a href="productDetail.pr">상세정보</a>';
-							output5 +=
-							'<a href="#">위시리스트</a>';
-							output5 +=
-							'</div></div></div></div>';
-							$('.chart_cont'+con_cnt).append(output5);
-							if(slide_cnt%4==0){
-								var output6 = '</div></div></div>';
-								$('.product_chart').append(output6);
-								con_cnt++;
-							}
-							slide_cnt++;
-							
-							});
-						pNum += 8;
-						document.getElementById('printNumber').value = pNum;
-							//pno += 1;
-							
-					}
-					
-				},
-				error: function () {
-					alert("DB에서 가져올 데이터가 없습니다.");
-				}
-			});
-		}
-
-		
-	}
-})
-
-
-
 function filSearch(){
+	con_cnt = 3;
+	slide_cnt = 1;
 	pNum = 0;
 	document.getElementById('printNumber').value = 0;
+	alert('필터선택 후 pno 0으로 초기화'+pNum);
 		$('.product_chart').empty();
 		var fil = new Array(3);
 		 for(var j=1; j<4;j++){		
@@ -279,7 +195,7 @@ function filSearch(){
 				'<div class="pr_img">';
 				output +=
 				'<figure>'+
-				'<a href="productDetail.pr">'+
+				'<a href="productDetail.pr?num='+item.product_num+'">'+
 				'<img src="/bit_project/image/'+item.img_sum+'">'+
 				'</a>'+
 				'</figure>';
@@ -303,13 +219,22 @@ function filSearch(){
 				if(cnt%4==0){
 					var output2 = '</div></div></div>';
 					$('.product_chart').append(output2);
+					var output3 = "";
+					output3+='<script>';
+					output3+='var swiper'+scnt+' ='+' new Swiper(\'.swiper-container'+scnt+'\', {';				
+					output3+='slidesPerView : 4, spaceBetween : 24,';
+					output3+='breakpoints : { 600 : { slidesPerView : 4, spaceBetween : 0}}';
+					output3+='});';
+					output3+='</script>';
+					console.log(output3);
+					$('.product_chart').append(output3);
 					scnt++;
 				}
 				cnt++;
 			});
 			pNum += 8;
-			alert("pNum="+pNum);
 			document.getElementById('printNumber').value = pNum;
+			alert('필터선택후 pno'+pNum);
 				}
 			},
 			error:function(){
@@ -318,3 +243,143 @@ function filSearch(){
 		});
 		//event.preventDefault();
 	};
+
+	$(window).scroll(function(){
+		if($(window).scrollTop() == $(document).height() - $(window).height()){
+			alert('현재 위치에서 ajax 데이터 호출');	
+			alert('스크롤pNum='+pNum);
+		
+			var fil = new Array(3);
+			 for(var j=1; j<4;j++){		
+			 var chkbox = $(".c" + j);
+				 for (var i = 0; i < chkbox.length; i++) {
+					 if (chkbox[i].checked == true) {
+					      fil[j-1] += chkbox[i].value;
+					      fil[j-1] += ",";				      
+					 }
+				 }
+			 }
+				$.ajax({
+					url: '/bit_project/filterAndScroll.pr',
+					type: 'post',
+					dataType: "json",
+					async:false,
+					data:{pno : pNum, category_l : fil[0], category_m : fil[1], category_s : fil[2]},
+					contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+					success: function (data) {
+						if(data!=null){
+							$.each(data, function (index, item) {
+								if(deviceChk==1){
+									if(slide_cnt%4==1){
+										var op5 = 
+										'<div class="swiper-container'+con_cnt+'">'+
+										'<div class="chart_cont'+con_cnt+' swiper-wrapper">';
+										$('.product_chart').append(op5);
+									}
+									var output5 = '';
+									output5 += 
+									'<div class="swiper-slide">'+
+									'<div class="pr_img">';
+									output5 +=
+									'<figure>'+
+									'<a href="productDetail.pr?num='+item.product_num+'">'+
+									'<img src="/bit_project/image/'+item.img_sum+'">'+
+									'</a>'+
+									'</figure>';
+									output5 +=
+									'<div class="rank">'+
+									'<strong>'+item.product_num+'</strong>'+
+									'</div></div>';
+									output5 +=
+									'<div class="infor">';
+									output5 +=
+									'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+									output5 +=
+									'<div class="infor_btn">';
+									output5 +=
+									'<a href="productDetail.pr">상세정보</a>';
+									output5 +=
+									'<a href="#">위시리스트</a>';
+									output5 +=
+									'</div></div></div></div>';
+									$('.chart_cont'+con_cnt).append(output5);
+									if(slide_cnt%4==0){
+										var output6 = '</div></div></div>';
+										$('.product_chart').append(output6);
+										var output3 = "";
+										output3+='<script>';
+										output3+='var swiper'+con_cnt+' ='+' new Swiper(\'.swiper-container'+con_cnt+'\', {';				
+										output3+='slidesPerView : 4, spaceBetween : 24,';
+										output3+='breakpoints : { 600 : { slidesPerView : 4, spaceBetween : 0}}';
+										output3+='});';
+										output3+='</script>';
+										console.log(output3);
+										$('.product_chart').append(output3);
+										con_cnt++;
+									}
+									slide_cnt++;
+									
+								}else {
+									if(slide_cnt%2==1){
+										var op5 = 
+										'<div class="swiper-container'+con_cnt+'">'+
+										'<div class="chart_cont'+con_cnt+' swiper-wrapper">';
+										$('.product_chart').append(op5);
+									}
+									var output5 = '';
+									output5 += 
+									'<div class="swiper-slide">'+
+									'<div class="pr_img">';
+									output5 +=
+									'<figure>'+
+									'<a href="productDetail.pr">'+
+									'<img src="/bit_project/image/'+item.img_sum+'">'+
+									'</a>'+
+									'</figure>';
+									output5 +=
+									'<div class="rank">'+
+									'<strong>'+item.product_num+'</strong>'+
+									'</div></div>';
+									output5 +=
+									'<div class="infor">';
+									output5 +=
+									'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+									output5 +=
+									'<div class="infor_btn">';
+									output5 +=
+									'<a href="productDetail.pr">상세정보</a>';
+									output5 +=
+									'<a href="#">위시리스트</a>';
+									output5 +=
+									'</div></div></div></div>';
+									$('.chart_cont'+con_cnt).append(output5);
+									if(slide_cnt%2==0){
+										var output6 = '</div></div></div>';
+										$('.product_chart').append(output6);
+										var output3 = "";
+										output3+='<script>';
+										output3+='var swiper'+con_cnt+' ='+' new Swiper(\'.swiper-container'+con_cnt+'\', {';				
+										output3+='slidesPerView : 2, spaceBetween : 24,';
+										output3+='breakpoints : { 600 : { slidesPerView : 4, spaceBetween : 0}}';
+										output3+='});';
+										output3+='</script>';
+										console.log(output3);
+										$('.product_chart').append(output3);
+										con_cnt++;
+									}
+									slide_cnt++;
+								}
+								
+							});
+							pNum += 8;
+							document.getElementById('printNumber').value = pNum;
+								//pno += 1;
+						}
+						
+					},
+					error: function () {
+						alert("DB에서 가져올 데이터가 없습니다.");
+					}
+				});
+		}
+	})

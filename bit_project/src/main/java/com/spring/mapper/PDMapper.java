@@ -21,5 +21,9 @@ public interface PDMapper {
 	//List<ProductVO> filterSearch(@Param("category_l") String category_l, @Param("category_m") String category_m, @Param("category_s") String category_s);
 	//스크롤 내리면 카테고리 읽어온 뒤 파라미터로 받은 pno+1 ~ pno+8까지 데이터 추가
 	List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3);
+	
+	//상품 상세
 	ProductVO getProductDetail(@Param("product_num") int product_num);
+	//상품 상세 페이지 들어갈 때 조회수 + 1
+	void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num);
 }
