@@ -30,19 +30,9 @@
 <!-- include summernote-ko-KR -->
 <script
 	src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/co_writeForm.js"></script>
 
 
-<script>
-	$(document).ready(function() {
-		$('#summernote').summernote({
-			placeholder : 'content',
-			minHeight : 370,
-			maxHeight : null,
-			focus : true,
-			lang : 'ko-KR'
-		});
-	});
-</script>
 
 </head>
 <body>
