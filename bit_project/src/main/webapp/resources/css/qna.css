@@ -581,7 +581,7 @@ h1 {
                text-align: center;
                width: 100%; 
                margin-top: 0px;
-               border-bottom: 3px  solid gray;
+               border-bottom: 3px  solid rgb(233, 227, 227);
                margin-bottom: 0px;
                cursor:pointer;
             }
@@ -603,52 +603,62 @@ h1 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-top: 5px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
 
             }
             #question_2 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
+
 
             }
             #question_3 {
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
+
 
             }
             #question_4 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
+
             }
             #question_5 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
             }
             #question_6 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
             }
             #question_7 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
             }
             #question_8 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
             }
             #question_9 {
                 
@@ -660,7 +670,8 @@ h1 {
                 
                 font-size: 18px;
                 height: 20px;
-                padding-bottom: 30px;
+                padding-top: 20px;
+                padding-bottom: 40px;
             }
             #list_nav_wrap ul li{
                 font-size: 16px;
@@ -669,10 +680,11 @@ h1 {
 				color: black;
 				background-color: rgb(248, 187, 187);
        		 }
-        
-			thead tr a.on {
+       		 thead tr a.on {
 				color: black;
 			}
+       		
+			
 	       }
        
 

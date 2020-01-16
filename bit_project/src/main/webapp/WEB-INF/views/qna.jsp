@@ -130,7 +130,15 @@
 			$('a').removeClass()
 			$(this).addClass('on')
 		})
-		
+	})
+	
+	
+	$(function(){
+		$('th').click(function(){
+			$('th').removeClass()
+			$(this).addClass('on1')
+			
+		})
 		$('#1').click(function() {
 			total();
 		})
@@ -149,15 +157,6 @@
 	})
 	
 	
-	$(function(){
-		$('th').click(function(){
-			$('th').removeClass()
-			$(this).addClass('on1')
-			;
-		})
-	})
-	
-	a=th
 	
 </script>
 
