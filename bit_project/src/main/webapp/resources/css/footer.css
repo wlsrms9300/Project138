@@ -1,6 +1,6 @@
 /* footer 시작 */  
 em,address {font-style: normal;}        
-#footer {background: #211f1f; margin-top:50px; text-align: left;}
+#footer {background: #211f1f; margin-top:50px; text-align: left; height:293px;}
 .footer_sns {position: absolute; right: 17px; top: 33px; z-index: 1;}
 .footer_sns li {display: inline-block; width: 36px; height: 36px; margin-left: 4px;}
 .footer_sns li.s1 {background-position: 0 -375px;}

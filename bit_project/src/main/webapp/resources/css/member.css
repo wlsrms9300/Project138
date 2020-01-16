@@ -386,7 +386,7 @@ ul.tabs li.current {
   /* footer 시작 */   
   			em,address {font-style: normal;}
   			.bar2{color:#8f8f8f;}       
-           #footer {background: #211f1f; margin-top:50px;}
+           #footer {background: #211f1f; margin-top:50px; height:293px;}
            .footer_sns {position: absolute; right: 17px; top: 33px; z-index: 1;}
            .footer_sns li {display: inline-block; width: 36px; height: 36px; margin-left: 4px;}
            .footer_sns li.s1 {background-position: 0 -375px;}
