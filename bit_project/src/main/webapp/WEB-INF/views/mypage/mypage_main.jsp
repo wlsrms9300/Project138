@@ -93,7 +93,7 @@
 
 
 <div id="mypage">
-    <div class="sample"></div>
+   
     <!-- profile 시작 -->
     <div id="profile_wrap">   
         <div id="profile">
