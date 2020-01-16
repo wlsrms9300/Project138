@@ -10,7 +10,6 @@
 	rel="stylesheet">
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>Document</title>
-<link rel="stylesheet" href="./footer.css">
 <style>
 </style>
 </head>
