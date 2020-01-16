@@ -55,12 +55,12 @@ public class MemberController {
 	
 	//연결할곳이 없어서 안함 - 파트너/어린이집 신청폼
 	
-	/*
+	/**/
 	@RequestMapping(value = "/B2BJoinForm.me", method = RequestMethod.GET)
 	public String B2BJoinForm(Model model) {
 		return "B2BJoinForm";
 		}
-	*/
+	
 	
 	
 	
