@@ -34,10 +34,11 @@ html {
     cursor:pointer;
 }
 #mypage {
-	margin-top:60px;
+	margin-top:70px;
     display:flex;
     max-width:1280px;
-    margin:0 auto;
+    margin-left:auto;
+    margin-right:auto;
 }
 #profile > img {
     width:150px;

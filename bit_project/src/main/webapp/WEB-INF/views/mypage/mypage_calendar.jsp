@@ -112,7 +112,7 @@ $(document).ready(function(){
     <div class="calendar-content">
 		<div id="des1">
 			<div class="des1-content1">
-				<b>이달의 반납가능 횟수 :</b>
+				<b>이달의 반납가능 횟수 :</b> <!-- 비정기 구독자가 아닐경우 -->
 			</div>
 			<div class="des1-content2">
 				<b>2</b>
@@ -123,20 +123,16 @@ $(document).ready(function(){
 				<td style="color:rgb(109, 109, 109);" colspan="2"><b>* 매월 셋째주 화요일은 결제일입니다 *</b></td>
 			</tr>
 			<tr>
-				<td style="color:rgb(109, 109, 109);">월요일 : </td>
+				<td style="color:rgb(109, 109, 109);">화요일 : </td>
 				<td><b>픽업일</b></td>
+			</tr>
+			<tr>
+				<td style="color:rgb(109, 109, 109);">수요일 : </td>
+				<td><b>예약확정</b></td>
 			</tr>
 			<tr>
 				<td style="color:rgb(109, 109, 109);">목요일 : </td>
 				<td><b>배송일</b></td>
-			</tr>
-			<tr>
-				<td style="color:rgb(54, 54, 253);">토요일 : </td>
-				<td><b>반납확정</b></td>
-			</tr>
-			<tr>
-				<td style="color:rgb(252, 69, 69);">일요일 : </td>
-				<td><b>예약확정</b></td>
 			</tr>
 		</table>
 	</div>
