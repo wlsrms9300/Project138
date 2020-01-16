@@ -20,7 +20,9 @@
 	<div id="fe-content">
 		<div id="find-content">
 			<h1>이메일 찾기</h1>
+			<div style="height: 80px"></div>
 			<h4>찾으시는 이메일은 gggg@gmail.com 입니다.</h4>
+			<div style="height: 40px"></div>
 			<div class="btnfield">
 				<span>
 					<button class="login-btn" onclick="location.href='login.me'">

@@ -1,4 +1,7 @@
 @charset "utf-8";
+@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+*{font-family: S-CoreDream-4Regular;}
 /*******************************로그인(login.jsp)****************************************/
      @media (max-width: 2000px){ 
             #content {
@@ -16,6 +19,13 @@
             width: 342px;
             margin: 0 auto;
           }
+          #pc-text {
+          	height: 70px;
+          	padding: auto 0;
+          }
+          #content > #login-content > h1 {
+          	height: 50px;
+          }
           a {
             color: #333;
             text-decoration: none;
@@ -26,7 +36,7 @@
             border: 1px solid #cccccc;
             border-radius: 3px;
             padding: 20px;
-            margin: 2px;
+            margin: 3px;
           }
           
            #loginPw {
@@ -35,7 +45,7 @@
             border: 1px solid #cccccc;
             border-radius: 3px;
             padding: 20px;
-            margin: 2px;
+            margin: 3px;
           }
 
           /*회원가입, 아이디/비밀번호찾기 영역*/
@@ -52,7 +62,7 @@
             float: right;
           }
           .btn-login {
-            margin: 10px 0 5px 0;
+            margin: 20px 0 10px 0;
             width: 100%;
             height: 48px;
             color: #fff;
@@ -96,7 +106,7 @@
       }
       
       #signup-title {
-      margin-bottom: 20px;
+      margin: 20px 0;
       }
       
       #contentbox > #signup-content> #signup-title > h1 {
@@ -123,7 +133,7 @@
         border: 1px solid #cccccc;
         border-radius: 3px;
         padding: 20px;
-        margin: 2px;
+        margin: 3px 0;
       }
 
       /*이름, 닉네임 input*/
@@ -133,7 +143,7 @@
         border: 1px solid #cccccc;
         border-radius: 3px;
         padding: 20px;
-        margin: 2px;
+        margin: 3px 0;
         float: left;
       }
       .emailcheck-btn, .nicknamecheck-btn {
@@ -151,6 +161,7 @@
       #additional-text {
         text-align: left;
         color:#686060; 
+        margin-top: 20px;
         margin-bottom: 4px;
       }
       .additional-info > input {
@@ -159,18 +170,24 @@
         border: 1px solid #cccccc;
         border-radius: 3px;
         padding: 20px;
-        margin-bottom: 4px;
+        margin: 3px 0;
+        
       }
       /*이용약관 동의*/
       .signup-agree {
-        margin-top: 4px;
+        margin-top: 5px;
         float: left;
         padding: 0;
+        width: 300px;
+        text-align: left;
       }
       /*개인정보 수집 및 이용에 대한 동의*/
       .marketing-agree {
         float: left;
+        margin-top: 5px;
         padding: 0;
+        width: 300px;
+        text-align: left;
       }
       /*이용약관 동의, 개인정보 수집 및 이용에 대한 동의 font-style*/
       input[id="signup-agree"] + label, input[id="marketing-agree"] + label{
@@ -181,7 +198,7 @@
 
       /*가입하기 버튼*/
       .signup-btn {
-        margin: 10px 0 5px 0;
+        margin: 20px 0 5px 0;
         width: 100%;
         height: 48px;
         color: #fff;
@@ -204,11 +221,12 @@ ul {
 	text-align: center;
 	position: relative;
 	width: 100%;
-	display: flex;
+	display: inline-grid;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: nowrap;
-	height: 600px;
+	height: 500px;
+	padding-top: 5%;
 }
 
 .content-box {
@@ -216,7 +234,7 @@ ul {
 	position: relative;
 	width: 400px;
 	height: 280px;
-	/*margin: 0 auto;*/
+	margin: 0 auto;
 	/*
 	top: 50%; left: 50%;
 	transition: translate(-50%,-50%);
@@ -358,7 +376,13 @@ ul.tabs li.current {
 	position: relative;
 	width: 370px;
 	margin: 0 auto;
+	height: 300px;
+	
+}
 
+#btnfield {
+		height: 100px;
+		padding: 50px 0;
 }
 
 .login-btn {
