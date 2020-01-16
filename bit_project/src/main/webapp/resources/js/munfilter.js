@@ -1,11 +1,22 @@
 $(document).ready(function () {
 	var pNum = 0;
 	document.getElementById('printNumber').value = 0;
-	allSearch();
+	var filter = "win16|win32|win64|mac|macintel";
+	if ( navigator.platform ) {
+		if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
+			alert('mobile 접속');
+			allSearch(2);
+		}
+		else { 
+			alert('pc 접속');
+			allSearch(1);
+		}
+	}
+
+	
 	
 });
-
-function allSearch() {
+function allSearch(params) {
 	$('.product_chart').empty();
 	//event.preventDefault();
 	var cnt = 1;
@@ -20,56 +31,111 @@ function allSearch() {
 		success: function (data) {
 			if(data!=null){
 			$.each(data, function (index, item) {
-			if(cnt%4==1){
-				var op = 
-				'<div class="swiper-container'+scnt+'">'+
-				'<div class="chart_cont'+scnt+' swiper-wrapper">';
-				$('.product_chart').append(op);
-			}
-			var output = '';
-			output += 
-			'<div class="swiper-slide">'+
-			'<div class="pr_img">';
-			output +=
-			'<figure>'+
-			'<a href="productDetail.pr?num='+item.product_num+'">'+
-			'<img src="/bit_project/image/'+item.img_sum+'">'+
-			'</a>'+
-			'</figure>';
-			output +=
-			'<div class="rank">'+
-			'<strong>'+item.product_num+'</strong>'+
-			'</div></div>';
-			output +=
-			'<div class="infor">';
-			output +=
-			'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
-			output +=
-			'<div class="infor_btn">';
-			output +=
-			'<a href="productDetail.pr">상세정보</a>';
-			output +=
-			'<a href="#">위시리스트</a>';
-			output +=
-			'</div></div></div></div>';
-			$('.chart_cont'+scnt).append(output);
-			if(cnt%4==0){
-				var output2 = '</div>';
-				$('.product_chart').append(output2);
-				var output3 = "";
+				if(params==1){
+					if(cnt%4==1){
+						var op = 
+						'<div class="swiper-container'+scnt+'">'+
+						'<div class="chart_cont'+scnt+' swiper-wrapper">';
+						$('.product_chart').append(op);
+					}
+					var output = '';
+					output += 
+					'<div class="swiper-slide">'+
+					'<div class="pr_img">';
+					output +=
+					'<figure>'+
+					'<a href="productDetail.pr?num='+item.product_num+'">'+
+					'<img src="/bit_project/image/'+item.img_sum+'">'+
+					'</a>'+
+					'</figure>';
+					output +=
+					'<div class="rank">'+
+					'<strong>'+item.product_num+'</strong>'+
+					'</div></div>';
+					output +=
+					'<div class="infor">';
+					output +=
+					'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+					output +=
+					'<div class="infor_btn">';
+					output +=
+					'<a href="productDetail.pr">상세정보</a>';
+					output +=
+					'<a href="#">위시리스트</a>';
+					output +=
+					'</div></div></div></div>';
+					$('.chart_cont'+scnt).append(output);
+					if(cnt%4==0){
+						var output2 = '</div>';
+						$('.product_chart').append(output2);
+						var output3 = "";
+					
+						output3+='<script>';
+						output3+='var swiper'+scnt+' ='+' new Swiper(\'.swiper-container'+scnt+'\', {';				
+						output3+='slidesPerView : 4, spaceBetween : 24,';
+						output3+='breakpoints : { 600 : { slidesPerView : 4, spaceBetween : 0}}';
+						output3+='});';
+						output3+='</script>';
+						console.log(output3);
+						$('.product_chart').append(output3);
+						scnt++;
+					}
+					cnt++;
+				}else {
+					if(cnt%2==1){
+						var op = 
+						'<div class="swiper-container'+scnt+'">'+
+						'<div class="chart_cont'+scnt+' swiper-wrapper">';
+						$('.product_chart').append(op);
+					}
+					var output = '';
+					output += 
+					'<div class="swiper-slide">'+
+					'<div class="pr_img">';
+					output +=
+					'<figure>'+
+					'<a href="productDetail.pr?num='+item.product_num+'">'+
+					'<img src="/bit_project/image/'+item.img_sum+'">'+
+					'</a>'+
+					'</figure>';
+					output +=
+					'<div class="rank">'+
+					'<strong>'+item.product_num+'</strong>'+
+					'</div></div>';
+					output +=
+					'<div class="infor">';
+					output +=
+					'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+					output +=
+					'<div class="infor_btn">';
+					output +=
+					'<a href="productDetail.pr">상세정보</a>';
+					output +=
+					'<a href="#">위시리스트</a>';
+					output +=
+					'</div></div></div></div>';
+					$('.chart_cont'+scnt).append(output);
+					if(cnt%2==0){
+						var output2 = '</div>';
+						$('.product_chart').append(output2);
+						var output3 = "";
+					
+						output3+='<script>';
+						output3+='var swiper'+scnt+' ='+' new Swiper(\'.swiper-container'+scnt+'\', {';				
+						output3+='slidesPerView : 2, spaceBetween : 24,';
+						output3+='breakpoints : { 600 : { slidesPerView : 2, spaceBetween : 24}}';
+						output3+='});';
+						output3+='</script>';
+						console.log(output3);
+						$('.product_chart').append(output3);
+						scnt++;
+					}
+					cnt++;
+				}
 			
-				output3+='<script>';
-				output3+='var swiper'+scnt+' ='+' new Swiper(\'.swiper-container'+scnt+'\', {';				
-				output3+='slidesPerView : 4, spaceBetween : 24,';
-				output3+='breakpoints : { 600 : { slidesPerView : 4, spaceBetween : 0}}';
-				output3+='});';
-				output3+='</script>';
-				console.log(output3);
-				$('.product_chart').append(output3);
-				scnt++;
-			}
-			cnt++;
 			});
+			
+			
 			document.getElementById('printNumber').value = 8;
 			pNum = parseInt(document.getElementById('printNumber').value); //8
 		}
