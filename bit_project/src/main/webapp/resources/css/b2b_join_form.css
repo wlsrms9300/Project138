@@ -1,4 +1,9 @@
 @charset "utf-8";
+@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {
+	font-family: 'S-CoreDream-4Regular';
+}
+
 /*******************************파트너 가입 신청*************************************/
    .modal {
          text-align: center;
@@ -16,6 +21,7 @@
 
      .sentence {
          text-align: left;
+         padding-left: 22px;
          margin:2px;
          font-size: 13px;
          font-weight: lighter;
@@ -48,17 +54,33 @@
          margin-bottom: 5px;
      }
      .modal > .modal-content > form > input:focus{
-             border: 1px solid #97d6eb;
-         }
-    
+         border: 1px solid #97d6eb;
+     }
+         
+    /*계약 기간 선택*/
+    #contract-term {
+    	 width: 461px;
+         height: 49px;
+         background-color: #efefef;
+         border-radius: 5px;
+         border: 1px solid #dedede;
+         padding: 10px;
+         margin-top: 3px;
+         font-size: 0.9em;
+         color: #3a3a3a;
+         margin-bottom: 7px;
+         
+    }     
+   
   	/*파트너 버튼*/
      #psubmit{
          width: 127px;
          height: 48px;
          text-align: center;
          border: none;
-         margin-top: 20px;
+         margin-top: 15px;
          cursor: pointer;
+         border-radius: 5px;
      }
      #psubmit:hover{
          color: #fff;
@@ -69,14 +91,17 @@
          width: 127px; height: 48px;
          text-align: center;
          border: none;
-         margin-top: 20px;
+         margin-top: 15px;
          cursor: pointer;
+         border-radius: 5px;
      }
      #pcancel:hover{
          color: #fff;
          background-color: #ea7475;
          opacity: 0.9;
      }
+     
+     
      
      /*어린이집 버튼*/
      #nsubmit{
@@ -126,7 +151,7 @@
          background-color: white;
          padding: 1rem 1.5rem;
          width: 500px;
-         height: 600px;
+         height: 760px;
          border-radius: 0.5rem;
   
      }
@@ -146,8 +171,6 @@
      .checkbox {
          text-align: left;
     }
-
-
      .close-button {
          float: right;
          width: 1.5rem;
@@ -165,17 +188,19 @@
          visibility: visible;
          transform: scale(1.0);
          transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+         width: 100%;
+         height: 900px;
      }
 
     /*사진 선택*/
     .box-file-input label{
-    display:inline-block;
-    background: #999595;
-    color:#fff;
-    padding:0px 15px;
-    border-radius: 5px;
-    line-height:35px;
-    cursor:pointer;
+	    display:inline-block;
+	    background: #999595;
+	    color:#fff;
+	    padding:0px 15px;
+	    border-radius: 5px;
+	    line-height:35px;
+	    cursor:pointer;
     }
     .box-file-input label:after{
         content:"파일등록";
@@ -193,52 +218,61 @@
     
     /*모바일 버전*/
       @media (max-width: 480px){
-      	
 		input[type=submit] {-webkit-appearance:none;}
 		input[type=button] {-webkit-appearance:none;}
         .modal {
-         text-align: left;
-         display: block;
-         margin: 0 auto;
-         font-size: 16px;
-         color: #999;
+	         text-align: left;
+	         display: block;
+	         margin: 0 auto;
+	         font-size: 16px;
+	         color: #999;
     	 }
       
       
         .modal-content {
-         position: relative;
-         top: 50%;
-         left: 50%;
-        
-         transform: translate(-50%, -50%);
-         background-color: white;
-         padding: 1rem 1.5rem;
-         width: 300px;
-         height: 600px;
-         border-radius: 0.5rem;
+	         position: relative;
+	         top: 50%;
+	         left: 50%;
+	         transform: translate(-50%, -50%);
+	         background-color: white;
+	         padding: 1rem 1.5rem;
+	         width: 300px;
+	         height: 760px;
+	         border-radius: 0.5rem;
      	}
      	
      	.button-box {
-     	float: left;
-         padding-left: 20px; 
+	     	float: left;
+	         padding-left: 20px; 
     	 }
-     	
-     
-     
 
          /*input 텍스트 박스, 버튼*/
-    .modal > .modal-content > form > input, .modal > .modal-content > form > .button-box > input {
-         width: 289px;
-         height: 27px;
-         background-color: #efefef;
-         border-radius: 5px;
-         border: 1px solid #dedede;
-         padding: 10px;
-         margin-top: 3px;
-         font-size: 0.9em;
-         color: #3a3a3a;
-         margin-bottom: 5px;
-     }
+	    .modal > .modal-content > form > input, .modal > .modal-content > form > .button-box > input {
+	         width: 289px;
+	         height: 27px;
+	         background-color: #efefef;
+	         border-radius: 5px;
+	         border: 1px solid #dedede;
+	         padding: 10px;
+	         margin-top: 3px;
+	         font-size: 0.9em;
+	         color: #3a3a3a;
+	         margin-bottom: 5px;
+	     }
+	     
+	     
+		/*계약 기간 선택*/
+	    #contract-term {
+	    	 width: 311px;
+	         height: 49px;
+	     
+	    }    
+	    
+	   .filename {
+	    	width: 200px;
+	    	overflow : hidden;
+	    }
+   
     
 
       }

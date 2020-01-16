@@ -10,59 +10,40 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/community.css"
 	rel="stylesheet" type="text/css" />
-<!-- css -->
-<script src="https://kit.fontawesome.com/fa509a9993.js"
-	crossorigin="anonymous"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-<!--icon-->
-<style>
-#community_cententbox {
-	margin: 0 auto;
-	width: 950px;
-}
-#category_select {
-	position: relative;
-	padding-right: 20px;
-	color: #333;
-	cursor: pointer;
-	border: none;
-	border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-	border-radius: 0;
-	width: 188px;
-	height: 41px;
-	font-size: 17px;
-}
+<link
+	href="${pageContext.request.contextPath}/resources/css/community_writeform.css"
+	rel="stylesheet" type="text/css" />
+<!-- summernote -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- include summernote css/js-->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<!-- include summernote-ko-KR -->
+<script
+	src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 
-#category_select:focus {
-	outline:none;
-}
 
-#post_subject {
-	font-size: 20px;
-	border: none;
-	border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-	width: 610px;
-	border-radius: 0;
-	padding: 8px 118px 8px 0;
-	line-height: 1.2;
-}
+<script>
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			placeholder : 'content',
+			minHeight : 370,
+			maxHeight : null,
+			focus : true,
+			lang : 'ko-KR'
+		});
+	});
+</script>
 
-#post_subject:focus {
-	outline:none;
-}
-
-#test {
-	text-align: center;
-	
-}
-#test > #story {
-	margin-top: 30px;
-	display: inline-block;
-	width: 950px;
-}
-
-</style>
 </head>
 <body>
 
@@ -74,65 +55,48 @@
 
 	<div id="community_container_menubar">
 		<div class="community_menubar">
-			<a class="community_menubar_item" href="#">자유게시판</a> <a
-				class="community_menubar_item" href="#">육아사진</a> <a
-				class="community_menubar_item" href="#">정보공유(팁)</a> <a
-				class="community_menubar_item" href="#">공구게시판</a> <a
-				class="community_menubar_item" href="#">육아게시판</a> <a
-				class="community_menubar_item" href="#">이슈,토론게시판</a>
+			<a class="community_menubar_item" href="community.co">자유게시판</a> <a
+				class="community_menubar_item" href="community_img.co">육아사진</a> <a
+				class="community_menubar_item" href="community.co">정보공유(팁)</a> <a
+				class="community_menubar_item" href="community.co">공구게시판</a> <a
+				class="community_menubar_item" href="community.co">육아게시판</a> <a
+				class="community_menubar_item" href="co_writeForm.co">이슈,토론게시판</a>
 		</div>
 	</div>
 
 	<div id="community_container_header">
 		<div class="community_title">
-			<h1>게시판이름</h1>
+			<h1></h1>
 		</div>
 		<div></div>
 	</div>
+	<div id="community-contentbox">
+		<form method="post" action="/write">
+			<div id="cententbox-top">
+				<span> <select id="category_select">
+						<option value="board1">자유게시판</option>
+						<option value="board2" selected>사진게시판</option>
+						<option value="board3">게시판3</option>
+						<option value="board4">게시판4</option>
+				</select>
+				</span> <span> <input id="title" name="title" class="" type="text"
+					placeholder="제목">
+				</span>
+			</div>
 
-	<div id="community_cententbox">
-		<span>
-			<select id="category_select">
-				<option value="board1">자유게시판</option>
-				<option value="board2" selected>사진게시판</option>
-				<option value="board3">게시판3</option>
-				<option value="board4">게시판4</option>
-			</select>
-		</span>
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<span>
-			<input id="post_subject" name="subject" class="" type="text"
-				placeholder="제목">
-		</span>
+			<div id="contentbox-middle">
+				<textarea class="form-control" id="summernote" name="content"
+					placeholder="content" maxlength="140" rows="7"></textarea>
+			</div>
+			<div id="contentbox-bottom">
+				<button type="submit" id="submit-btn" name="submit">글쓰기</button>
+				<input type="button" id="cancel-btn" value="취소">
+			</div>
+		</form>
 	</div>
-			<div id="summernote"></div>    
-	
-	<script type="text/javascript">
-	$(document).ready(function(){
-        var toolbar = [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']],
-            ['help', ['help']]
-        ];
-                
-        var setting = {
-            height : 300,
-            minHeight: null,
-            maxHeight: null,
-            focus : true,
-            lang : 'ko-KR',    
-            toolbar : toolbar
-        };
-                
-        $('#summernote').summernote(setting);
-});
-</script>
+
+	<footer>
+		<%@ include file="/WEB-INF/views/footer.jsp"%>
+	</footer>
 </body>
 </html>

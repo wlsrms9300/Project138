@@ -33,18 +33,24 @@
              <hr>
              <form action="/" method="POST">
                 
-                <h3 class="subtitle">입점 기본 자격 요건</h3>
-                <h5 class="sentence">적용되는 사항들을 선택해주세요.</h5>
-                <div class="checkbox">
-                    <input type="checkbox" id="cb1" class="cb"><label for="cb1">사업자등록(개인/법인 모두 가능)</label>
-                    <input type="checkbox" id="cb2" class="cb"><label for="cb2">통신판매업 신고</label>
-                </div>
-                
-               <input type="text" name="contact-address" placeholder="연락처 및 이메일을 알려주세요" required="required">
-       
-               <input type="text" name="product-price" placeholder="판매하고 싶은 상품과 가격을 알려주세요" required="required">
-               <input type="text" name="website" placeholder="홈페이지를 알려주세요">
-               <input type="text" name="address" placeholder="회사 및 상점 주소를 알려주세요">
+               <input type="text" name="license_num" placeholder="사업자등록번호를 알려주세요" required="required">
+               <input type="text" name="manager" placeholder="담당자 성함을 알려주세요" required="required">
+               <input type="tel" name="phone" placeholder="연락처를 알려주세요" required="required">
+               <input type="email" name="email" placeholder="이메일을 알려주세요" required="required">       
+               <input type="text" name="homepage" placeholder="홈페이지를 알려주세요">
+               <input type="text" name="postal_num" placeholder="우편번호">
+               <input type="text" name="address" placeholder="주소">
+               <input type="text" name="address_detail" placeholder="상세주소">
+               
+               <div>
+               <select name="term" id="contract-term">
+				    <option value="">계약기간 선택</option>
+				    <option value="3">3개월</option>
+				    <option value="6">6개월</option>
+				    <option value="9">9개월</option>
+				    <option value="12">12개월</option>
+				</select>
+				</div>
 
                <div class="box-file-input"><label><input type="file" name="ev_display_<?php echo $k; ?>" class="file-input" accept="image/*"></label><span class="filename">대표사진을 선택해주세요.</div>
                 <div class="button-box">
@@ -65,20 +71,28 @@
              <hr>
              <form action="/" method="POST">
                 
-                <h3 class="subtitle">기본 자격 요건</h3>
-                <h5 class="sentence">적용되는 사항들을 선택해주세요.</h5>
-                <div class="checkbox">
-                    <input type="checkbox" id="cb3" class="cb"><label for="cb3">사업자등록(개인/법인 모두 가능)</label>
-                </div>
-                <br/>
-               <input type="text" name="contact-address" placeholder="연락처 및 이메일을 알려주세요" required="required">
-               <input type="text" name="address" placeholder="어린이집 주소를 알려주세요">
-               <input type="text" name="website" placeholder="홈페이지를 알려주세요">
+                                
+               <input type="text" name="license_num" placeholder="사업자등록번호를 알려주세요" required="required">
+               <input type="text" name="manager" placeholder="담당자 성함을 알려주세요" required="required">
+               <input type="tel" name="phone" placeholder="연락처를 알려주세요" required="required">
+               <input type="email" name="email" placeholder="이메일을 알려주세요" required="required">       
+               <input type="text" name="homepage" placeholder="홈페이지를 알려주세요">
+               <input type="text" name="postal_num" placeholder="우편번호">
+               <input type="text" name="address" placeholder="주소">
+               <input type="text" name="address_detail" placeholder="상세주소">
+               
+               <div>
+               <select name="term" id="contract-term">
+				    <option value="">계약기간 선택</option>
+				    <option value="3">3개월</option>
+				    <option value="6">6개월</option>
+				    <option value="9">9개월</option>
+				    <option value="12">12개월</option>
+				</select>
+				</div>
+
                <div class="box-file-input"><label><input type="file" name="ev_display_<?php echo $k; ?>" class="file-input" accept="image/*"></label><span class="filename">대표사진을 선택해주세요.</div>
-               <br />
-               <div class="checkbox">
-                  <input type="checkbox" id="cb4" class="cb"><label for="cb4">구독서비스 이용을 원할 시 체크해주세요.</label>
-               </div>
+               
                 <div class="button-box">
                     <input type="button" id="ncancel" value="취소">
                     <input type="submit" id="nsubmit"  value="보내기">
