@@ -36,50 +36,79 @@
 	<!-- 웹 폰트 -->
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
 		rel="stylesheet">
-<!-- 자바스크립트 라이브러리 -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/munscroll.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
 	
 </head>
 
 <body>
+<header>
+<div id="wrap">
+        <div id="intro_bg">
+            <div class="header">
+                <div class="main">
+                    <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
+                </div>
+                <ul class="nav">
 
-	<header id="header">
-		<div class="container">
-			<div class="row">
-				<div class="header clearfix">
-					<h1>
-						<a href="#">
-							<!-- 
-                            <em><img src="assets/img/logo.png" alt="MEGABOX"></em>
-                            <strong><img src="assets/img/logo-sub.png" alt="LIFE THEATER"></strong>
-                            --> <em>로고1</em>
+                    <div class="login_text"><a href="login.me">로그인</a></div>
 
-						</a>
-					</h1>
-					<nav id="mNav">
-						<h2 class="ir_so">전체메뉴</h2>
-						<a href="#" class="ham"><span></span></a>
-					</nav>
-					<nav class="nav">
-						<ul class="clearfix">
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">상단바</a></li>
-							<li><a href="#">로그인</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- //header -->
+                    <li><input type="checkbox" id="menuicon">
+                        <label for="menuicon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+
+                        <div class="sidebar">
+                            <div id="sidemenu">
+                                <table class="menu_w">
+                                    <tbody>
+                                        <tr>  
+                                            <td><button name="button" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
+                                                    type="button">구독하기</button></td>
+                                            <td ><a href="community.co">커뮤니티</a></td>
+                                            <td><a href="product.pr">상품보기</a></td>
+                                            <td><a href="qna.se">QnA</a></td>
+                                            <td><a href="#">Contact Us</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button name="button" class="subscribe-btn" onclick="location.href='signup.me'"
+                                                    type="button">회원가입</button></td>
+                                            <td></td>
+                                            <td><a href="about.ma">이용방법</a></td>
+                                            <td><a href="kindergarten.ms">어린이집</a></td>
+                                            <td><a href="partner.ms">파트너</a></td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="menu_m" >   
+                                    <tbody>       
+                                                               
+                                     <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
+                                                    type="button" >구독하기</button></td></tr>
+                                        <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='signup.me'"
+                                                    type="button">회원가입</button></td></tr>
+                                        <tr><td><a href="about.ma">이용방법</a></td></tr>
+                                        <tr><td><a href="kindergarten.ms">어린이집</a></td></tr>
+                                        <tr><td><a href="partner.ms">파트너</a></td></tr> 
+                                        <tr><td><a href="community.co">커뮤니티</a></td></tr>
+                                        <tr><td><a href="product.pr">상품보기</a></td></tr>
+                                        <tr><td><a href="qna.se">QnA</a></td></tr>
+                                        <tr><td><a href="#">Contact Us</a></td></tr>
+                                   
+                                    </tbody>
+                                </table>                       
+                            </div>
+                        </div>
+                        
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+	
+	
 	<section id="banner">
 		<div class="slider">
 			<div class="swiper-container">
@@ -137,8 +166,8 @@
                 <input type="hidden" id="checkSaleCode" name="checkSaleCode" value="">
                 <input type="hidden" id="checkQuickCode" name="checkQuickCode" value="">
                 <input type="hidden" id="checkDeliveryCode" name="checkDeliveryCode" value="">
-                <input type="hidden" id="rememberPage" name="rememberPage" value="">
                 -->
+                <input type="hidden" id="printNumber" value="">
 				<ul class="cate clearfix">
 					<li class="product_tier"><a href="javascript:void(0)" onclick="select(1)"> 등급 <span
 								id="tier"></span> <span><i class="fas fa-angle-down"></i></span>
@@ -303,12 +332,17 @@
 
 	
 	
-	<section id="product_section">
+	<section id="product_section" style="min-height: 1000px;">
 		<div class="container">
 			<div class="row">
 				<div class="product">
 					<h3 class="product-normal">일반상품</h3>
 					<div class="product_chart">
+					
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- //product -->
 	<button onclick="location.href='productForm.pr'">상품등록하기</button>
@@ -361,12 +395,16 @@
 		</div>
 	</footer>
 	<!-- //footer -->
-
+<!-- 자바스크립트 라이브러리 -->
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
 
 
 
 	<script>
-		//배너 이미지 슬라이드
+		 //배너 이미지 슬라이드
 		var swiper = new Swiper('.swiper-container', {
 			pagination: {
 				el: '.swiper-pagination',
@@ -378,42 +416,11 @@
 			autoplay: {
 				delay: 5000,
 			},
-		});
-
-		//이미지 슬라이드
-
-		var swiper = new Swiper('.swiper-container2', {
-			slidesPerView: 4,
-			spaceBetween: 24,
-			//            mousewheel: {
-			//                invert: true,
-			//            },
-			/*
-			keyboard: {
-			    enabled: true,
-			    onlyInViewport: false,
-			},
-			
-			autoplay: {
-			    delay: 6000,
-			},
-			 */
-			breakpoints: {
-				600: {
-					slidesPerView: 2,
-					spaceBetween: 24
-				},
-				768: {
-					slidesPerView: 2,
-					spaceBetween: 24
-				},
-				960: {
-					slidesPerView: 3,
-					spaceBetween: 24
-				}
-			}
-		});
+		}); 
+		
+		
 	</script>
+	
 </body>
 
 </html>

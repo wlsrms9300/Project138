@@ -1,9 +1,10 @@
 package com.spring.product;
 
 import java.io.File;
-import java.net.URLEncoder;
+import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,12 +29,20 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/productDetail.pr")
-	public String productDetail(Model model, HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		model.addAttribute("id", id);		
-		
-		return "productDetail";
+	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
+		int pNum = Integer.parseInt(request.getParameter("num"));
+		ProductVO prVO = new ProductVO();
+		try {
+			prVO = service.getProductDetail(pNum);
+			model.addAttribute("prVO", prVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());
+		}
+		return "product_detail";
 	}
+
+	
 	@RequestMapping("/productForm.pr")
 	public String productForm(Model model, HttpSession session) {
 		String id = (String)session.getAttribute("id");
@@ -112,18 +121,12 @@ public class ProductController {
 		} catch (Exception e) {
 			
 		}
-		
-		
 		try {
 			service.prAdd(pdVO);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		
-		
-		
-		
 		//return "product";
 		return "redirect:/";
 	}

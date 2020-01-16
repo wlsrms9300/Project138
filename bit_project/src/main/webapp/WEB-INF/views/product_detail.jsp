@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.spring.product.ProductVO" %>
+    <%
+    ProductVO prVO = (ProductVO)request.getAttribute("prVO");
+    
+    %>
 <!DOCTYPE html>
 <html>
 
@@ -37,47 +42,75 @@
 </head>
 
 <body>
-    <header id="header">
-        <div class="container">
-            <div class="row">
-                <div class="header clearfix">
-                    <h1>
-                        <a href="#">
-                            <!-- 
-                            <em><img src="s/img/logo.png" alt="MEGABOX"></em>
-                            <strong><img src="s/img/logo-sub.png" alt="LIFE THEATER"></strong>
-                            -->
-                            <em>로고1</em>
-
-                        </a>
-                    </h1>
-                    <nav id="mNav">
-                        <h2 class="ir_so">전체메뉴</h2>
-                        <a href="#" class="ham"><span></span></a>
-                    </nav>
-                    <nav class="nav">
-                        <ul class="clearfix">
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">상단바</a></li>
-                            <li><a href="#">로그인</a></li>
-                        </ul>
-                    </nav>
+  <header>
+<div id="wrap">
+        <div id="intro_bg">
+            <div class="header">
+                <div class="main">
+                    <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
                 </div>
+                <ul class="nav">
+
+                    <div class="login_text"><a href="login.me">로그인</a></div>
+
+                    <li><input type="checkbox" id="menuicon">
+                        <label for="menuicon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+
+                        <div class="sidebar">
+                            <div id="sidemenu">
+                                <table class="menu_w">
+                                    <tbody>
+                                        <tr>  
+                                            <td><button name="button" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
+                                                    type="button">구독하기</button></td>
+                                            <td ><a href="community.co">커뮤니티</a></td>
+                                            <td><a href="product.pr">상품보기</a></td>
+                                            <td><a href="qna.se">QnA</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><button name="button" class="subscribe-btn" onclick="location.href='//'"
+                                                    type="button">회원가입</button></td>
+                                            <td><a href="about.ma">이용방법</a></td>
+                                            <td><a href="kindergarten.ms">어린이집</a></td>
+                                            <td><a href="partner.ms">파트너</a></td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="menu_m" >   
+                                    <tbody>       
+                                                               
+                                     <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
+                                                    type="button" >구독하기</button></td></tr>
+                                        <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='signup.me'"
+                                                    type="button">회원가입</button></td></tr>
+                                        <tr><td><a href="about.ma">이용방법</a></td></tr>
+                                        <tr><td><a href="kindergarten.ms">어린이집</a></td></tr>
+                                        <tr><td><a href="partner.ms">파트너</a></td></tr> 
+                                        <tr><td><a href="community.co">커뮤니티</a></td></tr>
+                                        <tr><td><a href="product.pr">상품보기</a></td></tr>
+                                        <tr><td><a href="qna.se">QnA</a></td></tr>
+                                   
+                                    </tbody>
+                                </table>                       
+                            </div>
+                        </div>
+                        
+                    </li>
+
+                </ul>
             </div>
         </div>
-    </header>
-    <!-- //header -->
+    </div>
+</header>
     <br>
     <br>
     <br>
-
     
     <br>
-
 
     <!-- 상품상세 content div-->
     <div class="container">
@@ -88,11 +121,11 @@
                 <div class="slider">                    
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide sss1">                               
+                            <div class="swiper-slide" style="background: url(/bit_project/image/<%=prVO.getImg_sum() %>) no-repeat center center; background-size: cover;">                               
                             </div>
-                            <div class="swiper-slide sss2">                             
+                            <div class="swiper-slide" style="background: url(/bit_project/image/<%=prVO.getImg_main() %>) no-repeat center center; background-size: cover;">                             
                             </div>
-                            <div class="swiper-slide sss3">                              
+                            <div class="swiper-slide" style="background: url(/bit_project/image/<%=prVO.getImg_detail() %>) no-repeat center center; background-size: cover;">                              
                             </div>                            
                         </div>
                         <div class="swiper-pagination"></div>
@@ -107,22 +140,21 @@
 
             <!-- 상품상세 content 오른쪽 상품정보 div -->
             <div class="product_right">
-                <span class="product_cate1">Home>진근스토어>골드>장난감</span>
+                <span class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %></span>
                 <span class="product_cate2">♡찜</span>
 
                 <br>
                 <hr>
-                <div>(#브랜드)Juun.j</div>
+                <div><%=prVO.getManufacturer() %></div>
                 <br><br><br>
                 <hr>
-                <div>(#상품명)[이번주 신상] 20SS (Men) 블랙 코튼 사이드 지퍼 포켓 스웨트 셔츠</div>
+                <div><%=prVO.getProduct_name() %></div>
                 <br><br><br>
                 <hr>
-                <div>(#상품정보)준지 남성의 코튼 사이드 지퍼 포켓 스웨트 셔츠입니다. 블랙 컬러감 위로 지퍼 디테일과 스트링이 돋보이는 제품입니다. 단품으로 데님 팬츠 혹은 슬랙스 등과 매치하거나
-                    이너로 셔츠와 함께 레이어링 하면 트렌디한 룩 연출이 가능한 아이템입니다.</div>
+                <div><%=prVO.getProduct_content() %></div>
                 <br><br><br>
                 <hr>
-                <div>재고 : <span>30</span></div>
+                <div>재고 : <span><%=prVO.getTotal_amount() %></span></div>
                 <br>
                 <hr>
                 <div>제품특징</div>
@@ -172,29 +204,10 @@
                 <img src="${pageContext.request.contextPath}/resources/img/product01.jpg">
                
             </div>
-
             <div>
                 <img src="${pageContext.request.contextPath}/resources/img/product02.jpg">
             </div>
 
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product03.jpg">
-            </div>
-
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product04.jpg">
-            </div>
-
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product05.gif">
-            </div>
-
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product06.gif">
-            </div>
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product07.gif">
-            </div>
         </div>
 
     </div>
@@ -222,7 +235,7 @@
 
             <div>구매고객 총별점</div>
             <div class="star_lay">
-                <span class="starR1 on"></span>
+                <span class="starR1"></span>
                 <span class="starR2"></span>
                 <span class="starR1"></span>
                 <span class="starR2"></span>
@@ -233,8 +246,8 @@
                 <span class="starR1"></span>
                 <span class="starR2"></span><br>
             </div>
-            <div>4.7/5</div>
-
+            <div><%=prVO.getGpa() %>/5</div>
+			<input type="hidden" id="reviewTotal" value="<%=prVO.getGpa() %>" />
         </div>
 
 
@@ -553,6 +566,45 @@
                   delay: 5000,
               },
           });
+          </script>
+          <script type="text/javascript">
+          $(document).ready(function () {	
+        		var reviewScore = parseInt(document.getElementById('reviewTotal').value);
+        		reviewScore*=10;
+        		//5개
+        		if(reviewScore == 50) {
+        			
+        		}
+        		//4.5개
+        		else if(reviewScore>45 && reviewScore <= 49){
+        			
+        		}else if(reviewScore>40 && reviewScore <= 45){
+        			
+        		}else if(reviewScore>35 && reviewScore <= 40){
+        			
+        		}else if(reviewScore>30 && reviewScore <= 35){
+        			
+        		}else if(reviewScore>25 && reviewScore <= 30){
+        			
+        		}else if(reviewScore>20 && reviewScore <= 25){
+        			
+        		}else if(reviewScore>15 && reviewScore <= 20){
+        			
+        		}else if(reviewScore>10 && reviewScore <= 15){
+        			
+        		}else if(reviewScore>5 && reviewScore <= 10){
+        			
+        		}else if(reviewScore>=0 && reviewScore <= 5){
+        			
+        		}
+        	})
+
+        	$('.starRev span').click(function () {
+        	  $(this).parent().children('span').removeClass('on');
+        	  $(this).addClass('on').prevAll('span').addClass('on');
+        	  return false;
+        	});
+
           </script>
 </body>
 

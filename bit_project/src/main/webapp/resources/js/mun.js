@@ -1,9 +1,3 @@
-$('.starRev span').click(function () {
-  $(this).parent().children('span').removeClass('on');
-  $(this).addClass('on').prevAll('span').addClass('on');
-  return false;
-});
-
 /*
   $('#f1').click(function(){
     if($("input:checkbox[id='f1']").is(":checked") == true){
@@ -174,17 +168,19 @@ $(function(){
 
 /* 모바일용 필터 체크박스 눌렀을 떄 기존 필터에 입력한 정보 그대로 남아있음 */
 $('#menu_state').click(function () {
+	
   var fil = document.getElementById('mFilter_menu');
   //var fil_nav = document.getElementById('mFilter');
   //var _zindex = document.getElementById('header');
   if (fil.style.display == 'none') {
     //_zindex.style.zIndex='-1';
+	  $('#mFilter label[for="menu_state"] i').css("right", "0px");
     fil.style.display = 'block';
     $('.fildivision').show();
     //fil_nav.style.background = '#fff';
   } else {
     //_zindex.style.zIndex='9999';
-
+	  $('#mFilter label[for="menu_state"] i').css("right", "-16px");
     fil.style.display = 'none';
     $('.fildivision').hide();
     //fil_nav.style.background = '#fff';

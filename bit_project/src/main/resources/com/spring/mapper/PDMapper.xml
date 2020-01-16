@@ -60,32 +60,85 @@
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist FROM product ORDER BY product_num ASC
 		)
 	)
-	<![CDATA[WHERE rnum>#{pno}-8 and rnum<=#{pno}]]>
+	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
 	
+	 
+	<!--  필터설정 이후 스크롤 시. 1. 해당 필터로 조회. 그 중 8개만 -->
+	<select id="filterScroll" parameterType="map" resultType="com.spring.product.ProductVO">
+	select * from (
+		select * FROM (
+		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
+		FROM product 
+		where 1=1 
+		<choose>
+		<when test="cateMap1.size != 0">
+		AND category_l IN 
+		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		<when test="cateMap2.size != 0">
+		AND category_m IN 
+		<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		<when test="cateMap3.size != 0">
+		AND category_s IN 
+		<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		</choose>
+		ORDER BY product_num ASC
+		)
+	)
+	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
+	</select>
+	<!-- 
 	<select id="filterSearch" parameterType="map" resultType="com.spring.product.ProductVO">
 	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product
 	where category_l=#{category_l} AND category_m=#{category_m} AND category_s=#{category_s}
 	order by product_num asc
-	</select>
+	</select> -->
 
-	<select id="selectList" parameterType="hashMap" resultType="com.spring.product.ProductVO">
-	select *
-	from product
-	where category_l IN 
-	<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
-	#{i}
-	</foreach>
-	AND category_m IN 
-	<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
-	#{i}
-	</foreach>
-	AND category_s IN 
-	<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
-	#{i}
-	</foreach>
-	
-	
-  	</select>
+	<!-- <select id="selectList" parameterType="map" resultType="com.spring.product.ProductVO">
+	select * from (
+		select * FROM (
+		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
+		FROM product 
+		where 1=1 
+		<choose>
+		<when test="cateMap1.size != 0">
+		AND category_l IN 
+		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		<when test="cateMap2.size != 0">
+		AND category_m IN 
+		<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		<when test="cateMap3.size != 0">
+		AND category_s IN 
+		<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+		</when>
+		</choose>
+		ORDER BY product_num ASC
+		)
+	)
+	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
+  	</select> -->
+  	
+  	<select id="getProductDetail" parameterType="map" resultType="com.spring.product.ProductVO">
+	select * from product where product_num=#{product_num}
+	</select>
 </mapper>

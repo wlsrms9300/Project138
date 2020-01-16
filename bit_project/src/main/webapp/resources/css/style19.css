@@ -1,35 +1,192 @@
 @charset "utf-8";
 
 /* 레이아웃 */
-#mNav {display: none; position: absolute; top: 23px; right: 16px;}
-#header {position: fixed; left: 0; top: 0; z-index: 9999; border-bottom: 1px solid #ccc; width: 100%; height: 50px; background: #fff;}
 #banner {position: relative; background:rgba(0,0,0,0.1);}
 #product_section {background-color: #f2f2f2;}
 #footer {background: #211f1f;}
 #testForm {display: none;}
-
+header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50px;}
 /* 가운데 영역 */
 .container {position: relative; width: 1280px; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
 
 /* 로우 영역 */
 .row {padding: 0 16px;}
 
-/* 모바일 메뉴 */
-.ham {display: block; width: 25px; height: 4px;}
-.ham span {position: relative; display: block; width: 25px; height: 4px; background: #39106a;}
-.ham span::before {
-    content: '';
-    width: 25px; height: 4px; background: #39106a;
-    position: absolute; left: 0; bottom: -7px;
-    transition:  transform 0.3s;
-}
-.ham span::after {
-    content: '';
-    width: 25px; height: 4px; background: #39106a;
-    position: absolute; left: 0; top: -7px;
-    transition:  transform 0.3s;
+/* 새로운 헤더 */
+#wrap{
+    width: 850px;
+    height:60px;
 }
 
+.main {
+    width: 100%;
+    margin-left: 40px;  
+}
+
+.main > li > img {
+    width:80px;
+    height:60px;
+}
+
+
+.header{
+background-color:white;
+position: fixed;
+-webkit-transition: fixed 0.5s;
+    transition: fixed 0.5s;
+display: flex;
+width: 100%;
+margin: auto;
+height: 60px;
+z-index: 1;
+box-shadow: 0px 3px 5px rgb(216, 216, 216);
+
+}
+.nav{
+    display: flex;
+    justify-content: flex-end;
+    width: calc(1100px - 260px);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    
+}
+.nav li {
+    margin-left: 20px;  
+    margin-top:auto;
+    margin-bottom:auto;
+} 
+
+.nav input[id ="menuicon"] {
+    display: none;
+   -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.nav input[id ="menuicon"] + label {
+    display: block; 
+    width: 15px;
+    height: 15px;
+    position:relative;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.nav input[id = "menuicon"] + label span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 5px;
+    background: #000;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.nav input[id="menuicon"] + label span:nth-child(1) {
+    top: 0;
+}
+.nav input[id="menuicon"] + label span:nth-child(2){
+    top: 50%;
+    transform:translateY(-50%);
+   -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.nav input[id="menuicon"] + label span:nth-child(3){
+    bottom: 0;
+}
+
+.nav input[id ="menuicon"]:checked + label span:nth-child(1){
+    top:50%;
+    transform:translateY(-50%) rotate(45deg);
+   -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.nav input[id ="menuicon"]:checked + label span:nth-child(2){
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.nav input[id ="menuicon"]:checked + label span:nth-child(3){
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+div[class="sidebar"] {
+    width:100%;
+    height:60px;
+    text-align: center;
+    border: 0;
+    background-color: rgba(255,235,205,0.95);
+    position: relative;
+    display: none;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+
+}
+
+input[id ="menuicon"]:checked +label +div {
+    top: 67px;
+    height: 180px;
+    display: flex;
+    position:fixed;
+    z-index: 9999;
+    left: 0;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    padding: 20px 0px 0px 0px; 
+    justify-content:center;
+}
+
+.nav ul{display: none;}
+
+#sidemenu {
+    display: flex;
+    width:80%;
+}
+
+.menu_w {
+    height: 150px;
+    -webkit-transition: all 0.9s;
+    -webkit-transition-delay: 0.9s;
+    transition: all 0.5s;
+    transition-delay: 0.5s;
+    width:100%;
+}
+
+.menu_m
+ {
+    display: none;
+    text-align: center;
+    padding: 10px;
+    border-radius:5px;
+    width:100%;
+}
+
+div[class="sidebar"] button {
+    background: #ff7276;
+    border-radius:5px;
+    color: #fff;
+    border: 0;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 400;   
+    text-align: center;
+    z-index: 1;
+  	box-shadow: 0px 3px 5px rgb(216, 216, 216);
+    
+}
+
+.login_text  {
+		margin-top:auto;
+		margin-bottom:auto;
+		padding-left:16px;
+		font-size:16px;
+		line-height:1.3;
+	}   
+/* 새로운 헤더 */
 
 
 
@@ -76,22 +233,9 @@ label.round::before {border-radius:50%;}
 #list1 ul, #list2 ul, #list3 ul, #list4 ul {position: absolute; background: #fff; border: 1px solid #ebebeb;}
 #list1 ul li, #list2 ul li, #list3 ul li, #list4 ul li {width: 100%; z-index: 50; }
 #tier, #age, #type, #sort {display: inline-block; width: 8rem; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; word-break: break-all; vertical-align: top; color: #a3a3a3;}
-
-
-
-
 /* 필터 */
 
-/* 헤더 */
-.header h1 {float: left; position: relative;}
-.header h1 em {padding: 8px 8px 3px 0px; display: inline-block;}
-.header h1 em img {width: 155px; }
-.header h1 strong {display: block; position: absolute; left: 170px; top: 14px;}
-.header h1 strong img {width: 157px;}
-.header .nav {float: right; }
-.header .nav ul {border-left: 1px solid #c6c6c6;}
-.header .nav li {float: left; width: 85px; text-align: center; border-right: 1px solid #c6c6c6; }
-.header .nav li a {display: block; padding: 14px 10px; font-size: 15px; font-weight: 700; color: #444;}
+
 
 /* 슬라이드 */
 .slider {width: 100%;}
@@ -164,30 +308,31 @@ label.round::before {border-radius:50%;}
 /* 미디어 쿼리 */
 @media (max-width: 1290px){
     .container {width: 100%;}
-    #header .row {padding-right: 0;}
-    .header .nav li:last-child {border-right: 0;}    
     .slider .swiper-slide.ss3 {text-align: center;}        
     
 }
 
 @media (max-width: 480px){
+	
     /* 웹 -> 모바일 전환되면서 필터 변경*/
     #wFilter {display: none;}
     #testForm {display: block;}
     #mFilter_menu {display: block;}
 
-    /* 헤더 */
-    .header h1 em {padding: 11px 0px 8px 0px; }
-    .header h1 em img {width: 135px; }
-    .header h1 strong {left: 0px; top: 18px;}
-    .header h1 strong img {width: 117px;}
-    .header .nav {display: none;}
-    .header h1 {text-align: left; float: none;}
-    .header h1 strong {left: 0px; display: none}
-    
-    
-     #mNav {display: block;}
-    /* 헤더 */
+    /* 새로운 헤더 */
+   .header{width:100%;}
+    .nav li {margin-left: 20px;  }       
+    .nav li:first-child {width: 343px;}       
+    .nav{display: flex;justify-content: flex-end;width: calc(900px - 60px);line-height: 45px;}
+	.login_text  {font-size:14px;padding-left:30px;}   
+    #sidemenu {margin:0 auto;width:auto;}
+    div[class="sidebar"] {height:60px;z-index:9999;}
+    div[class="sidebar"] button {width: 100px;height: 40px;font-weight: 100; font-size: 1rem;border: 0;margin-top:1px;}
+    .menu_m {display: flex;font-size: 1.4rem;margin-top: -20px;padding: 31px;}
+    .menu_w {display: none;}
+    div[class="sidebar"] {background-color: #fff;width:100%;position: fixed; background:  rgba(255,235,205,0.95);height: 10px;}
+	input[id ="menuicon"]:checked +label +div {top:67px;height: 450px;display: flex;}
+    /* 새로운 헤더 */
 
     /* 푸터 */
     .footer_sns {position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
@@ -226,17 +371,18 @@ label.round::before {border-radius:50%;}
     /* 상품 카테고리 모바일 UI 생각해서 수정해야함. */
 
     /* 상품 리스트 */
-    #product_section {background-color: transparent;}
+    #product_section {background-color: transparent; min-height: 40rem !important; max-height: 100% !important;}
     #product_section .ir_so {position: static; width: auto; height: auto; line-height: normal; text-indent: 0; font-size: 18px; padding-bottom: 10px; font-weight: bold;}
     #product_section .container {position: relative;}
     #product_section .container:after {content: ''; position: absolute; z-index: 20; top: 0; right: 0; width: 8px; height: 100%; background: #d9d7e0;}
-    #product_section .row {position: relative; margin: 8px; padding: 16px; background: #fff; margin-right: 0; padding-right: 0;}
+    /* #product_section .row {position: relative; margin: 8px; padding: 16px; background: #fff; margin-right: 0; padding-right: 0;}*/
+    #product_section .row {position: relative; margin: 0px; padding: 0px; background: #fff; margin-right: 0; padding-right: 0;}
     #product_section .row:after {content: ''; position: absolute; top: 0; right: 0; z-index: 10; width: 24px; height: 100%; background: #fff;}
     
     .product {padding: 0;}
       
     
-    .product_chart {position: relative; z-index: 30;}
+    .product_chart {position: relative; z-index: 30; }
     .product_chart > div > div > div {margin-right: 0px; }
     .product_chart > div > div > div .infor {padding: 5px;}
     .product_chart > div > div > div .infor h3 {text-align: center; margin: 5px 0 10px; }
@@ -245,14 +391,6 @@ label.round::before {border-radius:50%;}
     .product_chart > div > div > div .infor .infor_btn a {display: none;}
     .product_chart > div > div > div .infor .infor_btn a:last-child {width: 60%; margin-left: 20%; display: block; margin-right: 0; padding: 5px; color: #777; margin-bottom: 5px; box-sizing: border-box; font-size: 14px; background: none; border: 1px solid #ddd;}
     
-    /*
-    .product_chart > div > div > div .infor .infor_btn a {width: 52%; margin-left: 24%; display: block; margin-right: 0; padding: 5px; color: #777; margin-bottom: 5px; box-sizing: border-box; font-size: 14px; background: none; border: 1px solid #ddd;}
-    .product_chart > div > div > div .infor .infor_btn a:last-child {display: none;}
-    */
-    /* 상품 리스트 */
 
-
-    /* 웹용 필터 -> 모바일용 필터로 전환*/
-    /* body {background: #d9d7e0;}*/
 }
 
