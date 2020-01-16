@@ -1,7 +1,8 @@
 @charset "UTF-8";
+@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-body {margin: 0;}
-span{display:block; line-height: 28px; font-size: 14px; width: 600px; margin: 0 auto; margin-top:25px;}
+*{font-family: S-CoreDream-4Regular;}
+span{display:block; line-height: 28px; font-size: 14px; width: 600px; margin: 0 auto;}
 .intro-section > span > em{font-style: normal; font-weight: 800;}
 h2 {font-size: 36px; margin-top: 20px;}
 h3 {font-size: 18px; margin-top: 30px;}
@@ -10,8 +11,9 @@ hr {margin: 50px;}
 
 .subcontainer{width: 1200px; height: 350px; background-color: rgb(166, 206, 72); margin: 0 auto 50px auto;}
 .intro-section{width: 1200px; margin: 0 auto; text-align: center; }
+.intro-section > span{margin-top: 30px;}
 .intro-section > img{width: 1200px; height: 150px;}
-.intro-section > .mt_2 > img{width: 640px; height: 150px;}
+.intro-section1 > div > img{width: 640px; height: 150px;}
 .mt_box{display: flex; width: 640px; margin: 0 auto;}
 .mt_box > .mt_box_module{width: 850px; display: flex;}
 .mt_box > .mt_box_module > .box_step1{background: #f9f0f0;}
@@ -33,25 +35,29 @@ hr {margin: 50px;}
 /* 모바일 */
 @media (max-width: 480px){
 body {text-align: center; font-size: 14px;}
-span{display:block; line-height: 28px; font-size: 14px; width: 500px; margin: 0 auto; margin-top:25px;}
+span{display:block; line-height: 28px; font-size: 14px; width: 500px; margin: 0 auto; }
 .intro-section > span > em{font-style: normal; font-weight: 800;}
-h2 {font-size: 36px; margin-top: 20px;}
+h2 {font-size: 32px; margin-top: 20px;}
 h3 {font-size: 24px; margin-top: 30px;}
 hr {margin: 50px;}
+.img{width: 95%;}
 
-.subcontainer{width: 100%;background-color: #f7b8b8; height: 138px;}
+.subcontainer{width: 100%;background-color: #f7b8b8; height: 138px; overflow: hidden;}
 .intro-section{width: 85%; padding: 0 30px; margin: 0;}
 .intro-section > span{width: 100%;}
 .intro-section > img{width: 400px; }
 
 .intro-section1 {margin: 0; }
 .intro-section1 > div  > span{width: 420px;}
+.intro-section1 > div  > .img2{width: 95%;}
+.intro-section1 > div  > img{width: 95%;}
 
 .mt_box{display: flex; width: 100%;}
 .mt_box > .mt_box_module{display: flex; width: 100%;}
 .mt_box > .mt_box_module > div{width: 110px; height: 110px; border-radius: 50%; margin: 10px auto 10px auto;}
-.intro-section > .mt_6{background-color: #fff; width: 100%; height: 300px;}
+.intro-section > .mt_6{background-color: #fff; width: 100%; height: 250px;}
 .intro-section > .mt_6 > .mt_6_1{align-self: center; margin: auto;}
+
 
 }
 

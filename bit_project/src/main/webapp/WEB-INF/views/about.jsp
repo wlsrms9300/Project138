@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,36 +12,37 @@
 </head>
 <body>
 
-<div style="height: 50px;">
+<div style="height: 60px;">
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>
 </div>
 
  <div class="subcontainer">
-        about 사진
+        <div style="height: 350px; overflow: hidden"><img src="${pageContext.request.contextPath}/resources/img/about1.jpg" style="height: 100%; width: 100%;" ></div>
     </div>
     <div class="intro-section">
         <h2>안녕하세요, 진근이네입니다.</h2>
         <br>
 <!--         <img src="http://placehold.it/1200x150?text=logo" /> -->
-		<img src="${pageContext.request.contextPath}/resources/img/partner01.jpg">
+		<%-- <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"> --%>
+		<img>
         <br>
         <h3>진근이네란?</h3>
-        <span class="mt_1">
+        <span class="mt_1 span_style">
             <em>진근이네</em>는 0세부터 7세의 아이들을 대상으로 여러 장난감을 1달에 한 번씩 받아볼 수 있는 맞춤형 구독 서비스입니다.
             구독 신청 후, 배송된 장난감을 아이들이 재밌게 가지고 논 후에는 선택하신 위시리스트의 다른 장난감으로 교환 가능합니다.
             더는 선반 위에서 먼지만 쌓여가는 장난감을 사는 데 돈을 낭비하지 않으셔도 됩니다.
         </span>
         <h3>장난감 대여가 왜 합리적 경제 생활인가요?</h3>
-        <span class="mt_1">
+        <span class="mt_1 span_style">
             우리 아이의 취향에 맞게 다양한 종류의 장난감을 대여되는 <em>진근이네</em>를 이용함으로써, 아이가 원하는 것을 충족시킬 수있습니다.
             또한, 더는 가지고 놀지 않는 장난감을 공유 또는 교환함으로써 부모님의 부담을 덜며 사회적 나눔을 실천할 수 있습니다.
             <br>
             <em>진근이네</em>는 공유 경제의 개념을 도입하여 자원의 낭비를 막으며, 친환경에 이바지합니다.
         </span>
         <h3>장난감 대여가 왜 합리적 경제 생활인가요?</h3>
-        <span class="mt_1">
+        <span class="mt_1 span_style">
             우리 아이의 취향에 맞게 다양한 종류의 장난감을 대여되는 <em>진근이네</em>를 이용함으로써, 아이가 원하는 것을 충족시킬 수있습니다.
             또한, 더는 가지고 놀지 않는 장난감을 공유 또는 교환함으로써 부모님의 부담을 덜며 사회적 나눔을 실천할 수 있습니다.
             <br>
@@ -67,7 +69,7 @@
             </div>
         </div>
         <br>
-        <span>1단계 - 간단히 회원 가입을 완료한 후<br>
+        <span class="span_style">1단계 - 간단히 회원 가입을 완료한 후<br>
         2단계 - 원하시는 구독 종류를 선택하시고<br>
         3단계 - 좋아하거나 원하는 장난감을 골라 위시리스트에 추가합니다.<br>
         4단계 - 장난감이 문앞으로 배송되기를 기다리면 끝</span><br>
@@ -86,20 +88,21 @@
         <br><br>
         <hr>
         <br><br>
-        <div class="mt_2 img2">
-            <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"><br>
+        <div class="mt_2 img2 span_style">
+            <%-- <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"> --%>
+            <img src="${pageContext.request.contextPath}/resources/img/about2.jpg"><br>
             <span>2회 이상 파손 및 분실 시 서비스 이용에 제한될 수 있으니 이점 양해 부탁드립니다.</span>
         </div><br>
-        <div class="mt_3 img2">
-                <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"><br>
+        <div class="mt_3 img2 span_style">
+                 <img src="${pageContext.request.contextPath}/resources/img/about2.jpg"><br>
                 <span>구독이 처음이신 분들을 위해 체험(1개월,2개월) 서비스를 추천해 드립니다.</span>
             </div><br>
-        <div class="mt_4 img2">
-            <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"><br>
+        <div class="mt_4 img2 span_style">
+             <img src="${pageContext.request.contextPath}/resources/img/about2.jpg"><br>
             <span>아동 친화적인 살균 소독제를 이용하여 바이러스(Inf, HSV), 세균 등 99.9% 살균하고 있습니다.</span>
         </div><br>
-        <div class="mt_5 img2">
-            <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"><br>
+        <div class="mt_5 img2 span_style">
+             <img src="${pageContext.request.contextPath}/resources/img/about2.jpg"><br>
             <span>개인 SNS(인스타그램)에 리뷰를 작성해주시면 500point 지급해드립니다.<br>
                 포인트는 구독료 차감 가능하며 특별한 날에 오래 기억될 선물 포장 서비스에도 사용 가능합니다.</span>
         </div><br>
