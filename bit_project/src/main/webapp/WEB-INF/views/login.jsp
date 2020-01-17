@@ -55,10 +55,10 @@
 						<button type="button" onclick="location.href='#'" id="btn-left">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/naver.png"
-								style="width: 167px; height: 36px;" />
-						</button>
+								style="width: 167px; height: 36px;" />	
+						</button>					
 					</span> <span>
-						<button type="button" onclick="location.href='#'" id="btn-right">
+						<button type="button" onclick="location.href='${kakao_Url}'" id="btn-right">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/kakao.png"
 								style="width: 167px; height: auto;" />
