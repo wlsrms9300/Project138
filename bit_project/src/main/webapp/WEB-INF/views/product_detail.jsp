@@ -240,7 +240,6 @@
                     </p>                    
                     -->
         <div class="starRev">
-
             <div>구매고객 총별점</div>
             <div class="star_lay">
                 <span class="starR1"></span>
@@ -259,58 +258,23 @@
         </div>
 
 
-
-
-
-
-        <div class="product_review">
-            <section>
-                <div>
-                    <ul>
-                        <li class="review_text">
-                            <div>리뷰 제목 : 옷을 입었는데 핏이 개 구대기 같습니다.</div><br>
-                            <div class="review_content">
-                                리뷰 내용 : 옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭
-                                ㅆㅎㅌㅊ네요.옷이
-                                그럭저럭 ㅆㅎㅌㅊ네요.
-                                옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이
-                                그럭저럭
-                                ㅆㅎㅌㅊ네요.
+	<div class="review">                
+                <article>
+                    <ul style="display: flex;">
+                        <li style="flex: 8.5;">                            
+                            <div>asdasd흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
+                                흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
+                                흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
                             </div>
-                            <br><br><br><br><br><br><br><br>
+                            <span>서어른이 답글1 조회3 #비트캠프 #내일 폭발(기타정보) </span>
                         </li>
-                        <li class="review_img">
-                            <div> <img src="${pageContext.request.contextPath}/resources/img/card02@2.jpg"></div>
-                        </li>
+                        <li style="flex: 1.5;"><img src="${pageContext.request.contextPath}/resources/img/card02@2.jpg"></li>
                     </ul>
-                </div>
-                <br>
-
-                <div>
-                    <ul>
-                        <li class="review_text">
-                            <div>리뷰 제목 : 옷을 입었는데 핏이 개 구대기 같습니다.</div><br>
-                            <div class="review_content">
-                                리뷰 내용 : 옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭
-                                ㅆㅎㅌㅊ네요.옷이
-                                그럭저럭 ㅆㅎㅌㅊ네요.
-                                옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이 그럭저럭 ㅆㅎㅌㅊ네요.옷이
-                                그럭저럭
-                                ㅆㅎㅌㅊ네요.
-                            </div>
-                            <br><br><br><br><br><br><br><br>
-                        </li>
-                        <li class="review_img">
-                            <div> <img src="${pageContext.request.contextPath}/resources/img/card02@2.jpg"></div>
-                        </li>
-                    </ul>
-                </div>
-                <br>
-            </section>
-
-        </div>
-
+                    <hr style="border: 0.5px solid grey;">
+                </article>
+            </div>
     </div>
+ 
     <!-- 상품 리뷰 -->
 
 
@@ -612,8 +576,17 @@
         	  $(this).addClass('on').prevAll('span').addClass('on');
         	  return false;
         	});
-
           </script>
+    <script>
+    $('.review article ul li').click(function(){
+    	alert('클릭확인');
+    	if($(this).children().first().css("-webkit-line-clamp")==2){
+    		$(this).children().first().css("-webkit-line-clamp", "6");	
+    	}else {
+    		$(this).children().first().css("-webkit-line-clamp", "2");
+    	}
+    });
+    </script>
 </body>
 
 </html>
