@@ -1,37 +1,58 @@
 package com.spring.login;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
 public class LoginController {
 	
-	@Autowired(required = false)
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
 	
-	@RequestMapping(value = "/login.me", method = RequestMethod.GET)
+	@Autowired(required = false)
+	/* Naver BO */
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+	
+	/* 일반/카카오/네이버 로그인페이지  (카카오/네이버 Url보내줌) */
+	@RequestMapping(value = "/login.me", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView login(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
-		//인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		
+		/* 카카오인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
 		String kakaoUrl = KakaoController.getAuthorizationUri(session);
 		
 		//생성한 인증 URL을 View로 전달
 		mav.setViewName("login");
 		mav.addObject("kakao_Url", kakaoUrl);
+		mav.addObject("naver_Url", naverAuthUrl);
 		
 		return mav;
 		}
 	
+	/* 카카오 로그인 성공시 */
 	@RequestMapping(value="/kakaologin.pr", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView kakaoLogin(@RequestParam("code") String code, 
 	HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
@@ -71,6 +92,51 @@ public class LoginController {
 		System.out.println(kemail+"/"+kname+"/"+kimage+"/"+kgender+"/"+kbirthday+"/"+kage);
 		
 		return mav;
-				
+	}
+	
+	/* 네이버 로그인 성공시 callback호출 메소드 */
+	@RequestMapping(value = "/callback.pr", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		//1. 로그인 사용자 정보를 읽어온다.
+		apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+	
+		//2. String형식인 apiResult를 json형태로 바꿈
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(apiResult);
+		JSONObject jsonObj = (JSONObject) obj;
+		//3. 데이터 파싱
+		//Top레벨 단계 _response 파싱
+		JSONObject response_obj = (JSONObject)jsonObj.get("response");
+		//response의 nickname값 파싱
+		String nickname = (String)response_obj.get("nickname");
+		String id = (String)response_obj.get("id");
+		String age = (String)response_obj.get("age");
+		String gender = (String)response_obj.get("gender");
+		String email = (String)response_obj.get("email");
+		String name = (String)response_obj.get("name");
+		
+		System.out.println(nickname+"/"+id+"/"+age+"/"+gender+"/"+email+"/"+name);
+		
+		//4.파싱 닉네임 세션으로 저장
+		session.setAttribute("sessionId",nickname); //세션 생성
+		//모델에 데이터 저장
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("id", id);
+		model.addAttribute("age", age);
+		model.addAttribute("gender", gender);
+		model.addAttribute("email", email);
+		model.addAttribute("name", name);
+		
+		return "main";
+	}
+	
+	/* 로그아웃 */
+	@RequestMapping(value = "/logout.me", method = { RequestMethod.GET, RequestMethod.POST })
+		public String logout(HttpSession session)throws IOException {
+		session.invalidate();
+		return "redirect:main.ma";
 	}
 }

@@ -52,7 +52,7 @@
 
 				<div>
 					<span>
-						<button type="button" onclick="location.href='#'" id="btn-left">
+						<button type="button" onclick="location.href='${naver_Url}'" id="btn-left">
 							<img
 								src="${pageContext.request.contextPath}/resources/img/naver.png"
 								style="width: 167px; height: 36px;" />	
