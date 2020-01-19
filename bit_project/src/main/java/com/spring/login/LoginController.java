@@ -27,11 +27,47 @@ public class LoginController {
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
 	
-	@Autowired(required = false)
 	/* Naver BO */
+	@Autowired(required = false)
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
+	/* nomalLogin */
+	@Autowired(required = false)
+	private LoginService service;
+	
+	@RequestMapping(value = "/nomal_login.me", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView nomal_login(LoginVO vo, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String email = vo.getEmail();
+		String password = vo.getPassword();		
+		
+		// email, password 데이터 확인
+		System.out.println(email +"/"+ password);
+		
+		// DB에서 Email 불러와서 등록된 이메일인지 확인
+		LoginVO dbvo = null;
+		try {
+			dbvo = service.getDetail(email);
+			if(dbvo.getEmail() == null) {
+				System.out.println("등록된이메일이 아니야");
+				mav.setViewName("main");
+				return mav;
+			} else {
+				System.out.println("등록된 이메일이군");
+				mav.setViewName("main");
+				return mav;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("이메일로 정보불러오기 실패");
+			mav.setViewName("main");
+			return mav;
+		}
+				
+	}
+	
 	
 	/* 일반/카카오/네이버 로그인페이지  (카카오/네이버 Url보내줌) */
 	@RequestMapping(value = "/login.me", method = { RequestMethod.GET, RequestMethod.POST })

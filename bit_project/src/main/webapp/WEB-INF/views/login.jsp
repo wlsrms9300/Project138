@@ -6,12 +6,28 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<link href="${pageContext.request.contextPath}/resources/css/member.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/member.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Document</title>
-<style>
-</style>
+<title>로그인</title>
+<script>
+	function login() {
+		var email = $('#loginId').val();
+		var password = $('#loginPw').val();
+		if(email == "") {
+			alert("아이디(E-MAIL)을 입력해주세요.");
+			$('#loginId').focus();
+			return false;
+		} 
+		if(password == "") {
+			alert("비밀번호를 입력해주세요.");
+			$('#loginPw').focus();
+			return false;
+		}
+		
+		$('#loginForm').submit();
+	}
+</script>
 </head>
 <body>
 	<div style="height: 50px;">
@@ -27,14 +43,14 @@
 
 			<h1>로그인</h1>
 
-			<form method="POST" name="loginForm" action="">
+			<form method="POST" id="loginForm" name="loginForm" action="nomal_login.me">
 				<div class="input-block">
 					<div class="ipt-email">
-						<input type="email" id="loginId" name="loginId"
+						<input type="email" id="loginId" name="email"
 							placeholder="아이디 (E-MAIL)" />
 					</div>
 					<div class="ipt-pwd">
-						<input type="password" id="loginPw" name="loginPw"
+						<input type="password" id="loginPw" name="password"
 							placeholder="비밀번호" />
 					</div>
 				</div>
@@ -48,7 +64,7 @@
 						/ <a href="forgotIdPw.me" class="link-find">비밀번호 찾기</a>
 					</span>
 				</div>
-				<button type="submit" class="btn-login">로그인</button>
+				<input type="button" class="btn-login" value="로그인" onclick="login();">
 
 				<div>
 					<span>

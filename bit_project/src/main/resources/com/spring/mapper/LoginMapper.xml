@@ -5,12 +5,33 @@
 
    <!-- kakao/naver 로그인시 받아온정보 DB에 저장 -->
    <resultMap type="com.spring.login.LoginVO" id="LoginMap">
-   <result property="email" column="email"  /> <!-- 일반회원 로그인시 이메일 확인 -->
+   <result property="email" column="email"  />
+   <result property="usergroup" column="usergroup" /> 
    <result property="nickname" column="nickname"  />
    <result property="name" column="name"  />
-   <result property="password" column="password"  /> <!-- 일반회원 로그인시 패스워드 확인 -->
+   <result property="password" column="password"  /> 
+   <result property="phone" column="phone" />
+   <result property="address" column="address" />
+   <result property="address_detail" column="address_detail" />
+   <result property="postal_num" column="postal_num" />
+   <result property="birth" column="birth" />
+   <result property="children_birth" column="children_birth" />
+   <result property="children_name" column="children_name" />
+   <result property="point" column="point" />
+   <result property="regist" column="regist" />
+   <result property="last_connection" column="last_connection" />
+   <result property="subscribe" column="subscribe" />
+   <result property="instagram_id" column="instagram_id" />
+   <result property="receive_email" column="receive_email" />
+   <result property="receive_text" column="receive_text" />
    <result property="img" column="img"  />
+   <result property="email_state" column="email_state" />
    </resultMap>
+   
+   <!-- 이메일만 가져와서 비교 후 등록된 회원인지 확인 -->
+   <select id="getDetail" parameterType="String" resultMap="LoginMap">
+   		SELECT * FROM MEMBER WHERE EMAIL=#{email} 
+   </select>
   
    
 </mapper>
