@@ -257,7 +257,7 @@ div[class="sidebar"] button {
 }
 input[id ="menuicon"]:checked +label +div {
     top:67px;
-    height: 450px;
+    height: 470px;
     display: flex;
     
 }

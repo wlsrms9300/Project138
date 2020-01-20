@@ -4,6 +4,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!-- 파일 업로드시 필요 -->
+<%
+
+	String email = (String)session.getAttribute("email");
+	if((String)session.getAttribute("email") == null) {
+		out.println("<script>");
+		out.println("location.href='login.me'");
+		out.println("</script>");
+	}
+	
+	String img = (String)session.getAttribute("img");
+	
+
+%>
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -29,8 +42,19 @@
                     <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
                 </div>
                 <ul class="nav">
-
-                    <div class="login_text"><a href="#">로그인</a></div>
+					<%
+						if(img != null) {
+					%>
+						<div class="header_img" style="margin-top:8px; margin-right:5px;">
+							<img src="<%=img %>" style="border-radius:50px; width:40px; height:40px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+						</div>
+					<%
+						} else {
+					%>
+                    <div class="login_text"><a href="login.me">로그인</a></div>
+                    <%
+						}
+                    %>
 
                     <li><input type="checkbox" id="menuicon">
                         <label for="menuicon">
