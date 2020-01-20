@@ -122,9 +122,8 @@ public class LoginController {
 	
 	/* 카카오 로그인 성공시 */
 	@RequestMapping(value="/kakaologin.pr", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code") String code, 
+	public String kakaoLogin(@RequestParam("code") String code, 
 	HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		ModelAndView mav = new ModelAndView();
 		
 		//결과값을 node에 담아줌
 		JsonNode node = KakaoController.getAccessToken(code);
@@ -184,8 +183,7 @@ public class LoginController {
 					session.setAttribute("profile_image", image);
 				} else {
 					System.out.println("등록실패");
-					mav.setViewName("main");
-					return mav;
+					return "redirect:main.ma";
 				}		
 			} else { 
 				System.out.println("등록된 회원입니다");
@@ -201,9 +199,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		
-		mav.setViewName("main");
-		
-		return mav;
+		return "redirect:main.ma";
 	}
 	
 	/* 네이버 로그인 성공시 callback호출 메소드 */
@@ -271,9 +267,9 @@ public class LoginController {
 				if(res != 0) {
 					session.setAttribute("email", email); //세션 생성
 					session.setAttribute("nickname", nickname);
+					return "redirect:main.ma";
 				} else {
 					System.out.println("등록실패");
-					return "main";
 				}		
 			} else { 
 				System.out.println("등록된 회원입니다");
@@ -284,12 +280,13 @@ public class LoginController {
 				session.setAttribute("img", dbvo2.getImg());
 				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				service.updateConnection(dbvo2);
+				return "redirect:main.ma";
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}					
 		
-		return "main";
+		return "redirect:main.ma";
 	}
 	
 	/* 로그아웃 */
