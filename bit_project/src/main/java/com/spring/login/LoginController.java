@@ -2,6 +2,8 @@ package com.spring.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,12 +50,21 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		String email = vo.getEmail();
 		String password = vo.getPassword();		
+		
 		// 이전페이지 정보
 		String pre_url = request.getParameter("pre_url");
-		String url1 = pre_url.substring(34);
-		String url2 = url1.substring(0, url1.lastIndexOf("."));
+		String url1 = null;
+		String url2 = null;
+		// 이전 페이지가 main페이지면 오류해결
+		if(pre_url.substring(33).equals("/")) {
+			url1 = "main.ma";
+			url2 = url1.substring(0, url1.lastIndexOf("."));
+		} else {
+			url1 = pre_url.substring(33);
+			url2 = url1.substring(0, url1.lastIndexOf("."));
+		}
 			
-		// email, password, url 데이터 확인
+		// email, password, url 확인
 		System.out.println(email +"/"+ password);
 		System.out.println(pre_url +", "+ url1 +", "+ url2);
 			
@@ -70,8 +81,11 @@ public class LoginController {
 					if(dbvo.getEmail_state().equals("N")) { // 이메일 인증이 되지않은 이메일은 로그인 불가
 						writer.write("<script>alert('인증되지 않은 이메일입니다. 이메일을 확인해주세요.');location.href='./login.me?pre_url="+pre_url+"';</script>");
 					} else {
-					session.setAttribute(email, dbvo.getEmail());
-					mav.addObject("memberDetail", dbvo);
+					session.setAttribute("email", dbvo.getEmail());
+					session.setAttribute("nickname", dbvo.getNickname());
+					session.setAttribute("profile_image", dbvo.getImg());
+					dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
+					service.updateConnection(dbvo);
 					mav.setViewName(url2);
 					return mav;
 					}
@@ -119,39 +133,89 @@ public class LoginController {
 		//사용자의 정보
 		JsonNode userInfo = KakaoController.getKaKaoUserInfo(accessToken);
 		//DB에 맞게 받을 정보이름 수정
-		String kemail = null;
-		String kname = null;
-		String kgender = null;
-		String kbirthday = null;
-		String kage = null;
-		String kimage = null;
+		String email = null;
+		String nickname = null;
+		String birthday = null;
+		String image = null;
 		
 		//유저정보 카카오에서 가져오기
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakao_account = userInfo.path("kakao_account");
-		kemail = kakao_account.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kimage = properties.path("profile_image").asText();
-		kgender = kakao_account.path("gender").asText();
-		kbirthday = kakao_account.path("birthday").asText();
-		kage = kakao_account.path("age_range").asText();
-		session.setAttribute("kemail", kemail);
-		session.setAttribute("kname", kname);
-		session.setAttribute("kimage", kimage);
-		session.setAttribute("kgender", kgender);
-		session.setAttribute("kbirthday", kbirthday);
-		session.setAttribute("kage", kage);
-		mav.setViewName("main");
+		email = kakao_account.path("email").asText();
+		nickname = properties.path("nickname").asText();
+		image = properties.path("profile_image").asText();
+		birthday = kakao_account.path("birthday").asText();
+		System.out.println(email+"/"+nickname+"/"+image+"/"+birthday);
 		
-		System.out.println(kemail+"/"+kname+"/"+kimage+"/"+kgender+"/"+kbirthday+"/"+kage);
+		// DB에서 Email 불러와서 등록된 이메일인지 확인
+		int check;
+		char cValue;
+		try {
+			check = service.checkMember(email); // 등록된 이메일인지 확인
+			if(check == 0) {
+				LoginVO dbvo = new LoginVO();
+				dbvo.setEmail(email);
+				dbvo.setPassword("카카오");
+				//닉네임 확인후 동일한 닉네임 있을경우 뒤에 알파벳 추가(랜덤생성)
+				ArrayList<LoginVO> list = service.getNickname();
+				for(int i = 0; i < list.size(); i++) {
+					if(nickname.equals(list.get(i).getNickname())) {
+						for(int j = 0; j < 10; j++) {
+						    double dValue = Math.random();
+						    cValue = (char)((dValue * 26) + 65);   // 대문자
+						    nickname += cValue;
+						}
+					    dbvo.setNickname(nickname);
+					    break;
+					}
+				}
+				dbvo.setNickname(nickname);
+				if(birthday!=null) {
+					dbvo.setBirth(birthday);
+				}
+				dbvo.setRegist(new Timestamp(System.currentTimeMillis()));
+				dbvo.setImg(image);
+				dbvo.setEmail_state("Y");
+				dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
+				int res = service.insertMember(dbvo); // 등록되지 않은 회원이면 DB에 저장
+				if(res != 0) {
+					session.setAttribute("email", email); //세션 생성
+					session.setAttribute("nickname", nickname);
+					session.setAttribute("profile_image", image);
+				} else {
+					System.out.println("등록실패");
+					mav.setViewName("main");
+					return mav;
+				}		
+			} else { 
+				System.out.println("등록된 회원입니다");
+				LoginVO dbvo2 = new LoginVO();
+				dbvo2 = service.getDetail(email); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+				session.setAttribute("email", dbvo2.getEmail()); //세션 생성
+				session.setAttribute("nickname", dbvo2.getNickname());
+				session.setAttribute("profile_image", dbvo2.getImg());
+				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
+				service.updateConnection(dbvo2);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.setViewName("main");
 		
 		return mav;
 	}
 	
 	/* 네이버 로그인 성공시 callback호출 메소드 */
 	@RequestMapping(value = "/callback.pr", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
-
+	public String callback(Model model, @RequestParam(required=false, defaultValue="0") String code, @RequestParam String state, HttpSession session, 
+	HttpServletRequest request) throws IOException, ParseException {	
+		
+		//정보동의 취소시 이전페이지로 이동
+		if(code.equals("0")) {
+			return "main";
+		}
+		
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		//1. 로그인 사용자 정보를 읽어온다.
@@ -166,23 +230,64 @@ public class LoginController {
 		JSONObject response_obj = (JSONObject)jsonObj.get("response");
 		//response의 nickname값 파싱
 		String nickname = (String)response_obj.get("nickname");
-		String id = (String)response_obj.get("id");
-		String age = (String)response_obj.get("age");
-		String gender = (String)response_obj.get("gender");
+		String img = (String)response_obj.get("profile_image");
 		String email = (String)response_obj.get("email");
 		String name = (String)response_obj.get("name");
+		String birth = (String)response_obj.get("birthday");
+		System.out.println(nickname+"/"+email+"/"+name+"/"+img);
 		
-		System.out.println(nickname+"/"+id+"/"+age+"/"+gender+"/"+email+"/"+name);
-		
-		//4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId",nickname); //세션 생성
-		//모델에 데이터 저장
-		model.addAttribute("nickname", nickname);
-		model.addAttribute("id", id);
-		model.addAttribute("age", age);
-		model.addAttribute("gender", gender);
-		model.addAttribute("email", email);
-		model.addAttribute("name", name);
+		// DB에서 Email 불러와서 등록된 이메일인지 확인
+		int check;
+		char cValue;
+		try {
+			check = service.checkMember(email); // 등록된 이메일인지 확인
+			if(check == 0) {
+				LoginVO dbvo = new LoginVO();
+				dbvo.setEmail(email);
+				dbvo.setPassword("네이버");
+				//닉네임 확인후 동일한 닉네임 있을경우 뒤에 알파벳 추가(랜덤생성)
+				ArrayList<LoginVO> list = service.getNickname();
+				for(int i = 0; i < list.size(); i++) {
+					if(nickname.equals(list.get(i).getNickname())) {
+						for(int j = 0; j < 10; j++) {
+						    double dValue = Math.random();
+						    cValue = (char)((dValue * 26) + 65);   // 대문자
+						    nickname += cValue;
+						}
+					    dbvo.setNickname(nickname);
+					    break;
+					}
+				}
+				dbvo.setNickname(nickname);
+				dbvo.setBirth("0");
+				if(birth!=null) {
+					dbvo.setBirth(birth);
+				}
+				dbvo.setImg(img);
+				dbvo.setRegist(new Timestamp(System.currentTimeMillis()));
+				dbvo.setEmail_state("Y");
+				dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
+				int res = service.insertMember(dbvo); // 등록되지 않은 회원이면 DB에 저장
+				if(res != 0) {
+					session.setAttribute("email", email); //세션 생성
+					session.setAttribute("nickname", nickname);
+				} else {
+					System.out.println("등록실패");
+					return "main";
+				}		
+			} else { 
+				System.out.println("등록된 회원입니다");
+				LoginVO dbvo2 = new LoginVO();
+				dbvo2 = service.getDetail(email); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+				session.setAttribute("email", dbvo2.getEmail()); //세션 생성
+				session.setAttribute("nickname", dbvo2.getNickname());
+				session.setAttribute("img", dbvo2.getImg());
+				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
+				service.updateConnection(dbvo2);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}					
 		
 		return "main";
 	}

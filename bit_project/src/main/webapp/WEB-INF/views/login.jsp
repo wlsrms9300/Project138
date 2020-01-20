@@ -9,7 +9,6 @@
 	} else {
 		pre_url = request.getParameter("pre_url");
 	}
-	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +34,6 @@
 			$('#loginPw').focus();
 			return false;
 		}
-		
 		$('#loginForm').submit();
 	}
 </script>
