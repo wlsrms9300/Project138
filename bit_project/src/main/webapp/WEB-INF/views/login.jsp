@@ -1,5 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+	// 이전페이지 정보
+	String pre_url = null;
+	if(request.getParameter("pre_url") == null) {
+		pre_url = request.getHeader("Referer");
+	} else {
+		pre_url = request.getParameter("pre_url");
+	}
+	
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +41,7 @@
 </script>
 </head>
 <body>
+<!-- <img src="${image.filepath }"/>  로그인시 프로필이미지 불러오기 // 로그인성공시 정보 session에 저장하는걸로 수정해야함--> 
 	<div style="height: 50px;">
 	<header >
 	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 
@@ -64,6 +76,7 @@
 						/ <a href="forgotIdPw.me" class="link-find">비밀번호 찾기</a>
 					</span>
 				</div>
+				<input type="hidden" name="pre_url" value="<%=pre_url %>">
 				<input type="button" class="btn-login" value="로그인" onclick="login();">
 
 				<div>

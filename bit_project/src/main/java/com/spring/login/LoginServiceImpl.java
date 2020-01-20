@@ -22,18 +22,17 @@ public class LoginServiceImpl implements LoginService {
 			throw new Exception("이메일 조회 실패", e);
 		}
 	}
-
 	
-	/*
 	@Override
-	public LoginVO memberDetail(String email) throws Exception {
+	public int checkMember(String email) throws Exception {
 		try {
 			LoginMapper loginmapper = sqlSession.getMapper(LoginMapper.class);
-			LoginVO detail = loginmapper.memberDetail(email);
-			return detail;
+			int check = loginmapper.checkMember(email);
+			return check;
 		} catch (Exception e) {
-			throw new Exception("개인정보 조회 실패", e);
+			throw new Exception("이메일 체크 실패", e);
 		}
 	}
-	*/
+	
+	
 }

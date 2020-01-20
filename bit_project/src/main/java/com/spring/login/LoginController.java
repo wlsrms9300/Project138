@@ -1,14 +1,15 @@
 package com.spring.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.parser.ParseException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,35 +38,52 @@ public class LoginController {
 	@Autowired(required = false)
 	private LoginService service;
 	
+	// 관리자 로그인기능 추가 해야한다
 	@RequestMapping(value = "/nomal_login.me", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView nomal_login(LoginVO vo, HttpSession session) {
+	public ModelAndView nomal_login(LoginVO vo, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		PrintWriter writer = response.getWriter();
+			
 		ModelAndView mav = new ModelAndView();
 		String email = vo.getEmail();
 		String password = vo.getPassword();		
-		
-		// email, password 데이터 확인
+		// 이전페이지 정보
+		String pre_url = request.getParameter("pre_url");
+		String url1 = pre_url.substring(34);
+		String url2 = url1.substring(0, url1.lastIndexOf("."));
+			
+		// email, password, url 데이터 확인
 		System.out.println(email +"/"+ password);
-		
+		System.out.println(pre_url +", "+ url1 +", "+ url2);
+			
 		// DB에서 Email 불러와서 등록된 이메일인지 확인
 		LoginVO dbvo = null;
+		int check;
 		try {
-			dbvo = service.getDetail(email);
-			if(dbvo.getEmail() == null) {
-				System.out.println("등록된이메일이 아니야");
-				mav.setViewName("main");
-				return mav;
-			} else {
-				System.out.println("등록된 이메일이군");
-				mav.setViewName("main");
-				return mav;
-			}
+			check = service.checkMember(email); // 등록된 이메일인지 확인
+			if(check == 0) {
+				writer.write("<script>alert('등록되지 않은 이메일입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");		
+			} else { 
+				dbvo = service.getDetail(email); // 등록된 이메일일 경우 상세정보 불러와서 패스워드 확인작업
+				if(dbvo.getPassword().equals(password)) {
+					if(dbvo.getEmail_state().equals("N")) { // 이메일 인증이 되지않은 이메일은 로그인 불가
+						writer.write("<script>alert('인증되지 않은 이메일입니다. 이메일을 확인해주세요.');location.href='./login.me?pre_url="+pre_url+"';</script>");
+					} else {
+					session.setAttribute(email, dbvo.getEmail());
+					mav.addObject("memberDetail", dbvo);
+					mav.setViewName(url2);
+					return mav;
+					}
+				} else {
+					writer.write("<script>alert('잘못된 비밀번호입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");
+				}
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("이메일로 정보불러오기 실패");
-			mav.setViewName("main");
-			return mav;
+			writer.write("<script>('시스템 에러');location.href='./login.me?pre_url="+pre_url+"';</script>");
 		}
-				
+		return null;			
 	}
 	
 	

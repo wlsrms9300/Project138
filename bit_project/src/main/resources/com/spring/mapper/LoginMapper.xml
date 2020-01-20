@@ -28,9 +28,14 @@
    <result property="email_state" column="email_state" />
    </resultMap>
    
-   <!-- 이메일만 가져와서 비교 후 등록된 회원인지 확인 -->
+   <!-- 카운트 구해서 등록된 회원인지 확인 -->
+   <select id="getDetail" parameterType="String" resultType="int">
+   		SELECT COUNT(*) FROM MEMBER WHERE EMAIL=#{email} 
+   </select>
+   
+   <!-- 등록된 회원이면 사용자 정보 불러오기 -->
    <select id="getDetail" parameterType="String" resultMap="LoginMap">
-   		SELECT * FROM MEMBER WHERE EMAIL=#{email} 
+   		SELECT * FROM MEMBER WHERE EMAIL=#{email}
    </select>
   
    
