@@ -224,4 +224,30 @@ public class ProductAjaxController {
 		}
 		return list;
 	}
+	
+	@PostMapping(value = "/qna.pr", produces = "application/json;charset=UTF-8")
+	public List<QnaVO> qnaSearch(int page, int product_num) {
+		List<QnaVO> list = null;
+		int listcount = 0;
+		int limit = 10;
+		int startrow = (page - 1) * 10 + 1;
+		int endrow = startrow + limit - 1;
+		try {
+			list = service.qnaSearch(startrow, endrow, product_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	@PostMapping(value = "/qnacount.pr", produces = "application/json;charset=UTF-8")
+	public int qnatotalcount(int product_num) {	
+		int res=0;
+		try {
+			res = service.qnaCount(product_num);
+			return res;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return res;
+	}
 }

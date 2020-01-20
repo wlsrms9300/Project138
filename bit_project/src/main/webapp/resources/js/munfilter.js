@@ -18,8 +18,11 @@ $(document).ready(function () {
 			allSearch(deviceChk);
 		}
 	}
+	
+
 	//var pno = 2;
 });
+
 function allSearch(params) {
 	$('.product_chart').empty();
 	//event.preventDefault();

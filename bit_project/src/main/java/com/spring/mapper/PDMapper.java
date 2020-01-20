@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.product.ProductVO;
+import com.spring.product.QnaVO;
 
 public interface PDMapper {
 	void prAdd(ProductVO pdVO);	//상품 등록
@@ -26,4 +27,8 @@ public interface PDMapper {
 	ProductVO getProductDetail(@Param("product_num") int product_num);
 	//상품 상세 페이지 들어갈 때 조회수 + 1
 	void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num);
+	
+	//상품 문의
+	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
+	int qnaCount(@Param("product_num") int product_num);
 }

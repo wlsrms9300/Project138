@@ -147,4 +147,18 @@
 	update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
 	
+	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
+		select * FROM (
+		SELECT rownum rnum, question_num, product_num,nickname,content,regist,secret,answer 
+		FROM question
+		where product_num=#{product_num}
+		ORDER BY regist asc
+		)
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
+	 
+	</select>
+	<select id="qnaCount" parameterType="map" resultType="int">
+		select count(*) FROM question where product_num=#{product_num}
+			
+	</select>
 </mapper>

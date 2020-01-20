@@ -120,7 +120,28 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	
-	
+	@Override
+	public List<QnaVO> qnaSearch(int startPage, int endPage, int product_num) throws Exception {
+		try {
+			List<QnaVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.qnaSearch(startPage, endPage, product_num);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("qna 리스트 출력 실패.", e);
+		}
+	}
 
+	@Override
+	public int qnaCount(int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int res = pdMapper.qnaCount(product_num);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("qna 카운트 실패.", e);
+		}
+	}
+
+	
 }

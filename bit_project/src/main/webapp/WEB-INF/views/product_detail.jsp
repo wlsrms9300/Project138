@@ -39,6 +39,9 @@
     <!-- 웹 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
         rel="stylesheet">
+        <script>
+        var p = <%=prVO.getProduct_num() %>;
+        </script>
 </head>
 
 <body>
@@ -82,7 +85,7 @@
                                 </table>
                                 <table class="menu_m" >   
                                     <tbody>       
-                                                               
+                
                                      <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
                                                     type="button" >구독하기</button></td></tr>
                                         <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='signup.me'"
@@ -279,151 +282,50 @@
 
 
     <!-- 상품 문의 -->
-
-    <div class="container">
-        <div class="pr_title" id="cursor_move_qna">상품문의</div><br>
-        <div class="product_qna">
-            <table>
-                <colgroup>
-                    <col width="7%">
-                    <col width="8%">
-                    <col width="10%">
-                    <col width="auto">
-                    <col width="12%">
-                    <col width="13%">
-                </colgroup>
-       
-                <thead>
-                    <tr>
-                        <th scope="colgroup">번호</th>
-                        <th scope="col">답변여부</th>
-                        <th scope="col">구분</th>
-                        <th scope="col">내용</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">등록일자</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><strong>답변대기</strong></td>
-                        <td>기타</td>
-                        <td><a href="javascript:void(0)" onclick="alert('비밀글로 작성자만 볼 수 있습니다.'); return false;">상품 관련 문의
-                                입니다.&nbsp;</a><i class="fas fa-key"></i></td>
-                        <td>문용민</td>
-                        <td>2020.01.02</td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td><strong>답변완료</strong></td>
-                        <td>기타</td>
-                        <td><a href="javascript:void(0)" onclick="viewContent2();">상품교환문의</a></td>
-                        <td>문용민</td>
-                        <td>2020.01.02</td>
-                    </tr>
-
-                    <tr id="q0" class="detail_comment" style="display:none;">
-                        <td colspan="6">
-                            <div class="content_object"><a href="#">구매한 상품 링크</a></div>
-                            <p>질문 내용이 여기에 들어있어요.</p>
-                        </td>
-                    </tr>
-                    <tr id="a0" style="display:none; background: #f3f3f3;">
-                        <td class="replyadmin">
-                            로맨틱무브
-                            <br>
-                            담당자
-                            <br>
-                        </td>
-                        <td colspan="4" class="feedback_comment">
-                            <p>고객님 안녕하십니까? 진근이네입니다. 연락은 따로 드리지 않습니다. 이상.고객님 안녕하십니까? 진근이네입니다. 연락은 따로 드리지 않습니다.
-                                이상.</p>
-                        </td>
-                        <td class="feedback_writer">2020.01.02</td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td><strong>답변대기</strong></td>
-                        <td>기타</td>
-                        <td><a href="javascript:void(0)" onclick="viewContent1();">상품교환문의</a></td>
-                        <td>문용민</td>
-                        <td>2020.01.02</td>
-                    </tr>
-
-                    <tr id="q1" class="detail_comment" style="display:none;">
-                        <td colspan="6">
-                            <div class="content_object"><a href="#">구매한 상품 링크</a></div>
-                            <p>질문 내용이 여기에 들어있어요.</p>
-                        </td>
-                    </tr>
-                    <tr id="a1" style="display: none;">
-                        <td colspan="6" class="a1_reply">
-                            <div class="cFormBox">
-                                <div class="cForm">
-                                    <textarea class="comment-inner-text" name="comment_3067253" tabindex="1"></textarea>
-                                </div>
-
-                                <div class="btnGroup">
-                                    <div class="btnGroupBox">
-                                        <input type="button" onclick="alert('로그인 후 등록할 수 있습니다.');" value="등록"
-                                            tabindex="2" />
-                                        <span class="submitLoading" style="display: none;"></span>
-                                        <p class="comment_msg">
-                                            <span>댓글은 관리자가 확인하지 않습니다. 추가 질문은 새 질문글을 작성해주세요. 타 쇼핑몰 언급, 회원 간 거래글
-                                                등록은 엄격히 금지됩니다.</span>
-                                        </p>
-                                    </div>
-
-                                    <div class="clearfix15"></div>
-                                </div>
-
-                            </div>
-
-                        </td>
-                    </tr>
-                    <!--
-                    <tr id="a1" style="display: none;">
-                        <td colspan="6" class="a1_reply">
-                            <div class="cFormBox">
-                                <div class="cForm">
-                                    <textarea class="comment-inner-text" name="comment_3067253" tabindex="1"></textarea>
-                                </div>
-
-                                <div class="btnGroup">
-                                    <div class="btnGroupBox">
-                                        <input type="button" onclick="alert('로그인 후 등록할 수 있습니다.');" value="등록" tabindex="2"/>
-                                        <span class="submitLoading" style="display: none;"></span>
-                                        <p class="comment_msg">
-                                            <span >댓글은 관리자가 확인하지 않습니다. 추가 질문은 새 질문글을 작성해주세요. 타 쇼핑몰 언급, 회원 간 거래글 등록은 엄격히 금지됩니다.</span>
-                                        </p>
-                                    </div>
-
-                                    <div class="clearfix15"></div>
-                                </div>
-
-                            </div>
-
-                        </td>
-                    </tr>
-                    -->
-                    <tr>
-                        <td>4</td>
-                        <td><strong>답변대기</strong></td>
-                        <td>기타</td>
-                        <td><a href="javascript:void(0)">교환&nbsp;</a></td>
-                        <td>문용민</td>
-                        <td>2020.01.02</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-
-    </div>
+	<div class="container">
+            <div id="goodsQna" class="qna">
+                <h3>상품Q&A&nbsp;
+                    <em class="cssf">(4)</em>
+                    <a href="javascript:write()" style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>                    
+                </h3>
+                <div class="accordion">
+                    <ul>        
+                                                         
+                    </ul>
+                </div>
+			</div>
+			<div class="paginate" style="text-align:center;">
+			
+			</div>
+			 <div class="writeForm" style="display:none;">
+			 	<h2>상품Q&A 작성</h2>
+			 	<h3>문의 시 유의해 주세요!
+			 	<br>
+			 	상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
+			 	</h3>
+		        <form id="ProductForm">
+		         <div>
+		         <br>
+		           <label>제목</label>
+	               <span><input type="text" value="" placeholder="제목을 작성해주세요." /></span>
+	            </div>
+		        <div>
+		           <textarea rows="20" cols="20" placeholder="내용을 작성해주세요."></textarea>
+		        </div>
+		       
+	            <div>
+	               <label for="privatecheck">공개 여부</label>
+	               <span><input type="radio" name="privatecheck" value="공개" />공개</span>
+	               <span><input type="radio" name="privatecheck" value="비공개" />비공개</span>
+	            </div>
+	            <div class="writebtn">
+	            <a href="javascript:void(0)" >저장</a>
+	            <a href="javascript:void(0)" >취소</a>
+	            </div>
+		        </form>
+   			 </div>
+   </div>
+  
     <script>
         function viewContent2() {
             var q = document.getElementById('q0');
@@ -524,6 +426,7 @@
       <script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
       <script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+      
       <script>
           //배너 이미지 슬라이드
           var swiper = new Swiper('.swiper-container', {
@@ -585,6 +488,34 @@
     	}else {
     		$(this).children().first().css("-webkit-line-clamp", "2");
     	}
+    });
+    </script>
+    <script src="${pageContext.request.contextPath}/resources/js/munqna.js"></script>
+     <script>
+ 	var scrollHeight = 0;
+function write() {
+
+
+	$('body').css("background", "grey");
+    $(".writeForm").show();
+	scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+	$("body").addClass('not_scroll'); //overflow:hidden 추가
+	$('.writeForm').css('position', 'fixed'); //최상위 div 고정
+	$('.writeForm').css('top', - scrollHeight+100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	$('.writeForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+
+    };
+    $('.writebtn a').click(function(){
+    	$("body").removeClass('not_scroll');
+    	$('.writeForm').css('position', 'relative');//top값 해제
+    	$('.writeForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    	$('.writeForm').css('top', 0);//최상위 div 고정해제
+    	
+    	
+        $(".writeForm").hide();
+    	$('body').css("background", "none");
+    	$('body').scrollTop(scrollHeight);
+    	//[popupOpen()일때의 의도적 전역변수 scrollHeight값]현재 스크롤된값=보이는화면
     });
     </script>
 </body>
