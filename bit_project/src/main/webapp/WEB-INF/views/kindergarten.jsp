@@ -1,6 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="com.spring.menu.CompanyVO" %>
+	<%@ page import="java.util.List" %>
+	<%
+		List<CompanyVO> list = (List<CompanyVO>)request.getAttribute("list");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,25 +81,21 @@
 				<i class="fas fa-home fa-9x"></i>
 
 			</div>
-
+ 
 		</div>
 		<div class="kindergarten-list">
-			<div class="list">
-				<p>성운이네</p>
-			</div>
-			<div class="list">
-				<p>용민이네</p>
-			</div>
-			<div class="list">
-				<p>성현이네</p>
-			</div>
-			<div class="list">
-				<p>나겸이네</p>
-			</div>
-			<div class="list">
-				<p>수민이네</p>
-			</div>
-		</div>
+		  <ul style=" display: flex;">
+		  	<li style="flex: 8.5;">
+		  	<%
+			 	for (int i = 0; i < list.size(); i++) {
+					CompanyVO cvo = list.get(i);
+			%>
+			<img src="/bit_project/image/<%=cvo.getImg() %>">
+			
+			<%} %>
+			</li>
+		  </ul>
+	   </div>
 	</div>
 	<div style="height: 50px;">
 		<footer>

@@ -1,6 +1,6 @@
 package com.spring.member;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MemberController {
+
+	
 	
 	@RequestMapping(value = "/signup.me", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -61,19 +63,4 @@ public class MemberController {
 		return "B2BJoinForm";
 		}
 	
-	
-	
-	
-	
-	
-	
-//	@RequestMapping(value = "/board/**/boardAdd")
-//    public String boardAdd(HttpServletRequest req, ModelMap modelMap, @ModelAttribute("boardSearchVO") BoardSearchVO boardSearchVO) {
-//		String jspPath =req.getRequestURI();
-//		modelMap.put("boardSearchVO", boardSearchVO);
-//		return jspPath;
-//	}
-//	
-
-
-}
+	}
