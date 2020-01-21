@@ -2,7 +2,7 @@
 <%@ page import="java.util.*, com.spring.community.*" %>
 <%@ page import ="java.text.SimpleDateFormat" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <%
 SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
 CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
@@ -97,7 +97,7 @@ CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
 <!-- header 시작 -->
 <div style="height: 60px;">
 <header >
- 	<%@ include file="/WEB-INF/views/header1.jsp" %>
+ 	<%@ include file="/WEB-INF/views/header1.jsp" %>  
 </header>
 </div>
 <!-- header 끝 -->
@@ -140,7 +140,7 @@ CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
                     조회수 <%=cmvo.getCount() %>
                 </span>
                 <span class="community_mt_footer_share">
-<%--                     스크랩 <%=cmvo.getScrap_count() %> --%>
+   			<%--  스크랩 <%=cmvo.getScrap_count() %> --%>
                     스크랩 <%=cmvo.getScrap_count() %>
                 </span>
                 <div class="community_mt_footer_share_click">

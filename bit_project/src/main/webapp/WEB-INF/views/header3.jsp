@@ -53,7 +53,7 @@
 												<td><a href="community.co">커뮤니티</a></td>
 												<td><a href="product.pr">상품보기</a></td>
 												<td><a href="qna.se">QnA</a></td>
-												<td><a href="contactus.tazo">Contact Us</a></td>
+												<td><a href="contactus.ms">Contact Us</a></td>
 											</tr>
 											<tr>
 												<td><button name="button" class="subscribe-btn"
@@ -94,7 +94,7 @@
 											<tr>
 												<td><a href="qna.se">QnA</a></td>
 											</tr>
-											<tr><td><a href="contactus.tazo">Contact Us</a></td></tr>
+											<tr><td><a href="contactus.ms">Contact Us</a></td></tr>
 
 										</tbody>
 									</table>

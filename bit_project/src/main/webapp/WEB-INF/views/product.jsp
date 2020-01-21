@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String img = (String)session.getAttribute("img");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -48,8 +51,23 @@
                     <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
                 </div>
                 <ul class="nav">
-
+					<%
+						if(img != null) {
+					%>
+						<div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
+							<p style="cursor:pointer; font-size:16px;">로그아웃</p>
+						</div>					
+						<div class="header_img" style="margin-top:6.5px; margin-right:5px;">
+							<img src="<%=img %>" id="rumi" onclick="location.href='mypage_main.my'"  style="box-sizing:border-box; border-radius:50px; width:47px; height:47px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+						</div>
+								
+					<%
+						} else {
+					%>
                     <div class="login_text"><a href="login.me">로그인</a></div>
+                    <%
+						}
+                    %>   
 
                     <li><input type="checkbox" id="menuicon">
                         <label for="menuicon">
@@ -68,7 +86,7 @@
                                             <td ><a href="community.co">커뮤니티</a></td>
                                             <td><a href="product.pr">상품보기</a></td>
                                             <td><a href="qna.se">QnA</a></td>
-                                            <td><a href="#">Contact Us</a></td>
+                                            <td><a href="contactus.ms">Contact Us</a></td>
                                         </tr>
                                         <tr>
                                             <td><button name="button" class="subscribe-btn" onclick="location.href='signup.me'"
@@ -93,7 +111,7 @@
                                         <tr><td><a href="community.co">커뮤니티</a></td></tr>
                                         <tr><td><a href="product.pr">상품보기</a></td></tr>
                                         <tr><td><a href="qna.se">QnA</a></td></tr>
-                                        <tr><td><a href="#">Contact Us</a></td></tr>
+                                        <tr><td><a href="contactus.ms">Contact Us</a></td></tr>
                                    
                                     </tbody>
                                 </table>                       
