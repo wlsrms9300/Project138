@@ -18,4 +18,5 @@ public interface PDService {
 	
 	public List<QnaVO> qnaSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
 	public int qnaCount(@Param("product_num") int product_num) throws Exception;
+	public void reviewWrite(ReviewVO reviewVO) throws Exception;
 }

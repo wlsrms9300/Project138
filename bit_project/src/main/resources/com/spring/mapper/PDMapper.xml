@@ -43,7 +43,7 @@
 	</select>	
 	
 	<!-- 처음 들어왔을때 보여주는 상품리스트. 8개 bno을 rnum으로 쓰자. where bno>0 AND bno<9-->	
-	<select id="startSearch" resultType="com.spring.product.ProductVO">	 
+	<!-- <select id="startSearch" resultType="com.spring.product.ProductVO">	 
 	    select * from (
         select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
         gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount from (
@@ -51,17 +51,31 @@
         )
     )
 	<![CDATA[where rnum>=1 AND rnum<=8]]>	
+	</select> -->
+	
+	<select id="startSearch" resultType="com.spring.product.ProductVO">	 
+select * from (
+select  rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from (
+select * from product order by product_num
+))
+	<![CDATA[where rnum>=1 AND rnum<=8]]>	
 	</select>
 	 
 	 
 	<!--  초기에 8개가 화면에 뿌려진 이후, 스크롤을 내렸을 때 추가로 8개의 상품을 더 보여준다 -->
 	<select id="scrollSearch" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from (
+<!-- 	select * from (
 		select * FROM (
 		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount FROM product ORDER BY product_num ASC
 		)
-	)
+	) -->
+	select * from (
+select  rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from (
+select * from product order by product_num
+))
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
 	
@@ -159,6 +173,18 @@
 	</select>
 	<select id="qnaCount" parameterType="map" resultType="int">
 		select count(*) FROM question where product_num=#{product_num}
-			
 	</select>
+	
+	
+	<insert id="reviewWrite" parameterType="com.spring.product.ReviewVO">
+ 	<selectKey keyProperty="review_num" resultType="int" order="BEFORE">
+    SELECT review_sequence.NEXTVAL FROM DUAL
+	</selectKey>
+  	insert into review(review_num, product_num, nickname, content, img, regist, gpa) values(
+  	#{review_num}, #{product_num}, #{nickname}, #{content},#{img},
+    sysdate, #{gpa})
+	</insert>
+	
+	
+
 </mapper>

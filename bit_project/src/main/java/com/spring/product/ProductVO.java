@@ -29,7 +29,7 @@ public class ProductVO {
 	private int share_amount;
 	private String manufacturer;
 	private String product_content;
-	private int gpa;
+	private double gpa;
 	private String category_l;
 	private String category_m;
 	private String category_s;
@@ -87,13 +87,13 @@ public class ProductVO {
 	public void setProduct_content(String product_content) {
 		this.product_content = product_content;
 	}
-	public int getGpa() {
+
+	public double getGpa() {
 		return gpa;
 	}
-	public void setGpa(int gpa) {
+	public void setGpa(double gpa) {
 		this.gpa = gpa;
 	}
-	
 	public String getCategory_l() {
 		return category_l;
 	}

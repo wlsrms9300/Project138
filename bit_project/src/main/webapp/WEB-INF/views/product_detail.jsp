@@ -228,7 +228,12 @@
 
     <!-- 상품 리뷰 -->
     <div class="container">
-        <div class="pr_title" id="cursor_move_review">상품 리뷰</div>
+        <div class="pr_title" id="cursor_move_review">
+        <h3>상품 리뷰
+			<em class="cssf">(4)</em>
+			<a href="javascript:review_write()" style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>                    
+        </h3>
+        </div>
 
         <!--
                     <div class="review_star">
@@ -256,7 +261,8 @@
                 <span class="starR1"></span>
                 <span class="starR2"></span><br>
             </div>
-            <div><%=prVO.getGpa() %>/5</div>
+            
+            <div><%=String.format("%.2f", prVO.getGpa()) %>/5</div>
 			<input type="hidden" id="reviewTotal" value="<%=prVO.getGpa() %>" />
         </div>
 
@@ -278,6 +284,39 @@
             </div>
     </div>
  
+  <div class="reviewForm" style="display:none;">
+			 	<h2>상품리뷰 작성</h2>
+			 	<h3>리뷰 시 유의해 주세요!
+			 	<br>
+			 	상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
+			 	</h3>
+			 	<br>
+		        <form id="ReviewForm" method="post"  enctype="multipart/form-data" >
+		        <input type="hidden" name="writetype" value=2 />
+		        <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
+		        <input type="hidden" name="nickname" value="비트캠프폭발" />
+		        <div>
+	               <label for="reviewcheck">평점</label>
+	               <div><input type="radio" name="reviewcheck" value="5" />★★★★★</div>
+	               <div><input type="radio" name="reviewcheck" value="4" />★★★★</div>
+	               <div><input type="radio" name="reviewcheck" value="3" />★★★</div>
+	               <div><input type="radio" name="reviewcheck" value="2" />★★</div>
+	               <div><input type="radio" name="reviewcheck" value="1" />★</div>
+	            </div>
+		         <br>
+		        <div>
+		           <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
+		        </div>
+		       <br>
+	           <div>
+	           <input type="file" name="img" />
+	           </div>
+	            <div class="review_writebtn">
+	            <a href="javascript:void(0)">저장</a>
+	            <a href="javascript:void(0)">취소</a>
+	            </div>
+		        </form>
+   			 </div>
     <!-- 상품 리뷰 -->
 
 
@@ -286,7 +325,7 @@
             <div id="goodsQna" class="qna">
                 <h3>상품Q&A&nbsp;
                     <em class="cssf">(4)</em>
-                    <a href="javascript:write()" style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>                    
+                    <a href="javascript:qna_write()" style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>                    
                 </h3>
                 <div class="accordion">
                     <ul>        
@@ -297,13 +336,15 @@
 			<div class="paginate" style="text-align:center;">
 			
 			</div>
-			 <div class="writeForm" style="display:none;">
+			 <div class="qnaForm" style="display:none;">
 			 	<h2>상품Q&A 작성</h2>
 			 	<h3>문의 시 유의해 주세요!
 			 	<br>
 			 	상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
 			 	</h3>
-		        <form id="ProductForm">
+		        <form id="ProductForm" method="post">
+		        <input type="hidden" name="writetype" value=1 />
+		        <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
 		         <div>
 		         <br>
 		           <label>제목</label>
@@ -318,7 +359,7 @@
 	               <span><input type="radio" name="privatecheck" value="공개" />공개</span>
 	               <span><input type="radio" name="privatecheck" value="비공개" />비공개</span>
 	            </div>
-	            <div class="writebtn">
+	            <div class="qna_writebtn">
 	            <a href="javascript:void(0)" >저장</a>
 	            <a href="javascript:void(0)" >취소</a>
 	            </div>
@@ -493,30 +534,51 @@
     <script src="${pageContext.request.contextPath}/resources/js/munqna.js"></script>
      <script>
  	var scrollHeight = 0;
-function write() {
-
-
+function qna_write() {
 	$('body').css("background", "grey");
-    $(".writeForm").show();
+    $(".qnaForm").show();
 	scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
 	$("body").addClass('not_scroll'); //overflow:hidden 추가
-	$('.writeForm').css('position', 'fixed'); //최상위 div 고정
-	$('.writeForm').css('top', - scrollHeight+100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-	$('.writeForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	$('.qnaForm').css('position', 'fixed'); //최상위 div 고정
+	$('.qnaForm').css('top', - scrollHeight+100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	$('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
 
     };
-    $('.writebtn a').click(function(){
+    $('.qna_writebtn a').click(function(){
     	$("body").removeClass('not_scroll');
-    	$('.writeForm').css('position', 'relative');//top값 해제
-    	$('.writeForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-    	$('.writeForm').css('top', 0);//최상위 div 고정해제
-    	
-    	
-        $(".writeForm").hide();
+    	$('.qnaForm').css('position', 'relative');//top값 해제
+    	$('.qnaForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    	$('.qnaForm').css('top', 0);//최상위 div 고정해제
+        $(".qnaForm").hide();
     	$('body').css("background", "none");
     	$('body').scrollTop(scrollHeight);
     	//[popupOpen()일때의 의도적 전역변수 scrollHeight값]현재 스크롤된값=보이는화면
     });
+    
+    function review_write() {
+    	$('body').css("background", "grey");
+        $(".reviewForm").show();
+    	scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+    	$("body").addClass('not_scroll'); //overflow:hidden 추가
+    	$('.reviewForm').css('position', 'fixed'); //최상위 div 고정
+    	$('.reviewForm').css('top', - scrollHeight+100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    	$('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+
+        };
+        $('.review_writebtn a').click(function(){
+        	$("body").removeClass('not_scroll');
+        	$('.reviewForm').css('position', 'relative');//top값 해제
+        	$('.reviewForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+        	$('.reviewForm').css('top', 0);//최상위 div 고정해제
+            $(".reviewForm").hide();
+        	$('body').css("background", "none");
+        	$('body').scrollTop(scrollHeight);
+        		var frm = document.getElementById("ReviewForm");
+        		frm.action = "reviewAndQnaWrite.pr";
+        		frm.submit();
+        		frm.reset();
+        	//[popupOpen()일때의 의도적 전역변수 scrollHeight값]현재 스크롤된값=보이는화면
+        });
     </script>
 </body>
 

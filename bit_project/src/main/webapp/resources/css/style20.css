@@ -2,7 +2,7 @@
 
 /* 레이아웃 */
 #mNav {display: none; position: absolute; top: 23px; right: 16px;}
-
+header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50px; font-size:16px;}
 #movie {background-color: #f2f2f2;}
 #footer {background: #211f1f;}
 
@@ -184,7 +184,7 @@ div[class="sidebar"] button {
     width: 120px;
     height: 40px;
     line-height: 40px;
-    font-size: 16px;
+    
     font-weight: 400;   
     text-align: center;
     z-index: 1;
@@ -258,7 +258,7 @@ opacity:1;
 
 
 /* 상품 상세 페이지 title 글자 크기 일괄 부여 */
-.pr_title {font-size: 4rem;}
+.pr_title h3 {font-size: 24px;}
 
 /* 상품 리뷰 */
 /*
@@ -274,7 +274,7 @@ opacity:1;
          .txt-right {text-align: right !important;}
         .txt-right a {margin-left: 20px; }
        .review ul li img{border-radius: 15px; width:100%; height:100%;}
-.starRev {font-size: 30px; height: 100%; }
+.starRev {font-size: 24px; height: 100%; }
 .starR1{
     background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
     background-size: auto 100%;
@@ -331,21 +331,33 @@ opacity:1;
 .accordion ul .title {padding: 17px 0;cursor: pointer;line-height: 18px;display: block;}
 .accordion ul .title span {display: inline-block;width: 90px;color: #444;}
 .accordion ul .title span em {display: inline-block;position: absolute;width: 650px;height: 18px;color: #444;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;font-style: normal;}
-.accordion ul .date em {color: #8e8e8e;}
-.accordion ul .date {margin-bottom: 20px;padding: 0;line-height: 24px;background: none;cursor: default;float: right;padding-right: 30px;display: block;}
+.accordion ul .date em {color: #8e8e8e; text-align: right}
+.accordion ul .date em:first-child {float:left; width: 30%;}
+.accordion ul .date em:last-child {float:right; width: 70%;}
+.accordion ul .date {margin-bottom: 20px;padding: 0;line-height: 24px;background: none;cursor: default;float: right;padding-right: 30px;display: block; width:20%;}
 .accordion ul .content {line-height: 24px;display: none;}
-.txt-right {text-align: right !important;}
-.txt-right a {margin-left: 20px;}
+.txt-right {width:100%; text-align: right !important; float:right;}
+.txt-right a {margin-left: 20px; float: right;}
 
-.writeForm {position:absolute; width: 600px; height: 700px; bottom:200px; left:400px; background:#fff;  z-index:100;padding:15px 20px; overflow: hidden;}
-.writeForm h2 {font-size:20px;}
-.writeForm h3 {font-size:15px;} 
-.writeForm span {width:20%;}
-.writeForm input[type=text] {margin: -3px 0 0 0;padding: 5px 0;width: 80%;height: 24px;border: 0;border-bottom: 1px solid #e5e5e5;box-sizing: content-box;-webkit-appearance: none; font-size:1rem;}
-.writeForm form {width:100%; height:100%; }
-.writeForm textarea {width:100%; text-align:left; height:90px; font-size:13px; line-height: 20px; margin-top:1rem;}
-.writeForm .writebtn {width:100%; text-align:center;}
-.writeForm .writebtn a {width:100%; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px;}
+.qnaForm {position:absolute; width: 600px; height: 700px; bottom:200px; left:400px; background:#fff;  z-index:100;padding:15px 20px; overflow: hidden;}
+.qnaForm h2 {font-size:20px;}
+.qnaForm h3 {font-size:15px;} 
+.qnaForm span {width:20%;}
+.qnaForm input[type=text] {margin: -3px 0 0 0;padding: 5px 0;width: 80%;height: 24px;border: 0;border-bottom: 1px solid #e5e5e5;box-sizing: content-box;-webkit-appearance: none; font-size:1rem;}
+.qnaForm form {width:100%; height:100%; }
+.qnaForm textarea {width:100%; text-align:left; height:90px; font-size:13px; line-height: 20px; margin-top:1rem;}
+.qnaForm .qna_writebtn {width:100%; text-align:center;}
+.qnaForm .qna_writebtn a {width:100%; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px;}
+
+.reviewForm {position:absolute; width: 600px; height: 700px; bottom:200px; left:400px; background:#fff;  z-index:100;padding:15px 20px; overflow: hidden;}
+.reviewForm h2 {font-size:20px;}
+.reviewForm h3 {font-size:15px;} 
+.reviewForm span {width:20%;}
+.reviewForm input[type=text] {margin: -3px 0 0 0;padding: 5px 0;width: 80%;height: 24px;border: 0;border-bottom: 1px solid #e5e5e5;box-sizing: content-box;-webkit-appearance: none; font-size:1rem;}
+.reviewForm form {width:100%; height:100%; }
+.reviewForm textarea {width:100%; text-align:left; height:90px; font-size:13px; line-height: 20px; margin-top:1rem;}
+.reviewForm .review_writebtn {width:100%; text-align:center;}
+.reviewForm .review_writebtn a {width:100%; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px;}
 /* 바디에 스크롤 막는 방법 */
 .not_scroll{
     overflow: hidden;
@@ -406,7 +418,7 @@ colgroup {display: table-column-group;}
     #sidemenu {margin:0 auto;width:auto;}
     div[class="sidebar"] {height:60px;z-index:9999;}
     div[class="sidebar"] button {width: 100px;height: 40px;font-weight: 100; font-size: 1rem;border: 0;margin-top:1px;}
-    .menu_m {display: flex;font-size: 1.4rem;margin-top: -20px;padding: 31px;}
+    .menu_m {display: flex;margin-top: -20px;padding: 31px;}
     .menu_w {display: none;}
     div[class="sidebar"] {background-color: #fff;width:100%;position: fixed; background:  rgba(255,235,205,0.95);height: 10px;}
 	input[id ="menuicon"]:checked +label +div {top:60px;height: 430px;display: flex;}
@@ -441,7 +453,7 @@ colgroup {display: table-column-group;}
     /*.review_content{position: absolute; width: 100%;}*/
 
     /* 상품문의, 상품리뷰 등 타이틀 텍스트 크기 */
-    .pr_title {font-size: 3rem;}
+    .pr_title h3 {font-size: 16px;}
     
     /* 상품 메인 이미지와 상품 설명 부분*/
     .product_left {width: 100%;}

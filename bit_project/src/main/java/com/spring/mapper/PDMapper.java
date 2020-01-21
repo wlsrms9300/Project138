@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
+import com.spring.product.ReviewVO;
 
 public interface PDMapper {
 	void prAdd(ProductVO pdVO);	//상품 등록
@@ -31,4 +32,7 @@ public interface PDMapper {
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
 	int qnaCount(@Param("product_num") int product_num);
+	
+	//상품 리뷰
+	void reviewWrite(ReviewVO reviewVO) throws Exception;
 }

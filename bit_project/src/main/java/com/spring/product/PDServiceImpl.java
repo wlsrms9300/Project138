@@ -143,5 +143,17 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
+	@Override
+	public void reviewWrite(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewWrite(reviewVO);
+			
+		} catch (Exception e) {
+			throw new Exception("리뷰 등록 실패.", e);
+		}
+	}
+
+	
 	
 }
