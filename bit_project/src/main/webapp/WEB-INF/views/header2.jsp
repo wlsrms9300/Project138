@@ -16,14 +16,14 @@
         <div id="intro_bg">
             <div class="header">
                 <div class="main">
-                    <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
+                    <li><img src="${pageContext.request.contextPath}/resources/img/logo12.jpg"></li>
                 </div>
                 <ul class="nav">
                     <%
 						if(img != null) {
 					%>
-						<div class="header_img" style="margin-top:8px; margin-right:5px;">
-							<img src="<%=img %>" style="border-radius:50px; width:40px; height:40px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+						<div class="header_img" style="margin-top:6.5px; margin-right:5px;">
+							<img src="<%=img %>" onclick="location.href='mypage_main.my'" style="box-sizing:border-box; border-radius:50px; width:47px; height:47px; border:2px solid #EA7475; margin:0; cursor:pointer;">
 						</div>
 					<%
 						} else {
