@@ -1,4 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+body {
+	margin: 0;
+}
+
+.btn {
+	margin: 10px;
+}
 .snip1273 {
   font-family: 'Raleway', Arial, sans-serif;
   display: inline-block;
@@ -34,7 +42,9 @@
   height: auto;
   z-index: 1;
   opacity: 0;
-  padding: 20px 30px;
+  padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 20px;
 }
 .snip1273 figcaption:before,
 .snip1273 figcaption:after {
@@ -54,7 +64,7 @@
   line-height: 1.5em;
 }
 .snip1273 h3 {
-  margin: 0 0 5px;
+  margin: 5px 0 5px;
   font-weight: 700;
   text-transform: uppercase;
   
@@ -62,7 +72,7 @@
 .snip1273 p {
   font-size: 0.8em;
   font-weight: 500;
-  margin: 0 0 15px;
+  margin: 0 0 22px;
   text-align: left;
 }
 .snip1273 a {
