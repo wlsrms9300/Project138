@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -114,6 +115,7 @@ public class ProductAjaxController {
 					}
 				}
 				list = service.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+				System.out.println(list.size());
 			}
 			
 		} catch (Exception e) {
@@ -132,7 +134,7 @@ public class ProductAjaxController {
 		List<ProductVO> list = null;
 		try {
 			if (category_l == null && category_m == null && category_s == null) {
-//				list = service.scrollSearch(pno);
+				list = service.scrollSearch(pno);
 			} else {
 				// 문자열 끝만 지우기string=string.substring(0, string.length()-1);
 				if (category_l != null) {
@@ -214,6 +216,7 @@ public class ProductAjaxController {
 					}
 				}
 				list = service.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+				System.out.println(list.size());
 			}
 			
 		} catch (Exception e) {
@@ -222,4 +225,31 @@ public class ProductAjaxController {
 		}
 		return list;
 	}
+	
+	@PostMapping(value = "/qna.pr", produces = "application/json;charset=UTF-8")
+	public List<QnaVO> qnaSearch(int page, int product_num) {
+		List<QnaVO> list = null;
+		int listcount = 0;
+		int limit = 10;
+		int startrow = (page - 1) * 10 + 1;
+		int endrow = startrow + limit - 1;
+		try {
+			list = service.qnaSearch(startrow, endrow, product_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	@PostMapping(value = "/qnacount.pr", produces = "application/json;charset=UTF-8")
+	public int qnatotalcount(int product_num) {	
+		int res=0;
+		try {
+			res = service.qnaCount(product_num);
+			return res;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return res;
+	}
+	
 }

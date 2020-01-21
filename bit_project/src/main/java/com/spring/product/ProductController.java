@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -24,7 +25,7 @@ public class ProductController {
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
 		//String id = (String)session.getAttribute("id");
-		//model.addAttribute("id", id);				
+		//model.addAttribute("id", id);		
 		return "product";
 	}
 	
@@ -33,7 +34,9 @@ public class ProductController {
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
 		try {
+			
 			prVO = service.getProductDetail(pNum);
+			service.getProductReadCount(prVO.getReadcount(), pNum);
 			model.addAttribute("prVO", prVO);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,15 +74,6 @@ public class ProductController {
 			pdVO.setCategory_m(request.getParameter("category_m"));
 			pdVO.setCategory_s(request.getParameter("category_s"));
 			
-			System.out.println(request.getParameter("product_name"));
-			System.out.println(pdVO.getRental_amount()+pdVO.getShare_amount());
-			System.out.println(Integer.parseInt(request.getParameter("rental_amount")));
-			System.out.println(Integer.parseInt(request.getParameter("share_amount")));
-			
-			System.out.println(request.getParameter("manufacturer"));		
-			System.out.println(request.getParameter("category_l"));
-			System.out.println(request.getParameter("category_m"));
-			System.out.println(request.getParameter("category_s"));
 			MultipartFile mf1 = request.getFile("img_sum"); // 파일
 			MultipartFile mf2 = request.getFile("img_main"); // 파일
 			MultipartFile mf3 = request.getFile("img_detail"); // 파일
@@ -117,18 +111,58 @@ public class ProductController {
 				}		
 			}
 			
-			
-		} catch (Exception e) {
-			
-		}
-		try {
 			service.prAdd(pdVO);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
+		
 		//return "product";
 		return "redirect:/";
+	}
+	
+	
+	// 상품 문의, 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
+	@RequestMapping("/reviewAndQnaWrite.pr")
+	public String reviewAndQnaWrite(Model model, MultipartHttpServletRequest request) {
+		System.out.println("췍");
+		int writetype = Integer.parseInt(request.getParameter("writetype"));
+		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		//문의
+		if(writetype==1) {
+			
+			
+		}
+		//리뷰
+		else {
+			ReviewVO reviewVO = new ReviewVO(); 
+			
+			String nickname = request.getParameter("nickname");
+			String content = request.getParameter("content");
+			MultipartFile mf = request.getFile("img"); // 파일
+			String uploadPath = "C:\\Project138\\upload\\";
+			String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
+			String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+			reviewVO.setProduct_num(product_num);
+			reviewVO.setNickname(nickname);
+			reviewVO.setContent(content);
+			reviewVO.setImg(storedFileName);
+			reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
+			try {
+				service.reviewWrite(reviewVO);
+				if (mf.getSize() != 0) {
+					mf.transferTo(new File(uploadPath + storedFileName));
+				}
+				return "redirect:productDetail.pr?num="+product_num;
+			} catch (Exception e) {
+				e.printStackTrace();
+				e.getMessage();
+			}
+		}
+		
+		return "redirect:productDetail.pr?num="+product_num;
+		
+		
 	}
 	
 }
