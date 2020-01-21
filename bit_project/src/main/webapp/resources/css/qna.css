@@ -329,9 +329,8 @@ h1 {
 	
 #contents>.contents1{
 	font-size: 2ex;
-	border-bottom: 3px solid rgb(248, 187, 187);
+	border-bottom: 3px solid rgb(233, 227, 227);
 	padding-top: 30px;
-	padding-bottom: 20px;
 }
 	
 	#contents table {
@@ -348,9 +347,19 @@ h1 {
 	
 	}
 	
-	thead tr a.on {
-	color: rgb(248, 187, 187);
+	.contents1 table thead tr th {
+		cursor:pointer;
+		height:70px;
+		padding:0;
 	}
+	
+	thead tr th.on1 {
+		background-color: rgb(248, 187, 187);
+    }
+       		  
+    thead tr a.on {
+		color: white;
+    }
 	    
  
 	#question_1 {
@@ -360,13 +369,15 @@ h1 {
     border-bottom:0.1px  solid rgb(221, 221, 221);
     display: flex;
     color: #000;
-    padding-top: 10px;
+    padding-top: 15px;
+    padding-bottom: 40px;
 
 	}
 	
 	#question_2 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 15px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px  solid rgb(221, 221, 221);
@@ -377,7 +388,8 @@ h1 {
 	
 	#question_3 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom:0.1px solid rgb(221, 221, 221);
@@ -388,7 +400,8 @@ h1 {
 	
 	#question_4 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px  solid rgb(221, 221, 221);
@@ -399,7 +412,8 @@ h1 {
 	
 	#question_5 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
@@ -409,7 +423,8 @@ h1 {
 	
 	#question_6 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
@@ -419,7 +434,8 @@ h1 {
 	
 	#question_7 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
@@ -429,7 +445,8 @@ h1 {
 	
 	#question_8 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
@@ -439,7 +456,8 @@ h1 {
 	
 	#question_9 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
@@ -449,12 +467,14 @@ h1 {
 	
 	#question_10 {
 	font-weight: 500;
-	padding-top: 10px;
+	padding-top: 20px;
+	padding-bottom: 40px;
     height: 50px;
     font-size: 20px;
     border-bottom: 0.1px solid rgb(221, 221, 221);
     display: flex;
     color: #000;
+    
 	}
 	
 	#list_nav_wrap ul li h3{
@@ -544,7 +564,7 @@ h1 {
            
         
            @media (max-width:480px){
-               .container {width: 100%; height:322px;}
+               .container {width: 100%;}
                .footer_sns {position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
                .footer_sns .tel {display: none;}
                .footer_sns ul {padding-left:0;}
@@ -596,6 +616,7 @@ h1 {
             #contents >.contents1{
                 font-size: 0.2rem;
                 border-bottom: 0px solid red;
+                padding-bottom:20px;
                 
             } 
             .contents1 table thead tr th{
@@ -604,8 +625,9 @@ h1 {
                width: 100%; 
                margin-top: 0px;
                border-bottom: 3px  solid rgb(233, 227, 227);
-               margin-bottom: 0px;
-               cursor:pointer;
+               margin-bottom: 0px;    
+               height:50px;  
+               
             }
             
              h1 {
@@ -698,16 +720,8 @@ h1 {
             #list_nav_wrap ul li{
                 font-size: 16px;
             }
-        	thead tr th.on1 {
-				color: black;
-				background-color: rgb(248, 187, 187);
-       		 }
-       		 thead tr a.on {
-				color: black;
+        	
 			}
-       		
-			
-	       }
        
 
           

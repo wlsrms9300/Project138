@@ -31,7 +31,7 @@
              <h5 class="sentence">아래 사항을 작성하여 보내주시면 파트너 담당자가<br />
                 확인하여 연락 드리도록 하겠습니다.</h5>
              <hr>
-             <form action="/" method="POST">
+             <form action="companyAddProcess.cp" method="POST">
                 
                <input type="text" name="license_num" placeholder="사업자등록번호를 알려주세요" required="required">
                <input type="text" name="manager" placeholder="담당자 성함을 알려주세요" required="required">
@@ -69,7 +69,7 @@
              <h5 class="sentence">아래 사항을 작성하여 보내주시면 담당자가<br />
                 확인하여 연락 드리도록 하겠습니다.</h5>
              <hr>
-             <form action="/" method="POST">
+             <form action="/" method="POST" enctype="multipart/form-data">
                 
                                 
                <input type="text" name="license_num" placeholder="사업자등록번호를 알려주세요" required="required">
@@ -95,7 +95,7 @@
                
                 <div class="button-box">
                     <input type="button" id="ncancel" value="취소">
-                    <input type="submit" id="nsubmit"  value="보내기">
+                    <input type="submit" id="nsubmit" value="보내기">
                 </div>
              </form>
          </div> 

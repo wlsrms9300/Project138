@@ -130,23 +130,30 @@
 			con4.style.display = 'none';
 		}
 	}
+	
+	/*
 	$(function(){
 		$('a').click(function(){
 			$('a').removeClass()
 			$(this).addClass('on')
+		
 		})
 	})
-	
+	*/
 	
 	$(function(){
 		$('th').click(function(){
 			$('th').removeClass()
+			$('th').children().children().removeClass()
 			$(this).addClass('on1')
+			$(this).children().children().addClass('on');
+			
 			
 		})
+		
 		$('#1').click(function() {
 			total();
-		})
+		})	
 		$('#2').click(function() {
 			member();
 		})
@@ -159,6 +166,7 @@
 		$('#5').click(function() {
 			change();
 		})
+		
 	})
 	
 	

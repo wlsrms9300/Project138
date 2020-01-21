@@ -8,16 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MailSendController {
 	
-	
-	@RequestMapping(value = "/kindergarten.ms")
-	public String kindergarten(Model model) {
-
-		return "kindergarten";
-	}
-	
-	
-	
-	
+		
 	@RequestMapping(value = "/contactus_mailsend.ms")
 	public String mailsend_contactus(Model model) {
 

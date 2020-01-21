@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MemberController {
+
+	
 	
 	@Autowired
 	private MemberService memberService;
@@ -64,12 +67,6 @@ public class MemberController {
 	@RequestMapping(value = "/signedup.me", method = RequestMethod.GET)
 	public String signedup(Model model) {
 		return "signedup";
-	}
-
-	/*연결할곳이 없어서 안함 - 파트너/어린이집 신청폼*/
-	@RequestMapping(value = "/B2BJoinForm.me", method = RequestMethod.GET)
-	public String B2BJoinForm(Model model) {
-		return "B2BJoinForm";
 	}
 
 	
@@ -175,3 +172,4 @@ public class MemberController {
 
 
 }
+
