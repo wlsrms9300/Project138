@@ -14,11 +14,6 @@ public class MailSendController {
 
 		return "kindergarten";
 	}
-	@RequestMapping(value = "/partner.ms")
-	public String partner(Model model) {
-
-		return "partner";
-	}
 	
 	
 	

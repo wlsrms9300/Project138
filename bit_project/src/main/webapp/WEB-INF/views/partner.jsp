@@ -10,18 +10,21 @@
 <title>Partner</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/partner.css" />">
+
 <script src="http://code.jquery.com/jquery-3.4.1.js">
 	
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/partner.js"></script>
+
 <style>
-#container {
+#content {
 	width: 1280px;
 	margin: 0 auto;
 }
 
 #logo {
 	padding: 40px 0 40px 0;
-	background-color: #EA7475;
+	background-color: #ffb0b1;
 	color: white;
 	width: 100%;
 	text-align: center;
@@ -29,10 +32,13 @@
 
 #category {
 	margin-left: 30px;
+	margin-top: 100px;
 }
 
-#select {
+#select_box {
 	width: 150px;
+	height: 35px;
+	font-size: 16px;
 }
 
 /* img{
@@ -62,14 +68,15 @@
             transform:scale(1.1);
         } */
 @media ( max-width : 600px) {
-	#container {
+	#content {
 		width: auto;
 	}
 	#logo {
 		width: 100%;
 	}
 	#category {
-		margin: 5%;
+		margin: 15% 0 5% 2%;
+		height: 50px;
 	}
 	.image-wrapper {
 		display: block;
@@ -83,21 +90,35 @@
 		margin: 0 auto;
 	}
 	.snip1273 {
-		width: 85%;
+		width: 95%;
+		margin: 15px 9px 15px;
 		color: #ffffff;
 		background-color: #000000;
 	}
 	.snip1273 figcaption {
 		position: absolute;
 		font-size: 11px;
-		padding: 25px 20px;
+		padding: 17px 20px;
 	}
 	.snip1273 a {
+		width: 38px;
 		color: #ffffff;
 		position: absolute;
-		top: 35px;
-		right: 20px;
+		top: 32px;
+		left: 300px;
+		font-size: 20px;
 	}
+	
+	.snip1273 h3 {
+		font-size: 18px;
+		margin: 0;
+	}
+	
+	.snip1273 p {
+		font-size: medium;
+	}
+	
+	
 }
 </style>
 </head>
@@ -111,83 +132,25 @@
 	<div id="container">
 
 		<div id="logo">
-			<h1>Partner</h1>
+			<h1>파트너</h1>
 		</div>
-		<br> <br>
+
 		<div id="content">
 			<div id="category">
-				<br> <br> <select id="select">
-					<option value="a">a</option>
-					<option value="b">b</option>
-					<option value="c">c</option>
-					<option value="d">d</option>
-					<option value="e">e</option>
-				</select> <br> <br> <br> <br>
+				<form action="">
+					<select id="select_box" onchange="button_click()">
+						<option value="전체선택">전체선택</option>
+						<option value="장난감">장난감</option>
+						<option value="유아용품">유아용품</option>
+						<option value="머저리">머저리</option>
+					</select>
+					<!-- <input type = "button" class = "btn" id = "category_select" onclick = "button_click()" value = "검색" /> -->
+					<!-- <script type="text/javascript" src="partner.js"></script> -->
+					<hr align="left" width="96.7%">
+				</form>
 			</div>
+			<div class="partner_chart"></div>
 
-			<figure class="snip1273">
-				<img src="./resources/img/partner01.jpg">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.naver.com/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-
-			</figure>
-			<figure class="snip1273">
-				<img src="./resources/img/partner02.jpg">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.daum.net/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-			</figure>
-			<figure class="snip1273">
-				<img src="./resources/img/partner03.PNG">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.naver.com/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-			</figure>
-			<figure class="snip1273">
-				<img src="./resources/img/partner04.PNG">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.daum.net/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-			</figure>
-			<figure class="snip1273">
-				<img src="./resources/img/partner05.jpg">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.naver.com/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-			</figure>
-			<figure class="snip1273">
-				<img src="./resources/img/partner06.jpg">
-				<figcaption>
-					<h3>Hello</h3>
-					<p>mutherfucker</p>
-					<br> <a href="https://www.daum.net/" target="_blank"
-						style="text-align: right;">GO!</a>
-				</figcaption>
-			</figure>
-			
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
 		</div>
 
 	</div>
@@ -196,6 +159,7 @@
 			<%@ include file="/WEB-INF/views/footer.jsp"%>
 		</footer>
 	</div>
+
 </body>
 
 </html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.PartnerMapper">
+	<resultMap type="com.spring.partner.PartnerVO" id="partnerResultMap">
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="img" column="img" />
+		<result property="category" column="category" />
+		<result property="homepage" column="homepage" />
+	</resultMap>
+	
+	<select id="getPartnerList" resultMap="partnerResultMap">
+		select name, content, img, category, homepage from partner
+	</select>
+	
+	<select id="getPartnerList_filter" resultMap="partnerResultMap">
+		select name, content, img, category, homepage from partner where category={category_insert}
+	</select>
+</mapper>
