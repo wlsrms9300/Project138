@@ -14,7 +14,4 @@
 		select name, content, img, category, homepage from partner
 	</select>
 	
-	<select id="getPartnerList_filter" resultMap="partnerResultMap">
-		select name, content, img, category, homepage from partner where category={category_insert}
-	</select>
 </mapper>
