@@ -22,7 +22,7 @@
         <div style="height: 350px; overflow: hidden"><img src="${pageContext.request.contextPath}/resources/img/about1.jpg" style="height: 100%; width: 100%;" ></div>
     </div>
     <div class="intro-section">
-        <h2>안녕하세요, 진근이네입니다.</h2>
+        <h2 class="h2_style">안녕하세요, 진근이네입니다.</h2>
         <br>
 <!--         <img src="http://placehold.it/1200x150?text=logo" /> -->
 		<%-- <img src="${pageContext.request.contextPath}/resources/img/partner01.jpg"> --%>

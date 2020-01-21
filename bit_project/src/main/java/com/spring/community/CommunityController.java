@@ -1,5 +1,8 @@
 package com.spring.community;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CommunityController {
+	
+	@Autowired
+	private CommunityService communityService;
 
 	@RequestMapping(value = "/main.ma", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -20,11 +26,12 @@ public class CommunityController {
 		return "about";
 	}
 	@RequestMapping(value = "/community.co", method = RequestMethod.GET)
-	public String community(Model model) {
+	public String community(HttpServletRequest request, Model model) throws Exception{		
 
 		return "community";
 	}
 
+	
 	@RequestMapping(value = "/community_img.co", method = RequestMethod.GET)
 	public String community_img(Model model) {
 
@@ -32,8 +39,22 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
-	public String community_detail(Model model) {
+	public String community_detail(HttpServletRequest request, Model model) throws Exception {
+		CommunityVO cmvo = new CommunityVO();
+		
+		int num = Integer.parseInt(request.getParameter("board_num"));
+		int currentPage = Integer.parseInt(request.getParameter("pageNum"));
+		
+		cmvo = communityService.detailCommunity(num);
+		communityService.updateCount(cmvo);
+		
+		int cocount = communityService.getCommentCount(num);
+		
+		model.addAttribute("cocount", cocount);
+		model.addAttribute("pageNum", currentPage);
+		model.addAttribute("cmvo", cmvo);
 
+		System.out.println(cmvo.getBoard_num() + "boarD_num");
 		return "community_detail";
 	}
 	
@@ -42,9 +63,6 @@ public class CommunityController {
 
 		return "co_writeForm";
 	}
-	
-	
-	
 	
 
 }
