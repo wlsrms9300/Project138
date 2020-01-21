@@ -112,7 +112,7 @@
      <!--어린이집 가입신청 모달-->
      <div class="modal" id="nursery-modal">
          <div class="modal-content">
-             <span class="close-button" id="nclose-button">&times;</span>
+             <span class="close-button" id="nclose-button">&times;</span> 
              <h1 class="title">어린이집 가입신청</h1>
              <h5 class="sentence">아래 사항을 작성하여 보내주시면 담당자가<br />
                 확인하여 연락 드리도록 하겠습니다.</h5>
@@ -125,12 +125,12 @@
                <input type="tel" name="phone" placeholder="연락처" required="required">
                <input type="email" name="email" placeholder="이메일" required="required">       
                <input type="text" name="homepage" placeholder="홈페이지">
-               <input type="text" name="postal_num" id="mun" placeholder="우편번호">
+               <input type="text" name="postal_num" id="mun" placeholder="우편번호"> 
                <input type="text" name="address" id="address" placeholder="주소">
                <input type="text" name="address_detail" id="address_detail" placeholder="상세주소">
                
                <div>
-               <select name="term" id="contract-term">
+               <select name="term" id="contract-term">  
 				    <option value="">계약기간 선택</option>
 				    <option value="3">3개월</option>
 				    <option value="6">6개월</option>
@@ -142,14 +142,14 @@
                <div class="box-file-input"><label><input type="file" name="img" class="file-input"></label><span class="filename">대표사진을 선택해주세요.</div>
                
                 <div class="button-box">
-                    <input type="button" id="ncancel" value="취소">
-                    <input type="submit" id="nsubmit"  value="보내기">
+                    <input type="button" id="ncancel" value="취소">         
+                    <input type="submit" id="nsubmit"  value="보내기">      
                 </div>
              </form>
          </div> 
      </div>     
      
-     
+      
      <script type="text/javascript">
 /*파트너*/
 var modal = document.querySelector("#partner-modal");
@@ -163,13 +163,13 @@ function togglePModal() {
 
 ptrigger.addEventListener("click", togglePModal);
 pcloseButton.addEventListener("click", togglePModal);
-pcancel.addEventListener("click", togglePModal);
+pcance.addEventListener("click", togglePModal);
 
 /*어린이집*/
 var modal2 = document.querySelector("#nursery-modal");
-var ntrigger = document.querySelector("#nursery-join-btn");
-var ncloseButton = document.querySelector("#nclose-button");
-var ncancelButton = document.querySelector("#ncancel");
+var ntrigger = document.querySelector("#nursery-join-btn"); 
+var ncloseButton = document.querySelector("#nclose-button"); 
+var ncancelButton = document.querySelector("#ncancel");       
 
 
 function toggleNModal() {
@@ -181,7 +181,7 @@ document.getElementById("partner-join-btn").onclick = function() {
 	togglePModel();
 }
 */
-document.getElementById("nursery-join-btn").onclick = function() {
+document.getElementById("nursery-join-btn").onclick = function() { 
 	toggleNModal();
 }
 
@@ -193,8 +193,8 @@ function windowOnClick(event) {
 
 
 ncloseButton.addEventListener("click", toggleNModal);
-ncancel.addEventListener("click", toggleNModal);
-window.addEventListener("click", windowOnClick);
+ncancel.addEventListener("click", toggleNModal);    
+window.addEventListener("click", windowOnClick); 
 
 </script>
  <script>
@@ -213,7 +213,7 @@ window.addEventListener("click", windowOnClick);
 
  function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn){
      // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-  	alert(zipNo);
+
     $('#mun').val(zipNo);
     $('#address').val(roadAddrPart1);
     $('#address_detail').val(addrDetail);

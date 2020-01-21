@@ -74,7 +74,7 @@
 				</div>
 
 				<span>
-					<button class="btn-contact-us">CONTACT US</button>
+					<button href="#" id="nursery-join-btn1" class="btn-contact-us">가입 신청</button>
 				</span>
 			</div>
 			<div id="icon">

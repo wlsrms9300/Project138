@@ -64,7 +64,7 @@ public class MenuController {
 			e.getMessage();
 		}
 		service.cpAdd(cpVO);
-		return "main";
+		return "companyAddProcess";
 	}
 	
 	@RequestMapping("/kindergarten.ms")
@@ -79,4 +79,5 @@ public class MenuController {
 		}
 		return "kindergarten";
 	}
+	
 }
