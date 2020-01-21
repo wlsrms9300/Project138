@@ -25,8 +25,11 @@
 						<%
 							if(img != null) {
 						%>
+							<div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
+								<p style="cursor:pointer; font-size:16px;">로그아웃</p>
+							</div>
 							<div class="header_img" style="margin-top:6.5px; margin-right:5px;">
-								<img src="<%=img %>" onclick="location.href='mypage_main.my'"  style="box-sizing:border-box; border-radius:50px; width:47px; height:47px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+								<img src="<%=img %>" id="rumi" onclick="location.href='mypage_main.my'"  style="box-sizing:border-box; border-radius:50px; width:47px; height:47px; border:2px solid #EA7475; margin:0; cursor:pointer;">
 							</div>
 						<%
 							} else {

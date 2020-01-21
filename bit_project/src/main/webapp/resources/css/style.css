@@ -6,7 +6,10 @@
     margin: 0px;
     color: #000;
 }
-
+#rumi:hover {
+	filter:grayscale(60%);
+	transition:filter 0.5s;
+}
 #wrap{
     width: 850px;
 }

@@ -180,7 +180,7 @@ public class LoginController {
 				if(res != 0) {
 					session.setAttribute("email", email); //세션 생성
 					session.setAttribute("nickname", nickname);
-					session.setAttribute("profile_image", image);
+					session.setAttribute("img", image);
 				} else {
 					System.out.println("등록실패");
 					return "redirect:main.ma";
@@ -191,7 +191,7 @@ public class LoginController {
 				dbvo2 = service.getDetail(email); // 이미 등록된 이메일이면 DB에서 정보 가져오기
 				session.setAttribute("email", dbvo2.getEmail()); //세션 생성
 				session.setAttribute("nickname", dbvo2.getNickname());
-				session.setAttribute("profile_image", dbvo2.getImg());
+				session.setAttribute("img", dbvo2.getImg());
 				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				service.updateConnection(dbvo2);
 			}	
@@ -267,6 +267,7 @@ public class LoginController {
 				if(res != 0) {
 					session.setAttribute("email", email); //세션 생성
 					session.setAttribute("nickname", nickname);
+					session.setAttribute("img", img);
 					return "redirect:main.ma";
 				} else {
 					System.out.println("등록실패");
