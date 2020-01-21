@@ -97,7 +97,7 @@ CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
 <!-- header 시작 -->
 <div style="height: 60px;">
 <header >
- 	<%@ include file="/WEB-INF/views/header1.jsp" %> 
+ 	<%@ include file="/WEB-INF/views/header1.jsp" %>
 </header>
 </div>
 <!-- header 끝 -->
