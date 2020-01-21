@@ -1,22 +1,106 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.spring.community.*" %>
+<%@ page import ="java.text.SimpleDateFormat" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<%
+SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
+%>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"  content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 
 <title>community_detail</title>
-<link href="<%=request.getContextPath()%>/resources/css/community_detail.css" rel="stylesheet" type="text/css" /> <!-- css -->
-<script src="https://kit.fontawesome.com/fa509a9993.js" crossorigin="anonymous"></script> <!--icon--> 
+<link href="${pageContext.request.contextPath}/resources/css/community_detail.css" rel="stylesheet" type="text/css" /> <!-- css -->
+<!-- <script src="https://kit.fontawesome.com/fa509a9993.js" crossorigin="anonymous"></script>  --><!--icon--> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$("document").ready(function(){
+		 //날짜형식
+        function date_format(format) {
+            var year = format.getFullYear();
+            var month = format.getMonth()+1;
+            var hour = format.getHours();
+            var min = format.getMinutes();
+            
+            if(month<10) {
+               month = '0' + month;
+            }
+            var date = format.getHours();
+            if(hour<10) {
+               hour = '0' + hour;
+            }
+            var min = format.getMinutes();
+            if(min<10) {
+               min = '0' + min;
+            }
+            return year + "-" + month + "-" + date + "-" + hour +":" + min;
+         }
+		 
+		function coList() {
+			$('.community_comments_view').empty();
+			
+			$.ajax({
+				url:'/bit_project/getCO.co',
+				type: 'POST',
+				data:{'board_num' : $("#comment_num").attr("value")},
+				dataType: "json",
+				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+				success: function(data) {
+					if(data.length!=0){ //댓글 존재할시
+ 					 $.each(data, function(index, item) {
+ 						 var output = ' ';
+ 						var reg_date = new Date(item.regist); 
+		                var date = date_format(reg_date);
+ 						 
+ 						 output += '<div class="community_comments_view_user">';
+  						 output += '<img>';
+ 						 output += '</div>';
+ 						 output += '<div class="community_comments_view_container">';
+ 						 output += '<div class="community_comments_view_comments">';
+ 						 output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+ 						 output += '<input type="text" readonly onfocus:"this.blur()"; value="' + item.content + '">';
+ 						 output += '</div>';
+ 						 output += '<div class="community_comments_view_actions">';
+ 						 output += '<span class="community_comments_view_time">' + date + '</span>';
+  						 output += '<div class="community_comments_view_add">';
+ 						 output += '<button>' + "댓글달기" + '</button>' + '</div>';
+ 						 output += '</div>';
+ 						output += '</div>';
+ 						output += '</div>';
+ 						 
+ 						console.log("output:" + output);
+ 						$('.community_comments_view').append(output);
+					});
+					}
+					else { //댓글 없을때
+						var outputnull = "<div>";
+						outputnull += "<div style='text-align:center; width:950px;'>등록된 댓글이 없습니다.</div>";
+						outputnull += "</div>";
+						$('.community_comments_view').append(outputnull);
+					}
+				},
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			       }
+				});
+			}
+		coList();
+		
+	});
+</script>
 </head>
-<body>
 
-<div style="height: 50px;">
+<body>
+<!-- header 시작 -->
+<div style="height: 60px;">
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>
 </div>
+<!-- header 끝 -->
 
     <div id="community_container_menubar">
         <div class="community_menubar">
@@ -35,43 +119,29 @@
         </div>
     </div>
 
-    </div>
+<!--     </div> -->
     <!--게시글 시작-->
     <div id="community_container_mt_d">
         <div class="community_mt_title_d">
-            <h1>제목제목제목제목제목제제목제목제목제목제목제목제목제목제목제목</h1>
+            <h1><%=cmvo.getBoard_name() %></h1>
         </div>
         <hr>
         <div class="community_mt_mt_d">
-            <p class="community_mt_mt">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용<br><br>내용내용내용내용내용내용내용내용내용내용내용내용내용내용<br>
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내<br>용내용내용내용내용내용내용내용내용
-                내용내용내용내용내용내용내용내용내용내용내용내용내용내용<br>용내용내용내용내용내용내용내용내용내용내용내용내용
-                내용내용내용내용내용내용내용내용<br><br>
-                이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 위하여 설산에서 고행을 하였으며 예수는 무엇을<br>
-                때문이다 그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에
-                것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가<br><br> 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가<br>
-                이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 위하여 설산에서 고행을 하였으며 예수는 무엇을<br><br>
-                때문이다 그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 <br>산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에
-                것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인용내용내용내용내용내용내용내용내용내용내용내용내용<br>용내용내용내용내용내용내용내용내용내용내용내용내용
-                내용내용내용내용내용내용내용내용<br><br>
-                이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 위하여 설산에서 고행을 하였으며 예수는 무엇을<br>
-                때문이다 그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에
-                것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가<br><br> 뜨거운지라 인간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가<br>
-                이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 위하여 설산에서 고행을 하였으며 예수는 무엇을<br><br>
-                때문이다 그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 <br>산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에
-                것이 따뜻한 봄바람이다 인생에 따뜻한 봄바람을 불어 보내는 것은 청춘의 끓는 피다 청춘의 피가 뜨거운지라 인간의 동산에는간의 동산에는 사랑의 풀이 돋고 이상의 꽃이 피고 희망의 놀이 뜨고 열락의 새가</p>
+            <p class="community_mt_mt">
+            <%=cmvo.getContent() %>
+            </p>
         </div>
         <footer class="community_mt_footer">
             <div class="community_mt_footer_caption">
                 <span class="community_mt_footer_time">
-                    <2020년 1월 1일 00:00>
+                    <%=sdf.format(cmvo.getRegist()) %>
                 </span>
                 <span class="community_mt_footer_views">
-                    조회수 <0>
+                    조회수 <%=cmvo.getCount() %>
                 </span>
                 <span class="community_mt_footer_share">
-                    스크랩 <0>
+<%--                     스크랩 <%=cmvo.getScrap_count() %> --%>
+                    스크랩 <%=cmvo.getScrap_count() %>
                 </span>
                 <div class="community_mt_footer_share_click">
                     <button class="community_comments_form_photo" aria-label="공유하기" type="button">
@@ -83,16 +153,19 @@
         <hr>
     </div>
     <!-- 게시글  끝 -->
-    <!-- 댓글창 시작 -->
+    
+    <!-- 댓글입력창 시작 -->
     <div id="community_container_comments">
+    
         <div class="community_comments_count">
-            <h2>댓글</h2><div class="count_circle">5</div>
+            <h2>댓글</h2><div class="count_circle"></div>
         </div>
         <div class="community_comments_form">
             <div class="community_comments_form_user">
                 <img><i class="fas fa-user-circle fa-2x"></i>
             </div>
             <div class="community_comments_form_input">
+            <input type="hidden" name="comment_num" id="comment_num" value="<%=cmvo.getBoard_num() %>">
                 <div class="community_comments_form_content">
                     <div class="community_comments_form_comments" id="comments" contenteditable="true" placeholder="의견을 남겨 보세요."></div>
                 </div>
@@ -104,46 +177,11 @@
                 </div>
             </div>
         </div>
+    <!-- 댓글입력창 끝 -->   
+       
        <!--  댓글 보기 -->
-        <div class="community_comments_view">
-            <div class="community_comments_view_user">
-                <img>
-            </div>
-            <div class="community_comments_view_container">
-	            <div class="community_comments_view_comments">
-	           		<span class="community_mt_footer_users"><닉네임></span>
-	                <input type="text">
-	            </div>
-	            <div class="community_comments_view_actions">
-	                <span class="community_comments_view_time">
-	                    <2020.01.01>
-	                </span>
-	                <div class="community_comments_view_add">
-	                    <button type="button">댓글 달기</button>
-	                </div>
-	            </div>
-	    	</div>
-        </div>
-<!--         
-                댓글 보기
-        <div class="community_comments_view">
-            <div class="community_comments_view_user">
-                <img>
-                <span class="community_mt_footer_users"><닉네임></span>
-            </div>
-            <div class="community_comments_view_comments">
-                <input type="text">
-            </div>
-            <div class="community_comments_view_actions">
-                <span class="community_comments_view_time">
-                    <2020.01.01>
-                </span>
-                <div class="community_comments_view_comments">
-                    <button type="button">댓글 달기</button>
-                </div>
-            </div>
-        </div> -->
-        
+        <div class="community_comments_view"></div>
+
     </div>
     
 <footer>

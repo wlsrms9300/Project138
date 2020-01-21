@@ -12,6 +12,7 @@
 	h2{margin:0 10px;}
 	#comments {border-radius: 5px;}
 	#community_container_filter{width: 950px; margin: 0 auto; height: 40px;}
+	#community_data > .community_ncontainer{width:950px; margin: 0 auto; height: 200px; text-align: center;}
 	
 	/*********************************************************************************/
 	/* 필터      	                                                                 				              */
@@ -37,15 +38,17 @@
 	#community_container_menubar{width:100%; height: 55px; border-top: #a9a9a9 solid 1px; border-bottom: #a9a9a9 solid 1px;}
 	#community_container_menubar > .community_menubar{padding: 0 0 0 60px; text-align: center; vertical-align: middle;}
 	#community_container_menubar > .community_menubar > .community_menubar_item{font-size: 17px; font-weight: bold;  line-height: 23px; margin: 10px 4px; padding: 6px 8px 4px; color: slategrey; display: inline-block; text-decoration:none;}
+	#community_container_menubar > .community_menubar > .community_menubar_item:active{border-bottom: 4px solid #ff7276}
 
 	/*********************************************************************************/
 	/* 글게시판                                                           		      							 */
 	/*********************************************************************************/
 	#community_container_header{width: 1200px; display: flex;  margin:0 auto; height: 100px; padding-top: 30px; padding-bottom: 5px;}
 	#community_container_header > .community_title{text-align: center; margin:0 auto;}
+	.com_img {width: 120px; height: 120px;}
 	
 	#community_container_mt{width: 950px; margin: 0 auto; margin-bottom: 30px; margin-top: 10px; text-align: center;}
-	#community_container_mt > .underline{border-top: 1px solid #555; height: 30px; width: 950px;}
+	#community_container_mt > .underline{border-top: 1px solid #555; height: 20px; width: 950px;}
 	#community_container_mt > .community_mt_title{width: 97%; justify-content: center; text-align: left; margin: 0 auto;}
 	#community_container_mt > .community_mt_title > .community_mt_link{width: 950px; height: 120px; position: absolute;  z-index: 1;}
 	#community_container_mt > .community_mt_title > h2{margin-bottom: 10px; max-height: 30px; white-space: nowrap; display: block; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word; width: 790px;}
@@ -75,11 +78,12 @@
 	#community_container_mi > .community_mi_title >  .community_mi_footer > span{font-size: 12px; margin: 5px auto;}
 
 
+	#community_page{text-align: center; height: 40px; padding-top: 5%; border-top: 1px solid; width: 950px; margin: 0 auto;}
 @media (max-width:480px) {
 	body{font-size: 13px;}
 	hr{ width: 85%; border: #a9a9a9 solid 1px; margin: 10px auto;}
 	
-	#community_container_header{width: 100%; text-align: left; height: 100%;}
+	#community_container_header{width: 100%; text-align: left; height: 100px;}
 	#community_container_header > .community_title{text-align: center; font-size: 14px;}
 	#community_container_filter{width:90%;}
 	

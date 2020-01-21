@@ -17,7 +17,7 @@
 	#community_container_header_d > .community_title_d{width:950px; margin:0 auto;}
 	#community_container_mt_d > .community_mt_title_d{width:950px; height: 50px; margin: 0 auto; padding: 10px 0;}
 	#community_container_mt_d > .community_mt_title_d > h1{margin-bottom: 10px; white-space: nowrap; display: block; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-wrap: break-word;}
-	#community_container_mt_d > .community_mt_mt_d{width: 1200px; display: flex; margin:0 auto; height: auto; padding: 30px 0;}
+	#community_container_mt_d > .community_mt_mt_d{width: 1200px; display: flex; margin:0 auto; height: auto; padding: 30px 0; min-height: 200px;}
 	#community_container_mt_d > .community_mt_mt_d > .community_mt_mt{width:950px; margin: 0 auto; display: flex; line-height: 2; height: auto;}
 	#community_container_mt_d > .community_mt_footer{width:1200px; margin: 0 auto; height: 35px;}
 	#community_container_mt_d > .community_mt_footer > .community_mt_footer_caption{width:950px; margin: 0 auto; padding-top:14px; height: 35px;}
@@ -39,13 +39,13 @@
 	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions{display: flex; flex:0 0 auto; padding: 7px 15px 7px 0; margin: 0 -7.5px;}
 	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_photo{border: none; margin:0 7.5px; padding: 0;}
 	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_photo:focus{outline: none;}
-	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter{border: none; width: 40px; font-size:15px; color: #ff7276; }
+	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter{border: none; width: 40px; font-size:13px; color: #ff7276; }
 	#community_container_comments > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter:focus{outline: none;}
 	#community_container_comments > .community_comments_view{display: flex;}
 	#community_container_comments > .community_comments_view > .community_comments_view_user > img{width: 40px; height: 40px; margin: 5px 5px; border-radius: 50%; border: none;}
 	#community_container_comments > .community_comments_view > .community_comments_view_container >  .community_comments_view_comments{width: 900px; border-radius: 5px;}
 	#community_container_comments > .community_comments_view > .community_comments_view_container >  .community_comments_view_comments > span{font-size: 14px;}
-	#community_container_comments > .community_comments_view > .community_comments_view_container > .community_comments_view_comments > input{width: 900px; border: none; border-radius: 5px; background-color: #a9a9a9; height: auto; line-height: 1.4; font-size: 15px; padding: 9px 15px 9px; overflow: hidden; resize: none; word-wrap: break-word; box-sizing: border-box;}
+	#community_container_comments > .community_comments_view > .community_comments_view_container > .community_comments_view_comments > input{width: 900px; border: none; border-radius: 5px; background-color: #a9a9a9; height: auto; line-height: 1.4; font-size: 15px; padding: 9px 15px 9px; overflow: hidden; resize: none; word-wrap: break-word; box-sizing: border-box; }
 	#community_container_comments > .community_comments_view > .community_comments_view_container > .community_comments_view_comments > input:hover{outline: none;}
 	#community_container_comments > .community_comments_view > .community_comments_view_container > .community_comments_view_actions{display: flex; font-size: 13px; margin: 5px 0;}
 	#community_container_comments > .community_comments_view > .community_comments_view_container > .community_comments_view_actions > button{border: none; font-size: 14px;}

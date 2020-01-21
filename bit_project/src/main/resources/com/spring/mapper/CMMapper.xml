@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 	
+	**게시글**
+	board_num NUMBER PRIMARY KEY,
+	nickname VARCHAR2(20), /* nickname */
+	board_name VARCHAR2(100),
+	content VARCHAR2(500), /* content */
+	regist DATE, /* regist */
+	img VARCHAR2(200), /* img */
+	count NUMBER, /* count */ 조회수
+	category VARCHAR2(20), /* category */
+	scrap_count NUMBER /* scrap_count */ 
+	
+	**댓글**
+	comment_num NUMBER PRIMARY KEY,
+    board_num NUMBER, FOREIGN KEY(board_num) REFERENCES board(board_num),
+	nickname VARCHAR2(20), /* nickname */
+	content VARCHAR2(500), /* content */
+	regist DATE /* regist */
+-->
+
+<mapper namespace="com.spring.mapper.CMMapper">
+
+	<resultMap type="com.spring.community.CommunityVO" id="cmMap">
+		<result property="board_num" column="board_num"/>
+		<result property="nickname" column="nickname"/>
+		<result property="board_name" column="board_name"/>
+		<result property="content" column="content"/>
+		<result property="regist" column="regist"/>
+		<result property="img" column="img"/>
+		<result property="count" column="count"/>
+		<result property="category" column="category"/>
+		<result property="scrap_count" column="scrap_count"/>
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="co_count" column="co_count" />
+	</resultMap>
+	
+	<resultMap type="com.spring.community.CommentVO" id="coMap">
+		<result property="comment_num" column="comment_num"/>
+		<result property="board_num" column="board_num"/>
+		<result property="nickname" column="nickname"/>
+		<result property="content" column="content"/>
+		<result property="regist" column="regist"/>
+		<result property="co_count" column="co_count" />
+	</resultMap>
+	
+	<select id="getCommunity" resultMap="cmMap" parameterType="com.spring.community.CommunityVO">
+<!-- 		select * from (
+			select * from board where board_num in (
+				select board_num from board_comment)) 
+		where ROWNUM &gt;=#{start} AND ROWNUM &lt;=#{end} order by board_num desc	 -->
+		
+		select board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
+		from board where ROWNUM &gt;=#{start} AND ROWNUM &lt;=#{end} order by board_num desc
+	</select>
+	
+	<select id="getCommunityCount" resultType="int">
+		SELECT COUNT(*) FROM BOARD where category = #{category}
+	</select>
+	
+ 	<select id="getCM" resultMap="cmMap">
+		select board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
+		from board where board.category = #{category}
+	</select>
+	
+	<select id="detailCommunity" resultMap="cmMap" parameterType="int">
+		SELECT * FROM board WHERE board_num = #{board_num}
+	</select>
+	
+	<update id="updateCount" parameterType="com.spring.community.CommunityVO">
+		UPDATE board SET count=#{count}+1 WHERE board_num=#{board_num}
+	</update>
+	
+	
+	
+	<!-- 댓글 -->
+	 <select id="getCO" resultMap="coMap" parameterType="int">
+<!-- 		SELECT board_comment.nickname, board_comment.content, board_comment.regist, (
+			SELECT * FROM board_comment where board_comment.board_num=#{board_num}) as co_count 
+			from board_comment -->
+		select * from board_comment where board_num = #{board_num}
+	</select>
+	
+	<select id="getCommentCount" resultType="int" parameterType="int">
+		select count(*) from board_comment where board_num =#{board_num}
+	</select>
+</mapper>
