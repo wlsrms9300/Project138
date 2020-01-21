@@ -32,6 +32,7 @@
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 수민 -->
 		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
 		<url-pattern>*.me</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 진근 -->

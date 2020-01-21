@@ -190,7 +190,7 @@
         text-align: left;
       }
       /*이용약관 동의, 개인정보 수집 및 이용에 대한 동의 font-style*/
-      input[id="signup-agree"] + label, input[id="marketing-agree"] + label{
+      input[id="signup-agree"] + label, input[id="marketing-agree1"] + label, input[id="marketing-agree2"] + label{
         width: 20px;
         height: 20px;
         font-size: 14px;
@@ -226,7 +226,8 @@ ul {
 	align-items: center;
 	flex-wrap: nowrap;
 	height: 500px;
-	padding-top: 5%;
+	padding-top: 9%;
+	padding-bottom: 13%;
 }
 
 .content-box {
@@ -441,7 +442,7 @@ ul.tabs li.current {
            .container {position: relative; max-width:1280px; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
            
            @media (max-width:600px){
-               .container {width: 100%; height:322px;}
+               .container {width: 100%;}
                .footer_sns { position: static; text-align: center; background: #352c2c; padding-bottom: 15px;}
                .footer_sns .tel {display: none;}
                .footer_sns ul {padding-left:0;}

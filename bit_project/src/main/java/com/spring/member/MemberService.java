@@ -1,0 +1,10 @@
+package com.spring.member;
+
+
+public interface MemberService {
+	public int nicknameCheck(MemberVO membervo); //닉네임 중복체크
+	public int emailCheck(MemberVO membervo); //이메일 중복체크
+	public int verifyEmail(MemberVO membervo); //이메일 인증
+	public int memberInsert(MemberVO membervo); // 회원 등록
+
+}
