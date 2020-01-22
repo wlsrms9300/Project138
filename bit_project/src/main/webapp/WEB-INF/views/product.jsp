@@ -414,10 +414,10 @@
 	</footer>
 	<!-- //footer -->
 <!-- 자바스크립트 라이브러리 -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/jquery.min_1.12.4.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/munfilter.js"></script>
 
 
 
