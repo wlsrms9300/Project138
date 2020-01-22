@@ -252,4 +252,46 @@ public class ProductAjaxController {
 		return res;
 	}
 	
+	@PostMapping(value = "/qnadelete.pr", produces = "application/json;charset=UTF-8")
+	public int qnadelete(int question_num, int product_num) {
+		int res = 0;
+		try {
+			service.qnaDelete(question_num, product_num);
+			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return res;
+	}
+	
+
+	
+	@PostMapping(value = "/reviewcount.pr", produces = "application/json;charset=UTF-8")
+	public int reviewtotalcount(int product_num) {	
+		int res=0;
+		try {
+			res = service.reviewCount(product_num);
+			return res;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return res;
+	}
+	
+	@PostMapping(value = "/review.pr", produces = "application/json;charset=UTF-8")
+	public List<ReviewVO> reviewSearch(int page, int product_num) {
+		List<ReviewVO> list = null;
+		int listcount = 0;
+		int limit = 5;
+		int startrow = (page - 1) * 5 + 1;
+		int endrow = startrow + limit - 1;
+		try {
+			list = service.reviewSearch(startrow, endrow, product_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }

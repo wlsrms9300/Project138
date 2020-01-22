@@ -161,6 +161,7 @@ select * from product order by product_num
 	update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
 	
+	<!-- 문의 -->
 	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
 		select * FROM (
 		SELECT rownum rnum, question_num, product_num,nickname,content,regist,secret,answer 
@@ -169,12 +170,33 @@ select * from product order by product_num
 		ORDER BY regist asc
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
-	 
 	</select>
+	
 	<select id="qnaCount" parameterType="map" resultType="int">
 		select count(*) FROM question where product_num=#{product_num}
 	</select>
 	
+	<insert id="qnaWrite" parameterType="com.spring.product.QnaVO">
+ 	<selectKey keyProperty="question_num" resultType="int" order="BEFORE">
+    SELECT question_sequence.NEXTVAL FROM DUAL
+	</selectKey>
+  	insert into question(question_num, product_num, nickname, content, regist, secret)
+  	values(
+  	#{question_num}, #{product_num}, #{nickname}, #{content}, sysdate, #{secret}
+  	)
+	</insert>
+	<delete id="qnaDelete" parameterType="map">
+	delete from question where product_num=#{product_num} AND question_num=#{question_num}
+	</delete>
+	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
+	update question set nickname=#{nickname}, content=#{content}, secret=#{secret}, regist=sysdate where question_num=#{question_num}
+	</update>
+	<!-- 문의 -->
+	
+	<!-- 리뷰 -->
+	<select id="reviewCount" parameterType="map" resultType="int">
+		select count(*) FROM review where product_num=#{product_num}
+	</select>
 	
 	<insert id="reviewWrite" parameterType="com.spring.product.ReviewVO">
  	<selectKey keyProperty="review_num" resultType="int" order="BEFORE">
@@ -185,6 +207,17 @@ select * from product order by product_num
     sysdate, #{gpa})
 	</insert>
 	
-	
+	<select id="reviewSearch" parameterType="map" resultType="com.spring.product.ReviewVO">
+		select * FROM (
+		SELECT rownum rnum, review_num, product_num,nickname,content, img, regist, gpa 
+		FROM review
+		where product_num=#{product_num}
+		ORDER BY regist asc
+		)
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
+	</select>
+	<!-- 리뷰 -->
+
+
 
 </mapper>

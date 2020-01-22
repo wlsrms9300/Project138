@@ -254,7 +254,7 @@
     <div class="container">
         <div class="pr_title" id="cursor_move_review">
             <h3>상품 리뷰
-                <em class="cssf">(4)</em>
+                <em class="reviewcssf"></em>
                 <a href="javascript:review_write()"
                     style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>
             </h3>
@@ -281,23 +281,9 @@
 
 
         <div class="review">
-            <article>
-                <ul style="display: flex;">
-                    <li style="flex: 8.5;">
-                        <div>asdasd흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
-                            흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰
-                            내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
-                            흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰
-                            내용)흠..낫배드..(리뷰 내용)흠..낫배드..(리뷰 내용)
-                        </div>
-                        <span>서어른이 답글1 조회3 #비트캠프 #내일 폭발(기타정보) </span>
-                    </li>
-                    <li style="flex: 1.5;"><img src="${pageContext.request.contextPath}/resources/img/card02@2.jpg">
-                    </li>
-                </ul>
-                <hr style="border: 0.5px solid grey;">
-            </article>
+           
         </div>
+        <div class="review_paginate" style="text-align:center;">
     </div>
 
     <div class="reviewForm" style="display:none;">
@@ -308,7 +294,6 @@
         </h3>
         <br>
         <form id="ReviewForm" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="writetype" value=2 />
             <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
             <input type="hidden" name="nickname" value="비트캠프폭발" />
             <div>
@@ -333,6 +318,7 @@
             </div>
         </form>
     </div>
+    </div>
     <!-- 상품 리뷰 -->
 
 
@@ -340,7 +326,7 @@
     <div class="container">
         <div id="goodsQna" class="qna">
             <h3>상품Q&A&nbsp;
-                <em class="cssf">(4)</em>
+                <em class="qnacssf"></em>
                 <a href="javascript:qna_write()"
                     style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>
             </h3>
@@ -350,7 +336,7 @@
                 </ul>
             </div>
         </div>
-        <div class="paginate" style="text-align:center;">
+        <div class="qna_paginate" style="text-align:center;">
 
         </div>
         <div class="qnaForm" style="display:none;">
@@ -359,16 +345,16 @@
                 <br>
                 상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
             </h3>
-            <form id="ProductForm" method="post">
-                <input type="hidden" name="writetype" value=1 />
+            <form id="QnaForm" method="post">
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
+                <input type="hidden" name="nickname" value="비트캠프폭발" />
                 <div>
                     <br>
                     <label>제목</label>
-                    <span><input type="text" value="" placeholder="제목을 작성해주세요." /></span>
+                    <span><input type="text" name="title" placeholder="제목을 작성해주세요." /></span>
                 </div>
                 <div>
-                    <textarea rows="20" cols="20" placeholder="내용을 작성해주세요."></textarea>
+                    <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
                 </div>
 
                 <div>
@@ -451,6 +437,7 @@
                 </div>
             </div>
         </div>
+        
         <div id="footer_infor">
             <div class="container">
                 <div class="row">
@@ -484,6 +471,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/product/jquery.min_1.12.4.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/munreview.js"></script>
 
     <script>
         //배너 이미지 슬라이드
@@ -545,26 +533,19 @@
             }
         })
 
-        $('.starRev span').click(function () {
+      /*   $('.starRev span').click(function () {
             $(this).parent().children('span').removeClass('on');
             $(this).addClass('on').prevAll('span').addClass('on');
             return false;
-        });
+        }); */
     </script>
-    <script>
-        $('.review article ul li').click(function () {
-            alert('클릭확인');
-            if ($(this).children().first().css("-webkit-line-clamp") == 2) {
-                $(this).children().first().css("-webkit-line-clamp", "6");
-            } else {
-                $(this).children().first().css("-webkit-line-clamp", "2");
-            }
-        });
-    </script>
+
     <script src="${pageContext.request.contextPath}/resources/js/product/munqna.js"></script>
     <script>
         var scrollHeight = 0;
+        var checkcheck = 0;
         function qna_write() {
+        	
             $('body').css("background", "grey");
             $(".qnaForm").show();
             scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
@@ -572,9 +553,12 @@
             $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
             $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-
+            alert($('#QnaForm input[name=nickname]').val());
+           if($('#QnaForm input[name=nickname]').val==""){
+        	   checkcheck = 1;
+           }
         };
-        $('.qna_writebtn a').click(function () {
+        $('.qna_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
             $('.qnaForm').css('position', 'relative');//top값 해제
             $('.qnaForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
@@ -582,8 +566,34 @@
             $(".qnaForm").hide();
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
-            //[popupOpen()일때의 의도적 전역변수 scrollHeight값]현재 스크롤된값=보이는화면
+            //수정
+            if(checkcheck==1){
+            	 var frm = document.getElementById("QnaForm");
+                 frm.action = "qnaModify.pr";
+                 frm.submit();
+                 frm.reset();
+            }else {
+            	 var frm = document.getElementById("QnaForm");
+                 frm.action = "qnaWrite.pr";
+                 frm.submit();
+                 frm.reset();
+            }
+           
         });
+        $('.qna_writebtn a').last().click(function () {
+            $("body").removeClass('not_scroll');
+            $('.qnaForm').css('position', 'relative');//top값 해제
+            $('.qnaForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+            $('.qnaForm').css('top', 0);//최상위 div 고정해제
+            $(".qnaForm").hide();
+            $('body').css("background", "none");
+            $('body').scrollTop(scrollHeight);
+            var frm = document.getElementById("QnaForm");
+            frm.reset();
+        });
+        
+        
+        
 
         function review_write() {
             $('body').css("background", "grey");
@@ -595,7 +605,7 @@
             $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
 
         };
-        $('.review_writebtn a').click(function () {
+        $('.review_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
             $('.reviewForm').css('position', 'relative');//top값 해제
             $('.reviewForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
@@ -604,10 +614,20 @@
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
             var frm = document.getElementById("ReviewForm");
-            frm.action = "reviewAndQnaWrite.pr";
+            frm.action = "reviewWrite.pr";
             frm.submit();
             frm.reset();
-            //[popupOpen()일때의 의도적 전역변수 scrollHeight값]현재 스크롤된값=보이는화면
+        });
+        $('.review_writebtn a').last().click(function () {
+            $("body").removeClass('not_scroll');
+            $('.reviewForm').css('position', 'relative');//top값 해제
+            $('.reviewForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+            $('.reviewForm').css('top', 0);//최상위 div 고정해제
+            $(".reviewForm").hide();
+            $('body').css("background", "none");
+            $('body').scrollTop(scrollHeight);
+            var frm = document.getElementById("ReviewForm");
+            frm.reset();
         });
     </script>
 </body>
