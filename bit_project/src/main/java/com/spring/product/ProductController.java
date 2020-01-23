@@ -127,27 +127,33 @@ public class ProductController {
 
 	// 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/reviewWrite.pr")
-	public String reviewWrite(Model model, MultipartHttpServletRequest request) {
+	public String reviewWrite(MultipartHttpServletRequest request) {
 		System.out.println("췍");
 		int product_num = Integer.parseInt(request.getParameter("product_num"));
 		ReviewVO reviewVO = new ReviewVO();
 		String nickname = request.getParameter("nickname");
 		String content = request.getParameter("content");
-		MultipartFile mf = request.getFile("img"); // 파일
-		String uploadPath = "C:\\Project138\\upload\\";
-		String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
-		String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 		reviewVO.setProduct_num(product_num);
 		reviewVO.setNickname(nickname);
 		reviewVO.setContent(content);
-		reviewVO.setImg(storedFileName);
 		reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
+		
 		try {
-			service.reviewWrite(reviewVO);
-			if (mf.getSize() != 0) {
-				mf.transferTo(new File(uploadPath + storedFileName));
+			if(request.getFile("img").getSize()==0) {
+				reviewVO.setImg("mun.jpg");
+				
+			}else {
+				MultipartFile mf = request.getFile("img"); // 파일
+				String uploadPath = "C:\\Project138\\upload\\";
+				String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
+				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				reviewVO.setImg(storedFileName);
+				if (mf.getSize() != 0) {
+					mf.transferTo(new File(uploadPath + storedFileName));
+				}
 			}
-			return "redirect:productDetail.pr?num=" + product_num;
+			service.reviewWrite(reviewVO);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -155,6 +161,41 @@ public class ProductController {
 		return "redirect:productDetail.pr?num=" + product_num;
 	}
 
+	@RequestMapping("/reviewModify.pr")
+	public String reviewModify(MultipartHttpServletRequest request) {
+		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		int review_num = Integer.parseInt(request.getParameter("review_num"));
+		ReviewVO reviewVO = new ReviewVO();
+		String nickname = request.getParameter("nickname");
+		String content = request.getParameter("content");
+	
+		reviewVO.setProduct_num(product_num);
+		reviewVO.setNickname(nickname);
+		reviewVO.setContent(content);
+		reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
+		reviewVO.setReview_num(review_num);
+		try {
+			if(request.getFile("img").getSize()==0) {
+				service.reviewModifyNoImg(reviewVO);
+			}else {
+				MultipartFile mf = request.getFile("img"); // 파일
+				String uploadPath = "C:\\Project138\\upload\\";
+				String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
+				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				reviewVO.setImg(storedFileName);
+				if (mf.getSize() != 0) {
+					mf.transferTo(new File(uploadPath + storedFileName));
+				}
+				service.reviewModify(reviewVO);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return "redirect:productDetail.pr?num=" + product_num;
+	}
 	// 상품 문의 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/qnaWrite.pr")
 	public String qnaWrite(Model model, HttpServletRequest request) {
@@ -180,6 +221,7 @@ public class ProductController {
 	public String qnaModify(Model model, HttpServletRequest request) {
 		System.out.println("췍");
 		int product_num = Integer.parseInt(request.getParameter("product_num"));
+		int question_num = Integer.parseInt(request.getParameter("question_num"));
 		QnaVO qnaVO = new QnaVO();
 		String qna_sec = request.getParameter("privatecheck");
 		String nickname = request.getParameter("nickname");
@@ -188,6 +230,7 @@ public class ProductController {
 		qnaVO.setSecret(qna_sec);
 		qnaVO.setNickname(nickname);
 		qnaVO.setContent(content);
+		qnaVO.setQuestion_num(question_num);
 		try {
 			service.qnaModify(qnaVO);
 			

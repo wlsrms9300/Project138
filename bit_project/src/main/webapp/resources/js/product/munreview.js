@@ -10,7 +10,7 @@ $("document").ready(function () {
         dataType: 'json',
         data:{"product_num" : p},
         async:false,
-        success: function (data) {             
+        success: function (data) {    
             totalData = data;
             $('.reviewcssf').html("("+totalData+")");
         
@@ -22,17 +22,17 @@ $("document").ready(function () {
     
     review_snsData(totalData, dataPerPage, pageCount, currentPage);
     $('.review article ul li').click(function () {
-        alert('클릭확인');
         if ($(this).children().first().css("-webkit-line-clamp") == 2) {
             $(this).children().first().css("-webkit-line-clamp", "6");
+            $(this).children().first().css("margin-bottom", 40);
         } else {
             $(this).children().first().css("-webkit-line-clamp", "2");
+            $(this).children().first().css("margin-bottom", 80);
         }
     });
 });
 
 function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
-	alert(p);
     var allData = { "page": currentPage, "product_num" : p};
     
     $.ajax({
@@ -52,6 +52,17 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
                 exText += "<li style='flex: 8.5;'>";
                 exText += "<div>"+item.content+"</div>";
                 exText += "<span>"+"멤버테이블DB읽어서출력할곳"+"</span>";
+                exText += "<div>";
+                
+				var sib1 = "'"+item.review_num+"'";
+				var sib2 = "'"+item.nickname+"'";
+				var sib3 = "'"+item.content+"'";
+				var sib4 = "'"+item.img+"'";
+				var sib5 = "'"+item.gpa+"'";
+				exText += '<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
+				exText += "<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+                
+                exText += "</div>";
                 exText += "</li>";
                 exText += "<li style='flex: 1.5;'>";
                 exText += '<img src="/bit_project/image/'+item.img+'">';
@@ -64,8 +75,8 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
             review_paging(totalData, dataPerPage, pageCount, currentPage);
             
             }
+            
             else {
-            	alert("zz");
             	 var exTextnull = "<li style='text-align:cetner;'>";
             	 exTextnull += "<div>등록된 상품리뷰가 없습니다.</div>";
             	 exTextnull += "</li>";
@@ -77,10 +88,18 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
 			alert("ajax오류");
 		}
     });
+    $('.review article ul li').click(function () {
+        if ($(this).children().first().css("-webkit-line-clamp") == 2) {
+            $(this).children().first().css("-webkit-line-clamp", "6");
+            $(this).children().first().css("margin-bottom", 40);
+        } else {
+            $(this).children().first().css("-webkit-line-clamp", "2");
+            $(this).children().first().css("margin-bottom", 80);
+        }
+    });
 }
 
 function review_paging(totalData, dataPerPage, pageCount, currentPage) {
-	alert('페이징의 totaldata'+totalData);
     var totalPageDevide = totalData / dataPerPage;
     var pageGroupDevide = currentPage / pageCount;
 
@@ -110,7 +129,8 @@ function review_paging(totalData, dataPerPage, pageCount, currentPage) {
     }
     for (var i = first; i <= last; i++) {
         //html += "<a href='#' id=" + i + ">" + i + "</a> ";
-        html += "<a href='javascript:review_snsData(totalData, dataPerPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
+        //html += "<a href='javascript:review_snsData(totalData, dataPerPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
+    	html += "<a href='javascript:review_snsData("+totalData+","+dataPerPage+","+ pageCount+", " + i + ");' id=" + i + ">" + i + "</a> ";
         //html += "<a href='javascript:review_snsData(0, 6, 10, " + i + ")' id=" + i + ">" + i + "</a> ";
         
         
@@ -139,16 +159,56 @@ function review_paging(totalData, dataPerPage, pageCount, currentPage) {
         var $id = $item.attr("id");
         var selectedPage = $item.text(); // 번호 클릭.
 
-
-
         if ($id == "one") selectedPage = one;
         if ($id == "prev") selectedPage = prev;
         if ($id == "next") selectedPage = next;
         if ($id == "lastNo") selectedPage = lastNo;
-        alert(selectedPage);
         review_snsData(totalData, dataPerPage, pageCount, selectedPage);
         review_paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
        
     })
 }
 
+
+function reviewmodify(_rnum, _nickname, _content, _img, _gpa) {
+	 $("#ReviewForm textarea").html(_content);
+	 $("#ReviewForm input[name=nickname]").val("테스트닉네임");
+	 alert(_gpa);
+	 switch (_gpa) {
+		case "5":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='5']").prop('checked', true);
+			break;
+		case "4":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='4']").prop('checked', true);
+			break;
+		case "3":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='3']").prop('checked', true);
+			break;
+		case "2":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='2']").prop('checked', true);
+			break;
+		case "1":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='1']").prop('checked', true);
+			break;
+		default:
+			break;
+	}
+	 $("#ReviewForm input[name=review_num]").val(_rnum);
+	review_write();
+}
+function reviewdelete(_rnum){
+	 if (confirm("정말 삭제하시겠습니까??") == true){
+		 //ajax로 데이터 삭제
+		 $.ajax({
+			 url:'/bit_project/reviewdelete.pr',
+			 type:'POST',
+			 data:{"review_num" : _rnum, "product_num" : p},
+			 dataType:'JSON',
+			 success:function (data) {
+				 alert('삭제 성공');
+				 history.go(0);
+			 },
+			 error:function() {
+				alert('삭제 실패');
+			 }
+		 });
+	 }else{ 
+	     return false;
+	 }
+	
+}

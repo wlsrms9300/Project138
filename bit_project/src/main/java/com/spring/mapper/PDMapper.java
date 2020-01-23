@@ -42,4 +42,8 @@ public interface PDMapper {
 	void reviewWrite(ReviewVO reviewVO) throws Exception;
 	List<ReviewVO> reviewSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
 	int reviewCount(@Param("product_num") int product_num);
+	void reviewDelete(@Param("review_num") int review_num, @Param("product_num") int product_num);
+	void reviewModify(ReviewVO reviewVO);
+	void reviewModifyNoImg(ReviewVO reviewVO);
+	
 }

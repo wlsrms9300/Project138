@@ -216,6 +216,17 @@ select * from product order by product_num
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
 	</select>
+	
+	<delete id="reviewDelete" parameterType="map">
+	delete from review where product_num=#{product_num} AND review_num=#{review_num}
+	</delete>
+	<update id="reviewModify" parameterType="com.spring.product.QnaVO">
+	update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa}, regist=sysdate, img=#{img} where review_num=#{review_num}
+	</update>
+	
+	<update id="reviewModifyNoImg" parameterType="com.spring.product.QnaVO">
+	update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa}, regist=sysdate where review_num=#{review_num}
+	</update>
 	<!-- 리뷰 -->
 
 

@@ -44,5 +44,10 @@ public interface PDService {
 		public int reviewCount(@Param("product_num") int product_num) throws Exception;
 		// 리뷰 등록
 		public void reviewWrite(ReviewVO reviewVO) throws Exception;
-	
+		// 리뷰 삭제
+		public void reviewDelete(@Param("review_num") int review_num, @Param("product_num") int product_num) throws Exception;
+		// 리뷰 수정(이미지 수정까지)
+		public void reviewModify(ReviewVO reviewVO) throws Exception;
+		// 리뷰 수정(이미지는 안건드린 상태면, 기존 이미지 그대로
+		public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception;
 }

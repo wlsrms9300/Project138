@@ -155,6 +155,38 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
+	public void reviewDelete(int review_num, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewDelete(review_num, product_num);
+		} catch (Exception e) {
+			throw new Exception("review 삭제 실패.", e);
+		}
+	}
+	
+
+	@Override
+	public void reviewModify(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewModify(reviewVO);
+		} catch (Exception e) {
+			throw new Exception("리뷰 수정 실패.", e);
+		}
+	}
+
+	
+	@Override
+	public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewModifyNoImg(reviewVO);
+		} catch (Exception e) {
+			throw new Exception("리뷰 수정 실패.", e);
+		}
+	}
+
+	@Override
 	public void qnaWrite(QnaVO qnaVO) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);

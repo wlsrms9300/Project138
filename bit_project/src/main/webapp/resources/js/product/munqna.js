@@ -32,7 +32,6 @@
     });
 
     function snsData(totalData, dataPerPage, pageCount, currentPage) {
-    	alert(p);
         var allData = { "page": currentPage, "product_num" : p};
         
         $.ajax({
@@ -90,7 +89,6 @@
                 
                 }
                 else {
-                	alert("zz");
                 	 var exTextnull = "<li style='text-align:cetner;'>";
                 	 exTextnull += "<div>등록된 상품문의가 없습니다.</div>";
                 	 exTextnull += "</li>";
@@ -124,7 +122,6 @@
 
 
     function paging(totalData, dataPerPage, pageCount, currentPage) {
-    	alert('페이징의 totaldata'+totalData);
         var totalPageDevide = totalData / dataPerPage;
         var pageGroupDevide = currentPage / pageCount;
 
@@ -189,7 +186,6 @@
             if ($id == "prev") selectedPage = prev;
             if ($id == "next") selectedPage = next;
             if ($id == "lastNo") selectedPage = lastNo;
-            alert(selectedPage);
             snsData(totalData, dataPerPage, pageCount, selectedPage);
             paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
             $('.accordion ul li').click(function () {
@@ -211,6 +207,7 @@ function qnamodify(_qnum, _content, _nickname, _secret) {
 	 }else {
 		 $("#QnaForm input:radio[name='privatecheck']:radio[value='공개']").prop('checked', true);
 	 }
+	 $("#QnaForm input[name=question_num]").val(_qnum);
 	qna_write();
 }
 function qnadelete(qnum){

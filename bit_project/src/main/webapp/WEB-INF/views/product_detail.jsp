@@ -296,6 +296,7 @@
         <form id="ReviewForm" method="post" enctype="multipart/form-data">
             <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
             <input type="hidden" name="nickname" value="비트캠프폭발" />
+            <input type="hidden" name="review_num" value="" />
             <div>
                 <label for="reviewcheck">평점</label>
                 <div><input type="radio" name="reviewcheck" value="5" />★★★★★</div>
@@ -348,6 +349,7 @@
             <form id="QnaForm" method="post">
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
                 <input type="hidden" name="nickname" value="비트캠프폭발" />
+                <input type="hidden" name="question_num" value="" />
                 <div>
                     <br>
                     <label>제목</label>
@@ -497,8 +499,7 @@
             if (reviewScore == 50) {
                 $('.starRev span').parent().children('span').removeClass('on');
                 $('.starRev span').addClass('on').prevAll('span').addClass('on');
-            }
-            else if (reviewScore >= 45 && reviewScore < 50) {
+            }else if (reviewScore >= 45 && reviewScore < 50) {
                 $('.starRev span').parent().children('span').removeClass('on');
                 $('.starRev span').slice(0, 9).addClass('on');
             } else if (reviewScore >= 40 && reviewScore < 45) {
@@ -543,7 +544,8 @@
     <script src="${pageContext.request.contextPath}/resources/js/product/munqna.js"></script>
     <script>
         var scrollHeight = 0;
-        var checkcheck = 0;
+        var qnacheck = 0;
+        var revcheck = 0;
         function qna_write() {
         	
             $('body').css("background", "grey");
@@ -553,9 +555,9 @@
             $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
             $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            alert($('#QnaForm input[name=nickname]').val());
-           if($('#QnaForm input[name=nickname]').val==""){
-        	   checkcheck = 1;
+           //등록
+           if($('#QnaForm textarea').val().length==0){
+        	   qnacheck=1;
            }
         };
         $('.qna_writebtn a').first().click(function () {
@@ -566,15 +568,15 @@
             $(".qnaForm").hide();
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
-            //수정
-            if(checkcheck==1){
+            //등록
+            if(qnacheck==1){
             	 var frm = document.getElementById("QnaForm");
-                 frm.action = "qnaModify.pr";
+            	 frm.action = "qnaWrite.pr";
                  frm.submit();
                  frm.reset();
             }else {
             	 var frm = document.getElementById("QnaForm");
-                 frm.action = "qnaWrite.pr";
+            	 frm.action = "qnaModify.pr";
                  frm.submit();
                  frm.reset();
             }
@@ -592,9 +594,6 @@
             frm.reset();
         });
         
-        
-        
-
         function review_write() {
             $('body').css("background", "grey");
             $(".reviewForm").show();
@@ -603,7 +602,11 @@
             $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
             $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-
+            //텍스트에어리어가 빈값이다 -> 리뷰등록
+			if($('#ReviewForm textarea').val().length==0){
+	        	   revcheck = 1;
+	        	   alert("리뷰등록이네 : "+revcheck);
+	        }
         };
         $('.review_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -613,10 +616,18 @@
             $(".reviewForm").hide();
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
-            var frm = document.getElementById("ReviewForm");
-            frm.action = "reviewWrite.pr";
-            frm.submit();
-            frm.reset();
+            if(revcheck==1){
+            	var frm = document.getElementById("ReviewForm");
+                frm.action = "reviewWrite.pr";
+                frm.submit();
+                frm.reset();
+            } else {
+            	var frm = document.getElementById("ReviewForm");
+                frm.action = "reviewModify.pr";
+                frm.submit();
+                frm.reset();
+            }
+            
         });
         $('.review_writebtn a').last().click(function () {
             $("body").removeClass('not_scroll');
