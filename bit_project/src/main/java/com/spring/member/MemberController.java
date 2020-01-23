@@ -79,20 +79,23 @@ public class MemberController {
 		
 		
 		MultipartFile mf = request.getFile("img2"); // 파일
-	       if(mf.isEmpty()) {
-	    	   membervo.setImg("0c57c52f289644ceb799d673566eed91.png"); //upload 폴더에 있는 default_profile 이미지명. 확장자명까지 넣을 것.   
-	       } else {
-      
-	        String uploadPath = "C:\\Project138\\upload\\";
-	        String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
-	        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-	    
-	              if (mf.getSize() != 0) {
-	                 // mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-	                membervo.setImg(uploadPath + storedFileName);
-	              }  
-	       }
+	  
 		try {
+		     if(mf.isEmpty()) {
+		    	   membervo.setImg("C:\\Project138\\upload\\0c57c52f289644ceb799d673566eed91.png"); //upload 폴더에 있는 default_profile 이미지명. 확장자명까지 넣을 것.   
+		       } else {
+	      
+		        String uploadPath = "C:\\Project138\\upload\\";
+		        String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
+		        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+		    
+		              if (mf.getSize() != 0) {
+		                 // mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+		                mf.transferTo(new File(uploadPath + storedFileName));
+		                membervo.setImg(uploadPath + storedFileName);
+		              }  
+		       }
+			
 			int res = memberService.memberInsert(membervo);
 			writer = response.getWriter();
 			if(res == 1) {

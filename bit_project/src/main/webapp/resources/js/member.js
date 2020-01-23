@@ -80,25 +80,28 @@
 					$("#alert-true").show();
 					$("#alert-false").hide();
 					$("#submit").removeAttr("disabled");
-					return true;
 			} else if(pwd1 != pwd2 ){
 					$("#alert-true").hide();
 					$("#alert-false").show();
 					$("#submit").attr("disabled", "disabled");
-					return false;
 			}
 		}
 		});
 		
 			/*중복확인 버튼, 약관동의*/
 	        $('.signup-btn').click(function(){
-	        	str = document.signupForm.password.value;
-	    		if (str.length < 8 )
+	        	pwd1 = document.signupForm.password.value;
+	        	pwd2 = document.signupForm.pwcheck.value;
+	        
+	    		if (pwd1.length < 8 )
 	    		{
-//	    			alert("패스워드 길이 확인(6~10자리)!!!");
 	    			document.signupForm.password.focus();
 	    			return false;
+	    		}else if(pwd1 != pwd2){
+	    			document.signupForm.pwcheck.focus();
+	    			return false;
 	    		}
+	    		
 				var nicknamecheckBtn = $(".nicknamecheck-btn").val();
 				var emailcheckBtn = $(".emailcheck-btn").val();
 				if(nicknamecheckBtn == "N") {
