@@ -16,8 +16,7 @@
  <meta name="twitter:description" content="">
 
  <!-- 웹 폰트 -->
- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
-     rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean" rel="stylesheet">
 
 <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
 
@@ -163,7 +162,7 @@ function togglePModal() {
 
 ptrigger.addEventListener("click", togglePModal);
 pcloseButton.addEventListener("click", togglePModal);
-pcance.addEventListener("click", togglePModal);
+pcancel.addEventListener("click", togglePModal);
 
 /*어린이집*/
 var modal2 = document.querySelector("#nursery-modal");

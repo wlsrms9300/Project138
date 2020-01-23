@@ -38,6 +38,7 @@
 	<servlet-mapping>	<!-- 진근 -->
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.my</url-pattern>
+		<url-pattern>*.ct</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 용민 -->
 		<servlet-name>appServlet</servlet-name>
@@ -45,7 +46,7 @@
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 성현 -->
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.ms</url-pattern>
+		<url-pattern>*.ms</url-pattern> 
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 나겸 -->
 		<servlet-name>appServlet</servlet-name>

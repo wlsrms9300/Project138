@@ -8,23 +8,38 @@
 <title>main</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <meta name="viewport"  content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 <link href="${pageContext.request.contextPath}/resources/css/main_default.css" rel="stylesheet" type="text/css" />
 <script src="https://kit.fontawesome.com/fa509a9993.js" crossorigin="anonymous"></script> <!--icon--> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/aos.css"> <!-- aos -->
-
 </head>
-<body>
 
+<body>
+<script>
+$(document).ready(function(){
+	var chat = $('#chatframe');
+	$('#chat img').click(function(){
+		if(chat.is(':visible')) {
+			chat.fadeOut();
+		} else {
+			chat.fadeIn();
+		}
+			
+	});
+});
+</script>
 <div style="height: 50px;">
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>
 </div>
-
+<!-- 채팅 -->
 <div id="chat">
-	<a href="productadd.ma"><img src="${pageContext.request.contextPath}/resources/img/chat.png"/></a>  <!-- 임시 -->
+	<img src="${pageContext.request.contextPath}/resources/icons/chats.png"/>
 </div>
+<iframe id="chatframe" src="./index.ct"></iframe>
+	
 
 <!-- 지은 -->
 <div class="video-container">
