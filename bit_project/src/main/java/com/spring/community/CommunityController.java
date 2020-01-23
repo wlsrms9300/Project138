@@ -30,13 +30,6 @@ public class CommunityController {
 
 		return "community";
 	}
-
-	
-	@RequestMapping(value = "/community_img.co", method = RequestMethod.GET)
-	public String community_img(Model model) {
-
-		return "community_img";
-	}
 	
 	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
 	public String community_detail(HttpServletRequest request, Model model) throws Exception {
@@ -44,6 +37,8 @@ public class CommunityController {
 		
 		int num = Integer.parseInt(request.getParameter("board_num"));
 		int currentPage = Integer.parseInt(request.getParameter("pageNum"));
+		
+		System.out.println("num : "  + num + "currentpage : " + currentPage);
 		
 		cmvo = communityService.detailCommunity(num);
 		communityService.updateCount(cmvo);
@@ -54,7 +49,7 @@ public class CommunityController {
 		model.addAttribute("pageNum", currentPage);
 		model.addAttribute("cmvo", cmvo);
 
-		System.out.println(cmvo.getBoard_num() + "boarD_num");
+		System.out.println("board_num" + cmvo.getBoard_num());
 		return "community_detail";
 	}
 	

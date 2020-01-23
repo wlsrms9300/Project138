@@ -16,6 +16,7 @@ public class CommunityVO {
 	private int start;
 	private int end;
 	private int co_count;
+	private int cm_count;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -88,5 +89,11 @@ public class CommunityVO {
 	}
 	public void setCo_count(int co_count) {
 		this.co_count = co_count;
+	}
+	public int getCm_count() {
+		return cm_count;
+	}
+	public void setCm_count(int cm_count) {
+		this.cm_count = cm_count;
 	}
 }

@@ -36,6 +36,7 @@
 		<result property="start" column="start" />
 		<result property="end" column="end" />
 		<result property="co_count" column="co_count" />
+		<result property="cm_count" column="cm_count" />
 	</resultMap>
 	
 	<resultMap type="com.spring.community.CommentVO" id="coMap">
@@ -47,27 +48,67 @@
 		<result property="co_count" column="co_count" />
 	</resultMap>
 	
-	<select id="getCommunity" resultMap="cmMap" parameterType="com.spring.community.CommunityVO">
-<!-- 		select * from (
+<!-- 	<select id="getCommunity" resultMap="cmMap" parameterType="com.spring.community.CommunityVO">
+		select * from (
 			select * from board where board_num in (
 				select board_num from board_comment)) 
-		where ROWNUM &gt;=#{start} AND ROWNUM &lt;=#{end} order by board_num desc	 -->
+		where ROWNUM &gt;=#{start} AND ROWNUM &lt;=#{end} order by board_num desc	
 		
 		select board.board_num, board.nickname, board.board_name, board.content, board.regist,
 		board.img, board.count, board.category, board.scrap_count,
 		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
 		from board where ROWNUM &gt;=#{start} AND ROWNUM &lt;=#{end} order by board_num desc
-	</select>
-	
-	<select id="getCommunityCount" resultType="int">
-		SELECT COUNT(*) FROM BOARD where category = #{category}
-	</select>
-	
- 	<select id="getCM" resultMap="cmMap">
-		select board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		
+				select board.board_num, board.nickname, board.board_name, board.content, board.regist,
 		board.img, board.count, board.category, board.scrap_count,
 		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
-		from board where board.category = #{category}
+		from board order by board_num desc
+	</select> -->
+	
+<!-- 	<select id="getCommunityCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM BOARD where category = #{category}
+	</select> -->
+	
+<!--  	 <select id="getCM" parameterType="com.spring.community.CommunityVO" resultMap="cmMap">
+		select * from(
+		select rownum rnum, board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
+		from board where board.category = #{category} order by board.board_num desc )
+		<![CDATA[WHERE rnum >=#{start} and rnum<=#{end}]]> 
+	</select> -->
+	
+	<!-- 최신순 -->
+	<select id="filter1" parameterType="com.spring.community.CommunityVO" resultMap="cmMap">
+		select * from(
+		select rownum rnum, board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+		(select count(*) from board where category = #{category}) as cm_count
+		from board where board.category = #{category} order by board.regist desc ) board
+		<![CDATA[WHERE rnum >=#{start} and rnum<=#{end}]]> 
+	</select>
+	
+	<!-- 조회순 -->
+	<select id="filter2" parameterType="com.spring.community.CommunityVO" resultMap="cmMap">
+		select * from(
+		select rownum rnum, board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+		(select count(*) from board where category = #{category}) as cm_count
+		from board where board.category = #{category} order by board.count desc ) board
+		<![CDATA[WHERE rnum >=#{start} and rnum<=#{end}]]> 
+	</select>
+	
+	<!-- 댓글순 -->
+	<select id="filter3" parameterType="com.spring.community.CommunityVO" resultMap="cmMap">
+		select * from(
+		select rownum rnum, board.board_num, board.nickname, board.board_name, board.content, board.regist,
+		board.img, board.count, board.category, board.scrap_count,
+		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+		(select count(*) from board where category = #{category}) as cm_count
+		from board where board.category = #{category} order by co_count desc ) board
+		<![CDATA[WHERE rnum >=#{start} and rnum<=#{end}]]> 
 	</select>
 	
 	<select id="detailCommunity" resultMap="cmMap" parameterType="int">
