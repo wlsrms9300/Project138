@@ -83,7 +83,7 @@ public class LoginController {
 					} else {
 					session.setAttribute("email", dbvo.getEmail());
 					session.setAttribute("nickname", dbvo.getNickname());
-					session.setAttribute("profile_image", dbvo.getImg());
+					session.setAttribute("img", dbvo.getImg());
 					dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
 					service.updateConnection(dbvo);
 					mav.setViewName(url2);

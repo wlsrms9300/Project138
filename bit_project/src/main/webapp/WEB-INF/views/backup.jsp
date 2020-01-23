@@ -43,8 +43,8 @@
 		</div>
 		<div></div>
 	</div>
-<!-- 	<div id="community-contentbox">
-		<form method="post" action="/write">
+	<div id="community-contentbox">
+	 		<form method="post" id="articleForm" role="form" action="/article"> 
 			<div id="cententbox-top">
 				<span> <select id="category_select">
 						<option value="board1">자유게시판</option>
@@ -58,24 +58,28 @@
 			</div>
 
 			<div id="contentbox-middle">
-				<textarea class="form-control" id="summernote" name="content"
-					placeholder="content" maxlength="140" rows="7"></textarea>
+				
+				  <br style="clear: both">
+				  <h3 style="margin-bottom: 25px;">Article Form</h3>
+				  <div class="form-group">
+				    <input type="text" class="form-control" id="subject" name="subject" placeholder="subject" required>
+				  </div>
+				  <div class="form-group">
+				    <textarea class="form-control" id="summernote" name="content" placeholder="content" maxlength="140" rows="7"></textarea>
+				  </div>
+<!--				  <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>-->
+
 			</div>
 			<div id="contentbox-bottom">
-				<button type ="submit" id="submit-btn" name="submit">글쓰기</button>
-				<input type="button" id="cancel-btn" value="취소">
+				<button type="submit" id="submit-btn" name="submit" class="btn btn-primary pull-right">글쓰기</button>
+				<button type="button" id="cancel-btn" >취소</button>
 			</div>
-		</form>
-	</div> -->
-	
-		<h1>summernote</h1>
-	<form name="writeForm" action="imgsrc.cw" method="post" enctype="multipart/form-data">
-		<textarea id="summernote">Hello Summernote</textarea>
-		<input type="submit" value="전송">
-	</form>	
- 
-	
-	
+			</form>
+	</div>
+
+	<%-- <footer>
+		<%@ include file="/WEB-INF/views/footer.jsp"%>
+	</footer> --%>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#summernote').summernote({
@@ -95,12 +99,11 @@
     
     function sendFile(file, el) {
       var form_data = new FormData();
-
       form_data.append('file', file);
       $.ajax({
         data: form_data,
         type: "POST",
-        url: '/imgsrc.cw',
+        url: '/image',
         cache: false,
         contentType: false,
         enctype: 'multipart/form-data',
@@ -112,7 +115,7 @@
       });
     }
 </script>
-	
+
 <!-- summernote -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link
