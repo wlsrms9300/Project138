@@ -56,11 +56,11 @@ public class LoginController {
 		String url1 = null;
 		String url2 = null;
 		// 이전 페이지가 main페이지면 오류해결
-		if(pre_url.substring(33).equals("/")) {
+		if(pre_url.substring(34).equals("/")) {
 			url1 = "main.ma";
 			url2 = url1.substring(0, url1.lastIndexOf("."));
 		} else {
-			url1 = pre_url.substring(33);
+			url1 = pre_url.substring(34);
 			url2 = url1.substring(0, url1.lastIndexOf("."));
 		}
 			
@@ -84,6 +84,7 @@ public class LoginController {
 					session.setAttribute("email", dbvo.getEmail());
 					session.setAttribute("nickname", dbvo.getNickname());
 					session.setAttribute("img", dbvo.getImg());
+					session.setAttribute("userDetail", dbvo);
 					dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
 					service.updateConnection(dbvo);
 					mav.setViewName(url2);
@@ -171,6 +172,8 @@ public class LoginController {
 				dbvo.setNickname(nickname);
 				if(birthday!=null) {
 					dbvo.setBirth(birthday);
+				} else {
+					dbvo.setBirth("0");
 				}
 				dbvo.setRegist(new Timestamp(System.currentTimeMillis()));
 				dbvo.setImg(image);
@@ -192,6 +195,7 @@ public class LoginController {
 				session.setAttribute("email", dbvo2.getEmail()); //세션 생성
 				session.setAttribute("nickname", dbvo2.getNickname());
 				session.setAttribute("img", dbvo2.getImg());
+				session.setAttribute("userDetail", dbvo2);
 				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				service.updateConnection(dbvo2);
 			}	
@@ -258,6 +262,8 @@ public class LoginController {
 				dbvo.setBirth("0");
 				if(birth!=null) {
 					dbvo.setBirth(birth);
+				} else {
+					dbvo.setBirth("0");
 				}
 				dbvo.setImg(img);
 				dbvo.setRegist(new Timestamp(System.currentTimeMillis()));
@@ -279,6 +285,7 @@ public class LoginController {
 				session.setAttribute("email", dbvo2.getEmail()); //세션 생성
 				session.setAttribute("nickname", dbvo2.getNickname());
 				session.setAttribute("img", dbvo2.getImg());
+				session.setAttribute("userDetail", dbvo2);
 				dbvo2.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				service.updateConnection(dbvo2);
 				return "redirect:main.ma";

@@ -7,15 +7,14 @@
 <%
 
 	String email = (String)session.getAttribute("email");
+	String img = (String)session.getAttribute("img");
+	
 	if((String)session.getAttribute("email") == null) {
 		out.println("<script>");
 		out.println("location.href='login.me'");
 		out.println("</script>");
 	}
 	
-	String img = (String)session.getAttribute("img");
-	
-
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +42,7 @@
                 </div>
                 <ul class="nav">
 					<%
-						if(img != null) {
+						if(email != null) {
 					%>
 						<div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
 							<p style="cursor:pointer; font-size:16px;">로그아웃</p>
