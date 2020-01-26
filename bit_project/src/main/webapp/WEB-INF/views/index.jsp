@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.spring.chat.ChatVO" %>
+<%@ page import ="java.util.ArrayList" %>
+<%
+
+	ArrayList<ChatVO> adminlist = (ArrayList<ChatVO>)request.getAttribute("adminlist");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,16 +34,19 @@
     <main class="chats">
       <ul class="chats__list">
         <li class="chats__chat chat">
-          <a href="chatstart.ct">
+        <% for(int i = 0; i < adminlist.size(); i++) { 
+        		ChatVO list = (ChatVO)adminlist.get(i);
+        %>
+          <a href="chatstart.ct?nickname=<%=list.getNickname() %>">
             <div class="chats__chat friend friend--lg">
               <div class="friend__column">
-                <img src="${pageContext.request.contextPath}/resources/img/preview.jpg" class="m-avatar friend__avatar" />
+                <img src="/bit_project/image/<%=list.getImg() %>" class="m-avatar friend__avatar" />
                 <div class="friend__content">
                   <span class="friend__name">
-                    관리자명1
+                    <%=list.getNickname() %>
                   </span>
                   <span class="friend__bottom-text">
-                    접속중
+                    접속중(어떻게 알지?)
                   </span>
                 </div>
               </div>
@@ -47,66 +57,9 @@
               </div>
             </div>
            	</a>
-           	<a href="chatstart.ct">
-            <div class="chats__chat friend friend--lg">
-              <div class="friend__column">
-                <img src="${pageContext.request.contextPath}/resources/img/preview.jpg" class="m-avatar friend__avatar" />
-                <div class="friend__content">
-                  <span class="friend__name">
-                    관리자명2
-                  </span>
-                  <span class="friend__bottom-text">
-                    접속중
-                  </span>
-                </div>
-              </div>
-              <div class="friend__column">
-                <span class="chat__timestamp">
-                  채팅하기
-                </span>
-              </div>
-            </div>
-            </a>
-            <a href="chatstart.ct">
-            <div class="chats__chat friend friend--lg">
-              <div class="friend__column">
-                <img src="${pageContext.request.contextPath}/resources/img/preview.jpg" class="m-avatar friend__avatar" />
-                <div class="friend__content">
-                  <span class="friend__name">
-                    관리자명3
-                  </span>
-                  <span class="friend__bottom-text">
-                    부재중
-                  </span>
-                </div>
-              </div>
-              <div class="friend__column">
-                <span class="chat__timestamp">
-                  채팅하기
-                </span>
-              </div>
-            </div>
-            </a>
-            <a href="chatstart.ct">
-            <div class="chats__chat friend friend--lg">
-              <div class="friend__column">
-                <img src="${pageContext.request.contextPath}/resources/img/preview.jpg" class="m-avatar friend__avatar" />
-                <div class="friend__content">
-                  <span class="friend__name">
-                    관리자명4
-                  </span>
-                  <span class="friend__bottom-text">
-                    부재중
-                  </span>
-                </div>
-              </div>
-              <div class="friend__column">
-                <span class="chat__timestamp">
-                  채팅하기
-                </span>
-              </div>
-            </div>
-          </a>
+        <%
+        	}
+        %>
         </li>
       </ul>
     </main>

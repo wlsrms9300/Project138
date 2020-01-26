@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.ChatMapper">
+
+   <!-- admin 정보 -->
+   <resultMap type="com.spring.chat.ChatVO" id="ChatMap">
+   <result property="email" column="email"  />
+   <result property="nickname" column="nickname" /> 
+   <result property="password" column="password"  />
+   <result property="phone" column="phone"  />
+   <result property="regist" column="regist"  />
+   <result property="img" column="img"  />
+   <result property="usergroup" column="usergroup"  />
+   </resultMap>
+  
+   <select id="allAdmin" resultMap="ChatMap">
+   		SELECT * FROM ADMIN
+   </select>
+   
+</mapper>

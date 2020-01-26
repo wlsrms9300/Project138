@@ -39,3 +39,8 @@
  main {
   animation: fadeIn 0.5s ease-in-out;
 }
+
+.chat-screen {
+	 height:420px;
+  overflow-y:auto;
+}

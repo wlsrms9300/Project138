@@ -67,7 +67,9 @@ public class LoginController {
 		// email, password, url 확인
 		System.out.println(email +"/"+ password);
 		System.out.println(pre_url +", "+ url1 +", "+ url2);
-			
+		
+		
+		
 		// DB에서 Email 불러와서 등록된 이메일인지 확인
 		LoginVO dbvo = null;
 		int check;
