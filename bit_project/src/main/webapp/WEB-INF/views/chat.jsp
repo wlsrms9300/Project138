@@ -8,16 +8,13 @@
 		nickname = userDetail.getNickname();
 	} else {
 		nickname = "비회원";
-	}
-	
-	
-	
+	}	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 <link href="${pageContext.request.contextPath}/resources/css/chat/styles.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <link

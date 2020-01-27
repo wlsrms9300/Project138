@@ -33,10 +33,21 @@
    		SELECT COUNT(*) FROM MEMBER WHERE EMAIL=#{email} 
    </select>
    
+   <!-- 관리자인지 확인 -->
+   <select id="checkAdmin" parameterType="String" resultType="int">
+   		SELECT COUNT(*) FROM ADMIN WHERE EMAIL=#{email}
+   </select>
+   
+   <!-- 관리자계정이면 정보 불러오기 -->
+   <select id="getAdmin" parameterType="String" resultMap="LoginMap">
+ 		SELECT * FROM ADMIN WHERE EMAIL=#{email}  
+   </select>
+   
    <!-- 등록된 회원이면 사용자 정보 불러오기 -->
    <select id="getDetail" parameterType="String" resultMap="LoginMap">
    		SELECT * FROM MEMBER WHERE EMAIL=#{email}
    </select>
+   
    <!-- 닉네임 가져와서 중복된건지 확인 (중복이면 뒤에 숫자 붙혀준다) -->
    <select id="getNickname" resultMap="LoginMap">
    		SELECT NICKNAME FROM MEMBER

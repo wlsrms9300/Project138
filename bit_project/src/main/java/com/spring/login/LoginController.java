@@ -53,30 +53,43 @@ public class LoginController {
 		
 		// 이전페이지 정보
 		String pre_url = request.getParameter("pre_url");
+		System.out.println(pre_url);
 		String url1 = null;
 		String url2 = null;
 		// 이전 페이지가 main페이지면 오류해결
 		if(pre_url.substring(34).equals("/")) {
 			url1 = "main.ma";
-			url2 = url1.substring(0, url1.lastIndexOf("."));
 		} else {
 			url1 = pre_url.substring(34);
-			url2 = url1.substring(0, url1.lastIndexOf("."));
 		}
 			
 		// email, password, url 확인
 		System.out.println(email +"/"+ password);
-		System.out.println(pre_url +", "+ url1 +", "+ url2);
-		
-		
-		
+		System.out.println(pre_url +", "+ url1);
+			
 		// DB에서 Email 불러와서 등록된 이메일인지 확인
 		LoginVO dbvo = null;
+		LoginVO admindbvo = null;
 		int check;
+		int checkadmin;
 		try {
 			check = service.checkMember(email); // 등록된 이메일인지 확인
 			if(check == 0) {
-				writer.write("<script>alert('등록되지 않은 이메일입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");		
+				checkadmin = service.checkAdmin(email);
+				if(checkadmin == 0) {
+					writer.write("<script>alert('등록되지 않은 이메일입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");
+				} else { // admin테이블에서 이메일 조회후 카운트가0이 아니면 관리자 계정이므로 정보 조회후 세션에 저장
+					admindbvo = service.getAdmin(email);
+					if(admindbvo.getPassword().equals(password)) {
+						session.setAttribute("email", admindbvo.getEmail());
+						session.setAttribute("nickname", admindbvo.getNickname());
+						session.setAttribute("img", admindbvo.getImg());
+						session.setAttribute("userDetail", admindbvo);
+						writer.write("<script>location.href='./"+url1+"';</script>");
+					} else {
+						writer.write("<script>alert('잘못된 비밀번호입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");
+					}
+				}	
 			} else { 
 				dbvo = service.getDetail(email); // 등록된 이메일일 경우 상세정보 불러와서 패스워드 확인작업
 				if(dbvo.getPassword().equals(password)) {
@@ -89,8 +102,7 @@ public class LoginController {
 					session.setAttribute("userDetail", dbvo);
 					dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
 					service.updateConnection(dbvo);
-					mav.setViewName(url2);
-					return mav;
+					writer.write("<script>location.href='./"+url1+"';</script>");
 					}
 				} else {
 					writer.write("<script>alert('잘못된 비밀번호입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");

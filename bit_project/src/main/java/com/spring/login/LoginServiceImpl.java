@@ -21,7 +21,27 @@ public class LoginServiceImpl implements LoginService {
 			LoginVO detail = loginmapper.getDetail(email);
 			return detail;
 		} catch (Exception e) {
-			throw new Exception("이메일 조회 실패", e);
+			throw new Exception("이메일 정보조회 실패", e);
+		}
+	}
+	
+	public LoginVO getAdmin(String email) throws Exception {
+		try {
+			LoginMapper loginmapper = sqlSession.getMapper(LoginMapper.class);
+			LoginVO adminDetail = loginmapper.getAdmin(email);
+			return adminDetail;
+		} catch (Exception e) {
+			throw new Exception("관리자 정보조회 실패", e);
+		}
+	}
+	
+	public int checkAdmin(String email) throws Exception {
+		try {
+			LoginMapper loginmapper = sqlSession.getMapper(LoginMapper.class);
+			int checkadmin = loginmapper.checkAdmin(email);
+			return checkadmin;
+		} catch (Exception e) {
+			throw new Exception("관리자 체크 실패", e);
 		}
 	}
 	
@@ -29,8 +49,8 @@ public class LoginServiceImpl implements LoginService {
 	public int checkMember(String email) throws Exception {
 		try {
 			LoginMapper loginmapper = sqlSession.getMapper(LoginMapper.class);
-			int check = loginmapper.checkMember(email);
-			return check;
+			int checkmember = loginmapper.checkMember(email);
+			return checkmember;
 		} catch (Exception e) {
 			throw new Exception("이메일 체크 실패", e);
 		}
