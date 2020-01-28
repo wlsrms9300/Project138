@@ -25,4 +25,48 @@ public class ChatServiceImpl implements ChatService {
 		}
 	}
 	
+	@Override
+	public ArrayList<MessageVO> getRoom(String nickname) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			ArrayList<MessageVO> roomlist = chatmapper.getRoom(nickname);
+			return roomlist;
+		} catch (Exception e) {
+			throw new Exception("채팅방 조회 실패" , e); 
+		}
+	}
+	
+	@Override
+	public ArrayList<MessageVO> getMessage(int room_num) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			ArrayList<MessageVO> messagelist = chatmapper.getMessage(room_num);
+			return messagelist;
+		} catch (Exception e) {
+			throw new Exception("채팅글 조회 실패" , e); 
+		}
+	}
+	
+	@Override
+	public int createRoom(MessageVO messagevo) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			int result = chatmapper.createRoom(messagevo);
+			return result;
+		} catch (Exception e) {
+			throw new Exception("채팅방 생성 실패" , e); 
+		}
+	}
+	
+	@Override
+	public int insertContent(MessageVO messagevo) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			int result = chatmapper.insertContent(messagevo);
+			return result;
+		} catch (Exception e) {
+			throw new Exception("메시지 등록 실패", e);
+		}
+	}
+	
 }

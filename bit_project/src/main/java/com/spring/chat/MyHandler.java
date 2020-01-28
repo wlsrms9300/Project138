@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -19,6 +20,9 @@ public class MyHandler extends TextWebSocketHandler {
 	
 	//WebSocketSession 클라이언트 당 하나씩 생성, 해당 클라이언트와 연결된 웹소켓을 이용할 수 있는 객체
 	//해당 객체를 통해 메시지를 주고 받음
+	
+	@Autowired(required = false) //메시지 저장하기위해 필요
+	private ChatService chatservice;
 	
 	private List<WebSocketSession> users;
 	private Map<String, Object> userMap;
@@ -42,6 +46,7 @@ public class MyHandler extends TextWebSocketHandler {
 		System.out.println("메시지 : " + message.getPayload());
 		JSONObject object = new JSONObject(message.getPayload());
 		String type = object.getString("type");
+		MessageVO messagevo = new MessageVO();
 		
 		if(type != null && type.equals("register")) {
 			//등록 요청 메시지 
@@ -54,6 +59,17 @@ public class MyHandler extends TextWebSocketHandler {
 			String target = object.getString("target");
 			WebSocketSession ws = (WebSocketSession)userMap.get(target);
 			String msg = object.getString("message");
+			
+			//메시지 DB에 저장 후 전송
+			
+			messagevo.setContent(msg);
+			
+			int result;
+			try {
+				result = chatservice.insertContent(messagevo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			if(ws != null) {
 				ws.sendMessage(new TextMessage(msg));
 			}
