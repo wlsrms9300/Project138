@@ -22,7 +22,7 @@
 		<div id="find-content">
 			<h1>비밀번호 찾기</h1>
 			<div style="height: 80px"></div>
-			<h4>찾으시는 비밀번호는 <%=request.getAttribute("findPassword") %> 입니다.</h4>
+			<h4>새로운 비밀번호를 이메일로 발송했습니다.</h4>
 			<div style="height: 40px"></div>
 			<div class="btnfield">
 				<span>

@@ -33,9 +33,6 @@ public class MemberController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	@Autowired
-	private JavaMailSender naverMailSender;
 
 	@RequestMapping(value = "/signup.me", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -80,12 +77,8 @@ public class MemberController {
 
 		try {
 
-			System.out.println(membervo.getEmail());
-			System.out.println(membervo.getName());
-			System.out.println(membervo.getPhone());
-
 			memVO = memberService.findPassword(membervo);
-			System.out.println("컨트롤러" + memVO.getPassword());
+
 			model.addAttribute("findPassword", memVO.getPassword());
 
 			String setfrom = "suminnjeong@gmail.com"; // host 메일 주소
@@ -105,36 +98,6 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		return "findpassword";
-	}
-
-	// mailSending 코드
-	@RequestMapping(value = "/passwordmailSending.me")
-	public String passwordMailSending(HttpServletResponse response, Model model, HttpServletRequest request,
-			@RequestParam("findPassword") String findPassword) {
-
-		String setfrom = "tazo0519@naver.com"; // host 메일 주소
-//		    String email  = request.getParameter("email");     // 받는 사람 이메일
-		String title = "진근이네 비밀번호"; // 제목
-		String content = "새로운 비밀번호는 " + findPassword; // 메일 내용
-
-		MemberVO memVO = new MemberVO();
-		model.addAttribute("findPassword", memVO.getPassword());
-
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
-			messageHelper.setFrom(setfrom); // 보내는 사람 생략하면 정상작동 안함
-			messageHelper.setTo(findPassword); // 받는사람 이메일
-			messageHelper.setSubject(title); // 메일 제목은 생략 가능
-			messageHelper.setText(content); // 메일 내용
-
-			mailSender.send(message);
-		} catch (Exception e) {
-			System.out.println(e);
 		}
 
 		return "findpassword";
