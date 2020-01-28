@@ -3,7 +3,7 @@
 <%@ page import="com.spring.product.ProductVO" %>
 <%
     ProductVO prVO = (ProductVO)request.getAttribute("prVO");
-    
+	String img = (String)session.getAttribute("img");
     %>
 <!DOCTYPE html>
 <html>
@@ -53,8 +53,24 @@
                         <li><img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"></li>
                     </div>
                     <ul class="nav">
+                        <%
+						if(img != null) {
+					%>
+                        <div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
+                            <p style="cursor:pointer; font-size:16px;">로그아웃</p>
+                        </div>
+                        <div class="header_img" style="margin-top:6.5px; margin-right:5px;">
+                            <img src="<%=img %>" id="rumi" onclick="location.href='mypage_main.my'"
+                                style="box-sizing:border-box; border-radius:50px; width:47px; height:47px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+                        </div>
 
+                        <%
+						} else {
+					%>
                         <div class="login_text"><a href="login.me">로그인</a></div>
+                        <%
+						}
+                    %>
 
                         <li><input type="checkbox" id="menuicon">
                             <label for="menuicon">
@@ -74,10 +90,13 @@
                                                 <td><a href="community.co">커뮤니티</a></td>
                                                 <td><a href="product.pr">상품보기</a></td>
                                                 <td><a href="qna.se">QnA</a></td>
+                                                <td><a href="contactus.ms">Contact Us</a></td>
                                             </tr>
                                             <tr>
                                                 <td><button name="button" class="subscribe-btn"
-                                                        onclick="location.href='//'" type="button">회원가입</button></td>
+                                                        onclick="location.href='signup.me'" type="button">회원가입</button>
+                                                </td>
+                                                <td></td>
                                                 <td><a href="about.ma">이용방법</a></td>
                                                 <td><a href="kindergarten.ms">어린이집</a></td>
                                                 <td><a href="partner.ms">파트너</a></td>
@@ -114,6 +133,9 @@
                                             </tr>
                                             <tr>
                                                 <td><a href="qna.se">QnA</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="contactus.ms">Contact Us</a></td>
                                             </tr>
 
                                         </tbody>
@@ -176,7 +198,6 @@
                             <i class="fas fa-heart" aria-hidden="true"></i>
                         </label>
                     </span>
-
                     <br>
                     <hr>
                     <div><%=prVO.getManufacturer() %></div>
@@ -196,7 +217,22 @@
                         <span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span>
                     </div>
 
-
+   				<div class="bookmarkForm_true" style="display:none;">
+                        <h2>선택하신 상품이 WISH LIST에 담겼습니다.<br>WISH LIST로 이동하시겠습니까?</h2>
+                        <br>
+                        <div class="bookmark_true_btn">
+                                <a href="javascript:void(0)">저장</a>
+                                <a href="javascript:void(0)">취소</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bookmarkForm_false" style="display:none;">
+                        <h2>WISH LIST에서 해제되었습니다.</h2>
+                        <br>
+                        <div class="bookmark_false_btn">
+                                <a href="javascript:void(0)">확인</a>
+                        </div>
+                    </div>
                 </div>
             </form>
             <!-- 상품상세 content 오른쪽 상품정보 div -->
@@ -281,44 +317,44 @@
 
 
         <div class="review">
-           
+
         </div>
         <div class="review_paginate" style="text-align:center;">
-    </div>
+        </div>
 
-    <div class="reviewForm" style="display:none;">
-        <h2>상품리뷰 작성</h2>
-        <h3>리뷰 시 유의해 주세요!
+        <div class="reviewForm" style="display:none;">
+            <h2>상품리뷰 작성</h2>
+            <h3>리뷰 시 유의해 주세요!
+                <br>
+                상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
+            </h3>
             <br>
-            상품과 관련 없는 내용, 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.
-        </h3>
-        <br>
-        <form id="ReviewForm" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
-            <input type="hidden" name="nickname" value="비트캠프폭발" />
-            <input type="hidden" name="review_num" value="" />
-            <div>
-                <label for="reviewcheck">평점</label>
-                <div><input type="radio" name="reviewcheck" value="5" />★★★★★</div>
-                <div><input type="radio" name="reviewcheck" value="4" />★★★★</div>
-                <div><input type="radio" name="reviewcheck" value="3" />★★★</div>
-                <div><input type="radio" name="reviewcheck" value="2" />★★</div>
-                <div><input type="radio" name="reviewcheck" value="1" />★</div>
-            </div>
-            <br>
-            <div>
-                <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
-            </div>
-            <br>
-            <div>
-                <input type="file" name="img" />
-            </div>
-            <div class="review_writebtn">
-                <a href="javascript:void(0)">저장</a>
-                <a href="javascript:void(0)">취소</a>
-            </div>
-        </form>
-    </div>
+            <form id="ReviewForm" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
+                <input type="hidden" name="nickname" value="비트캠프폭발" />
+                <input type="hidden" name="review_num" value="" />
+                <div>
+                    <label for="reviewcheck">평점</label>
+                    <div><input type="radio" name="reviewcheck" value="5" />★★★★★</div>
+                    <div><input type="radio" name="reviewcheck" value="4" />★★★★</div>
+                    <div><input type="radio" name="reviewcheck" value="3" />★★★</div>
+                    <div><input type="radio" name="reviewcheck" value="2" />★★</div>
+                    <div><input type="radio" name="reviewcheck" value="1" />★</div>
+                </div>
+                <br>
+                <div>
+                    <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
+                </div>
+                <br>
+                <div>
+                    <input type="file" name="img" />
+                </div>
+                <div class="review_writebtn">
+                    <a href="javascript:void(0)">저장</a>
+                    <a href="javascript:void(0)">취소</a>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- 상품 리뷰 -->
 
@@ -372,38 +408,7 @@
         </div>
     </div>
 
-    <script>
-        function viewContent2() {
-            var q = document.getElementById('q0');
-            var a = document.getElementById('a0');
 
-            if (q.style.display == 'none' && a.style.display == 'none') {
-                q.style.display = 'table-row';
-                a.style.display = 'table-row';
-                return false;
-            } else {
-                q.style.display = 'none';
-                a.style.display = 'none';
-                return false;
-            }
-        }
-
-        function viewContent1() {
-            var q1 = document.getElementById('q1');
-            var a1 = document.getElementById('a1');
-
-
-            if (q1.style.display == 'none' && a1.style.display == 'none') {
-                q1.style.display = 'table-row';
-                a1.style.display = 'table-row';
-                return false;
-            } else {
-                q1.style.display = 'none';
-                a1.style.display = 'none';
-                return false;
-            }
-        }
-    </script>
     <!-- 상품 문의 -->
 
 
@@ -439,7 +444,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="footer_infor">
             <div class="container">
                 <div class="row">
@@ -499,7 +504,7 @@
             if (reviewScore == 50) {
                 $('.starRev span').parent().children('span').removeClass('on');
                 $('.starRev span').addClass('on').prevAll('span').addClass('on');
-            }else if (reviewScore >= 45 && reviewScore < 50) {
+            } else if (reviewScore >= 45 && reviewScore < 50) {
                 $('.starRev span').parent().children('span').removeClass('on');
                 $('.starRev span').slice(0, 9).addClass('on');
             } else if (reviewScore >= 40 && reviewScore < 45) {
@@ -534,11 +539,11 @@
             }
         })
 
-      /*   $('.starRev span').click(function () {
-            $(this).parent().children('span').removeClass('on');
-            $(this).addClass('on').prevAll('span').addClass('on');
-            return false;
-        }); */
+        /*   $('.starRev span').click(function () {
+              $(this).parent().children('span').removeClass('on');
+              $(this).addClass('on').prevAll('span').addClass('on');
+              return false;
+          }); */
     </script>
 
     <script src="${pageContext.request.contextPath}/resources/js/product/munqna.js"></script>
@@ -547,7 +552,7 @@
         var qnacheck = 0;
         var revcheck = 0;
         function qna_write() {
-        	
+
             $('body').css("background", "grey");
             $(".qnaForm").show();
             scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
@@ -555,10 +560,10 @@
             $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
             $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-           //등록
-           if($('#QnaForm textarea').val().length==0){
-        	   qnacheck=1;
-           }
+            //등록
+            if ($('#QnaForm textarea').val().length == 0) {
+                qnacheck = 1;
+            }
         };
         $('.qna_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -569,18 +574,18 @@
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
             //등록
-            if(qnacheck==1){
-            	 var frm = document.getElementById("QnaForm");
-            	 frm.action = "qnaWrite.pr";
-                 frm.submit();
-                 frm.reset();
-            }else {
-            	 var frm = document.getElementById("QnaForm");
-            	 frm.action = "qnaModify.pr";
-                 frm.submit();
-                 frm.reset();
+            if (qnacheck == 1) {
+                var frm = document.getElementById("QnaForm");
+                frm.action = "qnaWrite.pr";
+                frm.submit();
+                frm.reset();
+            } else {
+                var frm = document.getElementById("QnaForm");
+                frm.action = "qnaModify.pr";
+                frm.submit();
+                frm.reset();
             }
-           
+
         });
         $('.qna_writebtn a').last().click(function () {
             $("body").removeClass('not_scroll');
@@ -593,7 +598,7 @@
             var frm = document.getElementById("QnaForm");
             frm.reset();
         });
-        
+
         function review_write() {
             $('body').css("background", "grey");
             $(".reviewForm").show();
@@ -603,10 +608,10 @@
             $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             //텍스트에어리어가 빈값이다 -> 리뷰등록
-			if($('#ReviewForm textarea').val().length==0){
-	        	   revcheck = 1;
-	        	   alert("리뷰등록이네 : "+revcheck);
-	        }
+            if ($('#ReviewForm textarea').val().length == 0) {
+                revcheck = 1;
+                alert("리뷰등록이네 : " + revcheck);
+            }
         };
         $('.review_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -616,18 +621,18 @@
             $(".reviewForm").hide();
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
-            if(revcheck==1){
-            	var frm = document.getElementById("ReviewForm");
+            if (revcheck == 1) {
+                var frm = document.getElementById("ReviewForm");
                 frm.action = "reviewWrite.pr";
                 frm.submit();
                 frm.reset();
             } else {
-            	var frm = document.getElementById("ReviewForm");
+                var frm = document.getElementById("ReviewForm");
                 frm.action = "reviewModify.pr";
                 frm.submit();
                 frm.reset();
             }
-            
+
         });
         $('.review_writebtn a').last().click(function () {
             $("body").removeClass('not_scroll');
@@ -640,6 +645,10 @@
             var frm = document.getElementById("ReviewForm");
             frm.reset();
         });
+        
+        
+        
+       
     </script>
 </body>
 

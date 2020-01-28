@@ -24,8 +24,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
-		// String id = (String)session.getAttribute("id");
-		// model.addAttribute("id", id);
+		
 		return "product";
 	}
 

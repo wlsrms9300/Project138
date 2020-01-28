@@ -239,6 +239,31 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	
+	   
+	   @Override
+	   public int productListGetCount(String search_type, String search_word) throws Exception {
+	      try {
+	         int res = 0;
+	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+	         res = pdMapper.productListGetCount(search_type, search_word);
+	         return res;
+	      } catch (Exception e) {
+	         throw new Exception("검색 카운트 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public List<ProductVO> selectProductList(String search_type, String search_word, int pno)
+	         throws Exception {
+	      try {
+	         List<ProductVO> list = null;
+	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+	         list = pdMapper.selectProductList(search_type, search_word, pno);
+	         return list;
+	      } catch (Exception e) {
+	         throw new Exception("검색 리스트 출력 실패", e);
+	      }
+	      
+	   }
 	
 }

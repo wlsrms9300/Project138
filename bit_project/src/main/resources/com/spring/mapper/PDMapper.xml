@@ -41,41 +41,16 @@
 	gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount from product	
 	order by rnum asc	
 	</select>	
-	
-	<!-- 처음 들어왔을때 보여주는 상품리스트. 8개 bno을 rnum으로 쓰자. where bno>0 AND bno<9-->	
-	<!-- <select id="startSearch" resultType="com.spring.product.ProductVO">	 
-	    select * from (
-        select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-        gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount from (
-	         select * from product order by product_num asc
-        )
-    )
-	<![CDATA[where rnum>=1 AND rnum<=8]]>	
-	</select> -->
-	
-	<select id="startSearch" resultType="com.spring.product.ProductVO">	 
-select * from (
-select  rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from (
-select * from product order by product_num
-))
-	<![CDATA[where rnum>=1 AND rnum<=8]]>	
-	</select>
 	 
-	 
-	<!--  초기에 8개가 화면에 뿌려진 이후, 스크롤을 내렸을 때 추가로 8개의 상품을 더 보여준다 -->
+	<!-- 필터선택 안했을 때 상품 리스트 출력 -->
 	<select id="scrollSearch" parameterType="map" resultType="com.spring.product.ProductVO">
-<!-- 	select * from (
-		select * FROM (
-		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount FROM product ORDER BY product_num ASC
-		)
-	) -->
 	select * from (
-select  rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from (
-select * from product order by product_num
-))
+		select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
+		from (
+			select * from product order by product_num
+		 )
+	)
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
 	
@@ -88,80 +63,40 @@ select * from product order by product_num
 		SELECT *
 		FROM product 		
 		where 1=1 
-		<choose>
-		<when test="cateMap1.size != 0">
+		<if test="cateMap1.size != 0">
 		AND category_l IN 
 		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
 		#{i}
 		</foreach>
-		</when>
-		<when test="cateMap2.size != 0">
+		</if>
+		<if test="cateMap2.size != 0">
 		AND category_m IN 
 		<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
 		#{i}
 		</foreach>
-		</when>
-		<when test="cateMap3.size != 0">
+		</if>
+		<if test="cateMap3.size != 0">
 		AND category_s IN 
 		<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
 		#{i}
 		</foreach>
-		</when>
-		</choose>
+		</if>
 		order by product_num asc
 		)
 	)
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>	
 	</select>
-	<!-- 
-	<select id="filterSearch" parameterType="map" resultType="com.spring.product.ProductVO">
-	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist from product
-	where category_l=#{category_l} AND category_m=#{category_m} AND category_s=#{category_s}
-	order by product_num asc
-	</select> -->
 
-	<!-- <select id="selectList" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from (
-		select * FROM (
-		SELECT rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
-		FROM product 
-		where 1=1 
-		<choose>
-		<when test="cateMap1.size != 0">
-		AND category_l IN 
-		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
-		</when>
-		<when test="cateMap2.size != 0">
-		AND category_m IN 
-		<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
-		</when>
-		<when test="cateMap3.size != 0">
-		AND category_s IN 
-		<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
-		</when>
-		</choose>
-		ORDER BY product_num ASC
-		)
-	)
-	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
-  	</select> -->
-  	
+	<!--  상품 상세 && 조회수 증가 -->  	
   	<select id="getProductDetail" parameterType="map" resultType="com.spring.product.ProductVO">
 	select * from product where product_num=#{product_num}
 	</select>
 	<update id="getProductReadCount" parameterType="map">
 	update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
+	<!--  상품 상세 && 조회수 증가 -->
 	
-	<!-- 문의 -->
+	<!-- 상품 문의 -->
 	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
 		select * FROM (
 		SELECT rownum rnum, question_num, product_num,nickname,content,regist,secret,answer 
@@ -192,6 +127,7 @@ select * from product order by product_num
 	update question set nickname=#{nickname}, content=#{content}, secret=#{secret}, regist=sysdate where question_num=#{question_num}
 	</update>
 	<!-- 문의 -->
+	
 	
 	<!-- 리뷰 -->
 	<select id="reviewCount" parameterType="map" resultType="int">
@@ -230,5 +166,48 @@ select * from product order by product_num
 	<!-- 리뷰 -->
 
 
+<!--  상품 검색 -->
+	<select id="productListGetCount" parameterType="map" resultType="int">
+	select count(product_num) from product
+	<choose>
+	<when test="search_type == 'na'">
+	<if test="search_word != null and search_word != ''">
+	where product_name like '%' || #{search_word} || '%'
+	</if>
+	</when>
+	<when test="search_type == 'no'">
+	<if test="search_word != null and search_word != ''">
+	where product_num=#{search_word}
+	</if>
+	</when>
+	</choose>
+	</select>
+   
+   
+   <select id="selectProductList" parameterType="map" resultType="com.spring.product.ProductVO">
+   select * from
+   (
+   select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
+      gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount 
+      from
+   (
+   select * from product
+   <choose>
+   <when test="search_type == 'na'">
+   <if test="search_word != null and search_word != ''">
+   where product_name like '%' || #{search_word} || '%'
+   </if>
+   </when>
+   <when test="search_type == 'no'">
+   <if test="search_word != null and search_word != ''">
+   where product_num=#{search_word}
+   </if>
+   </when>
+   </choose>
+   order by product_num DESC
+   )
+   )
+   where rnum <![CDATA[<=]]> #{pno}+8 AND rnum <![CDATA[>=]]> #{pno}+1
+   </select>
 
 </mapper>

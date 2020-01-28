@@ -92,7 +92,7 @@
                     <select name="category_S">
                         <option selected value="과학박스">과학박스</option>
                         <option value="자동차">자동차</option>
-                        <option value=" 로보트">로보트</option>
+                        <option value="로보트">로보트</option>
                         <option value="진근박스">진근박스</option>
                     </select>
                 </div>

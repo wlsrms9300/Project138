@@ -50,4 +50,7 @@ public interface PDService {
 		public void reviewModify(ReviewVO reviewVO) throws Exception;
 		// 리뷰 수정(이미지는 안건드린 상태면, 기존 이미지 그대로
 		public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception;
+		// 5. 상품 검색
+		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
+	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;
 }

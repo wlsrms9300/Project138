@@ -168,29 +168,22 @@ $(function(){
 
 /* 모바일용 필터 체크박스 눌렀을 떄 기존 필터에 입력한 정보 그대로 남아있음 */
 $('#menu_state').click(function () {
-	
   var fil = document.getElementById('mFilter_menu');
-  //var fil_nav = document.getElementById('mFilter');
-  //var _zindex = document.getElementById('header');
   if (fil.style.display == 'none') {
-    //_zindex.style.zIndex='-1';
 	  $('#mFilter label[for="menu_state"] i').css("right", "0px");
     fil.style.display = 'block';
     $('.fildivision').show();
-    //fil_nav.style.background = '#fff';
   } else {
-    //_zindex.style.zIndex='9999';
 	  $('#mFilter label[for="menu_state"] i').css("right", "-16px");
     fil.style.display = 'none';
     $('.fildivision').hide();
-    //fil_nav.style.background = '#fff';
-    //$("#testForm")[0].reset();
   }
 });
 
 /* 필터에서 x 눌렀을 때. 필터 내용 초기화 및 필터 창 꺼짐.  */
+/*
 function testfun() {
-  var fil = document.getElementById('mFilter_menu');
+ // var fil = document.getElementById('mFilter_menu');
   var _a1 = document.getElementById('mFilter_menu_list1');
   var _b1 = document.getElementById('mFilter_menu_list2');
   var _c1 = document.getElementById('mFilter_menu_list3');
@@ -200,17 +193,19 @@ function testfun() {
   document.getElementById("mtier").innerHTML = '';
   document.getElementById("mage").innerHTML = '';
   document.getElementById("mtype").innerHTML = '';
-  fil.style.display = 'none';
-  $('.fildivision').hide();
+  //fil.style.display = 'none';
+  $('#mFilter_menu').css("display", "none");
+  $('.fildivision').css("display", "none");
+  
   //fil_nav.style.background = '#fff';
   $("#testForm")[0].reset();
 
 }
+*/
 // 필터 초기화 되고 필터창은 그대로 남아있음.
 function fclear() {
   //필터 선택 span 초기화
   //$("#testForm")[0].reset();
-
   // li display none
   var fil_list1 = document.getElementById('mFilter_menu_list1');
   var fil_list2 = document.getElementById('mFilter_menu_list2');
@@ -226,37 +221,28 @@ function fclear() {
 
 $('#mFilter_menu_li1').click(function () {
   var fil_list1 = document.getElementById('mFilter_menu_list1');
-
   if (fil_list1.style.display == 'none') {
     fil_list1.style.display = 'block';
-
   } else {
     fil_list1.style.display = 'none';
-
   }
 });
 
 $('#mFilter_menu_li2').click(function () {
   var fil_list2 = document.getElementById('mFilter_menu_list2');
-
   if (fil_list2.style.display == 'none') {
     fil_list2.style.display = 'block';
-
   } else {
     fil_list2.style.display = 'none';
-
   }
 });
 
 $('#mFilter_menu_li3').click(function () {
   var fil_list3 = document.getElementById('mFilter_menu_list3');
-
   if (fil_list3.style.display == 'none') {
     fil_list3.style.display = 'block';
-
   } else {
     fil_list3.style.display = 'none';
-
   }
 });
 
@@ -279,3 +265,67 @@ function mChk(checknum) {
   // input hidden의 id나 class 넣고 result값 세팅해주면 됨.    $('#tier').val(result);
 }
 /* 모바일용 필터 */
+
+
+$(function(){
+    $("#wishlist-pid-0001").click(function(){
+        var book = $(this).is(":checked");
+        if(book==true){
+        	//팝업창 띄우고 확인 누르면 db삽입
+            $('body').css("background", "grey");
+            $(".bookmarkForm_true").show();
+            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+            $("body").addClass('not_scroll'); //overflow:hidden 추가
+            $('.bookmarkForm_true').css('position', 'fixed'); //최상위 div 고정
+            $('.bookmarkForm_true').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+            $('.bookmarkForm_true').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+        }else {
+        	$('body').css("background", "grey");
+            $(".bookmarkForm_false").show();
+            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+            $("body").addClass('not_scroll'); //overflow:hidden 추가
+            $('.bookmarkForm_false').css('position', 'fixed'); //최상위 div 고정
+            $('.bookmarkForm_false').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+            $('.bookmarkForm_false').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+        	//팝업창 띄우고 확인 누르면 db삭제
+        }
+    });
+});
+
+//찜 등록 후 확인 누르면 마이페이지로 가서 찜목록 확인
+$('.bookmark_true_btn a').first().click(function () {
+    $("body").removeClass('not_scroll');
+    $('.bookmarkForm_true').css('position', 'relative');//top값 해제
+    $('.bookmarkForm_true').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    $('.bookmarkForm_true').css('top', 0);//최상위 div 고정해제
+    $(".bookmarkForm_true").hide();
+    $('body').css("background", "none");
+    $('body').scrollTop(scrollHeight);
+        var frm = document.getElementById("bookmarkForm_true");
+        frm.action = ".pr";
+        frm.submit();
+        frm.reset();
+});
+//찜 등록 후 취소 누르면 현재 페이지 머무름
+$('.bookmark_true_btn a').last().click(function () {
+    $("body").removeClass('not_scroll');
+    $('.bookmarkForm_true').css('position', 'relative');//top값 해제
+    $('.bookmarkForm_true').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    $('.bookmarkForm_true').css('top', 0);//최상위 div 고정해제
+    $(".bookmarkForm_true").hide();
+    $('body').css("background", "none");
+    $('body').scrollTop(scrollHeight);
+    var frm = document.getElementById("bookmarkForm_true");
+    frm.reset();
+});
+
+//찜 취소 시
+$('.bookmark_false_btn a').click(function () {
+    $("body").removeClass('not_scroll');
+    $('.bookmarkForm_false').css('position', 'relative');//top값 해제
+    $('.bookmarkForm_false').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    $('.bookmarkForm_false').css('top', 0);//최상위 div 고정해제
+    $(".bookmarkForm_false").hide();
+    $('body').css("background", "none");
+    $('body').scrollTop(scrollHeight);
+});
