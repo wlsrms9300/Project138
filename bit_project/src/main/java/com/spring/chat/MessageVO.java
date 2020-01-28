@@ -1,6 +1,7 @@
 package com.spring.chat;
 
 public class MessageVO {
+	private int message_num;
 	private String content;
 	private int room_num;
 	private String receiver;
@@ -36,6 +37,12 @@ public class MessageVO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public int getMessage_num() {
+		return message_num;
+	}
+	public void setMessage_num(int message_num) {
+		this.message_num = message_num;
 	}
 
 }

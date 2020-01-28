@@ -6,6 +6,7 @@
 <%@ page import ="java.util.ArrayList" %>
 <%
 	String sender = null; //sender 닉네임
+	String img = null; //sender 이미지
 	String nickname = null;
 	LoginVO userDetail = null;
 	String usergroup = null;
@@ -13,6 +14,7 @@
 	if(session.getAttribute("email") != null) {
 		sender = (String)session.getAttribute("nickname");
 		userDetail = (LoginVO)session.getAttribute("userDetail"); //유저정보
+		img = userDetail.getImg();
 		if(userDetail.getUsergroup().equals("admin")) {
 			nickname = userDetail.getNickname();   //관리자 닉네임
 			usergroup = userDetail.getUsergroup(); //관리자인지 확인
@@ -138,7 +140,7 @@ $(function() {
         	for(int i = 0; i < adminlist.size(); i++) { 
         		ChatVO list = (ChatVO)adminlist.get(i);
         %>
-          <a href="chatstart.ct?nickname=<%=list.getNickname() %>&sender=<%=sender%>">
+          <a href="chatstart.ct?nickname=<%=list.getNickname() %>&sender=<%=sender%>&img=<%=img%>">
             <div class="chats__chat friend friend--lg">
               <div class="friend__column">
                 <img src="/bit_project/image/<%=list.getImg() %>" class="m-avatar friend__avatar" />

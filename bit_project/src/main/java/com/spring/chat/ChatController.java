@@ -49,12 +49,16 @@ public class ChatController {
 	@RequestMapping(value = "/chatstart.ct", method = { RequestMethod.GET , RequestMethod.POST })
 	public String chatstart(Model model, HttpServletRequest request) {
 		MessageVO messagevo = new MessageVO();
+		System.out.println(request.getParameter("nickname"));
+		System.out.println(request.getParameter("sender"));
 		messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
 		messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
+		messagevo.setImg(request.getParameter("img")); //보내는 사람 프로필이미지
+
+		int result;
 		try {
-			chatservice.createRoom(messagevo);
-			
-			
+			result = chatservice.createRoom(messagevo);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

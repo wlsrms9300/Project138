@@ -10,4 +10,5 @@ public interface ChatMapper {
 	ArrayList<MessageVO> getRoom(String nickname);
 	ArrayList<MessageVO> getMessage(int room_num);
 	int createRoom(MessageVO messagevo);
+	int insertContent(MessageVO messagevo);
 }

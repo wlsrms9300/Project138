@@ -16,6 +16,7 @@
    
    <!-- Message 정보 -->
    <resultMap type="com.spring.chat.MessageVO" id="MessageMap">
+   <result property="message_num" column="message_num" />
    <result property="parent_room" column="parent_room"  />
    <result property="content" column="content" /> 
    <result property="room_num" column="room_num"  />
@@ -46,6 +47,15 @@
 	</selectKey>
    		INSERT INTO CHATROOM
    		VALUES(#{room_num}, #{receiver}, #{sender}, #{img})
+   </insert>
+   
+   <!-- 채팅내용 (일반/관리자) -->
+   <insert id="insertContent" parameterType="com.spring.chat.MessageVO">
+   <selectKey keyProperty="message_num" resultType="int" order="BEFORE">
+			SELECT CHATMESSAGE_SEQUENCE.nextval From DUAL
+	</selectKey>
+   		INSERT INTO CHATMESSAGE
+   		VALUES(#{message_num}, #{room_num}, #{content})
    </insert>
    
 </mapper>

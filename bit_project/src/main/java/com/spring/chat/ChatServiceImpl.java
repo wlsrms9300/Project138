@@ -58,4 +58,15 @@ public class ChatServiceImpl implements ChatService {
 		}
 	}
 	
+	@Override
+	public int insertContent(MessageVO messagevo) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			int result = chatmapper.insertContent(messagevo);
+			return result;
+		} catch (Exception e) {
+			throw new Exception("메시지 등록 실패", e);
+		}
+	}
+	
 }
