@@ -13,9 +13,39 @@
    <result property="img" column="img"  />
    <result property="usergroup" column="usergroup"  />
    </resultMap>
+   
+   <!-- Message 정보 -->
+   <resultMap type="com.spring.chat.MessageVO" id="MessageMap">
+   <result property="parent_room" column="parent_room"  />
+   <result property="content" column="content" /> 
+   <result property="room_num" column="room_num"  />
+   <result property="receiver" column="receiver"  />
+   <result property="sender" column="sender"  />
+   <result property="img" column="img" />
+   </resultMap>
   
+   <!-- 관리자 목록 불러오기 (일반사용자) -->
    <select id="allAdmin" resultMap="ChatMap">
    		SELECT * FROM ADMIN
    </select>
+   
+   <!-- 채팅방 불러오기 (관리자) -->
+   <select id="getRoom" parameterType="String" resultMap="MessageMap">
+   		SELECT * FROM CHATROOM WHERE RECEIVER=#{nickname}
+   </select>
+   
+   <!-- 채팅방 메시지 불러오기 (관리자) -->
+   <select id="getMessage" parameterType="int" resultMap="MessageMap">
+   		SELECT * FROM CHATMESSAGE WHERE ROOM_NUM=#{room_num}
+   </select>
+   
+   <!-- 채팅방 만들기 (일반사용자) -->
+   <insert id="createRoom" parameterType="com.spring.chat.MessageVO">
+   <selectKey keyProperty="room_num" resultType="int" order="BEFORE">
+			SELECT CHATROOM_SEQUENCE.nextval From DUAL
+	</selectKey>
+   		INSERT INTO CHATROOM
+   		VALUES(#{room_num}, #{receiver}, #{sender}, #{img})
+   </insert>
    
 </mapper>

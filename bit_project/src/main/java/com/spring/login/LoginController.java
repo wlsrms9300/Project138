@@ -40,7 +40,7 @@ public class LoginController {
 	@Autowired(required = false)
 	private LoginService service;
 	
-	// 관리자 로그인기능 추가 해야한다
+
 	@RequestMapping(value = "/nomal_login.me", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView nomal_login(LoginVO vo, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		response.setCharacterEncoding("utf-8");
@@ -135,6 +135,7 @@ public class LoginController {
 		return mav;
 		}
 	
+	
 	/* 카카오 로그인 성공시 */
 	@RequestMapping(value="/kakaologin.pr", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
 	public String kakaoLogin(@RequestParam("code") String code, 
@@ -195,9 +196,14 @@ public class LoginController {
 				dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				int res = service.insertMember(dbvo); // 등록되지 않은 회원이면 DB에 저장
 				if(res != 0) {
-					session.setAttribute("email", email); //세션 생성
-					session.setAttribute("nickname", nickname);
-					session.setAttribute("img", image);
+					LoginVO dbvo3 = new LoginVO();
+					dbvo3 = service.getDetail(email);
+					session.setAttribute("email", dbvo3.getEmail()); //세션 생성
+					session.setAttribute("nickname", dbvo3.getNickname());
+					session.setAttribute("img", dbvo3.getImg());
+					session.setAttribute("userDetail", dbvo3);
+					dbvo3.setLast_connection(new Timestamp(System.currentTimeMillis()));
+					service.updateConnection(dbvo3);
 				} else {
 					System.out.println("등록실패");
 					return "redirect:main.ma";
@@ -285,9 +291,14 @@ public class LoginController {
 				dbvo.setLast_connection(new Timestamp(System.currentTimeMillis()));
 				int res = service.insertMember(dbvo); // 등록되지 않은 회원이면 DB에 저장
 				if(res != 0) {
-					session.setAttribute("email", email); //세션 생성
-					session.setAttribute("nickname", nickname);
-					session.setAttribute("img", img);
+					LoginVO dbvo3 = new LoginVO();
+					dbvo3 = service.getDetail(email);
+					session.setAttribute("email", dbvo3.getEmail()); //세션 생성
+					session.setAttribute("nickname", dbvo3.getNickname());
+					session.setAttribute("img", dbvo3.getImg());
+					session.setAttribute("userDetail", dbvo3);
+					dbvo3.setLast_connection(new Timestamp(System.currentTimeMillis()));
+					service.updateConnection(dbvo3);
 					return "redirect:main.ma";
 				} else {
 					System.out.println("등록실패");

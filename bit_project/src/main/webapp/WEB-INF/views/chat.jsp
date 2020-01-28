@@ -4,11 +4,13 @@
 <%
 	LoginVO userDetail = (LoginVO)session.getAttribute("userDetail");
 	String nickname = null;
+	
 	if(userDetail != null) {
 		nickname = userDetail.getNickname();
 	} else {
 		nickname = "비회원";
 	}	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -109,7 +111,7 @@ $(function() {
       </div>
       <header class="header">
        <div>
-        <h1 class="header__title"><%=nickname%></h1>
+        <h1 class="header__title">상담중</h1>
         </div>
         <div class="header__header-column">
           <a href="javascript:history.back()" class="header__back-btn">

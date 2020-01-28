@@ -2,19 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.chat.ChatVO" %>
 <%@ page import="com.spring.login.LoginVO" %>
+<%@ page import="com.spring.chat.MessageVO" %>
 <%@ page import ="java.util.ArrayList" %>
 <%
+	String sender = null; //sender 닉네임
 	String nickname = null;
 	LoginVO userDetail = null;
 	String usergroup = null;
-	userDetail = (LoginVO)session.getAttribute("userDetail"); //유저정보
-	if(userDetail != null) {
+	
+	if(session.getAttribute("email") != null) {
+		sender = (String)session.getAttribute("nickname");
+		userDetail = (LoginVO)session.getAttribute("userDetail"); //유저정보
 		if(userDetail.getUsergroup().equals("admin")) {
-			nickname = userDetail.getNickname();
-			usergroup = userDetail.getUsergroup();
+			nickname = userDetail.getNickname();   //관리자 닉네임
+			usergroup = userDetail.getUsergroup(); //관리자인지 확인
 		} 
 	}
 	
+	ArrayList<MessageVO> roomlist = (ArrayList<MessageVO>)request.getAttribute("roomlist"); //관리자일 경우 채팅방 정보
 	ArrayList<ChatVO> adminlist = (ArrayList<ChatVO>)request.getAttribute("adminlist"); //관리자 목록 
 	
 %>
@@ -37,7 +42,7 @@
 
 <!-- chat JS -->
 <script type="text/javascript">
-
+<%-- 
 var ws;
 var userid = '<%=nickname%>';
 var target = '${taeget}';
@@ -77,7 +82,7 @@ function register() { //메시지 수신을 위한 서버에 id 등록하기
 		target : 'target',
 		type : "register", //메시지 구분하는 구분자 - 상대방 아이디와 메시지 포함
 		userid : userid
-	};
+	};	
 	ws.send(JSON.stringify(msg));
 };
 
@@ -104,16 +109,16 @@ $(document).ready(function() {
 			$(".chat-screen").scrollTop($(".chat-screen")[0].scrollHeight);
 		}
 	});
+	
 });
+
 
 //페이지가 로딩되면 connect 실행
 $(function() {
 	if(<%=usergroup %>.equals("admin")) {
-		System.out.println("왜");
 		connect();	
 	}	
-
-}); 
+});  --%>
 
 </script>
 
@@ -128,13 +133,12 @@ $(function() {
     <main class="chats">
       <ul class="chats__list">
         <li class="chats__chat chat">
-        
         <%
-          if(userDetail == null || !(userDetail.getUsergroup().equals("admin"))) {  //관리자가 아니거나 유저정보가 null값이면(비회원) list에 관리자 목록출력
+         if(userDetail == null || !(userDetail.getUsergroup().equals("admin"))) {  //관리자가 아니거나 유저정보가 null값이면(비회원) list에 관리자 목록출력
         	for(int i = 0; i < adminlist.size(); i++) { 
         		ChatVO list = (ChatVO)adminlist.get(i);
         %>
-          <a href="chatstart.ct?nickname=<%=list.getNickname() %>">
+          <a href="chatstart.ct?nickname=<%=list.getNickname() %>&sender=<%=sender%>">
             <div class="chats__chat friend friend--lg">
               <div class="friend__column">
                 <img src="/bit_project/image/<%=list.getImg() %>" class="m-avatar friend__avatar" />
@@ -144,6 +148,32 @@ $(function() {
                   </span>
                   <span class="friend__bottom-text">
                     접속중(어떻게 알지?)
+                  </span>
+                </div>
+              </div>
+              <div class="friend__column">
+                <span class="chat__timestamp">
+                  채팅하기
+                </span>
+              </div>
+            </div>
+           	</a>
+        <%
+        		}
+        	} else {
+        		for(int i = 0; i < roomlist.size(); i++) {
+        			MessageVO mlist = (MessageVO)roomlist.get(i);
+        %>
+        	 <a href="chatstart.ct?nickname=<%=mlist.getReceiver() %>">
+            <div class="chats__chat friend friend--lg">
+              <div class="friend__column">
+                <img src="<%=mlist.getImg() %>" class="m-avatar friend__avatar" />
+                <div class="friend__content">
+                  <span class="friend__name">
+                    <%=mlist.getSender() %>
+                  </span>
+                  <span class="friend__bottom-text">
+                    마지막 메시지 내용
                   </span>
                 </div>
               </div>
