@@ -45,37 +45,38 @@
 							<span> <input type="text" name="nickname" id="nickname"
 								class="checkfield" placeholder="닉네임" required></span> <span>
 								<button type="button" class="nicknamecheck-btn"
-									onclick="nnChk();" value="N">중복확인</button>
-							</span>
+									onclick="nnChk();" value="N">중복확인</button></span>
+								<div class="alert alert-true" id="nickname-alert-true" style="font-size:10px; float:left; color:green;">사용 가능한 닉네임입니다.</div>
+								<div class="alert alert-false" id="nickname-alert-false" style="font-size:10px;float:left;color:red;">이미 사용 중인 닉네임입니다. </div>
 						</div>
 						<div class="checkfield">
 							<span><input type="email" name="email" id="email"
-								class="checkfield" placeholder="이메일주소"></span> <span><button
+								class="checkfield" placeholder="이메일주소" required></span> <span><button
 									type="button" class="emailcheck-btn" onclick="emChk();"
 									value="N">중복확인</button></span>
+							<div class="alert alert-true" id="email-alert-true" style="font-size:10px; float:left; color:green;">사용 가능한 이메일입니다.</div>
+							<div class="alert alert-false" id="email-alert-false" style="font-size:10px;float:left;color:red;">이미 사용 중인 이메일입니다. </div>
 						</div>
 
 
 						<div class="formfield">
 							<input type="text" name="name" class="checkfield"
-								placeholder="이름">
+								placeholder="이름" required>
 						</div>
 						<div class="formfield">
 							<input type="password" id="password" name="password"
 								placeholder="비밀번호(8자리이상, 특수문자, 대소문자)" required><br /> 
-								<div class="alert alert-check" id="alert-check" style="font-size:10px; float:left; color:red;">비밀번호 8자리 이상</div>
+								<div class="alert alert-check" id="pw-alert-check" style="font-size:10px; float:left; color:red;">비밀번호 8자리 이상</div>
 								<input
 								type="password" id="pwcheck" name="pwcheck" placeholder="비밀번호 확인" required>
-							<div class="alert alert-true" id="alert-true" style="font-size:10px; float:left; color:green;">비밀번호가
-								일치합니다.</div>
-							<div class="alert alert-false" id="alert-false" style="font-size:10px;float:left;color:red;">비밀번호가
-								일치하지 않습니다.</div>
+							<div class="alert alert-true" id="pw-alert-true" style="font-size:10px; float:left; color:green;">비밀번호가 일치합니다.</div>
+							<div class="alert alert-false" id="pw-alert-false" style="font-size:10px;float:left;color:red;">비밀번호가 일치하지 않습니다.</div>
 						</div>
 						<div class="formfield">
-							<input type="text" name="phone" placeholder="핸드폰번호">
+							<input type="text" name="phone" placeholder="핸드폰번호" required>
 						</div>
 						<div class="formfield">
-							<input type="text" name="postal_num" id="pos_num" placeholder="우편번호">
+							<input type="text" name="postal_num" id="pos_num" placeholder="우편번호" required>
 						</div>
 						<div class="formfield">
 							<input type="text" name="address" id="address" placeholder="주소">
@@ -84,7 +85,7 @@
 							<input type="text" name="address_detail" id="address_detail" placeholder="상세주소">
 						</div>
 						<div class="formfield">
-							<input type="text" name="birth" placeholder="생년월일(6자리)">
+							<input type="text" name="birth" placeholder="생년월일(6자리)" required>
 						</div>
 
 						<h4 id="additional-text">추가정보 입력</h4>
@@ -168,26 +169,29 @@
 		
 		<script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 		 <script>
- $('#pos_num').click(function() {
-   goPopup();
-})
- function goPopup() {
-    // 주소검색을 수행할 팝업 페이지를 호출합니다.
-    // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    var pop = window.open("/bit_project/jusoPopup.jsp", "pop",
-          "width=570,height=420, scrollbars=yes, resizable=yes");
-
-    // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
- }
-
- function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn){
-     // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-
-    $('#pos_num').val(zipNo);
-    $('#address').val(roadAddrPart1);
-    $('#address_detail').val(addrDetail);
-}
+		 $('#pos_num').click(function() {
+		   goPopup();
+		})
+		$('#pos_num').keyup(function() {
+		   goPopup();
+		})
+		 function goPopup() {
+		    // 주소검색을 수행할 팝업 페이지를 호출합니다.
+		    // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+		    var pop = window.open("/bit_project/jusoPopup.jsp", "pop",
+		          "width=570,height=420, scrollbars=yes, resizable=yes");
+		
+		    // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+		    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+		 }
+		
+		 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn){
+		     // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		
+		    $('#pos_num').val(zipNo);
+		    $('#address').val(roadAddrPart1);
+		    $('#address_detail').val(addrDetail);
+		}
  </script>
 </body>
 </html>
