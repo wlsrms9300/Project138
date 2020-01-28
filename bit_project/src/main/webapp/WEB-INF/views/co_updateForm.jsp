@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.spring.writing.WritingVO" %>
 <%
-	String nickname = (String)session.getAttribute("nickname");
+	//String nickname = (String)session.getAttribute("nickname");
+	
+	WritingVO writingvo = (WritingVO)request.getAttribute("writingvo");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -53,31 +57,29 @@
 		<div></div>
 	</div>
  	<div id="community-contentbox">
-		<form method="post" id="writingForm" action="write.cw" role="form" enctype="multipart/form-data">
-			<input type="hidden" name="id" value="<%=nickname %>" />
+		<form method="POST" name="edit-Form" action="edit.cw" role="form" enctype="multipart/form-data">		
+			<input type="hidden" name="board_num" value="<%=writingvo.getBoard_num() %>" />
+			<input type="hidden" name="nickname" value="<%=writingvo.getNickname() %>" />
 			<div id="cententbox-top">
-			 	<span> <select id="category_select" name="category">
-						<option value="자유게시판">자유게시판</option>
-						<option value="사진게시판" selected>사진게시판</option>
-						<option value="게시판3">게시판3</option>
-						<option value="게시판4">게시판4</option>
+			 	<span> <select id="category_select" name="category" disabled>
+						<option value="<%=writingvo.getCategory() %>"><%=writingvo.getCategory() %></option>
 				</select>
-				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="제목">
+				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="<%=writingvo.getBoard_name() %>">
 				</span>
 			</div>
 
 			<div id="contentbox-middle">
-				<textarea class="summernote" id="summernote" name="content"
-					placeholder="content" maxlength="140" rows="7"></textarea>
+				<textarea class="summernote" id="summernote" name="content" maxlength="140" rows="7"></textarea>
 			</div>
 			<div id="contentbox-bottom">
-				<button type ="submit" id="submit-btn" name="submit">글쓰기</button>
+				<input type ="submit" id="submit-btn" value="수정">
 				<input type="button" id="cancel-btn" value="취소">
 			</div>
 		</form>
 	</div> 
   <script type="text/javascript">
   $(document).ready(function() {
+   
 	    $("#summernote").summernote({
 	        placeholder : 'content',
 			minHeight : 370,
@@ -92,6 +94,8 @@
 	            }
 	        }
 	    });
+	    $("#summernote").summernote('code', '${writingvo.content}'); //코드 수정할 때 필요
+	    
 	});
 
 	function sendFile(file, editor, welEditable){

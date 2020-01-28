@@ -69,7 +69,7 @@ public class MemberController {
 		return "signedup";
 	}
 
-	
+	/* 회원가입 DB insert */
 	@RequestMapping(value = "/memberInsert.me", method = RequestMethod.POST)
 	public String memberInsert(MultipartHttpServletRequest  request, HttpServletResponse response, MemberVO membervo, RedirectAttributes redirect)throws Exception {
 		
@@ -77,54 +77,76 @@ public class MemberController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer;
 		
-		
 		MultipartFile mf = request.getFile("img2"); // 파일
 	  
 		try {
+			 /* default image */
 		     if(mf.isEmpty()) {
 		    	   membervo.setImg("C:\\Project138\\upload\\0c57c52f289644ceb799d673566eed91.png"); //upload 폴더에 있는 default_profile 이미지명. 확장자명까지 넣을 것.   
-		       } else {
+		     } else {
 	      
 		        String uploadPath = "C:\\Project138\\upload\\";
 		        String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
 		        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-		    
-		              if (mf.getSize() != 0) {
-		                 // mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-		                mf.transferTo(new File(uploadPath + storedFileName));
-		                membervo.setImg(uploadPath + storedFileName);
-		              }  
-		       }
+		        
+		        if (mf.getSize() != 0) {
+		        	// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+		        	mf.transferTo(new File(uploadPath + storedFileName));
+		        	membervo.setImg("/bit_project/image/" + storedFileName);
+		        }  
+		     }
+		     
+		    /* 마케팅 수신  */
+			if(membervo.getReceive_email() == null) {
+				membervo.setReceive_email("N");
+			}
+			if(membervo.getReceive_text() == null) {
+				membervo.setReceive_text("N");
+			}
 			
+			/* 특수문자 제거 */
+			String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]"; //특수문자 제거 정규식
+//			membervo.setPhone(membervo.getPhone().replaceAll(match,"")); // phone - DB타입 varchar2로 바꿀 것.
+			membervo.setBirth(membervo.getBirth().replaceAll(match,"")); // 유저 생년월일
+			membervo.setChildren_birth(membervo.getChildren_birth().replaceAll(match,"")); // 자녀 생년월일
+			
+			/* DB insert */
 			int res = memberService.memberInsert(membervo);
 			writer = response.getWriter();
+			
+			/* 페이지 이동 */
 			if(res == 1) {
-				writer.write("<script>alert('메일을 확인해주세요.'); location.href='main.ma';</script>");
+//				writer.write("<script>alert('메일을 확인해주세요.'); location.href='main.ma';</script>");
 				redirect.addAttribute("email", request.getParameter("email"));  
+				return "redirect:/mailSending.me";
 			} else {
 				writer.write("<script>alert('회원 가입 실패.'); location.href='main.ma';</script>");
 			}
+			
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 		
-		return "redirect:/mailSending.me";
+		return null;
 	}
 	
 	
-	// mailSending 코드
+	  /* mailSending 코드 */
 	  @RequestMapping(value = "/mailSending.me")
-	  public String mailSending(HttpServletRequest request, @RequestParam("email") String email) {
+	  public String mailSending(HttpServletRequest request, HttpServletResponse response, @RequestParam("email") String email) throws Exception {
 	   
 	    String setfrom = "suminnjeong@gmail.com";  //host 메일 주소       
 //	    String email  = request.getParameter("email");     // 받는 사람 이메일
 	    String title = "진근이네 인증메일"; //제목
 	    String content= "http://localhost:8080/bit_project/verifyEmail.me?id="+ email; //메일 내용
 	   
+	    response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		
 	    try {
 	      MimeMessage message = mailSender.createMimeMessage();
-	      MimeMessageHelper messageHelper 
-	                        = new MimeMessageHelper(message, true, "UTF-8");
+	      MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 	 
 	      messageHelper.setFrom(setfrom);  // 보내는 사람 생략하면 정상작동 안함
 	      messageHelper.setTo(email);     // 받는사람 이메일
@@ -132,14 +154,16 @@ public class MemberController {
 	      messageHelper.setText(content);  // 메일 내용
 	     
 	      mailSender.send(message);
+	      
+	      writer.write("<script>alert('인증 메일을 확인해주세요.'); location.href='main.ma';</script>");
 	    } catch(Exception e){
 	      System.out.println(e);
 	    }
 	   
-	    return "redirect:/main.ma";
+	    return null;
 	  }
 	
-	  
+	/* 메일 인증 url */
 	@RequestMapping(value = "/verifyEmail.me", method = RequestMethod.GET)
 	public String verifyEmail(HttpServletRequest request, HttpServletResponse response, MemberVO membervo) {
 		membervo.setEmail(request.getParameter("id")); 

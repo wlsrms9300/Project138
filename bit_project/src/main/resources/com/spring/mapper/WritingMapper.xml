@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.WritingMapper">
-	<resultMap id="testMap" type="com.spring.writing.WritingVO">
+	<resultMap id="resultWritingVO" type="com.spring.writing.WritingVO">
+		<result property="board_num" column="board_num" />
+		<result property="nickname" column="nickname" />
+		<result property="board_name" column="board_name" />
+		<result property="content" column="content" />
+		<result property="regist" column="regist" />
 		<result property="img" column="img" />
+		<result property="count" column="count" />
+		<result property="category" column="category" />
+		<result property="scrap_count" column="scrap_count" />
 	</resultMap>
 
-<!-- 게시판 insert -->
-<insert id="insertBoard" parameterType="com.spring.writing.WritingVO">
-	<selectKey keyProperty="board_num" order="BEFORE" resultType="int">
-		SELECT board_sequence.NEXTVAL FROM DUAL
-	</selectKey>
-	INSERT INTO BOARD (board_num, nickname, board_name, content, regist, img, count, category, scrap_count)
-				VALUES (#{board_num}, #{nickname}, #{board_name}, #{content}, #{regist}, #{img}, #{count}, #{category}, #{scrap_count})
-</insert>
-
-<insert id="insertTest" parameterType="com.spring.writing.WritingVO">
-	insert into test_board values (#{img})
-</insert>
-
-<select id="returnTest" parameterType="com.spring.writing.WritingVO" resultType="String">
-	select * from test_board where img=#{img}
-</select>
+	<!-- 글쓰기 -->
+	<insert id="write" parameterType="com.spring.writing.WritingVO">
+		<selectKey keyProperty="board_num" order="BEFORE" resultType="int">
+			SELECT board_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD (board_num, nickname, board_name, content, regist, img, count, category, scrap_count)
+					VALUES (#{board_num}, #{nickname}, #{board_name}, #{content}, sysdate, #{img}, #{count}, #{category}, #{scrap_count})
+	</insert>
+	
+	<!-- DB) file_path table -->
+<!-- 	<insert id="storeFilePath" parameterType="String">
+		insert into file_path values (#{file_path})
+	</insert> -->
+	
+	<!-- file_path table 데이터 삭제 -->
+<!-- 	<delete id="deleteFilePath">
+		delete from file_path
+	</delete> -->
+	
+	<!-- 글 정보 가져오기 -->
+	<select id="getDetail" parameterType="int" resultMap="resultWritingVO">
+		select * from board where BOARD_NUM=#{BOARD_NUM}
+	</select>
+	
+	<!-- 글쓰기 수정 -->
+	<update id="edit" parameterType="com.spring.writing.WritingVO" >
+		update board set content=#{content} where board_num=#{board_num}
+	</update>
 				
 </mapper>
 
