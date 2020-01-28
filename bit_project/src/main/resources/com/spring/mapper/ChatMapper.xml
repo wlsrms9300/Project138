@@ -58,4 +58,9 @@
    		VALUES(#{message_num}, #{room_num}, #{content})
    </insert>
    
+   <!-- 방번호 가져오기 -->
+   <select id="getNum" parameterType="String" resultType="int">
+   		SELECT ROOM_NUM FROM CHATROOM WHERE SENDER=#{sender}
+   </select>
+   
 </mapper>

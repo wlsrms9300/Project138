@@ -69,4 +69,15 @@ public class ChatServiceImpl implements ChatService {
 		}
 	}
 	
+	@Override
+	public int getNum(String sender) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			int num = chatmapper.getNum(sender);
+			return num;
+		} catch (Exception e) {
+			throw new Exception("방번호 조회 실패", e);
+		}
+	}
+	
 }

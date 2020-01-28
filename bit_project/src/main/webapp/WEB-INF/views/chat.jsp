@@ -79,6 +79,7 @@ function sendMsg() {
 	var msg = {
 			type : "chat", //메시지 구분하는 구분자 - 상대방 아이디와 메시지 포함해서 보냄
 			target :  '${target}', //상대방 아이디 
+			room_num : '${room_num}',
 			message : $('#chat__content-text').val()
 	};
 	ws.send(JSON.stringify(msg));

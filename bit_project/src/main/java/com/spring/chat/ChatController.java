@@ -54,15 +54,17 @@ public class ChatController {
 		messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
 		messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
 		messagevo.setImg(request.getParameter("img")); //보내는 사람 프로필이미지
-
+		
 		int result;
+		int room_num;
 		try {
 			result = chatservice.createRoom(messagevo);
-
+			room_num = chatservice.getNum(request.getParameter("sender"));
+			model.addAttribute("room_num", room_num);
+			System.out.println(room_num);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		model.addAttribute("target", request.getParameter("nickname"));
 		return "chat";
 	}

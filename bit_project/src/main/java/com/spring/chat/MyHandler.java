@@ -59,14 +59,16 @@ public class MyHandler extends TextWebSocketHandler {
 			String target = object.getString("target");
 			WebSocketSession ws = (WebSocketSession)userMap.get(target);
 			String msg = object.getString("message");
+			int room_num = Integer.parseInt(object.getString("room_num"));
 			
-			//메시지 DB에 저장 후 전송
-			
+			//메시지 DB에 저장 후 전송	
 			messagevo.setContent(msg);
+			messagevo.setRoom_num(room_num);
 			
 			int result;
 			try {
 				result = chatservice.insertContent(messagevo);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
