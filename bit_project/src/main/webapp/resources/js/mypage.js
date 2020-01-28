@@ -269,6 +269,56 @@ $(document).ready(function(){
             menu3.hide();
             menu4.hide();
             menu5.hide();
+            var email = '<%=email%>';
+            $.ajax({
+            	url: '/bit_project/.my',
+                type: 'POST',
+                dataType: 'json',
+                async:false,
+                data: {"email" : email},
+                success: function (data) {
+                    $("").empty();
+                    $.each(data, function (index, item) {
+                        var bookmark = "";
+                        bookmark += '<div class="list_menu">';
+                        bookmark += '<table>';
+                        bookmark += '<tr class="menu_line">';
+                        bookmark += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
+                        bookmark += '<th class="profile_menu2"><b class="oh">예약</b></th>';
+                        bookmark += '<th class="profile_menu3"><b class="oh">찜</b></th>';
+                        bookmark += '</tr>';
+                        bookmark += '</table>';
+                        bookmark += '<p>n개의상품이있다.</p>';
+                        bookmark += '</div>';
+                        
+                        
+                        
+                        bookmark += '<div class="menu_product">';
+                        bookmark += '<table>';
+                        bookmark += '<tr class="product_line">';
+                        bookmark += '<td>';
+                        
+                        //8번 반복
+                        bookmark += '<div class="product>';
+                        bookmark += '<img src=""><h3>장난감1</h3>';
+                        bookmark += '</div>';
+                        //
+                        bookmark += '</td>';
+                        bookmark += '</tr>';
+                        
+                        bookmark += '</table>';
+                        bookmark += '</div>';
+                        
+                        
+                        
+                        $(".a").append(exText);
+                    })
+                },
+    	        error: function () {
+    				alert("ajax오류");
+    			}
+            });
+            
         } else {
             $('.profile_menu1').css('color', 'black');
             $('.profile_menu2').css('color', 'black');

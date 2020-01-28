@@ -272,7 +272,7 @@
             <!-- 포인트 끝 -->
             
             <!-- 위시리스트 시작 -->
-            <div class="list">
+            <%-- <div class="list">
                 <div class="list_menu">
                     <table>
                         <tr class="menu_line">
@@ -313,8 +313,8 @@
                                 </div>
                             </td>
                     </table>
-                </div>
-            </div>
+                </div> 
+            </div> --%>
             <!-- 위시리스트 끝 -->
 
             <!-- 쉐어/정산 시작 -->

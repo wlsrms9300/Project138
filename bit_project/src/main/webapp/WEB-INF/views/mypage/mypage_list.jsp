@@ -25,7 +25,7 @@
                     </table>
                     <p>n개의 상품이 있습니다.</p>
                 </div>
-                <div class="menu_product">
+                 <div class="menu_product">
                     <table>
                         <tr class="product_line"> 
                             <td>
@@ -54,8 +54,9 @@
                                 <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
                                 </div>
                             </td>
+                           </tr>
                     </table>
-                </div>
+                </div> 
             </div>
 </body>
 </html>
