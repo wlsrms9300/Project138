@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>community(main)</title>
+<title>community</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport"  content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 <link href="${pageContext.request.contextPath}/resources/css/community.css" rel="stylesheet" type="text/css" /> <!-- css -->
@@ -17,241 +17,7 @@
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script> <!-- dropdown --> --%>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-	$("document").ready(function(){
-        var category = $(".zz").text(); //기본 게시판(자유게시판)
-		var dataPerPage = 5; //한 페이지에 나타낼 데이터 수
-		var pageCount = 5; //한 화면에 나타낼 페이지 수
-		var currentPage = 1;
-		var totalData = 0;
-		
-		alert("ready 부분 시작");
-		selectData(category, dataPerPage, pageCount, currentPage);
-
-      	
-			$('.community_menubar_item').click(function() {
-				var category = $(this).attr('value'); //클릭한 게시판 이름
-				alert("클릭한 카테고리 : " + category);
-				$('.zz').text(category); //클릭한 게시판 이름으로 바꾸기
-				$(".paginate").empty();  //페이징 초기화
-				$('#wrapper-dropdown').val("최신순");
-				
-				
-				var dataPerPage = 5; //한 페이지에 나타낼 데이터 수
-				var pageCount = 5; //한 화면에 나타낼 페이지 수
-				var currentPage = 1;
-							      	
-				selectData(category, dataPerPage, pageCount, currentPage);
-			});
-			
-	}); //document.ready         
-	
-		function button_click() {
-			var currentPage = 1;
-			var category = $(".zz").text(); 
-			var dataPerPage = 5;
-			var pageCount = 5;
-			alert("currentpage 보내기 : " + currentPage);
-			selectData(category, dataPerPage, pageCount, currentPage);
-		}
-
-        //카테고리
-        function selectData(category, dataPerPage, pageCount, currentPage) {
-        	var category = $(".zz").text(); 
-        	var option = $("#wrapper-dropdown option:selected").val(); //필터 값 가져오기
-        	var totalData = 0; //총 게시글 수
-        	var dataPerPage = 5; //한 페이지에 나타낼 데이터 수
-			var pageCount = 5; //한 화면에 나타낼 페이지 수
-			
-        	alert("selectData 들어옴 ==> category" + category  + "dataPerpage" + dataPerPage + "pageCount" + pageCount + "currentPage" + currentPage + "option" + option);
-        	
-        		$.ajax({
-   				 url : '/bit_project/getCM.co', 
-   	              type : "post", 
-   	              data : {"page" : currentPage, "category" : category, "option" : option},
-   	              dataType: 'json',
-   	              async: false,
-   	              success : function(data){  //성공
-   	            		$('#community_data').empty();
-   	                 $('.zz').text(category); //게시판이름 바꾸기
-   	                 	
-   						if(data.length != 0) { //게시글 존재
-   	 					 	$.each(data, function(index, item) {
-   	 					 	
-   	 					 	totalData = item.cm_count; //해당 카테고리의 게시글 수
-   	 					 	var output = ' ';
-   							
-   							var reg_date = new Date(item.regist); 
-   			                var date = date_format(reg_date);  //날짜 format
-			        			                		
-   			                if (item.category != "육아사진") { //글게시판
-   			                	
-       							output += '<div id="community_container_mt">';
-       							output += '<div class="underline"></div>';
-       							output += '<div class="community_mt_title">';
-       							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"' + '</a>';
-       							output += '<div class="community_mt_img">';
-       							output += '<img src="${pageContext.request.contextPath}/resources/img/child.jpg" class="com_img">';
-       							output += '</div>';
-       							output += '<h2 class="community_name">' + item.board_name + '</h2>';
-       							output += '<p class="community_mt_mt">' + item.content + '</p>';
-       							output += '<footer class="community_mt_footer">';
-       							output += '<a class="community_mt_footer_user" href="main.ma">';
-       							output += '<img><i class="fas fa-user-circle fas-2x"></i>';
-       							output += '<span class="community_mt_footer_users">' +  item.nickname + ' </span>';
-       							output += '</a>';
-       							output += '<span class="community_mt_footer_caption">';
-       							output += '<span class="community_mt_footer_time">' + date + ' </span>';
-       							output += '<span class="community_mt_footer_comments">' + "댓글 " + item.co_count + ' </span>';
-       							output += '<span class="community_mt_footer_views">' + "조회수 " + item.count + ' </span>';
-       							output += '</span>';
-       							output += '</footer>';
-       							output += '</div><br>';
-       							output += '</div>';
-       							
-       							$('#community_data').append(output);
-   			                }else { //사진게시판
-   			                	output += '<div id="community_container_mi">';
-       							output += '<div class="community_mi_title">';
-       							output += '<a class="community_mi_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"' + '</a>';
-       							output += '<div class="community_mi_img">';
-       							output += '<img src="${pageContext.request.contextPath}/resources/img/child.jpg" class="com_img">';
-       							output += '</div>';
-       							output += '<h2 class="community_name">' + item.board_name + '</h2>';
-       							output += '<address class="community_mi_writer">';
-       							output += '<a class="community_mi_writer_user">'; //글쓴이 ?? 검색
-       							output += '<img><i class="fas fa-user-circle"></i>';
-       							output += '<span class="community_mt_footer_users">' + item.nickname + ' </span>';
-       							output += '</a>';
-       							output += '</address>';
-       							output += '<footer class="community_mi_footer">';
-       							output += '<span class="community_mi_footer_caption">';
-       							output += '<span class="community_mi_footer_time">' + date  + ' </span>';
-       							output += '<span class="community_mi_footer_comments">' + "댓글 " + item.co_count + ' </span>';
-       							output += '<span class="community_mi_footer_views">' + "조회수 " + item.count + ' </span>';
-       							output += '</span>';
-       							output += '</footer>';
-       							output += '</div><br>';
-       							output += '</div>';
-       							
-       							$('#community_data').append(output);
-   			                }
-   			             
-   						}); 
-   	 					alert("total : " + totalData);
- 			             paging(totalData, dataPerPage, pageCount, currentPage);
- 			            
-   						}
-   						else { //게시글 존재하지않을때
-   							var outputnull = "<div class='community_ncontainer'>";
-   							outputnull += "<div>등록된 게시글이 없습니다.</div>";
-   							outputnull += "</div>";
-   							$('#community_data').append(outputnull);
-   						}
-   					},
-   	              error : function(data){
-   	            	 alert('error');
-   	              }//error
-   			}); //ajax
-   			
-	}
-	
-		 //날짜 format
-        function date_format(format) {
-            var year = format.getFullYear();
-            var month = format.getMonth()+1;
-            var hour = format.getHours();
-            var min = format.getMinutes();
-            
-            if(month<10) {
-               month = '0' + month;
-            }
-            var date = format.getHours();
-            if(hour<10) {
-               hour = '0' + hour;
-            }
-            var min = format.getMinutes();
-            if(min<10) {
-               min = '0' + min;
-            }
-            return year + "-" + month + "-" + date + "-" + hour +":" + min;
-         }
-		 
-	
-        //페이징
-        function paging(totalData, dataPerPage, pageCount, currentPage) {
-        	alert('출력할 totaldata : '+totalData); //333333
-        	/* $(".paginate").empty();  */
-            var totalPageDevide = totalData / dataPerPage;
-            var pageGroupDevide = currentPage / pageCount;
-
-            var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수 1
-            var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹 0
-            
-            var last = pageGroup * pageCount; //0
-
-            if (last > totalPage) // 0 > 1
-                last = totalPage;
-            
-            var first = last - (pageCount - 1); // 0 - (5 - 1)
-            
-            if (first <= 0) {
-                first = 1; //
-            }
-            var next = last + 1; // 다음 1
-            var prev = first - 1; // 이전 0
-            var one = 1; // 맨 처음 
-            var lastNo = totalPage; // 맨 끝 1
-
-            var html = "";
-
-            if (prev > 0) {
-                html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
-                html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
-
-            }
-            
-            for (var i = first; i <= last; i++) {
-            	alert("페이징 만드는중");
-                //html += "<a href='#' id=" + i + ">" + i + "</a> ";
-                html += "<a href='javascript:selectData(totalData, dataPerPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
-                //html += "<a href='javascript:snsData(0, 6, 10, " + i + ")' id=" + i + ">" + i + "</a> ";
-                
-            }
-
-            if(totalPage==0){
-            	
-            }else {
-            	  if (last < totalPage) // 0 < 1
-            	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
-            	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
-
-            	        $(".paginate").html(html);    // 페이지 목록 생성
-            	        $(".paginate a").removeClass("page_on");
-
-            	        $(".paginate a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
-            }
-          
-
-            $(".paginate a").click(function () {
-                var $item = $(this);
-                var $id = $item.attr("id");
-                var selectedPage = $item.text(); // 번호 클릭.
-
-                if ($id == "one") selectedPage = one;
-                if ($id == "prev") selectedPage = prev;
-                if ($id == "next") selectedPage = next;
-                if ($id == "lastNo") selectedPage = lastNo;
-                
-                alert(selectedPage + "이동 ???");
-                selectData(totalData, dataPerPage, pageCount, selectedPage);
-                paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
-            });
-            
-        }
-             
-	</script>
-	
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community.js"></script>
 </head>
 <body>
 
@@ -268,11 +34,11 @@
             <a class="community_menubar_item" href="#" value="정보공유">정보공유(팁)</a>
             <a class="community_menubar_item" href="#" value="공구게시판">공구게시판</a>
             <a class="community_menubar_item" href="#" value="육아게시판">육아게시판</a>
-            <a class="community_menubar_item" href="co_writeForm.co">이슈,토론게시판</a>
+            <a class="community_menubar_item" href="#" value="토론게시판">이슈,토론게시판</a>
         </div>
     </div>
     
-
+<!-- 게시판 내용 시작 -->
 <div id="community_main">
     <div id="community_container_header">
         <div class="community_title"><p class="zz">자유게시판</p></div>
@@ -280,41 +46,49 @@
     
     <!-- filter + dropdown -->
 	<div id="community_container_filter">
-		<!-- filter -->
-	    <div class="community_search">
-	        <div class="wrap">
-	            <form action="" autocomplete="on">
-	            <input id="search" name="search" type="text" > <!-- input -->
-	            <i class="fas fa-search fa-2x"><input id="search_submit"  type="submit" name="search_submit"></i> <!-- icon -->
-	            </form>
-	        </div>
-	    </div>
-	    
-	   <!-- dropdown -->
+	
+	<!-- dropdown -->
      <div class="community_filter">
 		<select id="wrapper-dropdown" class="wrapper-dropdown" onchange="button_click()">
 			<option value="최신순">최신순</option>
 			<option value="조회순">조회순</option>
 			<option value="댓글순">댓글순</option>
-			<!-- <ul class="dropdown">
-				<li><a href="#" value="최신순">최신순</a></li>
-				<li><a href="#" value="댓글순">댓글순</a></li>
-				<li><a href="#" value="스크랩순">스크랩순</a></li>
-			</ul> -->
 		</select>
    	</div>
+   	
+   	<!-- 글쓰기 버튼 -->
+   	<button type="button" onclick="location.href='co_writeForm.co'" id="community_write">글쓰기</button>
+   	
+		<!-- filter -->
+	    <div class="community_search">
+	        <div class="wrap">
+	            <!-- <form action="" autocomplete="on" method="post"> -->
+	            <input id="search_form" name="search_form" type="text">
+	            <i class="fas fa-search">
+	            		<input id="search_submit"  type="submit" name="search_submit"></i> <!-- icon -->
+	            <!-- </form> -->
+	        </div>
+	    </div>
 	    
+   	
 	</div>
-	   
+	
+	<!-- 검색 결과 -->
+	 <div class="community_search_result"><p class="gg"></p></div>
+	 
 	<!-- 게시글 리스트 -->
     <div id="community_data"></div>
+    
+    <div class="underline"></div>
+    
     
 	<!-- 페이징 -->
     <div class="paginate" style="text-align:center;"></div>
     
 </div> <!-- 게시판 내용 끝 -->
+
 <footer>
-	<%@ include file="/WEB-INF/views/footer.jsp" %> 
+	 <%@ include file="/WEB-INF/views/footer.jsp" %> 
 </footer>
 
 </body>

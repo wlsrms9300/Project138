@@ -35,6 +35,7 @@ public class CommunityServiceImpl implements CommunityService {
 //		return getCM;
 //	}
 	
+	/*필터*/
 	@Override
 	public List<CommunityVO> filter1(String category, int start, int end) {
 		List<CommunityVO> filter1 = null;
@@ -65,36 +66,26 @@ public class CommunityServiceImpl implements CommunityService {
 		return filter3;
 	}
 	
-//	@Override
-//	public List<CommunityVO> getCM(String category) {
-//		List<CommunityVO> getCM = null;
-//		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-//		getCM = cmmapper.getCM(category);
-//		System.out.println( "service : " + getCM);
-//		
-//		return getCM;
-//	}
+	@Override
+	public List<CommunityVO> getCMsearch(String search_Data, String category, int start, int end) {
+		List<CommunityVO> getCMsearch = null;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		getCMsearch = cmmapper.getCMsearch(search_Data, category, start, end);
+		
+		System.out.println("service : " + search_Data + category + start + end + "zz : "  + getCMsearch);
+		
+		return getCMsearch;
+	}
 	
-//	@Override
-//	public List<CommunityVO> getCM() {
-//		List<CommunityVO> getCM = null;
-//		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-//		getCM = cmmapper.getCM();
-//		System.out.println( "service : " + getCM);
-//		
-//		return getCM;
-//	}
-
-//	@Override
-//	public int getCommunityCount(String category) throws Exception {
-//		try {
-//			CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-//			int res = cmmapper.getCommunityCount(category);
-//			return res;
-//		} catch (Exception e) {
-//			throw new Exception("게시글 카운트 실패", e);
-//		}
-//	}
+	@Override
+	public List<CommunityVO> getuserSearch(String nickname, int start, int end) {
+		List<CommunityVO> getuserSearch = null;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		
+		getuserSearch = cmmapper.getuserSearch(nickname, start, end);
+		System.out.println("닉네임으로 조회");
+		return getuserSearch;
+	}
 
 	@Override
 	public CommunityVO detailCommunity(int num) {

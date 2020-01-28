@@ -16,7 +16,10 @@ public interface CommunityService {
 	public List<CommunityVO> filter2(@Param("category") String category, @Param("start") int start, @Param("end") int end);
 	public List<CommunityVO> filter3(@Param("category") String category, @Param("start") int start, @Param("end") int end);
 	
+	/*검색*/
+	public List<CommunityVO> getCMsearch(@Param("search_Data") String search_Data, @Param("category") String category, @Param("start") int start, @Param("end") int end);
 	
+	public List<CommunityVO> getuserSearch(@Param("nickname") String nickname, @Param("start") int start, @Param("end") int end);
 	public CommunityVO detailCommunity(int num);
 	public int updateCount(CommunityVO cmvo);
 	
