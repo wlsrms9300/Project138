@@ -12,7 +12,7 @@
             async:false,
             success: function (data) {             
                 totalData = data;
-                alert(data);
+                $('.qnacssf').html("("+totalData+")");
             
             },
 	        error: function () {
@@ -32,7 +32,6 @@
     });
 
     function snsData(totalData, dataPerPage, pageCount, currentPage) {
-    	alert(p);
         var allData = { "page": currentPage, "product_num" : p};
         
         $.ajax({
@@ -50,8 +49,13 @@
                     var exText = "";
                     exText += "<li>";
                     exText += "<div class='title'>";
-                    exText += "<span>" +item.answer+ "</span>";                    
-                    exText += "<em>" + item.content + "</em>";
+                    exText += "<span>" +item.answer+ "</span>";    
+                    if(item.secret=="공개"){
+                    	exText += "<em>" + item.content + "</em>";	
+                    }else {
+                    	exText += "<em>" + item.content + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                    }
+                    
                     exText += "<div class='date'>";
                     exText += "<em>" + item.nickname + "</em>";
                     var date = new Date(item.regist);
@@ -59,10 +63,25 @@
                     exText += "<em>" + date + "</em>";
                     exText += "</div></div>"; //title
                     exText += "<div class='content' style='display:none;'>";
+                    exText += item.content;
                     exText += "<p class='txt-right'>";
-                    exText += "<a href='#' onclick='#'>수정</a>";
-                    exText += "<a href='#' onclick='#'>삭제</a>";
-                    exText += "</p>"+item.content;
+                    
+                    if(item.answer=="답변대기"){
+                    	 var sib1 = "'"+item.question_num+"'";
+                    	 var sib2 = "'"+item.content+"'";
+                    	 var sib3 = "'"+item.nickname+"'";
+                    	 var sib4 = "'"+item.secret+"'";
+                    	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib2+','+sib3+','+sib4+');">수정</a>';
+                        exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                        exText += "</p>";
+                    }else {
+                        exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                        exText += "</p>";
+                        exText += "<div class='reply'>";
+                        exText += "<span class='re'>re.</span>";
+                        exText += "<span class='date'>관리자가 답글 단 날짜</span>";
+                        exText += "관리자의 답글내용"+"</div>";
+                    }
                     exText += "</div></li>";
                     $(".accordion ul").append(exText);
                 })
@@ -70,7 +89,6 @@
                 
                 }
                 else {
-                	alert("zz");
                 	 var exTextnull = "<li style='text-align:cetner;'>";
                 	 exTextnull += "<div>등록된 상품문의가 없습니다.</div>";
                 	 exTextnull += "</li>";
@@ -104,7 +122,6 @@
 
 
     function paging(totalData, dataPerPage, pageCount, currentPage) {
-    	alert('페이징의 totaldata'+totalData);
         var totalPageDevide = totalData / dataPerPage;
         var pageGroupDevide = currentPage / pageCount;
 
@@ -151,14 +168,14 @@
         	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
         	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
 
-        	        $(".paginate").html(html);    // 페이지 목록 생성
-        	        $(".paginate a").removeClass("page_on");
+        	        $(".qna_paginate").html(html);    // 페이지 목록 생성
+        	        $(".qna_paginate a").removeClass("page_on");
 
-        	        $(".paginate a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
+        	        $(".qna_paginate a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
         }
       
 
-        $(".paginate a").click(function () {
+        $(".qna_paginate a").click(function () {
             var $item = $(this);
             var $id = $item.attr("id");
             var selectedPage = $item.text(); // 번호 클릭.
@@ -169,7 +186,6 @@
             if ($id == "prev") selectedPage = prev;
             if ($id == "next") selectedPage = next;
             if ($id == "lastNo") selectedPage = lastNo;
-            alert(selectedPage);
             snsData(totalData, dataPerPage, pageCount, selectedPage);
             paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
             $('.accordion ul li').click(function () {
@@ -183,4 +199,35 @@
         })
     }
    
- 
+function qnamodify(_qnum, _content, _nickname, _secret) {
+	 $("#QnaForm textarea[name=content]").html(_content);
+	 $("#QnaForm input[name=nickname]").val("테스트닉네임");
+	 if(_secret=="비공개"){
+		 $("#QnaForm input:radio[name='privatecheck']:radio[value='비공개']").prop('checked', true);	 
+	 }else {
+		 $("#QnaForm input:radio[name='privatecheck']:radio[value='공개']").prop('checked', true);
+	 }
+	 $("#QnaForm input[name=question_num]").val(_qnum);
+	qna_write();
+}
+function qnadelete(qnum){
+	 if (confirm("정말 삭제하시겠습니까??") == true){
+		 //ajax로 데이터 삭제
+		 $.ajax({
+			 url:'/bit_project/qnadelete.pr',
+			 type:'POST',
+			 data:{"question_num" : qnum, "product_num" : p},
+			 dataType:'JSON',
+			 success:function (data) {
+				 alert('삭제 성공');
+				 history.go(0);
+			 },
+			 error:function() {
+				alert('삭제 실패');
+			 }
+		 });
+	 }else{ 
+	     return false;
+	 }
+	
+}

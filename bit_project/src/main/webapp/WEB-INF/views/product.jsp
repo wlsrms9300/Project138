@@ -163,7 +163,18 @@
 		</div>
 	</section>
 
-
+	<div class="testsearch">
+   <div class="container">
+      <div class="row">
+         <select name="searchtype" id="select_searchtype">
+            <option value="na" selected="selected">상품명</option>
+            <option value="no">상품번호</option>
+         </select>
+         <input type="text" name="searchword" id="searchword" />
+         <a href="javascript:fn_searchList()" class="searchbtn">검색</a>
+      </div>
+   </div>
+   </div>
 
 	<div id="wFilter" class="container">
 		<div class="row">
@@ -260,7 +271,7 @@
 
 					<li class="filterbtn">
 <a href="javascript:void(0)" onclick="formReset();">초기화</a>
-<a href="javascript:void(0)" onclick="filSearch();">적용</a>
+<a href="javascript:void(0)" onclick="fil();">적용</a>
 
 					</li>
 					<li class="total_count"><a href="javascript:void(0)">전체보기</a>
@@ -279,8 +290,7 @@
 		<nav id="mFilter">
 			<label for="menu_state"><i class="fa"></i></label>
 			<div class="fildivision" style="text-align: center; padding: 5px 0 5px 0; display: none;">
-				필터링 <a href="javascript:testfun();"> <i class="fas fa-times"
-						style="float: right; padding: 5px; margin-right: 3px;"></i></a>
+				필터링 
 			</div>
 			<br>
 			<ul id="mFilter_menu" class="clearfix" style="display: none;">
@@ -309,9 +319,9 @@
 					</a></li>
 				<div id="mFilter_menu_list2" style="display: none;">
 					<ul>
-						<li><input type="checkbox" name="check2" class="m2" value="0~4" onclick="mChk(2);" /> <label
+						<li><input type="checkbox" name="check2" class="m2" value="04" onclick="mChk(2);" /> <label
 								for="c2">0~4</label></li>
-						<li><input type="checkbox" name="check2" class="m2" value="5~7" onclick="mChk(2);" /> <label
+						<li><input type="checkbox" name="check2" class="m2" value="57" onclick="mChk(2);" /> <label
 								for="c2">5~7</label></li>
 					</ul>
 				</div>
@@ -334,7 +344,7 @@
 				<div
 					style="line-height: 70px; position: fixed; left: 0; bottom: 0; width: 100%; height: 70px; text-align: center;">
 					<div style="width: 50%; height: 100%; float: left; background: #4c515d;">
-						<input type="button" value="검색" style="background: none; color: #fff;" />
+						<input type="button" value="검색" style="background: none; color: #fff;" onclick="javascript:fil();"/>
 					</div>
 
 					<div style="width: 50%; height: 100%; float: right; background: black;">
@@ -414,10 +424,10 @@
 	</footer>
 	<!-- //footer -->
 <!-- 자바스크립트 라이브러리 -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.min_1.12.4.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mun.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/munfilter.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/jquery.min_1.12.4.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/product/munfilter.js"></script>
 
 
 

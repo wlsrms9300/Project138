@@ -62,7 +62,7 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("상품 데이터 추가 조회 실패.", e);
 		}
 	}
-	
+
 	@Override
 	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2,
 			HashMap<String, String> cateMap3) throws Exception {
@@ -121,6 +121,82 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
+	public void reviewWrite(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewWrite(reviewVO);
+
+		} catch (Exception e) {
+			throw new Exception("리뷰 등록 실패.", e);
+		}
+	}
+
+	@Override
+	public int reviewCount(int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int res = pdMapper.reviewCount(product_num);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("review 카운트 실패.", e);
+		}
+	}
+
+	@Override
+	public List<ReviewVO> reviewSearch(int startPage, int endPage, int product_num) throws Exception {
+		try {
+			List<ReviewVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.reviewSearch(startPage, endPage, product_num);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("review 리스트 출력 실패.", e);
+		}
+	}
+
+	@Override
+	public void reviewDelete(int review_num, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewDelete(review_num, product_num);
+		} catch (Exception e) {
+			throw new Exception("review 삭제 실패.", e);
+		}
+	}
+	
+
+	@Override
+	public void reviewModify(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewModify(reviewVO);
+		} catch (Exception e) {
+			throw new Exception("리뷰 수정 실패.", e);
+		}
+	}
+
+	
+	@Override
+	public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewModifyNoImg(reviewVO);
+		} catch (Exception e) {
+			throw new Exception("리뷰 수정 실패.", e);
+		}
+	}
+
+	@Override
+	public void qnaWrite(QnaVO qnaVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.qnaWrite(qnaVO);
+		} catch (Exception e) {
+			throw new Exception("문의 등록 실패.", e);
+		}
+	}
+
+	@Override
 	public List<QnaVO> qnaSearch(int startPage, int endPage, int product_num) throws Exception {
 		try {
 			List<QnaVO> list = null;
@@ -144,16 +220,50 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
-	public void reviewWrite(ReviewVO reviewVO) throws Exception {
+	public void qnaDelete(int question_num, int product_num) throws Exception  {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			pdMapper.reviewWrite(reviewVO);
-			
+			pdMapper.qnaDelete(question_num, product_num);
 		} catch (Exception e) {
-			throw new Exception("리뷰 등록 실패.", e);
+			throw new Exception("qna 삭제실패.", e);
 		}
 	}
 
-	
+	@Override
+	public void qnaModify(QnaVO qnaVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.qnaModify(qnaVO);
+		} catch (Exception e) {
+			throw new Exception("문의 수정 실패.", e);
+		}
+	}
+
+	   
+	   @Override
+	   public int productListGetCount(String search_type, String search_word) throws Exception {
+	      try {
+	         int res = 0;
+	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+	         res = pdMapper.productListGetCount(search_type, search_word);
+	         return res;
+	      } catch (Exception e) {
+	         throw new Exception("검색 카운트 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public List<ProductVO> selectProductList(String search_type, String search_word, int pno)
+	         throws Exception {
+	      try {
+	         List<ProductVO> list = null;
+	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+	         list = pdMapper.selectProductList(search_type, search_word, pno);
+	         return list;
+	      } catch (Exception e) {
+	         throw new Exception("검색 리스트 출력 실패", e);
+	      }
+	      
+	   }
 	
 }
