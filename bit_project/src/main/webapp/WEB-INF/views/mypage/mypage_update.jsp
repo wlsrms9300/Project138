@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" session="true"%>
+<%@ page import = "com.spring.member.MemberVO" %>
+<%@ page import = "com.spring.login.LoginController" %>
+<%
+String email_param = (String)session.getAttribute("email");
+
+
+%>
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -23,11 +30,11 @@
                      <table class="update_table" cellspacing="8px">
                          <tr>
                              <td><p>회원명</p></td>
-                             <td><b class="na">#EA7475</b></td>
+                             <td><b class="na"><%=email_param %></b></td>
                          </tr>
                          <tr>
                              <td><p>이메일</p></td>
-                             <td><b class="na">wlsrms9300@naver.com</b></td>
+                             <td><b class="na"><%=email_param %></b></td>
                          </tr>
                          <tr>
                             <td><p>닉네임</p></td> 
