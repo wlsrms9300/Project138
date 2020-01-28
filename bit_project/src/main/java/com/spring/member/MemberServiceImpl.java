@@ -1,5 +1,7 @@
 package com.spring.member;
 
+import java.util.UUID;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +92,44 @@ public class MemberServiceImpl implements MemberService{
 			System.out.println("회원 등록 실패."+ e.getMessage());
 		}
 		return res;
+	}
+
+	@Override
+	public MemberVO findEmail(MemberVO membervo) {
+		MemberVO memVO = new MemberVO();
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memVO = memberMapper.findEmail(membervo);
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return memVO;
+	}
+
+	@Override
+	public MemberVO findPassword(MemberVO membervo) {
+		MemberVO memVO = new MemberVO();
+		int result = 0;
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			memVO = memberMapper.findPassword(membervo);
+			String password_random = UUID.randomUUID().toString().substring(0, 8).trim();
+			System.out.println(password_random);
+			membervo.setPassword(password_random);
+			System.out.println("패스워드 업데이트 전" + membervo.getPassword());
+			
+			result = memberMapper.updatepassword(membervo);
+			System.out.println("result = " + result);
+			membervo.setPassword(membervo.getPassword());
+			System.out.println("패스워드 업데이트 후 membervo.getPassword() = " + membervo.getPassword());
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return membervo;
 	}
 
 	

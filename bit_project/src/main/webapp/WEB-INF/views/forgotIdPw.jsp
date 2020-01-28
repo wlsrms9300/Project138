@@ -27,29 +27,33 @@
 				<li class="tab-link" data-tab="tab-2">비밀번호 찾기</li>
 			</ul>
 			<!-- 이메일 찾기 tab -->
-			<div id="tab-1" class="tab-content current">
-				<div class="ipt">
-					<input type="text" name="name" class="checkfield" placeholder="이름">
+			<form action="findemail.me">
+				<div id="tab-1" class="tab-content current">
+					<div class="ipt">
+						<input type="text" name="name" class="checkfield" placeholder="이름">
+					</div>
+					<div class="ipt">
+						<input type="text" name="phone" placeholder="핸드폰번호">
+					</div>
+					<button type="submit" class="find-btn">이메일 찾기</button>
 				</div>
-				<div class="ipt">
-					<input type="text" name="phoneNum" placeholder="핸드폰번호">
-				</div>
-				<button type="submit" class="find-btn" onclick="location.href='findemail.me'">이메일 찾기</button>
-			</div>
+			</form>
 			<!-- 비밀번호 찾기 tab -->
-			<div id="tab-2" class="tab-content">
-				<div class="ipt">
-					<input type="email" id="findId" name="findId" placeholder="아이디 (E-MAIL)" />
+			<form action="findpassword.me">
+				<div id="tab-2" class="tab-content">
+					<div class="ipt">
+						<input type="email" id="findId" name="email"
+							placeholder="아이디 (E-MAIL)" />
+					</div>
+					<div class="ipt">
+						<input type="text" name="name" class="checkfield" placeholder="이름">
+					</div>
+					<div class="ipt">
+						<input type="text" name="phone" placeholder="핸드폰번호">
+					</div>
+					<button type="submit" class="find-btn">비밀번호 찾기</button>
 				</div>
-				<div class="ipt">
-					<input type="text" name="name" class="checkfield" placeholder="이름">
-				</div>
-				<div class="ipt">
-					<input type="text" name="phoneNum" placeholder="핸드폰번호">
-				</div>
-				<button type="submit" class="find-btn">비밀번호 찾기</button>
-			</div>
-
+			</form>
 
 		</div>
 	</div>

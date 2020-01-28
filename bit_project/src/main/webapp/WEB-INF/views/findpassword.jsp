@@ -20,9 +20,9 @@
 	</div>
 	<div id="fe-content">
 		<div id="find-content">
-			<h1>이메일 찾기</h1>
+			<h1>비밀번호 찾기</h1>
 			<div style="height: 80px"></div>
-			<h4>찾으시는 이메일은 <%=request.getAttribute("findEmail") %> 입니다.</h4>
+			<h4>찾으시는 비밀번호는 <%=request.getAttribute("findPassword") %> 입니다.</h4>
 			<div style="height: 40px"></div>
 			<div class="btnfield">
 				<span>
