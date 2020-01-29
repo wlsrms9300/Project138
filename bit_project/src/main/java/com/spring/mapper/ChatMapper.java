@@ -12,4 +12,7 @@ public interface ChatMapper {
 	int createRoom(MessageVO messagevo);
 	int insertContent(MessageVO messagevo);
 	int getNum(String sender);
+	void deleteRoom(int room_num);
+	int checkRoom(String nickname);
+	String getImg(String sender);
 }

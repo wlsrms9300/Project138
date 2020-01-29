@@ -24,7 +24,7 @@ public class ChatController {
 		ArrayList<ChatVO> adminlist = null;
 		ArrayList<MessageVO> roomlist = null;
 		LoginVO userDetail = null;
-		
+		int check;
 		try {
 			adminlist = chatservice.allAdmin(); //일반유저일 경우 관리자목록 불러온다
 			
@@ -32,8 +32,13 @@ public class ChatController {
 				userDetail = (LoginVO)session.getAttribute("userDetail");
 				
 				if(userDetail.getUsergroup().equals("admin")) { //관리자일 경우 생성된 방정보 가져오기
-					roomlist = chatservice.getRoom(userDetail.getNickname());
-					model.addAttribute("roomlist", roomlist);
+					check = chatservice.checkRoom(userDetail.getNickname());
+					if(check != 0) {
+						roomlist = chatservice.getRoom(userDetail.getNickname());
+						model.addAttribute("roomlist", roomlist);
+					} else {
+						System.out.println("생성된 방이 없습니다");
+					}
 				}
 			}
 			model.addAttribute("adminlist", adminlist);
@@ -47,26 +52,48 @@ public class ChatController {
 	}
 	
 	@RequestMapping(value = "/chatstart.ct", method = { RequestMethod.GET , RequestMethod.POST })
-	public String chatstart(Model model, HttpServletRequest request) {
+	public String chatstart(Model model, HttpServletRequest request) throws Exception {
 		MessageVO messagevo = new MessageVO();
 		System.out.println(request.getParameter("nickname"));
-		System.out.println(request.getParameter("sender"));
-		messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
-		messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
-		messagevo.setImg(request.getParameter("img")); //보내는 사람 프로필이미지
-		
-		int result;
+		String usergroup = null; //관리자인지 확인
 		int room_num;
-		try {
-			result = chatservice.createRoom(messagevo);
+		int result;
+		if(request.getParameter("usergroup") != null) {
+			usergroup = request.getParameter("usergroup");
+		}
+		
+		String img = null;
+		if(usergroup == null) {
+			img = chatservice.getImg(request.getParameter("sender"));
+					
+			messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
+			messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
+			messagevo.setImg(img); //보내는 사람 프로필이미지
+
+			try {
+				result = chatservice.createRoom(messagevo);
+				room_num = chatservice.getNum(request.getParameter("sender"));
+				model.addAttribute("room_num", room_num);
+				System.out.println(room_num);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("관리자입니다");
 			room_num = chatservice.getNum(request.getParameter("sender"));
+			img = chatservice.getImg(request.getParameter("sender"));
+			
+			ArrayList<MessageVO> messagelist = chatservice.getMessage(room_num);
+			model.addAttribute("messagelist", messagelist);
+			model.addAttribute("img", img);
 			model.addAttribute("room_num", room_num);
-			System.out.println(room_num);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+			model.addAttribute("target", request.getParameter("sender"));
+			return "chat";
+		}
+		
 		model.addAttribute("target", request.getParameter("nickname"));
 		return "chat";
 	}
+	
 	
 }

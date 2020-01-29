@@ -47,6 +47,7 @@ public class MyHandler extends TextWebSocketHandler {
 		JSONObject object = new JSONObject(message.getPayload());
 		String type = object.getString("type");
 		MessageVO messagevo = new MessageVO();
+		int result;
 		
 		if(type != null && type.equals("register")) {
 			//등록 요청 메시지 
@@ -60,12 +61,16 @@ public class MyHandler extends TextWebSocketHandler {
 			WebSocketSession ws = (WebSocketSession)userMap.get(target);
 			String msg = object.getString("message");
 			int room_num = Integer.parseInt(object.getString("room_num"));
-			
-			//메시지 DB에 저장 후 전송	
 			messagevo.setContent(msg);
 			messagevo.setRoom_num(room_num);
 			
-			int result;
+			//타겟이 관리자중 한명인지 체크 -- 관리자면 state값 0 아니면 state값 1
+			if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) {
+				messagevo.setState("1");
+			} else {
+				messagevo.setState("0");
+			}			
+			//DB에 저장후 전송
 			try {
 				result = chatservice.insertContent(messagevo);
 				
@@ -82,6 +87,8 @@ public class MyHandler extends TextWebSocketHandler {
 	//연결 해제 후 실행 메서드
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("TextWebSocketHandler : 연결 종료! ");
+			
 		users.remove(session);
 	}
+	
 }

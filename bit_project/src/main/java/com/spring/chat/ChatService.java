@@ -9,4 +9,7 @@ public interface ChatService {
 	public int createRoom(MessageVO messagevo) throws Exception;
 	public int insertContent(MessageVO messagevo) throws Exception;
 	public int getNum(String sender) throws Exception;
+	public void deleteRoom(int room_num) throws Exception;
+	public int checkRoom(String nickname) throws Exception;
+	public String getImg(String sender) throws Exception;
 }

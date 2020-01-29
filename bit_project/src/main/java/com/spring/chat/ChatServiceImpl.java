@@ -80,4 +80,35 @@ public class ChatServiceImpl implements ChatService {
 		}
 	}
 	
+	@Override
+	public void deleteRoom(int room_num) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			chatmapper.deleteRoom(room_num);
+		} catch (Exception e) {
+			throw new Exception("채팅방 삭제 실패", e);
+		}
+	}
+	
+	@Override
+	public int checkRoom(String nickname) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			int check = chatmapper.checkRoom(nickname);
+			return check;
+		} catch (Exception e) {
+			throw new Exception("채팅방 체크", e);
+		}
+	}
+	
+	@Override
+	public String getImg(String sender) throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			String img = chatmapper.getImg(sender);
+			return img;
+		} catch (Exception e) {
+			throw new Exception("이미지 불러오기 실패", e);
+		}
+	}
 }

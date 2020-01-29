@@ -23,6 +23,7 @@
    <result property="receiver" column="receiver"  />
    <result property="sender" column="sender"  />
    <result property="img" column="img" />
+   <result property="state" column="state" />
    </resultMap>
   
    <!-- 관리자 목록 불러오기 (일반사용자) -->
@@ -33,6 +34,11 @@
    <!-- 채팅방 불러오기 (관리자) -->
    <select id="getRoom" parameterType="String" resultMap="MessageMap">
    		SELECT * FROM CHATROOM WHERE RECEIVER=#{nickname}
+   </select>
+   
+   <!-- 채팅방이 있는지 확인 (관리자) -->
+   <select id="checkRoom" parameterType="String" resultType="int">
+   		SELECT COUNT(*) FROM CHATROOM WHERE RECEIVER=#{nickname}
    </select>
    
    <!-- 채팅방 메시지 불러오기 (관리자) -->
@@ -55,12 +61,22 @@
 			SELECT CHATMESSAGE_SEQUENCE.nextval From DUAL
 	</selectKey>
    		INSERT INTO CHATMESSAGE
-   		VALUES(#{message_num}, #{room_num}, #{content})
+   		VALUES(#{message_num}, #{room_num}, #{content}, #{state})
    </insert>
    
    <!-- 방번호 가져오기 -->
    <select id="getNum" parameterType="String" resultType="int">
    		SELECT ROOM_NUM FROM CHATROOM WHERE SENDER=#{sender}
+   </select>
+   
+   <!-- 채팅방 삭제 -->
+   <delete id="deleteRoom" parameterType="int">
+   		DELETE CHATROOM WHERE ROOM_NUM=#{room_num}
+   </delete>
+   
+   <!-- 이미지 불러오기 -->
+   <select id="getImg" parameterType="String" resultType="String">
+   		SELECT IMG FROM MEMBER WHERE NICKNAME=#{sender}
    </select>
    
 </mapper>
