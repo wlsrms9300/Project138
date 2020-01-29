@@ -121,6 +121,39 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
+	public int getBookMark(int product_num, String email) throws Exception {
+		try {
+			int res = 0;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			res = pdMapper.getBookMark(product_num, email);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("찜 여부 확인 실패", e);
+		}
+	}
+
+	@Override
+	public void addBookMark(int product_num, String email, String bookimg) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.addBookMark(product_num, email, bookimg);
+		} catch (Exception e) {
+			throw new Exception("찜 on 실패", e);
+		}
+	}
+
+	
+	@Override
+	public void deleteBookMark(int product_num, String email) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.deleteBookMark(product_num, email);
+		} catch (Exception e) {
+			throw new Exception("찜 off 실패", e);
+		}
+	}
+
+	@Override
 	public void reviewWrite(ReviewVO reviewVO) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
@@ -163,7 +196,6 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("review 삭제 실패.", e);
 		}
 	}
-	
 
 	@Override
 	public void reviewModify(ReviewVO reviewVO) throws Exception {
@@ -175,7 +207,6 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	
 	@Override
 	public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception {
 		try {
@@ -220,7 +251,7 @@ public class PDServiceImpl implements PDService {
 	}
 
 	@Override
-	public void qnaDelete(int question_num, int product_num) throws Exception  {
+	public void qnaDelete(int question_num, int product_num) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
 			pdMapper.qnaDelete(question_num, product_num);
@@ -239,31 +270,29 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	   
-	   @Override
-	   public int productListGetCount(String search_type, String search_word) throws Exception {
-	      try {
-	         int res = 0;
-	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-	         res = pdMapper.productListGetCount(search_type, search_word);
-	         return res;
-	      } catch (Exception e) {
-	         throw new Exception("검색 카운트 실패", e);
-	      }
-	   }
+	@Override
+	public int productListGetCount(String search_type, String search_word) throws Exception {
+		try {
+			int res = 0;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			res = pdMapper.productListGetCount(search_type, search_word);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("검색 카운트 실패", e);
+		}
+	}
 
-	   @Override
-	   public List<ProductVO> selectProductList(String search_type, String search_word, int pno)
-	         throws Exception {
-	      try {
-	         List<ProductVO> list = null;
-	         PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-	         list = pdMapper.selectProductList(search_type, search_word, pno);
-	         return list;
-	      } catch (Exception e) {
-	         throw new Exception("검색 리스트 출력 실패", e);
-	      }
-	      
-	   }
-	
+	@Override
+	public List<ProductVO> selectProductList(String search_type, String search_word, int pno) throws Exception {
+		try {
+			List<ProductVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.selectProductList(search_type, search_word, pno);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("검색 리스트 출력 실패", e);
+		}
+
+	}
+
 }

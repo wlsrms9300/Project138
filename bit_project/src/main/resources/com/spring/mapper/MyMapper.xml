@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.MyMapper">
+<resultMap type="com.spring.mypage.bookmarkVO" id="bmMap">
+   <result property="mark_num" column="mark_num"  />
+   <result property="email" column="email"  />
+   <result property="product_num" column="product_num"  />
+   <result property="regist" column="regist"  />
+   <result property="bookmark_img" column="bookmark_img"  />
+</resultMap>
+
+
+<select id="getMyPageBookMark" parameterType="map" resultType="com.spring.mypage.bookmarkVO">
+	select * from bookmark where email=#{email}
+</select>
+
+</mapper>

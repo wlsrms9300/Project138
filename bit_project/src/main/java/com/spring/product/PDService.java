@@ -24,8 +24,13 @@ public interface PDService {
 		// 상품 클릭 시 해당 상품 데이터 받아서 상세페이지에 띄워줌
 		public ProductVO getProductDetail(@Param("product_num") int product_num) throws Exception;
 		// 상품 클릭 시 조회수 + 1
-		public	void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num) throws Exception;
-
+		public void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num) throws Exception;
+		// 찜 여부
+		public int getBookMark(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 찜 on
+		public void addBookMark(@Param("product_num") int product_num, @Param("email") String email, @Param("bookimg") String bookimg) throws Exception;
+		// 찜 off
+		public void deleteBookMark(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 	// 3. 상세 페이지 상품 문의
 		// 페이징 처리
 		public List<QnaVO> qnaSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
@@ -50,7 +55,7 @@ public interface PDService {
 		public void reviewModify(ReviewVO reviewVO) throws Exception;
 		// 리뷰 수정(이미지는 안건드린 상태면, 기존 이미지 그대로
 		public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception;
-		// 5. 상품 검색
+	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
 	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;
 }

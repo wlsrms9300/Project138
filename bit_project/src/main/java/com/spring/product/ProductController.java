@@ -24,19 +24,28 @@ public class ProductController {
 
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
-		
+		System.out.println("product.pr : "+session.getAttribute("email"));
 		return "product";
 	}
 
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
+		int res = 0;
+		String email = "";
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
 		try {
-
 			prVO = service.getProductDetail(pNum);
 			service.getProductReadCount(prVO.getReadcount(), pNum);
+			if(session.getAttribute("email")!=null) {
+				email = (String)session.getAttribute("email");
+				System.out.println("테스트 이메일 : "+email);
+				res = service.getBookMark(pNum, email);
+				
+			}
+			System.out.println("productDetail.pr : "+session.getAttribute("email"));
 			model.addAttribute("prVO", prVO);
+			model.addAttribute("bookmark", res);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());

@@ -30,6 +30,10 @@ public interface PDMapper {
 	ProductVO getProductDetail(@Param("product_num") int product_num);
 	//상품 상세 페이지 들어갈 때 조회수 + 1
 	void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num);
+	//상품 상세 찜
+	int getBookMark(@Param("product_num") int product_num, @Param("email") String email);
+	void addBookMark(@Param("product_num") int product_num, @Param("email") String email, @Param("bookimg") String bookimg);
+	void deleteBookMark(@Param("product_num") int product_num, @Param("email") String email);
 	
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);

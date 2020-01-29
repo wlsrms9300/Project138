@@ -4,6 +4,21 @@
 <%
     ProductVO prVO = (ProductVO)request.getAttribute("prVO");
 	String img = (String)session.getAttribute("img");
+	int bookmark = 0;
+	try {
+		if((int)request.getAttribute("bookmark")!=0){
+			bookmark = 1;
+		}
+	}catch (NullPointerException e) {
+		e.printStackTrace();
+		e.getMessage();
+	}finally {
+		System.out.println(bookmark);
+	}
+	String email = "";
+	if((String)session.getAttribute("email")!=null){
+		email = (String)session.getAttribute("email");
+	}
     %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +56,8 @@
         rel="stylesheet">
     <script>
         var p = <%=prVO.getProduct_num() %>;
+    	var sessionChk = "<%=email%>";
+    	
     </script>
 </head>
 
@@ -221,8 +238,8 @@
                         <h2>선택하신 상품이 WISH LIST에 담겼습니다.<br>WISH LIST로 이동하시겠습니까?</h2>
                         <br>
                         <div class="bookmark_true_btn">
-                                <a href="javascript:void(0)">저장</a>
-                                <a href="javascript:void(0)">취소</a>
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
                         </div>
                     </div>
                 </div>
@@ -479,6 +496,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/munreview.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/bookmark.js"></script>
 
     <script>
         //배너 이미지 슬라이드
@@ -649,6 +667,16 @@
         
         
        
+    </script>
+    <script>
+    var bookmark_img = '<%=prVO.getImg_main() %>';
+    var bcheck = <%=bookmark%>;
+	if(bcheck==0){
+		$('#wishlist-pid-0001').prop('checked', false);
+	}else {
+		$('#wishlist-pid-0001').prop('checked', true);
+		//$('#wishlist-pid-0001').attr('checked', true);
+	}
     </script>
 </body>
 

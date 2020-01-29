@@ -25,6 +25,32 @@ public class ProductAjaxController {
 		return list;
 	}
 
+	@PostMapping(value = "/addbookmark.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> addbookmark(int product_num, String email, String bookimg) {
+		HashMap<String,String> addbookMessage = new HashMap<String,String>();
+		try {
+			
+			service.addBookMark(product_num,email,bookimg);
+			addbookMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return addbookMessage;
+	}
+	@PostMapping(value = "/deletebookmark.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> deletebookmark(int product_num,String email) {
+		HashMap<String,String> deletebookMessage = new HashMap<String,String>();
+		try {
+			service.deleteBookMark(product_num,email);
+			deletebookMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deletebookMessage;
+		
+	}
+	
+	
 	@PostMapping(value = "/selectProductList.pr", produces = "application/json;charset=UTF-8")
 	   public List<ProductVO> selectProductList(String search_type, String search_word, int pno) {
 	      List<ProductVO> list = null;

@@ -87,14 +87,28 @@
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>	
 	</select>
 
-	<!--  상품 상세 && 조회수 증가 -->  	
+	<!--  상품 상세 -->  	
   	<select id="getProductDetail" parameterType="map" resultType="com.spring.product.ProductVO">
 	select * from product where product_num=#{product_num}
 	</select>
 	<update id="getProductReadCount" parameterType="map">
 	update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
-	<!--  상품 상세 && 조회수 증가 -->
+	
+	<insert id="addBookMark" parameterType="map">
+	<selectKey keyProperty="mark_num" resultType="int" order="BEFORE">
+	select bookmark_sequence.NEXTVAL from dual
+	</selectKey>
+	insert into bookmark values(#{mark_num}, #{email}, #{product_num}, sysdate, #{bookimg})	
+	</insert>
+	
+	<delete id="deleteBookMark" parameterType="map">
+	delete from bookmark where product_num=#{product_num} AND email=#{email}
+	</delete>
+	<select id="getBookMark" parameterType="map" resultType="int">
+	select NVL(count(*), 0) from bookmark where product_num=#{product_num} AND email=#{email}
+	</select>
+	<!--  상품 상세 -->
 	
 	<!-- 상품 문의 -->
 	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">

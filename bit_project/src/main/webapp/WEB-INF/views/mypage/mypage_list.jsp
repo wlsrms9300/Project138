@@ -15,48 +15,8 @@
 </head>
 <body>
 	<div class="list">
-                <div class="list_menu">
-                    <table>
-                        <tr class="menu_line">
-                            <th class="profile_menu1"><b class="oh">위시리스트</b></th>
-                            <th class="profile_menu2"><b class="oh">예약</b></th>
-                            <th class="profile_menu3"><b class="oh">찜</b></th>
-                        </tr>
-                    </table>
-                    <p>n개의 상품이 있습니다.</p>
-                </div>
-                 <div class="menu_product">
-                    <table>
-                        <tr class="product_line"> 
-                            <td>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감2</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                                 <div class="product">
-                                <img src="${pageContext.request.contextPath}/resources/img/rumi.jpg"><h3>장난감1</h3>
-                                </div>
-                            </td>
-                           </tr>
-                    </table>
-                </div> 
-            </div>
+              
+              
+    </div>
 </body>
 </html>
