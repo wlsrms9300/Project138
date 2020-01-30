@@ -8,4 +8,7 @@ public interface MemberService {
 	public int memberInsert(MemberVO membervo); // 회원 등록
 	public MemberVO findEmail(MemberVO membervo);	//아이디 찾기
 	public MemberVO findPassword(MemberVO membervo);	//비밀번호 찾기
+	public int passwordCheck(MemberVO membervo);	//mypage 비밀번호 확인
+	public int nicknameupdateCheck(MemberVO membervo);	//mypage 업데이트 닉네임 체크
+	public int passwordUpdate(MemberVO membervo);	//password 업데이트
 }

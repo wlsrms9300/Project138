@@ -18,11 +18,6 @@ public class MypageController {
 	@RequestMapping(value = "/mypage_main.my", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		
-		MemberVO memberVO = new MemberVO();
-		
-		System.out.println("컨트롤러 이메일" + memberVO.getEmail());
-		
-		
 		return "mypage/mypage_main";
 	}
 	
