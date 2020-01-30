@@ -1,5 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
 
+@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+* {
+	font-family: 'S-CoreDream-4Regular';
+}
 body {
 	margin: 0;
 }
@@ -19,6 +22,20 @@ body {
   color: #ffffff;
   background-color: #000000;
   font-size: 16px;
+}
+#category form div {
+	float:right;
+	margin-right:40px;
+}
+
+.btn-partner {
+	border: 1px solid;
+    border-radius: 5px;
+    width: 100px;
+    height: 36px;
+    font-size: 16px;
+    background-color: rgb(83, 83, 83);
+    color:  rgb(235, 235, 235);
 }
 .snip1273 * {
   -webkit-box-sizing: border-box;

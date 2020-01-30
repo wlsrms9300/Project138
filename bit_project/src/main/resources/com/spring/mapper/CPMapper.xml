@@ -19,13 +19,13 @@
    
    
 	<insert id="cpAdd" parameterType="com.spring.menu.CompanyVO">
-  	INSERT INTO Company(license_num, name, phone, email, homepage,	postal_num, address, address_detail, img,term) 
+  	INSERT INTO Company(license_num, name, phone, email, homepage,	postal_num, address, address_detail, img, term) 
   	VALUES(#{license_num}, #{name}, #{phone},#{email},#{homepage}, #{postal_num}, #{address}, #{address_detail}, #{img}, #{term})
 	</insert>
 
 	
-  	<select id="checkLicenseExist" parameterType="map" resultType="com.spring.menu.CompanyVO">
-	SELECT * FROM company WHERE license_num=#{license_num}
+  	<select id="checkLicenseExist" parameterType="map" resultType="int">
+	SELECT COUNT(*) FROM company WHERE license_num=#{license_num}
 	</select>
 	
 	<select id="companyimg" resultType="com.spring.menu.CompanyVO">

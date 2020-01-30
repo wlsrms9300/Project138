@@ -35,9 +35,9 @@
         </div>
       
           <h1 class="text-field">결제 상세 내역을 확인해주세요.</h1>
-
+          
         </div>
-        <form id="subscribe-term" action="subscribestep3.me" onsubmit="return checkForm();" method="post">
+        <form id="subscribe-term" action="여기에 컨트롤러 에서 만들어서 널자" onsubmit="return checkForm();" method="post">
         <div class="choiceTerm">
           <div class="">
             <input type="radio" id="choiceTerm01" name="choiceTerm" value="s1MsalePrice" checked>
@@ -54,7 +54,7 @@
        
           </div>
           <div class="subscribeNext">
-            <button type="submit" name="button">카카오페이 결제</button>
+            <button type="submit" name="button" >카카오페이 결제</button>
           </div>
           </form>
           </div>

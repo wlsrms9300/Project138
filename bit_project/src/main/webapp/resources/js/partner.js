@@ -9,7 +9,6 @@ $(document).on("touchstart", function(){ });
 $(document).ready(function() { // 제일 아래 selectData() 먼저 실행.
 	
 	
-	
 	// 목록
 	function selectData() {
 		
@@ -24,6 +23,7 @@ $(document).ready(function() { // 제일 아래 selectData() 먼저 실행.
 			dataType : "json",
 			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 			success : function(data) {
+				alert(data);
 				$.each(data, function(index, item) { // 각각의 데이터는 item에 저장됨.
 														// index는 parameter값
 														// item은 실제 저장된 값.

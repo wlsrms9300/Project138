@@ -25,4 +25,25 @@ public class PartnerServiceImpl implements PartnerService {
 	}
 	
 	
+	@Override
+	public void ptAdd(PartnerVO ptVO) throws Exception {
+		try {
+			PartnerMapper partnerMapper = sqlsession.getMapper(PartnerMapper.class);
+			partnerMapper.ptAdd(ptVO);
+		} catch (Exception e) {
+			throw new Exception("파트너 가입 실패.", e);
+	}
+
 }
+	//사업자 번호 중복 체크
+	@Override
+	public int ptcheckLicenseExist(PartnerVO ptVO) throws Exception{
+		PartnerMapper partnerMapper = sqlsession.getMapper(PartnerMapper.class);
+		//int result = sqlsession.selectOne("PartnerMapper.ptcheckLicenseExist",ptVO);
+		int result = partnerMapper.ptcheckLicenseExist(ptVO);
+				System.out.println("select결과="+result);
+		return result;		
+	}
+}
+
+
