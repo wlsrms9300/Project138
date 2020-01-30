@@ -3,7 +3,7 @@ package com.spring.partner;
 public class PartnerVO {
 
 	private int partner_num;
-	private int license_num;
+	private String license_num;
 	private String name;
 	private String content;
 	private String phone;
@@ -15,18 +15,35 @@ public class PartnerVO {
 	private String img;
 	private String term;
 	private String category;
-	
 	public int getPartner_num() {
 		return partner_num;
 	}
 	public void setPartner_num(int partner_num) {
 		this.partner_num = partner_num;
 	}
-	public int getLicense_num() {
+	public String getLicense_num() {
 		return license_num;
 	}
-	public void setLicense_num(int license_num) {
+	public void setLicense_num(String license_num) {
 		this.license_num = license_num;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getEmail() {
 		return email;
@@ -70,28 +87,12 @@ public class PartnerVO {
 	public void setTerm(String term) {
 		this.term = term;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
 	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	
 }

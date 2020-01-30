@@ -1,6 +1,7 @@
 package com.spring.menu;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,9 @@ public class MenuController {
 	@RequestMapping("/companyAddProcess.se")
 	public String companyAddProcess(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 		CompanyVO cpVO = new CompanyVO(); 
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		
 		try {
 			//홈페이지에 있는데이터를 cpvo에 넣어 놨어요
@@ -46,7 +50,7 @@ public class MenuController {
 			System.out.println(request.getParameter("postal_num"));		
 			
 			
-			MultipartFile mf = request.getFile("img"); // 파일
+			MultipartFile mf = request.getFile("img"); // 파일					
 		
 			
 			String uploadPath = "C:\\Project138\\upload\\";
@@ -57,14 +61,27 @@ public class MenuController {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf.transferTo(new File(uploadPath + storedFileName));
 					}
+			//사업자 번호 중복 체크
+			int result =service.checkLicenseExist(cpVO);
 			
+			if(result == 1) {
+				System.out.println("가입실패");
+				writer.write("<script>alert('사업자 번호를 확인해주세요.'); location.href='kindergarten.ms';</script>");
+				
+			}else{
+				System.out.println("가입성공");
+				writer.write("<script>alert('가입성공.'); location.href='kindergarten.ms';</script>");
+				service.cpAdd(cpVO);
+			}
 			
-		} catch (Exception e) {
+		} 
+	catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		service.cpAdd(cpVO);
-		return "companyAddProcess";
+		
+		return null;
+				
 	}
 	
 	@RequestMapping("/kindergarten.ms")
