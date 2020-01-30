@@ -41,7 +41,7 @@
 
 var ws;
 var userid = '<%=nickname%>';
-var target = '${taeget}';
+var target = '${target}';
 
 function connect() {
 	//웹소켓 객체 생성하는 부분
@@ -87,7 +87,7 @@ function sendMsg() {
 	//ws.send(userid + " : " + msg);
 	var msg = {
 			type : "chat", //메시지 구분하는 구분자 - 상대방 아이디와 메시지 포함해서 보냄
-			target :  '${target}', //상대방 아이디 
+			target : target, //상대방 아이디 
 			room_num : '${room_num}',
 			message : $('#chat__content-text').val()
 	};
@@ -108,6 +108,7 @@ $(document).ready(function() {
 	});
 });
 
+
 //페이지가 로딩되면 connect 실행
 $(function() {
 	connect();
@@ -121,10 +122,12 @@ $(function() {
       </div>
       <header class="header">
        <div>
-        <h1 class="header__title"><%=nickname%> ${target}</h1>
+        <h1 class="header__title">${target}과 상담중</h1>
         </div>
         <div class="header__header-column">
-          <a href="javascript:history.back()" class="header__back-btn">
+    
+        	<a href="index.ct" class="header__back-btn">
+      
             <i class="fas fa-arrow-left"></i>
           </a>
         </div>

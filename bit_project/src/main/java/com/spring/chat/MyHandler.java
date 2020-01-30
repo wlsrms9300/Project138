@@ -2,8 +2,10 @@ package com.spring.chat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,9 @@ public class MyHandler extends TextWebSocketHandler {
 			//채팅 메시지 : 상대방 아이디를 포함해서 메시지를 보낼것이기 때문에
 			//Map에서 상대방 아이디에 해당하는 WebSocket 꺼내와서 메시지 전송
 			String target = object.getString("target");
-			WebSocketSession ws = (WebSocketSession)userMap.get(target);
+			WebSocketSession ws = null;
+			ws = (WebSocketSession)userMap.get(target);
+			
 			String msg = object.getString("message");
 			int room_num = Integer.parseInt(object.getString("room_num"));
 			messagevo.setContent(msg);
@@ -70,15 +74,33 @@ public class MyHandler extends TextWebSocketHandler {
 			} else {
 				messagevo.setState("0");
 			}			
-			//DB에 저장후 전송
+			
+			//DB에 메시지 내용 저장
 			try {
-				result = chatservice.insertContent(messagevo);
+				if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) { 
+					result = chatservice.insertContent(messagevo);
+				} else {
+					if(ws == null) {
+						System.out.println("채팅상대가 나갔습니다");
+						
+					} else {
+						result = chatservice.insertContent(messagevo);
+					}
+				}
 				
+			//전송!!!
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			if(ws != null) {
 				ws.sendMessage(new TextMessage(msg));
+			} else {
+				if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) {
+					System.out.println("관리자가 없다");
+				} else {
+					System.out.println("채팅방 없음");
+				}
+				
 			}
 		}
 	}
@@ -86,8 +108,24 @@ public class MyHandler extends TextWebSocketHandler {
 	@Override
 	//연결 해제 후 실행 메서드
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		Set set = userMap.keySet();
+		Iterator iterator = set.iterator();
+		String key = null;
+		//DB에서 채팅방 삭제후 연결 종료
+		while(iterator.hasNext()) {
+			key = (String)iterator.next();
+			if(session == userMap.get(key)) {
+				userMap.remove(key);
+				int count = chatservice.ckRoom(key);
+				if(count != 0) {
+					int room_num = chatservice.getNum(key); //방번호 조회
+					chatservice.deleteMessage(room_num); //채팅내용 삭제
+					chatservice.deleteRoom(key); //채팅방 삭제
+					break;
+				}
+			} 
+		}
 		System.out.println("TextWebSocketHandler : 연결 종료! ");
-			
 		users.remove(session);
 	}
 	

@@ -45,6 +45,40 @@
 <title>Chat</title>
 </head>
 
+<script type="text/javascript">
+
+var ws;
+var userid = '<%=sender%>';
+
+function register() {
+	var msg = {
+		target : 'target',
+		type : "register",
+		userid : userid
+	};
+	ws.send(JSON.stringify(msg));
+};
+
+function connect() {
+
+	ws = new WebSocket('ws://localhost:8080/bit_project/chat');
+	
+	ws.onopen = function() {
+		console.log('연결 생성');
+		register();
+	};
+	
+	ws.onclose = function() {
+		console.log('연결 끊김');
+	};
+};
+
+if('<%=usergroup%>'.equals('admin')) {
+	connect();
+};
+
+</script>
+
 <body>
 
 <div class="status-bar">
@@ -61,7 +95,7 @@
          if(userDetail == null || !(userDetail.getUsergroup().equals("admin"))) {  //관리자가 아니거나 유저정보가 null값이면(비회원) list에 관리자 목록출력
         	for(int i = 0; i < adminlist.size(); i++) { 
         		ChatVO list = (ChatVO)adminlist.get(i);
-        %>
+        		%>
           <a href="chatstart.ct?nickname=<%=list.getNickname() %>&sender=<%=sender %>">
             <div class="chats__chat friend friend--lg">
               <div class="friend__column">
@@ -98,7 +132,7 @@
                     <%=mlist.getSender() %>
                   </span>
                   <span class="friend__bottom-text">
-                    마지막 메시지 내용
+                 
                   </span>
                 </div>
               </div>

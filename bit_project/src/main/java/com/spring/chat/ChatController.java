@@ -69,7 +69,7 @@ public class ChatController {
 			messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
 			messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
 			messagevo.setImg(img); //보내는 사람 프로필이미지
-
+			
 			try {
 				result = chatservice.createRoom(messagevo);
 				room_num = chatservice.getNum(request.getParameter("sender"));
