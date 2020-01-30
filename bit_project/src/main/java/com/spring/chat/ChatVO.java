@@ -55,4 +55,5 @@ public class ChatVO {
 	public void setUsergroup(String usergroup) {
 		this.usergroup = usergroup;
 	}
+
 }

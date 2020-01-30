@@ -7,6 +7,7 @@ public class MessageVO {
 	private String receiver;
 	private String sender;
 	private String img;
+	private String state;
 	
 	public String getContent() {
 		return content;
@@ -43,6 +44,12 @@ public class MessageVO {
 	}
 	public void setMessage_num(int message_num) {
 		this.message_num = message_num;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }
