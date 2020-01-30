@@ -12,4 +12,7 @@ public interface MemberMapper {
 	MemberVO findEmail(MemberVO membervo);	//이메일 찾기
 	MemberVO findPassword(MemberVO membervo);	//패스워드 찾기
 	int updatepassword(MemberVO membervo);	//패스워드 변경
+	MemberVO passwordCheck(MemberVO membervo);	//mypage 비밀번호 확인
+	int nicknameupdateCheck(MemberVO membervo);	//mypage nickname update 중복확인
+	int passwordUpdate(MemberVO membervo);	//비밀번호 변경
 }

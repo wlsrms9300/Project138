@@ -1,94 +1,172 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>
-<%@ page import = "com.spring.member.MemberVO" %>
-<%@ page import = "com.spring.login.LoginController" %>
+	pageEncoding="UTF-8" session="true"%>
+<%@ page import="com.spring.member.MemberVO"%>
+<%@ page import="com.spring.login.LoginVO"%>
+<%@ page import="com.spring.login.LoginController"%>
 <%
-String email_param = (String)session.getAttribute("email");
-
-
+	LoginVO userDetail = (LoginVO) session.getAttribute("userDetail");
+	if (userDetail.getInstagram_id() == null) {
+		userDetail.setInstagram_id("");
+	}
+	if (userDetail.getChildren_birth() == null) {
+		userDetail.setChildren_birth("");
+	}
 %>
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 폰트어썸 아이콘 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <!-- 웹 폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean" rel="stylesheet"/>
-<link href="${pageContext.request.contextPath}/resources/css/mypage/update.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
+	rel="stylesheet" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/mypage/update.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/profile.css" rel="stylesheet">
+
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="member_update">
-            <div class="member_img">
-                 <h1>회원수정</h1>
-                 <img src="${pageContext.request.contextPath}/resources/img/profile.png" width=100px height=100px>  
-            </div>
-            <div class="update_form_wrap">
-                 <form id="update_form" name="update_form" action="#" enctype="multipart/form-data" method="POST">
-                     <table class="update_table" cellspacing="8px">
-                         <tr>
-                             <td><p>회원명</p></td>
-                             <td><b class="na"><%=email_param %></b></td>
-                         </tr>
-                         <tr>
-                             <td><p>이메일</p></td>
-                             <td><b class="na"><%=email_param %></b></td>
-                         </tr>
-                         <tr>
-                            <td><p>닉네임</p></td> 
-                            <td><input type="text" class="nickname" placeholder="내용을 입력해주세요"></td>
-                            <td><input type="button" value="중복확인" class="button1"></td>
-                         </tr>
-                         <tr>
-                             <td><p>비밀번호</p></td> 
-                             <td><input type="password" class="password" placeholder="내용을 입력해주세요"></td>
-                             <td><input type="button" value="변경하기" class="button2"></td>
-                         </tr>
-                         <tr>
-                             <td><p>새 비밀번호</p></td> 
-                             <td><input type="password" class="new_password" placeholder="새 비밀번호"></td>
-                          </tr>
-                          <tr>
-                              <td></td>
-                              <td><input type="password" class="new_password_confirm" placeholder="새 비밀번호 확인"></td>
-                          </tr>
-                          <tr>
-                             <td><p>주소</p></td>    
-                             <td><input type="text" class="postal_num" placeholder="우편번호"></td>
-                             <td><input type="button" class="button4" value="검색"></td>
-                          </tr>
-                          <tr>
-                             <td></td>
-                             <td><input type="text" class="address" placeholder="주소"></td>
-                         </tr>
-                          <tr>
-                              <td></td>
-                              <td><input type="text" class="address_detail" placeholder="상세주소"></td>
-                          </tr>
-                          <tr>
-                              <td><p>인스타그램</p></td>
-                              <td><input type="text" class="instagram_id"></td>
-                          </tr>
-                          <tr>
-                              <td><b class="add">추가정보</b></td>
-                          </tr>
-                          <tr>
-                              <td><p>자녀의 이름</p></td>
-                              <td><input type="text" class="children_name"></td>
-                         </tr>
-                         <tr>
-                             <td><p>자녀 생년월일</p></td>
-                             <td><input type="text" class="children_birth"></td>
-                         </tr>
-                         <tr>
-                             <td></td>
-                             <td class="update_btn"><input type="button" value="회원정보 수정" class="button3"></td>
-                         </tr>   
-                     </table>
-                 </form>
-            </div>
-        </div>
+		<div class="member_img">
+			<h1>회원수정</h1>
+			<div id="profilefield">
+				<div class="image-upload">
+					<div class="image-edit">
+						<input type="file" name="img2" id="imageUpload"
+							class="imageUpload" data-preview="imagePreview"
+							accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
+					</div>
+					<div class="preview">
+						<div id="imagePreview"
+							style="background-image: url('<%=userDetail.getImg()%>');"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="update_form_wrap">
+			<form id="update_form" name="update_form" action="#"
+				enctype="multipart/form-data" method="POST">
+				<table class="update_table" cellspacing="8px">
+					<tr>
+						<td><p>회원명</p></td>
+						<td><b class="na"><%=userDetail.getName()%></b></td>
+					</tr>
+					<tr>
+						<td><p>이메일</p></td>
+						<td><b class="na"><input type="hidden" id="email"
+								value="<%=userDetail.getEmail()%>"><%=userDetail.getEmail()%></b></td>
+					</tr>
+					<tr>
+						<td><p>닉네임</p></td>
+						<td><input type="text" id="nickname" class="nickname"
+							placeholder="<%=userDetail.getNickname()%>"> <input
+							type="hidden" id="nickname_hidden"
+							value="<%=userDetail.getNickname()%>"></td>
+						<td><button type="button" value="N" class="button1"
+								id="button1" onclick="nnChk_mypage();">중복확인</button></td>
+					</tr>
+					<tr>
+						<td><p>비밀번호</p></td>
+						<td><input type="password" class="password_before"
+							id="password_before" placeholder="비밀번호를 입력해주세요"></td>
+						<td><button type="button" value="N" class="button2"
+								id="passwordhidden" onclick="pwChk_mypage();">변경하기</button></td>
+					</tr>
+
+					<tr class="tr_password" style="display: none;">
+						<td><p>새 비밀번호</p></td>
+						<td><input type="password" class="new_password"
+							id="new_password" placeholder="새 비밀번호">
+							<div class="alert alert-check" id="alert-check"
+								style="font-size: 10px; color: red;">비밀번호 8자리 이상</div></td>
+						<td><button type="button" value="N" class="button5"
+								id="password-check-btn" onclick="password_change();">변경확인</button></td>
+					</tr>
+
+					<tr class="tr_password" style="display: none;">
+						<td></td>
+						<td><input type="password" class="new_password_confirm"
+							id="new_password_confirm" placeholder="새 비밀번호 확인">
+							<div class="alert alert-true" id="alert-true"
+								style="font-size: 10px; color: green;">비밀번호가 일치합니다.</div>
+							<div class="alert alert-false" id="alert-false"
+								style="font-size: 10px; color: red;">비밀번호가 일치하지 않습니다.</div></td>
+					</tr>
+
+					<tr>
+						<td><p>주소</p></td>
+						<td><input type="text" class="postal_num" id="postal_num"
+							value="<%=userDetail.getPostal_num()%>"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="text" class="address" id="address"
+							value="<%=userDetail.getAddress()%>"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="text" class="address_detail"
+							id="address_detail" value="<%=userDetail.getAddress_detail()%>"></td>
+					</tr>
+					<tr>
+						<td><b class="add">추가정보</b></td>
+					</tr>
+					<tr>
+						<td><p>인스타그램</p></td>
+						<td><input type="text" class="instagram_id" id="instagram_id"
+							value="<%=userDetail.getInstagram_id()%>"></td>
+					</tr>
+
+					<tr>
+						<td><p>자녀 생년월일</p></td>
+						<td><input type="text" class="children_birth"
+							id="children_birth" value="<%=userDetail.getChildren_birth()%>"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td class="update_btn"><button type="button" value="N"
+								class="button3" onclick="nn_update_Chk_mypage();">회원정보
+								수정</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
+	<script>
+		$('#postal_num').click(function() {
+			goPopup();
+		})
+		function goPopup() {
+			// 주소검색을 수행할 팝업 페이지를 호출합니다.
+			// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+			var pop = window.open("/bit_project/jusoPopup.jsp", "pop",
+					"width=570,height=420, scrollbars=yes, resizable=yes");
+
+			// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+			//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+		}
+
+		function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
+				roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn,
+				bdMgtSn) {
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+
+			$('#postal_num').val(zipNo);
+			$('#address').val(roadAddrPart1);
+			$('#address_detail').val(addrDetail);
+		}
+	</script>
 </body>
 </html>

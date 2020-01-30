@@ -132,6 +132,80 @@ public class MemberServiceImpl implements MemberService{
 		return membervo;
 	}
 
+	@Override
+	public int passwordCheck(MemberVO membervo) {
+		MemberVO dbpassword = null;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			System.out.println("비밀번호 정보" + membervo.getPassword());
+			
+			dbpassword = memberMapper.passwordCheck(membervo);
+			
+			
+			if (dbpassword != null) {
+				res = 1; //비밀번호 일치
+				
+			} else {	//
+				res = 0;	//비밀번호 틀림
+				
+			}
+			System.out.println(res);
+		} catch(Exception e) {
+			System.out.println("mypage 비밀번호 확인 실패." +  e.getMessage());
+		}
+		return res;
+	}
+
+	@Override
+	public int nicknameupdateCheck(MemberVO membervo) {
+		int dbnickname = 0;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			System.out.println("닉네임 업데이트 정보" + membervo.getNickname());
+			
+			dbnickname = memberMapper.nicknameupdateCheck(membervo);
+			System.out.println("dbnickname (serviceImpl) = " + dbnickname);
+			if (dbnickname == 0) {	//update 실패
+				res = 1;	
+			} else {	//update 성공
+				res = 0;	
+			}
+			System.out.println("res = " + res);
+		} catch(Exception e) {
+			System.out.println("mypage nickname 중복 확인 실패." +  e.getMessage());
+		}
+		return res;
+	}
+
+	@Override
+	public int passwordUpdate(MemberVO membervo) {
+		int dbpasswordupdate = 0;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			System.out.println("닉네임 업데이트 정보" + membervo.getNickname());
+			
+			dbpasswordupdate = memberMapper.passwordUpdate(membervo);
+			
+			if (dbpasswordupdate != 0) {
+				res = 1; //비밀번호 db에서 변경 완료.
+				
+			} else {	//
+				res = 0;	//비밀번호 db에서 변경 실패.
+				
+			}
+			System.out.println("res = " + res);
+		} catch(Exception e) {
+			System.out.println("mypage 비밀번호 변경 실패." +  e.getMessage());
+		}
+		return res;
+	}
+
 	
 	
 	

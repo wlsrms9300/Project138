@@ -20,8 +20,23 @@
     margin-left:auto;
     margin-right:auto;
 }
-.button1, .button2, .button4 {
+.button1, .button4, .button5 {
     margin-right:30px;
+    background-color: #EA7475;
+    color:white;
+    font-size: 14px;
+    border:0;
+    outline:0;
+    border-radius:8px;
+    width:80px;
+    height:25px;
+    box-shadow:3px 3px 5px 0 rgb(172, 171, 171);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.button2{
+	margin-right:30px;
     background-color: #EA7475;
     color:white;
     font-size: 14px;
@@ -57,7 +72,7 @@
      transform: scale(0.9);     
 }
 
-.button1:active, .button2:active, .button4:active {	
+.button1:active, .button2:active, .button4:active, .button5:active {	
      -webkit-transform: scale(0.9);
      -ms-transform: scale(0.9);
      transform: scale(0.9);     
@@ -66,7 +81,7 @@
     color:#EA7475;
     font-size: 20px;
 }
-.nickname, .postal_num, .password, .new_password, .new_password_confirm, .address, .address_detail, .instagram_id, .children_name, .children_birth {
+.nickname, .postal_num, .password_before, .new_password, .new_password_confirm, .address, .address_detail, .instagram_id, .children_name, .children_birth {
     border-radius:5px;
     width:200px;
     height:30px;

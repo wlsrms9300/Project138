@@ -211,5 +211,14 @@ public class MemberController {
 
 		return "redirect:/main.ma";
 	}
+	
+	@RequestMapping(value = "/memberupdate.me")
+	public String memberupdate(HttpServletRequest request, HttpServletResponse response, MemberVO membervo) {
+		
+		
+		
+		return "mypage_update";
+	}
+	
 
 }
