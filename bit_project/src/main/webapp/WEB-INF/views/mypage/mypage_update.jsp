@@ -6,6 +6,7 @@
 <%@ page import="com.spring.login.LoginController"%>
 <%
 	LoginVO userDetail = (LoginVO) session.getAttribute("userDetail");
+
 	if (userDetail.getInstagram_id() == null) {
 		userDetail.setInstagram_id("");
 	}
@@ -15,6 +16,9 @@
 %>
 <!DOCTYPE html>
 <html>
+<script>
+var nick_session = '<%=userDetail.getNickname() %>';
+</script>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 폰트어썸 아이콘 -->
 <link rel="stylesheet"
@@ -26,7 +30,9 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/mypage/update.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/profile.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/resources/css/profile.css"
+	rel="stylesheet">
 
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -38,48 +44,52 @@
 </head>
 <body>
 	<div class="member_update">
-		<div class="member_img">
-			<h1>회원수정</h1>
-			<div id="profilefield">
-				<div class="image-upload">
-					<div class="image-edit">
-						<input type="file" name="img2" id="imageUpload"
-							class="imageUpload" data-preview="imagePreview"
-							accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
-					</div>
-					<div class="preview">
-						<div id="imagePreview"
-							style="background-image: url('<%=userDetail.getImg()%>');"></div>
+		<div class="update_form_wrap">
+			<form id="update_form" name="update_form"
+				enctype="multipart/form-data" method="post">
+
+				<h1>회원수정</h1>
+				<div class="member_img">
+					<div id="profilefield">
+						<div class="image-upload">
+
+							<div class="image-edit">
+								<input type="file" name="filename" id="imageUpload"
+									class="imageUpload" data-preview="imagePreview"
+									accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
+							</div>
+							<div class="preview">
+								<div id="imagePreview"
+									style="background-image: url('<%=userDetail.getImg()%>');">
+
+								</div>
+							</div>
+
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="update_form_wrap">
-			<form id="update_form" name="update_form" action="#"
-				enctype="multipart/form-data" method="POST">
 				<table class="update_table" cellspacing="8px">
+
 					<tr>
 						<td><p>회원명</p></td>
 						<td><b class="na"><%=userDetail.getName()%></b></td>
 					</tr>
 					<tr>
 						<td><p>이메일</p></td>
-						<td><b class="na"><input type="hidden" id="email"
+						<td><b class="na"><input type="hidden" id="email" name="email" class="email"
 								value="<%=userDetail.getEmail()%>"><%=userDetail.getEmail()%></b></td>
 					</tr>
 					<tr>
 						<td><p>닉네임</p></td>
-						<td><input type="text" id="nickname" class="nickname"
-							placeholder="<%=userDetail.getNickname()%>"> <input
-							type="hidden" id="nickname_hidden"
+						<td><input type="text" id="nickname" class="nickname" name="nickname"
 							value="<%=userDetail.getNickname()%>"></td>
 						<td><button type="button" value="N" class="button1"
 								id="button1" onclick="nnChk_mypage();">중복확인</button></td>
 					</tr>
 					<tr>
 						<td><p>비밀번호</p></td>
-						<td><input type="password" class="password_before"
-							id="password_before" placeholder="비밀번호를 입력해주세요"></td>
+						<td><input type="password" name="password" class="password" id="password"
+							placeholder="비밀번호를 입력해주세요"></td>
 						<td><button type="button" value="N" class="button2"
 								id="passwordhidden" onclick="pwChk_mypage();">변경하기</button></td>
 					</tr>
@@ -103,21 +113,22 @@
 							<div class="alert alert-false" id="alert-false"
 								style="font-size: 10px; color: red;">비밀번호가 일치하지 않습니다.</div></td>
 					</tr>
-
+					
 					<tr>
 						<td><p>주소</p></td>
-						<td><input type="text" class="postal_num" id="postal_num"
-							value="<%=userDetail.getPostal_num()%>"></td>
+						<td><input type="text" name="postal_num" class="postal_num"
+							id="postal_num" value="<%=userDetail.getPostal_num()%>"></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td><input type="text" class="address" id="address"
-							value="<%=userDetail.getAddress()%>"></td>
+							name="address" value="<%=userDetail.getAddress()%>"></td>
 					</tr>
 					<tr>
 						<td></td>
 						<td><input type="text" class="address_detail"
-							id="address_detail" value="<%=userDetail.getAddress_detail()%>"></td>
+							name="address_detail" id="address_detail"
+							value="<%=userDetail.getAddress_detail()%>"></td>
 					</tr>
 					<tr>
 						<td><b class="add">추가정보</b></td>
@@ -125,25 +136,29 @@
 					<tr>
 						<td><p>인스타그램</p></td>
 						<td><input type="text" class="instagram_id" id="instagram_id"
-							value="<%=userDetail.getInstagram_id()%>"></td>
+							name="instagram_id" value="<%=userDetail.getInstagram_id()%>"></td>
+					</tr>
+					
+					<tr>
+						<td><p>자녀 생년월일</p></td>
+						<td><input type="text" class="children_birth" name="children_birth"
+							id="children_birth" value="<%=userDetail.getChildren_birth()%>"></td>
 					</tr>
 
 					<tr>
-						<td><p>자녀 생년월일</p></td>
-						<td><input type="text" class="children_birth"
-							id="children_birth" value="<%=userDetail.getChildren_birth()%>"></td>
-					</tr>
-					<tr>
 						<td></td>
-						<td class="update_btn"><button type="button" value="N"
+						<!-- <td class="update_btn"><button type="button" value="N"
 								class="button3" onclick="nn_update_Chk_mypage();">회원정보
-								수정</button></td>
+								수정</button></td> -->
+						<td class="update_btn"><input type="button" value="회원정보"
+							class="button3"></td>
 					</tr>
 				</table>
 			</form>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/resources/js/member.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/member_update.js"></script>
 	<script>
 		$('#postal_num').click(function() {
 			goPopup();
@@ -167,6 +182,9 @@
 			$('#address').val(roadAddrPart1);
 			$('#address_detail').val(addrDetail);
 		}
+	</script>
+	<script>
+	
 	</script>
 </body>
 </html>

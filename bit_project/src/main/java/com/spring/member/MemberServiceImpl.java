@@ -38,6 +38,31 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return res;
 	}
+	
+	@Override
+	public int nnupdateCheck(MemberVO membervo) {	//사용자한테 받은 nickname값이 들어있음
+		MemberVO dbnickname = null;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			System.out.println(membervo.getNickname());
+			
+			dbnickname = memberMapper.nnupdateCheck(membervo);
+			
+			if (dbnickname != null) {
+				res = 1; //닉네임 중복
+				
+			} else {	//닉네임 중복체크 했을 때 중복되지 않는 값
+				res = 0;	//중복된 닉네임이 없는 것
+				
+			}
+			System.out.println(res);
+		} catch(Exception e) {
+			System.out.println("닉네임 중복 확인 실패."+  e.getMessage());
+		}
+		return res;
+	}
 
 	@Override
 	public int emailCheck(MemberVO membervo) {
