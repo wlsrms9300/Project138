@@ -2,19 +2,13 @@ package com.spring.mypage;
 
 import java.util.Date;
 
-public class bookmarkVO {
+public class BookmarkVO {
 	private int mark_num;
 	private String email;
 	private int product_num;
 	private Date regist;
-	private String bookmark_img;
 	
-	public String getBookmark_img() {
-		return bookmark_img;
-	}
-	public void setBookmark_img(String bookmark_img) {
-		this.bookmark_img = bookmark_img;
-	}
+
 	public int getMark_num() {
 		return mark_num;
 	}

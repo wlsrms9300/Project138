@@ -49,7 +49,7 @@
 
 
 /* 2020-01-29 20:20 문용민 추가 */
-.product_line div > img {
+.product_line div > a > img {
 	width:211px;
 	height:225px;
 } 

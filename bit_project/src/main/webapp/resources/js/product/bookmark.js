@@ -1,5 +1,4 @@
 $(function(){
-	
     $("#wishlist-pid-0001").click(function(){
     	if(sessionChk==""){
     	    location.href = 'login.me';
@@ -16,10 +15,11 @@ $(function(){
             $('.bookmarkForm_true').css('position', 'fixed'); //최상위 div 고정
             $('.bookmarkForm_true').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
             $('.bookmarkForm_true').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+            alert(""+p+""+sessionChk);
             $.ajax({
         		url: '/bit_project/addbookmark.pr',
         		type: 'post',
-        		data:{"product_num" : p, "email" : sessionChk, "bookimg" : bookmark_img}, 
+        		data:{"product_num" : p, "email" : sessionChk}, 
         		dataType: "json",
         		async:false,
         		contentType: 'application/x-www-form-urlencoded; charset=utf-8',

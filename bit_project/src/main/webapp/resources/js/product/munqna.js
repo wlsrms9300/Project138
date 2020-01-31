@@ -21,12 +21,32 @@
         });
         
         snsData(totalData, dataPerPage, pageCount, currentPage);
+        
         $('.accordion ul li').click(function () {
-            if ($(this).children().last().css("display") == 'none') {
-                $(this).children().last().show();
-            } else {
-                $(this).children().last().hide();
-            }
+        	//alert($(this).children().first().children().last().children().first().text());
+        	if($(this).children().first().children(":eq(2)").val()=="공개"){
+        		if ($(this).children().last().css("display") == 'none') {
+                		$(this).children().last().show();
+                } else {
+                    $(this).children().last().hide();
+                }
+        	}else {
+        		if ($(this).children().last().css("display") == 'none') {
+                	//공개면 상관없고 공개가 아닐 때
+                	if(nick==$(this).children().first().children().last().children().first().text()){
+                		$(this).children().last().show();
+                	}else {
+                		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
+                	}
+                    
+                } else {
+                    $(this).children().last().hide();
+                }
+        		
+        	}
+        	
+        	//console.log($(this).children().first().children(":eq(2)").val());
+            
 
         });
     });
@@ -45,15 +65,16 @@
                 //totalData = data.length;               
                 if(data.length!=0){
                 $.each(data, function (index, item) {
-                	
                     var exText = "";
                     exText += "<li>";
                     exText += "<div class='title'>";
                     exText += "<span>" +item.answer+ "</span>";    
                     if(item.secret=="공개"){
-                    	exText += "<em>" + item.content + "</em>";	
+                    	exText += "<em>" + item.question_title + "</em>";
+                    	exText += '<input type="hidden" value="'+item.secret+'">';		
                     }else {
-                    	exText += "<em>" + item.content + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                    	exText += "<em>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                    	exText += '<input type="hidden" value="'+item.secret+'">';
                     }
                     
                     exText += "<div class='date'>";
@@ -66,22 +87,41 @@
                     exText += item.content;
                     exText += "<p class='txt-right'>";
                     
-                    if(item.answer=="답변대기"){
-                    	 var sib1 = "'"+item.question_num+"'";
-                    	 var sib2 = "'"+item.content+"'";
-                    	 var sib3 = "'"+item.nickname+"'";
-                    	 var sib4 = "'"+item.secret+"'";
-                    	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib2+','+sib3+','+sib4+');">수정</a>';
-                        exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
-                        exText += "</p>";
-                    }else {
-                        exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
-                        exText += "</p>";
-                        exText += "<div class='reply'>";
-                        exText += "<span class='re'>re.</span>";
-                        exText += "<span class='date'>관리자가 답글 단 날짜</span>";
-                        exText += "관리자의 답글내용"+"</div>";
-                    }
+                    if(nick==item.nickname && nick!=null){
+                    	if(item.answer=="답변대기"){
+                       	 var sib1 = "'"+item.question_title+"'";
+                       	 var sib2 = "'"+item.content+"'";
+                       	 var sib3 = "'"+item.nickname+"'";
+                       	 var sib4 = "'"+item.secret+"'";                    
+                       	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+');">수정</a>';
+                         exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                         exText += "</p>";
+                       }else {
+                    	   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                    	   exText += "</p>";
+                           exText += "<div class='reply'>";
+                           exText += "<span class='re'>re.</span>";
+                           exText += "<span class='date'>관리자가 답글 단 날짜</span>";
+                           exText += "관리자의 답글내용"+"</div>";
+                       }
+                   	} else {
+                   		if(item.answer=="답변대기"){
+                            exText += "</p>";
+                        }else {
+                           if(item.secret!="공개"){
+                        	   
+                           }else {
+                        	   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                           	   exText += "</p>";
+                               exText += "<div class='reply'>";
+                               exText += "<span class='re'>re.</span>";
+                               exText += "<span class='date'>관리자가 답글 단 날짜</span>";
+                               exText += "관리자의 답글내용"+"</div>";
+                           }
+                       	   
+                        }
+                   	}
+                    
                     exText += "</div></li>";
                     $(".accordion ul").append(exText);
                 })
@@ -199,9 +239,10 @@
         })
     }
    
-function qnamodify(_qnum, _content, _nickname, _secret) {
+function qnamodify(_qnum, _title, _content, _nickname, _secret) {
 	 $("#QnaForm textarea[name=content]").html(_content);
-	 $("#QnaForm input[name=nickname]").val("테스트닉네임");
+	 $("#QnaForm input[name=question_title]").val(_title);
+	 //$("#QnaForm input[name=nickname]").val("테스트닉네임");
 	 if(_secret=="비공개"){
 		 $("#QnaForm input:radio[name='privatecheck']:radio[value='비공개']").prop('checked', true);	 
 	 }else {

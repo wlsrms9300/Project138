@@ -1,17 +1,19 @@
-package com.spring.product;
+package com.spring.mypage;
 
 import java.util.Date;
 
-public class wishlistVO {
-	private int wish_num;
+public class ReservationVO {
+	private int reserve_num;
 	private String email;
 	private int product_num;
 	private Date regist;
-	public int getWish_num() {
-		return wish_num;
+	private String state;
+	
+	public int getReserve_num() {
+		return reserve_num;
 	}
-	public void setWish_num(int wish_num) {
-		this.wish_num = wish_num;
+	public void setReserve_num(int reserve_num) {
+		this.reserve_num = reserve_num;
 	}
 	public String getEmail() {
 		return email;
@@ -30,6 +32,12 @@ public class wishlistVO {
 	}
 	public void setRegist(Date regist) {
 		this.regist = regist;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

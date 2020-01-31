@@ -9,13 +9,13 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
+import com.spring.product.reviewjoinmemberVO;
 
 public interface PDMapper {
 	void prAdd(ProductVO pdVO);	//상품 등록
 	List<ProductVO> allSearch();//아직 쓰진 않지만 전체 검색
 	
-	//startSearch, scrollSearch -> 카테고리가 null일 경우. default 세팅
-	List<ProductVO> startSearch();//상품 페이지 첫 접속시 8개 상품 띄워줌
+	//카테고리가 null일 경우. default 세팅	
 	List<ProductVO> scrollSearch(@Param("pno") int pno);//카테고리 null일 경우 pno만 받아서 전체 출력
 	
 	//스크롤 내리면 카테고리 읽어온 뒤 파라미터로 받은 pno+1 ~ pno+8까지 데이터 추가
@@ -32,8 +32,16 @@ public interface PDMapper {
 	void getProductReadCount(@Param("readcount") int readcount, @Param("product_num") int product_num);
 	//상품 상세 찜
 	int getBookMark(@Param("product_num") int product_num, @Param("email") String email);
-	void addBookMark(@Param("product_num") int product_num, @Param("email") String email, @Param("bookimg") String bookimg);
+	void addBookMark(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteBookMark(@Param("product_num") int product_num, @Param("email") String email);
+	//상품 상세 위시리스트
+	int getWishList(@Param("product_num") int product_num, @Param("email") String email);
+	void addWishList(@Param("product_num") int product_num, @Param("email") String email);
+	void deleteWishList(@Param("product_num") int product_num, @Param("email") String email);
+	//상품 상세 예약
+	int getReservation(@Param("product_num") int product_num, @Param("email") String email);
+	void addReservation(@Param("product_num") int product_num, @Param("email") String email);
+	void deleteReservation(@Param("product_num") int product_num, @Param("email") String email);
 	
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
@@ -44,7 +52,7 @@ public interface PDMapper {
 	
 	//상품 리뷰
 	void reviewWrite(ReviewVO reviewVO) throws Exception;
-	List<ReviewVO> reviewSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
+	List<reviewjoinmemberVO> reviewSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
 	int reviewCount(@Param("product_num") int product_num);
 	void reviewDelete(@Param("review_num") int review_num, @Param("product_num") int product_num);
 	void reviewModify(ReviewVO reviewVO);

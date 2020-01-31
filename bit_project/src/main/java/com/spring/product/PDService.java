@@ -11,8 +11,6 @@ public interface PDService {
 		public void prAdd(ProductVO pdVO) throws Exception;
 		// 전체조회(쓸일없음)
 		public List<ProductVO> allSearch() throws Exception;
-		// 상품페이지 접속 시 출력되는 8개의 데이터(필터값이 null인 상태)
-		public List<ProductVO> startSearch() throws Exception;	
 		// 필터값이 null인 상태에서 스크롤 시 추가 데이터 8개 출력
 		public List<ProductVO> scrollSearch(@Param("pno") int pno) throws Exception;	
 		// 필터설정 후 조회하거나, 필터설정 후 스크롤 내릴 경우.
@@ -28,9 +26,25 @@ public interface PDService {
 		// 찜 여부
 		public int getBookMark(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 찜 on
-		public void addBookMark(@Param("product_num") int product_num, @Param("email") String email, @Param("bookimg") String bookimg) throws Exception;
+		public void addBookMark(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 찜 off
 		public void deleteBookMark(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 위시리스트 여부
+		public int getWishList(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 위시리스트 on
+		public void addWishList(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 위시리스트 off
+		public void deleteWishList(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 예약 여부
+		public int getReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 예약 on
+		public void addReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		// 예약 off
+		public void deleteReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
+		
+		
+		
+		
 	// 3. 상세 페이지 상품 문의
 		// 페이징 처리
 		public List<QnaVO> qnaSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
@@ -44,7 +58,7 @@ public interface PDService {
 		public void qnaModify(QnaVO qnaVO) throws Exception;
 	// 4. 상세 페이지 상품 리뷰
 		// 페이징 처리
-		public List<ReviewVO> reviewSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
+		public List<reviewjoinmemberVO> reviewSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
 		// 등록된 리뷰 개수 출력
 		public int reviewCount(@Param("product_num") int product_num) throws Exception;
 		// 리뷰 등록

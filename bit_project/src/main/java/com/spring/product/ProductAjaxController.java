@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,23 +13,12 @@ public class ProductAjaxController {
 	@Autowired(required = false)
 	private PDService service;
 
-	@PostMapping(value = "/startSearch.pr", produces = "application/json;charset=UTF-8")
-	public List<ProductVO> startSearch() {
-		List<ProductVO> list = null;
-		try {
-			list = service.startSearch();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-
+	/********************** 북마크, 위시리스트, 예약 시작 **********************/
 	@PostMapping(value = "/addbookmark.pr", produces = "application/json;charset=UTF-8")
-	public HashMap<String, String> addbookmark(int product_num, String email, String bookimg) {
+	public HashMap<String, String> addbookmark(int product_num, String email) {
 		HashMap<String,String> addbookMessage = new HashMap<String,String>();
 		try {
-			
-			service.addBookMark(product_num,email,bookimg);
+			service.addBookMark(product_num,email);
 			addbookMessage.put("val", "kookoo");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +26,7 @@ public class ProductAjaxController {
 		return addbookMessage;
 	}
 	@PostMapping(value = "/deletebookmark.pr", produces = "application/json;charset=UTF-8")
-	public HashMap<String, String> deletebookmark(int product_num,String email) {
+	public HashMap<String, String> deletebookmark(int product_num, String email) {
 		HashMap<String,String> deletebookMessage = new HashMap<String,String>();
 		try {
 			service.deleteBookMark(product_num,email);
@@ -47,10 +35,58 @@ public class ProductAjaxController {
 			e.printStackTrace();
 		}
 		return deletebookMessage;
-		
 	}
 	
+	@PostMapping(value = "/addwishlist.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> addwishlist(int product_num, String email) {
+		HashMap<String,String> addwishMessage = new HashMap<String,String>();
+		try {
+			service.addWishList(product_num, email);
+			addwishMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return addwishMessage;
+	}
+	@PostMapping(value = "/deletewishlist.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> deletewishlist(int product_num, String email) {
+		HashMap<String,String> deletewishMessage = new HashMap<String,String>();
+		try {
+			service.deleteWishList(product_num, email);
+			deletewishMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deletewishMessage;
+	}
 	
+	@PostMapping(value = "/addreservation.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> addreservation(int product_num, String email) {
+		HashMap<String,String> addreserMessage = new HashMap<String,String>();
+		try {
+			service.addReservation(product_num, email);
+			addreserMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return addreserMessage;
+	}
+	@PostMapping(value = "/deletereservation.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> deletereservation(int product_num, String email) {
+		HashMap<String,String> deletereserMessage = new HashMap<String,String>();
+		try {
+			service.deleteReservation(product_num, email);
+			deletereserMessage.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deletereserMessage;
+	}
+	
+	/********************** 북마크, 위시리스트, 예약 종료 **********************/
+	
+	
+	/********************** 상품 검색 시작 **********************/
 	@PostMapping(value = "/selectProductList.pr", produces = "application/json;charset=UTF-8")
 	   public List<ProductVO> selectProductList(String search_type, String search_word, int pno) {
 	      List<ProductVO> list = null;
@@ -61,7 +97,9 @@ public class ProductAjaxController {
 	      }
 	      return list;
 	   }
+	/********************** 상품 검색 종료 **********************/
 	
+	/********************** 상품 필터&스크롤 시작 **********************/
 	@PostMapping(value = "/filterSearch.pr", produces = "application/json;charset=UTF-8")
 	public List<ProductVO> filterSearch(int pno, String[] category_l, String[] category_m, String[] category_s) {
 		HashMap<String, String> cateMap1 = new HashMap<String, String>();
@@ -162,12 +200,12 @@ public class ProductAjaxController {
 		}
 		return list;
 	}
+	/********************** 상품 필터&스크롤 종료 **********************/
 	
-	
+	/********************** 상품문의, 리뷰 시작 **********************/
 	@PostMapping(value = "/qna.pr", produces = "application/json;charset=UTF-8")
 	public List<QnaVO> qnaSearch(int page, int product_num) {
 		List<QnaVO> list = null;
-		int listcount = 0;
 		int limit = 10;
 		int startrow = (page - 1) * 10 + 1;
 		int endrow = startrow + limit - 1;
@@ -185,11 +223,11 @@ public class ProductAjaxController {
 			res = service.qnaCount(product_num);
 			return res;
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			e.getMessage();
 		}
 		return res;
 	}
-	
 	@PostMapping(value = "/qnadelete.pr", produces = "application/json;charset=UTF-8")
 	public int qnadelete(int question_num, int product_num) {
 		int res = 0;
@@ -202,9 +240,6 @@ public class ProductAjaxController {
 		}
 		return res;
 	}
-	
-
-	
 	@PostMapping(value = "/reviewcount.pr", produces = "application/json;charset=UTF-8")
 	public int reviewtotalcount(int product_num) {	
 		int res=0;
@@ -212,20 +247,20 @@ public class ProductAjaxController {
 			res = service.reviewCount(product_num);
 			return res;
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			e.getMessage();
 		}
 		return res;
 	}
-	
 	@PostMapping(value = "/review.pr", produces = "application/json;charset=UTF-8")
-	public List<ReviewVO> reviewSearch(int page, int product_num) {
-		List<ReviewVO> list = null;
-		int listcount = 0;
+	public List<reviewjoinmemberVO> reviewSearch(int page, int product_num) {
+		List<reviewjoinmemberVO> list = null;
 		int limit = 5;
 		int startrow = (page - 1) * 5 + 1;
 		int endrow = startrow + limit - 1;
 		try {
 			list = service.reviewSearch(startrow, endrow, product_num);
+			System.out.println("조인 결과 리스트 사이즈 : "+list.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -243,5 +278,5 @@ public class ProductAjaxController {
 		}
 		return res;
 	}
-	
+	/********************** 상품문의, 리뷰 종료 **********************/
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.MyMapper">
-<resultMap type="com.spring.mypage.bookmarkVO" id="bmMap">
+<resultMap type="com.spring.mypage.BookmarkVO" id="bmMap">
    <result property="mark_num" column="mark_num"  />
    <result property="email" column="email"  />
    <result property="product_num" column="product_num"  />
@@ -10,8 +10,25 @@
 </resultMap>
 
 
-<select id="getMyPageBookMark" parameterType="map" resultType="com.spring.mypage.bookmarkVO">
-	select * from bookmark where email=#{email}
+
+
+
+<select id="getMyPageBookMark" parameterType="map" resultType="com.spring.mypage.bookjoinproductVO">	
+	select p.product_num, p.product_name, p.MANUFACTURER, p.img_sum, b.mark_num, b.email  
+	from product p, bookmark b 
+	where p.product_num=b.product_num AND email=#{email}
+</select>
+
+<select id="getMyPageWishList" parameterType="map" resultType="com.spring.mypage.wishjoinproductVO">
+	select p.product_num, p.product_name, p.MANUFACTURER, p.img_sum, w.wish_num, w.email  
+	from product p, wishlist w
+	where p.product_num=w.product_num AND email=#{email}
+</select>
+
+<select id="getMyPageReservation" parameterType="map" resultType="com.spring.mypage.reservjoinproductVO">
+	select p.product_num, p.product_name, p.MANUFACTURER, p.img_sum, r.reserve_num, r.email  
+	from product p, reservation r
+	where p.product_num=r.product_num AND email=#{email}	
 </select>
 
 </mapper>

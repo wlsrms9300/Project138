@@ -47,25 +47,33 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
             if(data.length!=0){
             $.each(data, function (index, item) {
                 var exText = "";
+                var date = new Date(item.regist);
+                date = date_to_str(date);
                 exText += "<article>";
                 exText += "<ul style='display: flex;'>";
                 exText += "<li style='flex: 8.5;'>";
                 exText += "<div>"+item.content+"</div>";
-                exText += "<span>"+"멤버테이블DB읽어서출력할곳"+"</span>";
+                //exText += '<div><img src="/bit_project/image/'+item.mimg+'">';
+                exText += '<div><img src="'+item.mimg+'">';
+                alert(item.mimg);
+                exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
                 exText += "<div>";
                 
 				var sib1 = "'"+item.review_num+"'";
 				var sib2 = "'"+item.nickname+"'";
 				var sib3 = "'"+item.content+"'";
-				var sib4 = "'"+item.img+"'";
+				var sib4 = "'"+item.rimg+"'";
 				var sib5 = "'"+item.gpa+"'";
-				exText += '<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
-				exText += "<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+				if(nick==item.nickname){
+					exText += '<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
+					exText += "<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";	
+				}
                 
                 exText += "</div>";
                 exText += "</li>";
                 exText += "<li style='flex: 1.5;'>";
-                exText += '<img src="/bit_project/image/'+item.img+'">';
+                //exText += '<img src="/bit_project/image/'+item.mimg+'">';
+                exText += '<img src="/bit_project/image/'+item.rimg+'">';
                 exText += " </li>";
                 exText += "</ul>";
                 exText += "<hr style='border: 0.5px solid grey;'>";
@@ -172,7 +180,7 @@ function review_paging(totalData, dataPerPage, pageCount, currentPage) {
 
 function reviewmodify(_rnum, _nickname, _content, _img, _gpa) {
 	 $("#ReviewForm textarea").html(_content);
-	 $("#ReviewForm input[name=nickname]").val("테스트닉네임");
+	 //$("#ReviewForm input[name=nickname]").val("테스트닉네임");
 	 alert(_gpa);
 	 switch (_gpa) {
 		case "5":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='5']").prop('checked', true);
@@ -211,4 +219,22 @@ function reviewdelete(_rnum){
 	     return false;
 	 }
 	
+}
+
+function date_to_str(format)
+{
+    var year = format.getFullYear();
+    var month = format.getMonth() + 1;
+    if(month<10) month = '0' + month;
+    var date = format.getDate();
+    if(date<10) date = '0' + date;
+    var hour = format.getHours();
+    if(hour<10) hour = '0' + hour;
+    var min = format.getMinutes();
+    if(min<10) min = '0' + min;
+    var sec = format.getSeconds();
+    if(sec<10) sec = '0' + sec;
+    
+    return year + "-" + month + "-" + date + " " + hour + ":" + min;
+    
 }

@@ -30,7 +30,7 @@ public class ProductController {
 
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
-		int res = 0;
+		int bookmark_chk = 0, wishlist_chk = 0, reservation_chk = 0;
 		String email = "";
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
@@ -40,12 +40,16 @@ public class ProductController {
 			if(session.getAttribute("email")!=null) {
 				email = (String)session.getAttribute("email");
 				System.out.println("테스트 이메일 : "+email);
-				res = service.getBookMark(pNum, email);
+				bookmark_chk = service.getBookMark(pNum, email);
+				wishlist_chk = service.getWishList(pNum, email);
+				reservation_chk = service.getReservation(pNum, email);
 				
 			}
 			System.out.println("productDetail.pr : "+session.getAttribute("email"));
 			model.addAttribute("prVO", prVO);
-			model.addAttribute("bookmark", res);
+			model.addAttribute("bookmark", bookmark_chk);
+			model.addAttribute("wishlist", wishlist_chk);
+			model.addAttribute("reservation", reservation_chk);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());
@@ -210,10 +214,12 @@ public class ProductController {
 		System.out.println("췍");
 		int product_num = Integer.parseInt(request.getParameter("product_num"));
 		QnaVO qnaVO = new QnaVO();
+		String qna_title = request.getParameter("question_title");
 		String qna_sec = request.getParameter("privatecheck");
 		String nickname = request.getParameter("nickname");
 		String content = request.getParameter("content");
 		qnaVO.setProduct_num(product_num);
+		qnaVO.setQuestion_title(qna_title);
 		qnaVO.setSecret(qna_sec);
 		qnaVO.setNickname(nickname);
 		qnaVO.setContent(content);

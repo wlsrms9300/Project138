@@ -94,26 +94,62 @@
 	<update id="getProductReadCount" parameterType="map">
 	update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
-	
+	<!--  북마크 -->
 	<insert id="addBookMark" parameterType="map">
 	<selectKey keyProperty="mark_num" resultType="int" order="BEFORE">
 	select bookmark_sequence.NEXTVAL from dual
 	</selectKey>
-	insert into bookmark values(#{mark_num}, #{email}, #{product_num}, sysdate, #{bookimg})	
+	insert into bookmark values(#{mark_num}, #{email}, #{product_num}, sysdate)	
 	</insert>
 	
 	<delete id="deleteBookMark" parameterType="map">
 	delete from bookmark where product_num=#{product_num} AND email=#{email}
 	</delete>
+	
 	<select id="getBookMark" parameterType="map" resultType="int">
 	select NVL(count(*), 0) from bookmark where product_num=#{product_num} AND email=#{email}
 	</select>
+	<!--  북마크 -->
+	
+	<!--  위시리스트  -->
+	<insert id="addWishList" parameterType="map">
+	<selectKey keyProperty="wish_num" resultType="int" order="BEFORE">
+	select wishlist_sequence.NEXTVAL from dual
+	</selectKey>
+	insert into wishlist values(#{wish_num}, #{email}, #{product_num}, sysdate)	
+	</insert>
+	
+	<delete id="deleteWishList" parameterType="map">
+	delete from wishlist where product_num=#{product_num} AND email=#{email}
+	</delete>
+	
+	<select id="getWishList" parameterType="map" resultType="int">
+	select NVL(count(*), 0) from wishlist where product_num=#{product_num} AND email=#{email}
+	</select>
+	<!--  위시리스트  -->
+	
+	<!--  예약  -->
+	<insert id="addReservation" parameterType="map">
+	<selectKey keyProperty="reserve_num" resultType="int" order="BEFORE">
+	select reservation_sequence.NEXTVAL from dual
+	</selectKey>
+	insert into reservation(reserve_num, email, product_num, regist) values(#{reserve_num}, #{email}, #{product_num}, sysdate)	
+	</insert>
+	
+	<delete id="deleteReservation" parameterType="map">
+	delete from reservation where product_num=#{product_num} AND email=#{email}
+	</delete>
+	<select id="getReservation" parameterType="map" resultType="int">
+	select NVL(count(*), 0) from reservation where product_num=#{product_num} AND email=#{email}
+	</select>
+	<!--  예약  -->
+	
 	<!--  상품 상세 -->
 	
 	<!-- 상품 문의 -->
 	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
 		select * FROM (
-		SELECT rownum rnum, question_num, product_num,nickname,content,regist,secret,answer 
+		SELECT rownum rnum, question_num, question_title, product_num,nickname,content,regist,secret,answer 
 		FROM question
 		where product_num=#{product_num}
 		ORDER BY regist asc
@@ -129,16 +165,16 @@
  	<selectKey keyProperty="question_num" resultType="int" order="BEFORE">
     SELECT question_sequence.NEXTVAL FROM DUAL
 	</selectKey>
-  	insert into question(question_num, product_num, nickname, content, regist, secret)
+  	insert into question(question_num, question_title, product_num, nickname, content, regist, secret)
   	values(
-  	#{question_num}, #{product_num}, #{nickname}, #{content}, sysdate, #{secret}
+  	#{question_num}, #{question_title}, #{product_num}, #{nickname}, #{content}, sysdate, #{secret}
   	)
 	</insert>
 	<delete id="qnaDelete" parameterType="map">
 	delete from question where product_num=#{product_num} AND question_num=#{question_num}
 	</delete>
 	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
-	update question set nickname=#{nickname}, content=#{content}, secret=#{secret}, regist=sysdate where question_num=#{question_num}
+	update question set question_title=#{question_title}, nickname=#{nickname}, content=#{content}, secret=#{secret}, regist=sysdate where question_num=#{question_num}
 	</update>
 	<!-- 문의 -->
 	
@@ -157,7 +193,7 @@
     sysdate, #{gpa})
 	</insert>
 	
-	<select id="reviewSearch" parameterType="map" resultType="com.spring.product.ReviewVO">
+	<!-- <select id="reviewSearch" parameterType="map" resultType="com.spring.product.ReviewVO">
 		select * FROM (
 		SELECT rownum rnum, review_num, product_num,nickname,content, img, regist, gpa 
 		FROM review
@@ -165,7 +201,19 @@
 		ORDER BY regist asc
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
+	</select> -->
+	
+	<select id="reviewSearch" parameterType="map" resultType="com.spring.product.reviewjoinmemberVO">
+		select * FROM (
+		SELECT rownum rnum, r.review_num, r.product_num, r.nickname, r.content, r.regist, r.gpa, r.img as rimg,
+			   m.img as mimg
+		FROM review r, member m
+		where product_num=#{product_num} and r.nickname=m.nickname
+		ORDER BY regist asc
+		)
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
 	</select>
+	
 	
 	<delete id="reviewDelete" parameterType="map">
 	delete from review where product_num=#{product_num} AND review_num=#{review_num}
@@ -180,7 +228,7 @@
 	<!-- 리뷰 -->
 
 
-<!--  상품 검색 -->
+	<!--  상품 검색 -->
 	<select id="productListGetCount" parameterType="map" resultType="int">
 	select count(product_num) from product
 	<choose>
@@ -223,5 +271,6 @@
    )
    where rnum <![CDATA[<=]]> #{pno}+8 AND rnum <![CDATA[>=]]> #{pno}+1
    </select>
+   <!--  상품 검색 -->
 
 </mapper>
