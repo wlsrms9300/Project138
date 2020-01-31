@@ -58,7 +58,7 @@ $(document).ready(function(){
             }
         }
     });
-    
+    /*
     $('#board_history').click(function() {
     	var history = $('.history_drop');
     	if(history.is(":visible")) {
@@ -69,7 +69,7 @@ $(document).ready(function(){
     		history.slideDown();
     	}
     });
-
+	*/
     /* 메뉴버튼 이벤트 시작 */
     $('#num0').click(function(){
         var list= $('.list');
