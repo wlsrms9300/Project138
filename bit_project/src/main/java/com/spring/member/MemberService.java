@@ -9,6 +9,7 @@ public interface MemberService {
 	public MemberVO findEmail(MemberVO membervo);	//아이디 찾기
 	public MemberVO findPassword(MemberVO membervo);	//비밀번호 찾기
 	public int passwordCheck(MemberVO membervo);	//mypage 비밀번호 확인
-	public int nicknameupdateCheck(MemberVO membervo);	//mypage 업데이트 닉네임 체크
+	public int nicknameupdateCheck(MemberVO membervo);	//업데이트 폼 서브밋
 	public int passwordUpdate(MemberVO membervo);	//password 업데이트
+	public int nnupdateCheck(MemberVO membervo); //닉네임 중복체크
 }

@@ -15,4 +15,5 @@ public interface MemberMapper {
 	MemberVO passwordCheck(MemberVO membervo);	//mypage 비밀번호 확인
 	int nicknameupdateCheck(MemberVO membervo);	//mypage nickname update 중복확인
 	int passwordUpdate(MemberVO membervo);	//비밀번호 변경
+	MemberVO nnupdateCheck(MemberVO membervo);
 }

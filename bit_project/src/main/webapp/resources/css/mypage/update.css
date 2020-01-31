@@ -7,12 +7,16 @@
     border-radius:10px;
     margin: 0 auto;
 }
-.member_img > h1 {
+#update_form > h1 {
     margin-bottom:40px;
     color:rgb(73, 69, 69);
+    text-align: center;
 }
 .member_img {
     text-align: center;
+}
+#profilefield {
+	text-align: center;
 }
 .update_table {
     margin-top:30px;
@@ -81,7 +85,7 @@
     color:#EA7475;
     font-size: 20px;
 }
-.nickname, .postal_num, .password_before, .new_password, .new_password_confirm, .address, .address_detail, .instagram_id, .children_name, .children_birth {
+.nickname, .postal_num, .password, .new_password, .new_password_confirm, .address, .address_detail, .instagram_id, .children_name, .children_birth {
     border-radius:5px;
     width:200px;
     height:30px;
