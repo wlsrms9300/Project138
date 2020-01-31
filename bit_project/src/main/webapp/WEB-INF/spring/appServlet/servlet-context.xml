@@ -48,5 +48,6 @@
 	<context:component-scan base-package="com.spring.partner" />
 	<context:component-scan base-package="com.spring.chat" />
 	<context:component-scan base-package="com.spring.writing" />
+	<context:component-scan base-package="com.spring.admin" />
 
 </beans:beans>
