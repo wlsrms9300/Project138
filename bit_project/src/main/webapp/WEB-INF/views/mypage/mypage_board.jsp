@@ -84,13 +84,12 @@
  
         //활동내역 가져오기
         $('#board_history').click(function() {
-        	
         	var nickname = '<%=nickname1 %>';
         	var text = $('.board_history_btn > b').text();
         	var history = $('.history_drop');
         	
         	if(!(history.is(":visible"))) {
-        		$('#history_drop_table').empty();
+        		//$('#history_drop_table').empty();
         		
         		$.ajax({
         			url:'/bit_project/getAcHistory.my',
@@ -101,19 +100,21 @@
         			success: function(data) {	
         				
         				var output = '';
+        				var fmdate1 = null;
         				var writedate = null;
         				writedate = data.regist;
         				
         				if(writedate == null) {       					
             				writedate = "최신글이 없습니다";
         				} else {
-        					writedate = data.regist;
+        					fmdate1 = new Date(data.regist);
+        					writedate = date_format(fmdate1);
         				}
-        				var connection = data.last_connection;
-        				alert(writedate);
-        				
+        				var fmdate2 = new Date(data.last_connection);
+        				var connection = date_format(fmdate2);       		
+    				
         				output += '<tr>';
-        				output += '<td style="text-align:left;">마지막 접속일 :</td>';
+        				output += '<td style="text-align:left;"">마지막 접속일 :</td>';
         				output += '<td>' + connection + '</td>';
         				output += '<td>최근 글 등록일</td>';
         				output += '<td>' + writedate + '</td>';
@@ -131,8 +132,13 @@
         				output += '<td>' + data.scrap_count + '</td>';
         				output += '</tr>';
         				console.log("output:" + output);
-        				$('#history_drop_table').append(output);
-        				
+        				$('#history_drop_table').append(output); 
+        				$('.1').remove();
+        				$('.2').remove();
+        				$('.3').remove();
+        				$('#history_drop_table tr:nth-child(1)').addClass('1');
+        				$('#history_drop_table tr:nth-child(2)').addClass('2');
+        				$('#history_drop_table tr:nth-child(3)').addClass('3');
         				$('.board_history_btn > b').text('-');
         				history.slideDown();
         			},
@@ -145,9 +151,7 @@
 				history.slideUp();
         	}
         	event.preventDefault();
-        });
-     
-        
+        }); 
     });
     
 </script>
@@ -165,24 +169,26 @@
 		</div>
 		<div class="history_drop">
 			<table id="history_drop_table">
-			<tr>
+		
+			<tr class="1">
                <td style="text-align:left;"></td>
                <td></td>
                <td>최근 글 등록일 :</td>
                <td></td>
             </tr>
-            <tr>
+            <tr class="2">
                <td style="text-align:left;">게시글 :</td>
                <td></td>
                <td>댓글 :</td>
                <td></td>
             </tr>
-            <tr>
+            <tr class="3">
                <td style="text-align:left;">후기 :</td>
                <td></td>
                <td>스크랩 :</td>
                <td></td>
             </tr>
+
 			</table>
 		</div>
         
