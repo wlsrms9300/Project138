@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var today = new Date(),
         year = today.getFullYear(),
         month = today.getMonth(),
-        monthTag =["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        monthTag =["01","02","03","04","05","06","07","08","09","10","11","12"],
         day = today.getDate(),
         days = document.getElementById('calendar').getElementsByTagName('td'),
         selectedDay,
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(){
             headMonth = document.getElementsByClassName('head-month');
 
             e?headDay[0].innerHTML = e : headDay[0].innerHTML = day;
-            headMonth[0].innerHTML = monthTag[month] +" - " + year;        
+            headMonth[0].innerHTML = year + " - " + monthTag[month];        
      };
     
     Calendar.prototype.drawDays = function() {

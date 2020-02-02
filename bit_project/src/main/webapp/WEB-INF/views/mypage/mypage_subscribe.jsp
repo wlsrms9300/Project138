@@ -20,7 +20,7 @@
                         <b>미구독</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정기구독을 이용해보세요</p>
                     </div>
                     <div class="subscribe_content_2">
-                        <a href="#"><b>구독하기 ></b></a>
+                        <a href="subscribestep1.me"><b>구독하기 ></b></a>
                     </div>
                 </div>
                 <div class="pay_block">

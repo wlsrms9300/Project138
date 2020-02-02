@@ -52,7 +52,6 @@
     };
         
         $('#foo-table').DataTable( {
-        	
             language:lang_kor
         });  
     });
@@ -79,7 +78,7 @@
 
 		return year + "-" + month + "-" + date + " " + hour + ":" + min;
 	}
-    
+    ㄴ
     $(document).ready( function () {
  
         //활동내역 가져오기
