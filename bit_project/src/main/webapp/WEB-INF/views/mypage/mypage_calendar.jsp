@@ -37,14 +37,14 @@ $(document).ready(function(){
 			var result = confirm('반납신청하시겠습까?');
 			if(result == true) {
 				$.ajax({
-					url:'/bit_project/updatePS.my', //ps테이블의 return_application날짜갱신 후 state값 '대기'
+					url:'/bit_project/updatePS_application.my', //ps테이블의 return_application날짜갱신 후 state값 '대기'
 					type:'POST',
 					data: {'email':'<%=email_cal %>'},
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-					success: function(result) {
-						if(result.res == "OK") {
-							//db저장에 성공하면 db새로 읽어서 페이지 새로고침
+					success: function(data) {
+						if(data.res == "OK") {
+							$('#true').text(application_date);	
 						} else {
 							alert('반납신청 실패');
 						}
@@ -53,7 +53,7 @@ $(document).ready(function(){
 						alert("ajax통신 실패!!!");
 					}
 				});
-				$('#true').text(application_date);	
+
 			}
 		}
 	});
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			var result = confirm('반납신청을 취소하시겠습니까?');
 			if(result == true) {
 				$.ajax({
-					url:'bit_project/deletePS.my' //ps테이블의 return_application날짜 null로 바꾸고 staet값 '대여중'
+					url:'bit_project/updatePS_reset.my' //ps테이블의 return_application날짜 null로 바꾸고 staet값 '대여중'
 				});
 				$('#true').text("반납신청");
 			}
@@ -259,7 +259,7 @@ $(document).ready(function(){
     %>
     	<div class="subscribe_N"> <!-- 구독자가 아닐경우 -->
             <div class="subscribe_N_1">
-                <b>미구독</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정기구독을 이용해보세요</p>
+                <b>미구독</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정기구독을 이용해보세요</p> <!-- 수정필요 미구독(구독하기), 정기(반납횟수), 비정기(전환하기) -->
             </div>
             <div class="subscribe_N_2">
                 <a href="subscribestep1.me"><b>구독하기 ></b></a>

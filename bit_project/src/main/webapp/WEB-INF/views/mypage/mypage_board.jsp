@@ -78,11 +78,12 @@
 
 		return year + "-" + month + "-" + date + " " + hour + ":" + min;
 	}
-    ㄴ
+    
     $(document).ready( function () {
  
         //활동내역 가져오기
         $('#board_history').click(function() {
+        	
         	var nickname = '<%=nickname1 %>';
         	var text = $('.board_history_btn > b').text();
         	var history = $('.history_drop');

@@ -2,7 +2,7 @@ package com.spring.calendar;
 
 import java.sql.Timestamp;
 
-public class calendarVO {
+public class CalendarVO {
 	//product_state, subscribe 컬럼
 	private int state_num;
 	private int subscribe_num;
