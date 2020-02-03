@@ -50,6 +50,11 @@
 
 	}); //document.ready         
 	
+	//태그 제거
+	function removeTag( str ) {
+		return str.replace(/(<([^>]+)>)/gi, "");
+	}
+	
 		//필터
 		function button_click() {
 			var currentPage = 1;
@@ -103,12 +108,12 @@
        							output += '<div id="community_container_mt">';
        							output += '<div class="underline"></div>';
        							output += '<div class="community_mt_title">';
-       							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"' + '</a>';
+       							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + ' ">';
        							output += '<div class="community_mt_img">';
        							output += '<img src="" class="com_img1">';
        							output += '</div>';
        							output += '<h2 class="community_name">' + item.board_name + '</h2>';
-       							output += '<p class="community_mt_mt">' + item.content + '</p>';
+       							output += '<p class="community_mt_mt">' + removeTag(item.content) + '</p>';
        							output += '<footer class="community_mt_footer">';
        							output += '<a class="community_mt_footer_user" href="community_user.co?nickname=' + item.nickname + ' ">';
        							output += '<img><i class="fas fa-user-circle fas-2x"></i>';
@@ -120,6 +125,7 @@
        							output += '<span class="community_mt_footer_views">' + "조회수 " + item.count + ' </span>';
        							output += '</span>';
        							output += '</footer>';
+       							output += '</a>';
        							output += '</div><br>';
        							output += '</div>';
        							
@@ -128,7 +134,7 @@
    			                alert("사진 출력!!");
 	                				output += '<div id="community_container_mi">';
        							output += '<div class="community_mi_title">';
-       							output += '<a class="community_mi_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"/>';
+       							output += '<a class="community_mi_link" href="community_detail.co?board_num=' + item.board_num  + ' "></a>';
        							output += '<div class="community_mi_img">';
        							output += '<img src="" class="com_img2">';
        							output += '</div>';
@@ -212,12 +218,12 @@
    							output += '<div id="community_container_mt">';
    							output += '<div class="underline"></div>';
    							output += '<div class="community_mt_title">';
-   							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"' + '</a>';
+   							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + ' ">';
    							output += '<div class="community_mt_img">';
    							output += '<img src="" class="com_img">';
    							output += '</div>';
    							output += '<h2 class="community_name">' + item.board_name + '</h2>';
-   							output += '<p class="community_mt_mt">' + item.content + '</p>';
+   							output += '<p class="community_mt_mt">' + removeTag(item.content) + '</p>';
    							output += '<footer class="community_mt_footer">';
    							output += '<a class="community_mt_footer_user" href="community_user.co?nickname=' + item.nickname + ' ">';
    							output += '<img><i class="fas fa-user-circle fas-2x"></i>';
@@ -229,6 +235,7 @@
    							output += '<span class="community_mt_footer_views">' + "조회수 " + item.count + ' </span>';
    							output += '</span>';
    							output += '</footer>';
+   							output += '</a>';
    							output += '</div><br>';
    							output += '</div>';
    							
@@ -237,7 +244,7 @@
 			                	
 			                	output += '<div id="community_container_mi">';
    							output += '<div class="community_mi_title">';
-   							output += '<a class="community_mi_link" href="community_detail.co?board_num=' + item.board_num  + '&pageNum=1"/>';
+   							output += '<a class="community_mi_link" href="community_detail.co?board_num=' + item.board_num  + ' "></a>';
    							output += '<div class="community_mi_img">';
    							output += '<img src="" class="com_img2">';
    							output += '</div>';

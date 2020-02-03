@@ -1,5 +1,7 @@
 package com.spring.writing;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,13 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WritingController {
 	
 	@Autowired
 	private WritingService writingService;
+	
+	@RequestMapping(value = "/co_writeForm.co", method = RequestMethod.GET)
+	public String co_writeForm(Model model) {
+
+		return "co_writeForm";
+	}
+	
 	
 	/* 글쓰기 */
 	@PostMapping("/write.cw")
@@ -34,28 +42,35 @@ public class WritingController {
 		model.addAttribute("writingvo", writingvo);
 		
 //		return "detailtest";/*테스트  페이지*/
-		return "redirect:/getDetail.cw";
+//		return "redirect:/getDetail.cw";
+		return "redirect:community_detail.co?board_num=" + writingvo.getBoard_num();
 	}
 	
-	/* 글 정보 불러오기 */ // board_num 값 받는 코드 수정 필요. board_num defaultValue="15"
-	@RequestMapping("/getDetail.cw")
-	public String getDetail(WritingVO writingvo, Model model, @RequestParam(value="board_num",required=false, defaultValue="15") int board_num) {
-		System.out.println("BOARD_NUM:"+board_num);
-		WritingVO vo = writingService.getDetail(board_num);
+	/* 글 수정 폼*/
+	@RequestMapping("/updateForm.cw")
+	public String updateForm(Model model, HttpServletRequest request) {
+		WritingVO writingvo = writingService.updateForm(Integer.parseInt(request.getParameter("board_num")));
+		request.setAttribute("writingvo", writingvo);
+		return "co_updateForm";/*테스트  페이지*/
+	}
+	
+	/* 글 수정*/
+	@RequestMapping("/update.cw")
+	public String update(WritingVO writingvo, Model model, HttpServletRequest request) {
+		int res = 0;
+		res = writingService.update(writingvo);
 		
-		model.addAttribute("writingvo", vo);
-		return "co_updateForm";/*수정폼  페이지*/
+		return "redirect:community_detail.co?board_num=" + writingvo.getBoard_num();
 	}
 	
-	/* 글 수정 */
-	@PostMapping("/edit.cw")
-	public String edit(WritingVO writingvo, Model model) {
-		int res = writingService.edit(writingvo);
+	/*글 삭제 */
+	@GetMapping("/delete.cw")
+	public String delete(WritingVO writingvo, Model model, @RequestParam(value="board_num",required=false) int board_num) {
+		System.out.println(board_num + " board_num 게시글 삭제");
+		int res = writingService.delete(board_num);
 		System.out.println(res);
 		
-		model.addAttribute("writingvo", writingvo);
-		
-		return "detailtest";/*테스트  페이지*/
+		return "community";/*테스트  페이지*/
 	}
 
 }

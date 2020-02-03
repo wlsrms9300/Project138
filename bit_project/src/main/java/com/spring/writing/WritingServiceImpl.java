@@ -19,19 +19,34 @@ public class WritingServiceImpl implements WritingService {
 		return res;
 	}
 
+//	@Override
+//	public WritingVO getDetail(int board_num) {
+//		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
+//		WritingVO vo = writingMapper.getDetail(board_num);
+//		
+//		return vo;
+//	}
+
 	@Override
-	public WritingVO getDetail(int board_num) {
+	public WritingVO updateForm(int board_num) {
+		WritingVO vo = null;
 		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
-		WritingVO vo = writingMapper.getDetail(board_num);
+		vo = writingMapper.updateForm(board_num);
 		
 		return vo;
 	}
 
 	@Override
-	public int edit(WritingVO writingvo) {
+	public int delete(int board_num) {
 		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
-		int res = writingMapper.edit(writingvo);
-		
+		int res = writingMapper.delete(board_num);
+		return res;
+	}
+
+	@Override
+	public int update(WritingVO writingvo) {
+		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
+		int res = writingMapper.update(writingvo);
 		return res;
 	}
 

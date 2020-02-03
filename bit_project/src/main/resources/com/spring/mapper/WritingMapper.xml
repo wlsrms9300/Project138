@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.WritingMapper">
+
 	<resultMap id="resultWritingVO" type="com.spring.writing.WritingVO">
 		<result property="board_num" column="board_num" />
 		<result property="nickname" column="nickname" />
@@ -32,15 +33,20 @@
 		delete from file_path
 	</delete> -->
 	
-	<!-- 글 정보 가져오기 -->
-	<select id="getDetail" parameterType="int" resultMap="resultWritingVO">
-		select * from board where BOARD_NUM=#{BOARD_NUM}
+	<!-- 글 수정폼 -->
+	<select id="updateForm" parameterType="int" resultMap="resultWritingVO">
+		select * from board where board_num = #{board_num}
 	</select>
 	
-	<!-- 글쓰기 수정 -->
-	<update id="edit" parameterType="com.spring.writing.WritingVO" >
-		update board set content=#{content} where board_num=#{board_num}
+	<!-- 글 수정 -->
+	<update id="update" parameterType="com.spring.writing.WritingVO">
+		update board set board_name=#{board_name}, content=#{content} where board_num=#{board_num}
 	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="del_board" parameterType="int">
+		delete from board where board_num = #{board_num}
+	</delete>
 				
 </mapper>
 

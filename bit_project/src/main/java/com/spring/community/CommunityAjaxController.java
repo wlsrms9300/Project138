@@ -1,14 +1,12 @@
 package com.spring.community;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -89,7 +87,137 @@ public class CommunityAjaxController {
 		return getuserSearch;
 	}
 	
+	//게시판 댓글 보여주기
+	@PostMapping(value="/getCO.co", produces="application/json;charset=UTF-8")
+	public List<CommentVO> getCO(int board_num, int page) {
+		int limit = 5;
+		int start = (page - 1) * 5 + 1;
+		int end = start + limit - 1;
 
+		List<CommentVO> list = communityService.getCO(board_num, start, end);
+		return list;
+	}
+	
+	
+	//댓글 작성
+	@PostMapping(value="/writeCO.co", produces="application/json;charset=UTF-8")
+	public Map<String, Object> writeCO(CommentVO covo) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		System.out.println("댓글 작성 컨트롤ㄹㅓ"+ covo.getBoard_num() + covo.getNickname() + covo.getContent());
+		
+		try {
+			int res = communityService.writeCO(covo);
+			System.out.println(res);
+			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		return retVal;
+	}
+	
+	//댓글 수정
+	@PostMapping(value="/updateCO.co", produces="application/json;charset=UTF-8")
+	public Map<String, Object> updateCO(int comment_num, String content) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		System.out.println("댓글 수정 컨트롤ㄹㅓ" + comment_num + "내용 : " + content);
+		 
+		try {
+			int res = communityService.updateCO(comment_num, content);
+			System.out.println(res);
+			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		return retVal;
+	}
+	
+	//댓글 삭제
+		@PostMapping(value="/deleteCO.co", produces="application/json;charset=UTF-8")
+		public Map<String, Object> deleteCO(@RequestParam(value="comment_num", required=false, defaultValue="1") int comment_num) {
+			Map<String, Object> retVal = new HashMap<String, Object>();
+			System.out.println("댓글 삭제 컨트롤ㄹㅓ"+ comment_num);
+			
+			try {
+				int res = communityService.deleteCO(comment_num);
+				System.out.println(res);
+				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+			} catch (Exception e) {
+				retVal.put("res", "FAIL");
+				retVal.put("message", "Failure");
+			}
+			return retVal;
+		}
+	
+		//대댓글 작성
+		@PostMapping(value="/writeAnswer.co", produces="application/json;charset=UTF-8")
+		public Map<String, Object> writeAnswer(AnswerVO answervo) {
+			Map<String, Object> retVal = new HashMap<String, Object>();
+			System.out.println("대댓글 작성 컨트롤ㄹㅓ"+ answervo.getComment_num() + answervo.getNickname() + answervo.getContent());
+			
+			try {
+				int res = communityService.writeAnswer(answervo);
+				System.out.println(res);
+				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+			} catch (Exception e) {
+				retVal.put("res", "FAIL");
+				retVal.put("message", "Failure");
+			}
+			return retVal;
+		}
+		
+		//대댓글 보여주기
+		@PostMapping(value="/getAnswer.co", produces="application/json;charset=UTF-8")
+		public List<AnswerVO> getAnswer(int comment_num) {
+			System.out.println(comment_num);
+			List<AnswerVO> list = communityService.getAnswer(comment_num);
+			return list;
+		}
+		
+		//대댓 수정
+		@PostMapping(value="/updateAnswer.co", produces="application/json;charset=UTF-8")
+		public Map<String, Object> updateAnswer(int answer_num, String content) {
+			Map<String, Object> retVal = new HashMap<String, Object>();
+			System.out.println("대댓 수정 컨트롤러 : " + answer_num + "내용 : " + content);
+			 
+			try {
+				int res = communityService.updateAnswer(answer_num, content);
+				System.out.println(res);
+				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+			} catch (Exception e) {
+				retVal.put("res", "FAIL");
+				retVal.put("message", "Failure");
+			}
+			return retVal;
+		}
+		
+		//대댓글 삭제
+		@PostMapping(value="/deleteAnswer.co", produces="application/json;charset=UTF-8")
+		public Map<String, Object> deleteAnswer(@RequestParam(value="answer_num", required=false, defaultValue="1") int answer_num) {
+			Map<String, Object> retVal = new HashMap<String, Object>();
+			System.out.println("대댓글 삭제 컨트롤ㄹㅓ"+ answer_num);
+			
+			try {
+				int res = communityService.deleteAnswer(answer_num);
+				System.out.println(res);
+				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+			} catch (Exception e) {
+				retVal.put("res", "FAIL");
+				retVal.put("message", "Failure");
+			}
+			return retVal;
+		}
+		
+		
+		
+		
 //	//카테고리 선택 후 페이징(기본값=자유게시판)
 //	@PostMapping(value = "/getCommunityCount.co", produces="application/json;charset=UTF-8")
 //    public int getCommunityCount(String category) throws Exception {

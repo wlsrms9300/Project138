@@ -209,7 +209,7 @@
             <a class="community_menubar_item" href="community.co" value="정보공유">정보공유(팁)</a>
             <a class="community_menubar_item" href="community.co" value="공구게시판">공구게시판</a>
             <a class="community_menubar_item" href="community.co" value="육아게시판">육아게시판</a>
-            <a class="community_menubar_item" href="community.co" value="토론게시판">이슈,토론게시판</a>
+            <a class="community_menubar_item" href="community.co" value="이슈게시판">이슈,토론게시판</a>
         </div>
     </div>
     

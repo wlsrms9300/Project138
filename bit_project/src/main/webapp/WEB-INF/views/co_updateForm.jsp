@@ -11,14 +11,9 @@
 <head>
 <title>community(main)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<link
-	href="${pageContext.request.contextPath}/resources/css/community.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/community_writeform.css"
-	rel="stylesheet" type="text/css" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+<link href="${pageContext.request.contextPath}/resources/css/community.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/community_writeform.css" rel="stylesheet" type="text/css" />
 <!-- summernote -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -26,14 +21,13 @@
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <!-- include summernote-ko-KR -->
- <script
-	src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/resources/js/co_writeForm.js"></script>  --%>
 
 </head>
 <body>
 
-	<div style="height: 50px;">
+	<div style="height: 60px;">
 		<header>
 			<%@ include file="/WEB-INF/views/header2.jsp"%>
 		</header>
@@ -57,7 +51,7 @@
 		<div></div>
 	</div>
  	<div id="community-contentbox">
-		<form method="POST" name="edit-Form" action="edit.cw" role="form" enctype="multipart/form-data">		
+		<form method="POST" name="edit-Form" action="update.cw" role="form" enctype="multipart/form-data">		
 			<input type="hidden" name="board_num" value="<%=writingvo.getBoard_num() %>" />
 			<input type="hidden" name="nickname" value="<%=writingvo.getNickname() %>" />
 			<div id="cententbox-top">
