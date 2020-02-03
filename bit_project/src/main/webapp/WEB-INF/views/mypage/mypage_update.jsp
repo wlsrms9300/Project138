@@ -5,6 +5,7 @@
 <%@ page import="com.spring.login.LoginVO"%>
 <%@ page import="com.spring.login.LoginController"%>
 <%
+
 	LoginVO userDetail = (LoginVO) session.getAttribute("userDetail");
 
 	if (userDetail.getInstagram_id() == null) {

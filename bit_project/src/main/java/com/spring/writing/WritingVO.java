@@ -12,6 +12,9 @@ public class WritingVO {
 	private int count;
 	private String category;
 	private int scrap_count;
+	private int start;
+	private int end;
+	
 	public int getBoard_num() {
 		return board_num;
 	}
@@ -66,5 +69,18 @@ public class WritingVO {
 	public void setScrap_count(int scrap_count) {
 		this.scrap_count = scrap_count;
 	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	
 
 }

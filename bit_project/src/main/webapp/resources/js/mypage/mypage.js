@@ -386,11 +386,6 @@ $(document).ready(function(){
     
      /* 메뉴버튼 이벤트 끝 */
 
-    /* point 사용하기 클릭 이벤트 */
-    $('.point_button').click(function(){
-        window.confirm('포인트를 사용하시겠습니까?');
-        $('.point_text').val('');
-    });
 
     /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 시작 */
     $('.btn1').click(function() {

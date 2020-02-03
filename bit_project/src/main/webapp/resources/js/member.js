@@ -60,50 +60,53 @@
             alert("ajax통신 실패!!!");
          }
 
-      });
-   }
-   /*비밀번호  체크 */
-   $(function() {
-      $("#pw-alert-true").hide();
-      $("#pw-alert-false").hide();
-      $("#pw-alert-check").hide();
-      /* 8자리 여부 */
-      $("#password").keyup(function() {
-         var pwd1 = $("#password").val();
-         
-         if (pwd1.length < 8) { 
-            $("#pw-alert-check").show();
-            $("#submit").attr("disabled", "disabled");
-         } else {
-            $("#pw-alert-check").hide();
-            $("#submit").removeAttr("disabled");
-         }
-      });
-      /* 비밀번호 일치 여부 */
-      $(".pw").keyup(function() {
-            var pwd1 = $("#password").val();
-            var pwd2 = $("#pwcheck").val();
-         if(pwd1 =="" || pwd2 =="") {
-            return false;   
-         } else if (pwd1 != "" && pwd2 != "") {
-            if (pwd1 == pwd2) {
-               $("#pw-alert-true").show();
-               $("#pw-alert-false").hide();
-               $("#submit").removeAttr("disabled");
-            } else if(pwd1 != pwd2 ){
-               $("#pw-alert-true").hide();
-               $("#pw-alert-false").show();
-               $("#submit").attr("disabled", "disabled");
-            }
-         }
-      });
-   
-      
-      /*중복확인 버튼, 약관동의*/
+
+		});
+	}
+	/*비밀번호  체크 */
+	$(function() {
+		$("#pw-alert-true").hide();
+		$("#pw-alert-false").hide();
+		$("#pw-alert-check").hide();
+		/* 8자리 여부 */
+		$("#password").keyup(function() {
+			var pwd1 = $("#password").val();
+			
+			if (pwd1.length < 8) { 
+				$("#pw-alert-check").show();
+				$("#submit").attr("disabled", "disabled");
+			} else {
+				$("#pw-alert-check").hide();
+				$("#submit").removeAttr("disabled");
+			}
+		});
+		/* 비밀번호 일치 여부 */
+		$(".pw").keyup(function() {
+				var pwd1 = $("#password").val();
+				var pwd2 = $("#pwcheck").val();
+			if(pwd1 =="" || pwd2 =="") {
+				return false;	
+			} else if (pwd1 != "" && pwd2 != "") {
+				if (pwd1 == pwd2) {
+					$("#pw-alert-true").show();
+					$("#pw-alert-false").hide();
+					$("#submit").removeAttr("disabled");
+				} else if(pwd1 != pwd2 ){
+					$("#pw-alert-true").hide();
+					$("#pw-alert-false").show();
+					$("#submit").attr("disabled", "disabled");
+				}
+			}
+		});
+	
+		
+		/*중복확인 버튼, 약관동의*/
+
         $('.signup-btn').click(function(){
            pwd1 = document.signupForm.password.value;
            pwd2 = document.signupForm.pwcheck.value;
         
+
           if (pwd1.length < 8 )
           {
              document.signupForm.password.focus();
@@ -131,6 +134,7 @@
                }
             }
          }
+
         });
    });
    
