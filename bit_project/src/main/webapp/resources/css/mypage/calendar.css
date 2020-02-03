@@ -43,7 +43,7 @@
      -webkit-box-shadow: 0 0 5px #c9c9c9;
      box-shadow: 0 0 5px #c9c9c9;
      text-align: center;
-     margin: 4em auto;
+     margin: 2em auto;
      position: relative;
  }
  
@@ -136,9 +136,9 @@
      transition:all 0.2s ease-in;
  }
  
- .tbody td:hover, .selected {
+ .tbody td:hover, .selected /* .tbody td:nth-child(7):hover, .tbody td:nth-child(1):hover */ {
      color: #fff;
-     background-color: #2a3246;
+     background-color: #8a8e98;
      border: none;
  }
  
@@ -151,7 +151,6 @@
  #today {
      background-color: #e66b6b;
      color: #fff;
-     font-family: serif;
      border-radius: 50%;
  }
  
@@ -213,6 +212,16 @@
      -webkit-transition: all 0.3s ease;
      transition: all 0.3s ease;
  }
+ 
+ /*
+ .tbody tr td:nth-child(1) {
+ 	color:red;
+ }
+ 
+ .tbody tr td:nth-child(7) {
+ 	color:blue;
+ }
+ */
  
  #reset:hover {
      color: #e66b6b;
@@ -292,6 +301,67 @@
 
 thead tr th {
 	color:#EA7475;
+}
+
+.subscribe_N {
+	margin-bottom:50px;
+    height:35px;
+    border-radius:7px;
+    display:flex;
+    justify-content: space-between;
+    background-color: #e4e4e4;
+}
+
+.subscribe_N_1 {
+	line-height: 35px;
+    padding-left:20px;
+}
+
+.subscribe_N_2 {
+	line-height: 35px;
+    padding-right:20px;
+}
+
+.subscribe_N_1 > b {
+	font-size:13px;
+    color:#EA7475;
+    padding:3px;
+    border:solid 2.2px rgb(112, 111, 111);
+    border-radius:7px;
+}
+
+.subscribe_N_1 > p {
+	color: rgb(109, 109, 109);
+}
+
+.subscribe_N_2 a b {
+	color:#EA7475;
+}
+
+.color-content {
+	display:flex;
+	margin-bottom:30px;
+}
+
+.circle p{
+	color:#fff;
+	
+}
+
+.color-content .circle:nth-child(1), .color-content .circle:nth-child(2), .color-content .circle:nth-child(3) {
+	width:40px; height:40px; border-radius:50%; padding-top:10px; margin-right:20px;
+}
+
+.color-content .circle:nth-child(1) {
+	background-color:#595ad4;
+}
+
+.color-content .circle:nth-child(2) {
+	background-color:#cfa2fb;
+}
+
+.color-content .circle:nth-child(3) {
+	background-color:#77af6e;
 }
 
 @media (max-width: 600px) {
