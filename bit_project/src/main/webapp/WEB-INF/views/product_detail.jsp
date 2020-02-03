@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.product.ProductVO" %>
+<%@ page import="com.spring.login.LoginVO" %>
 <%
     ProductVO prVO = (ProductVO)request.getAttribute("prVO");
+	LoginVO userDetail = (LoginVO)session.getAttribute("userDetail");
+	
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
 	int bookmark = 0, wishlist = 0, reservation = 0;
-	String email = "";
-	if((String)session.getAttribute("email")!=null){
-		email = (String)session.getAttribute("email");
-	}
-	String phone = "";
-	if((String)session.getAttribute("phone")!=null){
-		phone = (String)session.getAttribute("phone");
-	}
+	String email = "", phone="";
 	
 	try {
+		if((String)session.getAttribute("email")!=null){
+			email = (String)session.getAttribute("email");
+			phone = userDetail.getPhone();
+		}
+		
 		if((int)request.getAttribute("bookmark")!=0){
 			bookmark = 1;
 		}
@@ -25,8 +26,8 @@
 		if((int)request.getAttribute("reservation")!=0){
 			reservation = 1;
 		}
+		
 	}catch (NullPointerException e) {
-		e.printStackTrace();
 		e.getMessage();
 	}finally {
 		System.out.println("닉네임 : "+nickname);
@@ -34,7 +35,7 @@
 		System.out.println("위시 : "+wishlist);
 		System.out.println("레저 : "+reservation);
 		System.out.println("이메일 : "+email);
-		System.out.println("연락처 : "+phone);
+		System.out.println("폰 : "+phone);
 	}
 	
     %>
@@ -498,6 +499,9 @@
         </div>
 
     </div>
+    <div class="container">
+    <input type="button" value="상품 수정" onclick="prModify();"/>
+    </div>
     <!-- 배송/반납  -->
 
 
@@ -761,28 +765,71 @@
 		$('#reservation_button').css("background","black");
 	}
 	function amount_alert() {
-		 var result = confirm("입고 알림을 신청하시겠습니까?");
-	        
-	        if(result)
-	        {
-	        	var alert_params = $("#amount_alarm").serialize();
-	            console.log("신청되었습니다.");
-	            $.ajax({
-	            	url: '/bit_project/alarm.pr',
-	                type: 'GET',
-	                dataType: 'json',
-	                async:false,
-	                data: alert_params,
-	                success: function (data) {
-	                	       
-	                },
-	    	        error: function () {
-	    				alert("ajax오류");
-	    			}
-	            });
-	         
-	        }
-	     
+		 var alert_params = $("#amount_alarm").serialize();
+		 var alarm_chk = 0;
+		 
+		 $.ajax({
+         	url: '/bit_project/alarmCheck.pr',
+             type: 'GET',
+             dataType: 'json',
+             async:false,
+             data: alert_params,
+             success: function (data) {
+             	if(data.val=="no"){
+             		alarm_chk = 0;
+             	}else {
+             		alarm_chk = 1;
+             	}
+             },
+ 	        error: function () {
+ 				alert("ajax오류");
+ 			}
+         });
+		 
+		 if(alarm_chk==0){
+			 var alarm_y = confirm("입고 알림을 신청하시겠습니까?");
+			 console.log(alert_params);
+			 if(alarm_y)
+		        {
+		            
+		            $.ajax({
+		            	url: '/bit_project/addalarm.pr',
+		                type: 'GET',
+		                dataType: 'json',
+		                async:false,
+		                data: alert_params,
+		                success: function (data) {
+		                	console.log("신청되었습니다.");
+		                },
+		    	        error: function () {
+		    				alert("ajax오류");
+		    			}
+		            });
+		         
+		        }
+		 }else {
+			 var alarm_n = confirm("입고 알림을 취소하시겠습니까?");
+			 if(alarm_n)
+		        {
+		            $.ajax({
+		            	url: '/bit_project/deletealarm.pr',
+		                type: 'GET',
+		                dataType: 'json',
+		                async:false,
+		                data: alert_params,
+		                success: function (data) {
+		                	console.log("취소되었습니다.");   
+		                },
+		    	        error: function () {
+		    				alert("ajax오류");
+		    			}
+		            });
+		         
+		        }
+		 }
+	}
+	function prModify() {
+		location.href="productModifyForm.pr?num=<%=prVO.getProduct_num()%>";
 	}
     </script>
 </body>

@@ -8,7 +8,7 @@ public class LoginVO {
 	private String nickname;
 	private String name;
 	private String password;
-	private int phone;
+	private String phone;
 	private String address;
 	private String address_detail;
 	private int postal_num;
@@ -61,10 +61,11 @@ public class LoginVO {
 	public void setUsergroup(String usergroup) {
 		this.usergroup = usergroup;
 	}
-	public int getPhone() {
+
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getAddress() {

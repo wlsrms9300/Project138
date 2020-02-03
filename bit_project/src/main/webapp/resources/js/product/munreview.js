@@ -55,7 +55,7 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
                 exText += "<div>"+item.content+"</div>";
                 //exText += '<div><img src="/bit_project/image/'+item.mimg+'">';
                 exText += '<div><img src="'+item.mimg+'">';
-                alert(item.mimg);
+                
                 exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
                 exText += "<div>";
                 
@@ -181,7 +181,6 @@ function review_paging(totalData, dataPerPage, pageCount, currentPage) {
 function reviewmodify(_rnum, _nickname, _content, _img, _gpa) {
 	 $("#ReviewForm textarea").html(_content);
 	 //$("#ReviewForm input[name=nickname]").val("테스트닉네임");
-	 alert(_gpa);
 	 switch (_gpa) {
 		case "5":$("#ReviewForm input:radio[name='reviewcheck']:radio[value='5']").prop('checked', true);
 			break;

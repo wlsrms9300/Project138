@@ -9,6 +9,8 @@ public interface PDService {
 	// 1. 상품 페이지 관련 	
 		// 상품등록
 		public void prAdd(ProductVO pdVO) throws Exception;
+		// 상품 수정
+		public void prModify(ProductVO pdVO) throws Exception;
 		// 전체조회(쓸일없음)
 		public List<ProductVO> allSearch() throws Exception;
 		// 필터값이 null인 상태에서 스크롤 시 추가 데이터 8개 출력
@@ -41,7 +43,12 @@ public interface PDService {
 		public void addReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 예약 off
 		public void deleteReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
-		
+		// 알람 여부
+		int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 알람 등록
+		void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 알람 삭제
+		void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
 		
 		
 		

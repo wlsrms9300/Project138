@@ -25,6 +25,17 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("상품등록 실패.", e);
 		}
 	}
+	
+	@Override
+	public void prModify(ProductVO pdVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.prModify(pdVO);
+		} catch (Exception e) {
+			throw new Exception("상품수정 실패.", e);
+		}
+	}
+
 	@Override
 	public List<ProductVO> allSearch() throws Exception {
 		try {
@@ -105,6 +116,43 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 	/********************** 상품상세 페이지 종료 **********************/
+	
+	/********************** 알람 시작 **********************/
+	@Override
+	public int getAlarm(String email, int product_num, String phone) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int res = pdMapper.getAlarm(email, product_num, phone);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("입고 알림 여부 체크 실패", e);
+		}
+	}
+	@Override
+	public void addAlarm(String email, int product_num, String phone) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.addAlarm(email, product_num, phone);
+			
+		} catch (Exception e) {
+			throw new Exception("입고 알림 신청 실패", e);
+		}
+	}
+	@Override
+	public void deleteAlarm(String email, int product_num, String phone) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.deleteAlarm(email, product_num, phone);
+			
+		} catch (Exception e) {
+			throw new Exception("입고 알림 신청 철회 실패", e);
+		}
+	}
+	
+	
+	
+	/********************** 알람 종료 **********************/
+	
 	
 	/********************** 북마크 시작 **********************/
 	@Override

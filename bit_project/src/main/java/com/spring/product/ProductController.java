@@ -68,11 +68,9 @@ public class ProductController {
 			service.getProductReadCount(prVO.getReadcount(), pNum);
 			if (session.getAttribute("email") != null) {
 				email = (String) session.getAttribute("email");
-				System.out.println("테스트 이메일 : " + email);
 				bookmark_chk = service.getBookMark(pNum, email);
 				wishlist_chk = service.getWishList(pNum, email);
 				reservation_chk = service.getReservation(pNum, email);
-
 			}
 			System.out.println("productDetail.pr : " + session.getAttribute("email"));
 			model.addAttribute("prVO", prVO);
@@ -88,26 +86,29 @@ public class ProductController {
 
 	@RequestMapping("/productForm.pr")
 	public String productForm(Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		model.addAttribute("id", id);
-
+		//String id = (String) session.getAttribute("id");
+		//model.addAttribute("id", id);
 		return "productadd";
+	}
+	@RequestMapping("/productModifyForm.pr")
+	public String productModifyForm(Model model, HttpSession session, HttpServletRequest request) {
+		ProductVO prVO = new ProductVO();
+		int pNum = Integer.parseInt(request.getParameter("num"));
+		try {
+			prVO = service.getProductDetail(pNum);
+			model.addAttribute("prVO", prVO);
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return "productmodify";
 	}
 
 	// 상품등록버튼 눌렀을떄 전송했을 때 처리 부분
 	@RequestMapping("/productAdd.pr")
 	public String productAddProcess(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		/*
-		 * String pname = request.getParameter("product_name"); int ramount =
-		 * Integer.parseInt(request.getParameter("rental_amount")); int samount =
-		 * Integer.parseInt(request.getParameter("share_amount")); String manufacturer =
-		 * request.getParameter("manufactuer"); String pcontent =
-		 * request.getParameter("product_content");
-		 */
 		ProductVO pdVO = new ProductVO();
 		int cnt=0;
-		try {
 			pdVO.setProduct_name(request.getParameter("product_name"));
 			pdVO.setRental_amount(Integer.parseInt(request.getParameter("rental_amount")));
 			pdVO.setShare_amount(Integer.parseInt(request.getParameter("share_amount")));
@@ -122,10 +123,10 @@ public class ProductController {
 			//MultipartFile mf2 = request.getFile("img_main"); // 파일
 			//MultipartFile mf3 = request.getFile("img_detail"); // 파일
 			String uploadPath = "C:\\Project138\\upload\\";
-			
-			for (MultipartFile mf : fileList) {				
-				String originalFileExtension = mf.getOriginalFilename()
-						.substring(mf.getOriginalFilename().lastIndexOf("."));
+			System.out.println(fileList.size());
+			for (MultipartFile mf : fileList) {
+				System.out.println("향상된for문 내부");
+				String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
 				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 	            long fileSize = mf.getSize(); // 파일 사이즈
 
@@ -154,43 +155,74 @@ public class ProductController {
 	                e.printStackTrace();
 	            }
 	        }
-			service.prAdd(pdVO);
-			/*
-			 * String uploadPath = "C:\\Project138\\upload\\"; String originalFileExtension
-			 * = mf1.getOriginalFilename()
-			 * .substring(mf1.getOriginalFilename().lastIndexOf(".")); String storedFileName
-			 * = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-			 * for (int i = 0; i < 3; i++) { if (i == 0) { pdVO.setImg_sum(storedFileName);
-			 * System.out.println("이미지 storedFileName : " + storedFileName); if
-			 * (mf1.getSize() != 0) { // mf.transferTo(new
-			 * File(uploadPath+"/"+mf.getOriginalFilename())); mf1.transferTo(new
-			 * File(uploadPath + storedFileName)); } } else if (i == 1) {
-			 * originalFileExtension = mf2.getOriginalFilename()
-			 * .substring(mf2.getOriginalFilename().lastIndexOf(".")); storedFileName =
-			 * UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-			 * System.out.println("이미지 storedFileName : " + storedFileName);
-			 * pdVO.setImg_main(storedFileName); if (mf2.getSize() != 0) { //
-			 * mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-			 * mf2.transferTo(new File(uploadPath + storedFileName)); } } else {
-			 * originalFileExtension = mf3.getOriginalFilename()
-			 * .substring(mf3.getOriginalFilename().lastIndexOf(".")); storedFileName =
-			 * UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-			 * pdVO.setImg_detail(storedFileName);
-			 * System.out.println("이미지 storedFileName : " + storedFileName); if
-			 * (mf3.getSize() != 0) { // mf.transferTo(new
-			 * File(uploadPath+"/"+mf.getOriginalFilename())); mf3.transferTo(new
-			 * File(uploadPath + storedFileName)); } } }
-			 */
-
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			e.getMessage();
-		}
+				service.prAdd(pdVO);
+		
 		// return "product";
 		return "redirect:/";
 	}
-
+	// 상품수정버튼 눌렀을떄 전송했을 때 처리 부분
+		@RequestMapping("/productModify.pr")
+		public String productModify(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
+				throws Exception {
+			ProductVO pdVO = new ProductVO();
+			int cnt=0;
+				pdVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+				pdVO.setProduct_name(request.getParameter("product_name"));
+				pdVO.setRental_amount(Integer.parseInt(request.getParameter("rental_amount")));
+				pdVO.setShare_amount(Integer.parseInt(request.getParameter("share_amount")));
+				pdVO.setManufacturer(request.getParameter("manufacturer"));
+				pdVO.setProduct_content(request.getParameter("product_content"));
+				pdVO.setTotal_amount(pdVO.getRental_amount() + pdVO.getShare_amount());
+				pdVO.setCategory_l(request.getParameter("category_l"));
+				pdVO.setCategory_m(request.getParameter("category_m"));
+				pdVO.setCategory_s(request.getParameter("category_s"));
+				String uploadPath = "C:\\Project138\\upload\\";
+				String originalFileExtension = "";
+				String storedFileName = "";
+				try {
+					if (request.getFile("img_sum").getSize() != 0) {
+						MultipartFile mf1 = request.getFile("img_sum"); // 파일
+						originalFileExtension = mf1.getOriginalFilename().substring(mf1.getOriginalFilename().lastIndexOf("."));
+						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+						pdVO.setImg_sum(storedFileName);
+						if (mf1.getSize() != 0) {
+							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+							mf1.transferTo(new File(uploadPath + storedFileName));
+						}
+						System.out.println("mf1 :"+storedFileName);
+					}
+					if (request.getFile("img_main").getSize() != 0) {
+						MultipartFile mf2 = request.getFile("img_main"); // 파일
+						originalFileExtension = mf2.getOriginalFilename().substring(mf2.getOriginalFilename().lastIndexOf("."));
+						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+						pdVO.setImg_main(storedFileName);
+						if (mf2.getSize() != 0) {
+							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+							mf2.transferTo(new File(uploadPath + storedFileName));
+						}
+						System.out.println("mf2 :"+storedFileName);
+					}
+					if (request.getFile("img_detail").getSize() != 0) {
+						MultipartFile mf3 = request.getFile("img_detail"); // 파일
+						originalFileExtension = mf3.getOriginalFilename().substring(mf3.getOriginalFilename().lastIndexOf("."));
+						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+						pdVO.setImg_detail(storedFileName);
+						if (mf3.getSize() != 0) {
+							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+							mf3.transferTo(new File(uploadPath + storedFileName));
+						}
+						System.out.println("mf3 :"+storedFileName);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				service.prModify(pdVO);
+			
+			// return "product";
+			return "redirect:/";
+		}
+	
 	// 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/reviewWrite.pr")
 	public String reviewWrite(MultipartHttpServletRequest request) {
