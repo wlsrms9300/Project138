@@ -44,12 +44,18 @@
                 reader.readAsDataURL(f);
             });
         }
+        function clsimg() {
+        	$(".imgs_wrap").empty();
+        	$("#input_imgs").val("");
+            
+		}
+        
     </script>
 </head>
 
 <body>
     <div class="container">
-        <form class="product-form" name="product_add_form" action="" method="POST">
+        <form  id="product_add_form" class="product-form" name="product_add_form" method="POST" enctype="multipart/form-data">
             <h3>기본정보</h3>
             <hr>
             <div class="product-image">
@@ -57,7 +63,8 @@
                 	    상품이미지
                 </div>
                 <div class="image-wrapper">
-                    <input type="file" id="input_imgs" class="file" multiple />
+                    <input type="file" id="input_imgs" class="file" name="img_list" multiple />
+                    <input type="button" onclick="clsimg();" value="이미지 초기화" />
                     <div class="imgs_wrap">
                         
                     </div>
@@ -71,7 +78,7 @@
                 </div>
             </div>
             <div class="product-subject">
-                <div class="subject-text">제목</div>
+                <div class="subject-text">상품명</div>
                 <div class="subject-input">
                     <input type="text" name="product_name" placeholder="상품명">
                 </div>
@@ -79,17 +86,17 @@
             <div class="product-category">
                 <div class="category-text">카테고리</div>
                 <div class="category-input">
-                    <select name="category_L">
+                    <select name="category_l">
                         <option selected value="실버">실버</option>
                         <option value="골드">골드</option>
                         <option value="플레티넘">플레티넘</option>
                         <option value="개인쉐어">개인쉐어</option>
                     </select>
-                    <select name="category_M">
+                    <select name="category_m">
                         <option selected value="04">0~4</option>
                         <option value="57">5~7</option>
                     </select>
-                    <select name="category_S">
+                    <select name="category_s">
                         <option selected value="과학박스">과학박스</option>
                         <option value="자동차">자동차</option>
                         <option value="로보트">로보트</option>
@@ -97,22 +104,21 @@
                     </select>
                 </div>
             </div>
-            <div class="product-explain">
-                <div class="explain-text">설명</div>
-                <div class="explain-input">
-                    <input type="text" name="product_explain" placeholder="설명을 입력하세요.">
-                </div>
-            </div>
-            <div class="product-amount">
-                <div class="amount-text">수량</div>
-                <div class="amount-input">
-                    <input type="number" name="product_amount"> 개
-                </div>
+  			<div>
+                <input type="number" name="rental_amount" placeholder="렌탈수량" />
             </div>
             <div>
-                <button class="btn-product">
-             	       상품 등록하기
-                </button>
+                <input type="number" name="share_amount" placeholder="개인쉐어수량" />
+            </div>
+            <div>
+                <input type="text" name="manufacturer" placeholder="제조사" />
+            </div>
+            <div>
+                <input type="text" name="product_content" placeholder="상품상세" />
+            </div>
+  			
+            <div class="btn-product">
+                <input type="button" value="[상품등록하기]" onclick="prAdd('productAdd.pr')" >            	
             </div>
         </form>
     </div>

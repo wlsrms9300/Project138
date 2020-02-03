@@ -5,12 +5,20 @@ import java.util.Date;
 public class QnaVO {
 
 	private int question_num;
+	private String question_title;
 	private int product_num;
 	private String nickname;
 	private String content;
 	private Date regist;
 	private String secret;
 	private String answer;
+	
+	public String getQuestion_title() {
+		return question_title;
+	}
+	public void setQuestion_title(String question_title) {
+		this.question_title = question_title;
+	}
 	public int getQuestion_num() {
 		return question_num;
 	}

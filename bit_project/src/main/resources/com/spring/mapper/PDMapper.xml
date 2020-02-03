@@ -3,211 +3,344 @@
 
 <mapper namespace="com.spring.mapper.PDMapper">
 
-   <resultMap type="com.spring.product.ProductVO" id="prMap">
-   <result property="product_num" column="product_num"  />
-   <result property="product_name" column="product_name"  />
-   <result property="total_amount" column="total_amount"  />
-   <result property="rental_amount" column="rental_amount"  />
-   <result property="share_amount" column="share_amount"  />
-   <result property="manufacturer" column="manufacturer"  />
-   <result property="product_content" column="product_content"  />
-   
-   <result property="gpa" column="gpa"  />
-   <result property="category_l" column="category_l"  />
-   <result property="category_m" column="category_m"  />
-   <result property="category_s" column="category_s"  />
-   <result property="img_sum" column="img_sum"  />
-   <result property="img_main" column="img_main"  />
-   <result property="img_detail" column="img_detail"  />
-   <result property="regist" column="regist"  />
-   <result property="readcount" column="readcount"  />
-   </resultMap>
-   
-   
+	<resultMap type="com.spring.product.ProductVO" id="prMap">
+		<result property="product_num" column="product_num" />
+		<result property="product_name" column="product_name" />
+		<result property="total_amount" column="total_amount" />
+		<result property="rental_amount" column="rental_amount" />
+		<result property="share_amount" column="share_amount" />
+		<result property="manufacturer" column="manufacturer" />
+		<result property="product_content" column="product_content" />
+
+		<result property="gpa" column="gpa" />
+		<result property="category_l" column="category_l" />
+		<result property="category_m" column="category_m" />
+		<result property="category_s" column="category_s" />
+		<result property="img_sum" column="img_sum" />
+		<result property="img_main" column="img_main" />
+		<result property="img_detail" column="img_detail" />
+		<result property="regist" column="regist" />
+		<result property="readcount" column="readcount" />
+	</resultMap>
+
+
 	<insert id="prAdd" parameterType="com.spring.product.ProductVO">
-  <selectKey keyProperty="product_num" resultType="int" order="BEFORE">
-    SELECT product_sequence.NEXTVAL FROM DUAL
-  </selectKey>
-  	insert into product(product_num, product_name, total_amount, rental_amount, share_amount, manufacturer,
-  	product_content, category_l, category_m, category_s,img_sum, img_main, img_detail, regist) values(
-  	#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
-    #{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s}, 
-    #{img_sum}, #{img_main},#{img_detail}, sysdate)
+		<selectKey keyProperty="product_num" resultType="int"
+			order="BEFORE">
+			SELECT product_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into product(product_num, product_name, total_amount,
+		rental_amount, share_amount, manufacturer,
+		product_content, category_l, category_m, category_s,
+		<choose>
+			<when test="img_sum == null and img_main == null and img_detail == null">
+					regist) values(
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			sysdate)
+			</when>
+			<when test="img_sum != null and img_main != null and img_detail == null">
+					img_sum, img_main, regist) values(
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{img_sum}, #{img_main},sysdate)
+			</when>
+			<when test="img_sum != null and img_main == null and img_detail == null">
+					img_sum, regist) values(
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{img_sum}, sysdate)
+			</when>
+				<when test="img_sum != null and img_main != null and img_detail != null">
+					img_sum, img_main, img_detail, regist) values(
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{img_sum}, #{img_main}, #{img_detail},sysdate)
+			</when>
+		</choose>
 	</insert>
-	
-	<!-- 상품 리스트 전체 출력(쓰진않음) -->	
-	<select id="allSearch" resultType="com.spring.product.ProductVO">	 
-	select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-	gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount from product	
-	order by rnum asc	
-	</select>	
-	 
+
+	<!-- 상품 리스트 전체 출력(쓰진않음) -->
+	<select id="allSearch" resultType="com.spring.product.ProductVO">
+		select rownum rnum, product_num, product_name, total_amount, rental_amount,
+		share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail,
+		regist, readcount from product
+		order by rnum asc
+	</select>
+
 	<!-- 필터선택 안했을 때 상품 리스트 출력 -->
-	<select id="scrollSearch" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from (
-		select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist
+	<select id="scrollSearch" parameterType="map"
+		resultType="com.spring.product.ProductVO">
+		select * from (
+		select rownum rnum, product_num, product_name,
+		total_amount, rental_amount, share_amount, manufacturer,
+		product_content,
+		gpa, category_l, category_m, category_s, img_sum,
+		img_main, img_detail, regist
 		from (
-			select * from product order by product_num
-		 )
-	)
+		select * from product order by product_num
+		)
+		)
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
-	
-	 
-	<!--  필터설정 이후 스크롤 시. 1. 해당 필터로 조회. 그 중 8개만 -->
-	<select id="filterScroll" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from (
-		select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount FROM (
+
+
+	<!-- 필터설정 이후 스크롤 시. 1. 해당 필터로 조회. 그 중 8개만 -->
+	<select id="filterScroll" parameterType="map"
+		resultType="com.spring.product.ProductVO">
+		select * from (
+		select rownum rnum, product_num, product_name,
+		total_amount, rental_amount, share_amount, manufacturer,
+		product_content,
+		gpa, category_l, category_m, category_s, img_sum,
+		img_main, img_detail, regist, readcount FROM (
 		SELECT *
-		FROM product 		
-		where 1=1 
+		FROM product
+		where 1=1
 		<if test="cateMap1.size != 0">
-		AND category_l IN 
-		<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
+			AND category_l IN
+			<foreach collection="cateMap1" item='item' index='i' open="("
+				close=")" separator=",">
+				#{i}
+			</foreach>
 		</if>
 		<if test="cateMap2.size != 0">
-		AND category_m IN 
-		<foreach collection="cateMap2" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
+			AND category_m IN
+			<foreach collection="cateMap2" item='item' index='i' open="("
+				close=")" separator=",">
+				#{i}
+			</foreach>
 		</if>
 		<if test="cateMap3.size != 0">
-		AND category_s IN 
-		<foreach collection="cateMap3" item='item' index='i' open="(" close=")" separator=",">
-		#{i}
-		</foreach>
+			AND category_s IN
+			<foreach collection="cateMap3" item='item' index='i' open="("
+				close=")" separator=",">
+				#{i}
+			</foreach>
 		</if>
 		order by product_num asc
 		)
-	)
-	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>	
+		)
+	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
 
-	<!--  상품 상세 && 조회수 증가 -->  	
-  	<select id="getProductDetail" parameterType="map" resultType="com.spring.product.ProductVO">
-	select * from product where product_num=#{product_num}
+	<!-- 상품 상세 -->
+	<select id="getProductDetail" parameterType="map"
+		resultType="com.spring.product.ProductVO">
+		select * from product where product_num=#{product_num}
 	</select>
 	<update id="getProductReadCount" parameterType="map">
-	update product set readcount=#{readcount}+1 where product_num=#{product_num}
+		update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
-	<!--  상품 상세 && 조회수 증가 -->
-	
+	<!-- 북마크 -->
+	<insert id="addBookMark" parameterType="map">
+		<selectKey keyProperty="mark_num" resultType="int"
+			order="BEFORE">
+			select bookmark_sequence.NEXTVAL from dual
+		</selectKey>
+		insert into bookmark values(#{mark_num}, #{email}, #{product_num},
+		sysdate)
+	</insert>
+
+	<delete id="deleteBookMark" parameterType="map">
+		delete from bookmark where product_num=#{product_num} AND email=#{email}
+	</delete>
+
+	<select id="getBookMark" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from bookmark where product_num=#{product_num} AND
+		email=#{email}
+	</select>
+	<!-- 북마크 -->
+
+	<!-- 위시리스트 -->
+	<insert id="addWishList" parameterType="map">
+		<selectKey keyProperty="wish_num" resultType="int"
+			order="BEFORE">
+			select wishlist_sequence.NEXTVAL from dual
+		</selectKey>
+		insert into wishlist values(#{wish_num}, #{email}, #{product_num},
+		sysdate)
+	</insert>
+
+	<delete id="deleteWishList" parameterType="map">
+		delete from wishlist where product_num=#{product_num} AND email=#{email}
+	</delete>
+
+	<select id="getWishList" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from wishlist where product_num=#{product_num} AND
+		email=#{email}
+	</select>
+	<!-- 위시리스트 -->
+
+	<!-- 예약 -->
+	<insert id="addReservation" parameterType="map">
+		<selectKey keyProperty="reserve_num" resultType="int"
+			order="BEFORE">
+			select reservation_sequence.NEXTVAL from dual
+		</selectKey>
+		insert into reservation(reserve_num, email, product_num, regist)
+		values(#{reserve_num}, #{email}, #{product_num}, sysdate)
+	</insert>
+
+	<delete id="deleteReservation" parameterType="map">
+		delete from reservation where product_num=#{product_num} AND email=#{email}
+	</delete>
+	<select id="getReservation" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from reservation where
+		product_num=#{product_num} AND email=#{email}
+	</select>
+	<!-- 예약 -->
+
+	<!-- 상품 상세 -->
+
 	<!-- 상품 문의 -->
-	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
+	<select id="qnaSearch" parameterType="map"
+		resultType="com.spring.product.QnaVO">
 		select * FROM (
-		SELECT rownum rnum, question_num, product_num,nickname,content,regist,secret,answer 
+		SELECT rownum rnum, question_num, question_title,
+		product_num,nickname,content,regist,secret,answer
 		FROM question
 		where product_num=#{product_num}
 		ORDER BY regist asc
 		)
-	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>
 	</select>
-	
+
 	<select id="qnaCount" parameterType="map" resultType="int">
-		select count(*) FROM question where product_num=#{product_num}
+		select
+		count(*) FROM question where product_num=#{product_num}
 	</select>
-	
+
 	<insert id="qnaWrite" parameterType="com.spring.product.QnaVO">
- 	<selectKey keyProperty="question_num" resultType="int" order="BEFORE">
-    SELECT question_sequence.NEXTVAL FROM DUAL
-	</selectKey>
-  	insert into question(question_num, product_num, nickname, content, regist, secret)
-  	values(
-  	#{question_num}, #{product_num}, #{nickname}, #{content}, sysdate, #{secret}
-  	)
+		<selectKey keyProperty="question_num" resultType="int"
+			order="BEFORE">
+			SELECT question_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into question(question_num, question_title, product_num,
+		nickname, content, regist, secret)
+		values(
+		#{question_num}, #{question_title}, #{product_num}, #{nickname}, #{content}, sysdate,
+		#{secret}
+		)
 	</insert>
 	<delete id="qnaDelete" parameterType="map">
-	delete from question where product_num=#{product_num} AND question_num=#{question_num}
+		delete from question where product_num=#{product_num} AND
+		question_num=#{question_num}
 	</delete>
 	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
-	update question set nickname=#{nickname}, content=#{content}, secret=#{secret}, regist=sysdate where question_num=#{question_num}
+		update question set question_title=#{question_title}, nickname=#{nickname},
+		content=#{content}, secret=#{secret}, regist=sysdate where
+		question_num=#{question_num}
 	</update>
 	<!-- 문의 -->
-	
-	
+
+
 	<!-- 리뷰 -->
 	<select id="reviewCount" parameterType="map" resultType="int">
-		select count(*) FROM review where product_num=#{product_num}
+		select
+		count(*) FROM review where product_num=#{product_num}
 	</select>
-	
-	<insert id="reviewWrite" parameterType="com.spring.product.ReviewVO">
- 	<selectKey keyProperty="review_num" resultType="int" order="BEFORE">
-    SELECT review_sequence.NEXTVAL FROM DUAL
-	</selectKey>
-  	insert into review(review_num, product_num, nickname, content, img, regist, gpa) values(
-  	#{review_num}, #{product_num}, #{nickname}, #{content},#{img},
-    sysdate, #{gpa})
+
+	<insert id="reviewWrite"
+		parameterType="com.spring.product.ReviewVO">
+		<selectKey keyProperty="review_num" resultType="int"
+			order="BEFORE">
+			SELECT review_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into review(review_num, product_num, nickname, content, img,
+		regist, gpa) values(
+		#{review_num}, #{product_num}, #{nickname}, #{content},#{img},
+		sysdate, #{gpa})
 	</insert>
-	
-	<select id="reviewSearch" parameterType="map" resultType="com.spring.product.ReviewVO">
+
+	<!-- <select id="reviewSearch" parameterType="map" resultType="com.spring.product.ReviewVO"> 
+		select * FROM ( SELECT rownum rnum, review_num, product_num,nickname,content, 
+		img, regist, gpa FROM review where product_num=#{product_num} ORDER BY regist 
+		asc ) <![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> </select> -->
+
+	<select id="reviewSearch" parameterType="map"
+		resultType="com.spring.product.reviewjoinmemberVO">
 		select * FROM (
-		SELECT rownum rnum, review_num, product_num,nickname,content, img, regist, gpa 
-		FROM review
-		where product_num=#{product_num}
+		SELECT rownum rnum, r.review_num, r.product_num,
+		r.nickname, r.content, r.regist, r.gpa, r.img as rimg,
+		m.img as mimg
+		FROM review r, member m
+		where product_num=#{product_num} and
+		r.nickname=m.nickname
 		ORDER BY regist asc
 		)
-	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]> 
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>
 	</select>
-	
+
+
 	<delete id="reviewDelete" parameterType="map">
-	delete from review where product_num=#{product_num} AND review_num=#{review_num}
+		delete from review where product_num=#{product_num} AND
+		review_num=#{review_num}
 	</delete>
-	<update id="reviewModify" parameterType="com.spring.product.QnaVO">
-	update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa}, regist=sysdate, img=#{img} where review_num=#{review_num}
+	<update id="reviewModify"
+		parameterType="com.spring.product.QnaVO">
+		update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa},
+		regist=sysdate, img=#{img} where review_num=#{review_num}
 	</update>
-	
-	<update id="reviewModifyNoImg" parameterType="com.spring.product.QnaVO">
-	update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa}, regist=sysdate where review_num=#{review_num}
+
+	<update id="reviewModifyNoImg"
+		parameterType="com.spring.product.QnaVO">
+		update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa},
+		regist=sysdate where review_num=#{review_num}
 	</update>
 	<!-- 리뷰 -->
 
 
-<!--  상품 검색 -->
-	<select id="productListGetCount" parameterType="map" resultType="int">
-	select count(product_num) from product
-	<choose>
-	<when test="search_type == 'na'">
-	<if test="search_word != null and search_word != ''">
-	where product_name like '%' || #{search_word} || '%'
-	</if>
-	</when>
-	<when test="search_type == 'no'">
-	<if test="search_word != null and search_word != ''">
-	where product_num=#{search_word}
-	</if>
-	</when>
-	</choose>
+	<!-- 상품 검색 -->
+	<select id="productListGetCount" parameterType="map"
+		resultType="int">
+		select count(product_num) from product
+		<choose>
+			<when test="search_type == 'na'">
+				<if test="search_word != null and search_word != ''">
+					where product_name like '%' || #{search_word} || '%'
+				</if>
+			</when>
+			<when test="search_type == 'no'">
+				<if test="search_word != null and search_word != ''">
+					where product_num=#{search_word}
+				</if>
+			</when>
+		</choose>
 	</select>
-   
-   
-   <select id="selectProductList" parameterType="map" resultType="com.spring.product.ProductVO">
-   select * from
-   (
-   select rownum rnum, product_num, product_name, total_amount, rental_amount, share_amount, manufacturer, product_content,
-      gpa, category_l, category_m, category_s, img_sum, img_main, img_detail, regist, readcount 
-      from
-   (
-   select * from product
-   <choose>
-   <when test="search_type == 'na'">
-   <if test="search_word != null and search_word != ''">
-   where product_name like '%' || #{search_word} || '%'
-   </if>
-   </when>
-   <when test="search_type == 'no'">
-   <if test="search_word != null and search_word != ''">
-   where product_num=#{search_word}
-   </if>
-   </when>
-   </choose>
-   order by product_num DESC
-   )
-   )
-   where rnum <![CDATA[<=]]> #{pno}+8 AND rnum <![CDATA[>=]]> #{pno}+1
-   </select>
+
+
+	<select id="selectProductList" parameterType="map"
+		resultType="com.spring.product.ProductVO">
+		select * from
+		(
+		select rownum rnum, product_num, product_name, total_amount, rental_amount,
+		share_amount, manufacturer, product_content,
+		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail,
+		regist, readcount
+		from
+		(
+		select * from product
+		<choose>
+			<when test="search_type == 'na'">
+				<if test="search_word != null and search_word != ''">
+					where product_name like '%' || #{search_word} || '%'
+				</if>
+			</when>
+			<when test="search_type == 'no'">
+				<if test="search_word != null and search_word != ''">
+					where product_num=#{search_word}
+				</if>
+			</when>
+		</choose>
+		order by product_num DESC
+		)
+		)
+		where rnum <![CDATA[<=]]>
+		#{pno}+8 AND rnum <![CDATA[>=]]>
+		#{pno}+1
+	</select>
+	<!-- 상품 검색 -->
 
 </mapper>

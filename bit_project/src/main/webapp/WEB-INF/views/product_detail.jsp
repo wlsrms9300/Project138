@@ -4,6 +4,39 @@
 <%
     ProductVO prVO = (ProductVO)request.getAttribute("prVO");
 	String img = (String)session.getAttribute("img");
+	String nickname = (String)session.getAttribute("nickname");
+	int bookmark = 0, wishlist = 0, reservation = 0;
+	String email = "";
+	if((String)session.getAttribute("email")!=null){
+		email = (String)session.getAttribute("email");
+	}
+	String phone = "";
+	if((String)session.getAttribute("phone")!=null){
+		phone = (String)session.getAttribute("phone");
+	}
+	
+	try {
+		if((int)request.getAttribute("bookmark")!=0){
+			bookmark = 1;
+		}
+		if((int)request.getAttribute("wishlist")!=0){
+			wishlist = 1;
+		}
+		if((int)request.getAttribute("reservation")!=0){
+			reservation = 1;
+		}
+	}catch (NullPointerException e) {
+		e.printStackTrace();
+		e.getMessage();
+	}finally {
+		System.out.println("닉네임 : "+nickname);
+		System.out.println("북마크 : "+bookmark);
+		System.out.println("위시 : "+wishlist);
+		System.out.println("레저 : "+reservation);
+		System.out.println("이메일 : "+email);
+		System.out.println("연락처 : "+phone);
+	}
+	
     %>
 <!DOCTYPE html>
 <html>
@@ -41,6 +74,8 @@
         rel="stylesheet">
     <script>
         var p = <%=prVO.getProduct_num() %>;
+    	var sessionChk = "<%=email%>";    	
+    	var nick = "<%=nickname%>";
     </script>
 </head>
 
@@ -188,8 +223,7 @@
             <!-- 상품상세 content 오른쪽 상품정보 div -->
             <form>
                 <div class="product_right">
-                    <span
-                        class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %>
+                    <span class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %>
                         조회수 : <%=prVO.getReadcount() %></span>
                     <span class="product_cate2">
                         <input type="checkbox" id="wishlist-pid-0001">
@@ -209,7 +243,12 @@
                     <div><%=prVO.getProduct_content() %></div>
                     <br><br><br>
                     <hr>
-                    <div>재고 : <span><%=prVO.getTotal_amount() %></span></div>
+	                    <div>재고 : <span><%=prVO.getTotal_amount() %>
+	                    <%if(prVO.getTotal_amount()==0 && nickname!=null){ %>
+	                    <a href="javascript:void(0)" onclick="amount_alert();">입고알림</a>
+	                    <%} %>
+	                    </span>
+	                    </div>
                     <br>
                     <hr>
                     <div>제품특징</div>
@@ -218,37 +257,73 @@
                     </div>
 
    				<div class="bookmarkForm_true" style="display:none;">
-                        <h2>선택하신 상품이 WISH LIST에 담겼습니다.<br>WISH LIST로 이동하시겠습니까?</h2>
+                        <h2>선택하신 상품을 찜하였습니다. <br>마이페이지에서 확인하시겠습니까?</h2>
                         <br>
                         <div class="bookmark_true_btn">
-                                <a href="javascript:void(0)">저장</a>
-                                <a href="javascript:void(0)">취소</a>
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
                         </div>
-                    </div>
                 </div>
+                
                 <div class="bookmarkForm_false" style="display:none;">
-                        <h2>WISH LIST에서 해제되었습니다.</h2>
+                        <h2>찜 해제되었습니다.</h2>
                         <br>
                         <div class="bookmark_false_btn">
                                 <a href="javascript:void(0)">확인</a>
                         </div>
-                    </div>
+                </div>
                 </div>
             </form>
             <!-- 상품상세 content 오른쪽 상품정보 div -->
-
+			
+			<form id="amount_alarm" method="GET">
+				<input type="hidden" name="alert_email" value="<%=email %>" />
+				<input type="hidden" name="alert_pnum" value="<%=prVO.getProduct_num() %>" />
+				<input type="hidden" name="alert_phone" value="<%=phone %>" />
+			</form>
+			
             <!-- 버튼 -->
 
-
+		</div>
         </div> <!-- -->
 
         <div class="filter-search">
-            <div><button>위시리스트</button></div>
-            <div><button>예약</button></div>
+            <div><button id="wish_button">위시리스트</button></div>
+           		<div class="wishlistForm_true" style="display:none;">
+                        <h2>선택하신 상품을 위시리스트에 등록하였습니다. <br>마이페이지에서 확인하시겠습니까?</h2>
+                        <br>
+                        <div class="wishlist_true_btn">
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
+                        </div>
+                </div>
+                
+                <div class="wishlistForm_false" style="display:none;">
+                        <h2>위시리스트 해제되었습니다.</h2>
+                        <br>
+                        <div class="wishlist_false_btn">
+                                <a href="javascript:void(0)">확인</a>
+                        </div>
+                </div>
+            <div><button id="reservation_button">예약</button></div>
+            <div class="reservationForm_true" style="display:none;">
+                        <h2>선택하신 상품이 예약되었습니다.<br>마이페이지에서 확인하시겠습니까?</h2>
+                        <br>
+                        <div class="reservation_true_btn">
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
+                        </div>
+                </div>
+                
+                <div class="reservationForm_false" style="display:none;">
+                        <h2>예약 해제되었습니다.</h2>
+                        <br>
+                        <div class="reservation_false_btn">
+                                <a href="javascript:void(0)">확인</a>
+                        </div>
+                </div>
         </div>
-
-
-    </div>
+    
     <!-- 상품상세 content div-->
 
     <!-- 상품정보 네비게이션 바 -->
@@ -331,7 +406,7 @@
             <br>
             <form id="ReviewForm" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
-                <input type="hidden" name="nickname" value="비트캠프폭발" />
+                <input type="hidden" name="nickname" value="<%=nickname %>" />
                 <input type="hidden" name="review_num" value="" />
                 <div>
                     <label for="reviewcheck">평점</label>
@@ -384,12 +459,12 @@
             </h3>
             <form id="QnaForm" method="post">
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
-                <input type="hidden" name="nickname" value="비트캠프폭발" />
+                <input type="hidden" name="nickname" value="<%=nickname %>" />
                 <input type="hidden" name="question_num" value="" />
                 <div>
                     <br>
                     <label>제목</label>
-                    <span><input type="text" name="title" placeholder="제목을 작성해주세요." /></span>
+                    <span><input type="text" name="question_title" placeholder="제목을 작성해주세요." /></span>
                 </div>
                 <div>
                     <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
@@ -479,6 +554,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/product/munreview.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/bookmark.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/wishlist.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/product/reservation.js"></script>
 
     <script>
         //배너 이미지 슬라이드
@@ -552,18 +630,22 @@
         var qnacheck = 0;
         var revcheck = 0;
         function qna_write() {
-
-            $('body').css("background", "grey");
-            $(".qnaForm").show();
-            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-            $("body").addClass('not_scroll'); //overflow:hidden 추가
-            $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
-            $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            //등록
-            if ($('#QnaForm textarea').val().length == 0) {
-                qnacheck = 1;
-            }
+			if(nick=="" || nick==null){
+				location.href="login.me";
+			}else{
+				  $('body').css("background", "grey");
+		            $(".qnaForm").show();
+		            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+		            $("body").addClass('not_scroll'); //overflow:hidden 추가
+		            $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
+		            $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+		            $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+		            //등록
+		            if ($('#QnaForm textarea').val().length == 0) {
+		                qnacheck = 1;
+		            }
+			}
+          
         };
         $('.qna_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -578,6 +660,7 @@
                 var frm = document.getElementById("QnaForm");
                 frm.action = "qnaWrite.pr";
                 frm.submit();
+                var ta = $("#QnaForm textarea[name=content]").html("");
                 frm.reset();
             } else {
                 var frm = document.getElementById("QnaForm");
@@ -596,22 +679,27 @@
             $('body').css("background", "none");
             $('body').scrollTop(scrollHeight);
             var frm = document.getElementById("QnaForm");
+            var ta = $("#QnaForm textarea[name=content]").html("");
             frm.reset();
         });
 
         function review_write() {
-            $('body').css("background", "grey");
-            $(".reviewForm").show();
-            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-            $("body").addClass('not_scroll'); //overflow:hidden 추가
-            $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
-            $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            //텍스트에어리어가 빈값이다 -> 리뷰등록
-            if ($('#ReviewForm textarea').val().length == 0) {
-                revcheck = 1;
-                alert("리뷰등록이네 : " + revcheck);
-            }
+        	if(nick=="" || nick==null){
+				location.href="login.me";
+			}else {
+			    $('body').css("background", "grey");
+	            $(".reviewForm").show();
+	            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+	            $("body").addClass('not_scroll'); //overflow:hidden 추가
+	            $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
+	            $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	            $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	            //텍스트에어리어가 빈값이다 -> 리뷰등록
+	            if ($('#ReviewForm textarea').val().length == 0) {
+	                revcheck = 1;
+	            }
+			}
+        
         };
         $('.review_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -625,6 +713,7 @@
                 var frm = document.getElementById("ReviewForm");
                 frm.action = "reviewWrite.pr";
                 frm.submit();
+                var ta = $("#ReviewForm textarea[name=content]").html("");
                 frm.reset();
             } else {
                 var frm = document.getElementById("ReviewForm");
@@ -649,6 +738,52 @@
         
         
        
+    </script>
+    <script>
+    var bcheck = <%=bookmark%>;
+    var wcheck = <%=wishlist%>;
+    var rcheck = <%=reservation%>;
+	if(bcheck==0){
+		$('#wishlist-pid-0001').prop('checked', false);
+	}else {
+		$('#wishlist-pid-0001').prop('checked', true);
+		//$('#wishlist-pid-0001').attr('checked', true);
+	}
+	if(wcheck==0){
+		$('#wish_button').css("background","#EA7475");
+	}else {
+		$('#wish_button').css("background","black");
+	}
+	
+	if(rcheck==0){
+		$('#reservation_button').css("background","#EA7475");
+	}else {
+		$('#reservation_button').css("background","black");
+	}
+	function amount_alert() {
+		 var result = confirm("입고 알림을 신청하시겠습니까?");
+	        
+	        if(result)
+	        {
+	        	var alert_params = $("#amount_alarm").serialize();
+	            console.log("신청되었습니다.");
+	            $.ajax({
+	            	url: '/bit_project/alarm.pr',
+	                type: 'GET',
+	                dataType: 'json',
+	                async:false,
+	                data: alert_params,
+	                success: function (data) {
+	                	       
+	                },
+	    	        error: function () {
+	    				alert("ajax오류");
+	    			}
+	            });
+	         
+	        }
+	     
+	}
     </script>
 </body>
 

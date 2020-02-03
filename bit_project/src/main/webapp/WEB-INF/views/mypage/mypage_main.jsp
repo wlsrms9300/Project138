@@ -25,7 +25,6 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
@@ -258,6 +257,9 @@
         </div>
     </footer>
     <!-- footer 끝 -->
-
+<script>
+var myemail = "<%=email%>";
+</script>
+<script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
 </body>
 </html>

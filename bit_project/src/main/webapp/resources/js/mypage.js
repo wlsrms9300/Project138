@@ -263,6 +263,8 @@ $(document).ready(function(){
             menu3.hide();
             menu4.hide();
             menu5.hide();
+           
+            
         } else {
             $('.profile_menu1').css('color', 'black');
             $('.profile_menu2').css('color', 'black');
