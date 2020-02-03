@@ -152,6 +152,7 @@ $(document).ready(function(){
     });
     
 
+    
     $('#num3').click(function(){
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -238,6 +239,20 @@ $(document).ready(function(){
     });
     
     $('#m1').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard1.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -246,6 +261,7 @@ $(document).ready(function(){
         var menu4= $('.member_update');
         var menu5= $('.member_bye');
         var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
         if(menu6.css("display") == "none") {
             $('#num0').css('color', 'black');
             $('#num1 > b').css('color', 'black');
@@ -254,6 +270,356 @@ $(document).ready(function(){
             $('#num4 > b').css('color', 'black');
             $('#num5 > b').css('color', 'black');
             $('#m1 > b').css('color', '#EA7475');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m2').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard2.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', '#EA7475');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m3').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard3.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', '#EA7475');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m4').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard4.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', '#EA7475');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m5').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard5.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', '#EA7475');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m6').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard6.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', '#EA7475');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m7').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard7.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', '#EA7475');
+            $('#m8 > b').css('color', 'black');
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m8').click(function(){
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard8.my',
+    		type:'POST',
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			
+    		},
+    		error:function() {
+    			
+    		}
+    	});
+    	
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m1 > b').css('color', 'black');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', '#EA7475');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -276,6 +642,7 @@ $(document).ready(function(){
         var menu4= $('.member_update');
         var menu5= $('.member_bye');
         var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
         if(menu6.css("display") == "none") {
             $('#num0').css('color', 'black');
             $('#num1 > b').css('color', 'black');
@@ -284,6 +651,265 @@ $(document).ready(function(){
             $('#num4 > b').css('color', 'black');
             $('#num5 > b').css('color', 'black');
             $('#m11 > b').css('color', '#EA7475');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');           
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m12').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', '#EA7475');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m13').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', '#EA7475');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m14').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', '#EA7475');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m15').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', '#EA7475');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m16').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', '#EA7475');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m17').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', '#EA7475');
+            $('#m18 > b').css('color', 'black');   
+            list.hide();
+            menu0.hide();
+            menu1.hide();
+            menu2.hide();
+            menu3.hide();
+            menu4.hide();
+            menu5.hide();
+            menu6.show();
+        }
+    });
+    
+    $('#m18').click(function(){
+        var list= $('.list');
+        var menu0= $('.calendar-wrap');
+        var menu1= $('.subscribe_wrap');
+        var menu2= $('.point_wrap');
+        var menu3= $('.share');
+        var menu4= $('.member_update');
+        var menu5= $('.member_bye');
+        var menu6= $('.board_list_wrap');
+        menu6.css("display", "none");
+        if(menu6.css("display") == "none") {
+            $('#num0').css('color', 'black');
+            $('#num1 > b').css('color', 'black');
+            $('#num2 > b').css('color', 'black');
+            $('#num3 > b').css('color', 'black');
+            $('#num4 > b').css('color', 'black');
+            $('#num5 > b').css('color', 'black');
+            $('#m11 > b').css('color', 'black');
+            $('#m12 > b').css('color', 'black');
+            $('#m13 > b').css('color', 'black');
+            $('#m14 > b').css('color', 'black');
+            $('#m15 > b').css('color', 'black');
+            $('#m16 > b').css('color', 'black');
+            $('#m17 > b').css('color', 'black');
+            $('#m18 > b').css('color', '#EA7475');   
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -478,6 +1104,7 @@ $(document).ready(function(){
         }
        
     });
+    
     $('.btn2').click(function() {
     	var reserdata = {email : myemail};
     	$.ajax({

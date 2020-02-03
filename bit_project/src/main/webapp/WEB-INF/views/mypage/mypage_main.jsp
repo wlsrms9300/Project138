@@ -32,6 +32,11 @@
 </head>
 <body>
 
+<script>
+	var email = '<%=email%>';
+	
+</script>
+
 <header>
 <div id="wrap">
         <div id="intro_bg">
@@ -182,13 +187,13 @@
     			<div id="sub_list22">
        						 <div class="sub_list22_bar">
             					<a class="sub_list22_menu" id="m11" href="#"><b>자유게시판</b></a>
-           						<a class="sub_list22_menu" href="#"><b>육아사진</b></a>
-            					<a class="sub_list22_menu" href="#"><b>정보공유(팁)</b></a>
-            					<a class="sub_list22_menu" href="#"><b>공구게시판</b></a>
-            					<a class="sub_list22_menu" href="#"><b>육아게시판</b></a>
-            					<a class="sub_list22_menu" href="#"><b>이슈,토론</b></a>
-            					<a class="sub_list22_menu" href="#"><b>댓글</b></a>
-            					<a class="sub_list22_menu" href="#"><b>후기</b></a>
+           						<a class="sub_list22_menu" id="m12"><b>육아사진</b></a>
+            					<a class="sub_list22_menu" id="m13"><b>정보공유(팁)</b></a>
+            					<a class="sub_list22_menu" id="m14"><b>공구게시판</b></a>
+            					<a class="sub_list22_menu" id="m15"><b>육아게시판</b></a>
+            					<a class="sub_list22_menu" id="m16"><b>이슈,토론</b></a>
+            					<a class="sub_list22_menu" id="m17"><b>댓글</b></a>
+            					<a class="sub_list22_menu" id="m18"><b>후기</b></a>
         					</div>
     					</div>
             </div> 

@@ -8,7 +8,7 @@ public class ChatVO {
 	private String email;
 	private String nickname;
 	private String password;
-	private int phone;
+	private String phone;
 	private Timestamp regist;
 	private String img;
 	private String usergroup;
@@ -31,10 +31,10 @@ public class ChatVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public Timestamp getRegist() {
