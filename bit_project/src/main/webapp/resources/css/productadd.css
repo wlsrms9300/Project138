@@ -101,7 +101,8 @@ select {
     margin: 1.2% 0 1.2% 10%;
 }
 
-.btn-product {
+.btn-product {text-align: center;}
+.btn-product input {
     border: 1px solid;
     border-radius: 5px;
     width: 130px;

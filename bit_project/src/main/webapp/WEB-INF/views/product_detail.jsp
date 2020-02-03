@@ -6,6 +6,15 @@
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
 	int bookmark = 0, wishlist = 0, reservation = 0;
+	String email = "";
+	if((String)session.getAttribute("email")!=null){
+		email = (String)session.getAttribute("email");
+	}
+	String phone = "";
+	if((String)session.getAttribute("phone")!=null){
+		phone = (String)session.getAttribute("phone");
+	}
+	
 	try {
 		if((int)request.getAttribute("bookmark")!=0){
 			bookmark = 1;
@@ -24,11 +33,10 @@
 		System.out.println("북마크 : "+bookmark);
 		System.out.println("위시 : "+wishlist);
 		System.out.println("레저 : "+reservation);
+		System.out.println("이메일 : "+email);
+		System.out.println("연락처 : "+phone);
 	}
-	String email = "";
-	if((String)session.getAttribute("email")!=null){
-		email = (String)session.getAttribute("email");
-	}
+	
     %>
 <!DOCTYPE html>
 <html>
@@ -235,7 +243,12 @@
                     <div><%=prVO.getProduct_content() %></div>
                     <br><br><br>
                     <hr>
-                    <div>재고 : <span><%=prVO.getTotal_amount() %></span></div>
+	                    <div>재고 : <span><%=prVO.getTotal_amount() %>
+	                    <%if(prVO.getTotal_amount()==0 && nickname!=null){ %>
+	                    <a href="javascript:void(0)" onclick="amount_alert();">입고알림</a>
+	                    <%} %>
+	                    </span>
+	                    </div>
                     <br>
                     <hr>
                     <div>제품특징</div>
@@ -262,7 +275,13 @@
                 </div>
             </form>
             <!-- 상품상세 content 오른쪽 상품정보 div -->
-
+			
+			<form id="amount_alarm" method="GET">
+				<input type="hidden" name="alert_email" value="<%=email %>" />
+				<input type="hidden" name="alert_pnum" value="<%=prVO.getProduct_num() %>" />
+				<input type="hidden" name="alert_phone" value="<%=phone %>" />
+			</form>
+			
             <!-- 버튼 -->
 
 		</div>
@@ -740,6 +759,30 @@
 		$('#reservation_button').css("background","#EA7475");
 	}else {
 		$('#reservation_button').css("background","black");
+	}
+	function amount_alert() {
+		 var result = confirm("입고 알림을 신청하시겠습니까?");
+	        
+	        if(result)
+	        {
+	        	var alert_params = $("#amount_alarm").serialize();
+	            console.log("신청되었습니다.");
+	            $.ajax({
+	            	url: '/bit_project/alarm.pr',
+	                type: 'GET',
+	                dataType: 'json',
+	                async:false,
+	                data: alert_params,
+	                success: function (data) {
+	                	       
+	                },
+	    	        error: function () {
+	    				alert("ajax오류");
+	    			}
+	            });
+	         
+	        }
+	     
 	}
     </script>
 </body>

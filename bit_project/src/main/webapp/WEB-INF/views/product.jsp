@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String img = (String)session.getAttribute("img");
+	String email = (String)session.getAttribute("email");
 %>
 
 <!DOCTYPE html>
@@ -429,9 +430,6 @@
 	<script src="${pageContext.request.contextPath}/resources/js/product/mun.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/product/swiper.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/product/munfilter.js"></script>
-
-
-
 	<script>
 		 //배너 이미지 슬라이드
 		var swiper = new Swiper('.swiper-container', {
@@ -446,8 +444,46 @@
 				delay: 5000,
 			},
 		}); 
-		
-		
+	</script>
+	<script>
+	/* $(function(){
+	 const eventSource = new EventSource('SSEServlet'); 
+	eventSource.addEventListener('odd', event => {
+		const data = JSON.parse(event.data);
+		console.log('odd - ${data.message}');
+	})
+
+	eventSource.addEventListener('even', event => {
+		const data = JSON.parse(event.data);
+		console.log('even - ${data.message}');
+	})
+
+	eventSource.onerror = error => {
+		eventSource.close();
+	}
+	}); */
+	if (window.EventSource == null) {
+	       alert('The browser does not support Server-Sent Events');
+	   } else {
+	       var eventSource = new EventSource('/sse/mvc/words');
+
+	       eventSource.onopen = function () {
+	           console.log('connection is established');
+	       };
+
+	       eventSource.onerror = function (error) {
+	           console.log('connection state: ' + eventSource.readyState + ', error: ' + event);
+	       };
+
+	       eventSource.onmessage = function (event) {
+	           console.log('id: ' + event.lastEventId + ', data: ' + event.data);
+
+	           if (event.data.endsWith('.')) {
+	               eventSource.close();
+	               console.log('connection is closed');
+	           }
+	       };
+	   }
 	</script>
 	
 </body>

@@ -3,17 +3,22 @@ package com.spring.product;
 import java.util.HashMap;
 import java.util.List;
 
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import net.nurigo.java_sdk.api.Message;
 
 @RestController
 public class ProductAjaxController {
 
 	@Autowired(required = false)
 	private PDService service;
-
-	/********************** 북마크, 위시리스트, 예약 시작 **********************/
+	
+	
+	/********************** 북마크, 위시리스트, 예약, 입고알림 시작 **********************/
 	@PostMapping(value = "/addbookmark.pr", produces = "application/json;charset=UTF-8")
 	public HashMap<String, String> addbookmark(int product_num, String email) {
 		HashMap<String,String> addbookMessage = new HashMap<String,String>();
@@ -82,8 +87,21 @@ public class ProductAjaxController {
 		}
 		return deletereserMessage;
 	}
+	@GetMapping(value = "/alarm.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> amount_alarm(String alert_email, String alert_pnum, int alert_phone) {
+		System.out.println(alert_email+""+alert_pnum+""+alert_phone);
+		HashMap<String,String> alarmList = new HashMap<String,String>();
+		try {
+			//service.addAlarm(alert_email, alert_pnum, alert_phone);
+			alarmList.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmList;
+	}
 	
-	/********************** 북마크, 위시리스트, 예약 종료 **********************/
+	
+	/********************** 북마크, 위시리스트, 예약, 입고알림 종료 **********************/
 	
 	
 	/********************** 상품 검색 시작 **********************/

@@ -13,23 +13,6 @@
 
 <body>
 
-    <!-- 
-	product_num NUMBER NOT NULL, /* product_num PK 상품번호*/
-	product_name VARCHAR2(50), /* product_name 상품명 */
-	total_amount NUMBER, /* total_amount 총수량 = 렌탈+개인쉐어*/
-	rental_amount NUMBER, /* rental_amount 렌탈수량*/
-	share_amount NUMBER, /* share_amount 개인쉐어수량 */
-	manufactuer VARCHAR2(20), /* 제조사 */
-	product_content VARCHAR2(1000), /* 상품상세 */
-	gpa NUMBER, /* 상품평점 */
-	category_L VARCHAR2(20), /* 대분류 */
-	category_M VARCHAR2(20), /* 중분류 */
-	category_S VARCHAR2(20), /* 소분류 */
-	img_sum VARCHAR2(50), /* 썸네일 */
-	img_main VARCHAR2(50), /* 메인 */
-	img_detail VARCHAR2(500), /* 상품상세쪽 이미지 */
-	regist DATE /* 상품 등록 시간? */
--->
     <form id="product_add_form" method="post" enctype="multipart/form-data" >
         <div>
             <!-- 상품번호 : -->

@@ -240,13 +240,6 @@ opacity:1;
 }
 
 
-
-
-
-
-
-
-
 /* 상품 상세 페이지 네비게이션 바 */
 .product_nav .nav_bar ul {display: flex; text-align: center; border-top: 1px solid #c6c6c6; border-bottom: 1px solid #c6c6c6;}
 .product_nav .nav_bar ul li {width: 25%; text-align: center; line-height: 5rem; border-left: 1px solid #c6c6c6;}
@@ -259,6 +252,9 @@ opacity:1;
 
 /* 상품 상세 페이지 title 글자 크기 일괄 부여 */
 .pr_title h3 {font-size: 24px;}
+
+/* 상품 상세 재고알림 버튼 */
+.product_right a {border-radius: 10px; font-size: 16px;border: none; text-decoration: none; width: 80px;  color: #fff; background:#EA7475; padding: 0px;}
 
 /* 상품 리뷰 */
 /*

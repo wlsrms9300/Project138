@@ -25,7 +25,6 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-		
 	<servlet-mapping>	<!-- 처음시작 메인페이지 -->
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
