@@ -64,11 +64,11 @@
 								placeholder="이름" required>
 						</div>
 						<div class="formfield">
-							<input type="password" id="password" name="password"
+							<input type="password" class="pw" id="password" name="password"
 								placeholder="비밀번호(8자리이상, 특수문자, 대소문자)" required><br /> 
 								<div class="alert alert-check" id="pw-alert-check" style="font-size:10px; float:left; color:red;">비밀번호 8자리 이상</div>
 								<input
-								type="password" id="pwcheck" name="pwcheck" placeholder="비밀번호 확인" required>
+								type="password" class="pw" id="pwcheck" name="pwcheck" placeholder="비밀번호 확인" required>
 							<div class="alert alert-true" id="pw-alert-true" style="font-size:10px; float:left; color:green;">비밀번호가 일치합니다.</div>
 							<div class="alert alert-false" id="pw-alert-false" style="font-size:10px;float:left;color:red;">비밀번호가 일치하지 않습니다.</div>
 						</div>

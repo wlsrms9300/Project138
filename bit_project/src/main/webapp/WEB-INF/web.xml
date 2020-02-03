@@ -36,6 +36,8 @@
 		<url-pattern>*.me</url-pattern>
 		<url-pattern>*.cw</url-pattern>
 		<url-pattern>*.im</url-pattern>
+		<url-pattern>*.pt</url-pattern>
+		<url-pattern>*.at</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 진근 -->
 		<servlet-name>appServlet</servlet-name>

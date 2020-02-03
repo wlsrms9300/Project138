@@ -20,6 +20,7 @@ public class MypageController {
 		
 		MemberVO memberVO = new MemberVO();
 		
+		memberVO.setEmail((String)session.getAttribute("email"));
 		System.out.println("컨트롤러 이메일" + memberVO.getEmail());
 		
 		

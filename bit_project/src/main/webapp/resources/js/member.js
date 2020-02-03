@@ -80,7 +80,7 @@
 			}
 		});
 		/* 비밀번호 일치 여부 */
-		$("#pwcheck").keyup(function() {
+		$(".pw").keyup(function() {
 				var pwd1 = $("#password").val();
 				var pwd2 = $("#pwcheck").val();
 			if(pwd1 =="" || pwd2 =="") {
@@ -112,8 +112,6 @@
     			document.signupForm.pwcheck.focus();
     			return false;
     		}
-    		
-	
     		
 			var nicknamecheckBtn = $(".nicknamecheck-btn").val();
 			var emailcheckBtn = $(".emailcheck-btn").val();
@@ -182,4 +180,3 @@
             readURL(this)
         });
     })
-	

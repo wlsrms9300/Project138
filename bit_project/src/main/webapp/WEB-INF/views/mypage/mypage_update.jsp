@@ -3,7 +3,7 @@
 <%@ page import = "com.spring.member.MemberVO" %>
 <%@ page import = "com.spring.login.LoginController" %>
 <%
-String email_param = (String)session.getAttribute("email");
+	String email_param = (String)session.getAttribute("email");
 
 
 %>
