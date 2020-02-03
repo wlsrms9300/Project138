@@ -11,7 +11,6 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
-	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -30,9 +29,48 @@
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <!-- Latest compiled and minified Locales -->
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-
-
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
+	<script src="${pageContext.request.contextPath}/resources/js/admin/member_admin.js"></script>
+	
 </head>
+<script type="text/javascript">
+    $(function($) {
+        var lang_kor = {
+        "decimal" : "",
+        "emptyTable" : "데이터가 없습니다.",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+        "infoEmpty" : "0명",
+        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+        "infoPostFix" : "",
+        "thousands" : ",",
+        "lengthMenu" : "_MENU_ 개씩 보기",
+        "loadingRecords" : "로딩중...",
+        "processing" : "처리중...",
+        "search" : "검색 : ",
+        "zeroRecords" : "검색된 데이터가 없습니다.",
+        "paginate" : {
+            "first" : "첫 페이지",
+            "last" : "마지막 페이지",
+            "next" : "다음",
+            "previous" : "이전"
+        },
+        "aria" : {
+            "sortAscending" : " :  오름차순 정렬",
+            "sortDescending" : " :  내림차순 정렬"
+        }
+    };
+
+        $('#foo-table').DataTable( {
+        	
+            language:lang_kor
+        });  
+        
+        $('#myTable').DataTable();
+    });
+   
+</script>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -171,66 +209,28 @@
         <div class="row">
             <div class="col-lg-12">
         
-                <div class="form-group">
-        
-                    <label>Selects</label>
-                    <select class="form-control" style="width: 200px;">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                        <option>Option 4</option>
-                    </select>
-        
-                    <select class="form-control" style="width: 200px;">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                        <option>Option 4</option>
-                    </select>
-                </div>
-                <table data-toggle="table">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1" style="text-align: center;"><button type="button" class="btn btn-sm btn-primary">전체선택</button></th>
-                            <th class="col-md-1">닉네임</th>
-                            <th class="col-md-7">아이디</th>
-                            <th class="col-md-1">그룹</th>
-                            <th class="col-md-1">게시글 수</th>
-                            <th class="col-md-1">댓글 수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox" value="member_check"></td>
-                            <td>닉네임1</td>
-                            <td>tazo0519@naver.com</td>
-                            <td>관리자</td>
-                            <td>11</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" value="member_check"></td>
-                            <td>닉네임2</td>
-                            <td>tazo0519@daum.net</td>
-                            <td>일반고객</td>
-                            <td>22</td>
-                            <td>22</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
+                
+				<div class="board_list_wrap">
+					
+					<table id="foo-table" class="foo-ex">
+						<h2>자유게시판</h2>
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th>Nickname</th>
+								<th>Phone</th>
+								<th>RegistDate</th>
+								<th>Subscribe</th>
+								<th>Grade</th>
+								<th>UserGroup</th>
+							</tr>
+
+						</thead>
+						<tbody id="output">
+							
+						</tbody>
+					</table>
+				</div>
             </div>
         </div>
 	</div>	<!--/.main-->

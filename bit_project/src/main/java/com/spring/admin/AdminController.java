@@ -51,7 +51,7 @@ public class AdminController {
 		
 		return "admin/index";
 	}
-	@RequestMapping(value = "/member_admin.se", method = RequestMethod.GET)
+	@RequestMapping(value = "/member_admin.se")
 	public String member_admin(Model model, HttpSession session) {
 		
 		return "admin/member_admin";

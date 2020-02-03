@@ -1,5 +1,7 @@
 package com.spring.member;
 
+import java.util.List;
+
 public interface MemberService {
 	public int nicknameCheck(MemberVO membervo); //닉네임 중복체크
 	public int emailCheck(MemberVO membervo); //이메일 중복체크
@@ -11,4 +13,6 @@ public interface MemberService {
 	public int nicknameupdateCheck(MemberVO membervo);	//업데이트 폼 서브밋
 	public int passwordUpdate(MemberVO membervo);	//password 업데이트
 	public int nnupdateCheck(MemberVO membervo); //닉네임 중복체크
+	public List<MemberSubscribeVO> getMemberList();	//admin에서 memberList 뽑음.
+	
 }
