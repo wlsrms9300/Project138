@@ -11,7 +11,7 @@
 	h2{margin:0 10px;}
 	#comments {border-radius: 5px;}
 	#community_container_filter{width: 950px; margin: 0 auto; height: 40px;}
-	#community_data {min-height: 850px; flex-wrap: wrap; width: 950px; margin: 0 auto; display: flex; padding-top: 20px;}
+	#community_data {min-height: 850px; flex-wrap: wrap; width: 950px; margin: 0 auto; padding-top: 20px;}
 	#community_data > .community_ncontainer{width:950px; margin: 0 auto; height: 200px; text-align: center; margin-top: 300px;}
 	#community_main{min-height: 780px;}
 	#community_main > .community_search_result{display: flex;}

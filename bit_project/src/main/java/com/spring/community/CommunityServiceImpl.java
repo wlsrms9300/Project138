@@ -35,7 +35,7 @@ public class CommunityServiceImpl implements CommunityService {
 //		return getCM;
 //	}
 	
-	/*필터*/
+	/***********************************필터***********************************/
 	@Override
 	public List<CommunityVO> filter1(String category, int start, int end) {
 		List<CommunityVO> filter1 = null;
@@ -66,6 +66,7 @@ public class CommunityServiceImpl implements CommunityService {
 		return filter3;
 	}
 	
+	/***********************************검색***********************************/
 	@Override
 	public List<CommunityVO> getCMsearch(String search_Data, String category, int start, int end) {
 		List<CommunityVO> getCMsearch = null;
@@ -88,38 +89,107 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public CommunityVO detailCommunity(int num) {
+	public CommunityVO detailCommunity(int board_num) {
 		CommunityVO cmvo = new CommunityVO();
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		cmvo = cmmapper.detailCommunity(num);
+		cmvo = cmmapper.detailCommunity(board_num);
 		System.out.println(cmvo.getCount() + "조회수");
 		return cmvo;
 	}
 
 	@Override
-	public int updateCount(CommunityVO cmvo) {
+	public int updateCount(int board_num) {
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		int res = cmmapper.updateCount(cmvo);
+		int res = cmmapper.updateCount(board_num);
 		
 		return res;
 	}
 
 	
-	/*댓글*/
+	/***********************************댓글***********************************/
 	@Override
-	public List<CommentVO> getCO(int board_num) {
+	public List<CommentVO> getCO(int board_num, int start, int end) {
 		List<CommentVO> getCO = null;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		getCO = cmmapper.getCO(board_num);
+		getCO = cmmapper.getCO(board_num, start, end);
 		
 		return getCO;
 	}
 
 	@Override
-	public int getCommentCount(int num) {
+	public int getCommentCount(int board_num) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		res = cmmapper.getCommunityCount(num);
+		res = cmmapper.getCommentCount(board_num);
+		return res;
+	}
+
+	@Override
+	public int writeCO(CommentVO covo) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		System.out.println("serviceimpl " + covo.getNickname());
+		res = cmmapper.writeCO(covo);
+		System.out.println("serviceimpl res : " + res);
+		return res;
+	}
+	
+	@Override
+	public int updateCO(int comment_num, String content) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		res = cmmapper.updateCO(comment_num, content);
+		System.out.println("serviceimpl res : " + res);
+		return res;
+	}
+
+	@Override
+	public int deleteCO(int comment_num) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		System.out.println("serviceimpl " + comment_num);
+		res = cmmapper.deleteCO(comment_num);
+		System.out.println("serviceimpl res : " + res);
+		return res;
+	}
+
+	
+	/***********************************대댓***********************************/
+	@Override
+	public int writeAnswer(AnswerVO answervo) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		System.out.println("대댓작성 serviceimpl " + answervo.getNickname());
+		res = cmmapper.writeAnswer(answervo);
+		System.out.println("대댓작성 serviceimpl res : " + res);
+		return res;
+	}
+
+	@Override
+	public List<AnswerVO> getAnswer(int comment_num) {
+		List<AnswerVO> getAnswer = null;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		getAnswer = cmmapper.getAnswer(comment_num);
+		
+		return getAnswer;
+	}
+	
+	@Override
+	public int updateAnswer(int answer_num, String content) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		res = cmmapper.updateAnswer(answer_num, content);
+		System.out.println("대댓수정 serviceimpl res : " + res);
+		return res;
+	}
+	
+	@Override
+	public int deleteAnswer(int answer_num) {
+		int res = 0;
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		System.out.println("대댓삭제 serviceimpl : " + answer_num);
+		res = cmmapper.deleteAnswer(answer_num);
+		System.out.println("대댓삭제 serviceimpl res : " + res);
 		return res;
 	}
 	

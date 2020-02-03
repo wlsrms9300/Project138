@@ -29,7 +29,7 @@
 </head>
 <body>
 
-	<div style="height: 50px;">
+	<div style="height: 60px;">
 		<header>
 			<%@ include file="/WEB-INF/views/header2.jsp"%>
 		</header>
@@ -37,12 +37,12 @@
 
 	<div id="community_container_menubar">
 		<div class="community_menubar">
-			<a class="community_menubar_item" href="community.co">자유게시판</a> <a
-				class="community_menubar_item" href="community_img.co">육아사진</a> <a
-				class="community_menubar_item" href="community.co">정보공유(팁)</a> <a
-				class="community_menubar_item" href="community.co">공구게시판</a> <a
-				class="community_menubar_item" href="community.co">육아게시판</a> <a
-				class="community_menubar_item" href="co_writeForm.co">이슈,토론게시판</a>
+            <a class="community_menubar_item" href="community.co" value="자유게시판">자유게시판</a>
+            <a class="community_menubar_item" href="community.co" value="육아사진">육아사진</a>
+            <a class="community_menubar_item" href="community.co" value="정보공유">정보공유(팁)</a>
+            <a class="community_menubar_item" href="community.co" value="공구게시판">공구게시판</a>
+            <a class="community_menubar_item" href="community.co" value="육아게시판">육아게시판</a>
+            <a class="community_menubar_item" href="community.co" value="이슈게시판">이슈,토론게시판</a>
 		</div>
 	</div>
 
@@ -54,13 +54,15 @@
 	</div>
  	<div id="community-contentbox">
 		<form method="post" id="writingForm" action="write.cw" role="form" enctype="multipart/form-data">
-			<input type="hidden" name="id" value="<%=nickname %>" />
+			<input type="hidden" name="nickname" value="<%=nickname %>" />
 			<div id="cententbox-top">
 			 	<span> <select id="category_select" name="category">
-						<option value="자유게시판">자유게시판</option>
-						<option value="사진게시판" selected>사진게시판</option>
-						<option value="게시판3">게시판3</option>
-						<option value="게시판4">게시판4</option>
+						<option value="자유게시판" selected>자유게시판</option>
+						<option value="사진게시판">사진게시판</option>
+						<option value="정보공유">정보공유(팁)</option>
+						<option value="공구게시판">공구게시판</option>
+						<option value="육아게시판">육아게시판</option>
+						<option value="이슈게시판">이슈게시판</option>
 				</select>
 				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="제목">
 				</span>

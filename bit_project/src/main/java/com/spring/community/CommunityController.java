@@ -44,33 +44,28 @@ public class CommunityController {
 		return "community_user";
 	}
 	
-	
-//	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
-//	public String community_detail(HttpServletRequest request, Model model) throws Exception {
-//		CommunityVO cmvo = new CommunityVO();
-//		
-//		int num = Integer.parseInt(request.getParameter("board_num"));
+	//게시글 상세보기
+	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
+	public String community_detail(HttpServletRequest request, Model model) throws Exception {
+		CommunityVO cmvo = new CommunityVO();
+		
+		int board_num = Integer.parseInt(request.getParameter("board_num"));
 //		int currentPage = Integer.parseInt(request.getParameter("pageNum"));
-//		
+		
 //		System.out.println("num : "  + num + "currentpage : " + currentPage);
-//		
-//		cmvo = communityService.detailCommunity(num);
-//		communityService.updateCount(cmvo);
-//		
-//		int cocount = communityService.getCommentCount(num);
-//		
-//		model.addAttribute("cocount", cocount);
+		System.out.println("board_num : "  + board_num);
+		
+		cmvo = communityService.detailCommunity(board_num);
+		communityService.updateCount(board_num);
+		
+		int cocount = communityService.getCommentCount(board_num);
+		
+		model.addAttribute("cocount", cocount);
 //		model.addAttribute("pageNum", currentPage);
-//		model.addAttribute("cmvo", cmvo);
-//
-//		System.out.println("board_num" + cmvo.getBoard_num());
-//		return "community_detail";
-//	}
-	
-	@RequestMapping(value = "/co_writeForm.co", method = RequestMethod.GET)
-	public String co_writeForm(Model model) {
+		model.addAttribute("cmvo", cmvo);
 
-		return "co_writeForm";
+		System.out.println("board_num" + cmvo.getBoard_num());
+		return "community_detail";
 	}
 	
 

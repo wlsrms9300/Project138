@@ -14,10 +14,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/dropdown.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/dropdown.js"></script> <!-- dropdown --> --%>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community.js"></script>
+
 </head>
 <body>
 
@@ -34,7 +33,7 @@
             <a class="community_menubar_item" href="#" value="정보공유">정보공유(팁)</a>
             <a class="community_menubar_item" href="#" value="공구게시판">공구게시판</a>
             <a class="community_menubar_item" href="#" value="육아게시판">육아게시판</a>
-            <a class="community_menubar_item" href="#" value="토론게시판">이슈,토론게시판</a>
+            <a class="community_menubar_item" href="#" value="이슈게시판">이슈,토론게시판</a>
         </div>
     </div>
     

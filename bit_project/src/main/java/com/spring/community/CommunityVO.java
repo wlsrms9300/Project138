@@ -13,6 +13,7 @@ public class CommunityVO {
 	private int count;
 	private String category;
 	private int scrap_count;
+	//
 	private int start;
 	private int end;
 	private int co_count;
