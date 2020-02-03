@@ -17,6 +17,10 @@ public class CalendarController {
 	public HashMap<String, String> updatePS(CalendarVO vo) throws Exception {
 		HashMap<String, String> data = new HashMap<String, String>();
 		System.out.println(vo.getEmail());
+		System.out.println(vo.getReturn_application());
+		vo.setState("반납신청");
+		vo.setReturn_application(vo.getReturn_application());
+		
 		
 		try {
 			int res = calendarservice.updatePS(vo);

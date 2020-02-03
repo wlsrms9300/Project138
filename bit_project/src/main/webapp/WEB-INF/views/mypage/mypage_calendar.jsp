@@ -39,7 +39,10 @@ $(document).ready(function(){
 				$.ajax({
 					url:'/bit_project/updatePS_application.my', //ps테이블의 return_application날짜갱신 후 state값 '대기'
 					type:'POST',
-					data: {'email':'<%=email_cal %>'},
+					data: {
+							email : '<%=email_cal %>',
+							return_application : application_date
+						  },
 					dataType: 'json',
 					contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 					success: function(data) {
