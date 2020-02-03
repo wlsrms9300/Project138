@@ -23,6 +23,16 @@
 		<result property="img" column="img" />
 
 	</resultMap>
+	
+	<resultMap type="com.spring.member.MemberSubscribeVO" id="membersubscribeMap">
+		<result property="email" column="email" />
+		<result property="usergroup" column="usergroup" />
+		<result property="nickname" column="nickname" />
+		<result property="phone" column="phone" />
+		<result property="regist" column="regist" />
+		<result property="subscribe" column="subscribe" />
+		<result property="grade" column="grade" />
+	</resultMap>
 
 	<select id="nicknameCheck" resultMap="signUpMap">
 		select * from member where nickname = #{nickname}
@@ -77,4 +87,9 @@
 	<update id="passwordUpdate" parameterType="com.spring.member.MemberVO">
 		update member set password = #{password} where email = #{email}
 	</update>
+	
+	<!-- admin페이지 member -->
+	<select id="getMemberList" resultMap="membersubscribeMap">
+		select m.email, m.nickname, m.phone, m.regist, m.subscribe, s.grade, m.usergroup from member m, subscribe s where m.email = s.email
+	</select>
 </mapper>

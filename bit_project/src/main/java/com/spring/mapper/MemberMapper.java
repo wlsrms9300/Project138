@@ -1,7 +1,11 @@
 package com.spring.mapper;
 
 
+import java.util.List;
+
+import com.spring.member.MemberSubscribeVO;
 import com.spring.member.MemberVO;
+
 
 
 public interface MemberMapper {
@@ -16,4 +20,5 @@ public interface MemberMapper {
 	int nicknameupdateCheck(MemberVO membervo);	//mypage nickname update 중복확인
 	int passwordUpdate(MemberVO membervo);	//비밀번호 변경
 	MemberVO nnupdateCheck(MemberVO membervo);
+	List<MemberSubscribeVO> getMemberList();
 }

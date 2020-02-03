@@ -1,5 +1,6 @@
 package com.spring.member;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
@@ -231,6 +232,19 @@ public class MemberServiceImpl implements MemberService{
 		return res;
 	}
 
+	@Override
+	public List<MemberSubscribeVO> getMemberList() {
+		List<MemberSubscribeVO> memberList = null;
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		memberList = memberMapper.getMemberList();
+		
+		System.out.println("memberList = " + memberList);
+		
+		
+		return memberList;
+	}
+
+	
 	
 	
 	
