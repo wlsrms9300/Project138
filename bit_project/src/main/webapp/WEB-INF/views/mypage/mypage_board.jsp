@@ -25,12 +25,12 @@
 </head>
 
 <script type="text/javascript">
-    $(function($) {
+    
         var lang_kor = {
         "decimal" : "",
         "emptyTable" : "데이터가 없습니다.",
-        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
-        "infoEmpty" : "0명",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 개)",
+        "infoEmpty" : "0개",
         "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
         "infoPostFix" : "",
         "thousands" : ",",
@@ -51,10 +51,8 @@
         }
     };
         
-        $('#foo-table').DataTable( {
-            language:lang_kor
-        });  
-    });
+       
+    
     
     // 날짜 출력 폼
     function date_format(format) {
@@ -196,24 +194,16 @@
     		<h2>자유게시판</h2>
 			<thead>
             	<tr>
-                	<th>No</th>
-                	<th>글제목</th>
+                	
                 	<th>등록일</th>
+                	<th>글제목</th>
                 	<th>조회수</th>
+                	<th>스크랩</th>
+                	
             	</tr>        
 			</thead>
-			<tbody>
-				<tr><td>1</td><td>책을</td><td>2020.01.13</td><td>20</td></tr>
-				<tr><td>2</td><td>꾸준히</td><td>2020.01.13</td><td>20</td></tr>
-				<tr><td>3</td><td>읽어요</td><td>2020.01.13</td><td>12</td></tr>
-				<tr><td>4</td><td>비싼가</td><td>2020.01.13</td><td>10</td></tr>
-				<tr><td>5</td><td>인가요</td><td>2020.01.13</td><td>25</td></tr>
-				<tr><td>6</td><td>오백원</td><td>2020.01.13</td><td>30</td></tr>
-				<tr><td>7</td><td>한권은</td><td>2020.01.13</td><td>20</td></tr>
-				<tr><td>8</td><td>안난다</td><td>2020.01.13</td><td>33</td></tr>
-				<tr><td>9</td><td>끝이</td><td>2020.01.13</td><td>10</td></tr>
-				<tr><td>10</td><td>읽어도</td><td>2020.01.13</td><td>55</td></tr>
-				<tr><td>99</td><td>꾸준히</td><td>2020.01.13</td><td>88</td></tr>
+			<tbody id="foo-table-output">
+				
 			</tbody>
     	</table>
      </div>

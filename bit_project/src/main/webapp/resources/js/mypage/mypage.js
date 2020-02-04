@@ -240,18 +240,36 @@ $(document).ready(function(){
     
     $('#m1').click(function(){
     	
+    	var text = $('#m1 > b').text();
+    	$('#foo-table-output').empty();
     	$.ajax({
     		url:'/bit_project/getboard1.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
     		success: function(data) {
-    			
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+    				
+    			});
     		},
     		error:function() {
     			
     		}
     	});
+    	
+    	   
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -270,6 +288,13 @@ $(document).ready(function(){
             $('#num4 > b').css('color', 'black');
             $('#num5 > b').css('color', 'black');
             $('#m1 > b').css('color', '#EA7475');
+            $('#m2 > b').css('color', 'black');
+            $('#m3 > b').css('color', 'black');
+            $('#m4 > b').css('color', 'black');
+            $('#m5 > b').css('color', 'black');
+            $('#m6 > b').css('color', 'black');
+            $('#m7 > b').css('color', 'black');
+            $('#m8 > b').css('color', 'black');
             list.hide();
             menu0.hide();
             menu1.hide();
@@ -282,7 +307,7 @@ $(document).ready(function(){
     });
     
     $('#m2').click(function(){
-    	
+    	var text = $('#m2 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard2.my',
     		type:'POST',
@@ -332,7 +357,7 @@ $(document).ready(function(){
     });
     
     $('#m3').click(function(){
-    	
+    	var text = $('#m3 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard3.my',
     		type:'POST',
@@ -382,7 +407,7 @@ $(document).ready(function(){
     });
     
     $('#m4').click(function(){
-    	
+    	var text = $('#m4 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard4.my',
     		type:'POST',
@@ -432,7 +457,7 @@ $(document).ready(function(){
     });
     
     $('#m5').click(function(){
-    	
+    	var text = $('#m5 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard5.my',
     		type:'POST',
@@ -482,7 +507,7 @@ $(document).ready(function(){
     });
     
     $('#m6').click(function(){
-    	
+    	var text = $('#m6 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard6.my',
     		type:'POST',
@@ -532,7 +557,7 @@ $(document).ready(function(){
     });
     
     $('#m7').click(function(){
-    	
+    	var text = $('#m7 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard7.my',
     		type:'POST',
@@ -582,7 +607,7 @@ $(document).ready(function(){
     });
     
     $('#m8').click(function(){
-    	
+    	var text = $('#m8 > b').text();
     	$.ajax({
     		url:'/bit_project/getboard8.my',
     		type:'POST',

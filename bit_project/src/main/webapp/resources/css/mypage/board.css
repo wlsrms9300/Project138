@@ -97,7 +97,7 @@
     font-size:14px;
     color:#333;
 }
-.board_list_wrap table tbody tr td:not(:nth-of-type(3)){
+.board_list_wrap table tbody tr td:not(:nth-of-type(2)){
     text-align:center;
 }
 .board_list_wrap table tbody tr td a:hover, .board_list_wrap table tbody tr td a:active {

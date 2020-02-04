@@ -11,6 +11,19 @@
 		<result property="comment_count" column="comment_count" />
 		<result property="scrap_count" column="scrap_count" />
 	</resultMap>
+	
+	<resultMap type="com.spring.myboard.BoardVO" id="BoardResultMap">
+		<result property="board_num" column="board_num" />
+		<result property="email" column="email" />
+		<result property="nickname" column="nickname" />
+		<result property="board_name" column="board_name" />
+		<result property="content" column="content" />
+		<result property="regist" column="regist" />
+		<result property="img" column="img" />
+		<result property="count" column="count" />
+		<result property="category" column="category" />
+		<result property="scrap_count" column="scrap_count" />
+	</resultMap>
 
    <!-- 마지막 접속일 -->
    <select id="getLastconnection" parameterType="String" resultMap="ActiveResultMap">
@@ -44,5 +57,13 @@
    		SELECT MAX(REGIST) REGIST FROM BOARD GROUP BY #{nickname}
    </select>
    
+  
+   
+  	<!-- 게시판 글목록 불러오기 -->
+  	<select id="getBoard1" parameterType="com.spring.myboard.BoardVO" resultMap="BoardResultMap">
+  		SELECT * FROM (SELECT * FROM BOARD WHERE CATEGORY=#{category}) 
+  		WHERE EMAIL=#{email} ORDER BY REGIST DESC
+  	</select>
+
    
 </mapper>
