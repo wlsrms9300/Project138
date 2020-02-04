@@ -229,12 +229,21 @@
 
 	<!-- 상품 상세 -->
 
+	<!-- 입고 SMS 알림 서비스 관련 -->
+	<select id="amountCheck" parameterType="map" resultType="int">
+		select total_amount from product where product_num=#{product_num}
+	</select>
+	
+	<select id="SMSalarm" parameterType="map" resultType="com.spring.product.AlarmVO">
+		select * from alarm where product_num=#{product_num}
+	</select>
+	<!-- 입고 SMS 알림 서비스 관련 -->
 	<!-- 상품 문의 -->
 	<select id="qnaSearch" parameterType="map"
 		resultType="com.spring.product.QnaVO">
 		select * FROM (
 		SELECT rownum rnum, question_num, question_title,
-		product_num,nickname,content,regist,secret,answer
+		product_num,email,nickname,content,regist,secret,answer
 		FROM question
 		where product_num=#{product_num}
 		ORDER BY regist asc
@@ -253,9 +262,9 @@
 			SELECT question_sequence.NEXTVAL FROM DUAL
 		</selectKey>
 		insert into question(question_num, question_title, product_num,
-		nickname, content, regist, secret)
+		email, nickname, content, regist, secret)
 		values(
-		#{question_num}, #{question_title}, #{product_num}, #{nickname}, #{content}, sysdate,
+		#{question_num}, #{question_title}, #{product_num}, #{email}, #{nickname}, #{content}, sysdate,
 		#{secret}
 		)
 	</insert>
@@ -264,7 +273,7 @@
 		question_num=#{question_num}
 	</delete>
 	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
-		update question set question_title=#{question_title}, nickname=#{nickname},
+		update question set question_title=#{question_title}, email=#{email}, nickname=#{nickname},
 		content=#{content}, secret=#{secret}, regist=sysdate where
 		question_num=#{question_num}
 	</update>
@@ -283,9 +292,9 @@
 			order="BEFORE">
 			SELECT review_sequence.NEXTVAL FROM DUAL
 		</selectKey>
-		insert into review(review_num, product_num, nickname, content, img,
+		insert into review(review_num, product_num, email, nickname, content, img,
 		regist, gpa) values(
-		#{review_num}, #{product_num}, #{nickname}, #{content},#{img},
+		#{review_num}, #{product_num}, #{email}, #{nickname}, #{content},#{img},
 		sysdate, #{gpa})
 	</insert>
 
@@ -299,10 +308,9 @@
 		select * FROM (
 		SELECT rownum rnum, r.review_num, r.product_num,
 		r.nickname, r.content, r.regist, r.gpa, r.img as rimg,
-		m.img as mimg
+		m.img as mimg, r.email as email
 		FROM review r, member m
-		where product_num=#{product_num} and
-		r.nickname=m.nickname
+		where product_num=#{product_num} and r.email=m.email              
 		ORDER BY regist asc
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>

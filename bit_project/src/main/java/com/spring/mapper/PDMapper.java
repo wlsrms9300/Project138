@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.product.AlarmVO;
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
@@ -47,6 +48,9 @@ public interface PDMapper {
 	int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
 	void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
 	void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	//SMS 서비스 관련
+	int amountCheck(@Param("product_num") int product_num);
+	List<AlarmVO> SMSalarm(@Param("product_num") int product_num);
 	
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);

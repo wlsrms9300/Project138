@@ -28,29 +28,7 @@ public class ProductController {
 	@Autowired(required = false)
 	private PDService service;
 
-	@RequestMapping(value = "/sendSms.pr")
-	public String sendSms() throws Exception {
-
-		String api_key = "NCSLBLNIRPXU74SZ"; // 위에서 받은 api key를 추가
-		String api_secret = "RNGJ7RNE5D4SQZMK6LJPTPKNJUN3LJOH"; // 위에서 받은 api secret를 추가
-
-		// Message coolsms = new Message(api_key, api_secret);
-		com.spring.product.Coolsms coolsms = new com.spring.product.Coolsms(api_key, api_secret);
-		// 이 부분은 홈페이지에서 받은 자바파일을 추가한다음 그 클래스를 import해야 쓸 수 있는 클래스이다.
-
-		HashMap<String, String> set = new HashMap<String, String>();
-		set.put("to", "01099028423"); // 수신번호
-
-		set.put("from", "01099028423"); // 발신번호, jsp에서 전송한 발신번호를 받아 map에 저장한다.
-		set.put("text", "테스트"); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
-		set.put("type", "sms"); // 문자 타입
-
-		System.out.println(set);
-		JSONObject result = coolsms.send(set); // 보내기&전송결과받기
-
-		return "product";
-	}
-
+	
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
 		System.out.println("product.pr : " + session.getAttribute("email"));
@@ -165,7 +143,8 @@ public class ProductController {
 		public String productModify(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
 				throws Exception {
 			ProductVO pdVO = new ProductVO();
-			int cnt=0;
+			// 수정 전 쿼리 돌려서 total 개수 파악. 만약 0이다?
+			int aChk = service.amountCheck(Integer.parseInt(request.getParameter("product_num")));
 				pdVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
 				pdVO.setProduct_name(request.getParameter("product_name"));
 				pdVO.setRental_amount(Integer.parseInt(request.getParameter("rental_amount")));
@@ -218,6 +197,29 @@ public class ProductController {
 				}
 				
 				service.prModify(pdVO);
+				System.out.println("service.수정완료");
+				if(aChk==0 && pdVO.getRental_amount()+pdVO.getShare_amount()>0) {
+					List<AlarmVO> list = null;
+					String api_key = "NCSLBLNIRPXU74SZ"; // 위에서 받은 api key를 추가
+					String api_secret = "RNGJ7RNE5D4SQZMK6LJPTPKNJUN3LJOH"; // 위에서 받은 api secret를 추가
+					// Message coolsms = new Message(api_key, api_secret);
+					com.spring.product.Coolsms coolsms = new com.spring.product.Coolsms(api_key, api_secret);
+					// 이 부분은 홈페이지에서 받은 자바파일을 추가한다음 그 클래스를 import해야 쓸 수 있는 클래스이다.
+					list = service.SMSalarm(pdVO.getProduct_num());
+					HashMap<String, String> set = new HashMap<String, String>();
+					for(int i=0; i<list.size(); i++) {
+						System.out.println("for문 내부 수신번호 : "+list.get(i).getPhone());
+						String mes = "안녕하세요. 진근이네입니다. 입고 알림 신청하신"+list.get(i).getProduct_num()+"번 상품 입고되었습니다.지금 바로 예약하세요";
+						set.put("to", list.get(i).getPhone()); // 수신번호
+						set.put("from", "01099028423"); // 발신번호, jsp에서 전송한 발신번호를 받아 map에 저장한다.
+						set.put("text", mes); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
+						set.put("type", "sms"); // 문자 타입
+
+						System.out.println(set);
+						JSONObject result = coolsms.send(set); // 보내기&전송결과받기
+					}
+					
+				}
 			
 			// return "product";
 			return "redirect:/";
@@ -227,13 +229,11 @@ public class ProductController {
 	@RequestMapping("/reviewWrite.pr")
 	public String reviewWrite(MultipartHttpServletRequest request) {
 		System.out.println("췍");
-		int product_num = Integer.parseInt(request.getParameter("product_num"));
 		ReviewVO reviewVO = new ReviewVO();
-		String nickname = request.getParameter("nickname");
-		String content = request.getParameter("content");
-		reviewVO.setProduct_num(product_num);
-		reviewVO.setNickname(nickname);
-		reviewVO.setContent(content);
+		reviewVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+		reviewVO.setNickname(request.getParameter("nickname"));
+		reviewVO.setContent(request.getParameter("content"));
+		reviewVO.setEmail(request.getParameter("email"));
 		reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
 
 		try {
@@ -257,22 +257,17 @@ public class ProductController {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		return "redirect:productDetail.pr?num=" + product_num;
+		return "redirect:productDetail.pr?num=" + reviewVO.getProduct_num();
 	}
 
 	@RequestMapping("/reviewModify.pr")
 	public String reviewModify(MultipartHttpServletRequest request) {
-		int product_num = Integer.parseInt(request.getParameter("product_num"));
-		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		ReviewVO reviewVO = new ReviewVO();
-		String nickname = request.getParameter("nickname");
-		String content = request.getParameter("content");
-
-		reviewVO.setProduct_num(product_num);
-		reviewVO.setNickname(nickname);
-		reviewVO.setContent(content);
+		reviewVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+		reviewVO.setNickname(request.getParameter("nickname"));
+		reviewVO.setContent(request.getParameter("content"));
 		reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
-		reviewVO.setReview_num(review_num);
+		reviewVO.setReview_num(Integer.parseInt(request.getParameter("review_num")));
 		try {
 			if (request.getFile("img").getSize() == 0) {
 				service.reviewModifyNoImg(reviewVO);
@@ -293,47 +288,38 @@ public class ProductController {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		return "redirect:productDetail.pr?num=" + product_num;
+		return "redirect:productDetail.pr?num=" + reviewVO.getProduct_num();
 	}
 
 	// 상품 문의 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/qnaWrite.pr")
 	public String qnaWrite(Model model, HttpServletRequest request) {
-		System.out.println("췍");
-		int product_num = Integer.parseInt(request.getParameter("product_num"));
 		QnaVO qnaVO = new QnaVO();
-		String qna_title = request.getParameter("question_title");
-		String qna_sec = request.getParameter("privatecheck");
-		String nickname = request.getParameter("nickname");
-		String content = request.getParameter("content");
-		qnaVO.setProduct_num(product_num);
-		qnaVO.setQuestion_title(qna_title);
-		qnaVO.setSecret(qna_sec);
-		qnaVO.setNickname(nickname);
-		qnaVO.setContent(content);
+		qnaVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+		qnaVO.setQuestion_title(request.getParameter("question_title"));
+		qnaVO.setEmail(request.getParameter("email"));
+		qnaVO.setSecret(request.getParameter("privatecheck"));
+		qnaVO.setNickname(request.getParameter("nickname"));
+		qnaVO.setContent(request.getParameter("content"));
 		try {
 			service.qnaWrite(qnaVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		return "redirect:productDetail.pr?num=" + product_num;
+		return "redirect:productDetail.pr?num=" + qnaVO.getProduct_num();
 	}
 
 	@RequestMapping("/qnaModify.pr")
 	public String qnaModify(Model model, HttpServletRequest request) {
-		System.out.println("췍");
-		int product_num = Integer.parseInt(request.getParameter("product_num"));
-		int question_num = Integer.parseInt(request.getParameter("question_num"));
 		QnaVO qnaVO = new QnaVO();
-		String qna_sec = request.getParameter("privatecheck");
-		String nickname = request.getParameter("nickname");
-		String content = request.getParameter("content");
-		qnaVO.setProduct_num(product_num);
-		qnaVO.setSecret(qna_sec);
-		qnaVO.setNickname(nickname);
-		qnaVO.setContent(content);
-		qnaVO.setQuestion_num(question_num);
+		qnaVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+		qnaVO.setSecret(request.getParameter("privatecheck"));
+		qnaVO.setEmail(request.getParameter("email"));
+		qnaVO.setNickname(request.getParameter("nickname"));
+		qnaVO.setContent(request.getParameter("content"));
+		qnaVO.setQuestion_title(request.getParameter("question_title"));
+		qnaVO.setQuestion_num(Integer.parseInt(request.getParameter("question_num")));
 		try {
 			service.qnaModify(qnaVO);
 
@@ -341,6 +327,6 @@ public class ProductController {
 			e.printStackTrace();
 			e.getMessage();
 		}
-		return "redirect:productDetail.pr?num=" + product_num;
+		return "redirect:productDetail.pr?num=" + qnaVO.getProduct_num();
 	}
 }

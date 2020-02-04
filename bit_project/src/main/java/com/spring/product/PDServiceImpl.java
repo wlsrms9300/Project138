@@ -27,6 +27,29 @@ public class PDServiceImpl implements PDService {
 	}
 	
 	@Override
+	public int amountCheck(int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int aChk = pdMapper.amountCheck(product_num);
+			return aChk;
+		} catch (Exception e) {
+			throw new Exception("수량 체크 실패.", e);
+		}
+	}
+
+	@Override
+	public List<AlarmVO> SMSalarm(int product_num) throws Exception {
+		try {
+			List<AlarmVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.SMSalarm(product_num);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("입고 알림 SMS 전송 실패.", e);
+		}
+	}
+
+	@Override
 	public void prModify(ProductVO pdVO) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);

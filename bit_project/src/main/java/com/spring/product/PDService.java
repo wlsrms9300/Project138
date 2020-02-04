@@ -19,6 +19,9 @@ public interface PDService {
 		public List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3) throws Exception;
 		//public List<ProductVO> filterSearch(@Param("category_l") String category_l, @Param("category_m") String category_m, @Param("category_s") String category_s) throws Exception;
 		//public List<ProductVO> selectList(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3) throws Exception;
+		// 수량 체크
+		public int amountCheck(@Param("product_num") int product_num) throws Exception;
+		public List<AlarmVO> SMSalarm(@Param("product_num") int product_num) throws Exception;
 		
 	// 2. 상품 상세 페이지 관련 
 		// 상품 클릭 시 해당 상품 데이터 받아서 상세페이지에 띄워줌

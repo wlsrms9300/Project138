@@ -7,12 +7,19 @@ public class QnaVO {
 	private int question_num;
 	private String question_title;
 	private int product_num;
+	private String email;
 	private String nickname;
 	private String content;
 	private Date regist;
 	private String secret;
 	private String answer;
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getQuestion_title() {
 		return question_title;
 	}

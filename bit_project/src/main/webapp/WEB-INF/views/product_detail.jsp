@@ -245,7 +245,7 @@
                     <br><br><br>
                     <hr>
 	                    <div>재고 : <span><%=prVO.getTotal_amount() %>
-	                    <%if(prVO.getTotal_amount()==0 && nickname!=null){ %>
+	                    <%if(prVO.getTotal_amount()==0 && email!=null){ %>
 	                    <a href="javascript:void(0)" onclick="amount_alert();">입고알림</a>
 	                    <%} %>
 	                    </span>
@@ -409,6 +409,7 @@
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
                 <input type="hidden" name="nickname" value="<%=nickname %>" />
                 <input type="hidden" name="review_num" value="" />
+                <input type="hidden" name="email" value="<%=email %>" />
                 <div>
                     <label for="reviewcheck">평점</label>
                     <div><input type="radio" name="reviewcheck" value="5" />★★★★★</div>
@@ -462,6 +463,7 @@
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
                 <input type="hidden" name="nickname" value="<%=nickname %>" />
                 <input type="hidden" name="question_num" value="" />
+                <input type="hidden" name="email" value="<%=email %>" />
                 <div>
                     <br>
                     <label>제목</label>
@@ -634,7 +636,7 @@
         var qnacheck = 0;
         var revcheck = 0;
         function qna_write() {
-			if(nick=="" || nick==null){
+			if(sessionChk=="" || sessionChk==null){
 				location.href="login.me";
 			}else{
 				  $('body').css("background", "grey");
@@ -688,7 +690,7 @@
         });
 
         function review_write() {
-        	if(nick=="" || nick==null){
+        	if(sessionChk=="" || sessionChk==null){
 				location.href="login.me";
 			}else {
 			    $('body').css("background", "grey");

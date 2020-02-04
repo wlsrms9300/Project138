@@ -23,10 +23,10 @@ $("document").ready(function () {
     review_snsData(totalData, dataPerPage, pageCount, currentPage);
     $('.review article ul li').click(function () {
         if ($(this).children().first().css("-webkit-line-clamp") == 2) {
-            $(this).children().first().css("-webkit-line-clamp", "6");
+            $(this).children().first().css("-webkit-line-clamp", 6);
             $(this).children().first().css("margin-bottom", 40);
         } else {
-            $(this).children().first().css("-webkit-line-clamp", "2");
+            $(this).children().first().css("-webkit-line-clamp", 2);
             $(this).children().first().css("margin-bottom", 80);
         }
     });
@@ -55,21 +55,25 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
                 exText += "<div>"+item.content+"</div>";
                 //exText += '<div><img src="/bit_project/image/'+item.mimg+'">';
                 exText += '<div><img src="'+item.mimg+'">';
-                
-                exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
-                exText += "<div>";
-                
-				var sib1 = "'"+item.review_num+"'";
+                var sib1 = "'"+item.review_num+"'";
 				var sib2 = "'"+item.nickname+"'";
 				var sib3 = "'"+item.content+"'";
 				var sib4 = "'"+item.rimg+"'";
 				var sib5 = "'"+item.gpa+"'";
-				if(nick==item.nickname){
-					exText += '<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
-					exText += "<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";	
+				var sib6 = "'"+item.email+"'";
+				if(sessionChk==item.email){
+					//exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
+	                //exText += "<div>";
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
+					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";	
+					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewpoint("+item.email+");'>포인트 적립</a>";
+					exText += '</div>';
+				}else {
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
 				}
                 
-                exText += "</div>";
+                //exText += "</div>";
                 exText += "</li>";
                 exText += "<li style='flex: 1.5;'>";
                 //exText += '<img src="/bit_project/image/'+item.mimg+'">';
@@ -178,7 +182,7 @@ function review_paging(totalData, dataPerPage, pageCount, currentPage) {
 }
 
 
-function reviewmodify(_rnum, _nickname, _content, _img, _gpa) {
+function reviewmodify(_rnum, _nickname, _content, _img, _gpa, _email) {
 	 $("#ReviewForm textarea").html(_content);
 	 //$("#ReviewForm input[name=nickname]").val("테스트닉네임");
 	 switch (_gpa) {
