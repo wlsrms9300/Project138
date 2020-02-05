@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String msg = (String)session.getAttribute("msg");
+	String price = request.getParameter("price");
+	String token = request.getParameter("token");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +49,8 @@
               <span class="Kinds">정기결제</span>
               <span class="loop">첫 배달일은 mm월 dd일입니다.</span>
               <div class="option">
-                <span>39,000원</span>
-                <span>/1개월<%=msg %></span>
+                <span><%=price %></span>               
+                <span>/1개월</span>          
                 <em>배송비무료</em>
               </div>
             </label>

@@ -66,12 +66,9 @@ public class PaymentController {
 	/* */
 	@RequestMapping(value="/insertSP.su", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String insertSP(@RequestParam(value="customer_uid") String customer_uid, PaymentVO paymentvo, SubscriptionVO subscriptionvo,HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
-		String res = paymentvo.getCustomer_uid();
-		System.out.println("res="+res);
-		System.out.println("customer_uid="+ customer_uid);
-		
+	public HashMap<String, String> insertSP(PaymentVO paymentvo, HttpServletRequest request,HttpServletResponse response) throws Exception {
+		System.out.println(paymentvo.getPrice());
+		HashMap<String, String> map = new HashMap<String, String>();
 		
 		/* 토큰 생성 */
 		String imp_key = URLEncoder.encode("6309798726474324", "UTF-8");
@@ -83,16 +80,16 @@ public class PaymentController {
 		Iamport2 iamport = new Iamport2();
 		String _token = iamport.getToken(request, response, json1, "https://api.iamport.kr/users/getToken"); 
 		
+		map.put("token", _token);
 		System.out.println("_token="+_token);
-		return _token;
-		
+		return map;	
 	}
 	
 	@RequestMapping(value = "/subscribestep3.me")
 	public String subscribestep3(Model model, HttpServletRequest request) {
-		String msg = (String)request.getAttribute("msg");
-		
-		System.out.println("msg=" + msg);
+		String price = request.getParameter("price");
+		String token = request.getParameter("token");
+		System.out.println(price +",,,,,,,"+ token);
 		return "subscribestep3";
 	}
 

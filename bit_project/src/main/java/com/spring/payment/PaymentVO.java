@@ -8,6 +8,7 @@ public class PaymentVO {
 	private int subscribe_num;
 	private Date pay_date;
 	private int price;
+	
 	public int getPay_num() {
 		return pay_num;
 	}
