@@ -103,6 +103,7 @@
 		/*중복확인 버튼, 약관동의*/
 
         $('.signup-btn').click(function(){
+        	
            pwd1 = document.signupForm.password.value;
            pwd2 = document.signupForm.pwcheck.value;
         

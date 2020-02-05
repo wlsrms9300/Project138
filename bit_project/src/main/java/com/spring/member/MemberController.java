@@ -49,10 +49,10 @@ public class MemberController {
 		return "subscribestep2";
 	}
 
-	@RequestMapping(value = "/subscribestep3.me")
-	public String subscribestep3(Model model) {
-		return "subscribestep3";
-	}
+//	@RequestMapping(value = "/subscribestep3.me")
+//	public String subscribestep3(Model model) {
+//		return "subscribestep3";
+//	}
 
 	@RequestMapping(value = "/findemail.me", method = RequestMethod.GET)
 	public String findemail(HttpServletRequest request, HttpServletResponse response, Model model, MemberVO membervo)

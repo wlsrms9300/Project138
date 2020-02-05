@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)session.getAttribute("msg");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +48,7 @@
               <span class="loop">첫 배달일은 mm월 dd일입니다.</span>
               <div class="option">
                 <span>39,000원</span>
-                <span>/1개월</span>
+                <span>/1개월<%=msg %></span>
                 <em>배송비무료</em>
               </div>
             </label>
