@@ -1,6 +1,6 @@
 package com.spring.myboard;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,4 +42,20 @@ public class BoardController {
 		System.out.println(data.getRegist());
 		return data;
 	}
+	@PostMapping(value="/getboard1.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard1(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		System.out.println(vo.getEmail());
+		System.out.println(vo.getCategory());
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	
+	
 }

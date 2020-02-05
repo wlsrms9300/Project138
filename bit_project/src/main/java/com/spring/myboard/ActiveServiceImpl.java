@@ -1,6 +1,6 @@
 package com.spring.myboard;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +77,17 @@ public class ActiveServiceImpl implements ActiveService {
 			return vo;
 		} catch (Exception e) {
 			throw new Exception("최신 글 조회실패", e);
+		}
+	}
+	
+	@Override
+	public ArrayList<BoardVO> getBoard1(BoardVO vo) throws Exception {
+		try {
+			ActiveMapper activemapper = sqlSession.getMapper(ActiveMapper.class);
+			ArrayList<BoardVO> data = activemapper.getBoard1(vo);
+			return data;
+		} catch (Exception e) {
+			throw new Exception("자유게시판 글 조회 실패", e);
 		}
 	}
 }
