@@ -33,7 +33,7 @@
                 <input type="number" name="rental_amount" placeholder="렌탈수량" />
             </div>
             <div>
-                <input type="number" name="share_amount" placeholder="개인쉐어수량" />
+                <input type="number" placeholder="개인쉐어수량" />
             </div>
             <div>
                 <input type="text" name="manufacturer" placeholder="제조사" />

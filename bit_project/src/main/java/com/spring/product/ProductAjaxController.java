@@ -3,11 +3,14 @@ package com.spring.product;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.nurigo.java_sdk.api.Message;
 
@@ -326,6 +329,18 @@ public class ProductAjaxController {
 		try {
 			service.reviewDelete(review_num, product_num);
 			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return res;
+	}
+	@GetMapping(value = "/Addpoint.pr", produces = "application/json;charset=UTF-8")
+	public int Addpoint(String email, String nickname, int product_num) {
+		int res = 0;
+		try {
+			res = service.addPoint(email);
+			service.pointDetail(email, product_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();

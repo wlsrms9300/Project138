@@ -244,7 +244,7 @@
                     <div><%=prVO.getProduct_content() %></div>
                     <br><br><br>
                     <hr>
-	                    <div>재고 : <span><%=prVO.getTotal_amount() %>
+	                    <div>재고 : <span><%=prVO.getCurrent_amount() %>
 	                    <%if(prVO.getTotal_amount()==0 && email!=null){ %>
 	                    <a href="javascript:void(0)" onclick="amount_alert();">입고알림</a>
 	                    <%} %>

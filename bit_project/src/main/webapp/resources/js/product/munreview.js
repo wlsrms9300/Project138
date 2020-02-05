@@ -66,8 +66,15 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
 	                //exText += "<div>";
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
-					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";	
-					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewpoint("+item.email+");'>포인트 적립</a>";
+					//item.point_details==1인 경우 삭제 못하게 바꿔야함.
+					
+					if(item.point_details==1){
+						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:green"></i></a>';	
+					}else {
+						exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewpoint('+sib6+','+sib2+');">포인트 적립</a>';
+					}
+					
 					exText += '</div>';
 				}else {
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
@@ -213,6 +220,7 @@ function reviewdelete(_rnum){
 			 success:function (data) {
 				 alert('삭제 성공');
 				 history.go(0);
+				 //document.getElementById('nickname').focus();
 			 },
 			 error:function() {
 				alert('삭제 실패');
@@ -222,6 +230,27 @@ function reviewdelete(_rnum){
 	     return false;
 	 }
 	
+}
+function reviewpoint(_email, _nickname) {
+	 var point_y = confirm("해당 유저에게 포인트를 지급하시겠습니까?"+"'\n'"+"아이디 : "+_email+"'\n'"+"닉네임 : "+_nickname);
+		 if(point_y)
+	     {
+	            $.ajax({
+	            	url: '/bit_project/Addpoint.pr',
+	                type: 'GET',
+	                dataType: 'json',
+	                data : {"email" : _email, "nickname" : _nickname, "product_num" : p},
+	                async:false,
+	                success: function (data) {
+	                	console.log("포인트 지급완료.");
+	                	history.go(0);
+	                	//document.getElementById('nickname').focus();
+	                },
+	    	        error: function () {
+	    				alert("ajax오류");
+	    			}
+	            });
+	     }
 }
 
 function date_to_str(format)

@@ -11,7 +11,14 @@ public class ReviewVO {
 	private String img;
 	private Date regist;
 	private double gpa;
+	private int point_details;
 	
+	public int getPoint_details() {
+		return point_details;
+	}
+	public void setPoint_details(int point_details) {
+		this.point_details = point_details;
+	}
 	public String getEmail() {
 		return email;
 	}

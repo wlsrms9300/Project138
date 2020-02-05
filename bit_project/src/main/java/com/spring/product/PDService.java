@@ -79,6 +79,10 @@ public interface PDService {
 		public void reviewModify(ReviewVO reviewVO) throws Exception;
 		// 리뷰 수정(이미지는 안건드린 상태면, 기존 이미지 그대로
 		public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception;
+		// 리뷰 포인트 지급
+		public int addPoint(@Param("email") String email) throws Exception;
+		// 리뷰 지급 후 reviewVO의 point_Details 값 1로 변경
+		public void pointDetail(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
 	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
 	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;

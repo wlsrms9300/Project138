@@ -105,17 +105,13 @@
                 </div>
             </div>
   			<div>
-                <input type="number" name="rental_amount" placeholder="렌탈수량" />
-            </div>
-            <div>
-                <input type="number" name="share_amount" placeholder="개인쉐어수량" />
+                <input type="number" name="total_amount" placeholder="총수량" />
             </div>
             <div>
                 <input type="text" name="manufacturer" placeholder="제조사" />
             </div>
             <div>
                 <input type="text" name="product_content" placeholder="상품상세" />
-                <input type="hidden" name="productkey" value="1"  />
             </div>
   			
             <div class="btn-product">

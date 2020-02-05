@@ -88,11 +88,11 @@ public class ProductController {
 		ProductVO pdVO = new ProductVO();
 		int cnt=0;
 			pdVO.setProduct_name(request.getParameter("product_name"));
-			pdVO.setRental_amount(Integer.parseInt(request.getParameter("rental_amount")));
-			pdVO.setShare_amount(Integer.parseInt(request.getParameter("share_amount")));
+			pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
+			pdVO.setRental_amount(0);
+			pdVO.setCurrent_amount(0);
 			pdVO.setManufacturer(request.getParameter("manufacturer"));
 			pdVO.setProduct_content(request.getParameter("product_content"));
-			pdVO.setTotal_amount(pdVO.getRental_amount() + pdVO.getShare_amount());
 			pdVO.setCategory_l(request.getParameter("category_l"));
 			pdVO.setCategory_m(request.getParameter("category_m"));
 			pdVO.setCategory_s(request.getParameter("category_s"));
@@ -143,15 +143,22 @@ public class ProductController {
 		public String productModify(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
 				throws Exception {
 			ProductVO pdVO = new ProductVO();
-			// 수정 전 쿼리 돌려서 total 개수 파악. 만약 0이다?
+			int amount_cnt = 0;
 			int aChk = service.amountCheck(Integer.parseInt(request.getParameter("product_num")));
 				pdVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
 				pdVO.setProduct_name(request.getParameter("product_name"));
-				pdVO.setRental_amount(Integer.parseInt(request.getParameter("rental_amount")));
-				pdVO.setShare_amount(Integer.parseInt(request.getParameter("share_amount")));
+				amount_cnt = Integer.parseInt(request.getParameter("ta"));	
+				if(amount_cnt > Integer.parseInt(request.getParameter("total_amount"))) {
+					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount"))-amount_cnt);
+				}else if(amount_cnt < Integer.parseInt(request.getParameter("total_amount"))) {
+					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount"))+amount_cnt);
+				}else {
+					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")));
+				}
+				pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
 				pdVO.setManufacturer(request.getParameter("manufacturer"));
 				pdVO.setProduct_content(request.getParameter("product_content"));
-				pdVO.setTotal_amount(pdVO.getRental_amount() + pdVO.getShare_amount());
+				
 				pdVO.setCategory_l(request.getParameter("category_l"));
 				pdVO.setCategory_m(request.getParameter("category_m"));
 				pdVO.setCategory_s(request.getParameter("category_s"));
@@ -198,7 +205,7 @@ public class ProductController {
 				
 				service.prModify(pdVO);
 				System.out.println("service.수정완료");
-				if(aChk==0 && pdVO.getRental_amount()+pdVO.getShare_amount()>0) {
+				if(aChk==0 && pdVO.getRental_amount()+pdVO.getCurrent_amount()>0) {
 					List<AlarmVO> list = null;
 					String api_key = "NCSLBLNIRPXU74SZ"; // 위에서 받은 api key를 추가
 					String api_secret = "RNGJ7RNE5D4SQZMK6LJPTPKNJUN3LJOH"; // 위에서 받은 api secret를 추가
@@ -310,6 +317,7 @@ public class ProductController {
 		return "redirect:productDetail.pr?num=" + qnaVO.getProduct_num();
 	}
 
+	
 	@RequestMapping("/qnaModify.pr")
 	public String qnaModify(Model model, HttpServletRequest request) {
 		QnaVO qnaVO = new QnaVO();

@@ -262,6 +262,7 @@ function qnadelete(qnum){
 			 success:function (data) {
 				 alert('삭제 성공');
 				 history.go(0);
+				 //document.getElementById('nickname').focus();
 			 },
 			 error:function() {
 				alert('삭제 실패');

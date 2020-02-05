@@ -108,10 +108,11 @@
                 </div>
             </div>
   			<div>
-                <input type="number" name="rental_amount" value="<%=prVO.getRental_amount() %>" />
+  				<input type="hidden" name="ta" value="<%=prVO.getTotal_amount() %>" />
+                <input type="number" name="total_amount" value="<%=prVO.getTotal_amount() %>" />
             </div>
             <div>
-                <input type="number" name="share_amount" value="<%=prVO.getShare_amount() %>" />
+                <input type="hidden" name="current_amount" value="<%=prVO.getCurrent_amount() %>" />
             </div>
             <div>
                 <input type="text" name="manufacturer" value="<%=prVO.getManufacturer() %>" />
@@ -126,7 +127,7 @@
             </div>
         </form>
     </div>
-     <script>
+     <script>    
     var c_l = "<%=prVO.getCategory_l()%>";
     var c_m = "<%=prVO.getCategory_m()%>";
     var c_s = "<%=prVO.getCategory_s()%>";

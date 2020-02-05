@@ -13,7 +13,7 @@ public class reviewjoinmemberVO {
 	private String nickname;
 	private String content;
 	private double gpa;	
-	
+	private int point_details;
 	// 멤버
 	private String email;
 	private String usergroup;
@@ -31,6 +31,14 @@ public class reviewjoinmemberVO {
 	private String instagram_id;/*N, Y*/
 	private String receive_email;/*N, Y*/
 	private String receive_text;/*N, Y*/
+	
+	
+	public int getPoint_details() {
+		return point_details;
+	}
+	public void setPoint_details(int point_details) {
+		this.point_details = point_details;
+	}
 	public String getRimg() {
 		return rimg;
 	}

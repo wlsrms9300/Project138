@@ -336,8 +336,30 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("리뷰 수정 실패.", e);
 		}
 	}
+	@Override
+	public int addPoint(String email) throws Exception {
+		try {
+			int res = 0;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			res = pdMapper.addPoint(email);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("리뷰 포인트 적립 실패.", e);
+		}
+	}
+	
+	@Override
+	public void pointDetail(String email, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.pointDetail(email, product_num);
+		} catch (Exception e) {
+			throw new Exception("리뷰 포인트 지급 여부 변경 실패.", e);
+		}
+	}
 	/********************** 상품리뷰 종료 **********************/
 	
+
 	/********************** 상품문의 시작 **********************/
 	@Override
 	public void qnaWrite(QnaVO qnaVO) throws Exception {
