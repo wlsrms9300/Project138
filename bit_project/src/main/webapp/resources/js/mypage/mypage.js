@@ -239,7 +239,7 @@ $(document).ready(function(){
     });
     
     $('#m1').click(function(){
-    	
+    	var check = true; // true면 데이터테이블 실행  false면 x
     	var text = $('#m1 > b').text();
     	$('#foo-table-output').empty();
     	$.ajax({
@@ -248,6 +248,7 @@ $(document).ready(function(){
     		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
     		success: function(data) {
     			$.each(data, function(index, item) {
     				var date1 = new Date(item.regist);
@@ -261,16 +262,20 @@ $(document).ready(function(){
     				output += '</tr>';
     				console.log("output:" + output);
     				$('#foo-table-output').prepend(output);
-    				
+
     			});
     		},
     		error:function() {
-    			
+    		check = false;	
     		}
     	});
     	
+    	if(check == true) {
+			$('#foo-table').DataTable({
+				language : lang_kor
+			});
+		}   		
     	   
-    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
