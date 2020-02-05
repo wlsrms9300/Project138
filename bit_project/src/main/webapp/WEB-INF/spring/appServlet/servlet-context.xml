@@ -54,6 +54,7 @@
 	<context:component-scan base-package="com.spring.myboard" />
 	<context:component-scan base-package="com.spring.calendar" />
 	<context:component-scan base-package="com.spring.admin2" />
+	<context:component-scan base-package="com.spring.payment" />
 
 
 </beans:beans>

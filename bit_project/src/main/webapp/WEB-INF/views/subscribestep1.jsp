@@ -15,6 +15,7 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/subscribe.js"></script>
 
+
 </head>
 <body>
 	<div style="height: 50px;">
@@ -38,9 +39,10 @@
 		</div>
 
 		<h1 class="text-field">구독 정보를 확인해주세요.</h1>
-
+		<form name="selectSubscription"  method="POST" action="selectSubscription.su">
 		<div class="choiceBox">
 			<div class="">
+	
 				<input type="radio" id="choice01" name="si_gift" value="0">
 				<label for="choice01">
 					<div class="">
@@ -67,13 +69,14 @@
 						<input TYPE="radio" name='group1' value='2month' /> 58,000원/2개월</label><br />
 						</span>
 					</div> <!--지우기-->
-
+		
 				</label>
 			</div>
 		</div>
 		<div class="subscribeNext">
-			<button id="termSelect" type="submit" onclick="location.href='subscribestep2.me'">다음단계로</button>
+			<button id="termSelect" type="submit" >다음단계로</button>
 		</div>
+		</form>
 	</div>
 	
 	 <!-- footer 시작 -->
