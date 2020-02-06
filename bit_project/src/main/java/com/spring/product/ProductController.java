@@ -97,9 +97,6 @@ public class ProductController {
 			pdVO.setCategory_m(request.getParameter("category_m"));
 			pdVO.setCategory_s(request.getParameter("category_s"));
 			List<MultipartFile> fileList = request.getFiles("img_list");
-			//MultipartFile mf1 = request.getFile("img_sum"); // 파일
-			//MultipartFile mf2 = request.getFile("img_main"); // 파일
-			//MultipartFile mf3 = request.getFile("img_detail"); // 파일
 			String uploadPath = "C:\\Project138\\upload\\";
 			System.out.println(fileList.size());
 			for (MultipartFile mf : fileList) {

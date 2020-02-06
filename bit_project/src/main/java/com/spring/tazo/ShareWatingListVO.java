@@ -1,6 +1,6 @@
 package com.spring.tazo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ShareWatingListVO {
 	private String email;
