@@ -503,6 +503,7 @@
     </div>
     <div class="container">
     <input type="button" value="상품 수정" onclick="prModify();"/>
+    <input type="button" value="상품 삭제" onclick="prDelete();"/>
     </div>
     <!-- 배송/반납  -->
 
@@ -832,6 +833,13 @@
 	}
 	function prModify() {
 		location.href="productModifyForm.pr?num=<%=prVO.getProduct_num()%>";
+	}
+	function prDelete() {
+		var pr_delete = confirm("해당 상품을 삭제하시겠습니까?");
+		if(pr_delete){
+			location.href="productDeleteForm.pr?num=<%=prVO.getProduct_num()%>";	
+		}
+		
 	}
     </script>
 </body>

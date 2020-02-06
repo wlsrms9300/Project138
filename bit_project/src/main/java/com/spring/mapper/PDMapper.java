@@ -15,6 +15,13 @@ import com.spring.product.reviewjoinmemberVO;
 public interface PDMapper {
 	void prAdd(ProductVO pdVO);	//상품 등록
 	void prModify(ProductVO pdVO); //상품 수정
+	void prDelete1(@Param("product_num") int product_num);
+	void prDelete2(@Param("product_num") int product_num);
+	void prDelete3(@Param("product_num") int product_num);
+	void prDelete4(@Param("product_num") int product_num);
+	void prDelete5(@Param("product_num") int product_num);
+	void prDelete6(@Param("product_num") int product_num);
+	void prDelete7(@Param("product_num") int product_num);
 	List<ProductVO> allSearch();//아직 쓰진 않지만 전체 검색
 	
 	//카테고리가 null일 경우. default 세팅	

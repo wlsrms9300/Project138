@@ -11,6 +11,8 @@ public interface PDService {
 		public void prAdd(ProductVO pdVO) throws Exception;
 		// 상품 수정
 		public void prModify(ProductVO pdVO) throws Exception;
+		//상품 삭제
+		public void prDelete(int product_num) throws Exception;
 		// 전체조회(쓸일없음)
 		public List<ProductVO> allSearch() throws Exception;
 		// 필터값이 null인 상태에서 스크롤 시 추가 데이터 8개 출력

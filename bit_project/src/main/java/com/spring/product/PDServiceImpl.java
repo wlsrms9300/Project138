@@ -27,6 +27,33 @@ public class PDServiceImpl implements PDService {
 	}
 	
 	@Override
+	public void prModify(ProductVO pdVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.prModify(pdVO);
+		} catch (Exception e) {
+			throw new Exception("상품수정 실패.", e);
+		}
+	}
+	
+	@Override
+	public void prDelete(int product_num) throws Exception {
+		try {
+			
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.prDelete1(product_num);
+			pdMapper.prDelete2(product_num);
+			pdMapper.prDelete3(product_num);
+			pdMapper.prDelete4(product_num);
+			pdMapper.prDelete5(product_num);
+			pdMapper.prDelete6(product_num);
+			pdMapper.prDelete7(product_num);
+		} catch (Exception e) {
+			throw new Exception("상품삭제 실패.", e);
+		}
+	}
+
+	@Override
 	public int amountCheck(int product_num) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
@@ -49,15 +76,6 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 
-	@Override
-	public void prModify(ProductVO pdVO) throws Exception {
-		try {
-			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			pdMapper.prModify(pdVO);
-		} catch (Exception e) {
-			throw new Exception("상품수정 실패.", e);
-		}
-	}
 
 	@Override
 	public List<ProductVO> allSearch() throws Exception {

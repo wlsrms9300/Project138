@@ -81,6 +81,19 @@ public class ProductController {
 		return "productmodify";
 	}
 
+	@RequestMapping("/productDeleteForm.pr")
+	public String productDeleteForm(HttpSession session, HttpServletRequest request) {
+		int pNum = Integer.parseInt(request.getParameter("num"));
+		System.out.println(pNum);
+		try {
+			//리뷰, 문의 삭제
+			service.prDelete(pNum);
+			System.out.println("1");
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return "product";
+	}
 	// 상품등록버튼 눌렀을떄 전송했을 때 처리 부분
 	@RequestMapping("/productAdd.pr")
 	public String productAddProcess(Model model, MultipartHttpServletRequest request, HttpServletResponse response)

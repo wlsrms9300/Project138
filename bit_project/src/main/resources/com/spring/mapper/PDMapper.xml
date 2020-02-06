@@ -59,7 +59,7 @@
 		</choose>
 	</insert>
 
-	<insert id="prModify" parameterType="com.spring.product.ProductVO">		
+	<update id="prModify" parameterType="com.spring.product.ProductVO">		
 		update product set product_name=#{product_name}, total_amount=#{total_amount},current_amount=#{current_amount},
 		manufacturer=#{manufacturer}, product_content=#{product_content},
 		category_l=#{category_l}, category_m=#{category_m}, category_s=#{category_s}, regist=sysdate
@@ -73,7 +73,29 @@
 			,img_detail=#{img_detail}
 			</if>
 		where product_num=#{product_num}
-	</insert>
+	</update>
+	
+	<delete id="prDelete1" parameterType="map">
+	delete from question where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete2" parameterType="map">
+	delete from review where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete3" parameterType="map">
+	delete from wishlist where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete4" parameterType="map">
+	delete from bookmark where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete5" parameterType="map">
+	delete from reservation where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete6" parameterType="map">
+	delete from alarm where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete7" parameterType="map">
+	delete from product where product_num=#{product_num}
+	</delete>
 
 
 	<!-- 상품 리스트 전체 출력(쓰진않음) -->
