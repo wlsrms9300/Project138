@@ -10,6 +10,7 @@
    <result property="email" column="email"  />
    <result property="homepage" column="homepage"  />
    <result property="postal_num" column="postal_num"  />
+   <result property="state" column="state"  />
    
    <result property="address" column="address"  />
    <result property="address_detail" column="address_detail"  />
@@ -29,6 +30,26 @@
 	</select>
 	
 	<select id="companyimg" resultType="com.spring.menu.CompanyVO">
+	SELECT * FROM company where state = 'Y'
+	</select>
+	
+	<select id="getMemberList" resultType="com.spring.menu.CompanyVO">
 	SELECT * FROM company
 	</select>
+	
+	<delete id="cpdelete" parameterType="map">
+	delete from company where name=#{name} 
+	</delete>
+	
+	
+	<!-- admin group 변경 -->
+   <update id="companyadd" parameterType="com.spring.menu.CompanyVO">
+   update company set state = 'Y' where name = #{name}
+     </update>
+     
+     <update id="cpsave"  parameterType="com.spring.menu.CompanyVO">
+   
+    update company set license_num = #{license_num} , homepage = #{homepage} , phone = #{phone} , term = #{term} WHERE name= #{name}
+   </update>
+   
 </mapper>

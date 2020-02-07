@@ -74,29 +74,28 @@
     }     
    
   	/*파트너 버튼*/
-     #psubmit{
+     #submit{
          width: 127px;
          height: 48px;
          text-align: center;
          border: none;
-         margin-top: 15px;
+         margin-top: 20px;
          cursor: pointer;
-         border-radius: 5px;
      }
-     #psubmit:hover{
+     #submit:hover{
          color: #fff;
          background-color: #ea7475;
          opacity: 0.9;
      }
-     #pcancel {
+     #cancel {
+      
          width: 127px; height: 48px;
          text-align: center;
          border: none;
-         margin-top: 15px;
+         margin-top: 20px;
          cursor: pointer;
-         border-radius: 5px;
      }
-     #pcancel:hover{
+     #cancel:hover{
          color: #fff;
          background-color: #ea7475;
          opacity: 0.9;
@@ -146,7 +145,7 @@
      }
      .modal-content {
          position: absolute;
-         top: 50%;
+         top: 60%;
          left: 50%;
          transform: translate(-50%, -50%);
          background-color: white;

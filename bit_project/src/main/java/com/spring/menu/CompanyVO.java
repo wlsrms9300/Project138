@@ -2,10 +2,10 @@ package com.spring.menu;
 
 public class CompanyVO {
 	
-	
+	private String state;
 	private String license_num;
 	private String name;
-	private int phone;
+	private String phone;
 	private String email;
 	private String homepage;
 	private int postal_num;
@@ -13,7 +13,12 @@ public class CompanyVO {
 	private String address_detail;
 	private String img;
 	private String term;
-	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getLicense_num() {
 		return license_num;
 	}
@@ -26,10 +31,10 @@ public class CompanyVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
@@ -74,6 +79,9 @@ public class CompanyVO {
 	public void setTerm(String term) {
 		this.term = term;
 	}
+	
+	
+	
 	
 }
 	
