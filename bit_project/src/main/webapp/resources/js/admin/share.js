@@ -1,52 +1,48 @@
-
-
-	$('#board_history').click(function() {
-		var history = $('.history_drop');
-		if (history.is(":visible")) {
-			$('.board_history_btn > b').text('+');
-			history.slideUp();
-		} else {
-			$('.board_history_btn > b').text('-');
-			history.slideDown();
-		}
-	});
-	
-	member_admin();
-	/* db에 member 정보 저장돼있는것 불러와서 뿌려주는 ajax */
-	function member_admin() {
+	function member_group() {
 		
 		$.ajax({
-
-			url : '/bit_project/member_admin.tz',
-			type : "post",
+			url : '/bit_project/share.tz',
+			type : 'post',
 			dataType : "json",
 			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-
-
+			/*async : false,*/
 			success:function(data){
+				$('#output').empty();
 				$.each(data, function(index, item){	//각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
+					
+					var email = "'" + item.email + "'";
+					
 					var output = '';
 					output += '<tr>';
 					output += '<td>' + item.email + '</td>';
-					output += '<td>' + item.nickname + '</td>';
 					output += '<td>' + item.phone + '</td>';
+					
 					var date = new Date(item.regist);
 		            date = date_to_str(date);
 					output += '<td>' + date + '</td>';
-					output += '<td>' + item.subscribe + '</td>';
-					output += '<td>' + item.grade + '</td>';
-					output += '<td>' + item.usergroup + '</td>';
+					
+					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary">상세보기</button>' + '</td>';
+					
+					output += '<td><button type="button" class="btn btn-sm btn-primary">수락</button> &nbsp;';
+					output += '<button type="button" class="btn btn-sm btn-primary" onclick="accept(' + email + ');">수락</button></td>';
+					output += '<button type="button" class="btn btn-sm btn-primary" onclick="deny(' + email + ');">거절</button></td>';
+					
 					output += '</tr>';
+					
 					console.log("output:"+output);
 					$('#output').append(output);
+					
 				});
+
 			},
 			error:function(){
 				alert("ajax통신 실패 !!!");
 			}
-
 		});
+	
 	}
+	member_group();
+	
 	
 	
 	function date_to_str(format)

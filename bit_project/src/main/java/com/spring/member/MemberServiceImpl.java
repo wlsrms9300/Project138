@@ -244,8 +244,66 @@ public class MemberServiceImpl implements MemberService{
 		return memberList;
 	}
 
+	@Override
+	public List<MemberVO> getGroupList() {
+		List<MemberVO> groupList = null;
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		groupList = memberMapper.getGroupList();
+		
+		System.out.println("groupList = " + groupList);
+		
+		
+		return groupList;
+	}
+
+	@Override
+	public int normal_to_bad(MemberVO membervo) {
+		int group_change = 0;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			
+			group_change = memberMapper.normal_to_bad(membervo);
+			
+			
+			if (group_change != 0) {
+				res = 1; //변경됨
+				
+			} else {	//
+				res = 0;	//변경 안됨
+				
+			}
+			System.out.println("서비스 impl res = " + res);
+		} catch(Exception e) {
+			System.out.println("서비스 impl에서 오류 => " +  e.getMessage());
+		}
+		return res;
+	}
 	
-	
-	
-	
+	@Override
+	public int bad_to_normal(MemberVO membervo) {
+		int group_change = 0;
+		int res = -1;
+		
+		try {
+			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+			
+			group_change = memberMapper.bad_to_normal(membervo);
+			
+			
+			if (group_change != 0) {
+				res = 1; //변경됨
+				
+			} else {	//
+				res = 0;	//변경 안됨
+				
+			}
+			System.out.println("서비스 impl res = " + res);
+		} catch(Exception e) {
+			System.out.println("서비스 impl에서 오류 => " +  e.getMessage());
+		}
+		return res;
+	}
+
 }

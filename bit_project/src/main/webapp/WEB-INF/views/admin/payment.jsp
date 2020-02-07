@@ -18,7 +18,48 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+	
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
+	<script src="${pageContext.request.contextPath}/resources/js/admin/payment.js"></script>
 </head>
+<script type="text/javascript">
+    $(function($) {
+        var lang_kor = {
+        "decimal" : "",
+        "emptyTable" : "데이터가 없습니다.",
+        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+        "infoEmpty" : "0명",
+        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+        "infoPostFix" : "",
+        "thousands" : ",",
+        "lengthMenu" : "_MENU_ 개씩 보기",
+        "loadingRecords" : "로딩중...",
+        "processing" : "처리중...",
+        "search" : "검색 : ",
+        "zeroRecords" : "검색된 데이터가 없습니다.",
+        "paginate" : {
+            "first" : "첫 페이지",
+            "last" : "마지막 페이지",
+            "next" : "다음",
+            "previous" : "이전"
+        },
+        "aria" : {
+            "sortAscending" : " :  오름차순 정렬",
+            "sortDescending" : " :  내림차순 정렬"
+        }
+    };
+
+        $('#foo-table').DataTable( {
+        	
+            language:lang_kor
+        });  
+        
+    });
+   
+</script>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -125,13 +166,11 @@
 			<!--파트너 관리-->
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 
-
-
-			<!--나중에 삭제할거-->
-			<li><a href="charts.se"><em class="fa fa-bar-chart">&nbsp;</em> Chart</a></li>
-			<li class="active"><a href="elements.se"><em class="fa fa-bar-chart">&nbsp;</em> Elements</a></li>
-			<li><a href="panels.se"><em class="fa fa-bar-chart">&nbsp;</em> Panels</a></li>
-			<li><a href="widgets.se"><em class="fa fa-bar-chart">&nbsp;</em> Widgets</a></li>
+			<!-- 쉐어 관리 -->
+			<li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어 관리</a></li>
+			
+			<!-- 결제 관리 -->
+			<li class="active"><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
 
 			<!--로그인-->
 			<li><a href="login.se"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
@@ -144,176 +183,49 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Forms</li>
+				<li class="active">결제 관리</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">UI Elements</h1>
+				<h1 class="page-header">결제 관리</h1>
 			</div>
 		</div><!--/.row-->
 				
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">Buttons</div>
-					<div class="panel-body">
-						<div class="col-md-12">
-							<h5>Small</h5>
-							<button type="button" class="btn btn-sm btn-primary">Primary</button>
-							<button type="button" class="btn btn-sm btn-default">Default</button>
-							<button type="button" class="btn btn-sm btn-success">Success</button>
-							<button type="button" class="btn btn-sm btn-info">Info</button>
-							<button type="button" class="btn btn-sm btn-warning">Warning</button>
-							<button type="button" class="btn btn-sm btn-danger">Danger</button>
-							<button type="button" class="btn btn-sm btn-link">Link</button>
-							<br />
-							<br />
-							<h5>Medium</h5>
-							<button type="button" class="btn btn-md btn-primary">Primary</button>
-							<button type="button" class="btn btn-md btn-default">Default</button>
-							<button type="button" class="btn btn-md btn-success">Success</button>
-							<button type="button" class="btn btn-md btn-info">Info</button>
-							<button type="button" class="btn btn-md btn-warning">Warning</button>
-							<button type="button" class="btn btn-md btn-danger">Danger</button>
-							<button type="button" class="btn btn-md btn-link">Link</button>
-							<br />
-							<br />
-							<h5>Large</h5>
-							<button type="button" class="btn btn-lg btn-primary">Primary</button>
-							<button type="button" class="btn btn-lg btn-default">Default</button>
-							<button type="button" class="btn btn-lg btn-success">Success</button>
-							<button type="button" class="btn btn-lg btn-info">Info</button>
-							<button type="button" class="btn btn-lg btn-warning">Warning</button>
-							<button type="button" class="btn btn-lg btn-danger">Danger</button>
-							<button type="button" class="btn btn-lg btn-link">Link</button>
-							<br />
-							<br />
-						</div>
+				<div class="board_list_wrap">
+					
+					<table id="foo-table" class="foo-ex">
+						<h2>결제</h2>
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Grade</th>
+								<th>Price</th>
+								<th>Point</th>
+								<th>Pay Price</th>
+							</tr>
+
+						</thead>
+						<tbody id="output">
+							
+						</tbody>
+					</table>
+					<div style="margin: 0 auto; text-align: center;">
+						<button type="button" class="btn btn-lg btn-primary">결제</button>
 					</div>
-				</div><!-- /.panel-->
-				
-				
-				<div class="panel panel-default">
-					<div class="panel-heading">Forms</div>
-					<div class="panel-body">
-						<div class="col-md-6">
-							<form role="form">
-								<div class="form-group">
-									<label>Text Input</label>
-									<input class="form-control" placeholder="Placeholder">
-								</div>
-								<div class="form-group">
-									<label>Password</label>
-									<input type="password" class="form-control">
-								</div>
-								<div class="form-group checkbox">
-									<label>
-										<input type="checkbox">Remember me
-									</label>
-								</div>
-								<div class="form-group">
-									<label>File input</label>
-									<input type="file">
-									<p class="help-block">Example block-level help text here.</p>
-								</div>
-								<div class="form-group">
-									<label>Text area</label>
-									<textarea class="form-control" rows="3"></textarea>
-								</div>
-								<label>Validation</label>
-								<div class="form-group has-success">
-									<input class="form-control" placeholder="Success">
-								</div>
-								<div class="form-group has-warning">
-									<input class="form-control" placeholder="Warning">
-								</div>
-								<div class="form-group has-error">
-									<input class="form-control" placeholder="Error">
-								</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Checkboxes</label>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 1
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 2
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 3
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" value="">Checkbox 4
-											</label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Radio Buttons</label>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio Button 1
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio Button 2
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 3
-											</label>
-										</div>
-										<div class="radio">
-											<label>
-												<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Button 4
-											</label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Selects</label>
-										<select class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Multiple Selects</label>
-										<select multiple class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-										</select>
-									</div>
-									<button type="submit" class="btn btn-primary">Submit Button</button>
-									<button type="reset" class="btn btn-default">Reset Button</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div><!-- /.panel-->
+				</div>
 			</div><!-- /.col-->
-			<div class="col-sm-12">
-				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
-			</div>
+			
 		</div><!-- /.row -->
 	</div><!--/.main-->
 	
-<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script>

@@ -15,4 +15,12 @@ public class TestController {
 		
 		return "mypage/mypage_update";
 	}
+	
+	@RequestMapping(value = "/main_test.tz")
+	public String share(Model model, HttpSession session) {
+		
+		return "main2";
+	}
+	
+	
 }

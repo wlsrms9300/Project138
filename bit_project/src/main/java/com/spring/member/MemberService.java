@@ -14,5 +14,7 @@ public interface MemberService {
 	public int passwordUpdate(MemberVO membervo);	//password 업데이트
 	public int nnupdateCheck(MemberVO membervo); //닉네임 중복체크
 	public List<MemberSubscribeVO> getMemberList();	//admin에서 memberList 뽑음.
-	
+	public List<MemberVO> getGroupList();	//admin에서 memberList 뽑음.
+	public int normal_to_bad(MemberVO membervo);	//admin페이지 usergroup변경.
+	public int bad_to_normal(MemberVO membervo);
 }

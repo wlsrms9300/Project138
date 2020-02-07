@@ -10,7 +10,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
-	
+	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -124,13 +124,11 @@
 			<!--파트너 관리-->
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 
-
-
-			<!--나중에 삭제할거-->
-			<li><a href="charts.se"><em class="fa fa-bar-chart">&nbsp;</em> Chart</a></li>
-			<li><a href="elements.se"><em class="fa fa-bar-chart">&nbsp;</em> Elements</a></li>
-			<li><a href="panels.se"><em class="fa fa-bar-chart">&nbsp;</em> Panels</a></li>
-			<li><a href="widgets.se"><em class="fa fa-bar-chart">&nbsp;</em> Widgets</a></li>
+			<!-- 쉐어 관리 -->
+			<li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어관리</a></li>
+			
+			<!-- 결제 관리 -->
+			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제관리</a></li>
 
 			<!--로그인-->
 			<li><a href="login.se"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>

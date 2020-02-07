@@ -18,7 +18,47 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin/member_group.js"></script>
+	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
+
 </head>
+<script type="text/javascript">
+$(function($) {
+    var lang_kor = {
+    "decimal" : "",
+    "emptyTable" : "데이터가 없습니다.",
+    "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+    "infoEmpty" : "0명",
+    "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+    "infoPostFix" : "",
+    "thousands" : ",",
+    "lengthMenu" : "_MENU_ 개씩 보기",
+    "loadingRecords" : "로딩중...",
+    "processing" : "처리중...",
+    "search" : "검색 : ",
+    "zeroRecords" : "검색된 데이터가 없습니다.",
+    "paginate" : {
+        "first" : "첫 페이지",
+        "last" : "마지막 페이지",
+        "next" : "다음",
+        "previous" : "이전"
+    },
+    "aria" : {
+        "sortAscending" : " :  오름차순 정렬",
+        "sortDescending" : " :  내림차순 정렬"
+    }
+};
+
+    $('#foo-table').DataTable( {
+    	
+        language:lang_kor
+    });  
+    
+});
+</script>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -125,13 +165,11 @@
 			<!--파트너 관리-->
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 
-
-
-			<!--나중에 삭제할거-->
-			<li><a href="charts.se"><em class="fa fa-bar-chart">&nbsp;</em> Chart</a></li>
-			<li><a href="elements.se"><em class="fa fa-bar-chart">&nbsp;</em> Elements</a></li>
-			<li><a href="panels.se"><em class="fa fa-bar-chart">&nbsp;</em> Panels</a></li>
-			<li><a href="widgets.se"><em class="fa fa-bar-chart">&nbsp;</em> Widgets</a></li>
+			<!-- 쉐어 관리 -->
+			<li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어 관리</a></li>
+			
+			<!-- 결제 관리 -->
+			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
 
 			<!--로그인-->
 			<li><a href="login.se"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
@@ -153,19 +191,42 @@
 				<h1 class="page-header">Member Group</h1>
 			</div>
 		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="board_list_wrap">
+					
+					<table id="foo-table" class="foo-ex">
+						<h2>회원 그룹 관리</h2>
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th>Nickname</th>
+								<th>Group</th>
+								<th>Group Change</th>
+							</tr>
+
+						</thead>
+						<tbody id="output">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div><!--/.row-->
 				
 		
 		
 	</div><!--/.main-->
 	
-<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script><!-- 테이블 아래 페이지버튼 -->
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart-data.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap-datepicker.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/custom.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script> --%>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script> --%>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart.js"></script> --%>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart-data.js"></script> --%>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap-datepicker.js"></script> --%>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/custom.js"></script> --%>
 	
 </body>
 </html>

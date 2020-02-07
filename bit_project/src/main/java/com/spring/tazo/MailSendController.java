@@ -50,4 +50,12 @@ public class MailSendController {
 		return "share_mailsend";
 	}
 	
+	@RequestMapping(value = "/share.ms")
+	public String share(Model model) {
+
+		System.out.println("share_mailsend.jsp 로 보냄");
+
+		return "share_mailsend";
+	}
+	
 }

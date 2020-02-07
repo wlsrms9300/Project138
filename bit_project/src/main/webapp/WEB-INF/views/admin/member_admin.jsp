@@ -17,18 +17,20 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
     <![endif]-->
-    
+    <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
 
     
+    <!-- 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    
+     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+     -->
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script><!-- 주석 가능 -->
     <!-- Latest compiled and minified Locales -->
-    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script><!-- 주석 가능 -->
+	
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
@@ -67,7 +69,6 @@
             language:lang_kor
         });  
         
-        $('#myTable').DataTable();
     });
    
 </script>
@@ -177,14 +178,12 @@
 			<!--파트너 관리-->
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 
-
-
-			<!--나중에 삭제할거-->
-			<li><a href="charts.se"><em class="fa fa-bar-chart">&nbsp;</em> Chart</a></li>
-			<li><a href="elements.se"><em class="fa fa-bar-chart">&nbsp;</em> Elements</a></li>
-			<li><a href="panels.se"><em class="fa fa-bar-chart">&nbsp;</em> Panels</a></li>
-			<li><a href="widgets.se"><em class="fa fa-bar-chart">&nbsp;</em> Widgets</a></li>
-
+			<!-- 쉐어 관리 -->
+			<li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어 관리</a></li>
+			
+			<!-- 결제 관리 -->
+			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
+			
 			<!--로그인-->
 			<li><a href="login.se"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
@@ -213,7 +212,7 @@
 				<div class="board_list_wrap">
 					
 					<table id="foo-table" class="foo-ex">
-						<h2>자유게시판</h2>
+						<h2>회원관리</h2>
 						<thead>
 							<tr>
 								<th>Email</th>
