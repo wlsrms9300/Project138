@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.spring.writing.WritingVO" %>
 <%
-	//String nickname = (String)session.getAttribute("nickname");
-	
 	WritingVO writingvo = (WritingVO)request.getAttribute("writingvo");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +19,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <!-- include summernote-ko-KR -->
  <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/co_writeForm.js"></script>  --%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_menu.js"></script>
 
 </head>
 <body>
@@ -34,14 +31,14 @@
 	</div>
 
 	<div id="community_container_menubar">
-		<div class="community_menubar">
-			<a class="community_menubar_item" href="community.co">자유게시판</a> <a
-				class="community_menubar_item" href="community_img.co">육아사진</a> <a
-				class="community_menubar_item" href="community.co">정보공유(팁)</a> <a
-				class="community_menubar_item" href="community.co">공구게시판</a> <a
-				class="community_menubar_item" href="community.co">육아게시판</a> <a
-				class="community_menubar_item" href="co_writeForm.co">이슈,토론게시판</a>
-		</div>
+		<ul class="community_menubar">
+        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
+        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
+        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
+        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
+        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
+        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+        </ul>
 	</div>
 
 	<div id="community_container_header">
@@ -51,14 +48,15 @@
 		<div></div>
 	</div>
  	<div id="community-contentbox">
-		<form method="POST" name="edit-Form" action="update.cw" role="form" enctype="multipart/form-data">		
+		<form method="POST" name="edit_Form" action="update.cw" role="form" enctype="multipart/form-data">		
 			<input type="hidden" name="board_num" value="<%=writingvo.getBoard_num() %>" />
 			<input type="hidden" name="nickname" value="<%=writingvo.getNickname() %>" />
+			<input type="hidden" name="email" value="<%=writingvo.getEmail() %>" />
 			<div id="cententbox-top">
 			 	<span> <select id="category_select" name="category" disabled>
 						<option value="<%=writingvo.getCategory() %>"><%=writingvo.getCategory() %></option>
 				</select>
-				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="<%=writingvo.getBoard_name() %>">
+				</span> <span> <input id="title" name="board_name" class="" type="text" value="<%=writingvo.getBoard_name() %>">
 				</span>
 			</div>
 
@@ -66,12 +64,30 @@
 				<textarea class="summernote" id="summernote" name="content" maxlength="140" rows="7"></textarea>
 			</div>
 			<div id="contentbox-bottom">
-				<input type ="submit" id="submit-btn" value="수정">
-				<input type="button" id="cancel-btn" value="취소">
+				<input type ="button" id="submit-btn" onclick="update_chk()" value="수정">
+				<input type="button" id="cancel-btn" onclick="history.back(-1);" value="취소">
 			</div>
 		</form>
 	</div> 
   <script type="text/javascript">
+  function update_chk() {
+	  var edit_Form = document.edit_Form;
+	  var content = edit_Form.content.value;
+	  
+		var target = document.getElementById("category_select");
+		var option = target.options[target.selectedIndex].value;
+		
+		if(!content) {
+		 	alert("내용을 입력해주세요");
+		}else {
+		 	if(option == "육아사진" && $(content).find('img').attr('src') == null){
+		  		alert("사진을 1개 이상 올려주세요");
+		 }else {
+			 edit_Form.submit();
+		 }
+		}
+	  }
+  
   $(document).ready(function() {
    
 	    $("#summernote").summernote({

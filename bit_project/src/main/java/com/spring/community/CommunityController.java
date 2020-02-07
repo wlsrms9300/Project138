@@ -1,7 +1,5 @@
 package com.spring.community;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.login.LoginService;
+import com.spring.login.LoginVO;
+
 @Controller
 public class CommunityController {
 	
 	@Autowired
 	private CommunityService communityService;
+	
+	@Autowired(required = false)
+	private LoginService service;
 
 	@RequestMapping(value = "/main.ma", method = RequestMethod.GET)
 	public String main(Model model) {
@@ -29,7 +33,14 @@ public class CommunityController {
 	}
 	@RequestMapping(value = "/community.co", method = RequestMethod.GET)
 	public String community(HttpServletRequest request, Model model) throws Exception{		
-
+		String category = request.getParameter("category");
+		
+		if(category == null) {
+			category = "자유게시판";
+		}
+		model.addAttribute("category", category);
+		System.out.println("받아온 카테고리 : " + category);
+		
 		return "community";
 	}
 	
@@ -48,20 +59,26 @@ public class CommunityController {
 	@RequestMapping(value = "/community_detail.co", method = RequestMethod.GET)
 	public String community_detail(HttpServletRequest request, Model model) throws Exception {
 		CommunityVO cmvo = new CommunityVO();
+		LoginVO dbvo = null;
 		
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
-//		int currentPage = Integer.parseInt(request.getParameter("pageNum"));
-		
-//		System.out.println("num : "  + num + "currentpage : " + currentPage);
 		System.out.println("board_num : "  + board_num);
 		
-		cmvo = communityService.detailCommunity(board_num);
-		communityService.updateCount(board_num);
+		cmvo = communityService.detailCommunity(board_num); //게시글 가져오기
+		communityService.updateCount(board_num); //조회수 올리기
+		int count1 = communityService.getCommentCount(board_num); //게시글의 댓글수 조회
+		int count2 = communityService.getAnswerCount(board_num); //게시글의 대댓수 조회
+		int cocount = count1 + count2;
 		
-		int cocount = communityService.getCommentCount(board_num);
+		String email = cmvo.getEmail();
+//		String img = communityService.getuserImg(email); //작성자 이메일로 프로필사진 가져오기
+		dbvo = service.getDetail(email);
+		String img = dbvo.getImg();
+		String email_co = dbvo.getEmail();
 		
+		model.addAttribute("email_co", email_co);
+		model.addAttribute("img", img);
 		model.addAttribute("cocount", cocount);
-//		model.addAttribute("pageNum", currentPage);
 		model.addAttribute("cmvo", cmvo);
 
 		System.out.println("board_num" + cmvo.getBoard_num());

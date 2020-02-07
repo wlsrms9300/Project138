@@ -61,4 +61,5 @@ public class CommentVO {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+
 }

@@ -67,7 +67,8 @@
 	#community_container_mt > .community_mt_title > .community_mt_link > .community_mt_img > .com_img1:hover{transform: scale(1.2); -webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2);}
 	#community_container_mt > .community_mt_title > .community_mt_link > .community_mt_img::after{display: block; padding-top: 100%;}
 /* 	#community_container_mt > .community_mt_title > img{border-radius: 5px; padding-left: 20px; width:120px; float: right;} */
-	#community_container_mt > .community_mt_title > .community_mt_footer > .community_mt_footer_user{font-size: 13px; z-index: 2; position: relative;}
+	#community_container_mt > .community_mt_title > .community_mt_footer > .community_mt_footer_user > img{width: 22px; height: 22px; border-radius: 100%;}
+	#community_container_mt > .community_mt_title > .community_mt_footer > .community_mt_footer_user{font-size: 15px; z-index: 2; position: relative; font-weight: bold;}
 	#community_container_mt > .community_mt_title > .community_mt_footer > span{font-size: 13px;}
 
 

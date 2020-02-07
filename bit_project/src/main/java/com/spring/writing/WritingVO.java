@@ -14,6 +14,7 @@ public class WritingVO {
 	private int scrap_count;
 	private int start;
 	private int end;
+	private String email;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -80,6 +81,12 @@ public class WritingVO {
 	}
 	public void setEnd(int end) {
 		this.end = end;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 

@@ -12,6 +12,7 @@
 		<result property="count" column="count" />
 		<result property="category" column="category" />
 		<result property="scrap_count" column="scrap_count" />
+		<result property="email" column="email" />
 	</resultMap>
 
 	<!-- 글쓰기 -->
@@ -19,8 +20,8 @@
 		<selectKey keyProperty="board_num" order="BEFORE" resultType="int">
 			SELECT board_sequence.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO BOARD (board_num, nickname, board_name, content, regist, img, count, category, scrap_count)
-					VALUES (#{board_num}, #{nickname}, #{board_name}, #{content}, sysdate, #{img}, #{count}, #{category}, #{scrap_count})
+		INSERT INTO BOARD (board_num, nickname, board_name, content, regist, img, count, category, scrap_count, email)
+					VALUES (#{board_num}, #{nickname}, #{board_name}, #{content}, sysdate, #{img}, #{count}, #{category}, #{scrap_count}, #{email})
 	</insert>
 	
 	<!-- DB) file_path table -->
@@ -40,13 +41,14 @@
 	
 	<!-- 글 수정 -->
 	<update id="update" parameterType="com.spring.writing.WritingVO">
-		update board set board_name=#{board_name}, content=#{content} where board_num=#{board_num}
+		update board set board_name=#{board_name}, content=#{content}, img=#{img} where board_num=#{board_num}
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="del_board" parameterType="int">
+	<delete id="delete" parameterType="int">
 		delete from board where board_num = #{board_num}
 	</delete>
-				
+	
+	
 </mapper>
 

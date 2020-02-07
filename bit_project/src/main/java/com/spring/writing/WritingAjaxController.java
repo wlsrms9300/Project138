@@ -34,9 +34,9 @@ public class WritingAjaxController {
 					throw new Exception("Failed to store empty file " + file.getOriginalFilename());
 				} else {
 	
-					String uploadPath = "C:\\Project138\\upload\\";
-					String originalFileExtension = file.getOriginalFilename()
-							.substring(file.getOriginalFilename().lastIndexOf("."));
+//					String uploadPath = "C:\\Project138\\upload\\";
+					String uploadPath = "/Users/nagyeom/upload/";
+					String originalFileExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 					String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 	
 					if (file.getSize() != 0) {

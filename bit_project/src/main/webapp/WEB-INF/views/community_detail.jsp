@@ -2,15 +2,19 @@
 <%@ page import="java.util.*, com.spring.community.*" %>
 <%@ page import ="java.text.SimpleDateFormat" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.*, com.spring.login.*" %>
 <%@ page session="true" %>
 <%
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
 	CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
-	CommentVO covo = (CommentVO)request.getAttribute("covo");
 	int comment_count = (int)request.getAttribute("cocount");
+	String img_e = (String)request.getAttribute("img");
+	String email_e = (String)request.getAttribute("email_co");
 	
+	String email_co = (String)session.getAttribute("email");
 	String nickname_co = (String)session.getAttribute("nickname");
 	String img_co = (String)session.getAttribute("img");
+	
 %>
 <html>
 <head>
@@ -19,6 +23,10 @@
 
 <title>community_detail</title>
 <link href="${pageContext.request.contextPath}/resources/css/community_detail.css" rel="stylesheet" type="text/css" /> <!-- css -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_menu.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 
@@ -32,14 +40,14 @@
 <!-- header 끝 -->
 
     <div id="community_container_menubar">
-        <div class="community_menubar">
-            <a class="community_menubar_item" href="community.co" value="자유게시판">자유게시판</a>
-            <a class="community_menubar_item" href="community.co" value="육아사진">육아사진</a>
-            <a class="community_menubar_item" href="community.co" value="정보공유">정보공유(팁)</a>
-            <a class="community_menubar_item" href="community.co" value="공구게시판">공구게시판</a>
-            <a class="community_menubar_item" href="community.co" value="육아게시판">육아게시판</a>
-            <a class="community_menubar_item" href="community.co" value="이슈게시판">이슈,토론게시판</a>
-        </div>
+        <ul class="community_menubar">
+        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
+        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
+        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
+        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
+        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
+        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+        </ul>
     </div>
 
     <div id="community_container_header_d">
@@ -53,6 +61,10 @@
     <div id="community_container_mt_d">
         <div class="community_mt_title_d">
             <h1><%=cmvo.getBoard_name() %></h1>
+        </div>
+        <div class="community_mt_title">
+        	<img src="<%=img_e %>">
+        	<p><%=cmvo.getNickname() %></p>
         </div>
         <hr>
         <div class="community_mt_mt">
@@ -69,17 +81,22 @@
                 <span class="community_mt_footer_share">
                     스크랩 <%=cmvo.getScrap_count() %>
                 </span>
-                <div class="community_mt_footer_share_click">
-                    <button class="community_comments_form_photo" aria-label="공유하기" type="button">
-                        <i class="fas fa-share-alt fa-2x"></i>
-                    </button>
+                <div class="community_mt_footer_share_click"> <!-- sns 공유 -->
+                    <a id="kakao-link-btn" href="javascript:;"><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 30px; height: 30px"/></a>
+                    <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3" data-url="http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}"  data-color="default" data-size="small" data-count="false" style="display: none;"></div>
                 </div>
-
+                
+                <%
+                	if (email_e.equals(email_co)) {
+                %>
                 <div class="community_mt_footer_btn" style="width: 300px; float: right;">
                 		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
-                		<button class="community_mt_footer_update_btn" onclick="location.href='delete.cw?board_num=<%=cmvo.getBoard_num() %>'">삭제</button>
+                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
                 </div>
-
+                <%
+                	}
+                %>
+                
             </div>
         </footer>
         <hr>
@@ -95,7 +112,20 @@
         <div class="community_comments_form">
             <div class="community_comments_form_user">
             	<input type="hidden" name="nickname" id="nickname1" value="<%=nickname_co %>">
-                <img>
+            	<input type="hidden" name="email" id="email1" value="<%=email_co %>">
+            	
+            	<%
+        		if(email_co == null) {
+            	%>
+            	<img src="/bit_project/image/0c57c52f289644ceb799d673566eed91.png">
+            	<%
+        		} else {
+            	%>
+                <img src="<%=img_co %>" >
+                <%
+        		}
+                %>
+                
             </div>
             <div class="community_comments_form_input">
             <input type="hidden" name="board_num" id="board_num" value="<%=cmvo.getBoard_num() %>">
@@ -103,9 +133,6 @@
                     <input type="text" class="community_comments_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">
                 </div>
                 <div class="community_comments_form_actions">
-                    <button class="community_comments_form_photo" aria-label="사진업로드" type="button">
-                        <i class="fas fa-camera fa-2x"></i>
-                    </button>
                     <button class="community_comments_form_enter" id="community_comments_form_enter" type="button">등록</button>
                 </div>
             </div>
@@ -116,55 +143,40 @@
        <!--  댓글 목록 시작 -->
         <div class="community_comments_view">
 		
-		<!-- 대댓 폼 -->
-<!-- 		<form id="answerForm" method="POST" action="./answerCO.co">
-			<div class="community_answer_form">
-				<div class="community_answer_form_user">
-					<input type="hidden" name="nickname" id="nickname1" value="zz">
-					<img>
-				</div>
-				<div class="community_answer_form_input">
-					<input type="hidden" name="comment_num" value="eee">
-					<div class="community_answer_form_content">
-						<input type="text" class="community_answer_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">
-					</div>
-					<div class="community_answer_form_actions">
-						<button class="community_answer_form_photo" aria-label="사진업로드" type="button">
-							<i class="fas fa-camera fa-2x"></i>
-						</button>
-						<button class="community_answer_form_enter" id="community_answer_form_enter" type="button">등록</button>
-					</div>
-				</div>
-			</div>
-		</form> -->
-		
-	</div> <!-- 댓글 목록 끝 -->
+		</div> <!-- 댓글 목록 끝 -->
 	</div> <!-- 댓글 입력창 끝 -->
 	
 	<!-- 페이징 -->
     <div class="paginate" style="text-align:center;"></div>
     
-<%--     
+  
 <footer>
 	<%@ include file="/WEB-INF/views/footer.jsp" %> 
 </footer>
- --%>
+ 
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 <script type="text/javascript">
-var pageCount = 5; //한 화면에 나타낼 페이지 수 
-var dataPerPage = 5; //화면에 뿌려줄 댓글 수
+function delchk(board_num) {
+	if(confirm("게시글을 삭제하시겠습니까?")) {
+		location.href= 'delete.cw?board_num=' + board_num
+	}else {
+		return false;
+	}
+}
 
 	$("document").ready(function(){
-		var currentPage = 1;
-		var totalData = 0;
-		
-		coList(totalData, dataPerPage, pageCount, currentPage);
+		coList();
 		
 		//댓글 등록
 		document.getElementById("community_comments_form_enter").addEventListener("click", cowrite);
 		
 		function cowrite() {
+			if($.trim($('.community_comments_form_comments').val()) == "") {
+				alert("댓글을 입력해주세요");
+				return false;
+			}
+
 			var params = $("#commentsForm").serialize(); //#commentsForm : 이름과 값. 문자형태로 만들어 params에 저장
 			alert(params);
 			
@@ -176,7 +188,7 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function(retVal) {
 					if (retVal.res == "OK") { //데이터 성공일때 이벤트 작성
-						coList(totalData, dataPerPage, pageCount, currentPage);
+						coList();
 						$('.community_comments_form_comments').val(''); //초기화
 					}
 				},
@@ -187,37 +199,51 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 		} //function
 		
 		
+		//대댓 폼
+		$('.answer_btn').click(function () {
+			var email_co = <%=(String)session.getAttribute("email")%>;
+			
+			if(email_co == null) {
+				alert("로그인 후 이용해주세요");
+				window.location.href = "login.me";	
+				return false;
+			}else {
+        		if ($(this).parents("li").next().css("display") == 'none') {
+                		$(this).parents("li").next().show();
+                } else {
+                    $(this).parents("li").next().hide();
+                }
+			}
+		});
 		
 	}); //ready
 	
 	//댓글 수정 폼
     function comod_form($comment_num) {
-		alert("댓글 수정 시작");
-     	
      	var num = $comment_num;
-     	alert(num);
      	
-     	if (num == $('.comment_form').attr('id')) {
-     		$('input[id="' + num + '"]').removeAttr("readonly");
-     		$('input[id="' + num + '"]').css("background", "pink");
-     		$('div[id="' + num + '"]').html("<button type='button' onclick='comod_btn()'>수정하기</button></div>");
-     	}
+   		$('input[id="' + num + '"]').removeAttr("readonly");
+   		$('input[id="' + num + '"]').css("background", "pink");
+   		$('div[id="' + num + '"]').html("<button type='button' onclick='comod_btn(" + num + ")'>수정하기</button></div>");
 	} 
 	
     //댓글 수정
-    function comod_btn() {
-    	alert($(".comment_form").val());
+    function comod_btn($num) {
+    	var num1 = $num;
+    	alert(num1);
+    	var co = $('input[id="' + num1 + '"]').val();
+    	alert(co);
     	
        jQuery.ajax({
           url : '/bit_project/updateCO.co',
           type : 'POST',
-          data : {'comment_num' : $("#comment_num").attr("value"), 'content' : $(".comment_form").val()},
+          data : {'comment_num' : num1, 'content' : co},
           contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType : "json",
           success : function(retVal) {
              if(retVal.res == "OK") {
             	 alert("댓글 수정이 완료되었습니다");
-            	 coList(totalData, dataPerPage, pageCount, currentPage);
+            	 coList();
              }
              else {
                 alert("댓글 수정 실패!!!")
@@ -230,19 +256,20 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
     }
     
   //댓글 삭제
-	function codel_btn() {
+	function codel_btn($comment_num) {
+	 	var num = $comment_num;
 		msg = "삭제하시겠습니까?";
         if (confirm(msg)!=0) { //Y
         	$.ajax({
 				url:'/bit_project/deleteCO.co',
 				type: 'POST',
-				data:{'comment_num' : $("#comment_num").attr("value")},
+				data:{'comment_num' : num},
 				dataType: "json",
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function(retVal) {
 					if (retVal.res == "OK") {
 						alert("댓글이 삭제되었습니다.");
-						coList(totalData, dataPerPage, pageCount, currentPage);
+						coList();
 					}
 					else {
 						alert("댓글 삭제 실패 !!");
@@ -258,35 +285,14 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 		}
 	}
  	
-/*   function answerList() {
-	  $('.community_comments_view_container').empty();
-	  
-	  $.ajax({
-		  url:'/bit_project/getCO.co',
-			type: 'POST',
-			data:{'board_num' : $("#board_num").attr("value")},
-			dataType: "json",
-			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-			success: function(data) {
-				
-			},
-			error:function(request,status,error) {
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		   }
-	  });
-	  
-  } */
-  
 	//댓글 목록
-	function coList(totalData, dataPerPage, pageCount, currentPage) {
+	function coList() {
 		$('.community_comments_view').empty();
-		alert("댓글리스트 ajax 들어옴 ==> dataPerpage" + dataPerPage + "totaldata " + totalData + "pageCount" + pageCount + "currentPage" + currentPage);
-		
-		totalData = <%=comment_count %>;
+				
 		$.ajax({
 			url:'/bit_project/getCO.co',
 			type: 'POST',
-			data:{'board_num' : $("#board_num").attr("value"), "page" : currentPage},
+			data:{'board_num' : $("#board_num").attr("value")},
 			dataType: "json",
 			async: false,
 			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
@@ -296,30 +302,55 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 						var output = ' ';
 						var reg_date = new Date(item.regist); 
 	                		var date = date_format(reg_date);
+	                		var email = "<%=email_co %>";
 	                		var nickname = "<%=nickname_co %>";
+	                		var img = "<%=img_co %>";
 	                
-	                	alert("댓글 뿌려주기!!");
-	                if (item.nickname == nickname) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
+	                if (item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
 						output += '<li class="comments_container" value="' + item.comment_num + '">';	 
 	                		output += '<div class="community_comments_view_user">';
-	                		output += '<img>';
+	                		output += '<img src="' + item.profile + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_container">';
 	                		output += '<div class="community_comments_view_comments">';
-	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + ' ">';
+	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + '">';
 	                		output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+	                		output += '<input type="hidden" id="email" value="' + item.email + '">';
 	                		output += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time">' + date + '</span>';
 	                		output += '<div class="community_comments_view_add">';
-	                		output += '<button type="button" onclick="answer_form(' + item.comment_num + ')">' + "댓글달기" + '</button>';
+	                		output += '<button type="button" class="answer_btn">' + "댓글달기" + '</button>';
 	                		output += '</div>';
 						output += '<div class="community_comments_view_modify" id="' + item.comment_num + '">';
 						output += '<button type="button" onclick="comod_form(' + item.comment_num + ')">' + "수정" + '</button>';
-						output += '<button type="button" onclick="codel_btn()">' + "삭제" + '</button></div>';
+						output += '<button type="button" onclick="codel_btn(' + item.comment_num + ')">' + "삭제" + '</button></div>';
 						output += '</div>';
 						output += '</div>';
+						
+						output += '<li class="answer_form" style="display: none;" id="' + item.comment_num + '">';
+						output += '<form id="answerForm" method="POST" enctype="multipart/form-data" accept-charset="utf-8">';
+				     	output += '<div class="community_answer_form">';
+				     	output += '<div class="community_answer_form_user">';
+				     	output += '<input type="hidden" name="nickname" id="nickname1" value="' + nickname + '">';
+				     	output += '<img src="' + img + '">';
+				     	output += '<input type="hidden" name="email" id="email" value="' + email + '">';
+				     	output += '</div>';
+				     	output += '<div class="community_answer_form_input">';
+				     	output += '<input type="hidden" name="comment_num" value="' + item.comment_num + '">';
+				     	output += '<input type="hidden" name="board_num" value="' + item.board_num + '">';
+				     	output += '<div class="community_answer_form_content">';
+				     	output += '<input type="text" class="community_answer_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">';
+				     	output += '</div>';
+				     	output += '<div class="community_answer_form_actions">';
+				     	output += '<button class="community_answer_form_enter" id="community_answer_form_enter" type="button" onclick="answerwrite(' + item.comment_num + ')">' + "등록" + '</button>';
+				     	output += '</div>';
+				     	output += '</div>';
+				     	output += '</div>';
+				     	output += '</form>';
+				     	output += '</li>';
+				     	
 						output += '</li>';
 						
 						$('.community_comments_view').append(output);
@@ -327,29 +358,52 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 	                else {
 	                		output += '<li class="comments_container" value="' + item.comment_num + '">';
 	                		output += '<div class="community_comments_view_user">';
-	                		output += '<img>';
+	                		output += '<img src="' + item.profile + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_container">';
 	                		output += '<div class="community_comments_view_comments">';
-	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + ' ">';
+	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + '">';
 	                		output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+	                		output += '<input type="hidden" id="email" value="' + item.email + '">';
 	                		output += '<input type="text" id="content" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time">' + date + '</span>';
 	                		output += '<div class="community_comments_view_add">';
-	                		output += '<button type="button" class="answer_btn" onclick="answer_form(' + item.comment_num + ')">' + "댓글달기" + '</button>' + '</div>';
+	                		output += '<button type="button" class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
 	                		output += '</div>';
 	                		output += '</div>';
 	                		output += '</div>';
- 						output += '</li>';
+ 						
+ 						output += '<li class="answer_form" style="display: none;" id="' + item.comment_num + '">';
+						output += '<form id="answerForm" method="POST" enctype="multipart/form-data" accept-charset="utf-8">';
+				     	output += '<div class="community_answer_form">';
+				     	output += '<div class="community_answer_form_user">';
+				     	output += '<input type="hidden" name="nickname" id="nickname1" value="' + nickname + '">';
+				     	output += '<img src="' + img + '">';
+				     	output += '<input type="hidden" name="email" id="email" value="' + email + '">';
+				     	output += '</div>';
+				     	output += '<div class="community_answer_form_input">';
+				     	output += '<input type="hidden" name="comment_num" value="' + item.comment_num + '">';
+				     	output += '<input type="hidden" name="board_num" value="' + item.board_num + '">';
+				     	output += '<div class="community_answer_form_content">';
+				     	output += '<input type="text" class="community_answer_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">';
+				     	output += '</div>';
+				     	output += '<div class="community_answer_form_actions">';
+				     	output += '<button class="community_answer_form_enter" id="community_answer_form_enter" type="button" onclick="answerwrite(' + item.comment_num + ')">' + "등록" + '</button>';
+				     	output += '</div>';
+				     	output += '</div>';
+				     	output += '</div>';
+				     	output += '</form>';
+				     	output += '</li>';
+				     	
+				     	output += '</li>';
  						
  						$('.community_comments_view').append(output);
 	                }
 	                
 	                answerList(item.comment_num);
 				});
-					 paging(totalData, dataPerPage, pageCount, currentPage);
 					 
 				} else { //댓글 없을때
 					var outputnull = "<div>";
@@ -364,84 +418,11 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 			}); //ajax
 		}
   
-  //페이징
-  function paging(totalData, dataPerPage, pageCount, currentPage) {
-  	alert('출력할 totaldata : '+totalData); //333333
-  	/* $(".paginate").empty();  */
-      var totalPageDevide = totalData / dataPerPage;
-      var pageGroupDevide = currentPage / pageCount;
-
-      var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수 1
-      var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹 0
-      
-      var last = pageGroup * pageCount; //0
-
-      if (last > totalPage) // 0 > 1
-          last = totalPage;
-      
-      var first = last - (pageCount - 1); // 0 - (5 - 1)
-      
-      if (first <= 0) {
-          first = 1; //
-      }
-      var next = last + 1; // 다음 1
-      var prev = first - 1; // 이전 0
-      var one = 1; // 맨 처음 
-      var lastNo = totalPage; // 맨 끝 1
-
-      var html = "";
-
-      if (prev > 0) {
-          html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
-          html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
-
-      }
-      
-      for (var i = first; i <= last; i++) {
-      	alert("페이징 만드는중");
-          //html += "<a href='#' id=" + i + ">" + i + "</a> ";
-          html += "<a href='javascript:coList(totalData, dataPerPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
-          //html += "<a href='javascript:snsData(0, 6, 10, " + i + ")' id=" + i + ">" + i + "</a> ";
-          
-      }
-
-      if(totalPage==0){
-      	
-      }else {
-      	  if (last < totalPage) // 0 < 1
-      	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
-      	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
-
-      	        $(".paginate").html(html);    // 페이지 목록 생성
-      	        $(".paginate a").removeClass("page_on");
-
-      	        $(".paginate a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
-      }
-    
-
-      $(".paginate a").click(function () {
-          var $item = $(this);
-          var $id = $item.attr("id");
-          var selectedPage = $item.text(); // 번호 클릭.
-
-          if ($id == "one") selectedPage = one;
-          if ($id == "prev") selectedPage = prev;
-          if ($id == "next") selectedPage = next;
-          if ($id == "lastNo") selectedPage = lastNo;
-          
-          alert(selectedPage + "페이지 이동");
-          coList(totalData, dataPerPage, pageCount, selectedPage);
-          paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
-      });
-      
-  }
   
   //대댓 목록
   function answerList($comment_num) {
-	  /* $('.community_comments_view_container').empty(); */
 	  var num = $comment_num;
-	  
-	  alert("댓글리스트에서 받아옴 : " + num);
+	  var profile = null;
 	  
 	  $.ajax({
 			url:'/bit_project/getAnswer.co',
@@ -451,25 +432,40 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 			async: false,
 			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 			success: function(data) {
-		/* 		if(data.length!=0){ //댓글 존재할시 */
 				$.each(data, function(index, item) {
-				if(num == item.comment_num) {
+					var email = item.email.trim();
+					
+					$.ajax({
+						url:'/bit_project/getuserImg.co',
+						type: 'POST',
+						data:{'email' : email},
+						dataType: "text",
+						async: false,
+						contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+						success: function(img) {
+								profile = img;
+						},
+						error:function(request,status,error){
+					        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+					    }
+					});
+							
 					var answer = ' ';
 					var reg_date = new Date(item.regist); 
             		var date = date_format(reg_date);
-            		var nickname = "<%=nickname_co %>";
-					/* alert(nickname + " : 세션 닉네임값 리댓");  */
-					alert("리댓 뿌려주기!!");
-	          		
-					 if(item.nickname == nickname) {
+            		var email = "<%=email_co %>";
+            		
+					if(num == item.comment_num) {
+					 if(item.email.trim() == email) {
 						answer += '<li class="answer_container" value="' + item.comment_num + '">';	 
 						answer += '<div class="community_answer_view_user">';
-						answer += '<img>';
+						answer += '<img src="' + profile + '">';
 						answer += '</div>';
 						answer += '<div class="community_answer_view_container">';
 						answer += '<div class="community_answer_view_answer">';
-						answer += '<input type="hidden" id="answer_num" value="' + item.answer_num + ' ">';
+						answer += '<input type="hidden" id="answer_num" value="' + item.answer_num + '">';
 						answer += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+						answer += '<input type="hidden" id="email" value="' + item.email + '">';
 						answer += '<input type="text" id="' + item.answer_num + '" class="answer_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
 						answer += '</div>';
 						answer += '<div class="community_answer_view_actions">';
@@ -486,12 +482,13 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 					else {
 						answer += '<li class="answer_container" value="' + item.comment_num + '">';	 
 						answer += '<div class="community_answer_view_user">';
-						answer += '<img>';
+						answer += '<img src="' + profile + '">';
 						answer += '</div>';
 						answer += '<div class="community_answer_view_container">';
 						answer += '<div class="community_answer_view_answer">';
 						answer += '<input type="hidden" id="answer_form" value="' + item.comment_num + ' ">';
 						answer += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+						answer += '<input type="hidden" id="email" value="' + item.email + '">';
 						answer += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
 						answer += '</div>';
 						answer += '<div class="community_answer_view_actions">';
@@ -501,13 +498,8 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 						
 						$(".community_comments_view_container").append(answer);
 					}
-				}
+					}
 				});
-/* 				} else{
-					var answern = ' ';
-					answern += '<p>' + '없음' + '</p>';
-					$(".community_comments_view_container").append(answern);
-				} */
 			},
 			error:function(request,status,error){
 		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
@@ -517,11 +509,12 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 	
 	//대댓 등록
 	function answerwrite($comment_num) {
+		if($.trim($('.community_answer_form_comments').val()) == "") {
+			alert("댓글을 입력해주세요");
+			return false;
+		}
 		var num = $comment_num;
-		var params = $('form[class="' + num +'"]').serialize();
-		/* var params = $("form." + num).serialize(); */ 
-		alert(params);
-		alert(num);
+		var params = $('li[id="' + num +'"]').children('form').serialize();
 		
 		$.ajax({
 			url:'/bit_project/writeAnswer.co',
@@ -532,7 +525,8 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 			success: function(retVal) {
 				
 				if (retVal.res == "OK") { //데이터 성공일때 이벤트 작성
-					coList(totalData, dataPerPage, pageCount, currentPage);
+					alert("댓글 등록 완료");
+					coList();
 					
 					//초기화
 					$('.community_answer_form_enter').val('');
@@ -547,39 +541,38 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 	
 	//대댓 수정 폼
     function anmod_form($answer_num) {
-		alert("대댓 수정 시작");
-     	
      	var num = $answer_num;
-     	alert(num);
      	
-     	if (num == $('.answer_form').attr('id')) {
-     		$('input[id="' + num + '"]').removeAttr("readonly");
-     		$('input[id="' + num + '"]').css("background", "yellow");
-     		$('div[id="' + num + '"]').html("<button type='button' onclick='anmod_btn()'>수정하기</button></div>");
-     	}
+   		$('input[id="' + num + '"]').removeAttr("readonly");
+   		$('input[id="' + num + '"]').css("background", "pink");
+   		$('div[id="' + num + '"]').html("<button type='button' onclick='anmod_btn(" + num + ")'>수정하기</button></div>");
 	} 
-	
+    
     //대댓 수정
-    function anmod_btn() {
+    function anmod_btn(num) {
+    	if($.trim($('.answer_form').val()) == "") {
+			alert("내용을 입력해주세요");
+			return false;
+		}
     	alert($(".answer_form").val());
     	
        jQuery.ajax({
           url : '/bit_project/updateAnswer.co',
           type : 'POST',
-          data : {'answer_num' : $("#answer_num").attr("value"), 'content' : $(".answer_form").val()},
+          data : {'answer_num' : num, 'content' : $(".answer_form").val()},
           contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType : "json",
           success : function(retVal) {
              if(retVal.res == "OK") {
-            	 alert("대댓 수정이 완료되었습니다");
-            	 coList(totalData, dataPerPage, pageCount, currentPage);
+            	 alert("댓글 수정이 완료되었습니다");
+            	 coList();
              }
              else {
-                alert("대댓 수정 실패")
+                alert("댓글 수정 실패")
              }
           },
           error:function() {
-             alert("대댓 ajax 오류");
+             alert("댓글 ajax 오류");
           }
        });
     }
@@ -598,11 +591,11 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function(retVal) {
 					if (retVal.res == "OK") {
-						alert("대댓글이 삭제되었습니다.");
-						coList(totalData, dataPerPage, pageCount, currentPage);
+						alert("댓글이 삭제되었습니다.");
+						coList();
 					}
 					else {
-						alert("대댓글 삭제 실패 !!");
+						alert("댓글 삭제 실패 !!");
 					}
 
 				},
@@ -614,24 +607,13 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
         	alert("취소되었습니다");
 		}
 	}
-	
-/* 	
-	//대댓 폼
-	function answer_form($comment_num) {
-		var num = $(comment_num);
-		alert("대댓달기");
-		
-		$('form[class="' + num + '"]').css("display","block");
-
-	}
-	  */
 
 	
 	//session 없을시 로그인페이지로 이동(댓글 input)
 	$(".community_comments_form_content").click(function() {
-		var nickname_1 = <%=(String)session.getAttribute("nickname")%>;
+		var email_co = <%=(String)session.getAttribute("email")%>;
 		
-		if(nickname_1 == null) {
+		if(email_co == null) {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
@@ -640,9 +622,9 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
 	  
 	//session 없을시 로그인페이지로 이동(대댓 input)
 	$(".community_answer_form_comments").click(function() {
-		var nickname_1 = <%=(String)session.getAttribute("nickname")%>;
+		var email_co = <%=(String)session.getAttribute("email")%>;
 		
-		if(nickname_1 == null) {
+		if(email_co == null) {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
@@ -674,11 +656,52 @@ var dataPerPage = 5; //화면에 뿌려줄 댓글 수
         if(min<10) {
            min = '0' + min;
         }
-        return year + "-" + month + "-" + date + "-" + hour +":" + min;
+        return year + "." + month + "." + date + "." + hour +":" + min;
      }
 	
-</script>
+	//태그 제거
+	function removeTag( str ) {
+/* 		return str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""); */
+		return str.replace(/(<([^>]+)>)/ig,"");
+		
+	}
 
+	
+</script>
+<!-- 라인 공유 -->
+<script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<!-- 카카오톡 공유 -->
+<script type='text/javascript'>
+ var content = '<%=cmvo.getContent() %>'; 
+
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('55c690e62a4cab3263ba4b230bb6af19');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: '<%=cmvo.getBoard_name() %>',
+        description: removeTag(content),
+        imageUrl: '<%=cmvo.getImg() %>',
+       link: {
+         webUrl: document.location.href,
+         mobileWebUrl: document.location.href
+       }
+      },
+      buttons: [
+        {
+          title: 'Open!',
+          link: {
+            mobileWebUrl: document.location.href,
+            webUrl: document.location.href
+          }
+        }  
+      ],
+      serverCallbackArgs: '{"myKey":"myValue"}' // 콜백 파라미터 설정
+    });
+
+</script>
 
 </body>
 </html>

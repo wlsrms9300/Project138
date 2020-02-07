@@ -13,12 +13,14 @@ public class CommunityVO {
 	private int count;
 	private String category;
 	private int scrap_count;
+	private String email;
 	//
 	private int start;
 	private int end;
 	private int co_count;
 	private int cm_count;
 	private int cmsearch_count;
+	private String profile;
 	
 	public int getBoard_num() {
 		return board_num;
@@ -103,5 +105,17 @@ public class CommunityVO {
 	}
 	public void setCmsearch_count(int cmsearch_count) {
 		this.cmsearch_count = cmsearch_count;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 }
