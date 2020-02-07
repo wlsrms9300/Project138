@@ -15,17 +15,8 @@ public class WritingServiceImpl implements WritingService {
 	public int write(WritingVO writingvo) {
 		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
 		int res = writingMapper.write(writingvo);
-//		writingMapper.deleteFilePath();// file_path table DB 지우기.
 		return res;
 	}
-
-//	@Override
-//	public WritingVO getDetail(int board_num) {
-//		WritingMapper writingMapper = sqlSession.getMapper(WritingMapper.class);
-//		WritingVO vo = writingMapper.getDetail(board_num);
-//		
-//		return vo;
-//	}
 
 	@Override
 	public WritingVO updateForm(int board_num) {
@@ -49,6 +40,7 @@ public class WritingServiceImpl implements WritingService {
 		int res = writingMapper.update(writingvo);
 		return res;
 	}
+
 
 
 //	@Override

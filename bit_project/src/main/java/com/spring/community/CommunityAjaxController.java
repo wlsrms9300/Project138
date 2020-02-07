@@ -9,101 +9,152 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.login.LoginService;
+import com.spring.login.LoginVO;
+
 @RestController
 public class CommunityAjaxController {
 
 	@Autowired(required = false)
 	private CommunityService communityService;
 	
+	@Autowired(required = false)
+	private LoginService service;
+	
 	//카테고리 선택 후 게시글 조회
+	
 	@PostMapping(value="/getCM.co", produces="application/json;charset=UTF-8")
-	public List<CommunityVO> getCM(int page, String category, String option) {
+	public List<CommunityVO> getCM(String category, String option) {
 		List<CommunityVO> list = null;
-		int limit = 0;
-		int start = 0;
-		int end = 0;
 		
-		if(category.equals("육아사진")) {
-			limit = 9;
-			start = (page - 1) * 9 + 1;
-			end = start + limit - 1;
-		}
-		else {
-			limit = 5;
-			start = (page - 1) * 5 + 1;
-			end = start + limit - 1;
-		}
-		System.out.println("컨트롤러부분 옵션값 : " + option + "카테고리 : " +category + " page: " +start + end);
+		System.out.println("컨트롤러부분 옵션값 : " + option + "카테고리 : " +category);
 		
 		if(option.equals("최신순")) {
-			list = communityService.filter1(category, start, end);
+			list = communityService.filter1(category);
 		} else if(option.equals("조회순")) {
-			list = communityService.filter2(category, start, end);
+			list = communityService.filter2(category);
 		}else { //댓글순
-			list = communityService.filter3(category, start, end);
+			list = communityService.filter3(category);
 		}
-		
 		return list;
 	}
 	
+//	@PostMapping(value="/getCM.co", produces="application/json;charset=UTF-8")
+//	public List<CommunityVO> getCM(int page, String category, String option) {
+//		List<CommunityVO> list = null;
+//		int limit = 0;
+//		int start = 0;
+//		int end = 0;
+//		
+//		if(category.equals("육아사진")) {
+//			limit = 9;
+//			start = (page - 1) * 9 + 1;
+//			end = start + limit - 1;
+//		}
+//		else {
+//			limit = 5;
+//			start = (page - 1) * 5 + 1;
+//			end = start + limit - 1;
+//		}
+//		System.out.println("컨트롤러부분 옵션값 : " + option + "카테고리 : " +category + " page: " +start + end);
+//		
+//		if(option.equals("최신순")) {
+//			list = communityService.filter1(category, start, end);
+//		} else if(option.equals("조회순")) {
+//			list = communityService.filter2(category, start, end);
+//		}else { //댓글순
+//			list = communityService.filter3(category, start, end);
+//		}
+//		
+//		return list;
+//	}
+	
 	//검색
 	@PostMapping(value="/getCMsearch.co", produces="application/json;charset=UTF-8")
-	public List<CommunityVO> getCMsearch(String search_Data, String category, int page) {
+	public List<CommunityVO> getCMsearch(String search_Data, String category) {
 		List<CommunityVO> search_list = null;
-		System.out.println("search_data : " + search_Data + " c : " + category + " page : " + page);
-		int limit = 0;
-		int start = 0;
-		int end = 0;
 		
-		if(category.equals("육아사진")) {
-			limit = 9;
-			start = (page - 1) * 9 + 1;
-			end = start + limit - 1;
-		}
-		else {
-			limit = 5;
-			start = (page - 1) * 5 + 1;
-			end = start + limit - 1;
-		}
-		
-		search_list = communityService.getCMsearch(search_Data, category, start, end);
+		search_list = communityService.getCMsearch(search_Data, category);
 		System.out.println("Controller 출력 : " + search_list);
 		return search_list;
 	}
 	
+//	@PostMapping(value="/getCMsearch.co", produces="application/json;charset=UTF-8")
+//	public List<CommunityVO> getCMsearch(String search_Data, String category, int page) {
+//		List<CommunityVO> search_list = null;
+//		System.out.println("search_data : " + search_Data + " c : " + category + " page : " + page);
+//		int limit = 0;
+//		int start = 0;
+//		int end = 0;
+//		
+//		if(category.equals("육아사진")) {
+//			limit = 9;
+//			start = (page - 1) * 9 + 1;
+//			end = start + limit - 1;
+//		}
+//		else {
+//			limit = 5;
+//			start = (page - 1) * 5 + 1;
+//			end = start + limit - 1;
+//		}
+//		
+//		search_list = communityService.getCMsearch(search_Data, category, start, end);
+//		System.out.println("Controller 출력 : " + search_list);
+//		return search_list;
+//	}
+	
 	//닉네임검색
 	@PostMapping(value="/getuserSearch.co", produces="application/json;charset=UTF-8")
-	public List<CommunityVO> getuserSearch(String nickname, int page) {
+	public List<CommunityVO> getuserSearch(String nickname) {
 		List<CommunityVO> getuserSearch = null;
 		
-		int limit = 5;
-		int start = (page - 1) * 5 + 1;
-		int end = start + limit - 1;
-		
-		System.out.println("nickname : " + nickname + "start , end : " + start + end);
-		getuserSearch = communityService.getuserSearch(nickname, start, end);
+		System.out.println("nickname : " + nickname );
+		getuserSearch = communityService.getuserSearch(nickname);
 		
 		System.out.println("Controller 출력 : " + getuserSearch);
 		return getuserSearch;
 	}
+//	
+//	@PostMapping(value="/getuserSearch.co", produces="application/json;charset=UTF-8")
+//	public List<CommunityVO> getuserSearch(String nickname, int page) {
+//		List<CommunityVO> getuserSearch = null;
+//		
+//		int limit = 5;
+//		int start = (page - 1) * 5 + 1;
+//		int end = start + limit - 1;
+//		
+//		System.out.println("nickname : " + nickname + "start , end : " + start + end);
+//		getuserSearch = communityService.getuserSearch(nickname, start, end);
+//		
+//		System.out.println("Controller 출력 : " + getuserSearch);
+//		return getuserSearch;
+//	}
 	
 	//게시판 댓글 보여주기
 	@PostMapping(value="/getCO.co", produces="application/json;charset=UTF-8")
-	public List<CommentVO> getCO(int board_num, int page) {
-		int limit = 5;
-		int start = (page - 1) * 5 + 1;
-		int end = start + limit - 1;
+	public List<CommentVO> getCO(int board_num) {
 
-		List<CommentVO> list = communityService.getCO(board_num, start, end);
+		List<CommentVO> list = communityService.getCO(board_num);
 		return list;
 	}
+	
+//	@PostMapping(value="/getCO.co", produces="application/json;charset=UTF-8")
+//	public List<CommentVO> getCO(int board_num, int page) {
+//		int limit = 5;
+//		int start = (page - 1) * 5 + 1;
+//		int end = start + limit - 1;
+//
+//		List<CommentVO> list = communityService.getCO(board_num, start, end);
+//		List<CommentVO> list = communityService.getCO(board_num);
+//		return list;
+//	}
 	
 	
 	//댓글 작성
 	@PostMapping(value="/writeCO.co", produces="application/json;charset=UTF-8")
 	public Map<String, Object> writeCO(CommentVO covo) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("댓글 작성 컨트롤ㄹㅓ"+ covo.getBoard_num() + covo.getNickname() + covo.getContent());
+		System.out.println("댓글 작성 컨트롤ㄹㅓ"+ covo.getBoard_num() + covo.getNickname() + covo.getContent() + covo.getEmail());
 		
 		try {
 			int res = communityService.writeCO(covo);
@@ -157,7 +208,7 @@ public class CommunityAjaxController {
 		@PostMapping(value="/writeAnswer.co", produces="application/json;charset=UTF-8")
 		public Map<String, Object> writeAnswer(AnswerVO answervo) {
 			Map<String, Object> retVal = new HashMap<String, Object>();
-			System.out.println("대댓글 작성 컨트롤ㄹㅓ"+ answervo.getComment_num() + answervo.getNickname() + answervo.getContent());
+			System.out.println("대댓글 작성 컨트롤ㄹㅓ"+ answervo.getComment_num() + answervo.getNickname() + answervo.getContent() + answervo.getEmail() + answervo.getBoard_num() );
 			
 			try {
 				int res = communityService.writeAnswer(answervo);
@@ -176,7 +227,22 @@ public class CommunityAjaxController {
 		public List<AnswerVO> getAnswer(int comment_num) {
 			System.out.println(comment_num);
 			List<AnswerVO> list = communityService.getAnswer(comment_num);
+			System.out.println(list);
 			return list;
+		}
+		
+		//대댓글 프로필 사진가져오기
+		@PostMapping(value="/getuserImg.co", produces="application/json;charset=UTF-8")
+		public String getuserImg(String email) throws Exception {
+			System.out.println(email);
+			LoginVO dbvo = null;
+			
+			dbvo = service.getDetail(email);
+			System.out.println(dbvo.getNickname());
+			String img = dbvo.getImg();
+			System.out.println(dbvo.getImg());
+				
+			return img;
 		}
 		
 		//대댓 수정
@@ -213,6 +279,14 @@ public class CommunityAjaxController {
 				retVal.put("message", "Failure");
 			}
 			return retVal;
+		}
+
+		public CommunityService getCommunityService() {
+			return communityService;
+		}
+
+		public void setCommunityService(CommunityService communityService) {
+			this.communityService = communityService;
 		}
 		
 		

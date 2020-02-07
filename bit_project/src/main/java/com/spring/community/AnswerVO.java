@@ -8,6 +8,10 @@ public class AnswerVO {
 	private String nickname;
 	private String content;
 	private Date regist;
+	//
+	private String email;
+	private String profile;
+	private int board_num;
 	
 	public int getAnswer_num() {
 		return answer_num;
@@ -38,6 +42,24 @@ public class AnswerVO {
 	}
 	public void setRegist(Date regist) {
 		this.regist = regist;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public int getBoard_num() {
+		return board_num;
+	}
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
 	}
 	
 }

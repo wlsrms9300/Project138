@@ -1,49 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String nickname = (String)session.getAttribute("nickname");
+	String nickname_co = (String)session.getAttribute("nickname");
+	String email_co = (String)session.getAttribute("email");
+	String img_co = (String)session.getAttribute("img");
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>community(main)</title>
+<title>community</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport"
-	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<link
-	href="${pageContext.request.contextPath}/resources/css/community.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/community_writeform.css"
-	rel="stylesheet" type="text/css" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+<link href="${pageContext.request.contextPath}/resources/css/community.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/community_writeform.css" rel="stylesheet" type="text/css" />
 <!-- summernote -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <!-- include summernote-ko-KR -->
- <script
-	src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/co_writeForm.js"></script>  --%>
+<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_menu.js"></script>
 
 </head>
 <body>
 
 	<div style="height: 60px;">
-		<header>
-			<%@ include file="/WEB-INF/views/header2.jsp"%>
+		<header >
+ 			<%@ include file="/WEB-INF/views/header2.jsp" %> 
 		</header>
 	</div>
 
 	<div id="community_container_menubar">
-		<div class="community_menubar">
-            <a class="community_menubar_item" href="community.co" value="자유게시판">자유게시판</a>
-            <a class="community_menubar_item" href="community.co" value="육아사진">육아사진</a>
-            <a class="community_menubar_item" href="community.co" value="정보공유">정보공유(팁)</a>
-            <a class="community_menubar_item" href="community.co" value="공구게시판">공구게시판</a>
-            <a class="community_menubar_item" href="community.co" value="육아게시판">육아게시판</a>
-            <a class="community_menubar_item" href="community.co" value="이슈게시판">이슈,토론게시판</a>
-		</div>
+		<ul class="community_menubar">
+        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
+        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
+        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
+        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
+        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
+        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+        </ul>
 	</div>
 
 	<div id="community_container_header">
@@ -53,17 +49,19 @@
 		<div></div>
 	</div>
  	<div id="community-contentbox">
-		<form method="post" id="writingForm" action="write.cw" role="form" enctype="multipart/form-data">
-			<input type="hidden" name="nickname" value="<%=nickname %>" />
+		<form method="post" name="writingForm" action="write.cw" role="form" enctype="multipart/form-data">
+			<input type="hidden" name="nickname" value="<%=nickname_co %>" />
+			<input type="hidden" name="email" value="<%=email_co %>" />
 			<div id="cententbox-top">
-			 	<span> <select id="category_select" name="category">
+			 	<span> 
+			 		<select id="category_select" name="category_select">
 						<option value="자유게시판" selected>자유게시판</option>
-						<option value="사진게시판">사진게시판</option>
+						<option value="육아사진">육아사진게시판</option>
 						<option value="정보공유">정보공유(팁)</option>
 						<option value="공구게시판">공구게시판</option>
 						<option value="육아게시판">육아게시판</option>
-						<option value="이슈게시판">이슈게시판</option>
-				</select>
+						<option value="이슈게시판">이슈,토론게시판</option>
+					</select>
 				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="제목">
 				</span>
 			</div>
@@ -73,12 +71,33 @@
 					placeholder="content" maxlength="140" rows="7"></textarea>
 			</div>
 			<div id="contentbox-bottom">
-				<button type ="submit" id="submit-btn" name="submit">글쓰기</button>
-				<input type="button" id="cancel-btn" value="취소">
+				<input type ="button" id="submit-btn" onclick="insert_chk()" value="글쓰기">
+				<input type="button" id="cancel-btn" onclick="history.back(-1);" value="취소">
 			</div>
 		</form>
 	</div> 
+	
+
   <script type="text/javascript">
+  function insert_chk() {
+	var writingForm = document.writingForm;
+	var board_name = writingForm.board_name.value;
+	var content = writingForm.content.value;
+	
+	var target = document.getElementById("category_select");
+	var option = target.options[target.selectedIndex].value;
+	
+	if(!board_name || !content) {
+	 alert("내용을 입력해주세요");
+	}else {
+	 if(option == "육아사진" && $(content).find('img').attr('src') == null){
+	  	alert("사진을 1개 이상 올려주세요");
+	 }else {
+	 writingForm.submit();
+	 }
+	}
+  }
+  
   $(document).ready(function() {
 	    $("#summernote").summernote({
 	        placeholder : 'content',
@@ -119,5 +138,6 @@
 	    });
 	}
 </script>
+
 </body>
 </html>
