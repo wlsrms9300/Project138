@@ -1,7 +1,8 @@
-	function payment() {
-		
+$(document).ready(function() {
+	
+	function payment() {		
 		$.ajax({
-			url : '/bit_project/payment.tz',
+			url : '/bit_project/subscribemember.su',
 			type : 'post',
 			dataType : "json",
 			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
@@ -19,9 +20,7 @@
 					output += '<td>' + item.grade + '</td>';
 					output += '<td>' + item.price + '</td>';
 					output += '<td>' + item.point_price + '</td>';
-					output += '<td>' + item.pay_price + '</td>';
-					
-					
+					output += '<td>' + item.pay_price + '</td>';									
 					output += '</tr>';
 					
 					console.log("output:"+output);
@@ -37,3 +36,4 @@
 	
 	}
 	payment();
+});

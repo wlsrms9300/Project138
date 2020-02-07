@@ -161,8 +161,8 @@
 		    pay_method : 'card', //결제 수단
 		    merchant_uid : merchant_uid,
 		    customer_uid: customer_uid, // 카드와 1:1로 대응하는 값
-		    name : '주문명:결제테스트', //order 테이블에 들어갈 주문명 혹은 주문번호
-		    amount : <%=price%>, //결제 금액
+		    amount: 0,
+		    name : '결제예약', //order 테이블에 들어갈 주문명 혹은 주문번호
 		    buyer_email : $('#user_email').val(), //구매자 email
 		    buyer_name : '<%=membervo.getName() %>', //구매자 이름
 		    buyer_tel : '<%=membervo.getPhone() %>', //구매자 전화번호
@@ -198,7 +198,7 @@
 	    			}
 	            }); 
 	           if(check == true) {
-	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ price + '&merchant_uid=' + merchant_uid;
+	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ <%=price %> + '&merchant_uid=' + merchant_uid + '&imp_uid';
 	           }
 	           
 		} else {

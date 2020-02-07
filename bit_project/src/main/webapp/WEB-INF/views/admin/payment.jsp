@@ -217,7 +217,7 @@
 						</tbody>
 					</table>
 					<div style="margin: 0 auto; text-align: center;">
-						<button type="button" class="btn btn-lg btn-primary">결제</button>
+						<button type="button" class="btn btn-lg btn-primary" id="schedule_payment">결제예약</button>
 					</div>
 				</div>
 			</div><!-- /.col-->

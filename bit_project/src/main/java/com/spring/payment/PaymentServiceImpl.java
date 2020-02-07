@@ -1,10 +1,13 @@
 package com.spring.payment;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MemberMapper;
+import com.spring.mapper.PaymentMapper;
 import com.spring.member.MemberVO;
 
 @Service("paymentService")
@@ -25,6 +28,17 @@ public class PaymentServiceImpl implements PaymentService {
 			System.out.println("유저 정보 불러오기 실패"+ e.getMessage());
 		}
 		return result;
+	}
+	
+	@Override
+	public ArrayList<SubscriptionVO> allSubscribe() throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			ArrayList<SubscriptionVO> list = paymentmapper.allSubscribe();
+			return list;
+		} catch (Exception e) {
+			throw new Exception("구독자 결제 조회 실패", e);
+		}
 	}
 	
 	

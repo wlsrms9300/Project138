@@ -1,5 +1,9 @@
 package com.spring.mapper;
 
-public interface PaymentMapper {
+import java.util.ArrayList;
 
+import com.spring.payment.SubscriptionVO;
+
+public interface PaymentMapper {
+	ArrayList<SubscriptionVO> allSubscribe();
 }

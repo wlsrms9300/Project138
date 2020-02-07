@@ -1,6 +1,7 @@
 package com.spring.payment;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,28 +24,41 @@ import com.siot.IamportRestClient.request.ScheduleEntry;
 import com.siot.IamportRestClient.request.UnscheduleData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Schedule;
+import com.spring.login.LoginVO;
 import com.spring.member.MemberVO;
 
 @Controller
 public class PaymentController {
-	
+
 	private IamportClient client;
-	
+
 	@Autowired(required = false)
 	public void setup() {
 		String api_key = "6309798726474324";
 		String api_secret = "mDbo9qHQOKOwHGhVmJHP2Xhw2Hyzyf7VSij2I1SwLG3tmkpJ47y74QE7ycH6rO2k6lmPmfl8VoBiJ12O";
 		client = new IamportClient(api_key, api_secret);
 	}
-	
+
 	@Autowired(required = false)
 	private PaymentService paymentService;
+
+	
+	 //관리자 결제 페이지 회원 불러오기
+	  
+	@RequestMapping(value= "/subscribemember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8") 
+	public ArrayList<LoginVO> subscribeMember() throws Exception {
+		ArrayList<LoginVO> data = new ArrayList<LoginVO> ();
+		
+		
+		return data;
+	}
+	 
 
 	/* 구독 선택 */
 	@RequestMapping(value = "/selectSubscription.su", method = RequestMethod.POST)
 	public String selectSubscription(@RequestParam("group1") String grade, HttpSession session,
-			HttpServletRequest request, Model model) {
-		
+			HttpServletRequest request, Model model) throws Exception {
+
 		if (grade.equals("silver")) {
 			model.addAttribute("price", 29000);
 		} else if (grade.equals("gold")) {
@@ -78,13 +92,12 @@ public class PaymentController {
 			HttpServletResponse response) throws Exception {
 		System.out.println(paymentvo.getPrice());
 		HashMap<String, String> map = new HashMap<String, String>();
-		
-		/* 토큰 가져오기
-			IamportResponse<AccessToken> auth_response = client.getAuth();
-			String token = auth_response.getResponse().getToken(); 
-			map.put("token",token);
-		*/
-		 
+
+		/*
+		 * 토큰 가져오기 IamportResponse<AccessToken> auth_response = client.getAuth(); String
+		 * token = auth_response.getResponse().getToken(); map.put("token",token);
+		 */
+
 		/*
 		 * 토큰 생성 String imp_key = URLEncoder.encode("6309798726474324", "UTF-8"); String
 		 * imp_secret = URLEncoder.encode(
@@ -97,16 +110,15 @@ public class PaymentController {
 		 * 
 		 * map.put("token", _token); System.out.println("_token="+_token);
 		 */
-		
-		
+
 		// DB에 결제내역 저장
 		String res = "1";
-		if(res.equals("1")) {
+		if (res.equals("1")) {
 			map.put("res", "OK");
 		} else {
 			map.put("res", "False");
 		}
-		
+
 		return map;
 	}
 
@@ -117,48 +129,48 @@ public class PaymentController {
 
 		return "subscribestep3";
 	}
-	
+
 	// 결제예약 신청
 	@RequestMapping(value = "/schedulepayment.me")
 	public HashMap<String, String> schedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
-		HashMap<String, String> map = new HashMap<String, String> ();
+		HashMap<String, String> map = new HashMap<String, String>();
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		String customer_uid = vo.getCustomer_uid();
 		String merchant_uid = vo.getMerchant_uid();
 		int price = vo.getPrice(); // schedule - amount
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2020);
 		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
 		cal.set(Calendar.DAY_OF_MONTH, 8);
 		Date d1 = cal.getTime();
-		
+
 		ScheduleData schedule_data = new ScheduleData(customer_uid);
 		try {
-			schedule_data.addSchedule(new ScheduleEntry(merchant_uid+"12", d1, BigDecimal.valueOf(price)));
+			schedule_data.addSchedule(new ScheduleEntry(merchant_uid + "12", d1, BigDecimal.valueOf(price)));
 			System.out.println("예약 요청");
 			IamportResponse<List<Schedule>> schedule_response = client.subscribeSchedule(schedule_data);
 			String message = schedule_response.getMessage();
 			int code = schedule_response.getCode();
-			
+
 			System.out.println(message); // null나와야 정상
 			System.out.println(code); // 0나와야함
-			
+
 			map.put("res", "OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("res", "False");
 		}
-	
+
 		return map;
 	}
-	
-	//결제예약 취소
+
+	// 결제예약 취소
 	@RequestMapping(value = "/unschedulepayment.me")
 	public HashMap<String, String> unschedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
-		HashMap<String, String> map = new HashMap<String, String> ();
+		HashMap<String, String> map = new HashMap<String, String>();
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
@@ -168,21 +180,21 @@ public class PaymentController {
 		try {
 			System.out.println("예약 취소 신청");
 			UnscheduleData unschedule_data = new UnscheduleData(customer_uid);
-			unschedule_data.addMerchantUid("merchant_1581044381101"+"12");
-			
+			unschedule_data.addMerchantUid("merchant_1581044381101" + "12");
+
 			IamportResponse<List<Schedule>> unschedule_response = client.unsubscribeSchedule(unschedule_data);
 			String message = unschedule_response.getMessage();
 			int code = unschedule_response.getCode();
-			
+
 			System.out.println(message);
 			System.out.println(code);
-			
+
 			map.put("res", "OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("res", "False");
 		}
-		
+
 		return map;
 	}
 

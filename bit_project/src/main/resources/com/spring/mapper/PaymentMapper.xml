@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.PaymentMapper">
+
+	<resultMap type="com.spring.payment.PaymentVO" id="PaymentResultMap">
+		<result property="pay_num" column="pay_num" />
+		<result property="customer_uid" column="customer_uid" />
+		<result property="subscribe_num" column="subscribe_num" />
+		<result property="pay_date" column="pay_date" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+		<result property="merchant_uid" column="merchant_uid" />
+		<result property="imp_uid" column="imp_uid" />
+	</resultMap>
+	
+	<resultMap type="com.spring.payment.SubscriptionVO" id="SubscriptionResultMap">
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+
+		<result property="subscribe_num" column="subscribe_num" />
+		<result property="email" column="email" />
+		<result property="grade" column="grade" />
+		<result property="state" column="state" />
+	</resultMap>
+	 
+	<select id="allSubscribe" resultMap="SubscriptionResultMap">
+		select m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
+		from member m, subscribe s, subscribe_payment p 
+		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y'
+	</select> 
+
+
+
+
 </mapper>
