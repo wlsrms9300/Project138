@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AdminController {
 	
 	
-	@RequestMapping(value = "/charts.se", method = RequestMethod.GET)
+	@RequestMapping(value = "/share.se")
 	public String home(Model model, HttpSession session) {
 		
-		return "admin/charts";
+		return "admin/share";
 	}
 	
-	@RequestMapping(value = "/elements.se", method = RequestMethod.GET)
-	public String elements(Model model, HttpSession session) {
+	@RequestMapping(value = "/payment.se")
+	public String payment(Model model, HttpSession session) {
 		
-		return "admin/elements";
+		return "admin/payment";
 	}
 	
 	@RequestMapping(value = "/panels.se", method = RequestMethod.GET)

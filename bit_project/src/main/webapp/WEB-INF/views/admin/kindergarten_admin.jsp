@@ -18,6 +18,7 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">

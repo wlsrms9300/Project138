@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.SubscribePaymentMapper">
+
+	<resultMap type="com.spring.admin2.SubscribePaymentVO" id="paymentMap">
+		<result property="email" column="email" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="grade" column="grade" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+	</resultMap>
+	
+	<!-- admin 결제 관리 페이지에 띄워줄 Subscribe = 'Y'인 데이터 -->
+	<select id="getPaymentList" resultMap="paymentMap">
+		select m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
+		from member m, subscribe s, subscribe_payment p 
+		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y'
+	</select>
+</mapper>

@@ -21,4 +21,7 @@ public interface MemberMapper {
 	int passwordUpdate(MemberVO membervo);	//비밀번호 변경
 	MemberVO nnupdateCheck(MemberVO membervo);
 	List<MemberSubscribeVO> getMemberList();
+	List<MemberVO> getGroupList();
+	int normal_to_bad(MemberVO membervo);	//admin usergroup 변경.
+	int bad_to_normal(MemberVO membervo);
 }

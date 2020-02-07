@@ -92,4 +92,19 @@
 	<select id="getMemberList" resultMap="membersubscribeMap">
 		select m.email, m.nickname, m.phone, m.regist, m.subscribe, s.grade, m.usergroup from member m, subscribe s where m.email = s.email
 	</select>
+	
+	<!-- admin페이지 group -->
+	<select id="getGroupList" resultMap="signUpMap" parameterType="com.spring.member.MemberVO">
+		select * from member
+	</select>
+	
+	<!-- admin group 변경 -->
+	<update id="normal_to_bad" parameterType="com.spring.member.MemberVO">
+		update member set usergroup = '비매너회원' where email = #{email}
+	</update>
+	
+	<!-- admin group 변경 -->
+	<update id="bad_to_normal" parameterType="com.spring.member.MemberVO">
+		update member set usergroup = '일반회원' where email = #{email}
+	</update>
 </mapper>
