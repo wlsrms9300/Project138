@@ -17,6 +17,36 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<!-- 구글 차트  -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Dialogue', 'Send', 'Resoponse'],
+          ['Dialogue 1', 0.5, 0.5],
+          ['Dialogue 2', 0.7, 0.3],
+          ['Dialogue 3', 0.4, 0.8],
+          ['Dialogue 4', 0.2, 1]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Analysis of Dialogue System',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+	
+	
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -252,9 +282,10 @@
 						</ul>
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
-						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="bar-chart" height="200" width="600"></canvas>
-						</div>
+							<div class="canvas-wrapper">
+							<!-- 막대 그래프 -->
+	 							<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+							</div>
 					</div>
 				</div>
 			</div>

@@ -39,6 +39,7 @@
 		<url-pattern>*.at</url-pattern>
 		<url-pattern>*.su</url-pattern>
 		<url-pattern>*.so</url-pattern>
+		<url-pattern>*.ch</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>	<!-- 진근 -->
 		<servlet-name>appServlet</servlet-name>

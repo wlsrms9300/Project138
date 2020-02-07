@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.community.CommentVO;
+
 @RestController
 public class BoardController {
 	
@@ -42,13 +44,105 @@ public class BoardController {
 		System.out.println(data.getRegist());
 		return data;
 	}
+	
+	/* 자유게시판 */
 	@PostMapping(value="/getboard1.my", produces="application/json;charset=UTF-8")
 	public ArrayList<BoardVO> getboard1(BoardVO vo) throws Exception {
 		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
-		System.out.println(vo.getEmail());
-		System.out.println(vo.getCategory());
 		try {
 			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 육아사진 */
+	@PostMapping(value="/getboard2.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard2(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 정보공유(팁) */
+	@PostMapping(value="/getboard3.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard3(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	 /* 공구게시판 */
+	@PostMapping(value="/getboard4.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard4(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 육아관련질문 */
+	@PostMapping(value="/getboard5.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard5(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 이슈.토론 */
+	@PostMapping(value="/getboard6.my", produces="application/json;charset=UTF-8")
+	public ArrayList<BoardVO> getboard6(BoardVO vo) throws Exception {
+		ArrayList<BoardVO> data = new ArrayList<BoardVO>();
+		try {
+			data = service.getBoard1(vo);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 댓글 */
+	@PostMapping(value="/getboard7.my", produces="application/json;charset=UTF-8")
+	public ArrayList<CommentVO> getComment(CommentVO vo) throws Exception {
+		ArrayList<CommentVO> data = new ArrayList<CommentVO>();
+		try {
+			data = service.getComment(vo);	
+			System.out.println("테스트 = " + data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	/* 후기 */
+	@PostMapping(value="/getboard8.my", produces="application/json;charset=UTF-8")
+	public ArrayList<MyReviewVO> getReview(MyReviewVO vo) throws Exception {
+		ArrayList<MyReviewVO> data = new ArrayList<MyReviewVO>();
+		try {
+			data = service.getReview(vo);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

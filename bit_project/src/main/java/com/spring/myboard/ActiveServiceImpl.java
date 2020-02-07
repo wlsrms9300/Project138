@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.community.CommentVO;
 import com.spring.mapper.ActiveMapper;
 
 @Service
@@ -87,7 +88,29 @@ public class ActiveServiceImpl implements ActiveService {
 			ArrayList<BoardVO> data = activemapper.getBoard1(vo);
 			return data;
 		} catch (Exception e) {
-			throw new Exception("자유게시판 글 조회 실패", e);
+			throw new Exception("나의 활동 - 글목록 조회 실패", e);
+		}
+	}
+
+	@Override
+	public ArrayList<CommentVO> getComment(CommentVO vo) throws Exception {
+		try {
+			ActiveMapper activemapper = sqlSession.getMapper(ActiveMapper.class);
+			ArrayList<CommentVO> data = activemapper.getComment(vo);
+			return data;
+		} catch (Exception e) {
+			throw new Exception("나의 활동 - 댓글 목록 조회 실패", e);
+		}
+	}
+
+	@Override
+	public ArrayList<MyReviewVO> getReview(MyReviewVO vo) throws Exception {
+		try {
+			ActiveMapper activemapper = sqlSession.getMapper(ActiveMapper.class);
+			ArrayList<MyReviewVO> data = activemapper.getReview(vo);
+			return data;
+		} catch (Exception e) {
+			throw new Exception("나의 활동 - 후기 작성 목록 조회 실패", e);
 		}
 	}
 }

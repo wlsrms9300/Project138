@@ -24,6 +24,27 @@
 		<result property="category" column="category" />
 		<result property="scrap_count" column="scrap_count" />
 	</resultMap>
+	
+	<resultMap type="com.spring.community.CommentVO" id="CommentResultMap">
+		<result property="comment_num" column="comment_num" />
+		<result property="board_num" column="board_num" />
+		<result property="nickname" column="nickname" />
+		<result property="content" column="content" />
+		<result property="regist" column="regist" />
+		<result property="email" column="email" />
+	</resultMap>
+	
+	<resultMap type="com.spring.myboard.MyReviewVO" id="MyReviewResultMap">
+		<result property="review_num" column="review_num" />
+		<result property="product_num" column="product_num" />
+		<result property="nickname" column="nickname" />
+		<result property="content" column="content" />
+		<result property="img" column="img" />
+		<result property="regist" column="regist" />
+		<result property="gpa" column="gpa" />
+		<result property="email" column="email" />
+	</resultMap>
+	
 
    <!-- 마지막 접속일 -->
    <select id="getLastconnection" parameterType="String" resultMap="ActiveResultMap">
@@ -57,12 +78,22 @@
    		SELECT MAX(REGIST) REGIST FROM BOARD GROUP BY #{nickname}
    </select>
    
-  
    
   	<!-- 게시판 글목록 불러오기 -->
   	<select id="getBoard1" parameterType="com.spring.myboard.BoardVO" resultMap="BoardResultMap">
   		SELECT * FROM (SELECT * FROM BOARD WHERE CATEGORY=#{category}) 
-  		WHERE EMAIL=#{email} ORDER BY REGIST DESC
+  		WHERE EMAIL=#{email} 
+  	</select>
+  	
+  	<!-- 나의 활동 댓글 목록 불러오기 -->
+  	<select id="getComment" parameterType="com.spring.community.CommentVO" resultMap="CommentResultMap">
+  		select regist, content from board_comment where email=#{email} 
+  		union select regist, content from board_answer where email=#{email}
+  	</select>
+  	
+  	<!-- 나의 활동 후기 목록 불러오기 -->
+  	<select id="getReview" parameterType="com.spring.myboard.MyReviewVO" resultMap="MyReviewResultMap">
+  		select * from review where email=#{email}
   	</select>
 
    

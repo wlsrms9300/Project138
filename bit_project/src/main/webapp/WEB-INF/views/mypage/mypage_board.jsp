@@ -189,18 +189,10 @@
 
 			</table>
 		</div>
-        
     	<table id="foo-table" class="foo-ex">
-    		<h2>자유게시판</h2>
-			<thead>
-            	<tr>
-                	
-                	<th>등록일</th>
-                	<th>글제목</th>
-                	<th>조회수</th>
-                	<th>스크랩</th>
-                	
-            	</tr>        
+    		<h2 id="myboard-title"></h2>
+			<thead id="foo-table-thead">
+      
 			</thead>
 			<tbody id="foo-table-output">
 				
