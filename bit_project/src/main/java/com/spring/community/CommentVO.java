@@ -10,6 +10,8 @@ public class CommentVO {
 	private Date regist;
 	//
 	private int co_count;
+	private String email;
+	private String profile;
 	
 	public int getComment_num() {
 		return comment_num;
@@ -46,5 +48,17 @@ public class CommentVO {
 	}
 	public void setCo_count(int co_count) {
 		this.co_count = co_count;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 }

@@ -238,10 +238,30 @@ $(document).ready(function(){
         }
     });
     
+    /* 여기부터 시작 */ /* 자유게시판 */
     $('#m1').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기. none 대신 throw 넣으면 브라우저의 console 출력.
+    	//$('#foo-table-output').dataTable().fnDestroy();
     	var check = true; // true면 데이터테이블 실행  false면 x
     	var text = $('#m1 > b').text();
-    	$('#foo-table-output').empty();
+    	
+    	$('#myboard-title').text(text);
+    	
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard1.my',
     		type:'POST',
@@ -250,6 +270,7 @@ $(document).ready(function(){
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
     		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
     		success: function(data) {
+    			 
     			$.each(data, function(index, item) {
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
@@ -269,10 +290,10 @@ $(document).ready(function(){
     		check = false;	
     		}
     	});
-    	
-    	if(check == true) {
+    	if(check == true) { //성공하면 테이블 실행
 			$('#foo-table').DataTable({
-				language : lang_kor
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
 			});
 		}   		
     	   
@@ -311,20 +332,64 @@ $(document).ready(function(){
         }
     });
     
+    /* 육아사진 */
     $('#m2').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기.
+    	var check = true; // true면 데이터테이블 실행  false면 x
     	var text = $('#m2 > b').text();
+    	
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    
     	$.ajax({
     		url:'/bit_project/getboard2.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
     		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     			
     		},
     		error:function() {
-    			
+    			check = false;	
     		}
     	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -361,20 +426,62 @@ $(document).ready(function(){
         }
     });
     
+    /* 정보공유(팁) */
     $('#m3').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기.
+    	var check = true; // true면 데이터테이블 실행  false면 x
     	var text = $('#m3 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard3.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
     		success: function(data) {
-    			
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     		},
     		error:function() {
-    			
+    			check = false;	
     		}
     	});
+    	
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}   
+    	
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -411,20 +518,61 @@ $(document).ready(function(){
         }
     });
     
+    /* 공구게시판 */
     $('#m4').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; 
+    	var check = true;
     	var text = $('#m4 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard4.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
     		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     			
     		},
     		error:function() {
-    			
+    			check = false;
     		}
     	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -461,20 +609,60 @@ $(document).ready(function(){
         }
     });
     
+    /* 육아관련질문 */
     $('#m5').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
     	var text = $('#m5 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard5.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
     		success: function(data) {
-    			
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     		},
     		error:function() {
-    			
+    			check = false;
     		}
     	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}   
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -511,20 +699,60 @@ $(document).ready(function(){
         }
     });
     
+    /* 이슈.토론 */
     $('#m6').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
     	var text = $('#m6 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard6.my',
     		type:'POST',
+    		data: {'email' : email, 'category' : text},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
     		success: function(data) {
-    			
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     		},
     		error:function() {
-    			
+    			check = false;
     		}
     	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -560,21 +788,57 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 댓글 */
     $('#m7').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
     	var text = $('#m7 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>댓글 내용</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
     	$.ajax({
     		url:'/bit_project/getboard7.my',
     		type:'POST',
+    		data: {'email' : email},
     		dataType: 'json',
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
     		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.content +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     			
     		},
     		error:function() {
-    			
+    			check = false;
     		}
     	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		} 
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -611,20 +875,58 @@ $(document).ready(function(){
         }
     });
     
+    /* 후기 */
     $('#m8').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
     	var text = $('#m8 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>후기</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+   	
+    	
     	$.ajax({
     		url:'/bit_project/getboard8.my',
     		type:'POST',
+    		data: {'email' : email},
     		dataType: 'json',
+    		async: false, 
     		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
     		success: function(data) {
-    			
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.content +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
     		},
     		error:function() {
-    			
+    			check = false;
     		}
     	});
+    	
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
     	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
@@ -664,8 +966,65 @@ $(document).ready(function(){
     
     
     /* 모바일 메뉴 이벤트 */
-    
+    /* 자유게시판 */
     $('#m11').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기. none 대신 throw 넣으면 브라우저의 console 출력.
+    	//$('#foo-table-output').dataTable().fnDestroy();
+    	var check = true; // true면 데이터테이블 실행  false면 x
+    	var text = $('#m1 > b').text();
+    	
+    	$('#myboard-title').text(text);
+    	
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard1.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
+    		success: function(data) {
+    			 
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    		},
+    		error:function() {
+    		check = false;	
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}   		
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -700,8 +1059,66 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 육아사진 */
     $('#m12').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기.
+    	var check = true; // true면 데이터테이블 실행  false면 x
+    	var text = $('#m2 > b').text();
+    	
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    
+    	$.ajax({
+    		url:'/bit_project/getboard2.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    			
+    		},
+    		error:function() {
+    			check = false;	
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
+    	
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -736,8 +1153,62 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 정보공유(팁) */
     $('#m13').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; //warning alert 출력 막기.
+    	var check = true; // true면 데이터테이블 실행  false면 x
+    	var text = $('#m3 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard3.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false, //ajax 옵션, ajax실행이 끝난후 함수가 실행된다
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    		},
+    		error:function() {
+    			check = false;	
+    		}
+    	});
+    	
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}   
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -772,8 +1243,62 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 공구게시판 */
     $('#m14').click(function(){
+    	$.fn.dataTable.ext.errMode='none'; 
+    	var check = true;
+    	var text = $('#m4 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard4.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    			
+    		},
+    		error:function() {
+    			check = false;
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -808,8 +1333,61 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 육아관련질문 */
     $('#m15').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
+    	var text = $('#m5 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard5.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    		},
+    		error:function() {
+    			check = false;
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}   
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -844,8 +1422,61 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 이슈.토론 */
     $('#m16').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
+    	var text = $('#m6 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>글제목</th>';
+		 thead += '<th>조회수</th>';
+		 thead += '<th>스크랩</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard6.my',
+    		type:'POST',
+    		data: {'email' : email, 'category' : text},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td>'+ item.count +'</td>';
+    				output += '<td>'+ item.scrap_count +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    		},
+    		error:function() {
+    			check = false;
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -880,8 +1511,58 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 댓글 */
     $('#m17').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
+    	var text = $('#m7 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>댓글 내용</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard7.my',
+    		type:'POST',
+    		data: {'email' : email},
+    		dataType: 'json',
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		async: false,
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.content +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    			
+    		},
+    		error:function() {
+    			check = false;
+    		}
+    	});
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		} 
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -916,8 +1597,59 @@ $(document).ready(function(){
             menu6.show();
         }
     });
-    
+    /* 후기 */
     $('#m18').click(function(){
+    	$.fn.dataTable.ext.errMode='none';
+    	var check = true;
+    	var text = $('#m8 > b').text();
+    	$('#myboard-title').text(text);
+    	/* 테이블 초기화 */
+    	if ($.fn.DataTable.isDataTable("#foo-table")) {
+    		  $('#foo-table').DataTable().clear().destroy();
+    		  $('#foo-table-output').empty();
+    	}
+    	$('#foo-table-thead').empty();
+    	var thead = '';
+		 thead += '<tr>';
+		 thead += '<th>등록일</th>';
+		 thead += '<th>후기</th>';
+		 thead += '</tr>';
+		 $('#foo-table-thead').append(thead);
+   	
+    	
+    	$.ajax({
+    		url:'/bit_project/getboard8.my',
+    		type:'POST',
+    		data: {'email' : email},
+    		dataType: 'json',
+    		async: false, 
+    		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    		success: function(data) {
+    			$.each(data, function(index, item) {
+    				var date1 = new Date(item.regist);
+    				var regist = date_format(date1);
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ regist +'</td>';
+    				output += '<td>'+ item.content +'</td>';
+    				output += '</tr>';
+    				console.log("output:" + output);
+    				$('#foo-table-output').prepend(output);
+
+    			});
+    		},
+    		error:function() {
+    			check = false;
+    		}
+    	});
+    	
+    	if(check == true) { //성공하면 테이블 실행
+			$('#foo-table').DataTable({
+				language : lang_kor,
+				order: [ [ 0, "desc" ] ]
+			});
+		}  
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
