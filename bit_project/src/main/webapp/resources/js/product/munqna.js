@@ -32,7 +32,7 @@
                 }
         	}else {
         		if ($(this).children().last().css("display") == 'none') {
-                	//공개면 상관없고 공개가 아닐 때
+                	//공개면 상관없고 공개가 아닐 때 0204 추후 수정
                 	if(nick==$(this).children().first().children().last().children().first().text()){
                 		$(this).children().last().show();
                 	}else {
@@ -86,14 +86,14 @@
                     exText += "<div class='content' style='display:none;'>";
                     exText += item.content;
                     exText += "<p class='txt-right'>";
-                    
-                    if(nick==item.nickname && nick!=null){
+                    if(sessionChk==item.email && sessionChk!=null){
                     	if(item.answer=="답변대기"){
                        	 var sib1 = "'"+item.question_title+"'";
                        	 var sib2 = "'"+item.content+"'";
                        	 var sib3 = "'"+item.nickname+"'";
-                       	 var sib4 = "'"+item.secret+"'";                    
-                       	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+');">수정</a>';
+                       	 var sib4 = "'"+item.secret+"'";
+                       	 var sib5 = "'"+item.email+"'"; 
+                       	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
                          exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
                          exText += "</p>";
                        }else {
@@ -239,7 +239,7 @@
         })
     }
    
-function qnamodify(_qnum, _title, _content, _nickname, _secret) {
+function qnamodify(_qnum, _title, _content, _nickname, _secret, _email) {
 	 $("#QnaForm textarea[name=content]").html(_content);
 	 $("#QnaForm input[name=question_title]").val(_title);
 	 //$("#QnaForm input[name=nickname]").val("테스트닉네임");
@@ -262,6 +262,7 @@ function qnadelete(qnum){
 			 success:function (data) {
 				 alert('삭제 성공');
 				 history.go(0);
+				 //document.getElementById('nickname').focus();
 			 },
 			 error:function() {
 				alert('삭제 실패');

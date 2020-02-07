@@ -3,11 +3,14 @@ package com.spring.product;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.nurigo.java_sdk.api.Message;
 
@@ -87,12 +90,48 @@ public class ProductAjaxController {
 		}
 		return deletereserMessage;
 	}
-	@GetMapping(value = "/alarm.pr", produces = "application/json;charset=UTF-8")
-	public HashMap<String, String> amount_alarm(String alert_email, String alert_pnum, int alert_phone) {
-		System.out.println(alert_email+""+alert_pnum+""+alert_phone);
+	@GetMapping(value = "/alarmCheck.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> amount_alarm(String alert_email, int alert_pnum, String alert_phone) {
+		System.out.println("알람체크.pr"+alert_email+"번호"+alert_pnum+"폰"+alert_phone);
+		//String email = alert_email;
+		//String email_cut = email.replace("%40", "@");
+
 		HashMap<String,String> alarmList = new HashMap<String,String>();
 		try {
-			//service.addAlarm(alert_email, alert_pnum, alert_phone);
+			int res =service.getAlarm(alert_email, alert_pnum, alert_phone);
+			if(res==0) {
+				alarmList.put("val", "no");	
+			}else {
+				alarmList.put("val", "kookoo");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmList;
+	}
+	
+	@GetMapping(value = "/addalarm.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> addalarm(String alert_email, int alert_pnum, String alert_phone) {
+		System.out.println("알람등록.pr"+alert_email+"번호"+alert_pnum+"폰"+alert_phone);
+		//String email = alert_email;
+		//String email_cut = email.replace("%40", "@");
+		HashMap<String,String> alarmList = new HashMap<String,String>();
+		try {
+			service.addAlarm(alert_email, alert_pnum, alert_phone);
+			alarmList.put("val", "kookoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmList;
+	}
+	
+	@GetMapping(value = "/deletealarm.pr", produces = "application/json;charset=UTF-8")
+	public HashMap<String, String> deletealarm(String alert_email, int alert_pnum, String alert_phone) {
+		System.out.println("알람삭제.pr");
+		HashMap<String,String> alarmList = new HashMap<String,String>();
+		try {
+			service.deleteAlarm(alert_email, alert_pnum, alert_phone);
 			alarmList.put("val", "kookoo");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -290,6 +329,18 @@ public class ProductAjaxController {
 		try {
 			service.reviewDelete(review_num, product_num);
 			res = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return res;
+	}
+	@GetMapping(value = "/Addpoint.pr", produces = "application/json;charset=UTF-8")
+	public int Addpoint(String email, String nickname, int product_num) {
+		int res = 0;
+		try {
+			res = service.addPoint(email);
+			service.pointDetail(email, product_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();

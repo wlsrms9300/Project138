@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="com.spring.product.ProductVO" %>
+    <% ProductVO prVO = (ProductVO)request.getAttribute("prVO");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +23,7 @@
         
         var sel_files = [];
         $(document).ready(function(){
-            $("#input_imgs").on("change", handleImgsFileSelect);
+            $(".img_set").on("change", handleImgsFileSelect);
         });
 
         function handleImgsFileSelect(e) {
@@ -46,7 +48,7 @@
         }
         function clsimg() {
         	$(".imgs_wrap").empty();
-        	$("#input_imgs").val("");
+        	$(".img_set").val("");
             
 		}
         
@@ -63,10 +65,11 @@
                 	    상품이미지
                 </div>
                 <div class="image-wrapper">
-                    <input type="file" id="input_imgs" class="file" name="img_list" multiple />
+                    <input type="file"  class="img_set" name="img_sum" />
+                    <input type="file"  class="img_set" name="img_main" />
+                    <input type="file"  class="img_set" name="img_detail" />
                     <input type="button" onclick="clsimg();" value="이미지 초기화" />
                     <div class="imgs_wrap">
-                        
                     </div>
                     
                     <div class="caution">
@@ -80,24 +83,24 @@
             <div class="product-subject">
                 <div class="subject-text">상품명</div>
                 <div class="subject-input">
-                    <input type="text" name="product_name" placeholder="상품명">
+                    <input type="text" name="product_name" value="<%=prVO.getProduct_name()%>">
                 </div>
             </div>
             <div class="product-category">
                 <div class="category-text">카테고리</div>
                 <div class="category-input">
                     <select name="category_l">
-                        <option selected value="실버">실버</option>
+                        <option value="실버">실버</option>
                         <option value="골드">골드</option>
                         <option value="플레티넘">플레티넘</option>
                         <option value="개인쉐어">개인쉐어</option>
                     </select>
                     <select name="category_m">
-                        <option selected value="04">0~4</option>
+                        <option value="04">0~4</option>
                         <option value="57">5~7</option>
                     </select>
                     <select name="category_s">
-                        <option selected value="과학박스">과학박스</option>
+                        <option value="과학박스">과학박스</option>
                         <option value="자동차">자동차</option>
                         <option value="로보트">로보트</option>
                         <option value="진근박스">진근박스</option>
@@ -105,20 +108,33 @@
                 </div>
             </div>
   			<div>
-                <input type="number" name="total_amount" placeholder="총수량" />
+  				<input type="hidden" name="ta" value="<%=prVO.getTotal_amount() %>" />
+                <input type="number" name="total_amount" value="<%=prVO.getTotal_amount() %>" />
             </div>
             <div>
-                <input type="text" name="manufacturer" placeholder="제조사" />
+                <input type="hidden" name="current_amount" value="<%=prVO.getCurrent_amount() %>" />
             </div>
             <div>
-                <input type="text" name="product_content" placeholder="상품상세" />
+                <input type="text" name="manufacturer" value="<%=prVO.getManufacturer() %>" />
+            </div>
+            <div>
+                <input type="text" name="product_content" value="<%=prVO.getProduct_content() %>" />
+                <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>"  />
             </div>
   			
             <div class="btn-product">
-                <input type="button" value="[상품등록하기]" onclick="prAdd('productAdd.pr')" >            	
+                <input type="button" value="[상품수정하기]" onclick="prAdd('productModify.pr')" >            	
             </div>
         </form>
     </div>
+     <script>    
+    var c_l = "<%=prVO.getCategory_l()%>";
+    var c_m = "<%=prVO.getCategory_m()%>";
+    var c_s = "<%=prVO.getCategory_s()%>";
+    $('[name="category_l"] option[value='+c_l+']').attr('selected','selected');
+    $('[name="category_m"] option[value='+c_m+']').attr('selected','selected');
+    $('[name="category_s"] option[value='+c_s+']').attr('selected','selected');
+    </script>
     
    
 </body>

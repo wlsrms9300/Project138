@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.product.AlarmVO;
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
@@ -13,6 +14,14 @@ import com.spring.product.reviewjoinmemberVO;
 
 public interface PDMapper {
 	void prAdd(ProductVO pdVO);	//상품 등록
+	void prModify(ProductVO pdVO); //상품 수정
+	void prDelete1(@Param("product_num") int product_num);
+	void prDelete2(@Param("product_num") int product_num);
+	void prDelete3(@Param("product_num") int product_num);
+	void prDelete4(@Param("product_num") int product_num);
+	void prDelete5(@Param("product_num") int product_num);
+	void prDelete6(@Param("product_num") int product_num);
+	void prDelete7(@Param("product_num") int product_num);
 	List<ProductVO> allSearch();//아직 쓰진 않지만 전체 검색
 	
 	//카테고리가 null일 경우. default 세팅	
@@ -38,10 +47,17 @@ public interface PDMapper {
 	int getWishList(@Param("product_num") int product_num, @Param("email") String email);
 	void addWishList(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteWishList(@Param("product_num") int product_num, @Param("email") String email);
-	//상품 상세 예약
+	//상품 상세 예약 
 	int getReservation(@Param("product_num") int product_num, @Param("email") String email);
 	void addReservation(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteReservation(@Param("product_num") int product_num, @Param("email") String email);
+	//상품 상세 알람
+	int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	//SMS 서비스 관련
+	int amountCheck(@Param("product_num") int product_num);
+	List<AlarmVO> SMSalarm(@Param("product_num") int product_num);
 	
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
@@ -57,7 +73,8 @@ public interface PDMapper {
 	void reviewDelete(@Param("review_num") int review_num, @Param("product_num") int product_num);
 	void reviewModify(ReviewVO reviewVO);
 	void reviewModifyNoImg(ReviewVO reviewVO);
-	
+	int addPoint(@Param("email") String email);
+	void pointDetail(@Param("email") String email, @Param("product_num") int product_num);
 	//상품 검색
 	int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word);
 	List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno);

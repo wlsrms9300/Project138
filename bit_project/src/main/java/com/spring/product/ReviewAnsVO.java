@@ -5,9 +5,17 @@ import java.util.Date;
 public class ReviewAnsVO {
 	private int comment_num;
 	private int review_num;
+	private String email;
 	private String nickname;
 	private String content;
 	private Date regist;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getComment_num() {
 		return comment_num;
 	}

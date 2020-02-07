@@ -9,8 +9,9 @@ $(document).ready(function() {
 				alert('은행을 선택하세요.');
 				return false;
 			} else{
+				alert('else');
 				var frm = document.getElementById("form_share");
-				frm.action = "share_mailsend.ms";
+				frm.action = "share_App.ms";
 				frm.submit();
 			}
 			

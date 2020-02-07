@@ -5,11 +5,26 @@ import java.util.Date;
 public class ReviewVO {
 	private int review_num;
 	private int product_num;
+	private String email;
 	private String nickname;
 	private String content;
 	private String img;
 	private Date regist;
 	private double gpa;
+	private int point_details;
+	
+	public int getPoint_details() {
+		return point_details;
+	}
+	public void setPoint_details(int point_details) {
+		this.point_details = point_details;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getReview_num() {
 		return review_num;
 	}

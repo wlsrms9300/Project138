@@ -13,13 +13,13 @@ public class reviewjoinmemberVO {
 	private String nickname;
 	private String content;
 	private double gpa;	
-	
+	private int point_details;
 	// 멤버
 	private String email;
 	private String usergroup;
 	private String name;
 	private String password;
-	private int phone;
+	private String phone;
 	private String address;
 	private String address_detail;
 	private int postal_num;
@@ -31,6 +31,14 @@ public class reviewjoinmemberVO {
 	private String instagram_id;/*N, Y*/
 	private String receive_email;/*N, Y*/
 	private String receive_text;/*N, Y*/
+	
+	
+	public int getPoint_details() {
+		return point_details;
+	}
+	public void setPoint_details(int point_details) {
+		this.point_details = point_details;
+	}
 	public String getRimg() {
 		return rimg;
 	}
@@ -103,10 +111,11 @@ public class reviewjoinmemberVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getPhone() {
+	
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getAddress() {

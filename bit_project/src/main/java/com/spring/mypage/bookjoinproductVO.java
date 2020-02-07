@@ -15,7 +15,7 @@ public class bookjoinproductVO {
 	private String product_name;
 	private int total_amount;
 	private int rental_amount;
-	private int share_amount;
+	private int current_amount;
 	private String manufacturer;
 	private String product_content;
 	private double gpa;
@@ -69,11 +69,12 @@ public class bookjoinproductVO {
 	public void setRental_amount(int rental_amount) {
 		this.rental_amount = rental_amount;
 	}
-	public int getShare_amount() {
-		return share_amount;
+
+	public int getCurrent_amount() {
+		return current_amount;
 	}
-	public void setShare_amount(int share_amount) {
-		this.share_amount = share_amount;
+	public void setCurrent_amount(int current_amount) {
+		this.current_amount = current_amount;
 	}
 	public String getManufacturer() {
 		return manufacturer;

@@ -8,7 +8,7 @@
 		<result property="product_name" column="product_name" />
 		<result property="total_amount" column="total_amount" />
 		<result property="rental_amount" column="rental_amount" />
-		<result property="share_amount" column="share_amount" />
+		<result property="current_amount" column="current_amount" />	
 		<result property="manufacturer" column="manufacturer" />
 		<result property="product_content" column="product_content" />
 
@@ -23,47 +23,85 @@
 		<result property="readcount" column="readcount" />
 	</resultMap>
 
-
+	
 	<insert id="prAdd" parameterType="com.spring.product.ProductVO">
-		<selectKey keyProperty="product_num" resultType="int"
-			order="BEFORE">
+		<selectKey keyProperty="product_num" resultType="int" order="BEFORE">
 			SELECT product_sequence.NEXTVAL FROM DUAL
 		</selectKey>
 		insert into product(product_num, product_name, total_amount,
-		rental_amount, share_amount, manufacturer,
+		rental_amount, current_amount, manufacturer,
 		product_content, category_l, category_m, category_s,
 		<choose>
 			<when test="img_sum == null and img_main == null and img_detail == null">
 					regist) values(
-			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount}, #{current_amount},
 			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
 			sysdate)
 			</when>
 			<when test="img_sum != null and img_main != null and img_detail == null">
 					img_sum, img_main, regist) values(
-			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
 			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
 			#{img_sum}, #{img_main},sysdate)
 			</when>
 			<when test="img_sum != null and img_main == null and img_detail == null">
 					img_sum, regist) values(
-			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
 			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
 			#{img_sum}, sysdate)
 			</when>
 				<when test="img_sum != null and img_main != null and img_detail != null">
 					img_sum, img_main, img_detail, regist) values(
-			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{share_amount},
+			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
 			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
 			#{img_sum}, #{img_main}, #{img_detail},sysdate)
 			</when>
 		</choose>
 	</insert>
 
+	<update id="prModify" parameterType="com.spring.product.ProductVO">		
+		update product set product_name=#{product_name}, total_amount=#{total_amount},current_amount=#{current_amount},
+		manufacturer=#{manufacturer}, product_content=#{product_content},
+		category_l=#{category_l}, category_m=#{category_m}, category_s=#{category_s}, regist=sysdate
+			<if test="img_sum != null">
+			,img_sum=#{img_sum}
+			</if>
+			<if test="img_main != null">
+			,img_main=#{img_main}
+			</if>
+			<if test="img_detail != null">
+			,img_detail=#{img_detail}
+			</if>
+		where product_num=#{product_num}
+	</update>
+	
+	<delete id="prDelete1" parameterType="map">
+	delete from question where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete2" parameterType="map">
+	delete from review where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete3" parameterType="map">
+	delete from wishlist where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete4" parameterType="map">
+	delete from bookmark where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete5" parameterType="map">
+	delete from reservation where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete6" parameterType="map">
+	delete from alarm where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete7" parameterType="map">
+	delete from product where product_num=#{product_num}
+	</delete>
+
+
 	<!-- 상품 리스트 전체 출력(쓰진않음) -->
 	<select id="allSearch" resultType="com.spring.product.ProductVO">
 		select rownum rnum, product_num, product_name, total_amount, rental_amount,
-		share_amount, manufacturer, product_content,
+		current_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail,
 		regist, readcount from product
 		order by rnum asc
@@ -74,7 +112,7 @@
 		resultType="com.spring.product.ProductVO">
 		select * from (
 		select rownum rnum, product_num, product_name,
-		total_amount, rental_amount, share_amount, manufacturer,
+		total_amount, rental_amount, current_amount, manufacturer,
 		product_content,
 		gpa, category_l, category_m, category_s, img_sum,
 		img_main, img_detail, regist
@@ -91,7 +129,7 @@
 		resultType="com.spring.product.ProductVO">
 		select * from (
 		select rownum rnum, product_num, product_name,
-		total_amount, rental_amount, share_amount, manufacturer,
+		total_amount, rental_amount, current_amount, manufacturer,
 		product_content,
 		gpa, category_l, category_m, category_s, img_sum,
 		img_main, img_detail, regist, readcount FROM (
@@ -133,6 +171,24 @@
 	<update id="getProductReadCount" parameterType="map">
 		update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
+	
+	<!--  알람  -->
+	<insert id="addAlarm" parameterType="map">
+		<selectKey keyProperty="alarm_num" resultType="int" order="BEFORE">
+			select alarm_sequence.NEXTVAL from dual
+		</selectKey>
+		insert into alarm values(#{alarm_num}, #{email}, #{product_num}, #{phone})
+	</insert>
+
+	<delete id="deleteAlarm" parameterType="map">
+		delete from alarm where product_num=#{product_num} AND email=#{email} AND phone=#{phone}
+	</delete>
+
+	<select id="getAlarm" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from alarm where product_num=#{product_num} AND email=#{email} AND phone=#{phone}
+	</select>
+	<!--  알람  -->
+	
 	<!-- 북마크 -->
 	<insert id="addBookMark" parameterType="map">
 		<selectKey keyProperty="mark_num" resultType="int"
@@ -194,12 +250,21 @@
 
 	<!-- 상품 상세 -->
 
+	<!-- 입고 SMS 알림 서비스 관련 -->
+	<select id="amountCheck" parameterType="map" resultType="int">
+		select total_amount from product where product_num=#{product_num}
+	</select>
+	
+	<select id="SMSalarm" parameterType="map" resultType="com.spring.product.AlarmVO">
+		select * from alarm where product_num=#{product_num}
+	</select>
+	<!-- 입고 SMS 알림 서비스 관련 -->
 	<!-- 상품 문의 -->
 	<select id="qnaSearch" parameterType="map"
 		resultType="com.spring.product.QnaVO">
 		select * FROM (
 		SELECT rownum rnum, question_num, question_title,
-		product_num,nickname,content,regist,secret,answer
+		product_num,email,nickname,content,regist,secret,answer
 		FROM question
 		where product_num=#{product_num}
 		ORDER BY regist asc
@@ -218,9 +283,9 @@
 			SELECT question_sequence.NEXTVAL FROM DUAL
 		</selectKey>
 		insert into question(question_num, question_title, product_num,
-		nickname, content, regist, secret)
+		email, nickname, content, regist, secret)
 		values(
-		#{question_num}, #{question_title}, #{product_num}, #{nickname}, #{content}, sysdate,
+		#{question_num}, #{question_title}, #{product_num}, #{email}, #{nickname}, #{content}, sysdate,
 		#{secret}
 		)
 	</insert>
@@ -229,7 +294,7 @@
 		question_num=#{question_num}
 	</delete>
 	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
-		update question set question_title=#{question_title}, nickname=#{nickname},
+		update question set question_title=#{question_title}, email=#{email}, nickname=#{nickname},
 		content=#{content}, secret=#{secret}, regist=sysdate where
 		question_num=#{question_num}
 	</update>
@@ -248,9 +313,9 @@
 			order="BEFORE">
 			SELECT review_sequence.NEXTVAL FROM DUAL
 		</selectKey>
-		insert into review(review_num, product_num, nickname, content, img,
+		insert into review(review_num, product_num, email, nickname, content, img,
 		regist, gpa) values(
-		#{review_num}, #{product_num}, #{nickname}, #{content},#{img},
+		#{review_num}, #{product_num}, #{email}, #{nickname}, #{content},#{img},
 		sysdate, #{gpa})
 	</insert>
 
@@ -263,11 +328,10 @@
 		resultType="com.spring.product.reviewjoinmemberVO">
 		select * FROM (
 		SELECT rownum rnum, r.review_num, r.product_num,
-		r.nickname, r.content, r.regist, r.gpa, r.img as rimg,
-		m.img as mimg
+		r.nickname, r.content, r.regist, r.gpa, r.point_details, r.img as rimg,
+		m.img as mimg, r.email as email
 		FROM review r, member m
-		where product_num=#{product_num} and
-		r.nickname=m.nickname
+		where product_num=#{product_num} and r.email=m.email              
 		ORDER BY regist asc
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>
@@ -279,16 +343,25 @@
 		review_num=#{review_num}
 	</delete>
 	<update id="reviewModify"
-		parameterType="com.spring.product.QnaVO">
+		parameterType="com.spring.product.ReviewVO">
 		update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa},
 		regist=sysdate, img=#{img} where review_num=#{review_num}
 	</update>
 
 	<update id="reviewModifyNoImg"
-		parameterType="com.spring.product.QnaVO">
+		parameterType="com.spring.product.ReviewVO">
 		update review set nickname=#{nickname}, content=#{content}, gpa=#{gpa},
 		regist=sysdate where review_num=#{review_num}
 	</update>
+	
+	<update id="addPoint" parameterType="map">
+		update member set point=point+500 where email=#{email}
+	</update>
+	<update id="pointDetail" parameterType="map">
+		update review set point_details=1 where email=#{email} AND product_num=#{product_num}
+	</update>
+	
+	
 	<!-- 리뷰 -->
 
 
@@ -316,7 +389,7 @@
 		select * from
 		(
 		select rownum rnum, product_num, product_name, total_amount, rental_amount,
-		share_amount, manufacturer, product_content,
+		current_amount, manufacturer, product_content,
 		gpa, category_l, category_m, category_s, img_sum, img_main, img_detail,
 		regist, readcount
 		from

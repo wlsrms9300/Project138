@@ -9,6 +9,10 @@ public interface PDService {
 	// 1. 상품 페이지 관련 	
 		// 상품등록
 		public void prAdd(ProductVO pdVO) throws Exception;
+		// 상품 수정
+		public void prModify(ProductVO pdVO) throws Exception;
+		//상품 삭제
+		public void prDelete(int product_num) throws Exception;
 		// 전체조회(쓸일없음)
 		public List<ProductVO> allSearch() throws Exception;
 		// 필터값이 null인 상태에서 스크롤 시 추가 데이터 8개 출력
@@ -17,6 +21,9 @@ public interface PDService {
 		public List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3) throws Exception;
 		//public List<ProductVO> filterSearch(@Param("category_l") String category_l, @Param("category_m") String category_m, @Param("category_s") String category_s) throws Exception;
 		//public List<ProductVO> selectList(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3) throws Exception;
+		// 수량 체크
+		public int amountCheck(@Param("product_num") int product_num) throws Exception;
+		public List<AlarmVO> SMSalarm(@Param("product_num") int product_num) throws Exception;
 		
 	// 2. 상품 상세 페이지 관련 
 		// 상품 클릭 시 해당 상품 데이터 받아서 상세페이지에 띄워줌
@@ -41,7 +48,12 @@ public interface PDService {
 		public void addReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 예약 off
 		public void deleteReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
-		
+		// 알람 여부
+		int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 알람 등록
+		void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 알람 삭제
+		void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
 		
 		
 		
@@ -69,6 +81,10 @@ public interface PDService {
 		public void reviewModify(ReviewVO reviewVO) throws Exception;
 		// 리뷰 수정(이미지는 안건드린 상태면, 기존 이미지 그대로
 		public void reviewModifyNoImg(ReviewVO reviewVO) throws Exception;
+		// 리뷰 포인트 지급
+		public int addPoint(@Param("email") String email) throws Exception;
+		// 리뷰 지급 후 reviewVO의 point_Details 값 1로 변경
+		public void pointDetail(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
 	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
 	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;

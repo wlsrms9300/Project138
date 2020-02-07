@@ -5,6 +5,7 @@ import java.util.Date;
 public class QnaAnsVO {
 	private int answer_num;
 	private int question_num;
+	private String email;
 	private String nickname;
 	private int product_num;
 	private String content;
