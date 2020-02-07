@@ -4,6 +4,7 @@ public class SubscriptionVO {
 	private int subscribe_num;
 	private String email;
 	private String grade;
+	private String state;
 	
 	public int getSubscribe_num() {
 		return subscribe_num;
@@ -22,5 +23,11 @@ public class SubscriptionVO {
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 }

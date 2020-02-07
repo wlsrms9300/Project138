@@ -127,6 +127,7 @@ public class IamportClient {
 	
 	public IamportResponse<List<Schedule>> subscribeSchedule(ScheduleData schedule_data) throws IamportResponseException, IOException {
 		AccessToken auth = getAuth().getResponse();
+		System.out.println(auth.getToken());
 		Call<IamportResponse<List<Schedule>>> call = this.iamport.schedule_subscription(auth.getToken(), schedule_data);
 		
 		Response<IamportResponse<List<Schedule>>> response = call.execute();

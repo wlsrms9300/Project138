@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import= "com.spring.login.LoginVO" %>
 <%
-	String msg = (String)session.getAttribute("msg");
+	String email_sub3 = (String)session.getAttribute("email");
 	String price = request.getParameter("price");
-	String token = request.getParameter("token");
+	LoginVO userDetail_sub3 = (LoginVO)session.getAttribute("userDetail");
+	String merchant_uid = request.getParameter("merchant_uid");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +14,78 @@
     <meta name="viewport"
         content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Document</title>
     <link href="${pageContext.request.contextPath}/resources/css/common1.css" rel="stylesheet">
 </head>
+
+<script>
+$(document).ready(function() {
+	$('.text-field').click(function(){
+		
+		var beforeStr = '<%=email_sub3 %>';
+		var afterStr = beforeStr.split('@');
+	    var customer_uid = afterStr[0] + afterStr[1]; //이메일 customer_uid로 사용 
+	
+		$.ajax ({
+			url:'/bit_project/schedulepayment.me',
+			type:"POST",
+			dataType:"json",
+			data: {
+				customer_uid : customer_uid,
+				price : '<%=price %>',
+				merchant_uid : '<%=merchant_uid%>'
+			},
+			contentType:'application/x-www-form-urlencoded; charset=utf-8',
+			success:function(map) {
+				if(map.res == "OK") {
+					alert('결제예약 성공');
+				} else {
+					alert('결제예약 실패');
+				}
+			}, error:function() {
+				alert('ajax통신 실패');
+			}
+		});
+		location.href='<%=request.getContextPath()%>/';
+	});
+	
+	
+	
+	$('.test_cancel').click(function(){
+		
+		var beforeStr = '<%=email_sub3 %>';
+		var afterStr = beforeStr.split('@');
+	    var customer_uid = afterStr[0] + afterStr[1]; //이메일 customer_uid로 사용 
+	
+		$.ajax ({
+			url:'/bit_project/unschedulepayment.me',
+			type:"POST",
+			dataType:"json",
+			data: {
+				customer_uid : customer_uid,
+				price : '<%=price %>',
+				merchant_uid : '<%=merchant_uid%>'
+			},
+			contentType:'application/x-www-form-urlencoded; charset=utf-8',
+			success:function(map) {
+				if(map.res == "OK") {
+					alert('결제예약 성공');
+				} else {
+					alert('결제예약 실패');
+				}
+			}, error:function() {
+				alert('ajax통신 실패');
+			}
+		});
+		location.href='<%=request.getContextPath()%>/';
+	});
+	
+	
+});
+    	
+</script>
+
 <body>
 	<div style="height: 50px;">
 	<header >
@@ -24,7 +95,7 @@
     <div class="subContainer">
         <div class="subscribeHeader">
           <ul>
-            <li class="on" style="cursor: pointer;" onclick="location.href='#'">
+            <li class="on" style="cursor: pointer;">
               <h1>1</h1>
               <span>구독선택</span>
             </li>
@@ -38,8 +109,8 @@
             </li>
           </ul>
         </div>
-          <h1 class="text-field">성공적으로 구독하였습니다.</h1>
-
+          <h1 class="text-field" style="cursor:pointer">성공적으로 구독하였습니다.</h1>
+          <h1 class="test_cancel" style="cursor:pointer">취소 테스트.</h1>
         </div>
      
         <div class="subscribeEndBox">
@@ -49,7 +120,7 @@
               <span class="Kinds">정기결제</span>
               <span class="loop">첫 배달일은 mm월 dd일입니다.</span>
               <div class="option">
-                <span><%=price %></span>               
+                <span><%=price %>원</span>               
                 <span>/1개월</span>          
                 <em>배송비무료</em>
               </div>

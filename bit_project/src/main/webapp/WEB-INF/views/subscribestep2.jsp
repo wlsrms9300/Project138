@@ -138,6 +138,7 @@
 		    var beforeStr = $('#user_email').val();
 			var afterStr = beforeStr.split('@');
 		    var customer_uid = afterStr[0] + afterStr[1];
+		    var merchant_uid = 'merchant_' + new Date().getTime();
 			
 		  	/* 빌링키 난수
 			var num = Math.floor(Math.random() * 10000) + 1;;
@@ -158,7 +159,7 @@
 	  IMP.request_pay({
 		    pg : 'kakaopay', // 결제 방식
 		    pay_method : 'card', //결제 수단
-		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    merchant_uid : merchant_uid,
 		    customer_uid: customer_uid, // 카드와 1:1로 대응하는 값
 		    name : '주문명:결제테스트', //order 테이블에 들어갈 주문명 혹은 주문번호
 		    amount : <%=price%>, //결제 금액
@@ -185,7 +186,11 @@
 	            	async : false,
 	            	contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 	            	success: function(map) {	
-	            		token = map.token;
+	            		if(map.res == "OK") {
+	            			
+	            		} else {
+	            			alert("실패");
+	            		}
 	            	}, 
 	            	error:function() {
 	    				alert("ajax통신 실패!!!");
@@ -193,7 +198,7 @@
 	    			}
 	            }); 
 	           if(check == true) {
-	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ price + '&token=' + token;
+	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ price + '&merchant_uid=' + merchant_uid;
 	           }
 	           
 		} else {

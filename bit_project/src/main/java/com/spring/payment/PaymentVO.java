@@ -7,7 +7,11 @@ public class PaymentVO {
 	private String customer_uid;
 	private int subscribe_num;
 	private Date pay_date;
-	private int price;
+	private int price; //등급별 가격
+	private int point_price; //포인트 차감
+	private int pay_price; //실제 결제금액
+	private String merchant_uid; //주문번호2
+	private String imp_uid; //주문번호1
 	
 	public int getPay_num() {
 		return pay_num;
@@ -38,6 +42,30 @@ public class PaymentVO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public int getPoint_price() {
+		return point_price;
+	}
+	public void setPoint_price(int point_price) {
+		this.point_price = point_price;
+	}
+	public int getPay_price() {
+		return pay_price;
+	}
+	public void setPay_price(int pay_price) {
+		this.pay_price = pay_price;
+	}
+	public String getMerchant_uid() {
+		return merchant_uid;
+	}
+	public void setMerchant_uid(String merchant_uid) {
+		this.merchant_uid = merchant_uid;
+	}
+	public String getImp_uid() {
+		return imp_uid;
+	}
+	public void setImp_uid(String imp_uid) {
+		this.imp_uid = imp_uid;
 	}
 	
 

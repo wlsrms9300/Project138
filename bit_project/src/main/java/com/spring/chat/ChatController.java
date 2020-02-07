@@ -30,7 +30,7 @@ public class ChatController {
 			
 			if(session.getAttribute("email") != null) { //세션이 null이 아니라면 유저정보 받아오기
 				userDetail = (LoginVO)session.getAttribute("userDetail");
-				
+				if(userDetail.getUsergroup() != null) {
 				if(userDetail.getUsergroup().equals("admin")) { //관리자일 경우 생성된 방정보 가져오기
 					check = chatservice.checkRoom(userDetail.getNickname());
 					if(check != 0) {
@@ -39,6 +39,7 @@ public class ChatController {
 					} else {
 						System.out.println("생성된 방이 없습니다");
 					}
+				}
 				}
 			}
 			model.addAttribute("adminlist", adminlist);
