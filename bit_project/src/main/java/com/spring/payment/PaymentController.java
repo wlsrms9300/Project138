@@ -44,7 +44,6 @@ public class PaymentController {
 
 	
 	 //관리자 결제 페이지 회원 불러오기
-	  
 	@RequestMapping(value= "/subscribemember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8") 
 	public ArrayList<LoginVO> subscribeMember() throws Exception {
 		ArrayList<LoginVO> data = new ArrayList<LoginVO> ();
@@ -90,36 +89,35 @@ public class PaymentController {
 	@ResponseBody
 	public HashMap<String, String> insertSP(PaymentVO paymentvo, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		System.out.println(paymentvo.getPrice());
 		HashMap<String, String> map = new HashMap<String, String>();
-
-		/*
+		SubscriptionVO vo = new SubscriptionVO(); //Subscribe테이블 정보
+		
+		int price = paymentvo.getPrice();
+		String imp_uid = paymentvo.getImp_uid();
+		String merchant_uid = paymentvo.getMerchant_uid();
+		String email = request.getParameter("email");
+		System.out.println("빌링키 정보 : " + price + ", " + imp_uid + ", " + merchant_uid + ", " + email);
+		
+		vo.setEmail(email);
+		
+		
+		
+		/* 예약할때 토큰 필요
 		 * 토큰 가져오기 IamportResponse<AccessToken> auth_response = client.getAuth(); String
 		 * token = auth_response.getResponse().getToken(); map.put("token",token);
 		 */
-
-		/*
-		 * 토큰 생성 String imp_key = URLEncoder.encode("6309798726474324", "UTF-8"); String
-		 * imp_secret = URLEncoder.encode(
-		 * "mDbo9qHQOKOwHGhVmJHP2Xhw2Hyzyf7VSij2I1SwLG3tmkpJ47y74QE7ycH6rO2k6lmPmfl8VoBiJ12O",
-		 * "UTF-8"); JSONObject json1 = new JSONObject();
-		 * 
-		 * json1.put("imp_key", imp_key); json1.put("imp_secret", imp_secret); Iamport2
-		 * iamport = new Iamport2(); String _token = iamport.getToken(request, response,
-		 * json1, "https://api.iamport.kr/users/getToken");
-		 * 
-		 * map.put("token", _token); System.out.println("_token="+_token);
-		 */
-
+		
 		// DB에 결제내역 저장
-		String res = "1";
-		if (res.equals("1")) {
+		try {
+			
+			
 			map.put("res", "OK");
-		} else {
+		} catch(Exception e) {
+			e.printStackTrace();
 			map.put("res", "False");
 		}
 
-		return map;
+		return map; //성공여부 map에 저장
 	}
 
 	@RequestMapping(value = "/subscribestep3.me")

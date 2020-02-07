@@ -15,24 +15,32 @@
 	</resultMap>
 	
 	<resultMap type="com.spring.payment.SubscriptionVO" id="SubscriptionResultMap">
-		<result property="name" column="name" />
-		<result property="phone" column="phone" />
-		<result property="price" column="price" />
-		<result property="point_price" column="point_price" />
-		<result property="pay_price" column="pay_price" />
-
 		<result property="subscribe_num" column="subscribe_num" />
 		<result property="email" column="email" />
 		<result property="grade" column="grade" />
 		<result property="state" column="state" />
 	</resultMap>
 	 
+	<!-- 관리자 페이지 구독결제목록 불러오기 -->
 	<select id="allSubscribe" resultMap="SubscriptionResultMap">
 		select m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
 		from member m, subscribe s, subscribe_payment p 
 		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y'
 	</select> 
-
+	
+	<!-- subscribe 테이블 insert (state 기본값 "구독대기" // 결제시 "구독중" 으로 변경필요)-->
+	<insert id="insertSubscribe" parameterType="com.spring.payment.SubscriptionVO">
+	<selectKey keyProperty="subscribe_num" resultType="int" order="BEFORE">
+			SELECT SUBSCRIBE_SEQUENCE.nextval From DUAL
+	</selectKey>
+		INSERT INTO SUBSCRIBE VALUES 
+ 		(SUBSCRIBE_NUM=#{subscribe_unm}, EMAIL=#{email}, GRADE=#{grade})
+	</insert>
+	
+	<!-- subscribe_payment 테이블 insert (subscribe_num 받아오기)-->
+	<insert id="insertPayment" parameterType="com.spring.payment.PaymentVO">
+	
+	</insert>
 
 
 
