@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.tazo.ShareWatingListVO;
 @RestController
 public class MypageAjaxController {
 	@Autowired(required = false)
@@ -49,5 +51,19 @@ public class MypageAjaxController {
 			e.getMessage();
 		}
 		return wishlist;
+	}
+	
+	@GetMapping(value = "/mypage_share.my", produces = "application/json;charset=UTF-8")
+	public List<ShareWatingListVO> getMyPageShare(String email) {
+		System.out.println("컨트롤러"+email);
+		List<ShareWatingListVO> shareList = null;
+		try {
+			shareList = service.getMyPageShare(email);
+			System.out.println(shareList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return shareList;
 	}
 }

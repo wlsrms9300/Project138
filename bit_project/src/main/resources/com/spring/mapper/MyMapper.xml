@@ -31,4 +31,10 @@
 	where p.product_num=r.product_num AND email=#{email}	
 </select>
 
+<select id="getMyPageShare" parameterType="map" resultType="com.spring.tazo.ShareWatingListVO">
+	select * from share_wating_list where email=#{email} 
+</select>
+
+
+
 </mapper>

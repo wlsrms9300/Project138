@@ -178,6 +178,82 @@ $(document).ready(function(){
             menu5.hide();
             menu6.hide();
         }
+        $('.share').empty();
+        $.ajax({
+            url: '/bit_project/mypage_share.my',
+            type: 'GET',
+            dataType: 'json',
+            data:{"email" : myemail},
+            async:false,
+            success: function (data) {
+                    var sl = "";
+                    if(data!=null){
+                    $.each(data, function (index, item) {
+                    	if(index==0){
+                    		sl += '<h2>쉐어</h2>';
+                            sl += '<div class="account">';
+                            sl += '<div class="account_title">';
+                            sl += '<h3>계좌번호</h3>';
+                            sl += '</div>';
+                            sl += '<div class="account_detail">';
+                            sl += '<p>'+item.bank+'&nbsp;&nbsp;'+item.account+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+item.name+'</p>';
+                            sl += '</div>';
+                            sl += '</div>';
+                            $('.share').append(sl);
+                            var sl_sub1 = "";
+                            sl_sub1 = '<div class="application">';
+                            sl_sub1 += '<h3>신청 내역</h3>';
+                            sl_sub1 += '<table>';
+                            sl_sub1 += '<tr class="application_line">';
+                            sl_sub1 += '<th>신청일</th>';
+                            sl_sub1 += '<th>상품명</th>';
+                            sl_sub1 += '<th>상태</th>';
+                            sl_sub1 += '</tr>';
+                            sl_sub1 += '</table>';
+                            $('.share').append(sl_sub1);
+                    	}
+                        //$('.account_title').append(sl_sub1);
+                        //$('.account_detail').append(sl_sub2);
+                        var sl_sub2 = "";
+                        sl_sub2 += '<tr class="application_line">';
+                        var date = new Date(item.consignment_start_date);
+                        date = date_to_str(date);
+                        sl_sub2 += '<td>'+date+'</td>';
+                        sl_sub2 += '<td>'+item.product_name+'</td>';
+                        if(item.share_state==0){
+                        	sl_sub2 += '<td>쉐어 대기</td>';	
+                        }else if(item.share_state==1) {
+                        	sl_sub2 += '<td>쉐어 수락</td>';
+                        }else {
+                        	sl_sub2 += '<td>쉐어 거절</td>';
+                        }
+                        sl_sub2 += '</tr>';
+
+                        $('.application table').append(sl_sub2);
+                      
+                    })
+                    var sh = "";
+                    sh += '<div class="share_history">';
+                    sh += '<h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn">';
+                    sh += '<table>';
+                    sh += '<tr class="share_line">';
+                    sh += '<th>기간</th>';
+                    sh += '<th>상품명</th>';
+                    sh += '<th>등급</th>';
+                    sh += '<th>수익</th>';
+                    sh += '<th>상태</th>';
+                    sh += '</tr>';
+                    sh += '</table>';
+                    sh += '</div>';
+                    $('.share').append(sh);
+                    } else {
+                    	alert('데이터가 없습니다.')
+                    }
+            },
+            error: function () {
+                alert("마이페이지 쉐어 신청 리스트 출력 실패");
+            }
+        });
     });
 
     $('#num4').click(function(){
@@ -686,3 +762,20 @@ $(document).ready(function(){
     });
 });
 
+function date_to_str(format)
+{
+    var year = format.getFullYear();
+    var month = format.getMonth() + 1;
+    if(month<10) month = '0' + month;
+    var date = format.getDate();
+    if(date<10) date = '0' + date;
+    var hour = format.getHours();
+    if(hour<10) hour = '0' + hour;
+    var min = format.getMinutes();
+    if(min<10) min = '0' + min;
+    var sec = format.getSeconds();
+    if(sec<10) sec = '0' + sec;
+    
+    return year + "-" + month + "-" + date + " " + hour + ":" + min;
+    
+}

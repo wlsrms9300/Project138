@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MyMapper;
+import com.spring.tazo.ShareWatingListVO;
 
 @Service
 public class MypageServiceImpl implements MypageService {
@@ -48,6 +49,20 @@ public class MypageServiceImpl implements MypageService {
 			throw new Exception("예약 리스트 출력 실패", e);
 		}
 	}
+
+	@Override
+	public List<ShareWatingListVO> getMyPageShare(String email) throws Exception {
+		List<ShareWatingListVO> shareList = null;
+		try {
+			System.out.println("서비스");
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			shareList = myMapper.getMyPageShare(email);
+			return shareList;
+		} catch (Exception e) {
+			throw new Exception("개인 쉐어 리스트 출력 실패", e);
+		}
+	}
+	
 
 	
 	

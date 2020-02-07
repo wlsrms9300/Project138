@@ -14,61 +14,8 @@
 </head>
 <body>
 	<div class="share">
-            <h2>쉐어</h2>
-            <div class="account">
-                <div class="account_title">
-                    <h3>계좌번호</h3>
-                </div>
-                <div class="account_detail">
-                    <p>우리은행 1002 - 043 - 884651&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조성현</p>
-                </div>
-            </div>
-            <div class="application">
-                <h3>신청 내역</h3>
-                <table>
-                    <tr class="application_line">
-                        <th>신청일</th>
-                        <th>상품명</th>
-                        <th>상태</th>
-                    </tr>
-                    <tr class="application_line">
-                        <td>2020.01.01</td>
-                        <td>상품명1</td>
-                        <td>쉐어 불가</td>
-                    </tr>
-                    <tr class="application_line">
-                        <td>2020.01.01</td>
-                        <td>장난감2</td>
-                        <td>쉐어 가능</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="share_history">
-                <h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn">
-                <table>
-                    <tr class="share_line">
-                        <th>기간</th>
-                        <th>상품명</th>
-                        <th>등급</th>
-                        <th>수익</th>
-                        <th>상태</th>
-                    </tr>
-                    <tr class="share_line">
-                        <td>2020.01.01 ~ 2020.01.20</td>
-                        <td>장난감</td>
-                        <td>골드</td>
-                        <td>2,000</td>
-                        <td>대여</td>                           
-                    </tr>
-                    <tr class="share_line">
-                        <td>2020.01.01 ~ 2020.01.20</td>
-                        <td>장난감</td>
-                        <td>플래티넘</td>
-                        <td>2,000</td>
-                        <td>대기</td> 
-                    </tr>
-                </table>
-            </div>
-        </div>
+           
+            
+    </div>
 </body>
 </html>
