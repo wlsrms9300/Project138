@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.CPMapper;
 
-@Service
+@Service 
 public class CPServiceImpl implements CPService {
 
 	@Autowired
@@ -46,5 +46,5 @@ public class CPServiceImpl implements CPService {
 		}
 		return list;
 	}
-	
+
 }

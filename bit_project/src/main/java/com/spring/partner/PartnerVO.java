@@ -5,6 +5,7 @@ public class PartnerVO {
 	private int partner_num;
 	private String license_num;
 	private String name;
+	private String state;
 	private String content;
 	private String phone;
 	private String email;
@@ -15,6 +16,8 @@ public class PartnerVO {
 	private String img;
 	private String term;
 	private String category;
+	
+	
 	public int getPartner_num() {
 		return partner_num;
 	}
@@ -32,6 +35,12 @@ public class PartnerVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	public String getContent() {
 		return content;
@@ -94,5 +103,5 @@ public class PartnerVO {
 		this.category = category;
 	}
 	
-	
+		
 }

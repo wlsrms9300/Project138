@@ -37,7 +37,7 @@ public class MenuController {
 			//홈페이지에 있는데이터를 cpvo에 넣어 놨어요
 			cpVO.setLicense_num(request.getParameter("license_num"));
 			cpVO.setName(request.getParameter("name"));		
-			cpVO.setPhone(Integer.parseInt(request.getParameter("phone")));		
+			cpVO.setPhone(request.getParameter("phone"));		
 			cpVO.setEmail(request.getParameter("email"));
 			cpVO.setHomepage(request.getParameter("homepage"));
 			cpVO.setPostal_num(Integer.parseInt(request.getParameter("postal_num")));
@@ -88,7 +88,7 @@ public class MenuController {
 	public String kindergarten(Model model, HttpServletResponse response) throws Exception {
 		List<CompanyVO> list = null; 
 		try {
-			list = service.companyimg();
+			list = service.companyimg();			
 			model.addAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
