@@ -45,15 +45,20 @@ public class PaymentController {
 	
 	 //관리자 결제 페이지 회원 불러오기
 	@RequestMapping(value= "/subscribemember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8") 
-	public ArrayList<LoginVO> subscribeMember() throws Exception {
-		ArrayList<LoginVO> data = new ArrayList<LoginVO> ();
-		
+	public ArrayList<PMemberVO> subscribeMember() throws Exception {
+		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+		try {
+			data = paymentService.allSubscribe();
+			System.out.println("관리자 페이지 결제자 정보 불러오기");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return data;
 	}
 	 
 
-	/* 구독 선택 */
+	/* 구독결제자 정보 */
 	@RequestMapping(value = "/selectSubscription.su", method = RequestMethod.POST)
 	public String selectSubscription(@RequestParam("group1") String grade, HttpSession session,
 			HttpServletRequest request, Model model) throws Exception {
@@ -84,7 +89,7 @@ public class PaymentController {
 		return "subscribestep2";
 	}
 
-	/* */
+	/* 빌링키 발급 후 DB에 정보저장 */
 	@RequestMapping(value = "/insertSP.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap<String, String> insertSP(PaymentVO paymentvo, HttpServletRequest request,

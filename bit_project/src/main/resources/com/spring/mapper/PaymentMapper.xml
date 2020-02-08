@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.PaymentMapper">
 
+	<!-- 구독결제 정보 -->
 	<resultMap type="com.spring.payment.PaymentVO" id="PaymentResultMap">
 		<result property="pay_num" column="pay_num" />
 		<result property="customer_uid" column="customer_uid" />
@@ -14,6 +15,7 @@
 		<result property="imp_uid" column="imp_uid" />
 	</resultMap>
 	
+	<!-- 구독 정보 -->
 	<resultMap type="com.spring.payment.SubscriptionVO" id="SubscriptionResultMap">
 		<result property="subscribe_num" column="subscribe_num" />
 		<result property="email" column="email" />
@@ -22,8 +24,19 @@
 		<result property="count" column="count" />
 	</resultMap>
 	
+	<!-- 구독자 정보(결제) -->
+	<resultMap type="com.spring.payment.PMemberVO" id="PMemberResultMap">
+		<result property="email" column="email" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="grade" column="grade" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+	</resultMap>
+	
 	<!-- 관리자 페이지 구독결제목록 불러오기 -->
-	<select id="allSubscribe" resultMap="SubscriptionResultMap">
+	<select id="allSubscribe" resultMap="PMemberResultMap">
 		select m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
 		from member m, subscribe s, subscribe_payment p 
 		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y'

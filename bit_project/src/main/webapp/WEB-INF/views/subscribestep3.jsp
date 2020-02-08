@@ -21,7 +21,9 @@
 
 <script>
 $(document).ready(function() {
-	$('.text-field').click(function(){
+	
+	//예약
+	$('.text-field').click(function(){ 
 		
 		var beforeStr = '<%=email_sub3 %>';
 		var afterStr = beforeStr.split('@');
@@ -51,7 +53,7 @@ $(document).ready(function() {
 	});
 	
 	
-	
+	//예약취소
 	$('.test_cancel').click(function(){
 		
 		var beforeStr = '<%=email_sub3 %>';
@@ -80,7 +82,6 @@ $(document).ready(function() {
 		});
 		location.href='<%=request.getContextPath()%>/';
 	});
-	
 	
 });
     	
@@ -132,7 +133,7 @@ $(document).ready(function() {
           </div>
           
           
-	 <!-- footer 시작 -->
+	<!-- footer 시작 -->
     <footer id="footer">
         <div id="footer_sns">
             <div class="container">

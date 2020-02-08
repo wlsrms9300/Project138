@@ -20,13 +20,13 @@
 	<![endif]-->
 	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 	
-	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
 	<script src="${pageContext.request.contextPath}/resources/js/admin/payment.js"></script>
 </head>
 <script type="text/javascript">
-    $(function($) {
+
         var lang_kor = {
         "decimal" : "",
         "emptyTable" : "데이터가 없습니다.",
@@ -51,14 +51,6 @@
             "sortDescending" : " :  내림차순 정렬"
         }
     };
-
-        $('#foo-table').DataTable( {
-        	
-            language:lang_kor
-        });  
-        
-    });
-   
 </script>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">

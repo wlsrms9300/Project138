@@ -21,8 +21,7 @@ public class AdminController2 {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private SubscribePaymentService subscribePaymentService;
+	
 	
 	@RequestMapping(value = "/member_admin.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody

@@ -1,24 +1,15 @@
-package com.spring.admin2;
+package com.spring.payment;
 
-public class SubscribePaymentVO {
+public class PMemberVO {
 
 	private String email;
 	private String name;
-	private int phone;
+	private String phone;
 	private String grade;
 	private int price;
 	private int point_price;
 	private int pay_price;
 	
-	private String subscribe;
-	
-	
-	public String getSubscribe() {
-		return subscribe;
-	}
-	public void setSubscribe(String subscribe) {
-		this.subscribe = subscribe;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -31,10 +22,10 @@ public class SubscribePaymentVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getGrade() {
@@ -61,4 +52,5 @@ public class SubscribePaymentVO {
 	public void setPay_price(int pay_price) {
 		this.pay_price = pay_price;
 	}
+	
 }

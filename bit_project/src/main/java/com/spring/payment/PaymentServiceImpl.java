@@ -31,10 +31,10 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
-	public ArrayList<SubscriptionVO> allSubscribe() throws Exception {
+	public ArrayList<PMemberVO> allSubscribe() throws Exception {
 		try {
 			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
-			ArrayList<SubscriptionVO> list = paymentmapper.allSubscribe();
+			ArrayList<PMemberVO> list = paymentmapper.allSubscribe();
 			return list;
 		} catch (Exception e) {
 			throw new Exception("구독자 결제 조회 실패", e);
