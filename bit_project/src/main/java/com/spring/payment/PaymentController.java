@@ -92,24 +92,69 @@ public class PaymentController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		SubscriptionVO vo = new SubscriptionVO(); //Subscribe테이블 정보
 		
-		int price = paymentvo.getPrice();
-		String imp_uid = paymentvo.getImp_uid();
-		String merchant_uid = paymentvo.getMerchant_uid();
-		String email = request.getParameter("email");
-		System.out.println("빌링키 정보 : " + price + ", " + imp_uid + ", " + merchant_uid + ", " + email);
-		
-		vo.setEmail(email);
-		
-		
-		
 		/* 예약할때 토큰 필요
 		 * 토큰 가져오기 IamportResponse<AccessToken> auth_response = client.getAuth(); String
 		 * token = auth_response.getResponse().getToken(); map.put("token",token);
 		 */
 		
+		int price = paymentvo.getPrice();
+		String imp_uid = paymentvo.getImp_uid();
+		String merchant_uid = paymentvo.getMerchant_uid();
+		String email = request.getParameter("email");
+		String grade = null;
+		int count = 0;
+		
+		System.out.println("빌링키 정보 : " + price + ", " + imp_uid + ", " + merchant_uid + ", " + email);
+		
+		switch(price) {
+			case 29000 : grade = "실버";
+						 break;
+			case 59000 : grade = "골드";
+						 break;
+			case 79000 : grade = "플래티넘";
+						 break;
+			case 34000 : grade = "비정기"; 
+						 count = 1;
+						 break;
+			case 68000 : grade = "비정기";
+						 count = 2;
+						 break;
+		}
+		
 		// DB에 결제내역 저장
 		try {
+			// 멤버 테이블 subscribe 컬럼 값 'Y'로 변경
+			int res1 = paymentService.updateMemberColumn(email);
+			if(res1 != 0) {
+				System.out.println("멤버테이블 구독 변경 성공");
+			} else {
+				System.out.println("멤버테이블 구독 변경 실패");
+			}
 			
+			// 구독정보 저장
+			vo.setEmail(email);
+			vo.setGrade(grade);
+			vo.setCount(count);
+			int res2 = paymentService.insertSubscribe(vo);
+			if(res2 != 0) {
+				System.out.println("구독등록 성공");
+			} else {
+				System.out.println("구독등록 실패");
+			}
+			
+			// 구독번호 가져오기
+			SubscriptionVO subvo = paymentService.getSubscribe(email);
+			int subscribe_num = subvo.getSubscribe_num();
+			
+			// 받아온 구독번호로 구독결제정보 저장
+			paymentvo.setSubscribe_num(subscribe_num);
+			
+			int res3 = paymentService.insertPayment(paymentvo);
+			if(res3 != 0) {
+				System.out.println("구독결제 등록 성공");
+			} else {
+				System.out.println("구도결제 등록 실패");
+			}
 			
 			map.put("res", "OK");
 		} catch(Exception e) {

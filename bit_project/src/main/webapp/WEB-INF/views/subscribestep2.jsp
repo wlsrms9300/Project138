@@ -184,7 +184,7 @@
 	            //빌링키 발급 성공
 	            var imp_uid = rsp.imp_uid;
 	            var check = true;
-	           $.ajax({ //빌링키 발급 성공시 DB에 정보 보내준 후 subscribe3d으로 이동 (sub3에서 결제내용 확인 및 위시리스트 작성으로 이동)
+	           $.ajax({ //빌링키 발급 성공시 DB에 정보 보내준 후 subscribe3으로 이동 (sub3에서 결제내용 확인 및 위시리스트 작성으로 이동)
 	            	url: "/bit_project/insertSP.su",
 	            	type: "POST",
 	            	dataType: "json",

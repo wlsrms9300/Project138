@@ -41,5 +41,47 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 	}
 	
+	@Override
+	public int insertSubscribe(SubscriptionVO vo) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.insertSubscribe(vo);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("구독정보 입력 실패", e);
+		}
+	}
 	
+	@Override
+	public SubscriptionVO getSubscribe(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			SubscriptionVO vo = paymentmapper.getSubscribe(email);
+			return vo;
+		} catch (Exception e) {
+			throw new Exception("구독정보 불러오기 실패", e);
+		}
+	}
+	
+	@Override
+	public int insertPayment(PaymentVO vo) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.insertPayment(vo);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("결제정보 입력 실패", e);
+		}
+	}
+	
+	@Override
+	public int updateMemberColumn(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.updateMemberColumn(email);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("멤버 구독컬럼 변경 성공", e);
+		}
+	}
 }

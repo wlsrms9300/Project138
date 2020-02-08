@@ -110,7 +110,6 @@ $(document).ready(function() {
           </ul>
         </div>
           <h1 class="text-field" style="cursor:pointer">성공적으로 구독하였습니다.</h1>
-          <h1 class="test_cancel" style="cursor:pointer">취소 테스트.</h1>
         </div>
      
         <div class="subscribeEndBox">

@@ -19,8 +19,9 @@
 		<result property="email" column="email" />
 		<result property="grade" column="grade" />
 		<result property="state" column="state" />
+		<result property="count" column="count" />
 	</resultMap>
-	 
+	
 	<!-- 관리자 페이지 구독결제목록 불러오기 -->
 	<select id="allSubscribe" resultMap="SubscriptionResultMap">
 		select m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
@@ -31,17 +32,29 @@
 	<!-- subscribe 테이블 insert (state 기본값 "구독대기" // 결제시 "구독중" 으로 변경필요)-->
 	<insert id="insertSubscribe" parameterType="com.spring.payment.SubscriptionVO">
 	<selectKey keyProperty="subscribe_num" resultType="int" order="BEFORE">
-			SELECT SUBSCRIBE_SEQUENCE.nextval From DUAL
+		SELECT SUBSCRIBE_SEQUENCE.nextval From DUAL
 	</selectKey>
-		INSERT INTO SUBSCRIBE VALUES 
- 		(SUBSCRIBE_NUM=#{subscribe_unm}, EMAIL=#{email}, GRADE=#{grade})
+		INSERT INTO SUBSCRIBE (SUBSCRIBE_NUM, EMAIL, GRADE, COUNT)
+		VALUES (#{subscribe_num}, #{email}, #{grade}, #{count})
 	</insert>
+	
+	<!-- subscribe 테이블 -->
+	<select id="getSubscribe" parameterType="String" resultMap="SubscriptionResultMap">
+		SELECT * FROM SUBSCRIBE WHERE EMAIL=#{email}
+	</select>
 	
 	<!-- subscribe_payment 테이블 insert (subscribe_num 받아오기)-->
 	<insert id="insertPayment" parameterType="com.spring.payment.PaymentVO">
-	
+	<selectKey keyProperty="pay_num" resultType="int" order="BEFORE">
+		SELECT SUBSCRIBE_PAY_SEQUENCE.nextval From DUAL
+	</selectKey>
+		INSERT INTO SUBSCRIBE_PAYMENT (PAY_NUM, SUBSCRIBE_NUM, PRICE, MERCHANT_UID, IMP_UID)
+		VALUES (#{pay_num}, #{subscribe_num}, #{price}, #{merchant_uid}, #{imp_uid})
 	</insert>
-
-
+	
+	<!-- 멤버 subscribe 컬럼 값 'Y'로 변경 -->
+	<update id="updateMemberColumn" parameterType="String">
+		UPDATE MEMBER SET SUBSCRIBE='Y' WHERE EMAIL=#{email} 
+	</update>
 
 </mapper>

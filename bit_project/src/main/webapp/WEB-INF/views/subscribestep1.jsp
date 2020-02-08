@@ -65,8 +65,8 @@
 					<div class="">
 						<span class="title">체험판</span> <br />
 						<br /> <span class="txt"> <label>
-						<label id="choice02"><input TYPE='radio' name='group1' value='1month' /> 29,000원/1개월</label></label><br /> <label>
-						<input TYPE="radio" name='group1' value='2month' /> 58,000원/2개월</label><br />
+						<label id="choice02"><input TYPE='radio' name='group1' value='1month' /> 34,000원 / 1개월</label></label><br /> <label>
+						<input TYPE="radio" name='group1' value='2month' /> 68,000원 / 2개월</label><br />
 						</span>
 					</div> <!--지우기-->
 		
