@@ -88,4 +88,9 @@ public interface PDService {
 	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
 	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;
+	    
+	// 6. 개인 쉐어 상품 등록 부분
+	    public int getPnum() throws Exception;
+	    public void shareState(int share_state, int waiting_num) throws Exception;
+	    public void shareAdd(ProductShareVO psVO) throws Exception;
 }

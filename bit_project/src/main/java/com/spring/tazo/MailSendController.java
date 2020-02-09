@@ -82,10 +82,12 @@ public class MailSendController {
 			shareVO.setEmail(req.getParameter("email"));
 			shareVO.setName(req.getParameter("name"));
 			shareVO.setProduct_name(req.getParameter("product_name"));
+			shareVO.setShare_content(req.getParameter("share_content"));
 			shareVO.setAmount(Integer.parseInt(req.getParameter("amount")));
 			shareVO.setConsignment_end_date(to);
 			shareVO.setBank(req.getParameter("bank"));
 			shareVO.setAccount(req.getParameter("account"));
+			
 			
 				if (req.getFile("share_img1").getSize() != 0) {
 					MultipartFile mf1 = req.getFile("share_img1"); // 파일

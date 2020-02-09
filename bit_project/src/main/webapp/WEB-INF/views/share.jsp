@@ -58,6 +58,11 @@
 							<td colspan="2"><input class="field-text" type="text" name="product_name"></td colspan="2">
 						</tr>
 						<tr>
+							<td>간단한 상품설명(구매시기 등)</td>
+							<td colspan="2"><input class="field-text" type="text" name="share_content"></td colspan="2">
+						</tr>
+						
+						<tr>
 							<td>수량</td>
 							<td colspan="2"><input class="field-text" type="text" name="amount"></td colspan="2">
 						</tr>
@@ -77,6 +82,7 @@
 							<td>이미지3</td>
 							<td colspan="2"><input type="file" name="share_img3"></td colspan="2">
 						</tr>
+						
 						<tr>
 							<td>계좌번호</td>
 							<td><select id="select" name="bank">

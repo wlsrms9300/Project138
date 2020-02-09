@@ -453,4 +453,36 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 	/********************** 상품검색 종료 **********************/
+
+
+	/********************** 개인쉐어 상품 등록 시작 **********************/
+	@Override
+	public int getPnum() throws Exception {
+		int res = 0;
+		PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+		res = pdMapper.getPnum();
+		return res;
+	}
+
+	@Override
+	public void shareState(int share_state, int waiting_num) throws Exception {
+		PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+		pdMapper.shareState(share_state, waiting_num);
+	}
+
+	@Override
+	public void shareAdd(ProductShareVO psVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.shareAdd(psVO);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		
+	}
+	
+	
+	
+	/********************** 개인쉐어 상품 등록 종료 **********************/
 }

@@ -1,11 +1,10 @@
 	function share() {
 		
 		$.ajax({
-			url : '/bit_project/member_share.tz',
+			url : '/bit_project/shareAcceptList.tz',
 			type : 'post',
 			dataType : "json",
 			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-			/*async : false,*/
 			success:function(data){
 				$('#output').empty();
 				$.each(data, function(index, item){	//각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
@@ -15,7 +14,6 @@
 			      	var sib2 = "'"+item.product_name+"'";
                    	var sib3 = "'"+item.amount+"'";
                    	var sib4 = "'"+item.share_content+"'"; 
-					
                    	var sib5 = "'"+item.share_img1+"'";
                    	var sib6 = "'"+item.share_img2+"'";
                    	var sib7 = "'"+item.share_img3+"'";
@@ -27,16 +25,19 @@
 					output += '<td>' + item.email + '</td>';
 					output += '<td>' + item.product_name + '</td>';
 					output += '<td>' + item.amount + '</td>';
-					var date = new Date(item.consignment_start_date);
-		            date = date_to_str(date);
-					output += '<td>' + date + '</td>';
-					date = date_to_str(new Date(item.consignment_end_date));
-					output += '<td>' + date + '</td>';
+					var date1 = new Date(item.consignment_start_date);
+					var date2 = new Date(item.consignment_end_date);
+		            date1 = date_to_str(date1);
+		            date2 = date_to_str(date2);
+		           	var sib10 = "'"+date1+"'";
+                   	var sib11 = "'"+date2+"'";
+					output += '<td>' + date1 + '</td>';
+					output += '<td>' + date2 + '</td>';
 					output += '<td>' + item.share_content + '</td>';
 					
 					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+sib0+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+');">상세보기</button>' + '</td>';
-					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+sib0+');">수락</button>';
-					output += '<button type="button" class="btn btn-sm btn-primary" onclick="deny('+sib0+');">거절</button></td>';
+					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="add('+sib0+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+','+sib10+','+sib11+');">등록</button>'
+					output += '</td>';
 					
 					output += '</tr>';
 					
@@ -53,8 +54,6 @@
 	
 	}
 	share();
-	
-	
 	
 	function date_to_str(format)
     {
@@ -74,6 +73,8 @@
         
     }
 	
+	
+
 	function shareDetail(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account) {
 		//파라미터로 받았고, 팝업창 띄움.
 		$('#waiting_num').val(_wnum);
@@ -97,42 +98,26 @@
 	        frmData.submit();
 	}
 	
-function accept(_wnum) {
-	var share_Accept = confirm("쉐어 수락하시겠습니까?");
-	if(share_Accept){
-		$.ajax({
-			url : '/bit_project/shareAcceptOrDeny.tz',
-			type : 'post',
-			dataType : "json",
-			data : {"waiting_num" : _wnum, "chk" : "Accept"},
-			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-			success:function(data){
-				console.log('수락완료');
-			},
-			error:function(){
-				alert("ajax통신 실패 !!!");
-			}
-		});
-	}
+function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, start, end) {
+	$('#waiting_num').val(_wnum);
+	$('#email').val(_email);
+	$('#name').val(_name);
+	$('#product_name').val(_pName);
+	$('#amount').val(_amount);
+	$('#consignment_start_date').val(start);
+	$('#consignment_end_date').val(end);
+	$('#share_content').val(_content);
+	$('#share_img1').val(_img1);
+	$('#share_img2').val(_img2);
+	$('#share_img3').val(_img3);
+	$('#bank').val(_bank);
+	$('#account').val(_account);
+
+	var pop_name = "popupAdd";
+	window.open("", pop_name,"width=1200,height=700, scrollbars=no, resizable=no");
 	
-}
-function deny(_wnum) {
-	var share_Deny= confirm("쉐어 거절하시겠습니까?");
-	if(share_Deny){
-		$.ajax({
-			url : '/bit_project/shareAcceptOrDeny.tz',
-			type : 'post',
-			dataType : "json",
-			data : {"waiting_num" : _wnum, "chk" : "Deny"},
-			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-			success:function(data){
-				console.log('거절완료');
-			},
-			error:function(){
-				alert("ajax통신 실패 !!!");
-			}
-		});
-	}
-	
-	
+	 var frmData = document.frmData;
+        frmData.target = pop_name;
+        frmData.action = "/bit_project/shareAdd.pr";
+        frmData.submit();
 }

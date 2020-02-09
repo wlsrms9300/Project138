@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.member.MemberService;
 import com.spring.member.MemberSubscribeVO;
 import com.spring.member.MemberVO;
+import com.spring.tazo.ShareWatingListVO;
 
 @Controller
 public class AdminController2 {
@@ -103,24 +104,6 @@ public class AdminController2 {
 
 		return retVal;
 	}
-/*	
-	@RequestMapping(value = "/member_admin.tz", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String getShareWaitingList() {
-		List<ShareWaitingListVO> list = memberService.getMemberList();
-		
-		String str = "";
-		
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			str = mapper.writeValueAsString(list);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
-			System.out.println("first() mapper : " + e.getMessage());
-		}
-		
-		return str;
-	}
-*/	
 	
 	@RequestMapping(value = "/payment.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -138,4 +121,59 @@ public class AdminController2 {
 		
 		return str;
 	}
+	
+	@RequestMapping(value = "/member_share.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getShareWaitingList() {
+		List<ShareWatingListVO> shareList = subscribePaymentService.getShareList();
+		
+		String str = "";
+		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			str = mapper.writeValueAsString(shareList);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch(Exception e) {
+			System.out.println("first() mapper : " + e.getMessage());
+		}
+		
+		return str;
+	}
+	
+	@RequestMapping(value = "/shareAcceptOrDeny.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> shareAcceptOrDeny(int waiting_num, String chk) {
+		System.out.println("waiting_num : "+waiting_num);
+		System.out.println("state : "+chk);
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int chk_num = 0;
+		try {
+			if(chk.equals("Accept")) {
+				chk_num = 1;
+				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);	
+			}else {
+				chk_num = 2;
+				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);	
+			}
+			retVal.put("res", "OK");
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+		}
+		return retVal;
+	}
+	
+	@RequestMapping(value = "/shareAcceptList.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<ShareWatingListVO> shareAcceptList() {
+		List<ShareWatingListVO> List = null;
+		try {
+			List = subscribePaymentService.getShareAcceptList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return List;
+	}
+	
 }
+

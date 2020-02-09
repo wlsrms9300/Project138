@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.product.AlarmVO;
+import com.spring.product.ProductShareVO;
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
@@ -22,6 +23,9 @@ public interface PDMapper {
 	void prDelete5(@Param("product_num") int product_num);
 	void prDelete6(@Param("product_num") int product_num);
 	void prDelete7(@Param("product_num") int product_num);
+	int getPnum(); //개인쉐어 상품 등록 떄 사용. 현재 product_num의 시퀀스 값 가져옴.
+	void shareState(@Param("share_state") int share_state, @Param("waiting_num") int waiting_num);
+	void shareAdd(ProductShareVO psVO);
 	List<ProductVO> allSearch();//아직 쓰진 않지만 전체 검색
 	
 	//카테고리가 null일 경우. default 세팅	

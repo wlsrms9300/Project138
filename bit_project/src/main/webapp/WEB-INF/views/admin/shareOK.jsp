@@ -224,6 +224,8 @@
 					    <input type="hidden" name="email" id="email" value="" />
 					    <input type="hidden" name="name" id="name" value="" />
 					    <input type="hidden" name="product_name" id="product_name" value="" />
+					    <input type="hidden" name="consignment_start_date" id="consignment_start_date" value="" />
+					    <input type="hidden" name="consignment_end_date" id="consignment_end_date" value="" />
 					    <input type="hidden" name="amount" id="amount" value="" />
 					    <input type="hidden" name="share_content" id="share_content" value="" />
 					    <input type="hidden" name="share_img1" id="share_img1" value="" />
@@ -243,7 +245,7 @@
 								<th>consignment_end_date</th>
 								<th>연식, 상품내용</th>
 								<th>상세보기</th>
-								<th>수락/거절</th>
+								<th>상품등록하기</th>
 							</tr>
 						</thead>
 						<tbody id="output">
@@ -275,6 +277,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/share.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/shareOK.js"></script>
 </body>
 </html>

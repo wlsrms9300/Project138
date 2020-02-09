@@ -18,4 +18,22 @@
 		from member m, subscribe s, subscribe_payment p 
 		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y'
 	</select>
+	
+	<!--  admin 페이지 쉐어 수락/거절 리스트 -->
+	<select id="getShareList" resultType="com.spring.tazo.ShareWatingListVO">
+		select * from share_waiting_list where share_state=0 order by consignment_start_date
+	</select>
+	<!--  admin 페이지 쉐어 수락 시 리스트 -->
+	<update id="shareWaitingListAcceptOrDeny" parameterType="map">
+	update share_waiting_list set share_state=#{chk_num} where waiting_num=#{waiting_num}
+	</update>
+	<!--  admin 개인쉐어 수락 리스트 0은 대기 1은 수락 2는 거절 -->
+	<select id="getShareAcceptList" resultType="com.spring.tazo.ShareWatingListVO">
+	select * from share_waiting_list where share_state=1 order by consignment_start_date
+	</select>
+	
+	<!--  admin 개인쉐어 거절 리스트  -->
+	<select id="getShareDenyList" resultType="com.spring.tazo.ShareWatingListVO">
+	select * from share_waiting_list where share_state=2 order by consignment_start_date
+	</select>
 </mapper>

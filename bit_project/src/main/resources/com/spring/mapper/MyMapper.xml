@@ -32,7 +32,7 @@
 </select>
 
 <select id="getMyPageShare" parameterType="map" resultType="com.spring.tazo.ShareWatingListVO">
-	select * from share_wating_list where email=#{email} 
+	select * from share_waiting_list where email=#{email} 
 </select>
 
 

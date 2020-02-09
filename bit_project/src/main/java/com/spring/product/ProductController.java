@@ -2,6 +2,8 @@ package com.spring.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -28,11 +30,15 @@ public class ProductController {
 	@Autowired(required = false)
 	private PDService service;
 
-	
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
 		System.out.println("product.pr : " + session.getAttribute("email"));
 		return "product";
+	}
+
+	@RequestMapping(value = "/shareDetail.pr")
+	public String shareDetail(Model model, HttpSession session) {
+		return "shareDetail";
 	}
 
 	@RequestMapping("/productDetail.pr")
@@ -64,10 +70,18 @@ public class ProductController {
 
 	@RequestMapping("/productForm.pr")
 	public String productForm(Model model, HttpSession session) {
-		//String id = (String) session.getAttribute("id");
-		//model.addAttribute("id", id);
+		// String id = (String) session.getAttribute("id");
+		// model.addAttribute("id", id);
 		return "productadd";
 	}
+
+	@RequestMapping("/shareAdd.pr")
+	public String shareAdd(Model model, HttpSession session) {
+		// String id = (String) session.getAttribute("id");
+		// model.addAttribute("id", id);
+		return "shareadd";
+	}
+
 	@RequestMapping("/productModifyForm.pr")
 	public String productModifyForm(Model model, HttpSession session, HttpServletRequest request) {
 		ProductVO prVO = new ProductVO();
@@ -86,7 +100,7 @@ public class ProductController {
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		System.out.println(pNum);
 		try {
-			//리뷰, 문의 삭제
+			// 리뷰, 문의 삭제
 			service.prDelete(pNum);
 			System.out.println("1");
 		} catch (Exception e) {
@@ -94,154 +108,212 @@ public class ProductController {
 		}
 		return "product";
 	}
+
+	// 개인쉐어 등록버튼 눌렀을 떄
+	@RequestMapping("/shareAddProcess.pr")
+	public void shareAddProcess(Model model, HttpServletRequest request) throws Exception {
+		int res = 0;
+		// Ch1. product table 등록
+		ProductVO pdVO = new ProductVO();
+		pdVO.setProduct_name(request.getParameter("product_name"));
+		pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
+		pdVO.setRental_amount(0);
+		pdVO.setCurrent_amount(0);
+		pdVO.setManufacturer(request.getParameter("manufacturer"));
+		pdVO.setProduct_content(request.getParameter("product_content"));
+		pdVO.setCategory_l(request.getParameter("category_l"));
+		pdVO.setCategory_m(request.getParameter("category_m"));
+		pdVO.setCategory_s(request.getParameter("category_s"));
+		pdVO.setImg_sum(request.getParameter("share_img1"));
+		pdVO.setImg_main(request.getParameter("share_img2"));
+		pdVO.setImg_detail(request.getParameter("share_img3"));
+		service.prAdd(pdVO);
+		res = service.getPnum();
+		// Ch2. share_waiting_list 테이블의 state값 1로 변경(쉐어수락)
+		int waiting = Integer.parseInt(request.getParameter("waiting_num"));
+		service.shareState(1, waiting);
+		
+		// Ch3. product_share table 등록
+		ProductShareVO psVO = new ProductShareVO();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(request.getParameter("consignment_start_date"));
+		System.out.println(request.getParameter("consignment_end_date"));
+		String subs1 = request.getParameter("consignment_start_date").substring(0, 10);
+		String subs2 = request.getParameter("consignment_end_date").substring(0, 10);
+		System.out.println(subs1);
+		System.out.println(subs2);
+		Date start = fm.parse(subs1);
+		Date end = fm.parse(subs2);
+		System.out.println(start);
+		System.out.println(end);
+		psVO.setProduct_num(res);
+		psVO.setProduct_name(request.getParameter("product_name"));
+		psVO.setEmail(request.getParameter("email"));
+		psVO.setConsignment_start_date(start);
+		psVO.setConsignment_end_date(end);
+		psVO.setTotal_share_count(0);
+		psVO.setTotal_accumulated_fund(0);
+		psVO.setAccumulated_fund(0);
+		psVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
+		psVO.setShare_amount(0);
+		psVO.setCurrent_amount(0);
+		
+		service.shareAdd(psVO);
+	}
+
 	// 상품등록버튼 눌렀을떄 전송했을 때 처리 부분
 	@RequestMapping("/productAdd.pr")
 	public String productAddProcess(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ProductVO pdVO = new ProductVO();
-		int cnt=0;
-			pdVO.setProduct_name(request.getParameter("product_name"));
-			pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
-			pdVO.setRental_amount(0);
-			pdVO.setCurrent_amount(0);
-			pdVO.setManufacturer(request.getParameter("manufacturer"));
-			pdVO.setProduct_content(request.getParameter("product_content"));
-			pdVO.setCategory_l(request.getParameter("category_l"));
-			pdVO.setCategory_m(request.getParameter("category_m"));
-			pdVO.setCategory_s(request.getParameter("category_s"));
-			List<MultipartFile> fileList = request.getFiles("img_list");
-			String uploadPath = "C:\\Project138\\upload\\";
-			System.out.println(fileList.size());
-			for (MultipartFile mf : fileList) {
-				System.out.println("향상된for문 내부");
-				String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
-				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-	            long fileSize = mf.getSize(); // 파일 사이즈
+		int cnt = 0;
+		pdVO.setProduct_name(request.getParameter("product_name"));
+		pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
+		pdVO.setRental_amount(0);
+		pdVO.setCurrent_amount(0);
+		pdVO.setManufacturer(request.getParameter("manufacturer"));
+		pdVO.setProduct_content(request.getParameter("product_content"));
+		pdVO.setCategory_l(request.getParameter("category_l"));
+		pdVO.setCategory_m(request.getParameter("category_m"));
+		pdVO.setCategory_s(request.getParameter("category_s"));
+		List<MultipartFile> fileList = request.getFiles("img_list");
+		String uploadPath = "C:\\Project138\\upload\\";
+		System.out.println(fileList.size());
+		for (MultipartFile mf : fileList) {
+			System.out.println("향상된for문 내부");
+			String originalFileExtension = mf.getOriginalFilename()
+					.substring(mf.getOriginalFilename().lastIndexOf("."));
+			String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+			long fileSize = mf.getSize(); // 파일 사이즈
 
-	            System.out.println("originFileName : " + storedFileName);
-	            System.out.println("fileSize : " + fileSize);
+			System.out.println("originFileName : " + storedFileName);
+			System.out.println("fileSize : " + fileSize);
 
-	            try {
-	                mf.transferTo(new File(uploadPath + storedFileName));
-	                switch (cnt) {
-					case 0:	pdVO.setImg_sum(storedFileName);		
-						break;
-					case 1:	pdVO.setImg_main(storedFileName);		
-						break;
-					case 2:	pdVO.setImg_detail(storedFileName);		
-						break;
-					default:
-						break;
-	                }
-	                cnt++;
-	                
-	            } catch (IllegalStateException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            } catch (IOException e) {
-	                // TODO Auto-generated catch block
-	                e.printStackTrace();
-	            }
-	        }
-				service.prAdd(pdVO);
-		
+			try {
+				mf.transferTo(new File(uploadPath + storedFileName));
+				switch (cnt) {
+				case 0:
+					pdVO.setImg_sum(storedFileName);
+					break;
+				case 1:
+					pdVO.setImg_main(storedFileName);
+					break;
+				case 2:
+					pdVO.setImg_detail(storedFileName);
+					break;
+				default:
+					break;
+				}
+				cnt++;
+
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		service.prAdd(pdVO);
+
 		// return "product";
 		return "redirect:/";
 	}
-	// 상품수정버튼 눌렀을떄 전송했을 때 처리 부분
-		@RequestMapping("/productModify.pr")
-		public String productModify(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
-				throws Exception {
-			ProductVO pdVO = new ProductVO();
-			int amount_cnt = 0;
-			int aChk = service.amountCheck(Integer.parseInt(request.getParameter("product_num")));
-				pdVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
-				pdVO.setProduct_name(request.getParameter("product_name"));
-				amount_cnt = Integer.parseInt(request.getParameter("ta"));	
-				if(amount_cnt > Integer.parseInt(request.getParameter("total_amount"))) {
-					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount"))-amount_cnt);
-				}else if(amount_cnt < Integer.parseInt(request.getParameter("total_amount"))) {
-					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount"))+amount_cnt);
-				}else {
-					pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")));
-				}
-				pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
-				pdVO.setManufacturer(request.getParameter("manufacturer"));
-				pdVO.setProduct_content(request.getParameter("product_content"));
-				
-				pdVO.setCategory_l(request.getParameter("category_l"));
-				pdVO.setCategory_m(request.getParameter("category_m"));
-				pdVO.setCategory_s(request.getParameter("category_s"));
-				String uploadPath = "C:\\Project138\\upload\\";
-				String originalFileExtension = "";
-				String storedFileName = "";
-				try {
-					if (request.getFile("img_sum").getSize() != 0) {
-						MultipartFile mf1 = request.getFile("img_sum"); // 파일
-						originalFileExtension = mf1.getOriginalFilename().substring(mf1.getOriginalFilename().lastIndexOf("."));
-						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-						pdVO.setImg_sum(storedFileName);
-						if (mf1.getSize() != 0) {
-							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-							mf1.transferTo(new File(uploadPath + storedFileName));
-						}
-						System.out.println("mf1 :"+storedFileName);
-					}
-					if (request.getFile("img_main").getSize() != 0) {
-						MultipartFile mf2 = request.getFile("img_main"); // 파일
-						originalFileExtension = mf2.getOriginalFilename().substring(mf2.getOriginalFilename().lastIndexOf("."));
-						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-						pdVO.setImg_main(storedFileName);
-						if (mf2.getSize() != 0) {
-							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-							mf2.transferTo(new File(uploadPath + storedFileName));
-						}
-						System.out.println("mf2 :"+storedFileName);
-					}
-					if (request.getFile("img_detail").getSize() != 0) {
-						MultipartFile mf3 = request.getFile("img_detail"); // 파일
-						originalFileExtension = mf3.getOriginalFilename().substring(mf3.getOriginalFilename().lastIndexOf("."));
-						storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
-						pdVO.setImg_detail(storedFileName);
-						if (mf3.getSize() != 0) {
-							// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
-							mf3.transferTo(new File(uploadPath + storedFileName));
-						}
-						System.out.println("mf3 :"+storedFileName);
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-				service.prModify(pdVO);
-				System.out.println("service.수정완료");
-				if(aChk==0 && pdVO.getRental_amount()+pdVO.getCurrent_amount()>0) {
-					List<AlarmVO> list = null;
-					String api_key = "NCSLBLNIRPXU74SZ"; // 위에서 받은 api key를 추가
-					String api_secret = "RNGJ7RNE5D4SQZMK6LJPTPKNJUN3LJOH"; // 위에서 받은 api secret를 추가
-					// Message coolsms = new Message(api_key, api_secret);
-					com.spring.product.Coolsms coolsms = new com.spring.product.Coolsms(api_key, api_secret);
-					// 이 부분은 홈페이지에서 받은 자바파일을 추가한다음 그 클래스를 import해야 쓸 수 있는 클래스이다.
-					list = service.SMSalarm(pdVO.getProduct_num());
-					HashMap<String, String> set = new HashMap<String, String>();
-					for(int i=0; i<list.size(); i++) {
-						System.out.println("for문 내부 수신번호 : "+list.get(i).getPhone());
-						String mes = "안녕하세요. 진근이네입니다. 입고 알림 신청하신"+list.get(i).getProduct_num()+"번 상품 입고되었습니다.지금 바로 예약하세요";
-						set.put("to", list.get(i).getPhone()); // 수신번호
-						set.put("from", "01099028423"); // 발신번호, jsp에서 전송한 발신번호를 받아 map에 저장한다.
-						set.put("text", mes); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
-						set.put("type", "sms"); // 문자 타입
 
-						System.out.println(set);
-						JSONObject result = coolsms.send(set); // 보내기&전송결과받기
-					}
-					
-				}
-			
-			// return "product";
-			return "redirect:/";
+	// 상품수정버튼 눌렀을떄 전송했을 때 처리 부분
+	@RequestMapping("/productModify.pr")
+	public String productModify(Model model, MultipartHttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ProductVO pdVO = new ProductVO();
+		int amount_cnt = 0;
+		int aChk = service.amountCheck(Integer.parseInt(request.getParameter("product_num")));
+		pdVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
+		pdVO.setProduct_name(request.getParameter("product_name"));
+		amount_cnt = Integer.parseInt(request.getParameter("ta"));
+		if (amount_cnt > Integer.parseInt(request.getParameter("total_amount"))) {
+			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) - amount_cnt);
+		} else if (amount_cnt < Integer.parseInt(request.getParameter("total_amount"))) {
+			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) + amount_cnt);
+		} else {
+			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")));
 		}
-	
+		pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
+		pdVO.setManufacturer(request.getParameter("manufacturer"));
+		pdVO.setProduct_content(request.getParameter("product_content"));
+
+		pdVO.setCategory_l(request.getParameter("category_l"));
+		pdVO.setCategory_m(request.getParameter("category_m"));
+		pdVO.setCategory_s(request.getParameter("category_s"));
+		String uploadPath = "C:\\Project138\\upload\\";
+		String originalFileExtension = "";
+		String storedFileName = "";
+		try {
+			if (request.getFile("img_sum").getSize() != 0) {
+				MultipartFile mf1 = request.getFile("img_sum"); // 파일
+				originalFileExtension = mf1.getOriginalFilename().substring(mf1.getOriginalFilename().lastIndexOf("."));
+				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				pdVO.setImg_sum(storedFileName);
+				if (mf1.getSize() != 0) {
+					// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+					mf1.transferTo(new File(uploadPath + storedFileName));
+				}
+				System.out.println("mf1 :" + storedFileName);
+			}
+			if (request.getFile("img_main").getSize() != 0) {
+				MultipartFile mf2 = request.getFile("img_main"); // 파일
+				originalFileExtension = mf2.getOriginalFilename().substring(mf2.getOriginalFilename().lastIndexOf("."));
+				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				pdVO.setImg_main(storedFileName);
+				if (mf2.getSize() != 0) {
+					// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+					mf2.transferTo(new File(uploadPath + storedFileName));
+				}
+				System.out.println("mf2 :" + storedFileName);
+			}
+			if (request.getFile("img_detail").getSize() != 0) {
+				MultipartFile mf3 = request.getFile("img_detail"); // 파일
+				originalFileExtension = mf3.getOriginalFilename().substring(mf3.getOriginalFilename().lastIndexOf("."));
+				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				pdVO.setImg_detail(storedFileName);
+				if (mf3.getSize() != 0) {
+					// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+					mf3.transferTo(new File(uploadPath + storedFileName));
+				}
+				System.out.println("mf3 :" + storedFileName);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		service.prModify(pdVO);
+		System.out.println("service.수정완료");
+		if (aChk == 0 && pdVO.getRental_amount() + pdVO.getCurrent_amount() > 0) {
+			List<AlarmVO> list = null;
+			String api_key = "NCSLBLNIRPXU74SZ"; // 위에서 받은 api key를 추가
+			String api_secret = "RNGJ7RNE5D4SQZMK6LJPTPKNJUN3LJOH"; // 위에서 받은 api secret를 추가
+			// Message coolsms = new Message(api_key, api_secret);
+			com.spring.product.Coolsms coolsms = new com.spring.product.Coolsms(api_key, api_secret);
+			// 이 부분은 홈페이지에서 받은 자바파일을 추가한다음 그 클래스를 import해야 쓸 수 있는 클래스이다.
+			list = service.SMSalarm(pdVO.getProduct_num());
+			HashMap<String, String> set = new HashMap<String, String>();
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println("for문 내부 수신번호 : " + list.get(i).getPhone());
+				String mes = "안녕하세요. 진근이네입니다. 입고 알림 신청하신" + list.get(i).getProduct_num() + "번 상품 입고되었습니다.지금 바로 예약하세요";
+				set.put("to", list.get(i).getPhone()); // 수신번호
+				set.put("from", "01099028423"); // 발신번호, jsp에서 전송한 발신번호를 받아 map에 저장한다.
+				set.put("text", mes); // 문자내용, jsp에서 전송한 문자내용을 받아 map에 저장한다.
+				set.put("type", "sms"); // 문자 타입
+
+				System.out.println(set);
+				JSONObject result = coolsms.send(set); // 보내기&전송결과받기
+			}
+
+		}
+
+		// return "product";
+		return "redirect:/";
+	}
+
 	// 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/reviewWrite.pr")
 	public String reviewWrite(MultipartHttpServletRequest request) {
@@ -327,7 +399,6 @@ public class ProductController {
 		return "redirect:productDetail.pr?num=" + qnaVO.getProduct_num();
 	}
 
-	
 	@RequestMapping("/qnaModify.pr")
 	public String qnaModify(Model model, HttpServletRequest request) {
 		QnaVO qnaVO = new QnaVO();

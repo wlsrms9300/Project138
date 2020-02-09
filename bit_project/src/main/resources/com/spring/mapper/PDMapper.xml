@@ -24,7 +24,7 @@
 	</resultMap>
 
 	
-	<insert id="prAdd" parameterType="com.spring.product.ProductVO">
+	<insert id="prAdd" parameterType="com.spring.product.ProductVO" >
 		<selectKey keyProperty="product_num" resultType="int" order="BEFORE">
 			SELECT product_sequence.NEXTVAL FROM DUAL
 		</selectKey>
@@ -58,6 +58,23 @@
 			</when>
 		</choose>
 	</insert>
+	
+	<select id="getPnum" resultType="int">
+			SELECT product_num
+    		FROM product
+    		WHERE product_num = (SELECT MAX(product_num)AS product_num FROM product)
+	</select>
+
+	<update id="shareState" parameterType="map">
+			UPDATE share_waiting_list
+    		SET share_state=#{share_state}
+    		WHERE waiting_num=#{waiting_num}
+	</update>
+	<insert id="shareAdd" parameterType="com.spring.product.ProductShareVO">
+	insert into product_share values(#{product_num}, #{product_name},#{email},#{consignment_start_date},#{consignment_end_date},
+	#{total_share_count},#{total_accumulated_fund},#{accumulated_fund},#{total_amount},#{share_amount},#{current_amount})
+	</insert>
+	
 
 	<update id="prModify" parameterType="com.spring.product.ProductVO">		
 		update product set product_name=#{product_name}, total_amount=#{total_amount},current_amount=#{current_amount},
