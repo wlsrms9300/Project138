@@ -23,34 +23,125 @@
 	<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
-	<script src="${pageContext.request.contextPath}/resources/js/admin/payment.js"></script>
+	
+	<!-- datepicker -->
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 </head>
 <script type="text/javascript">
+    $(document).ready(function() {
+    	 $("#datepicker").datepicker({
+    		 	  dateFormat: 'yy-mm-dd' //Input Display Format 변경
+                 ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                 ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                 ,changeYear: true //콤보박스에서 년 선택 가능
+                 ,changeMonth: true //콤보박스에서 월 선택 가능                
+                 ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                 ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                 ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                 ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+                 ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                 ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+                 ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+                 ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+                 ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+                 ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                 ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+               
+         });
 
-        var lang_kor = {
-        "decimal" : "",
-        "emptyTable" : "데이터가 없습니다.",
-        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
-        "infoEmpty" : "0명",
-        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
-        "infoPostFix" : "",
-        "thousands" : ",",
-        "lengthMenu" : "_MENU_ 개씩 보기",
-        "loadingRecords" : "로딩중...",
-        "processing" : "처리중...",
-        "search" : "검색 : ",
-        "zeroRecords" : "검색된 데이터가 없습니다.",
-        "paginate" : {
-            "first" : "첫 페이지",
-            "last" : "마지막 페이지",
-            "next" : "다음",
-            "previous" : "이전"
-        },
-        "aria" : {
-            "sortAscending" : " :  오름차순 정렬",
-            "sortDescending" : " :  내림차순 정렬"
-        }
-    };
+    	//초기값을 오늘 날짜로 설정
+         $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    	 
+    	var lang_kor = {
+    	        "decimal" : "",
+    	        "emptyTable" : "데이터가 없습니다.",
+    	        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+    	        "infoEmpty" : "0명",
+    	        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+    	        "infoPostFix" : "",
+    	        "thousands" : ",",
+    	        "lengthMenu" : "_MENU_ 개씩 보기",
+    	        "loadingRecords" : "로딩중...",
+    	        "processing" : "처리중...",
+    	        "search" : "검색 : ",
+    	        "zeroRecords" : "검색된 데이터가 없습니다.",
+    	        "paginate" : {
+    	            "first" : "첫 페이지",
+    	            "last" : "마지막 페이지",
+    	            "next" : "다음",
+    	            "previous" : "이전"
+    	        },
+    	        "aria" : {
+    	            "sortAscending" : " :  오름차순 정렬",
+    	            "sortDescending" : " :  내림차순 정렬"
+    	        }
+    	};
+
+        //관리자 페이지 이동시 테이블 불러오기
+		var check = true;
+		$.ajax({
+			url: '/bit_project/subscribemember.su',
+			type: 'POST',
+			dataType: 'json',
+			async: false,
+			contentType:'application/x-www-form-urlencoded; charset=utf-8',
+			success:function(data) {
+				$.each(data, function(index, item) {
+					var pay_price = item.price - item.point_price; //실제 결제 금액(테스트중) --> (디비에서 job사용해서 계산해서 값구하기)
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ item.email +'</td>';
+    				output += '<td>'+ item.name +'</td>';
+    				output += '<td>'+ item.phone +'</td>';
+    				output += '<td>'+ item.grade +'</td>';
+    				output += '<td>'+ item.price +'</td>';
+    				output += '<td>'+ item.point_price +'</td>';
+    				output += '<td>'+ pay_price +'</td>';
+    				output += '</tr>';
+    				
+    				console.log("output:" + output);
+    				$('#foo-table').prepend(output);
+    			});
+			},
+			error:function() {
+				alert('ajax통신 실패');
+				check = false;
+			}
+		});
+		
+		if(check == true) {
+			$('#foo-table').DataTable({
+				language: lang_kor
+			});
+		}	
+
+		//결제예약 (예약시 customer_uid, schedule(merchant_uid, amount, schedule_at) 필수)
+		$('#schedule_payment').click(function() {
+			$.ajax ({
+				url:'/bit_project/schedulepayment.su',
+				type:"POST",
+				dataType:"json",
+				contentType:'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(map) {
+					if(map.res == "OK") {
+						alert('결제예약 성공');
+					} else {
+						alert('결제예약 실패');
+					}
+				}, error:function() {
+					alert('ajax통신 실패');
+				}
+			});
+		});
+
+		
+
+		
+    });
+    
+          
 </script>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -208,7 +299,10 @@
 							
 						</tbody>
 					</table>
-					<div style="margin: 0 auto; text-align: center;">
+					<div style="margin: 0 auto; text-align: center; margin-top:10px;">
+						<input type="text" id="datepicker" style="border-radius:5px;">
+					</div>
+					<div style="margin: 0 auto; text-align: center; margin-top:20px;">
 						<button type="button" class="btn btn-lg btn-primary" id="schedule_payment">결제예약</button>
 					</div>
 				</div>
@@ -217,7 +311,7 @@
 		</div><!-- /.row -->
 	</div><!--/.main-->
 	
-	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script> --%>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script>

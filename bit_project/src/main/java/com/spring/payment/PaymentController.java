@@ -43,10 +43,11 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	
-	 //관리자 결제 페이지 회원 불러오기
+	//관리자 결제 페이지 회원 불러오기
 	@RequestMapping(value= "/subscribemember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8") 
-	public ArrayList<PMemberVO> subscribeMember() throws Exception {
-		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+	@ResponseBody
+	public ArrayList<PMemberVO> subscribeMember(HttpServletRequest request) throws Exception {
+		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> (); //데이터 받을 객체
 		try {
 			data = paymentService.allSubscribe();
 			System.out.println("관리자 페이지 결제자 정보 불러오기");
@@ -54,7 +55,7 @@ public class PaymentController {
 			e.printStackTrace();
 		}
 		
-		return data;
+		return data; //리스트 반환
 	}
 	 
 
@@ -172,8 +173,6 @@ public class PaymentController {
 
 	@RequestMapping(value = "/subscribestep3.me")
 	public String subscribestep3(Model model, HttpServletRequest request) {
-		String price = request.getParameter("price");
-		String token = request.getParameter("token");
 
 		return "subscribestep3";
 	}
@@ -182,12 +181,12 @@ public class PaymentController {
 	@RequestMapping(value = "/schedulepayment.me")
 	public HashMap<String, String> schedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
-		String customer_uid = vo.getCustomer_uid();
-		String merchant_uid = vo.getMerchant_uid();
-		int price = vo.getPrice(); // schedule - amount
+		//String name = request.getParameter("name");
+		//String phone = request.getParameter("phone");
+		//String email = request.getParameter("email");
+		//String customer_uid = vo.getCustomer_uid();
+		//String merchant_uid = vo.getMerchant_uid();
+		//int price = vo.getPrice(); // schedule - amount
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2020);

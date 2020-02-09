@@ -30,7 +30,7 @@ $(document).ready(function() {
 	    var customer_uid = afterStr[0] + afterStr[1]; //이메일 customer_uid로 사용 
 	
 		$.ajax ({
-			url:'/bit_project/schedulepayment.me',
+			url:'/bit_project/schedulepayment.su',
 			type:"POST",
 			dataType:"json",
 			data: {
