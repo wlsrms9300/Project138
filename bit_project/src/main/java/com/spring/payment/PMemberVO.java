@@ -2,6 +2,7 @@ package com.spring.payment;
 
 public class PMemberVO {
 
+	private int subscribe_num;
 	private String email;
 	private String name;
 	private String phone;
@@ -51,6 +52,12 @@ public class PMemberVO {
 	}
 	public void setPay_price(int pay_price) {
 		this.pay_price = pay_price;
+	}
+	public int getSubscribe_num() {
+		return subscribe_num;
+	}
+	public void setSubscribe_num(int subscribe_num) {
+		this.subscribe_num = subscribe_num;
 	}
 	
 }

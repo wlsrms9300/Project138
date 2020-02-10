@@ -31,10 +31,10 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
-	public ArrayList<PMemberVO> allSubscribe() throws Exception {
+	public ArrayList<PMemberVO> allSubscribe(String state) throws Exception {
 		try {
 			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
-			ArrayList<PMemberVO> list = paymentmapper.allSubscribe();
+			ArrayList<PMemberVO> list = paymentmapper.allSubscribe(state);
 			return list;
 		} catch (Exception e) {
 			throw new Exception("구독자 결제 조회 실패", e);
@@ -81,7 +81,40 @@ public class PaymentServiceImpl implements PaymentService {
 			int res = paymentmapper.updateMemberColumn(email);
 			return res;
 		} catch (Exception e) {
-			throw new Exception("멤버 구독컬럼 변경 성공", e);
+			throw new Exception("멤버 구독컬럼 변경 실패", e);
+		}
+	}
+	
+	@Override
+	public int updatePayState(PaymentVO vo) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.updatePayState(vo);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("결제 state 값 변경 실패", e);
+		}
+	}
+	
+	@Override
+	public PaymentVO selectCancel(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			PaymentVO vo = paymentmapper.selectCancel(email);
+			return vo;
+		} catch (Exception e) {
+			throw new Exception("취소정보 조회 실패", e);
+		}
+	}
+	
+	@Override
+	public int rePayState(PaymentVO vo) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.rePayState(vo);
+			return res;
+		} catch(Exception e) {
+			throw new Exception("예약취소 실패", e);
 		}
 	}
 }

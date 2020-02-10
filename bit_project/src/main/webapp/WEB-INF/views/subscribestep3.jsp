@@ -20,71 +20,7 @@
 </head>
 
 <script>
-$(document).ready(function() {
-	
-	//예약
-	$('.text-field').click(function(){ 
-		
-		var beforeStr = '<%=email_sub3 %>';
-		var afterStr = beforeStr.split('@');
-	    var customer_uid = afterStr[0] + afterStr[1]; //이메일 customer_uid로 사용 
-	
-		$.ajax ({
-			url:'/bit_project/schedulepayment.su',
-			type:"POST",
-			dataType:"json",
-			data: {
-				customer_uid : customer_uid,
-				price : '<%=price %>',
-				merchant_uid : '<%=merchant_uid%>'
-			},
-			contentType:'application/x-www-form-urlencoded; charset=utf-8',
-			success:function(map) {
-				if(map.res == "OK") {
-					alert('결제예약 성공');
-				} else {
-					alert('결제예약 실패');
-				}
-			}, error:function() {
-				alert('ajax통신 실패');
-			}
-		});
-		location.href='<%=request.getContextPath()%>/';
-	});
-	
-	
-	//예약취소
-	$('.test_cancel').click(function(){
-		
-		var beforeStr = '<%=email_sub3 %>';
-		var afterStr = beforeStr.split('@');
-	    var customer_uid = afterStr[0] + afterStr[1]; //이메일 customer_uid로 사용 
-	
-		$.ajax ({
-			url:'/bit_project/unschedulepayment.me',
-			type:"POST",
-			dataType:"json",
-			data: {
-				customer_uid : customer_uid,
-				price : '<%=price %>',
-				merchant_uid : '<%=merchant_uid%>'
-			},
-			contentType:'application/x-www-form-urlencoded; charset=utf-8',
-			success:function(map) {
-				if(map.res == "OK") {
-					alert('결제예약 성공');
-				} else {
-					alert('결제예약 실패');
-				}
-			}, error:function() {
-				alert('ajax통신 실패');
-			}
-		});
-		location.href='<%=request.getContextPath()%>/';
-	});
-	
-});
-    	
+
 </script>
 
 <body>

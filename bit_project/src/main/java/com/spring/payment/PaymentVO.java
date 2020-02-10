@@ -12,6 +12,7 @@ public class PaymentVO {
 	private int pay_price; //실제 결제금액
 	private String merchant_uid; //주문번호2
 	private String imp_uid; //주문번호1
+	private String state;
 	
 	public int getPay_num() {
 		return pay_num;
@@ -66,6 +67,12 @@ public class PaymentVO {
 	}
 	public void setImp_uid(String imp_uid) {
 		this.imp_uid = imp_uid;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,6 @@ import com.siot.IamportRestClient.request.ScheduleEntry;
 import com.siot.IamportRestClient.request.UnscheduleData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Schedule;
-import com.spring.login.LoginVO;
 import com.spring.member.MemberVO;
 
 @Controller
@@ -43,19 +43,34 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	
-	//관리자 결제 페이지 회원 불러오기
+	//관리자 결제 페이지 예약대기 불러오기
 	@RequestMapping(value= "/subscribemember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8") 
 	@ResponseBody
 	public ArrayList<PMemberVO> subscribeMember(HttpServletRequest request) throws Exception {
 		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> (); //데이터 받을 객체
 		try {
-			data = paymentService.allSubscribe();
-			System.out.println("관리자 페이지 결제자 정보 불러오기");
+			String state = "예약대기";
+			data = paymentService.allSubscribe(state);
+			System.out.println("관리자 페이지 예약대기 불러오기");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		return data; //리스트 반환
+	}
+	
+	//관리자 결제 페이지 예약완료 불러오기
+	@RequestMapping(value="/paymember.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public ArrayList<PMemberVO> payMember(HttpServletRequest request) throws Exception {
+		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+		try {
+			String state = "예약완료";
+			data = paymentService.allSubscribe(state);
+			System.out.println("관리자 페이지 예약완료 불러오기");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return data;
 	}
 	 
 
@@ -178,64 +193,106 @@ public class PaymentController {
 	}
 
 	// 결제예약 신청
-	@RequestMapping(value = "/schedulepayment.me")
+	@RequestMapping(value = "/schedulepayment.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public HashMap<String, String> schedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
-		HashMap<String, String> map = new HashMap<String, String>();
-		//String name = request.getParameter("name");
-		//String phone = request.getParameter("phone");
-		//String email = request.getParameter("email");
-		//String customer_uid = vo.getCustomer_uid();
-		//String merchant_uid = vo.getMerchant_uid();
-		//int price = vo.getPrice(); // schedule - amount
-
+		HashMap<String, String> map = new HashMap<String, String>(); //성공/실패 결과
+		String state = "예약대기";
+		ArrayList<PMemberVO> member = paymentService.allSubscribe(state); //결제할 사용자 목록
+		
+		String beforeDate = request.getParameter("date");
+		String[] date = beforeDate.split("/");		
+		
+		//결제일 설정 (datepicker로 받아온 날의 오전 10시에 결제)
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2020);
-		cal.set(Calendar.MONTH, Calendar.FEBRUARY);
-		cal.set(Calendar.DAY_OF_MONTH, 8);
+		cal.set(Calendar.YEAR, Integer.parseInt(date[2]));
+		cal.set(Calendar.MONTH, Integer.parseInt(date[0])-1);
+		cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
+		cal.set(Calendar.HOUR_OF_DAY, 20);
+		cal.set(Calendar.MINUTE, 25);
+		cal.set(Calendar.SECOND, 0);
 		Date d1 = cal.getTime();
-
-		ScheduleData schedule_data = new ScheduleData(customer_uid);
+		
+		int pay_price = 0;
+		
+		//merchant_uid 중요 (customer_uid, merchant_uid는 모든 사람이 달라야 한다, merchant_uid는 빌링키 발급받을 때 사용했던 값 사용못한다.)
+		String merchant_uid = "merchant_";
+		String[] before = null;
+		String customer_uid = null;
+		//결제일, merchant_uid, amount 설정 
+		ScheduleData schedule_data = null;
+		
 		try {
-			schedule_data.addSchedule(new ScheduleEntry(merchant_uid + "12", d1, BigDecimal.valueOf(price)));
-			System.out.println("예약 요청");
+		//결제할 사용자 목록으로 예약 (customer_uid 만들기)
+		for(int i = 0; i < member.size(); i++) {
+			PMemberVO user = member.get(i);
+			before = user.getEmail().split("@");
+			//customer_uid 설정
+			customer_uid = before[0] + before[1];
+			
+			//pay_price 설정
+			pay_price = user.getPrice() - user.getPoint_price();
+			
+			//merchant_uid 생성할 난수 생성
+			for(int j = 0; j < 15; j++) {
+			    double dValue = Math.random();
+			    int iValue = (int)(dValue * 10);
+			    merchant_uid += Integer.toString(iValue);
+			}
+			System.out.println("customer_uid : " + customer_uid);
+			System.out.println("merchant_uid : " + merchant_uid);
+			
+			//스케줄 생성
+			schedule_data = new ScheduleData(customer_uid);
+			schedule_data.addSchedule(new ScheduleEntry(merchant_uid, d1, BigDecimal.valueOf(pay_price)));
+			
+			//예약요청
 			IamportResponse<List<Schedule>> schedule_response = client.subscribeSchedule(schedule_data);
 			String message = schedule_response.getMessage();
 			int code = schedule_response.getCode();
-
-			System.out.println(message); // null나와야 정상
-			System.out.println(code); // 0나와야함
-
+			System.out.println(customer_uid + "의 예약요청 결과 : " + message + ", " + code);	
+			
+			//DB state, pay_price, merchant_uid 수정 (지금 저장된 merchant_uid로 예약 취소 가능)
+			vo.setSubscribe_num(user.getSubscribe_num());
+			vo.setPay_price(pay_price);
+			vo.setMerchant_uid(merchant_uid);
+			
+			int res = paymentService.updatePayState(vo);
+			merchant_uid = "merchant_"; //merchant_uid 초기화
+		}
 			map.put("res", "OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("res", "False");
 		}
-
 		return map;
 	}
 
 	// 결제예약 취소
-	@RequestMapping(value = "/unschedulepayment.me")
+	@RequestMapping(value = "/unschedulepayment.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	public HashMap<String, String> unschedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-		String customer_uid = vo.getCustomer_uid();
-		String merchant_uid = vo.getMerchant_uid();
-		int price = vo.getPrice(); // schedule - amount
+		String customer_uid = null;
+		String merchant_uid = null;
+		vo = paymentService.selectCancel(email);
+		String[] before = email.split("@");
+		customer_uid = before[0] + before[1];
+		merchant_uid = vo.getMerchant_uid();
+		
 		try {
-			System.out.println("예약 취소 신청");
+			System.out.println(customer_uid + "예약취소 신청");
 			UnscheduleData unschedule_data = new UnscheduleData(customer_uid);
-			unschedule_data.addMerchantUid("merchant_1581044381101" + "12");
-
+			unschedule_data.addMerchantUid(merchant_uid);
+			
 			IamportResponse<List<Schedule>> unschedule_response = client.unsubscribeSchedule(unschedule_data);
 			String message = unschedule_response.getMessage();
 			int code = unschedule_response.getCode();
-
-			System.out.println(message);
-			System.out.println(code);
-
+			System.out.println(customer_uid + "의 예약취소 결과 : " + message + ", " + code);	
+			
+			//state값 예약대기로 변경
+			vo.setPay_price(0);
+			int res = paymentService.rePayState(vo);
+			
 			map.put("res", "OK");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -244,12 +301,15 @@ public class PaymentController {
 
 		return map;
 	}
-
-	@RequestMapping(value = "/callback.me", produces = "application/json;charset=UTF-8")
-	public void callback(HttpServletRequest request) {
-		System.out.println("결제");
-
+//@RequestMapping(value = "/callback.me", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/callback.me")
+	public String callback(HttpServletRequest request, String imp_uid, String merchant_uid, String status) {
+		System.out.println(imp_uid);
+		System.out.println(merchant_uid);
+		System.out.println(status);
+		
 		// 결제되면 디비에 결과 저장
+		return "subscribestep3";
 	}
 
 }
