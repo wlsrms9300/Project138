@@ -222,31 +222,17 @@
         <div class="row">
             <div class="col-lg-12">
 				<div class="board_list_wrap">
-					<form name="frmData" id="frmData" method="post">
-						<input type="hidden" name="waiting_num" id="waiting_num" value="" />
-					    <input type="hidden" name="email" id="email" value="" />
-					    <input type="hidden" name="name" id="name" value="" />
-					    <input type="hidden" name="product_name" id="product_name" value="" />
-					    <input type="hidden" name="amount" id="amount" value="" />
-					    <input type="hidden" name="share_content" id="share_content" value="" />
-					    <input type="hidden" name="share_img1" id="share_img1" value="" />
-					    <input type="hidden" name="share_img2" id="share_img2" value="" />
-					    <input type="hidden" name="share_img3" id="share_img3" value="" />
-					    <input type="hidden" name="bank" id="bank" value="" />
-					    <input type="hidden" name="account" id="account" value="" />
-					</form>
 					<table id="foo-table" class="foo-ex">
 						<h2>쉐어 관리</h2>
 						<thead>
 							<tr>
+								<th>정산일</th>
 								<th>Email</th>
 								<th>Product Name</th>
-								<th>Total Amount</th>
-								<th>consignment_start_date</th>
-								<th>consignment_end_date</th>
-								<th>연식, 상품내용</th>
-								<th>상세보기</th>
-								<th>수락/거절</th>
+								<th>정산액</th>
+								<th>이름</th>
+								<th>은행</th>
+								<th>계좌</th>
 							</tr>
 						</thead>
 						<tbody id="output">
@@ -278,6 +264,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/share.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/share_settle.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.SubscribePaymentMapper;
+import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
 @Service("subscribePaymentService")
@@ -46,6 +47,14 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
 		ShareAcceptList = subscribePaymentMapper.getShareAcceptList();
 		return ShareAcceptList;
+	}
+
+	@Override
+	public List<SettlementVO> getSettleList() {
+		List<SettlementVO> settleList = null;
+		SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+		settleList = subscribePaymentMapper.getSettleList();
+		return settleList;
 	}
 
 

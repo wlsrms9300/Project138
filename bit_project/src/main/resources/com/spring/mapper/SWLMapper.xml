@@ -3,6 +3,7 @@
 
 <mapper namespace="com.spring.mapper.SWLMapper">
 	<resultMap type="com.spring.tazo.ShareWatingListVO" id="shareMap">
+		<result property="waiting_num" column="waiting_num" />
 		<result property="email" column="email" />
 		<result property="name" column="name" />
 		<result property="product_name" column="product_name" />
@@ -18,7 +19,7 @@
 		<result property="share_state" column="share_state" />
 	</resultMap>
 
-<insert id="prAdd" parameterType="com.spring.product.ProductVO">
+<!-- <insert id="prAdd" parameterType="com.spring.product.ProductVO">
 		<selectKey keyProperty="product_num" resultType="int" order="BEFORE">
 			SELECT product_sequence.NEXTVAL FROM DUAL
 		</selectKey>
@@ -27,14 +28,14 @@
 		product_content, category_l, category_m, category_s,
 		
 	</insert>
-
+ -->
 
 	<insert id="shareWaitingList" parameterType="com.spring.tazo.ShareWatingListVO">
 	<selectKey keyProperty="waiting_num" resultType="int" order="BEFORE">
 			SELECT waiting_sequence.NEXTVAL FROM DUAL
 	</selectKey>
-	insert into share_waiting_list(waiting_num,email, name, product_name, amount, consignment_start_date,consignment_end_date, share_img1, share_img2, share_img3, bank, account) 
-	values(#{waiting_num}, #{email}, #{name}, #{product_name}, #{amount}, sysdate, #{consignment_end_date}, #{share_img1}, #{share_img2}, #{share_img3}, #{bank}, #{account})
+	insert into share_waiting_list(waiting_num,email, name, product_name, amount, consignment_start_date,consignment_end_date, share_img1, share_img2, share_img3, bank, account, share_content) 
+	values(#{waiting_num}, #{email}, #{name}, #{product_name}, #{amount}, sysdate, #{consignment_end_date}, #{share_img1}, #{share_img2}, #{share_img3}, #{bank}, #{account}, #{share_content})
 	</insert>	
 
 

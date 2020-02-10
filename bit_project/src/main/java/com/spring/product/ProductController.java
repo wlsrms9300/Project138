@@ -43,7 +43,7 @@ public class ProductController {
 
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
-		int bookmark_chk = 0, wishlist_chk = 0, reservation_chk = 0;
+		int bookmark_chk = 0, wishlist_chk = 0, reservation_chk = 0, alarm_chk = 0;
 		String email = "";
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
@@ -55,12 +55,14 @@ public class ProductController {
 				bookmark_chk = service.getBookMark(pNum, email);
 				wishlist_chk = service.getWishList(pNum, email);
 				reservation_chk = service.getReservation(pNum, email);
+				alarm_chk = service.getAlarm2(email, pNum);
 			}
 			System.out.println("productDetail.pr : " + session.getAttribute("email"));
 			model.addAttribute("prVO", prVO);
 			model.addAttribute("bookmark", bookmark_chk);
 			model.addAttribute("wishlist", wishlist_chk);
 			model.addAttribute("reservation", reservation_chk);
+			model.addAttribute("alarm", alarm_chk);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());
@@ -118,7 +120,7 @@ public class ProductController {
 		pdVO.setProduct_name(request.getParameter("product_name"));
 		pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
 		pdVO.setRental_amount(0);
-		pdVO.setCurrent_amount(0);
+		pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("total_amount")));
 		pdVO.setManufacturer(request.getParameter("manufacturer"));
 		pdVO.setProduct_content(request.getParameter("product_content"));
 		pdVO.setCategory_l(request.getParameter("category_l"));
@@ -131,7 +133,7 @@ public class ProductController {
 		res = service.getPnum();
 		// Ch2. share_waiting_list 테이블의 state값 1로 변경(쉐어수락)
 		int waiting = Integer.parseInt(request.getParameter("waiting_num"));
-		service.shareState(1, waiting);
+		service.shareState(3, waiting);
 		
 		// Ch3. product_share table 등록
 		ProductShareVO psVO = new ProductShareVO();
@@ -170,7 +172,7 @@ public class ProductController {
 		pdVO.setProduct_name(request.getParameter("product_name"));
 		pdVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
 		pdVO.setRental_amount(0);
-		pdVO.setCurrent_amount(0);
+		pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("total_amount")));
 		pdVO.setManufacturer(request.getParameter("manufacturer"));
 		pdVO.setProduct_content(request.getParameter("product_content"));
 		pdVO.setCategory_l(request.getParameter("category_l"));
@@ -231,9 +233,9 @@ public class ProductController {
 		pdVO.setProduct_name(request.getParameter("product_name"));
 		amount_cnt = Integer.parseInt(request.getParameter("ta"));
 		if (amount_cnt > Integer.parseInt(request.getParameter("total_amount"))) {
-			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) - amount_cnt);
+			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) - (amount_cnt - Integer.parseInt(request.getParameter("total_amount"))));
 		} else if (amount_cnt < Integer.parseInt(request.getParameter("total_amount"))) {
-			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) + amount_cnt);
+			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")) + (Integer.parseInt(request.getParameter("total_amount")) - amount_cnt));
 		} else {
 			pdVO.setCurrent_amount(Integer.parseInt(request.getParameter("current_amount")));
 		}

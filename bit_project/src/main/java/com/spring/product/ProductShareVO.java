@@ -3,6 +3,7 @@ package com.spring.product;
 import java.util.Date;
 
 public class ProductShareVO {
+	private int share_num;
 	private int product_num;
 	private String product_name;
 	private String email;
@@ -14,6 +15,13 @@ public class ProductShareVO {
 	private int total_amount;
 	private int share_amount;
 	private int current_amount;
+	
+	public int getShare_num() {
+		return share_num;
+	}
+	public void setShare_num(int share_num) {
+		this.share_num = share_num;
+	}
 	public int getProduct_num() {
 		return product_num;
 	}

@@ -114,7 +114,7 @@ function accept(_wnum) {
 			}
 		});
 	}
-	
+	share();
 }
 function deny(_wnum) {
 	var share_Deny= confirm("쉐어 거절하시겠습니까?");
@@ -133,6 +133,6 @@ function deny(_wnum) {
 			}
 		});
 	}
-	
+	share();
 	
 }

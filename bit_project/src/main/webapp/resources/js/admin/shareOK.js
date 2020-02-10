@@ -96,6 +96,7 @@
 	        frmData.target = pop_name;
 	        frmData.action = "/bit_project/shareDetail.pr";
 	        frmData.submit();
+	        share();
 	}
 	
 function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, start, end) {
@@ -120,4 +121,5 @@ function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img
         frmData.target = pop_name;
         frmData.action = "/bit_project/shareAdd.pr";
         frmData.submit();
+        share();
 }

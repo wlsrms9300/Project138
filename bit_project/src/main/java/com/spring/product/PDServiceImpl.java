@@ -48,6 +48,7 @@ public class PDServiceImpl implements PDService {
 			pdMapper.prDelete5(product_num);
 			pdMapper.prDelete6(product_num);
 			pdMapper.prDelete7(product_num);
+			pdMapper.prDelete8(product_num);
 		} catch (Exception e) {
 			throw new Exception("상품삭제 실패.", e);
 		}
@@ -169,6 +170,18 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("입고 알림 여부 체크 실패", e);
 		}
 	}
+	
+	@Override
+	public int getAlarm2(String email, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int res = pdMapper.getAlarm2(email, product_num);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("입고 알림 여부 체크 실패", e);
+		}
+	}
+
 	@Override
 	public void addAlarm(String email, int product_num, String phone) throws Exception {
 		try {
@@ -231,9 +244,24 @@ public class PDServiceImpl implements PDService {
 	@Override
 	public int getWishList(int product_num, String email) throws Exception {
 		try {
-			int res = 0;
+			int resCount = 0, res = 0;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			res = pdMapper.getWishList(product_num, email);
+			resCount = pdMapper.getWishListCount(email);
+			if(resCount==10) {
+				res = pdMapper.getWishList(product_num, email);
+				if(res==1) {
+					res = 11;
+				}else {
+					res = 12;
+				}
+			}else {
+				res = pdMapper.getWishList(product_num, email);
+				if(res==1) {
+					res = 1;
+				}else {
+					res = 0;
+				}
+			}
 			return res;
 		} catch (Exception e) {
 			throw new Exception("위시리스트 여부 확인 실패", e);
@@ -265,12 +293,23 @@ public class PDServiceImpl implements PDService {
 		try {
 			int res = 0;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			res = pdMapper.getReservation(product_num, email);
+			//email로 예약한 게 있는지 확인
+			res = pdMapper.getReservation1(email);
+			//예약한 상품이 현재 상품인지 여부 확인
+			if(res==1) {
+				res = pdMapper.getReservation2(product_num, email);
+				if(res==1) {
+					res=1;
+				}else {
+					res=2;
+				}
+			}
 			return res;
 		} catch (Exception e) {
 			throw new Exception("위시리스트 여부 확인 실패", e);
 		}
 	}
+	
 	@Override
 	public void addReservation(int product_num, String email) throws Exception {
 		try {

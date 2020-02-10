@@ -189,6 +189,9 @@
 					<li><a class="" href="shareOK.se">
 						<span class="fa fa-arrow-right">&nbsp;</span> 쉐어 상품 등록
 					</a></li>
+						<li><a class="" href="share_settle.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 쉐어 정산 목록
+					</a></li>
 				</ul>
 			</li>
 			

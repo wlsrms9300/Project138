@@ -34,6 +34,29 @@
 <select id="getMyPageShare" parameterType="map" resultType="com.spring.tazo.ShareWatingListVO">
 	select * from share_waiting_list where email=#{email} 
 </select>
+<select id="getMyPageShare2" parameterType="map" resultType="com.spring.product.ProductShareVO">
+	select * from product_share where email=#{email} 
+</select>
+
+<select id="getShareJoin" parameterType="map" resultType="com.spring.product.SettlementVO">
+	select p.share_num, p.product_num, p.email, p.product_name, s.bank, s.account, s.name
+	from share_waiting_list s, product_share p 
+	where s.email = p.email AND p.share_num=#{share_num} AND s.share_state=3
+</select>
+
+
+
+<insert id="addMyPageShareSettle" parameterType="com.spring.product.SettlementVO">
+	<selectKey order="BEFORE" keyProperty="settlement_num" resultType="int">
+	SELECT settle_sequence.NEXTVAL FROM DUAL
+	</selectKey>
+	insert into settlement_details values(#{settlement_num}, #{share_num}, #{product_num}, #{email}, #{product_name}, #{accumulated_fund}, #{name}, #{bank}, #{account}, sysdate)
+</insert>
+
+<update id="updateShareJoin" parameterType="map">
+update product_share set total_accumulated_fund=total_accumulated_fund-#{settle} where share_num=#{share_num}
+</update>
+
 
 
 

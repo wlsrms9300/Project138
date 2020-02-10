@@ -27,13 +27,18 @@
 	<update id="shareWaitingListAcceptOrDeny" parameterType="map">
 	update share_waiting_list set share_state=#{chk_num} where waiting_num=#{waiting_num}
 	</update>
-	<!--  admin 개인쉐어 수락 리스트 0은 대기 1은 수락 2는 거절 -->
+	<!--  admin 개인쉐어 수락 리스트 0은 대기 1은 수락 2는 거절 3은 등록완료 -->
 	<select id="getShareAcceptList" resultType="com.spring.tazo.ShareWatingListVO">
 	select * from share_waiting_list where share_state=1 order by consignment_start_date
 	</select>
 	
-	<!--  admin 개인쉐어 거절 리스트  -->
+	<!--  admin 개인쉐어 거절 리스트 아직 안씀  -->
 	<select id="getShareDenyList" resultType="com.spring.tazo.ShareWatingListVO">
 	select * from share_waiting_list where share_state=2 order by consignment_start_date
+	</select>
+	
+	<!--  admin 개인쉐어 정산 리스트  -->
+	<select id="getSettleList" resultType="com.spring.product.SettlementVO">
+	select * from settlement_details order by settlement_num
 	</select>
 </mapper>

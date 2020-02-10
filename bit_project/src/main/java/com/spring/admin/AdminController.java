@@ -35,6 +35,11 @@ public class AdminController {
 		
 		return "admin/shareOK";
 	}
+	@RequestMapping(value = "/share_settle.se")
+	public String sharesettle(Model model, HttpSession session) {
+		
+		return "admin/share_settle";
+	}
 	@RequestMapping(value = "/payment.se")
 	public String payment(Model model, HttpSession session) {
 		

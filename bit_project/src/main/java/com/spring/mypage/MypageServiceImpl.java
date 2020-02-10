@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MyMapper;
+import com.spring.product.ProductShareVO;
+import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
 @Service
@@ -54,7 +56,6 @@ public class MypageServiceImpl implements MypageService {
 	public List<ShareWatingListVO> getMyPageShare(String email) throws Exception {
 		List<ShareWatingListVO> shareList = null;
 		try {
-			System.out.println("서비스");
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
 			shareList = myMapper.getMyPageShare(email);
 			return shareList;
@@ -62,6 +63,64 @@ public class MypageServiceImpl implements MypageService {
 			throw new Exception("개인 쉐어 리스트 출력 실패", e);
 		}
 	}
+
+	@Override
+	public List<ProductShareVO> getMyPageShare2(String email) throws Exception {
+		List<ProductShareVO> shareList = null;
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			shareList = myMapper.getMyPageShare2(email);
+			return shareList;
+		} catch (Exception e) {
+			throw new Exception("개인 쉐어 리스트 출력 실패", e);
+		}
+	}
+
+	@Override
+	public void getMyPageShareSettle(String email, int settle, int share_num) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			myMapper.getMyPageShareSettle(email, settle, share_num);
+		} catch (Exception e) {
+			throw new Exception("개인 쉐어 정산 실패", e);
+		}
+	}
+
+	@Override
+	public SettlementVO getShareJoin(int share_num) throws Exception{
+		try {
+			SettlementVO psVO = new SettlementVO();
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			psVO = myMapper.getShareJoin(share_num);
+			return psVO;
+		} catch (Exception e) {
+			throw new Exception("개인 쉐어 정산 실패", e);
+		}
+	}
+
+	@Override
+	public void addMyPageShareSettle(SettlementVO sVO) throws Exception {
+		try {
+			SettlementVO psVO = new SettlementVO();
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			myMapper.addMyPageShareSettle(sVO);
+		} catch (Exception e) {
+			throw new Exception("개인 쉐어 정산 실패", e);
+		}
+	}
+
+	@Override
+	public void updateShareJoin(int share_num, int settle) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			myMapper.updateShareJoin(share_num, settle);
+		} catch (Exception e) {
+			throw new Exception("product_share 적립금 차감 실패", e);
+		}
+	}
+	
+	
+	
 	
 
 	
