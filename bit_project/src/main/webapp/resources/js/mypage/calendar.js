@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 this.drawHeader(selectedDay.getDate());
                 }
             }
+            if(j == aDay1) {
+            	days[j].className = "pickup";
+            }
         }
     };
     

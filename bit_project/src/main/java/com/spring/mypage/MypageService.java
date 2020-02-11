@@ -11,4 +11,5 @@ public interface MypageService {
 	public List<WishlistVO> getMyPageWishList(@Param("email") String email) throws Exception;
 	public List<ReservationVO> getMyPageReservation(@Param("email") String email) throws Exception;
 	public List<ShareWatingListVO> getMyPageShare(@Param("email") String email) throws Exception;
+	public PStateVO getProductState(String email) throws Exception;
 }

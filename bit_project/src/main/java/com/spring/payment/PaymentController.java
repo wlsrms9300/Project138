@@ -1,6 +1,8 @@
 package com.spring.payment;
 
+import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,7 +73,22 @@ public class PaymentController {
 		}	
 		return data;
 	}
-	 
+	
+	//관리자 결제 페이지 예약완료 불러오기
+		@RequestMapping(value="/paidhistory.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public ArrayList<PMemberVO> paidHistory(HttpServletRequest request) throws Exception {
+			ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+			try {
+				String state = "결제완료";
+				data = paymentService.allSubscribe(state);
+				System.out.println("관리자 페이지 결제완료 불러오기");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			return data;
+		}
+		 
 
 	/* 구독결제자 정보 */
 	@RequestMapping(value = "/selectSubscription.su", method = RequestMethod.POST)
@@ -194,21 +210,39 @@ public class PaymentController {
 
 	// 결제예약 신청
 	@RequestMapping(value = "/schedulepayment.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public HashMap<String, String> schedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
+	@ResponseBody
+	public HashMap<String, String> schedulepayment(PaymentVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HashMap<String, String> map = new HashMap<String, String>(); //성공/실패 결과
 		String state = "예약대기";
 		ArrayList<PMemberVO> member = paymentService.allSubscribe(state); //결제할 사용자 목록
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		Date time = new Date();
+		String today = format.format(time);
 		
 		String beforeDate = request.getParameter("date");
-		String[] date = beforeDate.split("/");		
-		
+		String[] date = beforeDate.split("/");	
+		System.out.println(today);
+		System.out.println(beforeDate);
+		//예약날짜가 오늘보다 이전인지 확인
+		Date day1 = format.parse(today);
+		Date day2 = format.parse(beforeDate);
+		System.out.println(day1);
+		System.out.println(day2);
+		/*
+		int compare = day1.compareTo(day2);
+		if(compare >= 0) {
+			map.put("res", "오류");
+			return map;
+		}
+		*/
 		//결제일 설정 (datepicker로 받아온 날의 오전 10시에 결제)
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, Integer.parseInt(date[2]));
 		cal.set(Calendar.MONTH, Integer.parseInt(date[0])-1);
 		cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
-		cal.set(Calendar.HOUR_OF_DAY, 20);
-		cal.set(Calendar.MINUTE, 25);
+		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.MINUTE, 35);
 		cal.set(Calendar.SECOND, 0);
 		Date d1 = cal.getTime();
 		
@@ -269,6 +303,7 @@ public class PaymentController {
 
 	// 결제예약 취소
 	@RequestMapping(value = "/unschedulepayment.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public HashMap<String, String> unschedulepayment(PaymentVO vo, HttpServletRequest request) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
 		String email = request.getParameter("email");
@@ -301,15 +336,41 @@ public class PaymentController {
 
 		return map;
 	}
-//@RequestMapping(value = "/callback.me", produces = "application/json;charset=UTF-8")
-	@RequestMapping(value = "/callback.me")
-	public String callback(HttpServletRequest request, String imp_uid, String merchant_uid, String status) {
-		System.out.println(imp_uid);
-		System.out.println(merchant_uid);
-		System.out.println(status);
-		
+
+	@RequestMapping(value = "/callback.me", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public void callback(HttpServletRequest request) throws Exception {
+		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+
 		// 결제되면 디비에 결과 저장
-		return "subscribestep3";
+		String state = "예약완료";
+		data = paymentService.allSubscribe(state); //예약완료목록 불러와서 다음결제목록 만들기
+		
+		for(int i = 0; i < data.size(); i++) {
+			PMemberVO vo = data.get(i);
+			int res = paymentService.paidState(vo.getSubscribe_num());
+		}
+		
+		// 새 ROW 생성 (다음달 결제 목록)
+		PaymentVO pvo = null;
+		String[] before = null;
+		String customer_uid = null;
+		for(int i = 0; i < data.size(); i++) {
+			PMemberVO vo = data.get(i);
+			before = vo.getEmail().split("@");
+			customer_uid = before[0] + before[1];
+			pvo.setCustomer_uid(customer_uid);
+			pvo.setSubscribe_num(vo.getSubscribe_num());
+			pvo.setPrice(vo.getPrice());
+			pvo.setMerchant_uid("0");
+			pvo.setImp_uid("0");
+			int res = paymentService.insertPayment(pvo);
+			if(res != 0) {
+				System.out.println(customer_uid + "의 다음결제 목록 생성 성공");
+			} else {
+				System.out.println(customer_uid + "의 다음결제 목록 생성 실패");
+			}
+		}
 	}
 
 }

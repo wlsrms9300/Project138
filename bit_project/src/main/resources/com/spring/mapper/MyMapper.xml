@@ -9,6 +9,16 @@
    <result property="bookmark_img" column="bookmark_img"  />
 </resultMap>
 
+<resultMap type="com.spring.mypage.PStateVO" id="psMap">
+   <result property="state_num" column="state_num"  />
+   <result property="subscribe_num" column="subscribe_num"  />
+   <result property="product_num" column="product_num"  />
+   <result property="state" column="state"  />
+   <result property="delivery_date" column="delivery_date"  />
+   <result property="return_application" column="return_application"  />
+</resultMap>
+
+
 
 
 
@@ -33,6 +43,12 @@
 
 <select id="getMyPageShare" parameterType="map" resultType="com.spring.tazo.ShareWatingListVO">
 	select * from share_wating_list where email=#{email} 
+</select>
+
+<select id="getProductState" parameterType="String" resultMap="psMap">
+	SELECT P.STATE_NUM, P.SUBSCRIBE_NUM, P.PRODUCT_NUM, P.STATE, P.DELIVERY_DATE, P.RETURN_APPLICATION 
+	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P
+	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
 </select>
 
 

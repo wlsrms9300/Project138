@@ -14,5 +14,6 @@ public interface PaymentService {
 	public int updatePayState(PaymentVO vo) throws Exception;
 	public PaymentVO selectCancel(String email) throws Exception;
 	public int rePayState(PaymentVO vo) throws Exception;
+	public int paidState(int subscribe_num) throws Exception;
 	
 }

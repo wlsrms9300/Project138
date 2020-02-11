@@ -31,7 +31,7 @@
 	
 </head>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function() {        
     	var lang_kor = {
     	        "decimal" : "",
     	        "emptyTable" : "데이터가 없습니다.",
@@ -95,7 +95,7 @@
 			});
 		}	
 
-		//관리자 페이지 이동시 예약완료 테이블 불러오기
+		//예약완료 테이블 불러오기
 		var check = true;
 		$.ajax({
 			url: '/bit_project/paymember.su',
@@ -125,16 +125,53 @@
 				check = false;
 			}
 		});
-		
+
 		if(check == true) {
 			$('#foo-table2').DataTable({
 				language: lang_kor
 			});
 		}	
 
+		//결제완료 목록 불러오기
+		var check = true;
+		$.ajax({
+			url: '/bit_project/paidhistory.su',
+			type: 'POST',
+			dataType: 'json',
+			async: false,
+			contentType:'application/x-www-form-urlencoded; charset=utf-8',
+			success:function(data) {
+				$.each(data, function(index, item) {
+					var email = "'" + item.email + "'";
+    				var output = '';
+    				output += '<tr>';
+    				output += '<td>'+ item.email +'</td>';
+    				output += '<td>'+ item.name +'</td>';
+    				output += '<td>'+ item.phone +'</td>';
+    				output += '<td>'+ item.grade +'</td>';
+    				output += '<td>'+ item.pay_price +'</td>';
+    				output += '</tr>';
+    				
+    				console.log("output:" + output);
+    				$('#foo-table3').prepend(output);
+    			});
+			},
+			error:function() {
+				alert('ajax통신 실패');
+				check = false;
+			}
+		});
+		
+		if(check == true) {
+			$('#foo-table3').DataTable({
+				language: lang_kor
+			});
+		}	
+
 		//결제예약 (예약시 customer_uid, schedule(merchant_uid, amount, schedule_at) 필수)
 		$('#schedule_payment').click(function() {
-			var text = $('#datepicker').val(); //예약날짜 
+			var text = $('#datepicker').val(); //예약날짜
+			 
 			$.ajax ({
 				url: '/bit_project/schedulepayment.su',
 				type: "POST",
@@ -146,9 +183,11 @@
 				success:function(map) {
 					 if(map.res == "OK") {
 						alert('결제예약 성공');
-					} else {
+					} else if (map.res == "False") {
 						alert('결제예약 실패');
-					} 
+					} else {
+						alert('날짜선택 오류');
+					}
 				}, error:function() {
 					alert('ajax통신 실패');
 				}
@@ -366,6 +405,24 @@
 							<!-- 예약완료 -->
 						</tbody>
 					</table>
+					
+					<div style="margin-top:150px; margin-bottom:150px;">
+					<table id="foo-table3" class="foo-ex">
+						<h2 class="table3-drop" style="margin-top:50px;">결제내역</h2>
+						<thead>
+							<tr>
+								<th>Email</th>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Grade</th>
+								<th>Pay Price</th>
+							</tr>
+						</thead>
+						<tbody id="output3">
+							<!-- 결제완료 -->
+						</tbody>
+					</table>
+					</div>
 				</div>
 			</div><!-- /.col-->
 			
@@ -380,7 +437,9 @@
 
 		//초기값을 오늘 날짜로 설정
 	    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-		});
+
+	});
+
 	
 	</script>
 	

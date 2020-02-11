@@ -117,4 +117,15 @@ public class PaymentServiceImpl implements PaymentService {
 			throw new Exception("예약취소 실패", e);
 		}
 	}
+	
+	@Override
+	public int paidState(int subscribe_num) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.paidState(subscribe_num);
+			return res;
+		} catch(Exception e) {
+			throw new Exception("결제완료 변경 실패", e);
+		}
+	}
 }

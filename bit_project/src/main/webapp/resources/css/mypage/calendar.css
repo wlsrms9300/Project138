@@ -148,16 +148,43 @@
      transform: scale(0.7);
  }
  
- #today {
+/* 픽업일, 결제일, 배송일, 예약확정, 지난달or다음달(disabled) */
+/*======================================================================*/
+ #today { /*오늘*/
      background-color: #e66b6b;
      color: #fff;
      border-radius: 50%;
  }
  
- #disabled {
+ .pickup { /*픽업*/
+  	background-color: #cfa2fb;
+ 	color: #fff;
+ 	border-radius: 50%;
+ }
+ 
+ .delivery { /*배송*/
+ 	background-color: #77af6e;
+ 	color: #fff;
+ 	border-radius: 50%;
+ }
+ 
+ .payday { /*결제*/
+ 	background-color: #595ad4;
+ 	color: #fff;
+ 	border-radius: 50%;
+ }
+ 
+ .reserve { /*예약확정*/
+ 	background-color: black;
+ 	color: #fff;
+ 	border-radius: 50%;
+ }
+ 
+ #disabled { /*안보임*/
      cursor: default;
      background: #fff;
  }
+ /*======================================================================*/
  
  #disabled:hover {
      background: #fff;
@@ -212,16 +239,6 @@
      -webkit-transition: all 0.3s ease;
      transition: all 0.3s ease;
  }
- 
- /*
- .tbody tr td:nth-child(1) {
- 	color:red;
- }
- 
- .tbody tr td:nth-child(7) {
- 	color:blue;
- }
- */
  
  #reset:hover {
      color: #e66b6b;

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.spring.login.LoginVO" %>
+<%
+	LoginVO userDetail_subs = (LoginVO)session.getAttribute("userDetail");
+%>
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -15,13 +19,23 @@
 <body>
 	<div class="subscribe_wrap">
                 <h2>구독</h2>
+                
                 <div class="subscribe_block">
+                  <% if(userDetail_subs.getSubscribe().equals("N")) { %>
                     <div class="subscribe_content_1">
                         <b>미구독</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정기구독을 이용해보세요</p>
                     </div>
                     <div class="subscribe_content_2">
                         <a href="subscribestep1.me"><b>구독하기 ></b></a>
                     </div>
+                  <% } else { %>               
+                    <div class="subscribe_content_1">
+                        <b>구독중</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서비스를 이용중입니다</p>
+                    </div>
+                    <div class="subscribe_content_2">
+                        <a href="#"><b>구독취소 ></b></a>
+                    </div>
+                  <% } %>
                 </div>
                 <div class="pay_block">
                     <h3>자동 결제 정보</h3>
@@ -70,6 +84,7 @@
                         </tr>
                     </table>
                 </div>
+           
             </div>
 </body>
 </html>

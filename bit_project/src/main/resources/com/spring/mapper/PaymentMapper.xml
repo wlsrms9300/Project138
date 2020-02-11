@@ -84,11 +84,11 @@
 		WHERE SUBSCRIBE_NUM=#{subscribe_num} AND STATE='예약완료'
 	</update>
 	
-	<!-- state 변경 (결제완료)
-	<update id="paidState" parameterType="">
-		UPDATE SUBSCRIBE_PAYMENT SET STATE='결제완료',.
-	</update>
-	 -->
+	<!-- 결제되면 STATE 결제완료로 변경 (결제완료) -->
+	<update id="paidState" parameterType="int">
+		UPDATE SUBSCRIBE_PAYMENT SET STATE='결제완료'
+		WHERE SUBSCRIBE_NUM=#{subscribe_num} AND STATE='예약완료'
+	</update>	
 	
 	<!-- 예약취소 정보 (merchant_uid, subscribe_num 받아오기) -->
 	<select id="selectCancel" parameterType="String" resultMap="PaymentResultMap">
