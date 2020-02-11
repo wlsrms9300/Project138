@@ -414,8 +414,20 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("리뷰 포인트 지급 여부 변경 실패.", e);
 		}
 	}
+
+	@Override
+	public void reviewGpa(int product_num) throws Exception {
+		try {
+			System.out.println("reviewGpa 호출");
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewGpa(product_num);
+		} catch (Exception e) {
+			throw new Exception("리뷰 평점 반영 실패.", e);
+		}
+	}
 	/********************** 상품리뷰 종료 **********************/
 	
+
 
 	/********************** 상품문의 시작 **********************/
 	@Override

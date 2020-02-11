@@ -328,6 +328,7 @@ public class ProductAjaxController {
 		int res = 0;
 		try {
 			service.reviewDelete(review_num, product_num);
+			service.reviewGpa(product_num);
 			res = 1;
 		} catch (Exception e) {
 			e.printStackTrace();

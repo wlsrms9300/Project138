@@ -83,6 +83,7 @@ public interface PDMapper {
 	void reviewModifyNoImg(ReviewVO reviewVO);
 	int addPoint(@Param("email") String email);
 	void pointDetail(@Param("email") String email, @Param("product_num") int product_num);
+	void reviewGpa(@Param("product_num") int product_num);
 	//상품 검색
 	int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word);
 	List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno);

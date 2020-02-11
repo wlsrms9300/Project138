@@ -746,10 +746,9 @@
             var frm = document.getElementById("ReviewForm");
             frm.reset();
         });
-        
-        
-        
-       
+        var scrollTop = $(window).scrollTop();
+        var captionTop = $('.reviewcssf').offset().top;
+        $('html, body').animate({scrollTop : captionTop}, 0);
     </script>
     <script>
     var bcheck = <%=bookmark%>;

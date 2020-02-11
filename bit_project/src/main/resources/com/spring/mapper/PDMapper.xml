@@ -396,7 +396,12 @@
 	<update id="pointDetail" parameterType="map">
 		update review set point_details=1 where email=#{email} AND product_num=#{product_num}
 	</update>
-	
+	<update id="reviewGpa" parameterType="map">
+	update product set gpa=(
+		select sum(gpa)/count(*) AS gpa from review where product_num=#{product_num}
+		)
+	where product_num=#{product_num}
+	</update>
 	
 	<!-- 리뷰 -->
 

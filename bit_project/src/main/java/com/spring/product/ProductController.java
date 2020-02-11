@@ -104,6 +104,7 @@ public class ProductController {
 		try {
 			// 리뷰, 문의 삭제
 			service.prDelete(pNum);
+			
 			System.out.println("1");
 		} catch (Exception e) {
 			e.getMessage();
@@ -343,6 +344,7 @@ public class ProductController {
 				}
 			}
 			service.reviewWrite(reviewVO);
+			service.reviewGpa(reviewVO.getProduct_num());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -362,6 +364,7 @@ public class ProductController {
 		try {
 			if (request.getFile("img").getSize() == 0) {
 				service.reviewModifyNoImg(reviewVO);
+				service.reviewGpa(reviewVO.getProduct_num());
 			} else {
 				MultipartFile mf = request.getFile("img"); // 파일
 				String uploadPath = "C:\\Project138\\upload\\";
@@ -373,6 +376,7 @@ public class ProductController {
 					mf.transferTo(new File(uploadPath + storedFileName));
 				}
 				service.reviewModify(reviewVO);
+				service.reviewGpa(reviewVO.getProduct_num());
 			}
 
 		} catch (Exception e) {
