@@ -61,49 +61,49 @@
          }
 
 
-		});
-	}
-	/*비밀번호  체크 */
-	$(function() {
-		$("#pw-alert-true").hide();
-		$("#pw-alert-false").hide();
-		$("#pw-alert-check").hide();
-		/* 8자리 여부 */
-		$("#password").keyup(function() {
-			var pwd1 = $("#password").val();
-			
-			if (pwd1.length < 8) { 
-				$("#pw-alert-check").show();
-				$("#submit").attr("disabled", "disabled");
-			} else {
-				$("#pw-alert-check").hide();
-				$("#submit").removeAttr("disabled");
-			}
-		});
-		/* 비밀번호 일치 여부 */
-		$(".pw").keyup(function() {
-				var pwd1 = $("#password").val();
-				var pwd2 = $("#pwcheck").val();
-			if(pwd1 =="" || pwd2 =="") {
-				return false;	
-			} else if (pwd1 != "" && pwd2 != "") {
-				if (pwd1 == pwd2) {
-					$("#pw-alert-true").show();
-					$("#pw-alert-false").hide();
-					$("#submit").removeAttr("disabled");
-				} else if(pwd1 != pwd2 ){
-					$("#pw-alert-true").hide();
-					$("#pw-alert-false").show();
-					$("#submit").attr("disabled", "disabled");
-				}
-			}
-		});
-	
-		
-		/*중복확인 버튼, 약관동의*/
+      });
+   }
+   /*비밀번호  체크 */
+   $(function() {
+      $("#pw-alert-true").hide();
+      $("#pw-alert-false").hide();
+      $("#pw-alert-check").hide();
+      /* 8자리 여부 */
+      $("#password").keyup(function() {
+         var pwd1 = $("#password").val();
+         
+         if (pwd1.length < 8) { 
+            $("#pw-alert-check").show();
+            $("#submit").attr("disabled", "disabled");
+         } else {
+            $("#pw-alert-check").hide();
+            $("#submit").removeAttr("disabled");
+         }
+      });
+      /* 비밀번호 일치 여부 */
+      $(".pw").keyup(function() {
+            var pwd1 = $("#password").val();
+            var pwd2 = $("#pwcheck").val();
+         if(pwd1 =="" || pwd2 =="") {
+            return false;   
+         } else if (pwd1 != "" && pwd2 != "") {
+            if (pwd1 == pwd2) {
+               $("#pw-alert-true").show();
+               $("#pw-alert-false").hide();
+               $("#submit").removeAttr("disabled");
+            } else if(pwd1 != pwd2 ){
+               $("#pw-alert-true").hide();
+               $("#pw-alert-false").show();
+               $("#submit").attr("disabled", "disabled");
+            }
+         }
+      });
+   
+      
+      /*중복확인 버튼, 약관동의*/
 
         $('.signup-btn').click(function(){
-        	
+           
            pwd1 = document.signupForm.password.value;
            pwd2 = document.signupForm.pwcheck.value;
         
@@ -187,3 +187,63 @@
             readURL(this)
         });
     })
+   
+$(function () {
+        // Hide URL/FileReader API requirement message in capable browsers:
+        if (
+            window.createObjectURL ||
+            window.URL ||
+            window.webkitURL ||
+            window.FileReader
+        ) {
+            $('.browser').hide()
+            $('.preview').children().show()
+        }
+//이미지 drag drop
+$('.preview')
+.on("dragover", dragOver)
+.on("dragleave", dragOver)
+.on("drop", uploadFiles);
+ 
+function dragOver(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+ 
+function uploadFiles(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function dragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dragOver(e); //1
+ 
+    e.dataTransfer = e.originalEvent.dataTransfer; //2
+    var files = e.target.files || e.dataTransfer.files;
+    alert(files);
+ 
+    if (files.length > 1) {
+        alert('이미지는 한개만 가능합니다');
+        return;
+    }
+    if (files[0].type.match(/image.*/)) {
+    	if(isDataURL(e.target.result)){
+    		$(e.target).css({
+                "background-image": "url(" + e.target.result(files[0]) + ")",
+                "background-size": "100% 100%"
+            });
+    	}
+        
+    }else{
+      alert('이미지가 아닙니다.');
+      return;
+    }
+}
+});

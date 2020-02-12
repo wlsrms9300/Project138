@@ -39,7 +39,6 @@ public class CommunityController {
 			category = "자유게시판";
 		}
 		model.addAttribute("category", category);
-		System.out.println("받아온 카테고리 : " + category);
 		
 		return "community";
 	}
@@ -50,7 +49,6 @@ public class CommunityController {
 		String nickname = request.getParameter("nickname");
 		
 		model.addAttribute("nickname", nickname);
-		System.out.println("받아온 닉네임 : " + nickname);
 		
 		return "community_user";
 	}
@@ -62,7 +60,6 @@ public class CommunityController {
 		LoginVO dbvo = null;
 		
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
-		System.out.println("board_num : "  + board_num);
 		
 		cmvo = communityService.detailCommunity(board_num); //게시글 가져오기
 		communityService.updateCount(board_num); //조회수 올리기

@@ -23,8 +23,11 @@ public interface CommunityService {
 //	public List<CommunityVO> getuserSearch(@Param("nickname") String nickname, @Param("start") int start, @Param("end") int end);
 	public List<CommunityVO> getCMsearch(@Param("search_Data") String search_Data, @Param("category") String category);
 	public List<CommunityVO> getuserSearch(@Param("nickname") String nickname);
+	
+	/*게시글*/
 	public CommunityVO detailCommunity(int board_num);
 	public int updateCount(int board_num);
+	public int updateScrap(@Param("board_num") int board_num);
 	public String getuserImg(@Param("email") String email);
 	
 	/*댓글*/

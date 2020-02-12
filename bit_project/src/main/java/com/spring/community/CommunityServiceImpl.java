@@ -20,7 +20,6 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityVO> filter1 = null;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		filter1 = cmmapper.filter1(category);
-		System.out.println( "service : " + filter1);
 
 		return filter1;
 	}
@@ -30,7 +29,6 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityVO> filter2 = null;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		filter2 = cmmapper.filter2(category);
-		System.out.println( "service : " + filter2);
 		
 		return filter2;
 	}
@@ -40,7 +38,6 @@ public class CommunityServiceImpl implements CommunityService {
 		List<CommunityVO> filter3 = null;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		filter3 = cmmapper.filter3(category);
-		System.out.println( "service : " + filter3);
 		
 		return filter3;
 	}
@@ -52,8 +49,6 @@ public class CommunityServiceImpl implements CommunityService {
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		getCMsearch = cmmapper.getCMsearch(search_Data, category);
 		
-		System.out.println("service : " + search_Data + category + "zz : "  + getCMsearch);
-		
 		return getCMsearch;
 	}
 	
@@ -61,18 +56,19 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityVO> getuserSearch(String nickname) {
 		List<CommunityVO> getuserSearch = null;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		
 		getuserSearch = cmmapper.getuserSearch(nickname);
-		System.out.println("닉네임으로 조회");
+		
 		return getuserSearch;
 	}
 
+	
+	/*********************************게시글***********************************/
+	
 	@Override
 	public CommunityVO detailCommunity(int board_num) {
 		CommunityVO cmvo = new CommunityVO();
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		cmvo = cmmapper.detailCommunity(board_num);
-		System.out.println(cmvo.getCount() + "조회수");
 		return cmvo;
 	}
 
@@ -85,13 +81,18 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
+	public int updateScrap(int board_num) {
+		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
+		int res = cmmapper.updateScrap(board_num);
+		return res;
+	}
+	
+	@Override
 	public String getuserImg(String email) {
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		String img = cmmapper.getuserImg(email);
-		System.out.println("img : " + img);
 		return img;
 	}
-	
 
 	
 	/***********************************댓글***********************************/
@@ -116,9 +117,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int writeCO(CommentVO covo) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		System.out.println("serviceimpl " + covo.getEmail());
 		res = cmmapper.writeCO(covo);
-		System.out.println("serviceimpl res : " + res);
 		return res;
 	}
 	
@@ -127,7 +126,6 @@ public class CommunityServiceImpl implements CommunityService {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		res = cmmapper.updateCO(comment_num, content);
-		System.out.println("serviceimpl res : " + res);
 		return res;
 	}
 
@@ -135,9 +133,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int deleteCO(int comment_num) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		System.out.println("serviceimpl " + comment_num);
 		res = cmmapper.deleteCO(comment_num);
-		System.out.println("serviceimpl res : " + res);
 		return res;
 	}
 	
@@ -145,9 +141,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int deleteboardc(int board_num) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		System.out.println("serviceimpl " + board_num);
 		res = cmmapper.deleteboardc(board_num);
-		System.out.println("serviceimpl res : " + res);
 		return res;
 	}
 	
@@ -156,9 +150,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int writeAnswer(AnswerVO answervo) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		System.out.println("대댓작성 serviceimpl " + answervo.getNickname());
 		res = cmmapper.writeAnswer(answervo);
-		System.out.println("대댓작성 serviceimpl res : " + res);
 		return res;
 	}
 
@@ -184,7 +176,6 @@ public class CommunityServiceImpl implements CommunityService {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
 		res = cmmapper.updateAnswer(answer_num, content);
-		System.out.println("대댓수정 serviceimpl res : " + res);
 		return res;
 	}
 	
@@ -192,9 +183,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int deleteAnswer(int answer_num) {
 		int res = 0;
 		CMMapper cmmapper = sqlSession.getMapper(CMMapper.class);
-		System.out.println("대댓삭제 serviceimpl : " + answer_num);
 		res = cmmapper.deleteAnswer(answer_num);
-		System.out.println("대댓삭제 serviceimpl res : " + res);
 		return res;
 	}
 	

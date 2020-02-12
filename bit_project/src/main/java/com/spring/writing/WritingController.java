@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.community.CommunityService;
 
@@ -35,31 +38,32 @@ public class WritingController {
 	
 	/* 글쓰기 */
 	@PostMapping("/write.cw")
-	public String write(WritingVO writingvo, Model model) {
+	public String write(WritingVO writingvo, Model model, MultipartHttpServletRequest request) {
 
-		String text = writingvo.getContent();
-		System.out.println("게시글 내용 : " + text);
+	String text = writingvo.getContent();
+	System.out.println("게시글 내용 : " + text);
+	
+	Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); //img 태그 src 추출 정규표현식
+	Matcher matcher = pattern.matcher(text);     
+	
+	if(matcher.find()){
+		  writingvo.setImg(matcher.group(1));
+	}else {
+		  writingvo.setImg("null");
+	}
+	  
+	writingvo.setCategory((request).getParameter("category"));
+	writingvo.setCount(0);
+	writingvo.setScrap_count(0);
+	
+	int res = writingService.write(writingvo);
+	System.out.println(res);
+	
+	model.addAttribute("writingvo", writingvo);
 
-		Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); //img 태그 src 추출 정규표현식
-		Matcher matcher = pattern.matcher(text);     
-
-      if(matcher.find()){
-    	  writingvo.setImg(matcher.group(1));
-      }else {
-    	  writingvo.setImg("null");
-      }
-		
-		writingvo.setCount(0);
-		writingvo.setScrap_count(0);
-		
-		int res = writingService.write(writingvo);
-		System.out.println(res);
-		
-		model.addAttribute("writingvo", writingvo);
-		
 //		return "detailtest";/*테스트  페이지*/
 //		return "redirect:/getDetail.cw";
-		return "redirect:community_detail.co?board_num=" + writingvo.getBoard_num();
+	return "redirect:community_detail.co?board_num=" + writingvo.getBoard_num();
 	}
 	
 	/* 글 수정 폼*/

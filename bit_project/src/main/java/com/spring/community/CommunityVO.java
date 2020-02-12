@@ -18,6 +18,7 @@ public class CommunityVO {
 	private int start;
 	private int end;
 	private int co_count;
+	private int an_count;
 	private int cm_count;
 	private int cmsearch_count;
 	private String profile;
@@ -117,5 +118,11 @@ public class CommunityVO {
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public int getAn_count() {
+		return an_count;
+	}
+	public void setAn_count(int an_count) {
+		this.an_count = an_count;
 	}
 }
