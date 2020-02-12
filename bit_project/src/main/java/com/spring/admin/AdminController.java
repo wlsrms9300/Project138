@@ -51,11 +51,11 @@ public class AdminController {
 	}
 
 
-	@RequestMapping(value = "/index.se", method = RequestMethod.GET)
-	public String index(Model model, HttpSession session) {
-
-		return "admin/index";
-	}
+//	@RequestMapping(value = "/index.se", method = RequestMethod.GET)
+//	public String index(Model model, HttpSession session) {
+//
+//		return "admin/index";
+//	}
 
 	@RequestMapping(value = "/member_admin.se", method = RequestMethod.GET)
 	public String member_admin(Model model, HttpSession session) {

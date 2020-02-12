@@ -5,15 +5,93 @@
 		<result property="product_name" column="product_name" />
 		<result property="total" column="total" />
 	</resultMap>
+	
+	<resultMap id="doughnutGMap" type="com.spring.adminchart.DNGraphVO">
+		<result property="grade" column="grade" />
+		<result property="data" column="data" />
+	</resultMap>
+	
+	<resultMap id="ebitGMap" type="com.spring.adminchart.EBITVO">
+		<result property="month" column="month" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="expenses" column="expenses" />
+	</resultMap>
+	
+	<resultMap id="cpGMap" type="com.spring.adminchart.CountingPVO">
+		<result property="regist" column="regist" />
+		<result property="count" column="count" />
+	</resultMap>
+	
+	<resultMap id="vGMap" type="com.spring.adminchart.VariationVO">
+		<result property="regist" column="regist" />
+		<result property="increase" column="increase" />
+		<result property="decrease" column="decrease" />
+		<result property="total" column="total" />
+	</resultMap>
+	
 	<!-- 새로운 유저 수 카운트 -->
 	<select id="countNewUsers" parameterType="String" resultType="int">
 		SELECT count(*) FROM member
-    WHERE regist BETWEEN TO_DATE(#{strToday}) AND TO_DATE(#{strTomorrow})
+    	WHERE regist BETWEEN TO_DATE(#{strToday}) AND TO_DATE(#{strTomorrow})
 	</select>
 	
-	<!-- wishlist top5 -->
-<!-- 	<select id="getWishListRanking" resultMap="wlRankingMap" >
-		select product_name, count(*) from (select * from product, wishlist where product.product_num = wishlist.product_num) group by product_name order by count(*) desc
-	</select> -->
+	<!-- 영업이익 그래프 -->
+	<!-- 수익(매출) -->
+	<select id="getRevenue" parameterType="String" resultMap="ebitGMap">
+		select month, sum(price) as price, sum(point_price) as point_price from (
+			select * from (
+				select trunc(pay_date,'MM') as month, price, point_price from subscribe_payment
+			) where month between to_date(#{strAYAgo}) and to_date(#{strToday})
+		) group by month order by month
+	</select>
+	<!-- 비용 -->
+	<select id="getExpenses" parameterType="String" resultMap="ebitGMap">
+		select month, sum(accumulated_fund) as expenses from (
+			select * from (
+				select trunc(settlement_day, 'MM') as month, accumulated_fund from settlement_details) 
+				where month between to_date(#{strAYAgo}) and to_date(#{strToday})
+			) 
+		group by month  order by month
+	</select>
+	
+	<!-- 회원 변동 추이 -->
+	<!-- 증가치 -->
+	<select id="increaseUsers" parameterType="String" resultMap="vGMap">
+		select * from (
+			select regist, count(*) as increase from (
+				select trunc(regist,'DD') as regist, email from member
+			) group by regist order by regist asc
+		) where regist BETWEEN TO_DATE(#{str14DAgo}) AND TO_DATE(#{strToday})
+	</select>
+	<!-- 토탈 -->
+	<select id="countTotalUsers" parameterType="String" resultType="int">
+		select count(*) as total from (
+		SELECT trunc(regist, 'DD') as regist, email FROM member
+    	<![CDATA[WHERE regist <= TO_DATE(#{strToday}))]]>
+	</select>
+		
+	
+	<!-- 위시리스트 top5 -->
+	<select id="getWishListRanking" resultMap="wlRankingMap" >
+		select product_name, count(*) from 
+			(select * from product, wishlist where product.product_num = wishlist.product_num) 
+		group by product_name order by count(*) desc
+	</select> 
+	
+	<!-- 구독 등급 파이 그래프  -->
+	<select id="getDoughnutGraph" resultMap="doughnutGMap">
+		select grade, count(*) as data from subscribe group by grade 
+		order by decode(grade, 'platinum', 1, 'gold', 2, 'silver', 3, '2month', 4, '1month', 5)
+	</select>
+	
+	<!-- 커뮤니티 게시글 수 -->
+ 	<select id="countPosts" parameterType="String" resultMap="cpGMap">
+		select regist, count(*) as count from (
+			select trunc(regist, 'DD') as regist, board_name from board 
+			where regist between to_date(#{strAWAgo}) and to_date(#{strToday})
+		) group by regist order by regist asc
+ 	</select> 
+	
 
 </mapper>

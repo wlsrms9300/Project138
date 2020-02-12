@@ -17,6 +17,4 @@ public class RankingVO {
 		this.total = total;
 	}
 	
-	
-	
 }

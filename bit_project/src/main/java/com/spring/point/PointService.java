@@ -10,4 +10,5 @@ public interface PointService {
 	public int getTotalPoints(String email); //총 포인트
 	public int updateTotalPoints(MemberVO membervo); // 총 포인트 업데이트
 	public int insertPoint(PointVO pointvo);//포인트 내역 추가
+	public int updatePointPrice(String email, int point_price); // subscribe_payment 테이블의 pay_num 추출
 }

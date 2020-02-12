@@ -13,4 +13,7 @@ public interface PointMapper {
 	int getTotalPoints(String email); //총 포인트
 	int updateTotalPoints(MemberVO membervo); // 총 포인트 업데이트
 	int insertPoint(PointVO pointvo); //포인트 내역 추가
+	int getPayNum(String email); // subscribe_payment 테이블의 pay_num 추출
+	int getPointPrice(@Param("pay_num") int pay_num);//현재 point_price 추출
+	int updatePointPrice(@Param("point_price") int point_price, @Param("pay_num") int pay_num); // update point_price
 }

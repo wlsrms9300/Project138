@@ -1,6 +1,20 @@
 package com.spring.adminchart;
 
-public interface ChartService {
-	public int countNewUsers(String strToday, String strTomorrow) throws Exception; //유저 수 카운트
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+public interface ChartService {
+	public int countNewUsers() throws Exception; //유저 수 카운트
+	public List<RankingVO> getWishListRanking() throws Exception; //위시리스트 Top5
+	/* 영업이익 */
+	public List<EBITVO> getRevenue() throws Exception; //수익(매출)
+	public List<EBITVO> getExpenses() throws Exception; //비용
+	
+	/* 회원 변동 추이 */
+	public List<VariationVO> increaseUsers() throws Exception; //유저 수 카운트
+	public List<VariationVO> countTotalUsers() throws Exception;
+	
+	public List<DNGraphVO> getDoughnutGraph() throws Exception; // 구독 등급별 파이
+	public List<CountingPVO> countPosts() throws Exception;
 }

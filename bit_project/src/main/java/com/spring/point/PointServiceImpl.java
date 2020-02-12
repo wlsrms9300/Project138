@@ -76,7 +76,24 @@ public class PointServiceImpl implements PointService {
 		return res;
 	}
 
-	
+	@Override
+	public int updatePointPrice(String email, int point_price) {
+		int res = 0 ;
+		int pay_num = 0;
+		int currentPP = 0;
+		try {
+			PointMapper pointMapper = sqlSession.getMapper(PointMapper.class);
+			pay_num = pointMapper.getPayNum(email);
+			currentPP = pointMapper.getPointPrice(pay_num);
+			res = currentPP + point_price;
+			pointMapper.updatePointPrice(res, pay_num);
+		} catch(Exception e) {
+			System.out.println("subscribe_payment point_price 업데이트 실패."+  e.getMessage());
+		}
+		return res;
+	}
+
+
 	
 	
 }

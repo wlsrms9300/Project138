@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.spring.adminchart.*" %>
+<%@ page import="java.util.List" %>
 <%
 	int new_users = (int)request.getAttribute("new_users");
+	List<RankingVO> rankingList = (List<RankingVO>)request.getAttribute("rankingList");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,14 +23,385 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	<!-- 구글 차트  -->
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<!-- chart.js -->
+	<script src="${pageContext.request.contextPath}/resources/js/admin/chart/Chart.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/admin/chart/utils.js"></script>
+	<link href="${pageContext.request.contextPath}/resources/css/admin/chart/Chart.css" rel="stylesheet">
+
 	<script>
-		$(document).ready(function(){
-			
-			 
+	/* 데이터 값 랜덤으로 넣을 때 */
+	var randomScalingFactor = function() {
+		return Math.round(Math.random() * 100);
+	};
+
+	/* 영업이익 그래프 ebitGraph */
+	var chartData = {
+			labels: [
+				'${ebitMonth0 }', 
+				'${ebitMonth1 }', 
+				'${ebitMonth2 }', 
+				'${ebitMonth3 }', 
+				'${ebitMonth4 }', 
+				'${ebitMonth5 }', 
+				'${ebitMonth6 }', 
+				'${ebitMonth7 }', 
+				'${ebitMonth8 }', 
+				'${ebitMonth9 }', 
+				'${ebitMonth10 }', 
+				'${ebitMonth11 }'
+			],
+			datasets: [{
+				type: 'line',
+				lineTension: 0,
+				label: 'Dataset 1',
+				yAxisID: 'y-axis-1',
+				borderColor: window.chartColors.red,
+				borderWidth: 2,
+				fill: false,
+				data: [
+					'${ebit0 }', 
+					'${ebit1 }', 
+					'${ebit2 }', 
+					'${ebit3 }', 
+					'${ebit4 }', 
+					'${ebit5 }', 
+					'${ebit6 }', 
+					'${ebit7 }', 
+					'${ebit8 }', 
+					'${ebit9 }', 
+					'${ebit10 }', 
+					'${ebit11 }'
+				]
+			},{
+				type: 'line',
+				label: 'Dataset 4', //영업이익률
+				lineTension: 0,
+				yAxisID: 'y-axis-2',
+				borderColor: window.chartColors.purple,
+				borderWidth: 2,
+				fill: false,
+				data: [
+					'${om0 }', 
+					'${om1 }', 
+					'${om2 }', 
+					'${om3 }', 
+					'${om4 }', 
+					'${om5 }', 
+					'${om6 }', 
+					'${om7 }', 
+					'${om8 }', 
+					'${om9 }', 
+					'${om10 }', 
+					'${om11 }'
+				]
+			}, {
+				type: 'bar',
+				label: 'Dataset 2',
+				yAxisID: 'y-axis-1',
+				backgroundColor: window.chartColors.green,
+				data: [
+					'${revenue0 }', 
+					'${revenue1 }', 
+					'${revenue2 }', 
+					'${revenue3 }', 
+					'${revenue4 }', 
+					'${revenue5 }', 
+					'${revenue6 }', 
+					'${revenue7 }', 
+					'${revenue8 }', 
+					'${revenue9 }', 
+					'${revenue10 }', 
+					'${revenue11 }'
+				],
+				borderColor: 'white',
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'Dataset 3',
+				yAxisID: 'y-axis-1',
+				backgroundColor: window.chartColors.yellow,
+				data: [
+					'${expense0 }', 
+					'${expense1 }', 
+					'${expense2 }', 
+					'${expense3 }', 
+					'${expense4 }', 
+					'${expense5 }', 
+					'${expense6 }', 
+					'${expense7 }', 
+					'${expense8 }', 
+					'${expense9 }', 
+					'${expense10 }', 
+					'${expense11 }'
+				]
+			}]
+
+		};
+	/*회원변동 추이*/
+	var chartData2 = {
+			labels: [
+				'${vgDay0 }', 
+				'${vgDay1 }', 
+				'${vgDay2 }', 
+				'${vgDay3 }', 
+				'${vgDay4 }', 
+				'${vgDay5 }', 
+				'${vgDay6 }', 
+				'${vgDay7 }', 
+				'${vgDay8 }', 
+				'${vgDay9 }', 
+				'${vgDay10 }', 
+				'${vgDay11 }',
+				'${vgDay12 }',
+				'${vgDay13 }'
+				],
+			datasets: [{
+				type: 'line',
+				label: 'Dataset 1',
+				borderColor: window.chartColors.green,
+				borderWidth: 2,
+				fill: false,
+				data: [
+					'${total0 }', 
+					'${total1 }', 
+					'${total2 }', 
+					'${total3 }', 
+					'${total4 }', 
+					'${total5 }', 
+					'${total6 }', 
+					'${total7 }', 
+					'${total8 }', 
+					'${total9 }', 
+					'${total10 }', 
+					'${total11 }',
+					'${total12 }',
+					'${total13 }'
+				]
+			}, {
+				type: 'bar',
+				label: 'Dataset 2',
+				backgroundColor: window.chartColors.orange,
+				data: [
+					'${vgIncrease0 }', 
+					'${vgIncrease1 }', 
+					'${vgIncrease2 }', 
+					'${vgIncrease3 }', 
+					'${vgIncrease4 }', 
+					'${vgIncrease5 }', 
+					'${vgIncrease6 }', 
+					'${vgIncrease7 }', 
+					'${vgIncrease8 }', 
+					'${vgIncrease9 }', 
+					'${vgIncrease10 }', 
+					'${vgIncrease11 }',
+					'${vgIncrease12 }',
+					'${vgIncrease13 }'
+				],
+				borderColor: 'white',
+				borderWidth: 2
+			}, {
+				type: 'bar',
+				label: 'Dataset 3',
+				backgroundColor: window.chartColors.grey,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+		
 	
+	/* 구독상품 파이 */
+	var config = {
+		type: 'doughnut',
+		data: {
+			datasets: [{
+				data: [ '${dngData0 }', '${dngData1 }', '${dngData2 }', '${dngData3 }', '${dngData4 }'],
+				backgroundColor: [
+					window.chartColors.red,
+					window.chartColors.orange,
+					window.chartColors.blue,
+					window.chartColors.purple,
+					window.chartColors.green,
+					
+				],
+				label: 'Dataset 1'
+			}],
+			labels: [
+				'platinum',
+				'gold',
+				'silver',
+				'2month',
+				'1month'
+			]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				position: 'bottom',
+			},
+			title: {
+				display: false,
+			},
+			animation: {
+				animateScale: true,
+				animateRotate: true
+			}
+		}
+	};
+
+	/* 커뮤니티 게시글 */
+	var config4 = {
+			type: 'line',
+			data: {
+				labels: ['${cpDay0 }', '${cpDay1 }', '${cpDay2 }', '${cpDay3 }', '${cpDay4 }', '${cpDay5 }', '${cpDay6 }'],
+				datasets: [{
+					label: 'My First dataset',
+					backgroundColor: 'rgb(255, 99, 132, 0.6)',
+					borderColor: window.chartColors.red,
+					data: [
+						'${totalcp0 }', 
+						'${totalcp1 }', 
+						'${totalcp2 }', 
+						'${totalcp3 }', 
+						'${totalcp4 }', 
+						'${totalcp5 }', 
+						'${totalcp6 }'
+					],
+					fill: 'start',
+					lineTension: 0,
+				//	steppedLine: 'middle', //계단식 그래프
+				}/* , {
+					label: 'My Second dataset',
+					fill: false,
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				} */]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: false,
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Day'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+
+	
+	
+	
+	
+	window.onload = function() {
+		/* 영업이익 그래프  ebitGraph */
+		var ctx1 = document.getElementById('ebitGraph').getContext('2d');
+		window.myMixedChart = new Chart(ctx1, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					maintainAspectRatio: false, //상위 <div>에 속하게 됨.
+					legend: {
+						position: 'bottom',
+					},
+					title: {
+						display: false,
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					},
+					scales: {
+						yAxes: [{
+							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+							display: true,
+							position: 'left',
+							id: 'y-axis-1',
+						}, {
+							type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+							display: true,
+							position: 'right',
+							id: 'y-axis-2',
+							labelString: '%',
+							gridLines: {
+								drawOnChartArea: false
+							}
+						}]
+					}
+				}
+			});
+		/* 회원 변동 추이 */
+		var ctx2 = document.getElementById('variationGraph').getContext('2d');
+		window.myMixedChart = new Chart(ctx2, {
+			type: 'bar',
+			data: chartData2,
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				title: {
+					display: false,
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: true
+				}
+			}
 		});
+		
+		/*구독상품 파이 subscriberGraph */
+		var ctx3 = document.getElementById('subscriberGraph').getContext('2d');
+		window.myDoughnut = new Chart(ctx3, config);
+		
+		/* 커뮤니티 게시글 */
+		var ctx4 = document.getElementById('postGraph').getContext('2d');
+		window.myLine = new Chart(ctx4, config4);
+		
+		
+	};
 	</script>
 </head>
 <body>
@@ -191,78 +565,37 @@
 				</div>
 			</div><!--/.row-->
 		</div>
+		<!-- 영업 이익 그래프 -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						구독자 추이 현황
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						영업 이익
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+							<div class="chart-container" style="position: relative; height:40vh;">
+							<canvas id="ebitGraph"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div><!--/.row-->
 		
-		
+		<!-- 회원 변동 추이 -->
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						막대 그래프
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						회원 변동 추이
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 							<div class="canvas-wrapper">
 							<!-- 막대 그래프 -->
-	 							<div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+								<div class="chart-container2" style="position: relative; height:40vh;">							
+	 								<canvas id="variationGraph"></canvas>
+	 							</div>	
 							</div>
 					</div>
 				</div>
@@ -270,45 +603,38 @@
 		</div><!--/.row-->		
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						파트너
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						WishList Top5
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="chart" id="doughnut-chart1" ></canvas>
+						<table>
+							<%
+								for(int i=0; i<5; i++) 
+								{
+									RankingVO rankingvo = (RankingVO)rankingList.get(i);
+							%>
+								<tr>
+									<td>&nbsp;&nbsp;&nbsp;<%=i+1 %>.&nbsp;</td>
+									<td>
+										<%=rankingvo.getProduct_name() %>
+									</td>
+								</tr>
+							<%
+								}
+							%>
+	
+						</table>	
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						구독자
+						구독상품 
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -335,42 +661,19 @@
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="chart" id="doughnut-chart2" ></canvas>
+							<canvas id="subscriberGraph"> </canvas>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						재고
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+						커뮤니티 게시글
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
-							<canvas class="chart" id="doughnut-chart3" ></canvas>
+							<canvas id="postGraph"></canvas>
 						</div>
 					</div>
 				</div>
@@ -380,39 +683,10 @@
 	
 	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart-data.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap-datepicker.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/custom.js"></script>
 
-	<script>
-		window.onload = function () {
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-	responsive: true,
-	scaleLineColor: "rgba(0,0,0,.2)",
-	scaleGridLineColor: "rgba(0,0,0,.05)",
-	scaleFontColor: "#c5c7cc"
-	});
-	var chart2 = document.getElementById("doughnut-chart1").getContext("2d");
-	window.myDoughnut = new Chart(chart2).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-	var chart3 = document.getElementById("doughnut-chart2").getContext("2d");
-	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-	var chart4 = document.getElementById("doughnut-chart3").getContext("2d");
-	window.myDoughnut = new Chart(chart4).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-};
-	</script>
+
 		
 </body>
 </html>
