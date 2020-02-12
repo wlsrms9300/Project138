@@ -29,7 +29,7 @@ $(function(){
         	});
             wcheck = 1;
             $('#wish_button').css("background","black");
-        }else {
+        }else if(wcheck==1 || wcheck==11){
         	$('body').css("background", "grey");
             $(".wishlistForm_false").show();
             scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
@@ -53,6 +53,8 @@ $(function(){
         	});
             wcheck = 0;
             $('#wish_button').css("background","#EA7475");
+        } else {
+        	alert('위시리스트는 최소 5개 최대 10개까지 등록 가능합니다.');
         }
     });
 });

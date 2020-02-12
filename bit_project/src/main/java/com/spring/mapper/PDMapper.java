@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.product.AlarmVO;
+import com.spring.product.ProductShareVO;
 import com.spring.product.ProductVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
@@ -22,6 +23,10 @@ public interface PDMapper {
 	void prDelete5(@Param("product_num") int product_num);
 	void prDelete6(@Param("product_num") int product_num);
 	void prDelete7(@Param("product_num") int product_num);
+	void prDelete8(@Param("product_num") int product_num);
+	int getPnum(); //개인쉐어 상품 등록 떄 사용. 현재 product_num의 시퀀스 값 가져옴.
+	void shareState(@Param("share_state") int share_state, @Param("waiting_num") int waiting_num);
+	void shareAdd(ProductShareVO psVO);
 	List<ProductVO> allSearch();//아직 쓰진 않지만 전체 검색
 	
 	//카테고리가 null일 경우. default 세팅	
@@ -44,15 +49,18 @@ public interface PDMapper {
 	void addBookMark(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteBookMark(@Param("product_num") int product_num, @Param("email") String email);
 	//상품 상세 위시리스트
+	int getWishListCount(@Param("email") String email);
 	int getWishList(@Param("product_num") int product_num, @Param("email") String email);
 	void addWishList(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteWishList(@Param("product_num") int product_num, @Param("email") String email);
-	//상품 상세 예약 
-	int getReservation(@Param("product_num") int product_num, @Param("email") String email);
+	//상품 상세 예약
+	int getReservation1(@Param("email") String email);
+	int getReservation2(@Param("product_num") int product_num, @Param("email") String email);
 	void addReservation(@Param("product_num") int product_num, @Param("email") String email);
 	void deleteReservation(@Param("product_num") int product_num, @Param("email") String email);
 	//상품 상세 알람
 	int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	int getAlarm2(@Param("email") String email, @Param("product_num") int product_num);
 	void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
 	void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
 	//SMS 서비스 관련
@@ -75,6 +83,7 @@ public interface PDMapper {
 	void reviewModifyNoImg(ReviewVO reviewVO);
 	int addPoint(@Param("email") String email);
 	void pointDetail(@Param("email") String email, @Param("product_num") int product_num);
+	void reviewGpa(@Param("product_num") int product_num);
 	//상품 검색
 	int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word);
 	List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno);

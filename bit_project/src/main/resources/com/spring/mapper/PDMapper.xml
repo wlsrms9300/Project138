@@ -24,7 +24,7 @@
 	</resultMap>
 
 	
-	<insert id="prAdd" parameterType="com.spring.product.ProductVO">
+	<insert id="prAdd" parameterType="com.spring.product.ProductVO" >
 		<selectKey keyProperty="product_num" resultType="int" order="BEFORE">
 			SELECT product_sequence.NEXTVAL FROM DUAL
 		</selectKey>
@@ -58,6 +58,26 @@
 			</when>
 		</choose>
 	</insert>
+	
+	<select id="getPnum" resultType="int">
+			SELECT product_num
+    		FROM product
+    		WHERE product_num = (SELECT MAX(product_num)AS product_num FROM product)
+	</select>
+
+	<update id="shareState" parameterType="map">
+			UPDATE share_waiting_list
+    		SET share_state=#{share_state}
+    		WHERE waiting_num=#{waiting_num}
+	</update>
+	<insert id="shareAdd" parameterType="com.spring.product.ProductShareVO">
+		<selectKey keyProperty="share_num" resultType="int" order="BEFORE">
+			SELECT share_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+	insert into product_share values(#{share_num}, #{product_num}, #{product_name},#{email},#{consignment_start_date},#{consignment_end_date},
+	#{total_share_count},#{total_accumulated_fund},#{accumulated_fund},#{total_amount},#{share_amount},#{current_amount})
+	</insert>
+	
 
 	<update id="prModify" parameterType="com.spring.product.ProductVO">		
 		update product set product_name=#{product_name}, total_amount=#{total_amount},current_amount=#{current_amount},
@@ -94,6 +114,9 @@
 	delete from alarm where product_num=#{product_num}
 	</delete>
 	<delete id="prDelete7" parameterType="map">
+	delete from product_share where product_num=#{product_num}
+	</delete>
+	<delete id="prDelete8" parameterType="map">
 	delete from product where product_num=#{product_num}
 	</delete>
 
@@ -181,11 +204,14 @@
 	</insert>
 
 	<delete id="deleteAlarm" parameterType="map">
-		delete from alarm where product_num=#{product_num} AND email=#{email} AND phone=#{phone}
+		delete from alarm where product_num=#{product_num} AND email=#{email}
 	</delete>
 
 	<select id="getAlarm" parameterType="map" resultType="int">
 		select NVL(count(*), 0) from alarm where product_num=#{product_num} AND email=#{email} AND phone=#{phone}
+	</select>
+	<select id="getAlarm2" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from alarm where product_num=#{product_num} AND email=#{email}
 	</select>
 	<!--  알람  -->
 	
@@ -223,6 +249,11 @@
 		delete from wishlist where product_num=#{product_num} AND email=#{email}
 	</delete>
 
+	<!--  해당 유저의 email로 위시리스트가 10개인지 체크 -->
+	<select id="getWishListCount" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from wishlist where email=#{email}
+	</select>
+
 	<select id="getWishList" parameterType="map" resultType="int">
 		select NVL(count(*), 0) from wishlist where product_num=#{product_num} AND
 		email=#{email}
@@ -242,10 +273,15 @@
 	<delete id="deleteReservation" parameterType="map">
 		delete from reservation where product_num=#{product_num} AND email=#{email}
 	</delete>
-	<select id="getReservation" parameterType="map" resultType="int">
+		<select id="getReservation1" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from reservation where
+		email=#{email}
+	</select>
+	<select id="getReservation2" parameterType="map" resultType="int">
 		select NVL(count(*), 0) from reservation where
 		product_num=#{product_num} AND email=#{email}
 	</select>
+
 	<!-- 예약 -->
 
 	<!-- 상품 상세 -->
@@ -360,7 +396,12 @@
 	<update id="pointDetail" parameterType="map">
 		update review set point_details=1 where email=#{email} AND product_num=#{product_num}
 	</update>
-	
+	<update id="reviewGpa" parameterType="map">
+	update product set gpa=(
+		select sum(gpa)/count(*) AS gpa from review where product_num=#{product_num}
+		)
+	where product_num=#{product_num}
+	</update>
 	
 	<!-- 리뷰 -->
 

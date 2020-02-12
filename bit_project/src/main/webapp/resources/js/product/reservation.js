@@ -29,7 +29,7 @@ $(function(){
         	});
             rcheck = 1;
             $('#reservation_button').css("background","black");
-        }else {
+        }else if(rcheck==1){
         	$('body').css("background", "grey");
             $(".reservationForm_false").show();
             scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
@@ -53,6 +53,9 @@ $(function(){
         	});
             rcheck = 0;
             $('#reservation_button').css("background","#EA7475");
+        }
+        else {
+        	alert('예약은 최대 1개의 상품만 가능합니다.');
         }
     });
 });

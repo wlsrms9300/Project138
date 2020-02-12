@@ -3,6 +3,7 @@ package com.spring.tazo;
 import java.util.Date;
 
 public class ShareWatingListVO {
+	private int waiting_num;
 	private String email;
 	private String name;
 	private String product_name;
@@ -18,6 +19,12 @@ public class ShareWatingListVO {
 	private String account;
 	
 	
+	public int getWaiting_num() {
+		return waiting_num;
+	}
+	public void setWaiting_num(int waiting_num) {
+		this.waiting_num = waiting_num;
+	}
 	public String getName() {
 		return name;
 	}

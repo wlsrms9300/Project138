@@ -48,6 +48,7 @@ public class PDServiceImpl implements PDService {
 			pdMapper.prDelete5(product_num);
 			pdMapper.prDelete6(product_num);
 			pdMapper.prDelete7(product_num);
+			pdMapper.prDelete8(product_num);
 		} catch (Exception e) {
 			throw new Exception("상품삭제 실패.", e);
 		}
@@ -169,6 +170,18 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("입고 알림 여부 체크 실패", e);
 		}
 	}
+	
+	@Override
+	public int getAlarm2(String email, int product_num) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			int res = pdMapper.getAlarm2(email, product_num);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("입고 알림 여부 체크 실패", e);
+		}
+	}
+
 	@Override
 	public void addAlarm(String email, int product_num, String phone) throws Exception {
 		try {
@@ -231,9 +244,24 @@ public class PDServiceImpl implements PDService {
 	@Override
 	public int getWishList(int product_num, String email) throws Exception {
 		try {
-			int res = 0;
+			int resCount = 0, res = 0;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			res = pdMapper.getWishList(product_num, email);
+			resCount = pdMapper.getWishListCount(email);
+			if(resCount==10) {
+				res = pdMapper.getWishList(product_num, email);
+				if(res==1) {
+					res = 11;
+				}else {
+					res = 12;
+				}
+			}else {
+				res = pdMapper.getWishList(product_num, email);
+				if(res==1) {
+					res = 1;
+				}else {
+					res = 0;
+				}
+			}
 			return res;
 		} catch (Exception e) {
 			throw new Exception("위시리스트 여부 확인 실패", e);
@@ -265,12 +293,23 @@ public class PDServiceImpl implements PDService {
 		try {
 			int res = 0;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			res = pdMapper.getReservation(product_num, email);
+			//email로 예약한 게 있는지 확인
+			res = pdMapper.getReservation1(email);
+			//예약한 상품이 현재 상품인지 여부 확인
+			if(res==1) {
+				res = pdMapper.getReservation2(product_num, email);
+				if(res==1) {
+					res=1;
+				}else {
+					res=2;
+				}
+			}
 			return res;
 		} catch (Exception e) {
 			throw new Exception("위시리스트 여부 확인 실패", e);
 		}
 	}
+	
 	@Override
 	public void addReservation(int product_num, String email) throws Exception {
 		try {
@@ -375,8 +414,20 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("리뷰 포인트 지급 여부 변경 실패.", e);
 		}
 	}
+
+	@Override
+	public void reviewGpa(int product_num) throws Exception {
+		try {
+			System.out.println("reviewGpa 호출");
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.reviewGpa(product_num);
+		} catch (Exception e) {
+			throw new Exception("리뷰 평점 반영 실패.", e);
+		}
+	}
 	/********************** 상품리뷰 종료 **********************/
 	
+
 
 	/********************** 상품문의 시작 **********************/
 	@Override
@@ -453,4 +504,36 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 	/********************** 상품검색 종료 **********************/
+
+
+	/********************** 개인쉐어 상품 등록 시작 **********************/
+	@Override
+	public int getPnum() throws Exception {
+		int res = 0;
+		PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+		res = pdMapper.getPnum();
+		return res;
+	}
+
+	@Override
+	public void shareState(int share_state, int waiting_num) throws Exception {
+		PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+		pdMapper.shareState(share_state, waiting_num);
+	}
+
+	@Override
+	public void shareAdd(ProductShareVO psVO) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.shareAdd(psVO);	
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		
+	}
+	
+	
+	
+	/********************** 개인쉐어 상품 등록 종료 **********************/
 }

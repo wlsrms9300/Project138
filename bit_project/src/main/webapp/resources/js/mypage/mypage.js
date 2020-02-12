@@ -225,28 +225,16 @@ $(document).ready(function(){
                         	sl_sub2 += '<td>쉐어 대기</td>';	
                         }else if(item.share_state==1) {
                         	sl_sub2 += '<td>쉐어 수락</td>';
-                        }else {
+                        }else if(item.share_state==2) {
                         	sl_sub2 += '<td>쉐어 거절</td>';
+                        }else {
+                        	sl_sub2 += '<td>쉐어 승인</td>';
                         }
                         sl_sub2 += '</tr>';
 
                         $('.application table').append(sl_sub2);
                       
                     })
-                    var sh = "";
-                    sh += '<div class="share_history">';
-                    sh += '<h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn">';
-                    sh += '<table>';
-                    sh += '<tr class="share_line">';
-                    sh += '<th>기간</th>';
-                    sh += '<th>상품명</th>';
-                    sh += '<th>등급</th>';
-                    sh += '<th>수익</th>';
-                    sh += '<th>상태</th>';
-                    sh += '</tr>';
-                    sh += '</table>';
-                    sh += '</div>';
-                    $('.share').append(sh);
                     } else {
                     	alert('데이터가 없습니다.')
                     }
@@ -255,6 +243,60 @@ $(document).ready(function(){
                 alert("마이페이지 쉐어 신청 리스트 출력 실패");
             }
         });
+        
+        $.ajax({
+            url: '/bit_project/mypage_share2.my',
+            type: 'GET',
+            dataType: 'json',
+            data:{"email" : myemail},
+            async:false,
+            success: function (data) {
+                    var sl = "";
+                    if(data!=null){
+                    $.each(data, function (index, item) {
+                    	if(index==0){
+                    	  var sh = "";
+                          sh += '<div class="share_history">';
+                          sh += '<h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn" onclick="settlement();">';
+                          sh += '<table>';
+                          sh += '<tr class="share_line">';
+                          sh += '<th>기간</th>';
+                          sh += '<th>상품명</th>';
+                          sh += '<th>총수익</th>';
+                          sh += '<th>상태(대여 : 총수량)</th>';
+                          sh += '<th>정산</th>';
+                          sh += '</tr>';
+                          sh += '</table>';
+                          sh += '</div>';
+                          $('.share').append(sh);
+                    	}
+                    	//나머지 실제 데이터 출력 부분
+                    	var settle_sNum = "'" + item.share_num + "'";
+                    	var date1 = new Date(item.consignment_start_date);
+                    	date1 = date_to_str(date1);
+                    	var date2 = new Date(item.consignment_end_date);
+                    	date2 = date_to_str(date2);
+                    	var sh2 ="";
+                    	sh2 += '<tr class="share_line">';
+                    	sh2 += '<td>'+date1+'~'+date2+'</td>';
+                    	sh2 += '<td>'+item.product_name+'</td>';
+                    	sh2 += '<td>'+item.total_accumulated_fund+'</td>';
+                    	sh2 += '<td>'+item.share_amount+'/'+item.total_amount+'</td>';
+                    	sh2 += '<td><input type="button" value="정산" class="share_btn" onclick="settlement('+settle_sNum+');"></td>';
+                    	sh2 += '</tr>';
+                    	$('.share_history table').append(sh2);
+                    	
+                    })
+                    } else {
+                    	alert('데이터가 없습니다.')
+                    }
+            },
+            error: function () {
+                alert("마이페이지 쉐어 신청 리스트 출력 실패");
+            }
+        });
+        
+        
     });
 
     $('#num4').click(function(){
@@ -2169,4 +2211,36 @@ function date_to_str(format)
     
     return year + "-" + month + "-" + date + " " + hour + ":" + min;
     
+}
+function settlement(_sNum) {
+	var settle = confirm("정산하시겠습니까?");
+	
+	if(settle){
+		var settle_y = prompt("금액을 입력해주세요.");
+		
+		if(settle_y){
+			var a = Number(settle_y);
+			console.log(a);
+			if(a=="NaN"){
+				alert("다시 정산 버튼을 누르고 숫자만 입력해주세요.");
+			}else {
+				alert("정산신청이 완료되었습니다. 1~2일 이내 관리자가 확인 후 계좌로 보내드립니다.");
+				  $.ajax({
+			            url: '/bit_project/mypage_share_settle.my',
+			            type: 'GET',
+			            dataType: 'json',
+			            data:{"email" : myemail, "settle" : a, "share_num" : _sNum},
+			            async:false,
+			            success: function (data) {
+			                    
+			                    
+			                    
+			            },
+			            error: function () {
+			                alert("마이페이지 쉐어 신청 리스트 출력 실패");
+			            }
+			        });
+			}
+		}
+	}
 }

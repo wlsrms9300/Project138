@@ -50,6 +50,8 @@ public interface PDService {
 		public void deleteReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 알람 여부
 		int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 알람 여부 v2
+		int getAlarm2(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
 		// 알람 등록
 		void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
 		// 알람 삭제
@@ -85,7 +87,15 @@ public interface PDService {
 		public int addPoint(@Param("email") String email) throws Exception;
 		// 리뷰 지급 후 reviewVO의 point_Details 값 1로 변경
 		public void pointDetail(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
+		// 리뷰 평점 수정
+		public void reviewGpa(@Param("product_num") int product_num) throws Exception;
+		
 	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;
 	    public List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno) throws Exception;
+	    
+	// 6. 개인 쉐어 상품 등록 부분
+	    public int getPnum() throws Exception;
+	    public void shareState(int share_state, int waiting_num) throws Exception;
+	    public void shareAdd(ProductShareVO psVO) throws Exception;
 }

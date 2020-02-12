@@ -511,7 +511,7 @@
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 
 			<!-- 쉐어 관리 -->
-			<li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어관리</a></li>
+			<li class="active"><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어 관리</a></li>
 			
 			<!-- 결제 관리 -->
 			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제관리</a></li>

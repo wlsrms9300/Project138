@@ -8,7 +8,7 @@
 	
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
-	int bookmark = 0, wishlist = 0, reservation = 0;
+	int bookmark = 0, wishlist = 0, reservation = 0, alarm = 0;
 	String email = "", phone="";
 	
 	try {
@@ -21,10 +21,13 @@
 			bookmark = 1;
 		}
 		if((int)request.getAttribute("wishlist")!=0){
-			wishlist = 1;
+			wishlist = (int)request.getAttribute("wishlist");
 		}
 		if((int)request.getAttribute("reservation")!=0){
-			reservation = 1;
+			reservation = (int)request.getAttribute("reservation");
+		}
+		if((int)request.getAttribute("alarm")!=0){
+			alarm = 1;
 		}
 		
 	}catch (NullPointerException e) {
@@ -36,6 +39,7 @@
 		System.out.println("레저 : "+reservation);
 		System.out.println("이메일 : "+email);
 		System.out.println("폰 : "+phone);
+		System.out.println("알람 : "+alarm);
 	}
 	
     %>
@@ -244,9 +248,10 @@
                     <div><%=prVO.getProduct_content() %></div>
                     <br><br><br>
                     <hr>
-	                    <div>재고 : <span><%=prVO.getCurrent_amount() %>
+	                    <div>총수량 : <span><%=prVO.getTotal_amount()%>
+	                    <div>남은수량 : <span><%=prVO.getCurrent_amount()%>
 	                    <%if(prVO.getTotal_amount()==0 && email!=null){ %>
-	                    <a href="javascript:void(0)" onclick="amount_alert();">입고알림</a>
+	                    <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
 	                    <%} %>
 	                    </span>
 	                    </div>
@@ -741,15 +746,15 @@
             var frm = document.getElementById("ReviewForm");
             frm.reset();
         });
-        
-        
-        
-       
+        var scrollTop = $(window).scrollTop();
+        var captionTop = $('.reviewcssf').offset().top;
+        $('html, body').animate({scrollTop : captionTop}, 0);
     </script>
     <script>
     var bcheck = <%=bookmark%>;
     var wcheck = <%=wishlist%>;
     var rcheck = <%=reservation%>;
+    var acheck = <%=alarm%>;
 	if(bcheck==0){
 		$('#wishlist-pid-0001').prop('checked', false);
 	}else {
@@ -758,20 +763,27 @@
 	}
 	if(wcheck==0){
 		$('#wish_button').css("background","#EA7475");
-	}else {
+	}else if(wcheck==1 || wcheck==11){
 		$('#wish_button').css("background","black");
+	}else {
+		$('#wish_button').css("background","#EA7475");
 	}
 	
-	if(rcheck==0){
+	if(rcheck==0 || rcheck==2){
 		$('#reservation_button').css("background","#EA7475");
 	}else {
 		$('#reservation_button').css("background","black");
+	}
+	if(acheck==0){
+		$('.alarm_btn').css("background","#EA7475");
+	}else {
+		$('.alarm_btn').css("background","black");
 	}
 	function amount_alert() {
 		 var alert_params = $("#amount_alarm").serialize();
 		 var alarm_chk = 0;
 		 
-		 $.ajax({
+		/*  $.ajax({
          	url: '/bit_project/alarmCheck.pr',
              type: 'GET',
              dataType: 'json',
@@ -788,8 +800,8 @@
  				alert("ajax오류");
  			}
          });
-		 
-		 if(alarm_chk==0){
+		  */
+		 if(acheck==0){
 			 var alarm_y = confirm("입고 알림을 신청하시겠습니까?");
 			 console.log(alert_params);
 			 if(alarm_y)
@@ -802,7 +814,7 @@
 		                async:false,
 		                data: alert_params,
 		                success: function (data) {
-		                	console.log("신청되었습니다.");
+		            		$('.alarm_btn').css("background","black");
 		                },
 		    	        error: function () {
 		    				alert("ajax오류");
@@ -821,7 +833,8 @@
 		                async:false,
 		                data: alert_params,
 		                success: function (data) {
-		                	console.log("취소되었습니다.");   
+		                	console.log("취소되었습니다.");
+		                	$('.alarm_btn').css("background","#EA7475");
 		                },
 		    	        error: function () {
 		    				alert("ajax오류");

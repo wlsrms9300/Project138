@@ -26,11 +26,20 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "/share.se")
-	public String home(Model model, HttpSession session) {
+	public String share(Model model, HttpSession session) {
 		
 		return "admin/share";
 	}
-	
+	@RequestMapping(value = "/shareOK.se")
+	public String shareOK(Model model, HttpSession session) {
+		
+		return "admin/shareOK";
+	}
+	@RequestMapping(value = "/share_settle.se")
+	public String sharesettle(Model model, HttpSession session) {
+		
+		return "admin/share_settle";
+	}
 	@RequestMapping(value = "/payment.se")
 	public String payment(Model model, HttpSession session) {
 		
