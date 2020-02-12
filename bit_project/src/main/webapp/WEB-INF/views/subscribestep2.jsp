@@ -161,8 +161,8 @@
 		    pay_method : 'card', //결제 수단
 		    merchant_uid : merchant_uid,
 		    customer_uid: customer_uid, // 카드와 1:1로 대응하는 값
-		    name : '주문명:결제테스트', //order 테이블에 들어갈 주문명 혹은 주문번호
-		    amount : <%=price%>, //결제 금액
+		    amount: 0,
+		    name : '빌링키 발급', //order 테이블에 들어갈 주문명 혹은 주문번호
 		    buyer_email : $('#user_email').val(), //구매자 email
 		    buyer_name : '<%=membervo.getName() %>', //구매자 이름
 		    buyer_tel : '<%=membervo.getPhone() %>', //구매자 전화번호
@@ -171,23 +171,34 @@
 		  /*   m_redirect_url : '/khx/payEnd.action'	// 결제 완료 후 보낼 컨트롤러의 메소드명 */
 		}, function(rsp) { //callback
 			if(rsp.success) {
+				
+				/*
 				msg = '결제가 완료되었습니다.';
 	            msg += '\n고유ID : ' + rsp.imp_uid;
 	            msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	            msg += '\n결제 금액 : ' + rsp.paid_amount;
 	            msg += '\n카드 승인번호 : ' + rsp.apply_num;
 	            price += rsp.paid_amount;
+	            */
+	            
+	            //빌링키 발급 성공
+	            var imp_uid = rsp.imp_uid;
 	            var check = true;
-	           $.ajax({
+	           $.ajax({ //빌링키 발급 성공시 DB에 정보 보내준 후 subscribe3으로 이동 (sub3에서 결제내용 확인 및 위시리스트 작성으로 이동)
 	            	url: "/bit_project/insertSP.su",
 	            	type: "POST",
 	            	dataType: "json",
-	            	data: {'price': <%=price %>},
+	            	data: {
+		            	price: <%=price %>,
+		            	imp_uid: imp_uid,
+						merchant_uid: merchant_uid,
+						email: '<%=user_email%>'
+	               	},
 	            	async : false,
 	            	contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 	            	success: function(map) {	
 	            		if(map.res == "OK") {
-	            			
+	            			alert("DB작성 성공");
 	            		} else {
 	            			alert("실패");
 	            		}
@@ -198,7 +209,7 @@
 	    			}
 	            }); 
 	           if(check == true) {
-	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ price + '&merchant_uid=' + merchant_uid;
+	        	   location.href='<%=request.getContextPath()%>/subscribestep3.me?price='+ <%=price %>;
 	           }
 	           
 		} else {

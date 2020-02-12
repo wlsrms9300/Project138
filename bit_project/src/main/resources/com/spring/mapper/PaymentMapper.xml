@@ -1,4 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.PaymentMapper">
+
+	<!-- 구독결제 정보 -->
+	<resultMap type="com.spring.payment.PaymentVO" id="PaymentResultMap">
+		<result property="pay_num" column="pay_num" />
+		<result property="customer_uid" column="customer_uid" />
+		<result property="subscribe_num" column="subscribe_num" />
+		<result property="pay_date" column="pay_date" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+		<result property="merchant_uid" column="merchant_uid" />
+		<result property="imp_uid" column="imp_uid" />
+		<result property="state" column="state" />
+	</resultMap>
+	
+	<!-- 구독 정보 -->
+	<resultMap type="com.spring.payment.SubscriptionVO" id="SubscriptionResultMap">
+		<result property="subscribe_num" column="subscribe_num" />
+		<result property="email" column="email" />
+		<result property="grade" column="grade" />
+		<result property="state" column="state" />
+		<result property="count" column="count" />
+	</resultMap>
+	
+	<!-- 구독자 정보(결제) -->
+	<resultMap type="com.spring.payment.PMemberVO" id="PMemberResultMap">
+		<result property="subscribe_num" column="subscribe_num" />
+		<result property="email" column="email" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="grade" column="grade" />
+		<result property="price" column="price" />
+		<result property="point_price" column="point_price" />
+		<result property="pay_price" column="pay_price" />
+	</resultMap>
+	
+	<!-- 관리자 페이지 예약대기/완료 불러오기 -->
+	<select id="allSubscribe" parameterType="String" resultMap="PMemberResultMap">
+		select s.subscribe_num, m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
+		from member m, subscribe s, subscribe_payment p 
+		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y' and p.state = #{state}
+	</select> 
+	
+	<!-- subscribe 테이블 insert (state 기본값 "구독대기" // 결제시 "구독중" 으로 변경필요)-->
+	<insert id="insertSubscribe" parameterType="com.spring.payment.SubscriptionVO">
+	<selectKey keyProperty="subscribe_num" resultType="int" order="BEFORE">
+		SELECT SUBSCRIBE_SEQUENCE.nextval From DUAL
+	</selectKey>
+		INSERT INTO SUBSCRIBE (SUBSCRIBE_NUM, EMAIL, GRADE, COUNT)
+		VALUES (#{subscribe_num}, #{email}, #{grade}, #{count})
+	</insert>
+	
+	<!-- subscribe 테이블 -->
+	<select id="getSubscribe" parameterType="String" resultMap="SubscriptionResultMap">
+		SELECT * FROM SUBSCRIBE WHERE EMAIL=#{email}
+	</select>
+	
+	<!-- subscribe_payment 테이블 insert (subscribe_num 받아오기)-->
+	<insert id="insertPayment" parameterType="com.spring.payment.PaymentVO">
+	<selectKey keyProperty="pay_num" resultType="int" order="BEFORE">
+		SELECT SUBSCRIBE_PAY_SEQUENCE.nextval From DUAL
+	</selectKey>
+		INSERT INTO SUBSCRIBE_PAYMENT (PAY_NUM, SUBSCRIBE_NUM, PRICE, MERCHANT_UID, IMP_UID)
+		VALUES (#{pay_num}, #{subscribe_num}, #{price}, #{merchant_uid}, #{imp_uid})
+	</insert>
+	
+	<!-- 멤버 subscribe 컬럼 값 'Y'로 변경 -->
+	<update id="updateMemberColumn" parameterType="String">
+		UPDATE MEMBER SET SUBSCRIBE='Y' WHERE EMAIL=#{email} 
+	</update>
+	
+	<!-- state, pay_price, merchant_uid 상태값 변경 (예약완료) -->
+	<update id="updatePayState" parameterType="com.spring.payment.PaymentVO">
+		UPDATE SUBSCRIBE_PAYMENT SET STATE='예약완료', PAY_PRICE=#{pay_price}, MERCHANT_UID=#{merchant_uid}
+		WHERE SUBSCRIBE_NUM=#{subscribe_num} AND STATE='예약대기'
+	</update>
+	
+	<!-- state, pay_price 상태값 변경 (예약대기) -->
+	<update id="rePayState" parameterType="com.spring.payment.PaymentVO">
+		UPDATE SUBSCRIBE_PAYMENT SET STATE='예약대기', PAY_PRICE=#{pay_price}
+		WHERE SUBSCRIBE_NUM=#{subscribe_num} AND STATE='예약완료'
+	</update>
+	
+	<!-- 결제되면 STATE 결제완료로 변경 (결제완료) -->
+	<update id="paidState" parameterType="int">
+		UPDATE SUBSCRIBE_PAYMENT SET STATE='결제완료'
+		WHERE SUBSCRIBE_NUM=#{subscribe_num} AND STATE='예약완료'
+	</update>	
+	
+	<!-- 예약취소 정보 (merchant_uid, subscribe_num 받아오기) -->
+	<select id="selectCancel" parameterType="String" resultMap="PaymentResultMap">
+		SELECT P.MERCHANT_UID, S.SUBSCRIBE_NUM FROM MEMBER M, SUBSCRIBE S, SUBSCRIBE_PAYMENT P
+		WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL=#{email}
+	</select>
+	
+	
+	
+
 </mapper>

@@ -32,6 +32,7 @@
 
 
 .board_list_wrap {
+	min-height:750px;
 	display:none;
 	margin:0 auto;
 }

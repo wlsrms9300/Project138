@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.login.LoginVO" %>
+<%@ page import="com.spring.mypage.PStateVO" %>
 <!DOCTYPE html>
 <%
 	LoginVO userDetail_cal = (LoginVO)session.getAttribute("userDetail"); //유저정보
 	String subscribe_cal = userDetail_cal.getSubscribe(); //구독여부 체크
 	String email_cal = (String)session.getAttribute("email");
+	PStateVO pstate = (PStateVO)request.getAttribute("pstate");
 %>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -20,6 +22,15 @@
 <title>Insert title here</title>
 </head>
 <script>
+//반납신청일
+var beforeDate = '<%=pstate.getReturn_application() %>';
+var date = beforeDate.replace(/(\s*)/g, "");
+var sdate = date.split("-");
+var aYear1 = sdate[0];
+var aMonth1 = sdate[1].replace(/(^0+)/, "");
+var aDay1 = sdate[2];
+alert(date1 + ", " + aMonth1 + ", " + aDay1);
+
 $(document).ready(function(){
 	window.onload = function() {
 	var line = $('.calendar_line > td');
@@ -52,11 +63,11 @@ $(document).ready(function(){
 							alert('반납신청 실패');
 						}
 					},
-					error:function() {
-						alert("ajax통신 실패!!!");
+					error:function(request, status, error) {
+						alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" +"error : " + error);
 					}
 				});
-
+				location.href='<%=request.getContextPath()%>/mypage_main.my';
 			}
 		}
 	});
@@ -72,6 +83,7 @@ $(document).ready(function(){
 					url:'bit_project/updatePS_reset.my' //ps테이블의 return_application날짜 null로 바꾸고 staet값 '대여중'
 				});
 				$('#true').text("반납신청");
+				location.href='<%=request.getContextPath()%>/mypage_main.my';
 			}
 		}
 	});
@@ -93,7 +105,17 @@ $(document).ready(function(){
  			if(subscribe_cal.equals("Y")) { //구독중일 경우 반납신청/반납취소 버튼추가
         %>
             <div class="return-true">
-            	<p id="true">반납신청</p>
+        <%
+        	if(pstate.getReturn_application() == null) {
+        %>
+            <p id="true">반납신청</p>
+        <%
+        	} else {	
+        %>
+        	<p id="true"><%=pstate.getReturn_application() %></p>
+        <%
+        	}
+        %>
             </div>
             <div class="return-false">
             	<p id="false">반납취소</p>

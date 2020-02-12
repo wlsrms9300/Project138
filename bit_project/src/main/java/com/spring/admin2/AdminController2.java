@@ -21,8 +21,7 @@ public class AdminController2 {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private SubscribePaymentService subscribePaymentService;
+	
 	
 	@RequestMapping(value = "/member_admin.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -122,20 +121,4 @@ public class AdminController2 {
 	}
 */	
 	
-	@RequestMapping(value = "/payment.tz", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String getPaymentList() {
-		List<SubscribePaymentVO> list = subscribePaymentService.getPaymentList();
-		
-		String str = "";
-		
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			str = mapper.writeValueAsString(list);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
-			System.out.println("first() mapper : " + e.getMessage());
-		}
-		
-		return str;
-	}
 }
