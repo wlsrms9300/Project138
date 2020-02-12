@@ -27,7 +27,6 @@
 	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 </head>
 
-
 <script type="text/javascript">
     $(function($) {
         var lang_kor = {

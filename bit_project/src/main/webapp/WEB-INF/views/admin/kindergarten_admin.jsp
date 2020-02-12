@@ -28,6 +28,8 @@
 	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 </head>
 
+
+</style>
 <script type="text/javascript">
     $(function($) {
         var lang_kor = {
@@ -63,7 +65,7 @@
         	
             language:lang_kor
         });
-        $('#myTable').DataTable();
+       
     });
    
 </script>

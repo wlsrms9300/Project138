@@ -1,4 +1,6 @@
 /* db에 member 정보 저장돼있는것 불러와서 뿌려주는 ajax */
+
+
 var state_param = null;
 partner_admin();  
 function partner_admin() {

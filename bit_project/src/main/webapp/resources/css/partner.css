@@ -17,7 +17,7 @@ body {
   margin: 30px;
   /* min-width: 310px -60px; */
   /* max-width: 310px; */
-  width: 45%;
+  width: 30%;
   height: auto;
   color: #ffffff;
   background-color: #000000;
@@ -84,10 +84,14 @@ body {
   margin: 5px 0 5px;
   font-weight: 700;
   text-transform: uppercase;
-  
+  text-align: left;
+}
+.partner_chart{
+	text-align: center;
 }
 .snip1273 p {
   font-size: 0.8em;
+  text-align: left;
   font-weight: 500;
   margin: 0 0 22px;
   text-align: left;
@@ -100,6 +104,7 @@ body {
   left: 0;
   z-index: 1;
   color: #ffffff;
+  float: left;
 }
 .snip1273:before,
 .snip1273:after,

@@ -4,7 +4,7 @@ kindergarten_admin();
    function kindergarten_admin() {
       
       $.ajax({
-
+    	 
          url : '/bit_project/kindergarten_admin.se',
          type : "post",
          dataType : "json",
@@ -20,7 +20,7 @@ kindergarten_admin();
                 output += '<tr>';
                 output += '<td>' + item.name + '</td>';
                 output += '<td>' + item.phone + '</td>';
-                output += '<td>' + item.term + '</td>';
+                output += '<td>' + item.term +"개월"+ '</td>';
                  
                 output += '<td><button type="button" class="btn btn-sm btnadd" onclick="add(' + name + ');">수락</button>&nbsp;<button type="button" class="btn btn-sm btnDel"onclick="del(' + name + ');">거절</button></td>';
                 
@@ -116,7 +116,9 @@ kindergarten_admin();
 		            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
 		            	if(item.state == 'Y') {
 		            		  var name = "'" + item.name + "'"; 
-		                      var output = '';
+		            		 
+		            		  var output = '';
+
 		                     
 		                      output += '<tr>';
 
@@ -124,7 +126,10 @@ kindergarten_admin();
 		                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
-		                      output += '<td>' + '<input type="hidden" value='+ item.term+'><span>'+item.term+'</span></td>';
+		                     
+		                      var date = new Date(item.term);
+		  		             date = date_to_str(date);
+		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
 		   	                
 		   	               
 		                      output += '<td><button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
@@ -143,9 +148,27 @@ kindergarten_admin();
 		         }
 
 		      });
+	      
 		   }
    kindergarten_admin1();
 	   
+   
+   function date_to_str(format)
+   {
+	   var format= new Date();
+       var year = format.getFullYear(); 
+       var month = format.getMonth() + 1;
+       if(month<10) month = '0' + month;
+       var date = format.getDate();
+       if(date<10) date = '0' + date;
+       var hour = format.getHours();
+       if(hour<10) hour = '0' + hour;
+       
+       return year + "-" + month + "-" + date + "~"+ year + "-" + month + 'format' + "-" + date ;
+       
+   }
+   
+   
 	   function del(param_name) {
 	  	  	 var input = confirm("거절 하시겠습니까?");
 	  		 if(input){
@@ -161,7 +184,7 @@ kindergarten_admin();
 	  		  	        success: function(result){	  	        	
 	  		  	            if (result.res=="OK") {
 	  		  	                alert("거절 완료.");
-	  		  	                kindergarten_admin1();
+	  		  	                kindergarten_admin();
 	  		  	            } else{
 	  		  	                alert("거절 실패.");
 	  		  	            }
