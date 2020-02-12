@@ -74,7 +74,7 @@ public class PaymentController {
 		return data;
 	}
 	
-	//관리자 결제 페이지 예약완료 불러오기
+	//관리자 결제 페이지 결제완료 불러오기
 		@RequestMapping(value="/paidhistory.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 		@ResponseBody
 		public ArrayList<PMemberVO> paidHistory(HttpServletRequest request) throws Exception {
@@ -355,6 +355,7 @@ public class PaymentController {
 		PaymentVO pvo = null;
 		String[] before = null;
 		String customer_uid = null;
+		
 		for(int i = 0; i < data.size(); i++) {
 			PMemberVO vo = data.get(i);
 			before = vo.getEmail().split("@");

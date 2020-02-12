@@ -234,16 +234,14 @@ function uploadFiles(e) {
         return;
     }
     if (files[0].type.match(/image.*/)) {
-    	if(isDataURL(e.target.result)){
-    		$(e.target).css({
-                "background-image": "url(" + e.target.result(files[0]) + ")",
-                "background-size": "100% 100%"
-            });
-    	}
-        
-    }else{
-      alert('이미지가 아닙니다.');
-      return;
-    }
+		$(e.target).css({
+			"background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "background-size": "100% 100%"
+        });
+    
+}else{
+  alert('이미지가 아닙니다.');
+  return;
+}
 }
 });

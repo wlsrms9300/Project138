@@ -82,7 +82,7 @@
 	<!-- 구독 등급 파이 그래프  -->
 	<select id="getDoughnutGraph" resultMap="doughnutGMap">
 		select grade, count(*) as data from subscribe group by grade 
-		order by decode(grade, 'platinum', 1, 'gold', 2, 'silver', 3, '2month', 4, '1month', 5)
+		order by decode(grade, '플래티넘', 1, '골드', 2, '실버', 3, '2month', 4, '1month', 5)
 	</select>
 	
 	<!-- 커뮤니티 게시글 수 -->

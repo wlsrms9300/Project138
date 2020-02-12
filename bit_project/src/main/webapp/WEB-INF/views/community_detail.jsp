@@ -79,7 +79,7 @@
                     조회수 <%=cmvo.getCount() %>
                 </span>
                 <span class="community_mt_footer_share">
-                    스크랩 <%=cmvo.getScrap_count() %>
+        
                 </span>
                 <div class="community_mt_footer_share_click"> <!-- sns 공유 -->
                     <a id="kakao-link-btn" href="javascript:kakao_click();"><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 30px; height: 30px"/></a>

@@ -4,7 +4,7 @@
 <%@ page import="java.util.List" %>
 <%
 	int new_users = (int)request.getAttribute("new_users");
-	List<RankingVO> rankingList = (List<RankingVO>)request.getAttribute("rankingList");
+	List<RankingVO> rankingList = (List<RankingVO>)request.getAttribute("rankingList"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -615,7 +615,7 @@
 								for(int i=0; i<5; i++) 
 								{
 									RankingVO rankingvo = (RankingVO)rankingList.get(i);
-							%>
+							%> 
 								<tr>
 									<td>&nbsp;&nbsp;&nbsp;<%=i+1 %>.&nbsp;</td>
 									<td>
@@ -624,7 +624,7 @@
 								</tr>
 							<%
 								}
-							%>
+							%> 
 	
 						</table>	
 						</div>
