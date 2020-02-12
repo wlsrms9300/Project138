@@ -30,6 +30,7 @@
 		<result property="start" column="start" />
 		<result property="end" column="end" />
 		<result property="co_count" column="co_count" /> <!-- 댓글 수 -->
+		<result property="an_count" column="an_count" /> <!-- 대댓 수 -->
 		<result property="cm_count" column="cm_count" /> <!-- 총 게시글 수 -->
 		<result property="cmsearch_count" column="cmsearch_count" />
 		<result property="email" column="email" />
@@ -101,6 +102,7 @@
 	    	select board_num, nickname, board_name, content, regist, img, count, category, scrap_count, email,
 	    		(select member.img from member where board.email = member.email) as profile,
 	    		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+	    		(select count(*) from board_answer where board_answer.board_num = board.board_num) as an_count,
 	    		(select count(*) from board where category = #{category}) as cm_count
 	    		from board where category = #{category} order by regist desc) 
 	</select>
@@ -111,6 +113,7 @@
 	    	select board_num, nickname, board_name, content, regist, img, count, category, scrap_count, email,
 	    		(select member.img from member where board.email = member.email) as profile,
 	    		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+	    		(select count(*) from board_answer where board_answer.board_num = board.board_num) as an_count,
 	    		(select count(*) from board where category = #{category}) as cm_count
 	    		from board where category = #{category} order by count desc) 
 	</select>
@@ -121,6 +124,7 @@
 	    	select board_num, nickname, board_name, content, regist, img, count, category, scrap_count, email,
 	    		(select member.img from member where board.email = member.email) as profile,
 	    		(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+	    		(select count(*) from board_answer where board_answer.board_num = board.board_num) as an_count,
 	    		(select count(*) from board where category = #{category}) as cm_count
 	    		from board where category = #{category} order by co_count desc) 
 	</select>
@@ -146,7 +150,8 @@
    			select  board_num, board_name, nickname, content, regist, img, count, category, scrap_count, email,
    						(select member.img from member where board.email = member.email) as profile,
    						(select count(*) from board where category = #{category} and (nickname LIKE '%${search_Data}%' or board_name LIKE '%${search_Data}%' or content LIKE '%${search_Data}%')) as cmsearch_count,
-						(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count
+						(select count(*) from board_comment where board_comment.board_num = board.board_num) as co_count,
+						(select count(*) from board_answer where board_answer.board_num = board.board_num) as an_count
 			from board)
 		where category = #{category} and (nickname LIKE '%${search_Data}%' or board_name LIKE '%${search_Data}%' or content LIKE '%${search_Data}%') order by regist desc
 		
@@ -164,6 +169,7 @@
 		
 		select * from(select board_num, board_name, nickname, content, regist, img, count, category, scrap_count,
                     (select member.img from member where board.email = member.email) as profile,
+                    (select count(*) from board_answer where board_answer.board_num = board.board_num) as an_count,
                     (select count(*) from board where nickname = #{nickname}) as cmsearch_count from board)
         board where nickname = #{nickname} order by regist desc
 	</select>
@@ -175,6 +181,10 @@
 	
 	<update id="updateCount" parameterType="int">
 		UPDATE board SET count=count+1 WHERE board_num=#{board_num}
+	</update>
+	
+	<update id="updateScrap" parameterType="int">
+		UPDATE board SET scrap_count = scrap_count+1 WHERE board_num=#{board_num}
 	</update>
 	
 	<!--프로필사진 가져오기 -->

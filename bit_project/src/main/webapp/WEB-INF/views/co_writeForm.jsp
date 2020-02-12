@@ -34,11 +34,11 @@
 	<div id="community_container_menubar">
 		<ul class="community_menubar">
         	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
-        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
-        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
+        	<li data-tab="육아사진게시판" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
+        	<li data-tab="정보공유(팁)" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
         	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
         	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
-        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+        	<li data-tab="이슈,토론게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
         </ul>
 	</div>
 
@@ -54,15 +54,18 @@
 			<input type="hidden" name="email" value="<%=email_co %>" />
 			<div id="cententbox-top">
 			 	<span> 
-			 		<select id="category_select" name="category_select">
+			 		<select id="category_select" onchange="category_click()">
 						<option value="자유게시판" selected>자유게시판</option>
-						<option value="육아사진">육아사진게시판</option>
-						<option value="정보공유">정보공유(팁)</option>
+						<option value="육아사진게시판">육아사진게시판</option>
+						<option value="정보공유(팁)">정보공유(팁)</option>
 						<option value="공구게시판">공구게시판</option>
 						<option value="육아게시판">육아게시판</option>
-						<option value="이슈게시판">이슈,토론게시판</option>
+						<option value="이슈,토론게시판">이슈,토론게시판</option>
 					</select>
-				</span> <span> <input id="title" name="board_name" class="" type="text" placeholder="제목">
+					<input type="hidden" name="category" value="" />
+				</span>
+				<span> 
+					<input id="title" name="board_name" class="" type="text" placeholder="제목">
 				</span>
 			</div>
 
@@ -90,13 +93,20 @@
 	if(!board_name || !content) {
 	 alert("내용을 입력해주세요");
 	}else {
-	 if(option == "육아사진" && $(content).find('img').attr('src') == null){
+	 if(option == "육아사진게시판" && $(content).find('img').attr('src') == null){
 	  	alert("사진을 1개 이상 올려주세요");
 	 }else {
 	 writingForm.submit();
 	 }
 	}
   }
+  
+	//카테고리선택
+	function category_click() {
+		var target = document.getElementById("category_select");
+		var category = target.options[target.selectedIndex].value;
+		$('input[name=category]').attr('value',category);
+	}
   
   $(document).ready(function() {
 	    $("#summernote").summernote({

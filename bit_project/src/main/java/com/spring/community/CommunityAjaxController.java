@@ -27,8 +27,6 @@ public class CommunityAjaxController {
 	public List<CommunityVO> getCM(String category, String option) {
 		List<CommunityVO> list = null;
 		
-		System.out.println("컨트롤러부분 옵션값 : " + option + "카테고리 : " +category);
-		
 		if(option.equals("최신순")) {
 			list = communityService.filter1(category);
 		} else if(option.equals("조회순")) {
@@ -36,6 +34,7 @@ public class CommunityAjaxController {
 		}else { //댓글순
 			list = communityService.filter3(category);
 		}
+		
 		return list;
 	}
 	
@@ -73,9 +72,8 @@ public class CommunityAjaxController {
 	@PostMapping(value="/getCMsearch.co", produces="application/json;charset=UTF-8")
 	public List<CommunityVO> getCMsearch(String search_Data, String category) {
 		List<CommunityVO> search_list = null;
-		
 		search_list = communityService.getCMsearch(search_Data, category);
-		System.out.println("Controller 출력 : " + search_list);
+		
 		return search_list;
 	}
 	
@@ -107,11 +105,8 @@ public class CommunityAjaxController {
 	@PostMapping(value="/getuserSearch.co", produces="application/json;charset=UTF-8")
 	public List<CommunityVO> getuserSearch(String nickname) {
 		List<CommunityVO> getuserSearch = null;
-		
-		System.out.println("nickname : " + nickname );
 		getuserSearch = communityService.getuserSearch(nickname);
 		
-		System.out.println("Controller 출력 : " + getuserSearch);
 		return getuserSearch;
 	}
 //	
@@ -133,8 +128,8 @@ public class CommunityAjaxController {
 	//게시판 댓글 보여주기
 	@PostMapping(value="/getCO.co", produces="application/json;charset=UTF-8")
 	public List<CommentVO> getCO(int board_num) {
-
 		List<CommentVO> list = communityService.getCO(board_num);
+		
 		return list;
 	}
 	
@@ -149,22 +144,37 @@ public class CommunityAjaxController {
 //		return list;
 //	}
 	
-	
-	//댓글 작성
-	@PostMapping(value="/writeCO.co", produces="application/json;charset=UTF-8")
-	public Map<String, Object> writeCO(CommentVO covo) {
+	//스크랩
+	@PostMapping(value="/updateScrap.co", produces="application/json;charset=UTF-8")
+	public Map<String, Object> updateScrap(int board_num) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("댓글 작성 컨트롤ㄹㅓ"+ covo.getBoard_num() + covo.getNickname() + covo.getContent() + covo.getEmail());
 		
 		try {
-			int res = communityService.writeCO(covo);
-			System.out.println(res);
+			int res = communityService.updateScrap(board_num);
 			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 		} catch (Exception e) {
 			retVal.put("res", "FAIL");
 			retVal.put("message", "Failure");
 		}
+		
+		return retVal;
+	}
+	
+	//댓글 작성
+	@PostMapping(value="/writeCO.co", produces="application/json;charset=UTF-8")
+	public Map<String, Object> writeCO(CommentVO covo) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		
+		try {
+			int res = communityService.writeCO(covo);
+			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		
 		return retVal;
 	}
 	
@@ -172,11 +182,9 @@ public class CommunityAjaxController {
 	@PostMapping(value="/updateCO.co", produces="application/json;charset=UTF-8")
 	public Map<String, Object> updateCO(int comment_num, String content) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("댓글 수정 컨트롤ㄹㅓ" + comment_num + "내용 : " + content);
 		 
 		try {
 			int res = communityService.updateCO(comment_num, content);
-			System.out.println(res);
 			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 		} catch (Exception e) {
@@ -190,11 +198,9 @@ public class CommunityAjaxController {
 		@PostMapping(value="/deleteCO.co", produces="application/json;charset=UTF-8")
 		public Map<String, Object> deleteCO(@RequestParam(value="comment_num", required=false, defaultValue="1") int comment_num) {
 			Map<String, Object> retVal = new HashMap<String, Object>();
-			System.out.println("댓글 삭제 컨트롤ㄹㅓ"+ comment_num);
 			
 			try {
 				int res = communityService.deleteCO(comment_num);
-				System.out.println(res);
 				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 			} catch (Exception e) {
@@ -208,11 +214,9 @@ public class CommunityAjaxController {
 		@PostMapping(value="/writeAnswer.co", produces="application/json;charset=UTF-8")
 		public Map<String, Object> writeAnswer(AnswerVO answervo) {
 			Map<String, Object> retVal = new HashMap<String, Object>();
-			System.out.println("대댓글 작성 컨트롤ㄹㅓ"+ answervo.getComment_num() + answervo.getNickname() + answervo.getContent() + answervo.getEmail() + answervo.getBoard_num() );
 			
 			try {
 				int res = communityService.writeAnswer(answervo);
-				System.out.println(res);
 				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 			} catch (Exception e) {
@@ -225,9 +229,8 @@ public class CommunityAjaxController {
 		//대댓글 보여주기
 		@PostMapping(value="/getAnswer.co", produces="application/json;charset=UTF-8")
 		public List<AnswerVO> getAnswer(int comment_num) {
-			System.out.println(comment_num);
 			List<AnswerVO> list = communityService.getAnswer(comment_num);
-			System.out.println(list);
+			
 			return list;
 		}
 		
@@ -249,11 +252,9 @@ public class CommunityAjaxController {
 		@PostMapping(value="/updateAnswer.co", produces="application/json;charset=UTF-8")
 		public Map<String, Object> updateAnswer(int answer_num, String content) {
 			Map<String, Object> retVal = new HashMap<String, Object>();
-			System.out.println("대댓 수정 컨트롤러 : " + answer_num + "내용 : " + content);
 			 
 			try {
 				int res = communityService.updateAnswer(answer_num, content);
-				System.out.println(res);
 				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 			} catch (Exception e) {
@@ -267,11 +268,9 @@ public class CommunityAjaxController {
 		@PostMapping(value="/deleteAnswer.co", produces="application/json;charset=UTF-8")
 		public Map<String, Object> deleteAnswer(@RequestParam(value="answer_num", required=false, defaultValue="1") int answer_num) {
 			Map<String, Object> retVal = new HashMap<String, Object>();
-			System.out.println("대댓글 삭제 컨트롤ㄹㅓ"+ answer_num);
 			
 			try {
 				int res = communityService.deleteAnswer(answer_num);
-				System.out.println(res);
 				retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
 
 			} catch (Exception e) {
@@ -281,16 +280,6 @@ public class CommunityAjaxController {
 			return retVal;
 		}
 
-		public CommunityService getCommunityService() {
-			return communityService;
-		}
-
-		public void setCommunityService(CommunityService communityService) {
-			this.communityService = communityService;
-		}
-		
-		
-		
 		
 //	//카테고리 선택 후 페이징(기본값=자유게시판)
 //	@PostMapping(value = "/getCommunityCount.co", produces="application/json;charset=UTF-8")

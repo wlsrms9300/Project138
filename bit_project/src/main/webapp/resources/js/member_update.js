@@ -302,6 +302,65 @@ $(function() {
 	});
 })
 
+$(function() {
+	if (
+            window.createObjectURL ||
+            window.URL ||
+            window.webkitURL ||
+            window.FileReader
+        ) {
+            $('.browser').hide()
+            $('.preview').children().show()
+        }
+
+
+//이미지 drag drop
+$('.preview')
+.on("dragover", dragOver)
+.on("dragleave", dragOver)
+.on("drop", uploadFiles);
+ 
+function dragOver(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+ 
+function uploadFiles(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function dragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dragOver(e); //1
+ 
+    e.dataTransfer = e.originalEvent.dataTransfer; //2
+    var files = e.target.files || e.dataTransfer.files;
+ 
+    if (files.length > 1) {
+        alert('이미지는 한개만 가능합니다');
+        return;
+    }
+    if (files[0].type.match(/image.*/)) {
+        $(e.target).css({
+            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "background-size": "100% 100%"
+        });
+    }else{
+      alert('이미지가 아닙니다');
+      return;
+    }
+}
+
+});
+
+
 
 
 /*

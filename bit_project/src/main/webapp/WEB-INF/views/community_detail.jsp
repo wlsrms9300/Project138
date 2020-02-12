@@ -5,7 +5,7 @@
 <%@ page import="java.util.*, com.spring.login.*" %>
 <%@ page session="true" %>
 <%
-	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 	CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
 	int comment_count = (int)request.getAttribute("cocount");
 	String img_e = (String)request.getAttribute("img");
@@ -40,13 +40,13 @@
 <!-- header 끝 -->
 
     <div id="community_container_menubar">
-        <ul class="community_menubar">
-        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
-        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
-        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
-        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
-        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
-        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+		<ul class="community_menubar">
+        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#"><span class="category-txt">자유게시판</span></a></li>
+        	<li data-tab="육아사진게시판" class="community_menubar_item"><a href="#"><span class="category-txt">육아사진게시판</span></a></li>
+        	<li data-tab="정보공유(팁)" class="community_menubar_item"><a href="#"><span class="category-txt">정보공유(팁)</span></a></li>
+        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#"><span class="category-txt">공구게시판</span></a></li>
+        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#"><span class="category-txt">육아게시판</span></a></li>
+        	<li data-tab="이슈,토론게시판" class="community_menubar_item"><a href="#"><span class="category-txt">이슈,토론게시판</span></a></li>
         </ul>
     </div>
 
@@ -82,14 +82,16 @@
                     스크랩 <%=cmvo.getScrap_count() %>
                 </span>
                 <div class="community_mt_footer_share_click"> <!-- sns 공유 -->
-                    <a id="kakao-link-btn" href="javascript:;"><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 30px; height: 30px"/></a>
+                    <a id="kakao-link-btn" href="javascript:kakao_click();"><img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" style="width: 30px; height: 30px"/></a>
+                    <a href="http://share.naver.com/web/shareView.nhn?url=http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}&title=${cmvo.getBoard_name()}" onclick="window.open(this.href, '', 'resizable=no,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=no,dependent=no,width=600,height=600'); return false;">
+                    <img src="${pageContext.request.contextPath}/resources/icons/naver.png" style="border-radius: 5px;" ></a>
                     <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3" data-url="http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}"  data-color="default" data-size="small" data-count="false" style="display: none;"></div>
                 </div>
                 
                 <%
                 	if (email_e.equals(email_co)) {
                 %>
-                <div class="community_mt_footer_btn" style="width: 300px; float: right;">
+                <div class="community_mt_footer_btn">
                 		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
                 		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
                 </div>
@@ -106,7 +108,7 @@
     <!-- 댓글입력창 시작 -->
     <div id="community_container_comments">
         <div class="community_comments_count">
-            <h2>댓글</h2><div class="count_circle"><p><%=comment_count %></p></div>
+            <h3>댓글</h3><div class="count_circle"><p><%=comment_count %></p></div>
         </div>
      <form method="POST" name="commentsForm" id ="commentsForm" enctype="multipart/form-data" accept-charset="utf-8">
         <div class="community_comments_form">
@@ -133,7 +135,7 @@
                     <input type="text" class="community_comments_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">
                 </div>
                 <div class="community_comments_form_actions">
-                    <button class="community_comments_form_enter" id="community_comments_form_enter" type="button">등록</button>
+                    <button class="community_comments_form_enter" id="community_comments_form_enter" type="button" >등록</button>
                 </div>
             </div>
         </div>
@@ -141,14 +143,11 @@
     <!-- 댓글입력창 끝 -->   
        
        <!--  댓글 목록 시작 -->
-        <div class="community_comments_view">
+        <div class="community_comments_view paginated">
 		
 		</div> <!-- 댓글 목록 끝 -->
 	</div> <!-- 댓글 입력창 끝 -->
 	
-	<!-- 페이징 -->
-    <div class="paginate" style="text-align:center;"></div>
-    
   
 <footer>
 	<%@ include file="/WEB-INF/views/footer.jsp" %> 
@@ -166,19 +165,21 @@ function delchk(board_num) {
 }
 
 	$("document").ready(function(){
+		
 		coList();
+		
 		
 		//댓글 등록
 		document.getElementById("community_comments_form_enter").addEventListener("click", cowrite);
 		
 		function cowrite() {
+			alert("댓글버튼");
 			if($.trim($('.community_comments_form_comments').val()) == "") {
 				alert("댓글을 입력해주세요");
 				return false;
 			}
 
 			var params = $("#commentsForm").serialize(); //#commentsForm : 이름과 값. 문자형태로 만들어 params에 저장
-			alert(params);
 			
 			$.ajax({
 				url:'/bit_project/writeCO.co',
@@ -201,9 +202,9 @@ function delchk(board_num) {
 		
 		//대댓 폼
 		$('.answer_btn').click(function () {
-			var email_co = <%=(String)session.getAttribute("email")%>;
+			var email_co = '<%=(String)session.getAttribute("email")%>';
 			
-			if(email_co == null) {
+			if(email_co == 'null') {
 				alert("로그인 후 이용해주세요");
 				window.location.href = "login.me";	
 				return false;
@@ -215,6 +216,7 @@ function delchk(board_num) {
                 }
 			}
 		});
+		
 		
 	}); //ready
 	
@@ -288,6 +290,7 @@ function delchk(board_num) {
 	//댓글 목록
 	function coList() {
 		$('.community_comments_view').empty();
+		var datacount = '<%=comment_count %>';
 				
 		$.ajax({
 			url:'/bit_project/getCO.co',
@@ -411,6 +414,7 @@ function delchk(board_num) {
 					outputnull += "</div>";
 					$('.community_comments_view').append(outputnull);
 				}
+				page(datacount);
 			},
 			error:function(request,status,error){
 		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
@@ -607,13 +611,13 @@ function delchk(board_num) {
         	alert("취소되었습니다");
 		}
 	}
-
+	
 	
 	//session 없을시 로그인페이지로 이동(댓글 input)
 	$(".community_comments_form_content").click(function() {
-		var email_co = <%=(String)session.getAttribute("email")%>;
+		var email_co = '<%=(String)session.getAttribute("email")%>';
 		
-		if(email_co == null) {
+		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
@@ -622,9 +626,9 @@ function delchk(board_num) {
 	  
 	//session 없을시 로그인페이지로 이동(대댓 input)
 	$(".community_answer_form_comments").click(function() {
-		var email_co = <%=(String)session.getAttribute("email")%>;
+		var email_co = '<%=(String)session.getAttribute("email")%>';
 		
-		if(email_co == null) {
+		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
@@ -658,50 +662,178 @@ function delchk(board_num) {
         }
         return year + "." + month + "." + date + "." + hour +":" + min;
      }
-	
-	//태그 제거
-	function removeTag( str ) {
-/* 		return str.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""); */
-		return str.replace(/(<([^>]+)>)/ig,"");
-		
-	}
 
-	
+<%-- 	
+//네이버 블로그 공유
+    function share() {
+    	var url_default_naver = "http://share.naver.com/web/shareView.nhn?url=";
+    	var url_combine_naver = url_default_naver + encodeURI(url_this_page) + title_default_naver + encodeURI(title_this_page);
+    	
+    	var url_this_page = location.href; 
+    	var title_this_page = document.title;
+
+    	
+       var url = document.location.href;
+        var title = '<%=cmvo.getBoard_name() %>';
+        var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+        var link = StringTool.format('https"//share.naver.com/web/shareView.nhn?url={0}&title={1}', url, title);
+        document.location = shareURL; 
+}
+ --%>
+        
+//태그 제거
+    function removeTag( str ) {
+    	return str.replace(/(<([^>]+)>)/ig,"");
+    }
+
+//카카오톡 공유
+     var content = '<%=cmvo.getContent() %>'; 
+
+        // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('55c690e62a4cab3263ba4b230bb6af19');
+        // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+        Kakao.Link.createDefaultButton({
+          container: '#kakao-link-btn',
+          objectType: 'feed',
+          content: {
+            title: '<%=cmvo.getBoard_name() %>',
+            description: removeTag(content),
+            imageUrl: '<%=cmvo.getImg() %>',
+           link: {
+             webUrl: document.location.href,
+             mobileWebUrl: document.location.href
+           }
+          },
+          buttons: [
+            {
+              title: 'Open!',
+              link: {
+                mobileWebUrl: document.location.href,
+                webUrl: document.location.href
+              }
+            }  
+          ]
+        });
+  
+      //스크랩수 업데이트
+		function countupdate(){
+			var num = <%=cmvo.getBoard_num() %>;
+			
+			$.ajax({
+		          url : '/bit_project/updateScrap.co',
+		          type : 'POST',
+		          data : {'board_num' : num},
+		          contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+		          dataType : "json",
+		          success : function(retVal) {
+		             if(retVal.res == "OK") {
+		            	 location.reload();
+		             }
+		          },
+		          error:function() {
+		             alert("스크랩 오류");
+		          }
+		       });
+		}
+        
+    function page(datacount){ 
+
+    	var reSortColors = function($table) {};
+    			
+    	 $('div.paginated').each(function() {
+    	  var pagesu = 10;  //페이지 번호 갯수
+    	  var currentPage = 0;
+    	  var numPerPage = 5;  //목록의 수
+    	  var $table = $(this);    
+    	  
+    	  //length로 원래 리스트의 전체길이구함
+    	  var numRows = datacount;
+    	  //Math.ceil를 이용하여 반올림
+    	  var numPages = Math.ceil(numRows / numPerPage);
+    	  //리스트가 없으면 종료
+    	  if (numPages==0) return;
+    	  //pager라는 클래스의 div엘리먼트 작성
+    	  var $pager = $('<div align="center" id="remo"><div class="pager"></div></div>');
+    	  
+    	  var nowp = currentPage;
+    	  var endp = nowp+5;
+    	  
+    	  //페이지를 클릭하면 다시 셋팅
+    	  $table.bind('repaginate', function() {
+    	  //기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+    	  
+    	   $table.find('li.comments_container').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    	   $("#remo").html("");
+    	   
+    	   if (numPages > 1) {     // 한페이지 이상이면
+    	    if (currentPage < 5 && numPages-currentPage >= 5) {   
+    	     nowp = 0;     // 1부터 
+    	     endp = pagesu;    // 10까지
+    	    }else{
+    	     nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+    	     endp = nowp+pagesu;   // 10까지
+    	     pi = 1;
+    	    }
+    	    
+    	    if (numPages < endp) {   // 10페이지가 안되면
+    	     endp = numPages;   // 마지막페이지를 갯수 만큼
+    	     nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+    	    }
+    	    if (nowp < 1) {     // 시작이 음수 or 0 이면
+    	     nowp = 0;     // 1페이지부터 시작
+    	    }
+    	   }else{       // 한페이지 이하이면
+    	    nowp = 0;      // 한번만 페이징 생성
+    	    endp = numPages;
+    	   }
+    	   // [처음]
+    	   $('<br /><span class="page-number">[처음]</span>').bind('click', {newPage: page},function(event) {
+    	          currentPage = 0;   
+    	          $table.trigger('repaginate');  
+    	          $($(".page-number")[2]).addClass('active').siblings().removeClass('active');
+    	      }).appendTo($pager).addClass('clickable');
+    	    // [이전]
+    	      $('<span class="page-number" >&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	          if(currentPage == 0) return; 
+    	          currentPage = currentPage-1;
+    	    $table.trigger('repaginate'); 
+    	    $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+    	   }).appendTo($pager).addClass('clickable');
+    	    // [1,2,3,4,5,6,7,8]
+    	   for (var page = nowp ; page < endp; page++) {
+    	    $('<span class="page-number" style="margin-left: 8px;"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+    	     currentPage = event.data['newPage'];
+    	     $table.trigger('repaginate');
+    	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+    	     }).appendTo($pager).addClass('clickable');
+    	   } 
+    	    // [다음]
+    	      $('<span class="page-number">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	    if(currentPage == numPages-1) return;
+    	        currentPage = currentPage+1;
+    	    $table.trigger('repaginate'); 
+    	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+    	   }).appendTo($pager).addClass('clickable');
+    	    // [끝]
+    	   $('<span class="page-number">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+    	           currentPage = numPages-1;
+    	           $table.trigger('repaginate');
+    	           $($(".page-number")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+    	   }).appendTo($pager).addClass('clickable');
+    	     
+    	     $($(".page-number")[2]).addClass('active');
+    	reSortColors($table);
+    	  });
+    	   $pager.insertAfter($table).find('span.page-number:first').next().next().addClass('active');   
+    	   $pager.appendTo($table);
+    	   $table.trigger('repaginate');
+    	 });
+    	}
+
 </script>
+
 <!-- 라인 공유 -->
 <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-<!-- 카카오톡 공유 -->
-<script type='text/javascript'>
- var content = '<%=cmvo.getContent() %>'; 
-
-    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('55c690e62a4cab3263ba4b230bb6af19');
-    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-    Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: '<%=cmvo.getBoard_name() %>',
-        description: removeTag(content),
-        imageUrl: '<%=cmvo.getImg() %>',
-       link: {
-         webUrl: document.location.href,
-         mobileWebUrl: document.location.href
-       }
-      },
-      buttons: [
-        {
-          title: 'Open!',
-          link: {
-            mobileWebUrl: document.location.href,
-            webUrl: document.location.href
-          }
-        }  
-      ],
-      serverCallbackArgs: '{"myKey":"myValue"}' // 콜백 파라미터 설정
-    });
-
-</script>
 
 </body>
 </html>

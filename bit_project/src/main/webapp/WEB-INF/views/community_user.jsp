@@ -17,6 +17,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_menu.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_paging.js"></script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -32,11 +33,11 @@ String nickname1 = (String)request.getAttribute("nickname");
     <div id="community_container_menubar">
 		<ul class="community_menubar">
         	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
-        	<li data-tab="육아사진" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
-        	<li data-tab="정보공유" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
+        	<li data-tab="육아사진게시판" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
+        	<li data-tab="정보공유(팁)" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
         	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
         	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
-        	<li data-tab="이슈게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
+        	<li data-tab="이슈,토론게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
         </ul>
     </div>
     
@@ -76,7 +77,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 	
 		function userSearch() {
 		var nickname = "<%=nickname1%>";
-			alert("nickname : " + nickname);
+		var datacount = 0;
 			
 		$.ajax({
             url : '/bit_project/getuserSearch.co', 
@@ -87,7 +88,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 	        	cache : false,
             	success : function(data) {
             		$('#community_data').empty();
-            		
+            		datacount = data.length;
             		if(data.length != 0) { //게시글 존재
  					 $.each(data, function(index, item) {
  						alert("총 갯수 : " + item.cmsearch_count);
@@ -131,6 +132,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 							outputnull += "</div>";
 							$('#community_data').append(outputnull);
 						}
+            		page(datacount);
 					},
 	              error : function(data){
 	            		alert('검색 실패');
@@ -156,7 +158,7 @@ String nickname1 = (String)request.getAttribute("nickname");
             if(min<10) {
                min = '0' + min;
             }
-            return year + "-" + month + "-" + date + "-" + hour +":" + min;
+            return year + "." + month + "." + date + " " + hour +":" + min;
          }
         
 </script>
