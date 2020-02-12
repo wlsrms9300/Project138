@@ -366,7 +366,7 @@
 		<div id="commuBanner">
 
 			<img
-				src="${pageContext.request.contextPath}/resources/img/commuBanner.jpg">
+				src="${pageContext.request.contextPath}/resources/img/qna_main.PNG">
 		</div>
 
 		<div id="contents">

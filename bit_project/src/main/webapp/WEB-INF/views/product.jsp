@@ -167,12 +167,12 @@
 	<div class="testsearch">
    <div class="container">
       <div class="row">
-         <select name="searchtype" id="select_searchtype">
+         <select name="searchtype" id="select_searchtype" class="form-control">
             <option value="na" selected="selected">상품명</option>
             <option value="no">상품번호</option>
          </select>
-         <input type="text" name="searchword" id="searchword" />
-         <a href="javascript:fn_searchList()" class="searchbtn">검색</a>
+         <input type="text" name="searchword" id="searchword" class="form-control" />
+         <a href="javascript:fn_searchList()" class="searchbtn form-control">검색</a>
       </div>
    </div>
    </div>

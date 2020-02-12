@@ -36,6 +36,15 @@
 		}
 		$('#loginForm').submit();
 	}
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+ 
+             // 엔터키가 눌렸을 때 실행할 내용
+             login();
+        }
+	}
+
 </script>
 </head>
 <body>
@@ -61,7 +70,7 @@
 					</div>
 					<div class="ipt-pwd">
 						<input type="password" id="loginPw" name="password"
-							placeholder="비밀번호" />
+							placeholder="비밀번호" onkeyup="enterkey();" />
 					</div>
 				</div>
 				<div class="login-append">
@@ -70,8 +79,8 @@
 							class="link-find">회원가입</a>
 						</label>
 					</div>
-					<span class="txt-find"> <a href="findemail.me" class="link-find">이메일</a>
-						/ <a href="forgotIdPw.me" class="link-find">비밀번호 찾기</a>
+					<span class="txt-find">
+						<a href="forgotIdPw.me" class="link-find">이메일 / 비밀번호 찾기</a>
 					</span>
 				</div>
 				<input type="hidden" name="pre_url" value="<%=pre_url %>">
