@@ -39,7 +39,9 @@ html{
     height:60px;
 }
 
-
+#anotherQna{
+	padding-bottom: 20px;
+}
 .header{
 
 background-color:white;
