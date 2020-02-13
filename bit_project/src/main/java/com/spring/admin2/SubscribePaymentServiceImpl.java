@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.SubscribePaymentMapper;
+import com.spring.mypage.PStateVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -46,6 +47,15 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		return settleList;
 	}
 
+	@Override
+	public List<PStateVO> getReturnList() {
+		List<PStateVO> returnList = null;
+		SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+		returnList = subscribePaymentMapper.getReturnList();
+		return returnList;
+	}
+
+	
 
 	
 	

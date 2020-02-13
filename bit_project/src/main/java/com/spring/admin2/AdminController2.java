@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.member.MemberService;
 import com.spring.member.MemberSubscribeVO;
 import com.spring.member.MemberVO;
+import com.spring.mypage.PStateVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -174,5 +175,19 @@ public class AdminController2 {
 		return str;
 	}
 
+	@RequestMapping(value = "/admin_return.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String admin_return() {
+		List<PStateVO> returnList = subscribePaymentService.getReturnList();
+		String str = "";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			str = mapper.writeValueAsString(returnList);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch(Exception e) {
+			System.out.println("first() mapper : " + e.getMessage());
+		}
+		
+		return str;
+	}
 }
 

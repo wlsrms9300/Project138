@@ -288,7 +288,7 @@ $(document).ready(function(){
                     	
                     })
                     } else {
-                    	alert('데이터가 없습니다.')
+                    	alert('데이터가 없습니다.');
                     }
             },
             error: function () {

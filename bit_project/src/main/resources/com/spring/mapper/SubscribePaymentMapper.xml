@@ -25,4 +25,10 @@
 	select * from settlement_details order by settlement_num
 	</select>
 	
+	<!--  admin 반납확정 리스트  -->
+	<select id="getReturnList" resultType="com.spring.mypage.PStateVO">
+	select * from product_state where state='반납확정' order by state_num asc
+	</select>
+	
+	
 </mapper>

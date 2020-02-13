@@ -255,4 +255,10 @@ public class AdminController {
 
 		return save;
 	}
+	
+	@RequestMapping(value = "/return.se", method = RequestMethod.GET)
+	public String returnApp(Model model, HttpSession session) {
+		return "admin/return";
+	}
+
 }	
