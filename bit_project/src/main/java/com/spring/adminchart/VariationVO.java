@@ -5,6 +5,7 @@ import java.util.Date;
 public class VariationVO {
 	private Date regist;
 	private String strRegist;
+	private Date deleted_date;
 	private int increase;
 	private int decrease;
 	private int total;
@@ -20,6 +21,12 @@ public class VariationVO {
 	}
 	public void setStrRegist(String strRegist) {
 		this.strRegist = strRegist;
+	}
+	public Date getDeleted_date() {
+		return deleted_date;
+	}
+	public void setDeleted_date(Date deleted_date) {
+		this.deleted_date = deleted_date;
 	}
 	public int getIncrease() {
 		return increase;
@@ -39,6 +46,4 @@ public class VariationVO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	
-
 }

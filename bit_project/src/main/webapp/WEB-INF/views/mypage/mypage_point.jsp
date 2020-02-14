@@ -90,9 +90,10 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
 		 $('.point_button').click(function(){ 
 			 var pt1 = $('#subscription').val();
 			 var pt2 = $('#gift-wrap').val();
- 			 window.confirm('포인트를 사용하시겠습니까?'); 
-			/* 구독료 차감 */
-			 if($('input:radio[id=subscription-check]').is(':checked') == true) { 
+ 			if(totalPoints < pt1 && totalPoints < pt2) {
+ 				alert("보유포인트가 부족합니다.");
+ 			} else if ($('input:radio[id=subscription-check]').is(':checked') == true && pt1 != 0 && pt1 != '') { /* 구독료 차감 */
+				 window.confirm('포인트를 사용하시겠습니까?'); 
 				 var result = totalPoints - pt1;
 				 var reason = "subscription";
 				 
@@ -175,7 +176,8 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
 			 }
 			 
 			
-		 });
+		 	});
+		 
 		
 	});
 	
@@ -197,6 +199,7 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
 				 pointTable1 += '<th>포인트</th>';
 				 pointTable1 += '</tr>';
 				 $('#pointTable').append(pointTable1);
+			if(data.length != 0) {
 				 $.each(data, function(index, point) {
 					 var reg_date = new Date(point.occur_date); 
 		             var date = date_format(reg_date);  /* 날짜 format */
@@ -220,6 +223,15 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
 					 }
 					 
 				 });
+				 
+			} else {
+				 var pointTable2 = '';
+				 pointTable2 +='<tr class="line2">';
+				 pointTable2 +='<td colspan="3" style="text-align: center;">' + '포인트 내역이 없습니다.' +'</td>';
+				 pointTable2 +='</tr>';
+				 $('#pointTable').append(pointTable2);
+				
+			}	 
 				 paging(totalData, dataPage, pageCount, currentPage);
 			 },
 			 error:function() {
@@ -320,19 +332,6 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
                 <div class="point_history">
                     <h3>포인트 내역</h3>
                     <table id="pointTable">
-<%--                     	<%
-           					 if(listcount > 0) {
-         				%> --%>
-                       <!--  <tr class="line2">
-                            <td>2020.01.01</td>
-                            <td>후기작성</td>
-                            <td>+500 Point</td>
-                        </tr>
-                        <tr class="line2">
-                            <td>2020.01.01</td>
-                            <td>구독료 차감</td>
-                            <td>-1,000 Point</td>
-                        </tr> -->
                     </table>
                     
                 </div>

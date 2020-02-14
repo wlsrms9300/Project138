@@ -4,7 +4,10 @@
 <%@ page import="java.util.List" %>
 <%
 	int new_users = (int)request.getAttribute("new_users");
-	List<RankingVO> rankingList = (List<RankingVO>)request.getAttribute("rankingList"); 
+	int total_subscribers = (int)request.getAttribute("total_subscribers");
+	int total_b2b = (int)request.getAttribute("total_b2b");
+	List<RankingVO> rankingList = (List<RankingVO>)request.getAttribute("rankingList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -34,6 +37,8 @@
 		return Math.round(Math.random() * 100);
 	};
 
+
+	
 	/* 영업이익 그래프 ebitGraph */
 	var chartData = {
 			labels: [
@@ -53,7 +58,7 @@
 			datasets: [{
 				type: 'line',
 				lineTension: 0,
-				label: 'Dataset 1',
+				label: '영업이익',
 				yAxisID: 'y-axis-1',
 				borderColor: window.chartColors.red,
 				borderWidth: 2,
@@ -74,7 +79,7 @@
 				]
 			},{
 				type: 'line',
-				label: 'Dataset 4', //영업이익률
+				label: '영업이익률', //영업이익률
 				lineTension: 0,
 				yAxisID: 'y-axis-2',
 				borderColor: window.chartColors.purple,
@@ -96,7 +101,7 @@
 				]
 			}, {
 				type: 'bar',
-				label: 'Dataset 2',
+				label: '매출',
 				yAxisID: 'y-axis-1',
 				backgroundColor: window.chartColors.green,
 				data: [
@@ -117,7 +122,7 @@
 				borderWidth: 2
 			}, {
 				type: 'bar',
-				label: 'Dataset 3',
+				label: '비용',
 				yAxisID: 'y-axis-1',
 				backgroundColor: window.chartColors.yellow,
 				data: [
@@ -157,7 +162,8 @@
 				],
 			datasets: [{
 				type: 'line',
-				label: 'Dataset 1',
+				label: '총 회원 수',
+				lineTension: 0,
 				borderColor: window.chartColors.green,
 				borderWidth: 2,
 				fill: false,
@@ -179,7 +185,7 @@
 				]
 			}, {
 				type: 'bar',
-				label: 'Dataset 2',
+				label: '가입자 수',
 				backgroundColor: window.chartColors.orange,
 				data: [
 					'${vgIncrease0 }', 
@@ -201,23 +207,23 @@
 				borderWidth: 2
 			}, {
 				type: 'bar',
-				label: 'Dataset 3',
+				label: '탈퇴자 수',
 				backgroundColor: window.chartColors.grey,
 				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
+					'${vgDecrease0 }', 
+					'${vgDecrease1 }', 
+					'${vgDecrease2 }', 
+					'${vgDecrease3 }', 
+					'${vgDecrease4 }', 
+					'${vgDecrease5 }', 
+					'${vgDecrease6 }', 
+					'${vgDecrease7 }', 
+					'${vgDecrease8 }', 
+					'${vgDecrease9 }', 
+					'${vgDecrease10 }', 
+					'${vgDecrease11 }',
+					'${vgDecrease12 }',
+					'${vgDecrease13 }'
 				]
 			}]
 
@@ -229,23 +235,20 @@
 		type: 'doughnut',
 		data: {
 			datasets: [{
-				data: [ '${dngData0 }', '${dngData1 }', '${dngData2 }', '${dngData3 }', '${dngData4 }'],
+				data: [ '${dngData0 }', '${dngData1 }', '${dngData2 }', '${dngData3 }'],
 				backgroundColor: [
 					window.chartColors.red,
-					window.chartColors.orange,
-					window.chartColors.blue,
-					window.chartColors.purple,
-					window.chartColors.green,
-					
+					window.chartColors.yellow,
+					window.chartColors.grey,
+					window.chartColors.blue
 				],
 				label: 'Dataset 1'
 			}],
 			labels: [
-				'platinum',
-				'gold',
-				'silver',
-				'2month',
-				'1month'
+				'플래티넘',
+				'골드',
+				'실버',
+				'비정기'
 			]
 		},
 		options: {
@@ -267,9 +270,16 @@
 	var config4 = {
 			type: 'line',
 			data: {
-				labels: ['${cpDay0 }', '${cpDay1 }', '${cpDay2 }', '${cpDay3 }', '${cpDay4 }', '${cpDay5 }', '${cpDay6 }'],
+				labels: [	
+					'${vgDay7 }', 
+					'${vgDay8 }', 
+					'${vgDay9 }', 
+					'${vgDay10 }', 
+					'${vgDay11 }',
+					'${vgDay12 }',
+					'${vgDay13 }'],
 				datasets: [{
-					label: 'My First dataset',
+					label: '게시글 수',
 					backgroundColor: 'rgb(255, 99, 132, 0.6)',
 					borderColor: window.chartColors.red,
 					data: [
@@ -302,6 +312,9 @@
 			},
 			options: {
 				responsive: true,
+				legend: {
+					position: 'bottom',
+				},
 				title: {
 					display: false,
 				},
@@ -318,22 +331,17 @@
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Day'
 						}
 					}],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Value'
 						}
 					}]
 				}
 			}
 		};
-
-	
-	
 	
 	
 	window.onload = function() {
@@ -382,6 +390,9 @@
 			options: {
 				responsive: true,
 				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom',
+				},
 				title: {
 					display: false,
 				},
@@ -541,15 +552,15 @@
 			<div class="row">
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
-							<div class="large">120</div>
-							<div class="text-muted">New Subscribers</div>
+						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-teal"></em>
+							<div class="large"><%=total_subscribers %></div>
+							<div class="text-muted">Total Subscribers</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
+						<div class="row no-padding"><em class="fa fa-xl fa-users color-orange"></em>
 							<div class="large"><%=new_users %></div>
 							<div class="text-muted">New Users</div>
 						</div>
@@ -557,20 +568,20 @@
 				</div>
 				<div class="col-xs-6 col-md-4 col-lg-4 no-padding">
 					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">583</div>
-							<div class="text-muted">NEW B2B</div>
+						<div class="row no-padding"><em class="fa fa-xl fa-home color-red"></em>
+							<div class="large"><%=total_b2b %></div>
+							<div class="text-muted">Total B2B</div>
 						</div>
 					</div>
 				</div>
 			</div><!--/.row-->
 		</div>
-		<!-- 영업 이익 그래프 -->
+		<!-- 영업이익 그래프 -->
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						영업 이익
+						영업이익
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
@@ -635,29 +646,6 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						구독상품 
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
