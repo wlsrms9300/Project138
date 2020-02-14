@@ -1,5 +1,7 @@
 package com.spring.adminchart;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,101 +22,115 @@ public class ChartController {
 	private ChartService chartService;
 	
 	@RequestMapping(value = "/index.se", method = RequestMethod.GET)
-	public String showCharts(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String showCharts(Model model) {
 		int new_users = 0;
+		int total_subscribers = 0;
+		int total_b2b = 0;
 		List<RankingVO> rankingList = null;
 		List<EBITVO> revenueList = null;
 		List<EBITVO> expenseList = null;
 		List<DNGraphVO> dngList = null;
 		List<CountingPVO> countingpList = null;
-		List<VariationVO> variationList = null;
 		List<VariationVO> variationTList = null;
+		
 		try {
-
-		new_users = chartService.countNewUsers(); // New Users
-		
-		rankingList = chartService.getWishListRanking();	
-		
-		dngList = chartService.getDoughnutGraph(); // 구독 등급별 파이 
-		for(int i = 0; i < 5; i++) {
-			DNGraphVO dngvo = (DNGraphVO)dngList.get(i);
-			String dngGrade = dngvo.getGrade();
-			System.out.println("등급"+dngGrade);
-			int dngData = dngvo.getData();
-			System.out.println("데이터"+dngData);
-			System.out.println("--------");
-			model.addAttribute("dngData"+i, dngData);
-		}
-		
-		/* 영업이익 */
-		revenueList = chartService.getRevenue();// 수익(매출) 
-		expenseList = chartService.getExpenses();// 비용
-		
-		for(int i = 0; i < 12; i++ ) {
-			/*수익(매출)*/
-			EBITVO ebitvo1 = (EBITVO)revenueList.get(i);
-			Date ebitMonth = ebitvo1.getMonth();
-			int ebitPrice = ebitvo1.getPrice();
-			int ebitPoint_pirce = ebitvo1.getPoint_price();
-			int revenue = ebitPrice + ebitPoint_pirce;
-			model.addAttribute("ebitMonth"+i, ebitMonth);
-			model.addAttribute("revenue"+i, revenue);
+			new_users = chartService.countNewUsers(); 
+			total_subscribers = chartService.countTotalSubscribers();
+			total_b2b = chartService.countTotalB2B();
 			
-			/*비용*/
-			EBITVO ebitvo2 = (EBITVO)expenseList.get(i);
-			int expense = ebitvo2.getExpenses();
-			model.addAttribute("expense"+i, expense);
+			rankingList = chartService.getWishListRanking();
+			dngList = chartService.getDoughnutGraph();
+			for(int i = 0; i < dngList.size(); i++) {
+				DNGraphVO dngvo = (DNGraphVO)dngList.get(i);
+				int dngData = dngvo.getData();
+				
+				model.addAttribute("dngData"+i, dngData);
+			}
 			
-			/*영업이익*/
-			int ebit = revenue - expense;
-			model.addAttribute("ebit"+i, ebit); 
+			/* 영업이익 */
+			revenueList = chartService.getRevenue();// 수익(매출) 
+			expenseList = chartService.getExpenses();// 비용
 			
-			/*영업이익률*/
-			double operatingMargin = ((double)ebit /(double)revenue ) * 100;
-			model.addAttribute("om"+i, operatingMargin);
-		}
+			for(int i = 0; i < revenueList.size(); i++ ) {
+				/*수익(매출)*/
+				EBITVO ebitvo1 = (EBITVO)revenueList.get(i);
+				Date month = ebitvo1.getMonth();
+				String ebitMonth = new SimpleDateFormat("yyyy/MM").format(month);
+				int ebitPrice = ebitvo1.getPrice();
+				int ebitPoint_pirce = ebitvo1.getPoint_price();
+				int revenue = ebitPrice + ebitPoint_pirce;
+				model.addAttribute("ebitMonth"+i, ebitMonth);
+				model.addAttribute("revenue"+i, revenue);
+				
+				/*비용*/
+				EBITVO ebitvo2 = (EBITVO)expenseList.get(i);
+				int expense = ebitvo2.getExpenses();
+				model.addAttribute("expense"+i, expense);
+				
+				/*영업이익*/
+				int ebit = revenue - expense;
+				model.addAttribute("ebit"+i, ebit); 
+				
+				/*영업이익률*/
+				double operatingMargin = ((double)ebit /(double)revenue ) * 100;
+				model.addAttribute("om"+i, operatingMargin);
+			}
+			
+			/* 가입한 회원 수 */
+			variationTList = chartService.countTotalUsers();
+			for(int i = 0; i < 14; i ++) {
+				/*현재*/
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			    Calendar c = Calendar.getInstance();
+				String strDate = sdf.format(c.getTime());
+				/*기준이 되는 날*/
+				c.setTime(sdf.parse(strDate));
+				c.add(Calendar.DATE, -13+i); 
+				strDate = sdf.format(c.getTime()); 
+				
+				VariationVO variationIvo = new VariationVO();
+				VariationVO variationDvo = new VariationVO();
+				variationIvo = chartService.increaseUsers(strDate);
+				variationDvo = chartService.decreaseUsers(strDate);
+				int vgIncrease = 0;
+				int vgDecrease = 0;
+				
+				if(variationIvo != null) {
+					vgIncrease = variationIvo.getIncrease();
+				} 
+				model.addAttribute("vgIncrease"+i, vgIncrease);
+				
+				if(variationDvo != null) {
+					vgDecrease = variationDvo.getDecrease();
+				} 
+				model.addAttribute("vgDecrease"+i, vgDecrease);
 		
-		/*가입한 회원 수 */
-		variationList = chartService.increaseUsers();
-		variationTList = chartService.countTotalUsers();
-		for (int i = 0; i < variationList.size(); i++) {
-			VariationVO variationvo1 = (VariationVO)variationList.get(i);
-			Date vgDay = variationvo1.getRegist();
-			int vgIncrease = variationvo1.getIncrease();
-			System.out.println("vgDay="+vgDay);
-			
-			System.out.println("vgIncrease="+vgIncrease);
-			model.addAttribute("vgDay"+i, vgDay);
-			model.addAttribute("vgIncrease"+i, vgIncrease);
-			
+				SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+				strDate = sdf2.format(c.getTime());
+				model.addAttribute("vgDay"+i, strDate);
+			}
 			
 			/* 총 회원 수*/
-			VariationVO variationvo2 = (VariationVO)variationTList.get(i);
-			int total = variationvo2.getTotal();
-			System.out.println("total="+total);
-			model.addAttribute("total"+i, total);
+			for (int i = 0; i < variationTList.size(); i++) {
+				VariationVO variationvo2 = (VariationVO)variationTList.get(i);
+				int total = variationvo2.getTotal();
+				model.addAttribute("total"+i, total);
+			}
 			
-			/*탈퇴한 회원 수 */ // 전날total + 오늘 가입한 회원 수 - 오늘 total 
+			countingpList = chartService.countPosts(); // 커뮤니티 게시글 수 카운트
+			for(int i = 0; i < countingpList.size(); i++ ) {
+				CountingPVO countingpvo = (CountingPVO)countingpList.get(i);
+				Date cpDay = countingpvo.getRegist();
+				int totalcp = countingpvo.getCount();
+				
+				model.addAttribute("cpDay"+i, cpDay);
+				model.addAttribute("totalcp"+i, totalcp);
+			}
 			
-			
-		}
-		
-		
-		countingpList = chartService.countPosts(); // 커뮤니티 게시글 수 카운트
-		for(int i = 0; i < countingpList.size(); i++ ) {
-			CountingPVO countingpvo = (CountingPVO)countingpList.get(i);
-			Date cpDay = countingpvo.getRegist();
-			int totalcp = countingpvo.getCount();
-			
-			model.addAttribute("cpDay"+i, cpDay);
-			model.addAttribute("totalcp"+i, totalcp);
-		}
-		
-		
-		
-		
-		model.addAttribute("new_users", new_users);
-		model.addAttribute("rankingList", rankingList);
+			model.addAttribute("new_users", new_users);
+			model.addAttribute("total_subscribers", total_subscribers);
+			model.addAttribute("total_b2b", total_b2b);
+			model.addAttribute("rankingList", rankingList);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

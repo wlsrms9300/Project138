@@ -133,16 +133,13 @@ public class ChartServiceImpl implements ChartService {
 		    Calendar c1 = Calendar.getInstance();
 			String strToday = sdf.format(c1.getTime());
 			
-			System.out.println("오늘="+strToday);
 			/*일주일 전*/
 			String strAWAgo = strToday;  // 시작일
 			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
 			Calendar c = Calendar.getInstance();
 			c.setTime(sdf1.parse(strAWAgo));
-			c.add(Calendar.DATE, -7); 
+			c.add(Calendar.DATE, -6); 
 			strAWAgo = sdf1.format(c.getTime());
-			
-			System.out.println("일주일전 ="+strAWAgo);
 			
 			countingpList = chartMapper.countPosts(strAWAgo, strToday);
 		} catch(Exception e) {
@@ -151,34 +148,9 @@ public class ChartServiceImpl implements ChartService {
 		return countingpList;
 	}
 	
-	/* 회원 변동 추이*/
-	@Override
-	public List<VariationVO> increaseUsers() throws Exception {
-		List<VariationVO> variationList = null;
-		try {
-			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
-			/*현재*/
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		    Calendar c1 = Calendar.getInstance();
-			String strToday = sdf.format(c1.getTime());
-
-			/*2주 전*/
-			String str14DAgo = strToday;  // 시작일
-			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-			Calendar c = Calendar.getInstance();
-			c.setTime(sdf1.parse(str14DAgo));
-			c.add(Calendar.DATE, -13); 
-			str14DAgo = sdf1.format(c.getTime()); 
-			
-			System.out.println("str14DAgo="+str14DAgo);
-			variationList = chartMapper.increaseUsers(str14DAgo, strToday);
-		} catch(Exception e) {
-			throw new Exception("회원 증가치 구하기 실패", e);
-		}
-		return variationList;
-	}
 
 
+	/*회원 변동 추이*/
 	@Override
 	public List<VariationVO> countTotalUsers() throws Exception {
 		List<VariationVO> variationList = new ArrayList();
@@ -189,8 +161,6 @@ public class ChartServiceImpl implements ChartService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		    Calendar c1 = Calendar.getInstance();
 			String strToday = sdf.format(c1.getTime());
-
-			
 			
 			for(int i = 0; i < 14; i++) {
 				VariationVO variationvo = new VariationVO();
@@ -204,8 +174,6 @@ public class ChartServiceImpl implements ChartService {
 				str14DAgo = sdf1.format(c.getTime()); 
 				total = chartMapper.countTotalUsers(str14DAgo);
 				
-				System.out.println("날짜="+str14DAgo);
-				
 				variationvo.setStrRegist(str14DAgo);
 				variationvo.setTotal(total);
 				
@@ -216,6 +184,59 @@ public class ChartServiceImpl implements ChartService {
 			throw new Exception("총 회원수 구하기 실패", e);
 		}
 		return variationList;
+	}
+
+	@Override
+	public VariationVO decreaseUsers(String strDate) throws Exception {
+		VariationVO variationvo = null;
+		try {
+			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
+			
+			variationvo = chartMapper.decreaseUsers(strDate);
+		}catch(Exception e) {
+			throw new Exception("회원 감소치 구하기 실패", e);
+		}
+		return variationvo;
+	}
+
+
+	@Override
+	public VariationVO increaseUsers(String strDate) throws Exception {
+		VariationVO variationvo = null;
+		try {
+			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
+			
+			variationvo = chartMapper.increaseUsers(strDate);
+		}catch(Exception e) {
+			throw new Exception("회원 증가치 구하기 실패", e);
+		}
+		return variationvo;
+	}
+	
+	
+	@Override
+	public int countTotalSubscribers() throws Exception {
+		int res = 0;
+		try {
+			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
+			res = chartMapper.countTotalSubscribers();
+		}catch(Exception e) {
+			throw new Exception("TOTAL SUBSCRIBERS 카운트 실패", e);
+		}
+		return res;
+	}
+
+
+	@Override
+	public int countTotalB2B() throws Exception {
+		int res = 0;
+		try {
+			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
+			res = chartMapper.countTotalCompany() + chartMapper.countTotalPartner();
+		}catch(Exception e) {
+			throw new Exception("TOTAL B2B 카운트 실패", e);
+		}
+		return res;
 	}
 
 
