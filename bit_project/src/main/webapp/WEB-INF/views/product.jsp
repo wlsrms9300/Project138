@@ -403,13 +403,12 @@
 						<!-- <h2><img src="assets/img/logo_footer.png" alt=""></h2> -->
 						<h2>로고1</h2>
 						<ul>
-							<li><a href="#">회사소개</a></li>
-							<li><a href="#">채용정보</a></li>
-							<li><a href="#">제휴/광고/부대사업 문의</a></li>
-							<li><a href="#">이용약관</a></li>
-							<li><a href="#">개인정보처리방침</a></li>
-							<li><a href="#">고객센터</a></li>
-							<li><a href="#">윤리경영</a></li>
+								<li><a href="kindergarten.ms">어린이집</a></li>
+								<li><a href="partner.ms">파트너</a></li>
+								<li><a href="contactus.ms">고객센터</a></li>
+								<li><a href="share.ms">개인 쉐어</a></li>
+								<li><a href="#">어린이집 쉐어</a></li>
+							
 						</ul>
 						<address>
 							<p>

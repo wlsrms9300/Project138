@@ -364,119 +364,15 @@ h1 {
     }
 	    
  
-	#question_1 {
+	#question_1,#question_2,#question_3,#question_4,#question_5,#question_6,#question_7,#question_8,#question_9,#question_10 {
     font-weight: 500;
     height: 50px;
     font-size: 20px;
-    border-bottom:0.1px  solid rgb(221, 221, 221);
     display: flex;
     color: #000;
     padding-top: 15px;
     padding-bottom: 40px;
 
-	}
-	
-	#question_2 {
-	font-weight: 500;
-	padding-top: 15px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px  solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-
-	}
-	
-	#question_3 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom:0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-
-	}
-	
-	#question_4 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px  solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-
-	}
-	
-	#question_5 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-	}
-	
-	#question_6 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-	}
-	
-	#question_7 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-	}
-	
-	#question_8 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-	}
-	
-	#question_9 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-	}
-	
-	#question_10 {
-	font-weight: 500;
-	padding-top: 20px;
-	padding-bottom: 40px;
-    height: 50px;
-    font-size: 20px;
-    border-bottom: 0.1px solid rgb(221, 221, 221);
-    display: flex;
-    color: #000;
-    
 	}
 	
 	#list_nav_wrap ul li h3{

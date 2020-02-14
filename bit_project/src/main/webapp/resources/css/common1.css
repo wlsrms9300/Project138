@@ -81,7 +81,7 @@ figure {
 
 
 .subscribeNext {margin:60px 0 30px !important;}
-.subscribeNext > button {margin:0 auto; border-radius: 3px; color:#fff; border:0; width:120px; height:36px; font-size:14px; font-weight: 800; text-align:center; background: #ff7276;}
+.subscribeNext > input {cursor:pointer;margin:0 auto; border-radius: 3px; color:#fff; border:0; width:120px; height:36px; font-size:14px; font-weight: 800; text-align:center; background: #ff7276;}
 
 
 

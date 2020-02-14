@@ -312,17 +312,17 @@
                                 <table class="menu_w">
                                     <tbody>
                                         <tr>  
-                                            <td><button name="button" class="subscribe-btn" onclick="location.href='//'"
+                                            <td><button name="button" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
                                                     type="button">구독하기</button></td>
 
                                             <td ><a href="community.co">커뮤니티</a></td>
                                             <td><a href="product.pr">상품보기</a></td>
                                             <td><a href="qna.se">QnA</a></td>
-                                            <td><a href="contactus.tazo">Contact Us</a></td>
+                                            <td><a href="contactus.ms">Contact Us</a></td>
 
                                         </tr>
                                         <tr>
-                                            <td><button name="button" class="subscribe-btn2" onclick="location.href='//'"
+                                            <td><button name="button" class="subscribe-btn2" onclick="location.href='signup.me'"
                                                     type="button">회원가입</button></td>
 
                                             <td></td>
@@ -338,14 +338,14 @@
                                                                
                                      	<tr><td><button name="button1" class="subscribe-btn" onclick="location.href='subscribestep1.me'"
                                                     type="button" >구독하기</button></td></tr>
-                                        <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='//'"
+                                        <tr><td><button name="button1" class="subscribe-btn" onclick="location.href='signup.me'"
                                                     type="button">회원가입</button></td></tr>
 
                                         <tr><td><a href="about.ma">이용방법</a></td></tr>
                                         <tr><td><a href="kindergarten.ms">어린이집</a></td></tr>
                                         <tr><td><a href="partner.ms">파트너</a></td></tr> 
                                         <tr><td><a href="community.co">커뮤니티</a></td></tr>
-                                        <tr><td><a href="product.pr">상품보기</a></td></tr>
+                                        <tr><td><a href="product.pr">상품보기</a></td></tr> 
                                         <tr><td><a href="qna.se">QnA</a></td></tr>
                                         <tr><td><a href="contactus.ms">Contact Us</a></td></tr>
 
@@ -418,109 +418,129 @@
 			</div>
 			<div id="list_nav_wrap">
 				<div class="wrapper">
-
-					<h3>
-						<a href="javascript:doDisplay();" style="color: black;"
-							id="question_1">&emsp;&emsp;&emsp;회원 가입은 무료 인가요?</a>
-					</h3>
-					<ul id="question" style="display: none;">
-						<li>
-							<p></p>
-							<h3>회원가입은 무료입니다. 하지만 장난감을 받아보려면 구독신청을 따로 하셔야합니다.</h3>
-						</li>
-					</ul>
-					<h3>
-						<a href="javascript:doDisplay1();" style="color: black;"
-							id="question_2">&emsp;&emsp;&emsp;구독 하는 방법이 궁금해요</a>
-					</h3>
-					<ul id="question1" style="display: none;">
-						<li>
-							<p></p>
-							<h3>신청하면됩니다</h3>
-						</li>
-					</ul>
-					<h3>
-						<a href="javascript:doDisplay2();" style="color: black;"
-							id="question_3">&emsp;&emsp;&emsp;배송은 언제 되나요</a>
-					</h3>
-					<ul id="question2" style="display: none;">
-						<li>
-							<p></p>
-							<h3>때가되면 받을꺼에요</h3>
-						</li>
-					</ul>
-					<h3>
-						<a href="javascript:doDisplay3();" style="color: black;"
-							id="question_4">&emsp;&emsp;&emsp;환불신청 어떻게 할수있나요</a>
-					</h3>
-					<ul id="question3" style="display: none;">
-						<li>
-							<p></p>
-							<h3>못해요</h3>
-						</li>
-					</ul>
-					<h3>
-						<a href="javascript:doDisplay4();" style="color: black;"
-							id="question_5">&emsp;&emsp;&emsp;교환신청 하고싶어요</a>
-					</h3>
-					<ul id="question4" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>다시한번 생각하세요</h3>
-						</li>
-					</ul>
-					<h3>
-						<a href="javascript:doDisplay5();" style="color: black;"
-							id="question_6">&emsp;&emsp;&emsp;아이디를 잃어버렸어요</a>
-					</h3>
-					<ul id="question5" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>다시한번 생각해 보세요</h3>
-						</li>
-					</ul>
+					<div class="question1" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay();" style="color: black;"
+								id="question_1">&emsp;&emsp;&emsp;회원 가입은 무료 인가요?</a>
+						</h3>
+						
+						<ul id="question" style="display: none;">
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;회원가입은 무료입니다. 하지만 장난감을 받아보려면 구독신청을 따로 하셔야합니다.</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question2" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay1();" style="color: black;"
+								id="question_2">&emsp;&emsp;&emsp;구독 하는 방법이 궁금해요</a>
+						</h3>
+						<ul id="question1" style="display: none;">
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;메인 페이지 또는 메뉴 누르시면 "구독하기" 를 찾으실수 있습니다.</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question3" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay2();" style="color: black;"
+								id="question_3">&emsp;&emsp;&emsp;배송은 언제 되나요</a>
+						</h3>
+						<ul id="question2" style="display: none;">
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;매달 넷째주 목요일에 일괄 배송됩니다.</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question4" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay3();" style="color: black;"
+								id="question_4">&emsp;&emsp;&emsp;환불신청 어떻게 할수있나요</a>
+						</h3>
+						<ul id="question3" style="display: none;">
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;메인 페이지 우측하단에있는 채팅 기능으로 문의 주세요</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question5" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay4();" style="color: black;"
+								id="question_5">&emsp;&emsp;&emsp;교환신청 하고싶어요</a>
+						</h3>
+						<ul id="question4" style="display: none;" >
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다.</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question6" style="border-bottom:0.1px solid rgb(221, 221, 221);">
+						<h3>
+							<a href="javascript:doDisplay5();" style="color: black;"
+								id="question_6">&emsp;&emsp;&emsp;아이디를 잃어버렸어요</a>
+						</h3>
+						<ul id="question5" style="display: none;" >
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
+							</li>
+						</ul>	
+					</div>
+					<div class="question7" style="border-bottom:0.1px solid rgb(221, 221, 221);">
 						<h3>
 						<a href="javascript:doDisplay6();" style="color: black;"
 							id="question_7">&emsp;&emsp;&emsp;비밀번호를 잃어버렸어요</a>
-					</h3>
-					<ul id="question6" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>화이팅</h3>
-						</li>
-					</ul>
+						</h3>
+						<ul id="question6" style="display: none;" >
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
+							</li>
+						</ul>
+					</div>
+					<div class="question8" style="border-bottom:0.1px solid rgb(221, 221, 221);">
 						<h3>
 						<a href="javascript:doDisplay7();" style="color: black;"
 							id="question_8">&emsp;&emsp;&emsp;구독된 배송지를 바꾸고 싶어요</a>
 
-					</h3>
-					<ul id="question7" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>사진 찍으세요</h3>						
-						</li>
-					</ul>
+						</h3>
+						<ul id="question7" style="display: none;" >
+							<li>
+								<p></p>
+								<h3>&emsp;&emsp;&emsp;로그인을 하시고 마이페이지에 들어가면 수정이 가능합니다.</h3>						
+							</li>
+						</ul>
+					</div>
+					<div class="question9" style="border-bottom:0.1px solid rgb(221, 221, 221);">
 						<h3>
 						<a href="javascript:doDisplay8();" style="color: black;"
 							id="question_9">&emsp;&emsp;&emsp;예약은 어떻게 하나요?</a>
 
-					</h3>
-					<ul id="question8" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>클릭하세요</h3>						
-						</li>
-					</ul>
+						</h3>
+						<ul id="question8" style="display: none;" >
+							<li>
+								<p></p>
+						<h3>&emsp;&emsp;&emsp;상품페이지에 예약버튼이 있으면 최대 1개 예약 가능합니다.</h3>						
+							</li>
+						</ul>
+					</div>
+					<div class="question10" style="border-bottom:0.1px solid rgb(221, 221, 221);">
 						<h3>
-						<a href="javascript:doDisplay9();" style="color: black;"
+							<a href="javascript:doDisplay9();" style="color: black;"
 							id="question_10">&emsp;&emsp;&emsp;교환/반품 기준이 어떻게 되나요?</a>
-					</h3>
-					<ul id="question9" style="display: none;" >
-						<li>
-							<p></p>
-							<h3>못해요</h3>						
+						</h3>
+							<ul id="question9" style="display: none;" >
+							<li>
+								<p></p>
+						<h3>&emsp;&emsp;&emsp;고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.</h3>						
 						</li>
 					</ul>
+					</div>
 				</div>
 			</div>
 			<div id="anotherQna">
@@ -528,7 +548,7 @@
 				<div class=anotherQna1>
 				<button name="button" class="subscribe-btn3" onclick="location.href='//'"
                                                     type="button">1:1 채팅</button>
-				<button name="button" class="subscribe-btn4" onclick="location.href='//'"
+				<button name="button" class="subscribe-btn4" onclick="location.href='contactus.ms'"
                                                     type="button">이메일 문의</button>
 				</div>
 			</div>
@@ -562,13 +582,12 @@
 							<!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
 							<h2>로고1</h2>
 							<ul>
-								<li><a href="#">회사소개</a></li>
-								<li><a href="#">채용정보</a></li>
-								<li><a href="#">제휴/광고/부대사업 문의</a></li>
-								<li><a href="#">이용약관</a></li>
-								<li><a href="#">개인정보처리방침</a></li>
-								<li><a href="#">고객센터</a></li>
-								<li><a href="#">윤리경영</a></li>
+								<li><a href="kindergarten.ms">어린이집</a></li>
+								<li><a href="partner.ms">파트너</a></li>
+								<li><a href="contactus.ms">고객센터</a></li>
+								<li><a href="share.ms">개인 쉐어</a></li>
+								<li><a href="#">어린이집 쉐어</a></li>
+							
 							</ul>
 							<address>
 								<p>
