@@ -23,14 +23,14 @@
 </head>
 <script>
 //반납신청일
-var beforeDate = '<%=pstate.getReturn_application() %>';
+<%-- var beforeDate = '<%=pstate.getReturn_application() %>';
 var date = beforeDate.replace(/(\s*)/g, "");
 var sdate = date.split("-");
 var aYear1 = sdate[0];
 var aMonth1 = sdate[1].replace(/(^0+)/, "");
 var aDay1 = sdate[2];
 alert(date1 + ", " + aMonth1 + ", " + aDay1);
-
+ --%>
 $(document).ready(function(){
 	window.onload = function() {
 	var line = $('.calendar_line > td');

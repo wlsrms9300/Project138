@@ -1,5 +1,6 @@
 package com.spring.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,4 +16,7 @@ public interface SubscribePaymentMapper {
 	List<ShareWatingListVO> getShareAcceptList();
 	List<SettlementVO> getSettleList();
 	List<PStateVO> getReturnList();
+	List<String> getEmail();
+	List<Integer> getWish(@Param("email") String email);
+	void insertWish(@Param("randomPnum") int randomPnum);
 }

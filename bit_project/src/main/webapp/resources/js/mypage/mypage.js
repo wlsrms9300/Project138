@@ -1891,302 +1891,27 @@ $(document).ready(function(){
      /* 메뉴버튼 이벤트 끝 */
 
 
-    /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 시작 */
-    $('.btn1').click(function() {
-    	var wishlistdata = {email : myemail};
-    	 $.ajax({
-         	url: '/bit_project/mypage_wishlist.my',
-             type: 'GET',
-             dataType: 'json',
-             async:false,
-             data : wishlistdata,
-             success: function (data) {
-             	$(".list").empty();
-                 var wishlist_header = "";
-                 var wishlist_footer = "";
-                 var wishcnt = 0;
-                 wishlist_header += '<div class="list_menu">';
-                 wishlist_header += '<table>';
-                 wishlist_header += '<tr class="menu_line">';
-                 wishlist_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
-                 wishlist_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
-                 wishlist_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
-                 wishlist_header += '</tr>';
-                 wishlist_header += '</table>';
-                 //wishlist_header += '<p>n개의상품이있다.</p>';
-                 wishlist_header += '</div>';
-                 $(".list").append(wishlist_header);
-                 wishlist_footer += '<div class="menu_product">';
-                 wishlist_footer += '<table>';
-                 wishlist_footer += '<tr class="product_line">';
-                 wishlist_footer += '<td>';
-                 wishlist_footer += '</td>';
-                 wishlist_footer += '</tr>';
-                 wishlist_footer += '</table>';
-                 wishlist_footer += '</div>';
-                 $(".list").append(wishlist_footer);
-                 $.each(data, function (index, item) {
-                     var wishlist_body = "";
-                     wishlist_body += '<div class="product'+wishcnt+'"></div>';
-                     console.log(wishlist_body);
-                     $(".list .product_line td").append(wishlist_body);
-                     var wishlist_body2 = "";
-                     wishlist_body2 += '<a href="productDetail.pr?num='+item.product_num+'">';
-                     wishlist_body2 += '<img src="/bit_project/image/'+item.img_sum+'">';
-                     wishlist_body2 +='</a>';
-                     wishlist_body2 += '<h3>'+item.product_name+'</h3>';
-                     $(".list .product_line td .product"+wishcnt).append(wishlist_body2);
-                     wishcnt++;
-                     console.log(item.product_name);
-                 })
-                 if(wishcnt==0){
-                 	var mytotalcount = '<p>선택한 상품이 없습니다.</p>';
-                     $(".list_menu").append(mytotalcount);
-                 }else {
-                 	var mytotalcount = '<p>선택한 상품 : '+wishcnt+'개'+'</p>';
-                     $(".list_menu").append(mytotalcount);	
-                 }
-             },
- 	        error: function () {
- 				alert("ajax오류");
- 			}
-         });
-        var list= $('.list');
-        var menu0= $('.calendar-wrap');
-        var menu1= $('.subscribe_wrap');
-        var menu2= $('.point_wrap');
-        var menu3= $('.share');
-        var menu4= $('.member_update');
-        var menu5= $('.member_bye');
-        var menu6= $('.board_list_wrap');
-        
-        if(list.css("display") == "none") {
-            $('#num0').css('color', 'black');
-            $('#num1 > b').css('color', 'black');
-            $('#num2 > b').css('color', 'black');
-            $('#num3 > b').css('color', 'black');
-            $('#num4 > b').css('color', 'black');
-            $('#num5 > b').css('color', 'black');
-            $('#m1 > b').css('color', 'black');
-            list.show();
-            menu0.hide();
-            menu1.hide();
-            menu2.hide();
-            menu3.hide();
-            menu4.hide();
-            menu5.hide();
-            menu6.hide();
-            $('.profile_menu1 > b').css('color', '#EA7475');
-            $('.profile_menu2 > b').css('color', 'black');
-            $('.profile_menu3 > b').css('color', 'black');
-        } else {           
-            $('.profile_menu1 > b').css('color', '#EA7475');
-            $('.profile_menu2 > b').css('color', 'black');
-            $('.profile_menu3 > b').css('color', 'black');
-        }
-       
-    });
-    
-    $('.btn2').click(function() {
-    	var reserdata = {email : myemail};
-    	$.ajax({
-        	url: '/bit_project/mypage_reservation.my',
-            type: 'GET',
-            dataType: 'json',
-            async:false,
-            data : reserdata,
-            success: function (data) {
-                $(".list").empty();
-                var reser_header = "";
-                var reser_footer = "";
-                var resercnt = 0;
-                reser_header += '<div class="list_menu">';
-                reser_header += '<table>';
-                reser_header += '<tr class="menu_line">';
-                reser_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
-                reser_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
-                reser_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
-                reser_header += '</tr>';
-                reser_header += '</table>';
-                //bookmark_header += '<p>n개의상품이있다.</p>';
-                reser_header += '</div>';
-                $(".list").append(reser_header);
-                reser_footer += '<div class="menu_product">';
-                reser_footer += '<table>';
-                reser_footer += '<tr class="product_line">';
-                reser_footer += '<td>';
-                reser_footer += '</td>';
-                reser_footer += '</tr>';
-                reser_footer += '</table>';
-                reser_footer += '</div>';
-                $(".list").append(reser_footer);
-                $.each(data, function (index, item) {
-                    var reser_body = "";
-                    reser_body += '<div class="product'+resercnt+'"></div>';
-                    $(".list .product_line td").append(reser_body);
-                    var reser_body2 = "";
-                    reser_body2 += '<a href="productDetail.pr?num='+item.product_num+'">';
-                    reser_body2 += '<img src="/bit_project/image/'+item.img_sum+'">';
-                    reser_body2 +='</a>';
-                    reser_body2 += '<h3>'+item.product_name+'</h3>';
-                    $(".list .product_line td .product"+resercnt).append(reser_body2);
-                    resercnt++;
-                })
-                if(resercnt==0){
-                	var mytotalcount = '<p>예약한 상품이 없습니다.</p>';
-                    $(".list_menu").append(mytotalcount);
-                }else {
-                	var mytotalcount = '<p>예약한 상품 : '+resercnt+'개'+'</p>';
-                    $(".list_menu").append(mytotalcount);	
-                }
-                
-            },
-	        error: function () {
-				alert("ajax오류");
-			}
-        });
-        var list= $('.list');
-        var menu0= $('.calendar-wrap');
-        var menu1= $('.subscribe_wrap');
-        var menu2= $('.point_wrap');
-        var menu3= $('.share');
-        var menu4= $('.member_update');
-        var menu5= $('.member_bye');
-        var menu6= $('.board_list_wrap');
-        if(list.css("display") == "none") {
-            $('#num0').css('color', 'black');
-            $('#num1 > b').css('color', 'black');
-            $('#num2 > b').css('color', 'black');
-            $('#num3 > b').css('color', 'black');
-            $('#num4 > b').css('color', 'black');
-            $('#num5 > b').css('color', 'black');
-            $('#m1 > b').css('color', 'black');
-            $('.profile_menu1 > b').css('color', 'black');
-            $('.profile_menu2 > b').css('color', '#EA7475');
-            $('.profile_menu3 > b').css('color', 'black');
-            list.show();
-            menu0.hide();
-            menu1.hide();
-            menu2.hide();
-            menu3.hide();
-            menu4.hide();
-            menu5.hide();
-            menu6.hide();
-        } else {
-            $('.profile_menu1 > b').css('color', 'black');
-            $('.profile_menu2 > b').css('color', '#EA7475');
-            $('.profile_menu3 > b').css('color', 'black');
-        }
-        
-    });
-    $('.btn3').click(function() {
-    	var bookmarkdata = {email : myemail};
-    	$.ajax({
-        	url: '/bit_project/mypage_bookmark.my',
-            type: 'GET',
-            dataType: 'json',
-            async:false,
-            data : bookmarkdata,
-            success: function (data) {
-                $(".list").empty();
-                var bookmark_header = "";
-                var bookmark_footer = "";
-                var bookcnt = 0;
-                bookmark_header += '<div class="list_menu">';
-                bookmark_header += '<table>';
-                bookmark_header += '<tr class="menu_line">';
-                bookmark_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
-                bookmark_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
-                bookmark_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
-                bookmark_header += '</tr>';
-                bookmark_header += '</table>';
-                //bookmark_header += '<p>n개의상품이있다.</p>';
-                bookmark_header += '</div>';
-                $(".list").append(bookmark_header);
-                bookmark_footer += '<div class="menu_product">';
-                bookmark_footer += '<table>';
-                bookmark_footer += '<tr class="product_line">';
-                bookmark_footer += '<td>';
-	            bookmark_footer += '</td>';
-	            bookmark_footer += '</tr>';
-                bookmark_footer += '</table>';
-                bookmark_footer += '</div>';
-                $(".list").append(bookmark_footer);
-                $.each(data, function (index, item) {
-                    var bookmark_body = "";
-                    bookmark_body += '<div class="product'+bookcnt+'"></div>';
-                    console.log(bookmark_body);
-                    $(".list .product_line td").append(bookmark_body);
-                    var bookmark_body2 = "";
-                    bookmark_body2 += '<a href="productDetail.pr?num='+item.product_num+'">';
-                    bookmark_body2 += '<img src="/bit_project/image/'+item.img_sum+'">';
-                    bookmark_body2 +='</a>';
-                    bookmark_body2 += '<h3>'+item.product_name+'</h3>';
-                    $(".list .product_line td .product"+bookcnt).append(bookmark_body2);
-                    bookcnt++;
-                })
-                if(bookcnt==0){
-                	var mytotalcount = '<p>찜한 상품이 없습니다.</p>';
-                    $(".list_menu").append(mytotalcount);
-                }else {
-                	var mytotalcount = '<p>찜한 상품 : '+bookcnt+'개'+'</p>';
-                    $(".list_menu").append(mytotalcount);	
-                }
-            },
-	        error: function () {
-				alert("ajax오류");
-			}
-        });
-        var list= $('.list');
-        var menu0= $('.calendar-wrap');
-        var menu1= $('.subscribe_wrap');
-        var menu2= $('.point_wrap');
-        var menu3= $('.share');
-        var menu4= $('.member_update');
-        var menu5= $('.member_bye');
-        var menu6= $('.board_list_wrap');
-        if(list.css("display") == "none") {
-            $('#num0').css('color', 'black');
-            $('#num1 > b').css('color', 'black');
-            $('#num2 > b').css('color', 'black');
-            $('#num3 > b').css('color', 'black');
-            $('#num4 > b').css('color', 'black');
-            $('#num5 > b').css('color', 'black');
-            $('#m1 > b').css('color', 'black');
-            menu0.hide();
-            menu1.hide();
-            menu2.hide();
-            menu3.hide();
-            menu4.hide();
-            menu5.hide();
-            menu6.hide();
-            list.show();
-            $('.profile_menu1 > b').css('color', 'black');
-            $('.profile_menu2 > b').css('color', 'black');
-            $('.profile_menu3 > b').css('color', '#EA7475');
-        } else {
-            $('.profile_menu1 > b').css('color', 'black');
-            $('.profile_menu2 > b').css('color', 'black');
-            $('.profile_menu3 > b').css('color', '#EA7475');
-        }
-        
-    });
+   
 
-    $('.profile_menu1').click(function() {
-        $('.profile_menu1 > b').css('color', '#EA7475');
-        $('.profile_menu2 > b').css('color', 'black');
-        $('.profile_menu3 > b').css('color', 'black');
-    });
-    $('.profile_menu2').click(function() {
-        $('.profile_menu1 > b').css('color', 'black');
-        $('.profile_menu2 > b').css('color', '#EA7475');
-        $('.profile_menu3 > b').css('color', 'black');
-    });
-    $('.profile_menu3').click(function() {
-        $('.profile_menu1 > b').css('color', 'black');
-        $('.profile_menu2 > b').css('color', 'black');
-        $('.profile_menu3 > b').css('color', '#EA7475');
-    });
+$(document).on("click",".profile_menu1",function(){
+	$('.profile_menu1 > b').css('color', '#EA7475');
+	$('.profile_menu2 > b').css('color', 'black');
+	$('.profile_menu3 > b').css('color', 'black');
+	wish_click();
+})
+$(document).on("click",".profile_menu2",function(){
+	$('.profile_menu1 > b').css('color', '#EA7475');
+	$('.profile_menu2 > b').css('color', 'black');
+	$('.profile_menu3 > b').css('color', 'black');
+	reser_click();
+})
+$(document).on("click",".profile_menu3",function(){
+	$('.profile_menu1 > b').css('color', '#EA7475');
+	$('.profile_menu2 > b').css('color', 'black');
+	$('.profile_menu3 > b').css('color', 'black');
+	book_click();
+})
+   
     /* 프로필 메뉴 > 위시리스트/ 예약/ 찜 끝 */
 
     
@@ -2243,4 +1968,349 @@ function settlement(_sNum) {
 			}
 		}
 	}
+}
+/* 프로필 메뉴 > 위시리스트/ 예약/ 찜 시작 */
+function wish_click() {
+	var wishlistdata = {email : myemail};
+	 $.ajax({
+     	url: '/bit_project/mypage_wishlist.my',
+         type: 'GET',
+         dataType: 'json',
+         async:false,
+         data : wishlistdata,
+         success: function (data) {
+         	$(".list").empty();
+             var wishlist_header = "";
+             var wishlist_footer = "";
+             var wishcnt = 0;
+             wishlist_header += '<div class="list_menu">';
+             wishlist_header += '<table>';
+             wishlist_header += '<tr class="menu_line">';
+             wishlist_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
+             wishlist_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
+             wishlist_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
+             wishlist_header += '</tr>';
+             wishlist_header += '</table>';
+             //wishlist_header += '<p>n개의상품이있다.</p>';
+             wishlist_header += '</div>';
+             $(".list").append(wishlist_header);
+             wishlist_footer += '<div class="menu_product">';
+             wishlist_footer += '<table>';
+             wishlist_footer += '<tr class="product_line">';
+             wishlist_footer += '<td>';
+             wishlist_footer += '</td>';
+             wishlist_footer += '</tr>';
+             wishlist_footer += '</table>';
+             wishlist_footer += '</div>';
+             $(".list").append(wishlist_footer);
+             $.each(data, function (index, item) {
+                 var wishlist_body = "";
+                 wishlist_body += '<div class="product'+wishcnt+'"></div>';
+                 console.log(wishlist_body);
+                 $(".list .product_line td").append(wishlist_body);
+                 var wishlist_body2 = "";
+                 //wishlist_body2 += '<img src="/bit_project/image/'+item.img_sum+'" onclick="open('+item.product_num+');">';
+                 wishlist_body2 += '<img src="/bit_project/image/'+item.img_sum+'" onclick="asd('+item.product_num+');">';
+                 //wishlist_body2 += '<button onclick="javascript:alert('+zz+');">삭제</button>';
+                 wishlist_body2 += '<button onclick="deleteWish('+item.product_num+');">삭제</button>';
+                 wishlist_body2 += '<h3>'+item.product_name+'</h3>';
+                 $(".list .product_line td .product"+wishcnt).append(wishlist_body2);
+                 
+                 wishcnt++;
+             })
+             if(wishcnt==0){
+             	var mytotalcount = '<p>선택한 상품이 없습니다.</p>';
+                 $(".list_menu").append(mytotalcount);
+             }else {
+             	var mytotalcount = '<p>선택한 상품 : '+wishcnt+'개'+'</p>';
+                 $(".list_menu").append(mytotalcount);	
+             }
+         },
+	        error: function () {
+				alert("ajax오류");
+			}
+     });
+    var list= $('.list');
+    var menu0= $('.calendar-wrap');
+    var menu1= $('.subscribe_wrap');
+    var menu2= $('.point_wrap');
+    var menu3= $('.share');
+    var menu4= $('.member_update');
+    var menu5= $('.member_bye');
+    var menu6= $('.board_list_wrap');
+    
+    if(list.css("display") == "none") {
+        $('#num0').css('color', 'black');
+        $('#num1 > b').css('color', 'black');
+        $('#num2 > b').css('color', 'black');
+        $('#num3 > b').css('color', 'black');
+        $('#num4 > b').css('color', 'black');
+        $('#num5 > b').css('color', 'black');
+        $('#m1 > b').css('color', 'black');
+        list.show();
+        menu0.hide();
+        menu1.hide();
+        menu2.hide();
+        menu3.hide();
+        menu4.hide();
+        menu5.hide();
+        menu6.hide();
+        $('.profile_menu1 > b').css('color', '#EA7475');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', 'black');
+    } else {           
+        $('.profile_menu1 > b').css('color', '#EA7475');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', 'black');
+    }
+   
+}
+
+function reser_click() {
+	var reserdata = {email : myemail};
+	$.ajax({
+    	url: '/bit_project/mypage_reservation.my',
+        type: 'GET',
+        dataType: 'json',
+        async:false,
+        data : reserdata,
+        success: function (data) {
+            $(".list").empty();
+            var reser_header = "";
+            var reser_footer = "";
+            var resercnt = 0;
+            reser_header += '<div class="list_menu">';
+            reser_header += '<table>';
+            reser_header += '<tr class="menu_line">';
+            reser_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
+            reser_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
+            reser_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
+            reser_header += '</tr>';
+            reser_header += '</table>';
+            //bookmark_header += '<p>n개의상품이있다.</p>';
+            reser_header += '</div>';
+            $(".list").append(reser_header);
+            reser_footer += '<div class="menu_product">';
+            reser_footer += '<table>';
+            reser_footer += '<tr class="product_line">';
+            reser_footer += '<td>';
+            reser_footer += '</td>';
+            reser_footer += '</tr>';
+            reser_footer += '</table>';
+            reser_footer += '</div>';
+            $(".list").append(reser_footer);
+            $.each(data, function (index, item) {
+                var reser_body = "";
+                reser_body += '<div class="product'+resercnt+'"></div>';
+                $(".list .product_line td").append(reser_body);
+                var reser_body2 = "";
+                reser_body2 += '<img src="/bit_project/image/'+item.img_sum+'" onclick="asd('+item.product_num+');">';
+                reser_body2 += '<button onclick="deleteReser('+item.product_num+');">삭제</button>';
+                reser_body2 += '<h3>'+item.product_name+'</h3>';
+                $(".list .product_line td .product"+resercnt).append(reser_body2);
+                resercnt++;
+                
+                
+            })
+            if(resercnt==0){
+            	var mytotalcount = '<p>예약한 상품이 없습니다.</p>';
+                $(".list_menu").append(mytotalcount);
+            }else {
+            	var mytotalcount = '<p>예약한 상품 : '+resercnt+'개'+'</p>';
+                $(".list_menu").append(mytotalcount);	
+            }
+            
+        },
+        error: function () {
+			alert("ajax오류");
+		}
+    });
+    var list= $('.list');
+    var menu0= $('.calendar-wrap');
+    var menu1= $('.subscribe_wrap');
+    var menu2= $('.point_wrap');
+    var menu3= $('.share');
+    var menu4= $('.member_update');
+    var menu5= $('.member_bye');
+    var menu6= $('.board_list_wrap');
+    if(list.css("display") == "none") {
+        $('#num0').css('color', 'black');
+        $('#num1 > b').css('color', 'black');
+        $('#num2 > b').css('color', 'black');
+        $('#num3 > b').css('color', 'black');
+        $('#num4 > b').css('color', 'black');
+        $('#num5 > b').css('color', 'black');
+        $('#m1 > b').css('color', 'black');
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', '#EA7475');
+        $('.profile_menu3 > b').css('color', 'black');
+        list.show();
+        menu0.hide();
+        menu1.hide();
+        menu2.hide();
+        menu3.hide();
+        menu4.hide();
+        menu5.hide();
+        menu6.hide();
+    } else {
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', '#EA7475');
+        $('.profile_menu3 > b').css('color', 'black');
+    }
+    
+}
+function book_click() {
+	var bookmarkdata = {email : myemail};
+	$.ajax({
+    	url: '/bit_project/mypage_bookmark.my',
+        type: 'GET',
+        dataType: 'json',
+        async:false,
+        data : bookmarkdata,
+        success: function (data) {
+            $(".list").empty();
+            var bookmark_header = "";
+            var bookmark_footer = "";
+            var bookcnt = 0;
+            bookmark_header += '<div class="list_menu">';
+            bookmark_header += '<table>';
+            bookmark_header += '<tr class="menu_line">';
+            bookmark_header += '<th class="profile_menu1"><b class="oh">위시리스트</b></th>';
+            bookmark_header += '<th class="profile_menu2"><b class="oh">예약</b></th>';
+            bookmark_header += '<th class="profile_menu3"><b class="oh">찜</b></th>';
+            bookmark_header += '</tr>';
+            bookmark_header += '</table>';
+            //bookmark_header += '<p>n개의상품이있다.</p>';
+            bookmark_header += '</div>';
+            $(".list").append(bookmark_header);
+            bookmark_footer += '<div class="menu_product">';
+            bookmark_footer += '<table>';
+            bookmark_footer += '<tr class="product_line">';
+            bookmark_footer += '<td>';
+            bookmark_footer += '</td>';
+            bookmark_footer += '</tr>';
+            bookmark_footer += '</table>';
+            bookmark_footer += '</div>';
+            $(".list").append(bookmark_footer);
+            $.each(data, function (index, item) {
+                var bookmark_body = "";
+                bookmark_body += '<div class="product'+bookcnt+'"></div>';
+                console.log(bookmark_body);
+                $(".list .product_line td").append(bookmark_body);
+                var bookmark_body2 = "";
+                bookmark_body2 += '<img src="/bit_project/image/'+item.img_sum+'" onclick="asd('+item.product_num+');">';
+                bookmark_body2 += '<button onclick="deleteBook('+item.product_num+');">삭제</button>';
+                bookmark_body2 += '<h3>'+item.product_name+'</h3>';
+                $(".list .product_line td .product"+bookcnt).append(bookmark_body2);
+                bookcnt++;
+            })
+            if(bookcnt==0){
+            	var mytotalcount = '<p>찜한 상품이 없습니다.</p>';
+                $(".list_menu").append(mytotalcount);
+            }else {
+            	var mytotalcount = '<p>찜한 상품 : '+bookcnt+'개'+'</p>';
+                $(".list_menu").append(mytotalcount);	
+            }
+        },
+        error: function () {
+			alert("ajax오류");
+		}
+    });
+    var list= $('.list');
+    var menu0= $('.calendar-wrap');
+    var menu1= $('.subscribe_wrap');
+    var menu2= $('.point_wrap');
+    var menu3= $('.share');
+    var menu4= $('.member_update');
+    var menu5= $('.member_bye');
+    var menu6= $('.board_list_wrap');
+    if(list.css("display") == "none") {
+        $('#num0').css('color', 'black');
+        $('#num1 > b').css('color', 'black');
+        $('#num2 > b').css('color', 'black');
+        $('#num3 > b').css('color', 'black');
+        $('#num4 > b').css('color', 'black');
+        $('#num5 > b').css('color', 'black');
+        $('#m1 > b').css('color', 'black');
+        menu0.hide();
+        menu1.hide();
+        menu2.hide();
+        menu3.hide();
+        menu4.hide();
+        menu5.hide();
+        menu6.hide();
+        list.show();
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', '#EA7475');
+    } else {
+        $('.profile_menu1 > b').css('color', 'black');
+        $('.profile_menu2 > b').css('color', 'black');
+        $('.profile_menu3 > b').css('color', '#EA7475');
+    }
+    
+}
+
+function asd(url) {
+	 window.open("productDetail.pr?num="+url);
+	 //location.href = "productDetail.pr?num="+url;
+}
+
+
+function deleteWish(pNum) {
+	var dw_y = confirm('위시리스트에서 삭제하시겠습니까?');
+	if(dw_y){
+		 $.ajax({
+		 		url: '/bit_project/deletewishlist.pr',
+		 		type: 'post',
+		 		data:{"product_num" : pNum, "email" : myemail}, 
+		 		dataType: "json",
+		 		async:false,
+		 		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+		 		success: function (data) {
+					},
+		 		error: function () {
+		 		}
+		 		
+		 });
+	}
+	wish_click();
+}
+function deleteReser(pNum) {
+	var dw_y = confirm('예약에서 삭제하시겠습니까?');
+	if(dw_y){
+		 $.ajax({
+		 		url: '/bit_project/deletereservation.pr',
+		 		type: 'post',
+		 		data:{"product_num" : pNum, "email" : myemail}, 
+		 		dataType: "json",
+		 		async:false,
+		 		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+		 		success: function (data) {
+					},
+		 		error: function () {
+		 		}
+		 		
+		 });
+	}
+	reser_click();
+}
+function deleteBook(pNum) {
+	var dw_y = confirm('찜에서 삭제하시겠습니까?');
+	if(dw_y){
+		 $.ajax({
+		 		url: '/bit_project/deletebookmark.pr',
+		 		type: 'post',
+		 		data:{"product_num" : pNum, "email" : myemail}, 
+		 		dataType: "json",
+		 		async:false,
+		 		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+		 		success: function (data) {
+					},
+		 		error: function () {
+		 		}
+		 		
+		 });
+	}
+	book_click();
 }

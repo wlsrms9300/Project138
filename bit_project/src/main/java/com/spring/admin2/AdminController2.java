@@ -1,5 +1,7 @@
 package com.spring.admin2;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,44 +25,44 @@ public class AdminController2 {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private SubscribePaymentService subscribePaymentService;
-	
+
 	@RequestMapping(value = "/member_admin.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getMemberList() {
 		List<MemberSubscribeVO> list = memberService.getMemberList();
-		
+
 		String str = "";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			str = mapper.writeValueAsString(list);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
+			str = mapper.writeValueAsString(list); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
 			System.out.println("first() mapper : " + e.getMessage());
 		}
-		
+
 		return str;
 	}
-	
+
 	@RequestMapping(value = "/member_group.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupList() {
 		List<MemberVO> list = memberService.getGroupList();
-		
+
 		String str = "";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			str = mapper.writeValueAsString(list);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
+			str = mapper.writeValueAsString(list); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
 			System.out.println("first() mapper : " + e.getMessage());
 		}
-		
+
 		return str;
 	}
-	
+
 	@PostMapping(value = "/normal_to_bad.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> normal_to_bad(MemberVO membervo) {
@@ -83,7 +85,7 @@ public class AdminController2 {
 
 		return retVal;
 	}
-	
+
 	@PostMapping(value = "/bad_to_normal.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> bad_to_normal(MemberVO membervo) {
@@ -106,39 +108,38 @@ public class AdminController2 {
 
 		return retVal;
 	}
-	
 
 	@RequestMapping(value = "/member_share.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getShareWaitingList() {
 		List<ShareWatingListVO> shareList = subscribePaymentService.getShareList();
-		
+
 		String str = "";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			str = mapper.writeValueAsString(shareList);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
+			str = mapper.writeValueAsString(shareList); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
 			System.out.println("first() mapper : " + e.getMessage());
 		}
-		
+
 		return str;
 	}
-	
+
 	@RequestMapping(value = "/shareAcceptOrDeny.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public Map<String, Object> shareAcceptOrDeny(int waiting_num, String chk) {
-		System.out.println("waiting_num : "+waiting_num);
-		System.out.println("state : "+chk);
+		System.out.println("waiting_num : " + waiting_num);
+		System.out.println("state : " + chk);
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		int chk_num = 0;
 		try {
-			if(chk.equals("Accept")) {
+			if (chk.equals("Accept")) {
 				chk_num = 1;
-				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);	
-			}else {
+				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);
+			} else {
 				chk_num = 2;
-				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);	
+				subscribePaymentService.shareWaitingListAcceptOrDeny(waiting_num, chk_num);
 			}
 			retVal.put("res", "OK");
 		} catch (Exception e) {
@@ -146,20 +147,21 @@ public class AdminController2 {
 		}
 		return retVal;
 	}
-	
+
 	@RequestMapping(value = "/shareAcceptList.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public List<ShareWatingListVO> shareAcceptList() {
 		List<ShareWatingListVO> List = null;
 		try {
 			List = subscribePaymentService.getShareAcceptList();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
 		return List;
 	}
+
 	@RequestMapping(value = "/member_share_settle.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String member_share_settle() {
@@ -167,14 +169,40 @@ public class AdminController2 {
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			str = mapper.writeValueAsString(settleList);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
+			str = mapper.writeValueAsString(settleList); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
 			System.out.println("first() mapper : " + e.getMessage());
 		}
-		
+
 		return str;
 	}
 
+	@RequestMapping(value = "/admin_batch.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String admin_batch() {
+		int randomPnum = 0;
+		ArrayList<Integer> wishList = null;
+		// 1. 위시리스트 넣기
+		// LIST로 email만 받아온다
+		List<String> emailList = subscribePaymentService.getEmail();
+		ArrayList<String> list = new ArrayList<String>();
+		list = (ArrayList) emailList;
+		// 해당 이메일로 위시리스트 조회해서 랜덤으로 뽑은 후 product_state 테이블에 insert한다.
+		for (String email : list) {
+			System.out.println("email is " + email);
+			//위시리스트 조회.
+			wishList = (ArrayList)subscribePaymentService.getWish(email);
+			//랜덤뽑기
+			Collections.shuffle(wishList);
+			randomPnum = wishList.get(0);
+			//위시리스트 DB 넣기
+			subscribePaymentService.insertWish(randomPnum);
+			System.out.println("foreach 도는중 쿠쿠");
+		}
+		String str = "";
+		return str;
+	}
+	
 	@RequestMapping(value = "/admin_return.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String admin_return() {
@@ -182,12 +210,11 @@ public class AdminController2 {
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			str = mapper.writeValueAsString(returnList);	//writeValueAsString -> list객체를 json형식으로 바꿔줌.
-		} catch(Exception e) {
+			str = mapper.writeValueAsString(returnList); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
 			System.out.println("first() mapper : " + e.getMessage());
 		}
-		
+
 		return str;
 	}
 }
-

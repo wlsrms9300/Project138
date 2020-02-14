@@ -228,7 +228,7 @@
 						<thead>
 							<tr>
 								<th>STATE_NUM</th>
-								<th>SUBSCRIBE_NUM Name</th>
+								<th>SUBSCRIBE_NUM</th>
 								<th>PRODUCT_NUM</th>
 								<th>STATE</th>
 								<th>DELIVERY_DATE</th>

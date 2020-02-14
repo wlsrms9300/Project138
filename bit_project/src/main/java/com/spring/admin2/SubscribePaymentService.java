@@ -1,5 +1,6 @@
 package com.spring.admin2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.mypage.PStateVO;
@@ -13,6 +14,11 @@ public interface SubscribePaymentService {
 	public List<ShareWatingListVO> getShareAcceptList();
 	public List<SettlementVO> getSettleList();
 	public List<PStateVO> getReturnList();
+	
+	public List<String> getEmail();
+	public List<Integer> getWish(String email);
+	public void insertWish(int randomPnum);
+	
 	
 	
 }

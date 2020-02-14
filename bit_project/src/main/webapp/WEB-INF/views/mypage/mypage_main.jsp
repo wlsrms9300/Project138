@@ -161,9 +161,9 @@
             <p>회원등급 : </p><h4>일반회원</h4><br>
             <p>포인트 : </p><h4>2000P</h4>
             <ul class="sub_list3">
-                <li><img src="${pageContext.request.contextPath}/resources/img/wishlist.png" class="btn1"></li>
-                <li><img src="${pageContext.request.contextPath}/resources/img/reservation.png" class="btn2"></li>
-                <li><img src="${pageContext.request.contextPath}/resources/img/bookmark.png" class="btn3"></li>
+                <li><img src="${pageContext.request.contextPath}/resources/img/wishlist.png" class="btn1" onclick="wish_click()"></li>
+                <li><img src="${pageContext.request.contextPath}/resources/img/reservation.png" class="btn2" onclick="reser_click()"></li>
+                <li><img src="${pageContext.request.contextPath}/resources/img/bookmark.png" class="btn3" onclick="book_click()"></li>
             </ul>
         </div>
         </div>

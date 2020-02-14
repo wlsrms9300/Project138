@@ -26,9 +26,43 @@
 	</select>
 	
 	<!--  admin 반납확정 리스트  -->
-	<select id="getReturnList" resultType="com.spring.mypage.PStateVO">
+	<!-- <select id="getReturnList" resultType="com.spring.mypage.PStateVO">
 	select * from product_state where state='반납확정' order by state_num asc
+	</select> -->
+	
+	<select id="getReturnList" resultType="com.spring.mypage.PStateVO" >
+	select * from product_state where state='반납확정' AND 
+	SUBSCRIBE_NUM NOT IN (
+        select SUBSCRIBE_NUM from product_state where state='배송전'
+    )
 	</select>
 	
 	
+	<select id="getEmail" resultType="String" >
+	select email from subscribe where subscribe_num IN (	
+		select subscribe_num from product_state where state='반납확정' AND 
+		SUBSCRIBE_NUM NOT IN (
+	        select SUBSCRIBE_NUM from product_state where state='배송전'
+	    )
+	)
+	</select>
+	<select id="getWish" parameterType="map" resultType="int">
+	select product_num from wishlist where email=#{email} AND product_num NOT IN (
+		select product_num from product where current_amount=0
+	)
+	</select>
+	
+	<update id="returnBatch">
+	update (
+		select * from product_state where state='반납확정' AND SUBSCRIBE_NUM NOT IN (
+        	select SUBSCRIBE_NUM from product_state where state='배송전'
+    	)
+	)
+	set state='배송전'
+	</update>
+	
+	<insert id="insertWish" parameterType="map">
+	insert into product_state values(10, 1, #{randomPnum}, '배송전', '2020/02/20', '')
+	</insert>
+
 </mapper>

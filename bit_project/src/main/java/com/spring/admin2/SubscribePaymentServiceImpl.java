@@ -1,5 +1,6 @@
 package com.spring.admin2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -53,6 +54,46 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
 		returnList = subscribePaymentMapper.getReturnList();
 		return returnList;
+	}
+
+	@Override
+	public List<String> getEmail() {
+		List<String> emailList = null;
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			emailList = subscribePaymentMapper.getEmail();
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		return emailList;
+	}
+
+	@Override
+	public List<Integer> getWish(String email) {
+		List<Integer> wishList = null;
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			wishList = subscribePaymentMapper.getWish(email);
+			
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		return wishList;
+	
+	}
+
+	@Override
+	public void insertWish(int randomPnum) {
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			subscribePaymentMapper.insertWish(randomPnum);
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		
 	}
 
 	

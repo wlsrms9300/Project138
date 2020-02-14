@@ -52,3 +52,18 @@
         return year + "-" + month + "-" + date + " " + hour + ":" + min;
         
     }
+$(document).on("click","#blanket",function(){
+	$.ajax({
+		url : '/bit_project/admin_batch.tz',
+		type : 'post',
+		dataType : "json",
+		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+		success:function(data){
+			alert('성공');
+
+		},
+		error:function(){
+			alert("ajax통신 실패 !!!");
+		}
+	});
+})
