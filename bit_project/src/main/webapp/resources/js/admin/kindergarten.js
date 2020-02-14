@@ -1,45 +1,5 @@
 /* db에 member 정보 저장돼있는것 불러와서 뿌려주는 ajax */
 var state_param = null;
-kindergarten_admin();   
-   function kindergarten_admin() {
-      
-      $.ajax({
-    	 
-         url : '/bit_project/kindergarten_admin.se',
-         type : "post",
-         dataType : "json",
-         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-
-         success:function(data){
-        	 
-        	 $('#output').empty();
-             $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
-              if(item.state == null) {
-                var name = "'" + item.name + "'"; 
-                var output = '';
-                output += '<tr>';
-                output += '<td>' + item.name + '</td>';
-                output += '<td>' + item.phone + '</td>';
-                output += '<td>' + item.term +"개월"+ '</td>';
-                 
-                output += '<td><button type="button" class="btn btn-sm btnadd" onclick="add(' + name + ');">수락</button>&nbsp;<button type="button" class="btn btn-sm btnDel"onclick="del(' + name + ');">거절</button></td>';
-                
-                output += '</tr>';
-                
-              }
-           
-                console.log("output:"+output);
-                $('#output').append(output);
-             });
-             
-           },
-          error:function(){
-             alert("ajax통신 실패 !!!");
-          }
-
-       });
-    }
-   kindergarten_admin();
    
    function del(param_name) {
 	  	 var input = confirm("거절 하시겠습니까?");
@@ -99,61 +59,10 @@ kindergarten_admin();
 	      });
 	 	 }
 	 	}
-
-
-
-   function kindergarten_admin1() {
-	      
-	      $.ajax({
-
-	    	  url : '/bit_project/kindergarten_admin.se',
-		         type : "post",
-		         dataType : "json",
-		         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-
-		         success:function(data){
-		        	 $('#output1').empty();
-		            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
-		            	if(item.state == 'Y') {
-		            		  var name = "'" + item.name + "'"; 
-		            		 
-		            		  var output = '';
-
-		                     
-		                      output += '<tr>';
-
-		                      output += '<td>' +item.name +'</td>';
-		                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
-		                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
-		                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
-		                     
-		                      var date = new Date(item.term);
-		  		             date = date_to_str(date);
-		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
-		   	                
-		   	               
-		                      output += '<td><button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
-		                      
-		                      output += '</tr>';
-		               
-		             
-		            	}
-		            	
-		               console.log("output:"+output);
-		               $('#output1').append(output);
-		            });
-		         },
-		         error:function(){
-		            alert("ajax통신 실패 !!!");
-		         }
-
-		      });
-	      
-		   }
-   kindergarten_admin1();
 	   
    
-   function date_to_str(format)
+   
+   function date_to_str(format, babo)
    {
 	   var format= new Date();
        var year = format.getFullYear(); 
@@ -164,7 +73,11 @@ kindergarten_admin();
        var hour = format.getHours();
        if(hour<10) hour = '0' + hour;
        
-       return year + "-" + month + "-" + date + "~"+ year + "-" + month + 'format' + "-" + date ;
+       var month2 = Number(month); 
+       var babo2 = Number(babo); 
+       
+       return year + "-" + month + "-" + date + "~"+ year + "-" + (month2+babo2) + "-" + date ;
+       
        
    }
    
@@ -196,7 +109,7 @@ kindergarten_admin();
 	  	     });
 	  		 }
 	  	   }
-	   kindergarten_admin1();
+	
 	   
 	   
 	   $(document).on("click",".btnmodify",function(){ 

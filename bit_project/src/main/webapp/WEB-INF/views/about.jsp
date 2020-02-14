@@ -79,8 +79,8 @@
         <div class="mt_6">
             <div class="mt_6_1">
                 <h3>진근이네는 연속되는 선물과 같습니다.<br><br></h3>
-                <button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='#'">회원가입</button>
-                <button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='#'">구독하기</button>
+                <button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='signup.me'">회원가입</button>
+                <button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='subscribestep1.me'">구독하기</button>
             </div> 
         </div>
     </div>
@@ -116,7 +116,7 @@
             <div class="mt_6_1">
                 <h3>장난감 정기구독서비스로<br>
                 설레임과 기쁨이 있는 시간을 가져보세요<br><br></h3>
-                <button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='#'">구독하기</button>
+                <button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='subscribestep1.me'">구독하기</button>
             </div> 
         </div>
         

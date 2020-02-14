@@ -14,7 +14,20 @@
 	rel="stylesheet">
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/subscribe.js"></script>
-
+<script>
+$(document).ready(function(){
+	$('#termSelect').click(function() {
+		var check = $('input:radio[name="group1"]').is(':checked');
+		if(check == false) {
+			alert('서비스를 선택해주세요.');
+			
+		} else {
+			$('form[name="selectSubscription"]').submit();
+		}
+	});
+});
+	
+</script>
 
 </head>
 <body>
@@ -74,7 +87,7 @@
 			</div>
 		</div>
 		<div class="subscribeNext">
-			<button id="termSelect" type="submit" >다음단계로</button>
+			<input type="button" id="termSelect" value="다음단계로">
 		</div>
 		</form>
 	</div>
@@ -104,13 +117,12 @@
                         <!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
                         <h2>로고1</h2>
                         <ul>
-                            <li><a href="#">회사소개</a></li>
-                            <li><a href="#">채용정보</a></li>
-                            <li><a href="#">제휴/광고/부대사업 문의</a></li>
-                            <li><a href="#">이용약관</a></li>
-                            <li><a href="#">개인정보처리방침</a></li>
-                            <li><a href="#">고객센터</a></li>
-                            <li><a href="#">윤리경영</a></li>
+                          	    <li><a href="kindergarten.ms">어린이집</a></li>
+								<li><a href="partner.ms">파트너</a></li>
+								<li><a href="contactus.ms">고객센터</a></li>
+								<li><a href="share.ms">개인 쉐어</a></li>
+								<li><a href="#">어린이집 쉐어</a></li>
+							
                         </ul>
                         <address>
                             <p>서울특별시 서초구 강남대로 459 <br><span class="bar2">대표자명 김진근</span>

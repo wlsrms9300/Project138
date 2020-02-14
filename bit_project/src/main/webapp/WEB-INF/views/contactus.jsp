@@ -117,8 +117,7 @@
 				
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
-
-				var iwContent = '<div style="padding:5px">임마 비트캠프다 <br><a href="https://map.kakao.com/link/map/임마 비트캠프다 ,33.450701,126.570667" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+				var iwContent = '<div style="padding:5px">비트캠프 <br><a href="https://map.kakao.com/link/map/비트캠프 ,37.502987, 127.024200" style="color:#ffb0b1" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/비트캠프,37.502987, 127.024200" style="color:#ffb0b1" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 				    iwPosition = new kakao.maps.LatLng(37.502987, 127.024200); //인포윈도우 표시 위치입니다
 
 				// 인포윈도우를 생성합니다
@@ -201,13 +200,12 @@
 					<!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
 					<h2>로고1</h2>
 					<ul>
-						<li><a href="#">회사소개</a></li>
-						<li><a href="#">채용정보</a></li>
-						<li><a href="#">제휴/광고/부대사업 문의</a></li>
-						<li><a href="#">이용약관</a></li>
-						<li><a href="#">개인정보처리방침</a></li>
-						<li><a href="#">고객센터</a></li>
-						<li><a href="#">윤리경영</a></li>
+								<li><a href="kindergarten.ms">어린이집</a></li>
+								<li><a href="partner.ms">파트너</a></li>
+								<li><a href="contactus.ms">고객센터</a></li>
+								<li><a href="share.ms">개인 쉐어</a></li>
+								<li><a href="#">어린이집 쉐어</a></li>
+							
 					</ul>
 					<address>
 						<p>

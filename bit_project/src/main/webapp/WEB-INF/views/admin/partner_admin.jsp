@@ -28,41 +28,142 @@
 </head>
 
 <script type="text/javascript">
-    $(function($) {
-        var lang_kor = {
-        "decimal" : "",
-        "emptyTable" : "데이터가 없습니다.",
-        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
-        "infoEmpty" : "0명",
-        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
-        "infoPostFix" : "",
-        "thousands" : ",",
-        "lengthMenu" : "_MENU_ 개씩 보기",
-        "loadingRecords" : "로딩중...",
-        "processing" : "처리중...",
-        "search" : "검색 : ",
-        "zeroRecords" : "검색된 데이터가 없습니다.",
-        "paginate" : {
-            "first" : "첫 페이지",
-            "last" : "마지막 페이지",
-            "next" : "다음",
-            "previous" : "이전"
-        },
-        "aria" : {
-            "sortAscending" : " :  오름차순 정렬",
-            "sortDescending" : " :  내림차순 정렬"
-        }
-    };
+   
+    $(document).ready(function() {
+    	var lang_kor = {
+    	        "decimal" : "",
+    	        "emptyTable" : "데이터가 없습니다.",
+    	        "info" : "_START_ - _END_ (총 _TOTAL_ 명)",
+    	        "infoEmpty" : "0명",
+    	        "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+    	        "infoPostFix" : "",
+    	        "thousands" : ",",
+    	        "lengthMenu" : "_MENU_ 개씩 보기",
+    	        "loadingRecords" : "로딩중...",
+    	        "processing" : "처리중...",
+    	        "search" : "검색 : ",
+    	        "zeroRecords" : "검색된 데이터가 없습니다.",
+    	        "paginate" : {
+    	            "first" : "첫 페이지",
+    	            "last" : "마지막 페이지",
+    	            "next" : "다음",
+    	            "previous" : "이전"
+    	        },
+    	        "aria" : {
+    	            "sortAscending" : " :  오름차순 정렬",
+    	            "sortDescending" : " :  내림차순 정렬"
+    	        }
+    	    };
+    	var check = true;
+    	  $.ajax({
 
-        $('#foo-table').DataTable( {
-        	
-            language:lang_kor
-        });
-  		$('#foo-table2').DataTable( {
-        	
-            language:lang_kor
-        });
-        $('#myTable').DataTable();
+    	         url : '/bit_project/partner_admin.se',
+    	         type : "post",
+    	         dataType : "json",
+    	         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+    	         async: false,
+    	         success:function(data){
+    	        	 
+    	             $('#output').empty();
+    	            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
+    	             if(item.state == null) {
+    	               var name = "'" + item.name + "'"; 
+    	               var output = '';
+    	               output += '<tr>';
+    	               output += '<td>' + item.name + '</td>';
+    	               output += '<td>' + item.phone + '</td>';
+    	               output += '<td>' + item.term +"개월"+ '</td>';
+    	                
+    	               output += '<td><button type="button" class="btn btn-sm btnadd" onclick="add(' + name + ');">수락</button>&nbsp;<button type="button" class="btn btn-sm btnDel"onclick="del(' + name + ');">거절</button></td>';
+    	               
+    	               output += '</tr>';
+    	               
+    	             }
+    	          
+    	               console.log("output:"+output);
+    	               $('#output').append(output);
+    	        
+    	            });
+    	            
+    	            
+    	          },
+    	         error:function(){
+    	            alert("ajax통신 실패 !!!");
+    	            check = false;
+    	         }
+
+    	      });
+    	  if(check == true) {
+  			$('#foo-table').DataTable({
+  				language: lang_kor
+  			});
+  		}	
+    	  
+    	  
+    	  var check2 = true;
+    	  $.ajax({
+
+    	         url : '/bit_project/partner_admin.se',
+    	         type : "post",
+    	         dataType : "json",
+    	         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+    	         async: false,
+    	         success:function(data){
+    	        	 $('#output1').empty();
+    	        	 
+    	            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
+    	            	if(item.state == 'Y') {
+    	            		
+    	            		  var license_num = "'" + item.license_num + "'"; 
+    	            		  var name = "'" + item.name + "'";
+    	            		  var phone = "'" + item.phone + "'";
+    	            		  var email = "'" + item.email + "'";
+    	            		  var homepage = "'" + item.homepage + "'";
+    	            		  var postal_num = "'" + item.postal_num + "'";
+    	            		  var address = "'" + item.address + "'";
+    	            		  var address_detail = "'" + item.address_detail + "'";
+    	            		  var term = "'" + item.term + "'";
+    	            		  var category = "'" + item.category + "'";
+    	            		  var content = "'" + item.content + "'";
+    	            		  
+    	                      var output = '';
+    	                      
+    	                      output += '<tr>';  
+    	                      
+    	                      output += '<td>' +item.name +'</td>';
+    	                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
+    	                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
+    	                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
+    	   	                
+    	                      var date = new Date(item.term);
+    		                  	date = date_to_str(date,item.term);
+    		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
+    		   	                
+    		   	               
+    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+ license_num + name + phone + email + homepage + postal_num + address + address_detail + term + category + content +');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
+    	                      
+    	                      output += '</tr>';
+    	                      	             
+    	            	}
+    	            	
+    	               console.log("output:"+output);
+    	               $('#output1').append(output);
+    	            
+    	            });
+    	         },
+    	         error:function(){
+    	        	 
+    	            alert("ajax통신 실패 !!!");
+    	            check2 = false;
+    	         }
+
+    	      });
+    	  
+    	  if(check2 == true) {
+         	  $('#foo-table2').DataTable({
+         		 language: lang_kor 
+         	  });
+           }
     });
    
 </script>
@@ -235,12 +336,59 @@
 			<tbody id = "output1">
 			
 			</tbody>
+				 <!-- 파트너 가입신청 모달-->
+			 
+     <div class="modal" id="partner-modal">
+         <div class="modal-content">
+             <span class="close-button" id="pclose-button">&times;</span>
+             <h1 class="title">파트너 정보</h1>
+                             
+               <input type="text" name="license_num" placeholder="사업자등록번호" >
+               <input type="text" name="name" placeholder="회사명" >
+               <input type="tel" name="phone" placeholder="연락처" >
+               <input type="email" name="email" placeholder="이메일" >       
+               <input type="text" name="homepage" placeholder="홈페이지" >
+               <input type="text" name="postal_num"  placeholder="우편번호" >
+               <input type="text" name="address" placeholder="주소" >
+               <input type="text" name="address_detail" placeholder="상세주소" >
+               <input type="text" name="term" placeholder="계약기간" >
+               <input type="text" name="category" placeholder="카테고리" >
+	           <input type="text" name="content" placeholder="간단한 소개" >
+	           
+               <input type="button" id="cancel" value="확인">
+             </form>
+         </div> 
+     </div>
+
+ 	<script type="text/javascript">
+         var modal = document.querySelector("#partner-modal");
+         var btndetail = document.querySelector("#btndetail");
+         var pcloseButton = document.querySelector("#pclose-button");
+         var cancelButton = document.querySelector("#cancel"); 
+        console.log(modal);
+        function toggleModal() {
+             modal.classList.toggle("show-modal");
+         }
+        function windowOnClick(event) {
+             if (event.target === modal) {
+                 toggleModal();
+             }
+         }
+        
+         btndetail.addEventListener("click", toggleModal);
+         pcloseButton.addEventListener("click", toggleModal);
+         cancel.addEventListener("click", toggleModal);
+         window.addEventListener("click", windowOnClick);
+     </script>
+     
+     <!---------------------여기까지 ------------------------------------->
+			
     	</table>
 		
 		
 	</div>	<!--/.main-->
 	
-	<script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script> --%>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart-data.js"></script>
@@ -275,6 +423,8 @@
 	segmentShowStroke: false
 	});
 };
+
+
 	</script>
 		
 </body>
