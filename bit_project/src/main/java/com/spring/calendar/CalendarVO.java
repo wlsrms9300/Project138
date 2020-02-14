@@ -12,6 +12,7 @@ public class CalendarVO {
 		private String return_application;	
 		private String email;
 		private String grade;
+		private int count;
 		
 		public int getState_num() {
 			return state_num;
@@ -60,5 +61,11 @@ public class CalendarVO {
 		}
 		public void setGrade(String grade) {
 			this.grade = grade;
+		}
+		public int getCount() {
+			return count;
+		}
+		public void setCount(int count) {
+			this.count = count;
 		}
 }

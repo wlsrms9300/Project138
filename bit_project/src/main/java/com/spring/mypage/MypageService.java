@@ -19,6 +19,7 @@ public interface MypageService {
 	public SettlementVO getShareJoin(@Param("share_num") int share_num) throws Exception;
 	public void addMyPageShareSettle(SettlementVO sVO) throws Exception;
 	public void updateShareJoin(@Param("share_num") int share_num, @Param("settle") int settle) throws Exception;
+	public int checkPS(String email) throws Exception;
 	
 	
 	

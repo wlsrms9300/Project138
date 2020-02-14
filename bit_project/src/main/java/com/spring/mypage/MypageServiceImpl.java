@@ -129,7 +129,18 @@ public class MypageServiceImpl implements MypageService {
 			PStateVO vo = myMapper.getProductState(email);
 			return vo;
 		} catch (Exception e) {
-			throw new Exception("상품 상태 조회 실패", e);
+			throw new Exception("상품상태 조회 실패", e);
+		}
+	}
+	
+	@Override
+	public int checkPS(String email) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			int count = myMapper.checkPS(email);
+			return count;
+		} catch (Exception e) {
+			throw new Exception("상품상태 카운트 조회 실패", e);
 		}
 	}
 	

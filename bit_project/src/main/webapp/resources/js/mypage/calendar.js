@@ -44,19 +44,50 @@ document.addEventListener('DOMContentLoaded', function(){
     Calendar.prototype.drawDays = function() {
         var startDay = new Date(year, month, 1).getDay(),
 
-            nDays = new Date(year, month + 1, 0).getDate(),
+            nDays = new Date(year, month + 1, 0).getDate(),  //이번달 총 일수
     
-            n = startDay;
-
+            n = startDay;  //시작일
+        //days[1], days[8], days[15], days[22], days[29], days[36]...(매주 월요일)
+        //days[4], days[11], days[18], days[25], days[32]...(매주 목요일)
+        
         for(var k = 0; k <42; k++) {
             days[k].innerHTML = '';
             days[k].id = '';
             days[k].className = '';
         }
-
+        
         for(var i  = 1; i <= nDays ; i++) {
+        	//반납신청일 체크
+        	if(aDay1 != "0") {
+        		if(i == aDay1 && (month + 1 == aMonth1)) {
+                	days[n].id = "pickup";
+                	if(n >= 4 && n < 11) {
+                		days[11].id = "delivery";
+                	} else if( n >= 11 && n < 18) {
+                		days[18].id = "delivery";
+                	} else if( n >= 18 && n < 25) {
+                		days[25].id = "delivery";
+                	} else if( n >= 25 && n < 32) {
+                		days[32].id = "delivery";
+                	}
+                }	
+        	} 
+        	
             days[n].innerHTML = i; 
             n++;
+        }
+             
+        //결제일 체크
+        if(days[1].innerHTML === "") {
+        	days[29].id = "payday";
+        	if(aDay1 == "0") {
+        		days[33].id = "delivery";
+        	}
+        } else {
+        	days[22].id = "payday";
+        	if(aDay1 == "0") {
+        		days[26].id = "delivery";
+        	}
         }
         
         for(var j = 0; j < 42; j++) {
@@ -67,7 +98,8 @@ document.addEventListener('DOMContentLoaded', function(){
             }else if(j === day + startDay - 1){
                 if((this.options && (month === setDate.getMonth()) && (year === setDate.getFullYear())) || (!this.options && (month === today.getMonth())&&(year===today.getFullYear()))){
                     this.drawHeader(day);
-                    days[j].id = "today";
+                    days[j].id = "today"; 
+                    /*days[j].innerHTML += "<br>today";*/
                 }
             }
             if(selectedDay){
@@ -75,9 +107,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 days[j].className = "selected";
                 this.drawHeader(selectedDay.getDate());
                 }
-            }
-            if(j == aDay1) {
-            	days[j].className = "pickup";
             }
         }
     };
