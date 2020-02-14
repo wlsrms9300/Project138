@@ -7,7 +7,11 @@
 	LoginVO userDetail_cal = (LoginVO)session.getAttribute("userDetail"); //유저정보
 	String subscribe_cal = userDetail_cal.getSubscribe(); //구독여부 체크
 	String email_cal = (String)session.getAttribute("email");
-	PStateVO pstate = (PStateVO)request.getAttribute("pstate");
+	PStateVO pstate = new PStateVO();
+	if(request.getAttribute("pstate") != null) {
+		pstate = (PStateVO)request.getAttribute("pstate");	
+	}
+	
 %>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -23,13 +27,27 @@
 </head>
 <script>
 //반납신청일
-var beforeDate = '<%=pstate.getReturn_application() %>';
-var date = beforeDate.replace(/(\s*)/g, "");
-var sdate = date.split("-");
-var aYear1 = sdate[0];
-var aMonth1 = sdate[1].replace(/(^0+)/, "");
-var aDay1 = sdate[2];
-alert(date1 + ", " + aMonth1 + ", " + aDay1);
+	var beforeDate = "0";
+	var date = "0";
+	var sdate = "0";
+	var aYear1 = "0";
+	var aMonth1 = "0";
+	var aDay1 = "0";
+
+	if('<%=subscribe_cal %>' == "Y") {
+		if('<%=pstate %>' != null) {
+			if(!('<%=pstate.getReturn_application() %>' == "N")) {
+				beforeDate = '<%=pstate.getReturn_application() %>';
+				date = beforeDate.replace(/(\s*)/g, "");
+				sdate = date.split("-");
+				aYear1 = sdate[0];
+				aMonth1 = sdate[1].replace(/(^0+)/, "");
+				aDay1 = sdate[2];
+			}
+		}
+	}
+
+/*  alert(date + ", " + aMonth1 + ", " + aDay1);  */
 
 $(document).ready(function(){
 	window.onload = function() {
@@ -75,16 +93,35 @@ $(document).ready(function(){
 	//반납취소 이벤트 -- 반납취소시 ajax로 db에서 삭제 / 상태가 '확정'이면 취소불가
 	$('#false').click(function() {
 		var text = $('#true').text();
+		var text2 = $('#false').text();
 		
-		if(text != "반납신청") {
+		if(text != "반납신청" && text2 != "반납확정") {
 			var result = confirm('반납신청을 취소하시겠습니까?');
 			if(result == true) {
 				$.ajax({
-					url:'bit_project/updatePS_reset.my' //ps테이블의 return_application날짜 null로 바꾸고 staet값 '대여중'
+					url:'/bit_project/updatePS_reset.my', //ps테이블의 return_application날짜 null로 바꾸고 staet값 '대여중'
+					dataType: 'json',
+					type: 'POST',
+					data: {
+							email : '<%=email_cal %>'
+						  },
+					contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+					success: function(data) {
+						if(data.res == "OK") {
+							$('#true').text("반납신청");	
+						} else {
+							alert('반납취소 실패');
+						}
+						
+					},
+					error:function(request, status, error) {
+						alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" +"error : " + error);
+					}
 				});
-				$('#true').text("반납신청");
 				location.href='<%=request.getContextPath()%>/mypage_main.my';
 			}
+		} else {
+			alert('반납신청 내역이 없거나 반납확정 상태입니다.');
 		}
 	});
 	
@@ -106,7 +143,7 @@ $(document).ready(function(){
         %>
             <div class="return-true">
         <%
-        	if(pstate.getReturn_application() == null) {
+        	if(pstate.getReturn_application().equals("N")) {
         %>
             <p id="true">반납신청</p>
         <%
@@ -114,14 +151,24 @@ $(document).ready(function(){
         %>
         	<p id="true"><%=pstate.getReturn_application() %></p>
         <%
-        	}
+        	} 
+        	if(!(pstate.getState().equals("반납확정"))) {
         %>
             </div>
             <div class="return-false">
             	<p id="false">반납취소</p>
             </div>
         <%
- 			} 
+ 			} else { 
+        %>
+        	</div>
+            <div class="return-false">
+            	<p id="false">반납확정</p>
+            </div>
+        
+        <%
+ 				}
+ 			}
         %>
       
         </div>
@@ -170,7 +217,7 @@ $(document).ready(function(){
                 </tr>
                 <tr>
                     <td></td>
-                    <td style="background-color: #595ad4; border-radius: 50%; color: #fff;"></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -242,10 +289,10 @@ $(document).ready(function(){
                 </tr>
                 <tr>
                     <td></td>
-                    <td style="background-color: #595ad4; border-radius: 50%; color: #fff;"></td>
-                    <td style="background-color: #cfa2fb; border-radius: 50%; color: #fff;"></td>
                     <td></td>
-                    <td style="background-color: #77af6e; border-radius: 50%; color: #fff;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -276,8 +323,15 @@ $(document).ready(function(){
     <div class="calendar-content">
     	<div class="color-content" style="text-align:center;">
     		<div class="circle"><p>결제</p></div>
-    		<div class="circle"><p>픽업</p></div>
+    		<div class="circle"><p>반납</p></div>
     		<div class="circle"><p>배송</p></div>
+    		<div class="circle"><p>예약</p></div>
+    	</div>
+    	<div class="calendar-des-text">
+    		1. 원하는 반납일을 선택 후 반납신청 버튼을 눌러줍니다.<br>
+    		2. 반납확정 전에는 언제든 취소 가능합니다. (반납일 하루전 00:00시에 반납확정됩니다.)<br>
+    		3. 반납완료 시 돌아오는 목요일에 새상품이 배송됩니다. (예약상품 우선)<br>
+    		<br>
     	</div>
     <%
     	if(subscribe_cal.equals("N")) {
@@ -301,14 +355,14 @@ $(document).ready(function(){
 				<b>2</b>
 			</div>
 		</div>
-		<table id="des2"> 
+		<!-- <table id="des2"> 
 			
 			<tr>
 				<td style="color:rgb(109, 109, 109);">수요일 : </td>
 				<td><b>예약확정</b></td>
 			</tr>
 			
-		</table>
+		</table> -->
 	<%
     	}
 	%>

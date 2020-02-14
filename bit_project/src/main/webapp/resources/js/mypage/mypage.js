@@ -257,7 +257,7 @@ $(document).ready(function(){
                     	if(index==0){
                     	  var sh = "";
                           sh += '<div class="share_history">';
-                          sh += '<h3>쉐어 내역</h3><input type="button" value="정산" class="share_btn" onclick="settlement();">';
+                          sh += '<h3>쉐어 내역</h3>';
                           sh += '<table>';
                           sh += '<tr class="share_line">';
                           sh += '<th>기간</th>';

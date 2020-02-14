@@ -138,7 +138,7 @@
  
  .tbody td:hover, .selected /* .tbody td:nth-child(7):hover, .tbody td:nth-child(1):hover */ {
      color: #fff;
-     background-color: #8a8e98;
+     background-color: #bcbec1;
      border: none;
  }
  
@@ -151,31 +151,33 @@
 /* 픽업일, 결제일, 배송일, 예약확정, 지난달or다음달(disabled) */
 /*======================================================================*/
  #today { /*오늘*/
-     background-color: #e66b6b;
-     color: #fff;
+     /* background-color: #e66b6b; */
+     color: #e66b6b;
      border-radius: 50%;
+     font-size:x-large;
  }
  
- .pickup { /*픽업*/
+ #pickup { /*픽업*/
   	background-color: #cfa2fb;
  	color: #fff;
  	border-radius: 50%;
  }
  
- .delivery { /*배송*/
+ #delivery { /*배송*/
  	background-color: #77af6e;
  	color: #fff;
  	border-radius: 50%;
  }
  
- .payday { /*결제*/
- 	background-color: #595ad4;
- 	color: #fff;
+ #payday { /*결제*/
+ 	/* background-color: #595ad4; */
+ 	color: #595ad4;
  	border-radius: 50%;
+ 	font-size:x-large;
  }
  
- .reserve { /*예약확정*/
- 	background-color: black;
+ #reserve { /*예약확정*/
+ 	background-color: rgb(232, 168, 102);
  	color: #fff;
  	border-radius: 50%;
  }
@@ -362,11 +364,10 @@ thead tr th {
 
 .circle p{
 	color:#fff;
-	
 }
 
-.color-content .circle:nth-child(1), .color-content .circle:nth-child(2), .color-content .circle:nth-child(3) {
-	width:40px; height:40px; border-radius:50%; padding-top:10px; margin-right:20px;
+.color-content .circle:nth-child(1), .color-content .circle:nth-child(2), .color-content .circle:nth-child(3), .color-content .circle:nth-child(4) {
+	width:40px; height:40px; border-radius:50%; padding-top:10px; margin-right:20px; color:#fff;
 }
 
 .color-content .circle:nth-child(1) {
@@ -379,6 +380,10 @@ thead tr th {
 
 .color-content .circle:nth-child(3) {
 	background-color:#77af6e;
+}
+
+.color-content .circle:nth-child(4) {
+	background-color:rgb(232, 168, 102);
 }
 
 @media (max-width: 600px) {

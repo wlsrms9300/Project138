@@ -74,6 +74,11 @@ update product_share set total_accumulated_fund=total_accumulated_fund-#{settle}
 	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
 </select>
 
+<select id="checkPS" parameterType="String" resultType="int">
+	SELECT COUNT(*)
+	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P
+	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
+</select>
 
 
 </mapper>

@@ -50,7 +50,7 @@ public class ChartController {
 		revenueList = chartService.getRevenue();// 수익(매출) 
 		expenseList = chartService.getExpenses();// 비용
 		
-		for(int i = 0; i < 12; i++ ) {
+		for(int i = 0; i < revenueList.size(); i++ ) {
 			/*수익(매출)*/
 			EBITVO ebitvo1 = (EBITVO)revenueList.get(i);
 			Date ebitMonth = ebitvo1.getMonth();

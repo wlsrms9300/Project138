@@ -74,7 +74,7 @@ public class PaymentController {
 		return data;
 	}
 	
-	//관리자 결제 페이지 예약완료 불러오기
+	//관리자 결제 페이지 결제완료 불러오기
 		@RequestMapping(value="/paidhistory.su", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 		@ResponseBody
 		public ArrayList<PMemberVO> paidHistory(HttpServletRequest request) throws Exception {
@@ -94,7 +94,7 @@ public class PaymentController {
 	@RequestMapping(value = "/selectSubscription.su", method = RequestMethod.POST)
 	public String selectSubscription(@RequestParam("group1") String grade, HttpSession session,
 			HttpServletRequest request, Model model) throws Exception {
-
+		
 		if (grade.equals("silver")) {
 			model.addAttribute("price", 29000);
 		} else if (grade.equals("gold")) {
@@ -106,7 +106,8 @@ public class PaymentController {
 		} else if (grade.equals("2month")) {
 			model.addAttribute("price", 58000);
 		}
-
+		
+		
 		String email = (String) session.getAttribute("email");
 		MemberVO result = paymentService.getUserInfo(email);
 		model.addAttribute("membervo", result);
@@ -355,6 +356,7 @@ public class PaymentController {
 		PaymentVO pvo = null;
 		String[] before = null;
 		String customer_uid = null;
+		
 		for(int i = 0; i < data.size(); i++) {
 			PMemberVO vo = data.get(i);
 			before = vo.getEmail().split("@");

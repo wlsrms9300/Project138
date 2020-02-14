@@ -130,8 +130,7 @@ public class MemberController {
 		    	   membervo.setImg("/bit_project/image/0c57c52f289644ceb799d673566eed91.png"); //upload 폴더에 있는 default_profile 이미지명. 확장자명까지 넣을 것.   
 		     } else {
 	      
-//		        String uploadPath = "C:\\Project138\\upload\\";
-		    	 String uploadPath = "/Users/nagyeom/upload/";
+		        String uploadPath = "C:\\Project138\\upload\\";
 		        String originalFileExtension = mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf("."));
 		        String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 		        

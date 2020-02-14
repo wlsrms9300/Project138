@@ -23,7 +23,6 @@ public class CalendarController {
 		vo = calendarservice.getSC(vo.getEmail()); //subscribe_num
 		vo.setState("반납신청");
 		vo.setReturn_application(request.getParameter("return_application"));
-		System.out.println(request.getParameter("return_application"));
 		
 		try {
 			int res = calendarservice.updatePS(vo);
@@ -37,9 +36,22 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "/updatePS_reset.my", produces="application/json;charset=UTF-8", method = { RequestMethod.GET , RequestMethod.POST })
-	public HashMap<String, String> resetPS(String nickname) throws Exception {
+	@ResponseBody
+	public HashMap<String, String> resetPS(CalendarVO vo, HttpServletRequest request) throws Exception {
 		HashMap<String, String> data = new HashMap<String, String>();
+		System.out.println("반납신청 이메일" + vo.getEmail());
+		vo = calendarservice.getSC(vo.getEmail());
+		vo.setState("대여중");
+		vo.setReturn_application("N");
 		
+		try {
+			int res = calendarservice.resetPS(vo);
+			data.put("res", "OK");
+		} catch(Exception e) {
+			e.printStackTrace();
+			data.put("res", "Fail");
+		}
+
 		return data;
 	}
 	

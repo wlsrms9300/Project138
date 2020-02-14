@@ -23,5 +23,6 @@ public interface MyMapper {
 	SettlementVO getShareJoin(@Param("share_num") int share_num);
 	void addMyPageShareSettle(SettlementVO sVO);
 	void updateShareJoin(@Param("share_num") int share_num, @Param("settle") int settle);
+	int checkPS(String email);
 
 }
