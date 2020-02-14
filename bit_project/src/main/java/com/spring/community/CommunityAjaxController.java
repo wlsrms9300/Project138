@@ -129,7 +129,7 @@ public class CommunityAjaxController {
 	@PostMapping(value="/getCO.co", produces="application/json;charset=UTF-8")
 	public List<CommentVO> getCO(int board_num) {
 		List<CommentVO> list = communityService.getCO(board_num);
-		
+		System.out.println(board_num);
 		return list;
 	}
 	

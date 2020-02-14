@@ -62,7 +62,7 @@
 						<option value="육아게시판">육아게시판</option>
 						<option value="이슈,토론게시판">이슈,토론게시판</option>
 					</select>
-					<input type="hidden" name="category" value="" />
+					<input type="hidden" name="category" value="자유게시판" />
 				</span>
 				<span> 
 					<input id="title" name="board_name" class="" type="text" placeholder="제목">

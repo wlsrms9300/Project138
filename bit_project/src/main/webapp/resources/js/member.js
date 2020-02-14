@@ -5,7 +5,11 @@
       
    /*닉네임 중복 체크*/
    function nnChk() {
-      var _str = $("#nickname").val();
+      if($.trim($("#nickname").val()) == '') {
+    	  alert("닉네임을 입력해주세요");
+    	  $("#nickname").focus();
+    	  return false;
+      } 
       
       $.ajax({
          url : '/bit_project/nicknameCheck.do',
@@ -35,7 +39,15 @@
    
    /*이메일 중복 체크*/
    function emChk() {
-      
+     var email = $("#email").val();
+     var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+     if(!exptext.test(email)){ //이메일 형식이 올바르지않을때
+    	 alert("이메일 형식이 올바르지 않습니다");
+    	 $("#email").focus();
+    	 return false;
+     }else { //이메일 형식이 올바르면 중복 체크
+
       var _str1 = $("#email").val();
       $.ajax({
          url : '/bit_project/emailCheck.do',
@@ -61,8 +73,11 @@
          }
 
 
-      });
+      }); //ajax
+     } //else
+     
    }
+   
    /*비밀번호  체크 */
    $(function() {
       $("#pw-alert-true").hide();
@@ -99,73 +114,45 @@
          }
       });
    
-      
-      /*중복확인 버튼, 약관동의*/
-
-        $('.signup-btn').click(function(){
-           
-           pwd1 = document.signupForm.password.value;
-           pwd2 = document.signupForm.pwcheck.value;
-        
-
-          if (pwd1.length < 8 )
-          {
-             document.signupForm.password.focus();
-             return false;
-          }else if(pwd1 != pwd2){
-             document.signupForm.pwcheck.focus();
-             return false;
-          }
-          
-   
-          
-         var nicknamecheckBtn = $(".nicknamecheck-btn").val();
-         var emailcheckBtn = $(".emailcheck-btn").val();
-         if(nicknamecheckBtn == "N") {
-            alert("닉네임 중복확인 버튼을 눌러주세요.");
-         }else if(nicknamecheckBtn == "Y") {
-            if(emailcheckBtn == "N"){
-               alert("이메일 중복확인 버튼을 눌러주세요.");
-            }else if(emailcheckBtn == "Y"){
-               if($('#signup-agree').prop("checked")== false) 
-               {
-                alert('약관에 동의해주세요.');
-               } else  {
-                  document.signupForm.submit();
-               }
-            }
-         }
-
-        });
+    
    });
    
    /* 프로필  */
    $(function () {
-        // Hide URL/FileReader API requirement message in capable browsers:
-        if (
-            window.createObjectURL ||
-            window.URL ||
-            window.webkitURL ||
-            window.FileReader
-        ) {
+
+//        if (
+//            window.createObjectURL ||
+//            window.URL ||
+//            window.webkitURL ||
+//            window.FileReaders
+//        ) {
+            $('.zz')
+            .on("dragover", dragOver)
+            .on("dragleave", dragOver)
+            .on("drop", uploadFiles);
+            
             $('.browser').hide()
             $('.preview').children().show()
-        }
+//        }
 
         function isDataURL(s) {
             return !!s.match(isDataURL.regex);
         }
         isDataURL.regex = /^\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*$/i;
-
+        
+        function dragOver(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        
+        
         function readURL(input) {
-
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 var preview = $(input).data('preview');
                 var _invalid = $(input).parent().parent().find('.invalid-file')
 
                 reader.onload = function(e) {
-
                     if( isDataURL(e.target.result) )    {
                         _invalid.hide()
                         $('#' + preview).css('background-image', 'url('+e.target.result +')');
@@ -176,74 +163,125 @@
                         _invalid.html('<div class="alert alert-false"><strong>Error!</strong> Invalid image file.</div>')
                         _invalid.show()
                     }
-                }
+                } //reader.onload
                 reader.readAsDataURL(input.files[0]);
-            }
-        }
+            } //if
+        } //function readURL
 
+        function uploadFiles(e) {
+            e.stopPropagation();
+            e.preventDefault()
+            dragOver(e); //1
+         
+           e.dataTransfer = e.originalEvent.dataTransfer; //2 
+            
+          var files = e.target.files || e.dataTransfer.files;
+          if (files.length > 1) {
+              alert('이미지 한개만 가능합니다');
+              return;
+          }
+
+            var reader = new FileReader();
+            var preview = $(this).data('preview');
+            var _invalid = $(this).parent().parent().find('.invalid-file')
+
+            reader.onload = function(e) {
+                if( isDataURL(e.target.result) )    {
+                    _invalid.hide()
+                    $('#' + preview).css('background-image', 'url('+e.target.result +')');
+                    $('#' + preview).hide();
+                    $('#' + preview).fadeIn(650);
+                } else {
+                    $('#' + preview).hide()
+                    _invalid.html('<div class="alert alert-false"><strong>Error!</strong> Invalid image file.</div>')
+                    _invalid.show()
+                }
+            } //reader.onload
+            reader.readAsDataURL(files[0]);
+        } //function uploadFiles
+        
         $('.imageUpload').bind('change', function(e) {
             e.preventDefault()
 
             readURL(this)
         });
-    })
-   
-$(function () {
-        // Hide URL/FileReader API requirement message in capable browsers:
-        if (
-            window.createObjectURL ||
-            window.URL ||
-            window.webkitURL ||
-            window.FileReader
-        ) {
-            $('.browser').hide()
-            $('.preview').children().show()
-        }
-//이미지 drag drop
-$('.preview')
-.on("dragover", dragOver)
-.on("dragleave", dragOver)
-.on("drop", uploadFiles);
- 
-function dragOver(e){
-  e.stopPropagation();
-  e.preventDefault();
-}
- 
-function uploadFiles(e){
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function dragOver(e) {
-    e.stopPropagation();
-    e.preventDefault();
-}
-
-function uploadFiles(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    dragOver(e); //1
- 
-    e.dataTransfer = e.originalEvent.dataTransfer; //2
-    var files = e.target.files || e.dataTransfer.files;
-    alert(files);
- 
-    if (files.length > 1) {
-        alert('이미지는 한개만 가능합니다');
-        return;
-    }
-    if (files[0].type.match(/image.*/)) {
-    	if(isDataURL(e.target.result)){
-    		$(e.target).css({
-                "background-image": "url(" + e.target.result(files[0]) + ")",
-                "background-size": "100% 100%"
-            });
-    	}
         
-    }else{
-      alert('이미지가 아닙니다.');
-      return;
-    }
-}
-});
+    });
+   
+   /*빈칸체크*/
+   function inputChk(){
+	  	var signupForm = document.signupForm;
+	  	
+	  	var nickname = signupForm.nickname.value;
+	  	var nicknamecheckBtn = $(".nicknamecheck-btn").val();
+	  	var email = signupForm.email.value;
+	  	var emailcheckBtn = $(".emailcheck-btn").val();
+		var name = signupForm.name.value;
+		var password = signupForm.password.value;
+		var pwcheck = signupForm.pwcheck.value;
+		var phone = signupForm.phone.value;
+		var postal_num = signupForm.postal_num.value;
+		var address = signupForm.address.value;
+		var address_detail = signupForm.address_detail.value;
+		var birth = signupForm.birth.value;
+		
+		
+		if(!nickname) {
+	    	  alert("닉네임을 입력해주세요");
+	    	  $("#nickname").focus();
+	    	  return false;		
+ 		}else if(nicknamecheckBtn == "N") {
+ 		     alert("닉네임 중복확인 버튼을 눌러주세요");
+ 		     $("#nickname").focus();
+	    	  return false;		
+ 		}else if(!email) {
+			 alert("이메일을 입력해주세요");
+			 $("#email").focus();
+			 return false;
+		}else if(emailcheckBtn == "N"){
+	        alert("이메일 중복확인 버튼을 눌러주세요.");
+	        $("#email").focus();
+			return false;
+	    }else if(!name) {
+			 alert("이름을 입력해주세요");
+			 $("#name").focus();
+			 return false;
+		}else if(!password || !pwcheck){
+			alert("비밀번호를 입력해주세요");
+			$("#password").focus();
+			return false;
+		}else if(password.length < 8 || pwcheck.length < 8){
+			alert("비밀번호를 8자리 이상 입력해주세요");
+			$("#password").focus();
+			return false;
+		}else if(password != pwcheck){
+			alert("비밀번호가 일치하지 않습니다");
+			$("#password").focus();
+			return false;
+		}else if(!phone) {
+			alert("핸드폰번호를 입력해주세요");
+			$("#phone").focus();
+			return false;
+		 }else if(!postal_num) {
+			 alert("우편번호를 입력해주세요");
+	    	  $("#postal_num").focus();
+	    	  return false;
+		 }else if(!address) {
+			 alert("주소를 입력해주세요");
+	    	  $("#address").focus();
+	    	  return false;
+	    }else if(!address_detail) {
+			 alert("상세주소를 입력해주세요");
+	    	  $("#address_detail").focus();
+	    	  return false;
+	    }else if(!birth) {
+			 alert("생년월일을 입력해주세요");
+	    	  $("#birth").focus();
+	    	  return false;
+	    }else if($('#signup-agree').prop("checked")== false)  {
+	         alert('약관에 동의해주세요.');
+	         return false;
+   		}else {
+			 signupForm.submit();
+		 }
+   	}

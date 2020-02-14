@@ -3,11 +3,11 @@ $("document").ready(function(){
 	$('ul.community_menubar li').click(function()  {
 		var category = $(this).attr('data-tab'); //클릭한 게시판 이름
 		
-		window.location.href = "community.co?category="+category;
-		$(this).css("color", "#ff7276");
+		$(this).removeClass("active"); 
+		$(this).addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
 		
-//		$('.zz').text(category); //클릭한 게시판 이름으로 바꾸기
-//		selectData(category);
+		window.location.href = "community.co?category="+category;
+		
 	});
 	
 }); //ready

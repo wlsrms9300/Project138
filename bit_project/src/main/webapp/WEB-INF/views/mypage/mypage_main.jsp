@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.spring.login.*" %>
+<%@ page import="java.util.*, com.spring.payment.*" %>
 <!-- 파일 업로드시 필요 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -8,6 +10,10 @@
 
 	String email = (String)session.getAttribute("email");
 	String img = (String)session.getAttribute("img");
+	String nickname = (String)session.getAttribute("nickname");
+	
+	LoginVO dbvo = (LoginVO)request.getAttribute("dbvo");
+	SubscriptionVO subvo = (SubscriptionVO)request.getAttribute("subvo");
 	
 	if((String)session.getAttribute("email") == null) {
 		out.println("<script>");
@@ -16,6 +22,7 @@
 	}
 	
 %>
+
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -154,12 +161,22 @@
         </div>
         <div id="detail_wrap">
         <div id="name">
-            <h2>#EA7475</h2>
+            <h2><%=nickname %></h2>
         </div>
         <div id="profile_detail">
-            <a href="instagram.com/instagram_id">instagram_id</a><br>
-            <p>회원등급 : </p><h4>일반회원</h4><br>
-            <p>포인트 : </p><h4>2000P</h4>
+        	<% if(dbvo.getInstagram_id() != null) { %>
+            <a href="https://www.instagram.com/<%=dbvo.getInstagram_id()%>/" target="_blank">@<%=dbvo.getInstagram_id() %></a><br>
+            <% } else { %>
+	        <br>
+	        <% } %>
+            <p>회원등급 : </p>
+	            <% if( dbvo.getSubscribe().equals("N") ) { %>
+	            <h4>일반회원</h4>
+	            <% }else{ %>
+	            <h4><%=subvo.getGrade() %></h4>
+	            <% } %>
+            <br>
+            <p>포인트 : </p><h4><%=dbvo.getPoint() %>P</h4>
             <ul class="sub_list3">
                 <li><img src="${pageContext.request.contextPath}/resources/img/wishlist.png" class="btn1"></li>
                 <li><img src="${pageContext.request.contextPath}/resources/img/reservation.png" class="btn2"></li>
@@ -228,7 +245,7 @@
        	 	<%@ include file="/WEB-INF/views/mypage/mypage_calendar.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_bye.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_list.jsp" %>
-            <%@ include file="/WEB-INF/views/mypage/mypage_point.jsp" %>
+           <%@ include file="/WEB-INF/views/mypage/mypage_point.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_share.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_subscribe.jsp"%>
             <%@ include file="/WEB-INF/views/mypage/mypage_update.jsp"%>

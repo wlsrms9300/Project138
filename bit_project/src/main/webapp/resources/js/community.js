@@ -48,7 +48,8 @@
    	             async: false,
    	             success : function(data){  //성공
    	            		$('#community_data').empty();
-   	                 $('.zz').text(category); //게시판이름 바꾸기
+   	            		$('#community_data_d').empty();
+   	                $('.zz').text(category); //게시판이름 바꾸기
    	                 	datacount = data.length; //게시글 총 개수
    						if(data.length != 0) { //게시글 존재
    	 					 	$.each(data, function(index, item) {
@@ -115,11 +116,10 @@
        							output += '</div>';
 	                				output += '</div>';
 	                				
-	                				$('#community_data').append(output);
+	                				$('#community_data_d').append(output);
    			                }
    			                
    						}); //each
-   	 					page(datacount);
    						}
    						
    						else { //게시글 존재하지않을때
@@ -128,7 +128,12 @@
    							outputnull += "</div>";
    							$('#community_data').append(outputnull);
    						}
-   						
+   						if(category != "육아사진게시판"){
+	            			page(datacount);
+	            		}
+	            		else{
+	            			page1(datacount);
+	            		}
    					},
    	              error : function(data){
    	            	 alert('error');
@@ -151,6 +156,7 @@
    	        	cache : false,
 	            success : function(data) {
 	            		$('#community_data').empty();
+	            		$('#community_data_d').empty();
 	            		datacount = data.length; //검색 총 데이터 개수
 	            		if(data.length != 0) { //게시글 존재
 	 					 $.each(data, function(index, item) {
@@ -220,7 +226,7 @@
    							output += '</div>';
                 				output += '</div>';
                 				
-                				$('#community_data').append(output);
+                				$('#community_data_d').append(output);
 			                	}
    						}); 
 			            
@@ -246,11 +252,16 @@
 	        }); //ajax
 		}
 
-      //session 없을시 로그인페이지로 이동(글쓰기 버튼)
+      //글쓰기 버튼 
+      //session 없으면 로그인으로 이동, 비매너회원은 접근금지
     	function write_btn(email){
     		if(email != 'null') {
-    			alert("글쓰기 시작");
-    			window.location.href = "co_writeForm.co";
+//    			if(group != "비매너회원") {
+//    				window.location.href = "co_writeForm.co";
+//    			}else {
+//    				alert("접근금지");
+//        			return false;
+//    			}
     		}else{
     			alert("로그인 후 이용해주세요");
     			window.location.href = "login.me";	
@@ -260,8 +271,9 @@
     	
 		 //날짜 format
         function date_format(format) {
-            var year1 = format.getFullYear().toString();
-            var year = year1.substr(2,4);
+        	var year = format.getFullYear();
+//            var year = format.getFullYear().toString();
+//            var year = year1.substr(2,4);
             var month = format.getMonth()+1;
             var hour = format.getHours();
             var min = format.getMinutes();
@@ -334,14 +346,15 @@
     	    nowp = 0;      // 한번만 페이징 생성
     	    endp = numPages;
     	   }
+
     	   // [처음]
-    	   $('<br /><span class="page-number" >[처음]</span>').bind('click', {newPage: page},function(event) {
+    	   $('<br /><span class="page-number" onclick="window.scrollTo(0,0);">[처음]</span>').bind('click', {newPage: page},function(event) {
     	          currentPage = 0;   
     	          $table.trigger('repaginate');  
     	          $($(".page-number")[2]).addClass('active').siblings().removeClass('active');
     	      }).appendTo($pager).addClass('clickable');
     	    // [이전]
-    	      $('<span class="page-number" >&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
     	          if(currentPage == 0) return; 
     	          currentPage = currentPage-1;
     	    $table.trigger('repaginate'); 
@@ -349,21 +362,21 @@
     	   }).appendTo($pager).addClass('clickable');
     	    // [1,2,3,4,5,6,7,8]
     	   for (var page = nowp ; page < endp; page++) {
-    	    $('<span class="page-number" style="margin-left: 8px;"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+    	    $('<span class="page-number" style="margin-left: 8px;" onclick="window.scrollTo(0,0);"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
     	     currentPage = event.data['newPage'];
     	     $table.trigger('repaginate');
     	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
     	     }).appendTo($pager).addClass('clickable');
     	   } 
     	    // [다음]
-    	      $('<span class="page-number">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
     	    if(currentPage == numPages-1) return;
     	        currentPage = currentPage+1;
     	    $table.trigger('repaginate'); 
     	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
     	   }).appendTo($pager).addClass('clickable');
     	    // [끝]
-    	   $('<span class="page-number" >&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+    	   $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
     	           currentPage = numPages-1;
     	           $table.trigger('repaginate');
     	           $($(".page-number")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
@@ -378,6 +391,7 @@
     	 });
     	}
 
+    //육아사진게시판 페이징
     function page1(datacount){ 
 
     	var reSortColors = function($table) {
@@ -392,20 +406,20 @@
     	  //length로 원래 리스트의 전체길이구함
     	  var numRows = datacount;
     	  //Math.ceil를 이용하여 반올림
-    	  var numPages = Math.ceil(numRows / numPerPage);
+    	  var numPages = Math.ceil(numRows / numPerPage); //10 / 9
     	  //리스트가 없으면 종료
     	  if (numPages==0) return;
     	  //pager라는 클래스의 div엘리먼트 작성
     	  var $pager = $('<div align="center" id="remo"><div class="pager"></div></div>');
     	  
-    	  var nowp = currentPage;
-    	  var endp = nowp+9;
+    	  var nowp = currentPage; //0
+    	  var endp = nowp+5; // 9
     	  
     	  //페이지를 클릭하면 다시 셋팅
     	  $table.bind('repaginate', function() {
     	  //기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
     	  
-    	   $table.find('div.community_container_mi').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    	   $table.find('div#community_container_mi').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
     	   $("#remo").html("");
     	   
     	   if (numPages > 1) {     // 한페이지 이상이면
@@ -413,8 +427,8 @@
     	     nowp = 0;     // 1부터 
     	     endp = pagesu;    // 10까지
     	    }else{
-    	     nowp = currentPage -5;  // 6넘어가면 2부터 찍고
-    	     endp = nowp+pagesu;   // 10까지
+    	     nowp = currentPage -5;  // 10넘어가면 2부터 찍고
+    	     endp = nowp+pagesu;   // 20까지
     	     pi = 1;
     	    }
     	    
@@ -430,13 +444,13 @@
     	    endp = numPages;
     	   }
     	   // [처음]
-    	   $('<br /><span class="page-number">[처음]</span>').bind('click', {newPage: page},function(event) {
+    	   $('<br /><span class="page-number" onclick="window.scrollTo(0,0);">[처음]</span>').bind('click', {newPage: page},function(event) {
     	          currentPage = 0;   
     	          $table.trigger('repaginate');  
     	          $($(".page-number")[2]).addClass('active').siblings().removeClass('active');
     	      }).appendTo($pager).addClass('clickable');
     	    // [이전]
-    	      $('<span class="page-number">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
     	          if(currentPage == 0) return; 
     	          currentPage = currentPage-1;
     	    $table.trigger('repaginate'); 
@@ -444,21 +458,21 @@
     	   }).appendTo($pager).addClass('clickable');
     	    // [1,2,3,4,5,6,7,8]
     	   for (var page = nowp ; page < endp; page++) {
-    	    $('<span class="page-number" style="margin-left: 8px;"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+    	    $('<span class="page-number" style="margin-left: 8px;" onclick="window.scrollTo(0,0);"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
     	     currentPage = event.data['newPage'];
     	     $table.trigger('repaginate');
     	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
     	     }).appendTo($pager).addClass('clickable');
     	   } 
     	    // [다음]
-    	      $('<span class="page-number" >&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
     	    if(currentPage == numPages-1) return;
     	        currentPage = currentPage+1;
     	    $table.trigger('repaginate'); 
     	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
     	   }).appendTo($pager).addClass('clickable');
     	    // [끝]
-    	   $('<span class="page-number" >&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+    	   $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
     	           currentPage = numPages-1;
     	           $table.trigger('repaginate');
     	           $($(".page-number")[endp-nowp+1]).addClass('active').siblings().removeClass('active');

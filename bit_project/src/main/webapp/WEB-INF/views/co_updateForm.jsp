@@ -80,7 +80,7 @@
 		if(!content) {
 		 	alert("내용을 입력해주세요");
 		}else {
-		 	if(option == "육아사진" && $(content).find('img').attr('src') == null){
+		 	if(option == "육아사진게시판" && $(content).find('img').attr('src') == null){
 		  		alert("사진을 1개 이상 올려주세요");
 		 }else {
 			 edit_Form.submit();
