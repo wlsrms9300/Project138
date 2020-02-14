@@ -5,11 +5,13 @@
 <%@ page import="java.util.*, com.spring.community.*" %>
 <%@ page import="java.util.*, com.spring.login.*" %>
 <%
-	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 	LoginVO vo = (LoginVO)request.getAttribute("vo");
 	String category = (String)request.getAttribute("category");
 
 	String email_co = (String)session.getAttribute("email");
+	LoginVO userDetail_co = (LoginVO)session.getAttribute("userDetail");
+	
 %>	
 
 <html>
@@ -82,7 +84,11 @@
 	 <div class="community_search_result"><p class="gg"></p></div>
 	 
 	<!-- 게시글 리스트 -->
-    <div id="community_data" class="paginated"></div>
+	<% if(category.equals("육아사진게시판")) { %>
+    	<div id="community_data_d" class="paginated"></div>
+    <% } else { %>
+    	<div id="community_data" class="paginated"></div>
+    <% } %>
     
 </div> <!-- 게시판 내용 끝 -->
 

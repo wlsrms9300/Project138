@@ -33,10 +33,14 @@
                   <div id="profilefield">
                      <div class="image-upload"> <!-- 이미지 올릴곳 -->
                        <div class="image-edit">
-                           <input type="file" name="img2" id="imageUpload" class="imageUpload" data-preview="imagePreview" accept=".png, .jpg, .jpeg" />
-                           <label for="imageUpload"></label>
+                           <input type="file" name="img2" id="imageUpload" class="imageUpload" data-preview="imagePreview" accept=".png, .jpg, .jpeg" style="width:100px; height: 300px; border:1px solid;"multiple />
+                           <!-- <label for="imageUpload" style="width:100px; height: 300px; border:1px solid;"></label>  -->
+                           <label for="imageUpload"></label> 
+                             <div class="zz" name="img2" data-preview="imagePreview" style="width:250px; height:200px;" ></div>
+<!--                            	<input type="file" name="img2" id="zz" class="zz" data-preview="imagePreview" accept=".png, .jpg, .jpeg" disabled />
+                           	<label for="zz" style="width:300px; height: 300px; border:1px solid;"></label>  -->
                        </div>
-                       <div class="preview">
+                       <div class="preview" >
                            <div id="imagePreview" style="background-image: url('${pageContext.request.contextPath}/resources/img/default_profile.png');"></div>
                        </div>
                         </div>
@@ -73,10 +77,10 @@
                      <div class="alert alert-false" id="pw-alert-false" style="font-size:10px;float:left;color:red;">비밀번호가 일치하지 않습니다.</div>
                   </div>
                   <div class="formfield">
-                     <input type="text" name="phone" placeholder="핸드폰번호" required>
+                     <input type="text" name="phone" placeholder="핸드폰번호" >
                   </div>
                   <div class="formfield">
-                     <input type="text" name="postal_num" id="pos_num" placeholder="우편번호" required>
+                     <input type="text" name="postal_num" id="pos_num" placeholder="우편번호" >
                   </div>
                   <div class="formfield">
                      <input type="text" name="address" id="address" placeholder="주소">
@@ -85,13 +89,13 @@
                      <input type="text" name="address_detail" id="address_detail" placeholder="상세주소">
                   </div>
                   <div class="formfield">
-                     <input type="text" name="birth" placeholder="생년월일(6자리)" required>
+                     <input type="text" name="birth" placeholder="생년월일(6자리)" maxlength="6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                   </div>
 
                   <h4 id="additional-text">추가정보 입력</h4>
                   <div class="additional-info">
                      <input type="text" name="children_birth"
-                        placeholder="자녀 생년월일(6자리)">
+                        placeholder="자녀 생년월일(6자리)" maxlength="6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                   </div>
                   <div class="additional-info">
                      <input type="text" name="instagram_id" placeholder="인스타그램 아이디">
@@ -111,7 +115,7 @@
                   </div>
 
                   <div>
-                     <input type="button" class="signup-btn" value="가입하기">
+                     <input type="button" class="signup-btn" onclick="inputChk()"value="가입하기">
                   </div>
                </form>
             </div>

@@ -17,7 +17,6 @@ String nickname1 = (String)request.getAttribute("nickname");
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/modernizr-custom.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_menu.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/community_paging.js"></script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -52,10 +51,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 	 <div class="community_search_result"><p class="nickname_zz" style="font-size: 12px;"><%=nickname1 %></p><p>님 검색 결과</p></div>
 	 
 	<!-- 게시글 리스트 -->
-    <div id="community_data"></div>
-    
-	<!-- 페이징 -->
-    <div class="paginate" style="text-align:center;"></div>
+    <div id="community_data" class="paginated"></div>
     
 </div> 
 
@@ -63,7 +59,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 	 <%@ include file="/WEB-INF/views/footer.jsp" %> 
 </footer>
 
-
+ 
 <script>
 	$("document").ready(function(){
 		
@@ -91,19 +87,25 @@ String nickname1 = (String)request.getAttribute("nickname");
             		datacount = data.length;
             		if(data.length != 0) { //게시글 존재
  					 $.each(data, function(index, item) {
- 						alert("총 갯수 : " + item.cmsearch_count);
  						 
  						var output = ' ';
 						var reg_date = new Date(item.regist); 
 		                var date = date_format(reg_date);  //날짜 format
 		                
-							output += '<div id="community_container_mt">';
+		                		output += '<div id="community_container_mt" class="community_container_mt">';
 							output += '<div class="underline"></div>';
 							output += '<div class="community_mt_title">';
 							output += '<a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">';
-							output += '<div class="community_mt_img">';
-							output += '<img src="" class="com_img">';
-							output += '</div>';
+							
+							if(item.img != "null") {
+       							output += '<div class="community_mt_img">';
+       							output += '<img src="' + item.img + '" class="com_img1">';
+       							output += '</div>';
+       							}else {
+   								output += '<div class="community_mt_img">';
+       							output += '</div>';
+       							}
+							
 							output += '<h2 class="community_name">' + item.board_name + '</h2>';
 							output += '<p class="community_mt_mt">' + removeTag(item.content) + '</p>';
 							output += '<footer class="community_mt_footer">';
@@ -160,7 +162,104 @@ String nickname1 = (String)request.getAttribute("nickname");
             }
             return year + "." + month + "." + date + " " + hour +":" + min;
          }
-        
+      
+        function page(datacount){ 
+
+        	var reSortColors = function($table) {
+//        		  $('tbody tr:odd td', $table).removeClass('even').removeClass('listtd').addClass('odd');
+//        		  $('tbody tr:even td', $table).removeClass('odd').removeClass('listtd').addClass('even');
+        	 };
+        			
+        	 $('div.paginated').each(function() {
+        	  var pagesu = 10;  //페이지 번호 갯수
+        	  var currentPage = 0;
+        	  var numPerPage = 5;  //목록의 수
+        	  var $table = $(this);    
+        	  
+        	  //length로 원래 리스트의 전체길이구함
+        	  var numRows = datacount;
+        	  //Math.ceil를 이용하여 반올림
+        	  var numPages = Math.ceil(numRows / numPerPage);
+        	  //리스트가 없으면 종료
+        	  if (numPages==0) return;
+        	  //pager라는 클래스의 div엘리먼트 작성
+        	  var $pager = $('<div align="center" id="remo"><div class="pager"></div></div>');
+        	  
+        	  var nowp = currentPage;
+        	  var endp = nowp+5;
+        	  
+        	  //페이지를 클릭하면 다시 셋팅
+        	  $table.bind('repaginate', function() {
+        	  //기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+        	  
+        	   $table.find('div.community_container_mt').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+        	   $("#remo").html("");
+        	   
+        	   if (numPages > 1) {     // 한페이지 이상이면
+        	    if (currentPage < 5 && numPages-currentPage >= 5) {   // 현재 5p 이하이면
+        	     nowp = 0;     // 1부터 
+        	     endp = pagesu;    // 10까지
+        	    }else{
+        	     nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+        	     endp = nowp+pagesu;   // 10까지
+        	     pi = 1;
+        	    }
+        	    
+        	    if (numPages < endp) {   // 10페이지가 안되면
+        	     endp = numPages;   // 마지막페이지를 갯수 만큼
+        	     nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+        	    }
+        	    if (nowp < 1) {     // 시작이 음수 or 0 이면
+        	     nowp = 0;     // 1페이지부터 시작
+        	    }
+        	   }else{       // 한페이지 이하이면
+        	    nowp = 0;      // 한번만 페이징 생성
+        	    endp = numPages;
+        	   }
+
+        	   // [처음]
+        	   $('<br /><span class="page-number" onclick="window.scrollTo(0,0);">[처음]</span>').bind('click', {newPage: page},function(event) {
+        	          currentPage = 0;   
+        	          $table.trigger('repaginate');  
+        	          $($(".page-number")[2]).addClass('active').siblings().removeClass('active');
+        	      }).appendTo($pager).addClass('clickable');
+        	    // [이전]
+        	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+        	          if(currentPage == 0) return; 
+        	          currentPage = currentPage-1;
+        	    $table.trigger('repaginate'); 
+        	    $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+        	   }).appendTo($pager).addClass('clickable');
+        	    // [1,2,3,4,5,6,7,8]
+        	   for (var page = nowp ; page < endp; page++) {
+        	    $('<span class="page-number" style="margin-left: 8px;" onclick="window.scrollTo(0,0);"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+        	     currentPage = event.data['newPage'];
+        	     $table.trigger('repaginate');
+        	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+        	     }).appendTo($pager).addClass('clickable');
+        	   } 
+        	    // [다음]
+        	      $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+        	    if(currentPage == numPages-1) return;
+        	        currentPage = currentPage+1;
+        	    $table.trigger('repaginate'); 
+        	     $($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+        	   }).appendTo($pager).addClass('clickable');
+        	    // [끝]
+        	   $('<span class="page-number" onclick="window.scrollTo(0,0);">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+        	           currentPage = numPages-1;
+        	           $table.trigger('repaginate');
+        	           $($(".page-number")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+        	   }).appendTo($pager).addClass('clickable');
+        	     
+        	     $($(".page-number")[2]).addClass('active');
+        	reSortColors($table);
+        	  });
+        	   $pager.insertAfter($table).find('span.page-number:first').next().next().addClass('active');   
+        	   $pager.appendTo($table);
+        	   $table.trigger('repaginate');
+        	 });
+        	}
 </script>
 
 </body>

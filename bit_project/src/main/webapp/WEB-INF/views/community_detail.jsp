@@ -5,7 +5,7 @@
 <%@ page import="java.util.*, com.spring.login.*" %>
 <%@ page session="true" %>
 <%
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 	CommunityVO cmvo = (CommunityVO)request.getAttribute("cmvo");
 	int comment_count = (int)request.getAttribute("cocount");
 	String img_e = (String)request.getAttribute("img");
@@ -14,6 +14,7 @@
 	String email_co = (String)session.getAttribute("email");
 	String nickname_co = (String)session.getAttribute("nickname");
 	String img_co = (String)session.getAttribute("img");
+	LoginVO userDetail_co = (LoginVO)session.getAttribute("userDetail");
 	
 %>
 <html>
@@ -88,16 +89,16 @@
                     <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3" data-url="http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}"  data-color="default" data-size="small" data-count="false" style="display: none;"></div>
                 </div>
                 
-                <%
-                	if (email_e.equals(email_co)) {
-                %>
+                <% if (email_e.equals(email_co)) { %>
                 <div class="community_mt_footer_btn">
                 		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
                 		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
                 </div>
-                <%
-                	}
-                %>
+                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
+                <div class="community_mt_footer_btn">
+                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
+                </div>
+                <% } %>
                 
             </div>
         </footer>
@@ -132,7 +133,11 @@
             <div class="community_comments_form_input">
             <input type="hidden" name="board_num" id="board_num" value="<%=cmvo.getBoard_num() %>">
                 <div class="community_comments_form_content">
+                	<%if(userDetail_co.getUsergroup().equals("비매너회원")) {%>
+                		<input type="text" class="community_comments_form_comments" name="content" placeholder="의견을 남겨 보세요." readonly>
+                	<% } else { %>
                     <input type="text" class="community_comments_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">
+                <% } %>
                 </div>
                 <div class="community_comments_form_actions">
                     <button class="community_comments_form_enter" id="community_comments_form_enter" type="button" >등록</button>
@@ -165,7 +170,6 @@ function delchk(board_num) {
 }
 
 	$("document").ready(function(){
-		
 		coList();
 		
 		
@@ -173,7 +177,6 @@ function delchk(board_num) {
 		document.getElementById("community_comments_form_enter").addEventListener("click", cowrite);
 		
 		function cowrite() {
-			alert("댓글버튼");
 			if($.trim($('.community_comments_form_comments').val()) == "") {
 				alert("댓글을 입력해주세요");
 				return false;
@@ -203,17 +206,23 @@ function delchk(board_num) {
 		//대댓 폼
 		$('.answer_btn').click(function () {
 			var email_co = '<%=(String)session.getAttribute("email")%>';
-			
+			var group = '<%=userDetail_co.getUsergroup()%>';
+
 			if(email_co == 'null') {
 				alert("로그인 후 이용해주세요");
 				window.location.href = "login.me";	
 				return false;
 			}else {
-        		if ($(this).parents("li").next().css("display") == 'none') {
-                		$(this).parents("li").next().show();
-                } else {
-                    $(this).parents("li").next().hide();
-                }
+				if(group == "비매너회원") {
+					alert("접근금지");
+					return false;
+				}else {
+	        		if ($(this).parents("li").next().css("display") == 'none') {
+	                		$(this).parents("li").next().show();
+	                } else {
+	                    $(this).parents("li").next().hide();
+	                }
+				}
 			}
 		});
 		
@@ -225,16 +234,14 @@ function delchk(board_num) {
      	var num = $comment_num;
      	
    		$('input[id="' + num + '"]').removeAttr("readonly");
-   		$('input[id="' + num + '"]').css("background", "pink");
+   		$('input[id="' + num + '"]').focus();
    		$('div[id="' + num + '"]').html("<button type='button' onclick='comod_btn(" + num + ")'>수정하기</button></div>");
 	} 
 	
     //댓글 수정
     function comod_btn($num) {
     	var num1 = $num;
-    	alert(num1);
     	var co = $('input[id="' + num1 + '"]').val();
-    	alert(co);
     	
        jQuery.ajax({
           url : '/bit_project/updateCO.co',
@@ -301,6 +308,7 @@ function delchk(board_num) {
 			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 			success: function(data) {
 				if(data.length!=0){ //댓글 존재할시
+					alert("댓글있니");
 					 $.each(data, function(index, item) {
 						var output = ' ';
 						var reg_date = new Date(item.regist); 
@@ -548,7 +556,7 @@ function delchk(board_num) {
      	var num = $answer_num;
      	
    		$('input[id="' + num + '"]').removeAttr("readonly");
-   		$('input[id="' + num + '"]').css("background", "pink");
+   		$('input[id="' + num + '"]').focus();
    		$('div[id="' + num + '"]').html("<button type='button' onclick='anmod_btn(" + num + ")'>수정하기</button></div>");
 	} 
     
@@ -584,7 +592,6 @@ function delchk(board_num) {
 	//대댓 삭제
 	function andel_btn($answer_num) {
 		var num = $answer_num;
-		alert("삭제할 answer_num " + num);
 		msg = "삭제하시겠습니까?";
         if (confirm(msg)!=0) { //Y
         	$.ajax({
@@ -613,26 +620,35 @@ function delchk(board_num) {
 	}
 	
 	
-	//session 없을시 로그인페이지로 이동(댓글 input)
+	//댓글 input칸
+	 //session 없으면 로그인으로 이동, 비매너회원은 접근금지
 	$(".community_comments_form_content").click(function() {
 		var email_co = '<%=(String)session.getAttribute("email")%>';
+		var group = '<%= userDetail_co.getUsergroup()%>';
 		
 		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
-		   }
+		}else if(group == '비매너회원') {
+			alert("접근금지");
+			return false;
+		}
 	});
 	  
 	//session 없을시 로그인페이지로 이동(대댓 input)
 	$(".community_answer_form_comments").click(function() {
 		var email_co = '<%=(String)session.getAttribute("email")%>';
+		var group = '<%= userDetail_co.getUsergroup()%>';
 		
 		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
-		   }
+		   }else if(group == '비매너회원') {
+				alert("접근금지");
+				return false;
+			}
 	});
 	
 	//input 엔터 막기
