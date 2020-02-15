@@ -260,5 +260,9 @@ public class AdminController {
 	public String returnApp(Model model, HttpSession session) {
 		return "admin/return";
 	}
+	@RequestMapping(value = "/returnpick.se", method = RequestMethod.GET)
+	public String returnPick(Model model, HttpSession session) {
+		return "admin/returnpick";
+	}
 
 }	

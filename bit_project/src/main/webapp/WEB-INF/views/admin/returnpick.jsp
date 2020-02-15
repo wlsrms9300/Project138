@@ -222,13 +222,13 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Share</li>
+				<li class="active">배송</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Share</h1>
+				<h1 class="page-header">배송</h1>
 			</div>
 		</div><!--/.row-->
 
@@ -236,7 +236,7 @@
             <div class="col-lg-12">
 				<div class="board_list_wrap">
 					<table id="foo-table" class="foo-ex">
-						<h2>반납확정&&배송관리<button id="blanket" style="float:right;">일괄처리</button></h2>
+						<h2>배송관리</h2>
 						<thead>
 							<tr>
 								<th>STATE_NUM</th>
@@ -245,6 +245,8 @@
 								<th>STATE</th>
 								<th>DELIVERY_DATE</th>
 								<th>RETURN_APPLICATION</th>
+								<th>상세보기</th>
+								<th>수락/거절</th>
 							</tr>
 						</thead>
 						<tbody id="output">
@@ -276,6 +278,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/returnApp.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/returnpick.js"></script>
 </body>
 </html>

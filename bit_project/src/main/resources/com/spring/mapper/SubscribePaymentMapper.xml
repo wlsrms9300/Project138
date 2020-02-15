@@ -38,8 +38,8 @@
 	</select>
 	
 	
-	<select id="getEmail" resultType="String" >
-	select email from subscribe where subscribe_num IN (	
+	<select id="getEmail" resultType="com.spring.payment.SubscriptionVO" >
+	select email, subscribe_num from subscribe where subscribe_num IN (	
 		select subscribe_num from product_state where state='반납확정' AND 
 		SUBSCRIBE_NUM NOT IN (
 	        select SUBSCRIBE_NUM from product_state where state='배송전'
@@ -52,17 +52,28 @@
 	)
 	</select>
 	
-	<update id="returnBatch">
+	<!-- 반납확정을 배송전으로 바꾸는 쿼리. 아직 미사용 -->
+	<!-- <update id="returnBatch">
 	update (
 		select * from product_state where state='반납확정' AND SUBSCRIBE_NUM NOT IN (
         	select SUBSCRIBE_NUM from product_state where state='배송전'
     	)
 	)
 	set state='배송전'
-	</update>
+	</update> -->
 	
 	<insert id="insertWish" parameterType="map">
-	insert into product_state values(10, 1, #{randomPnum}, '배송전', '2020/02/20', '')
+	<selectKey keyProperty="num1" order="BEFORE" resultType="int">
+	select subscribe_ps_sequence.NEXTVAL from dual
+	</selectKey>
+	insert into product_state values(#{num1}, #{subscribe_num}, #{randomPnum}, '배송전', #{date}, '')
 	</insert>
 
+	<select id="pickupList" resultType="com.spring.mypage.PStateVO">
+	select * from product_state where state='반납확정' order by return_application
+	</select>
+	
+	<update id="pickAccept" parameterType="map">
+	update product_state set state='반납완료' where state_num=#{state_num}
+	</update>
 </mapper>

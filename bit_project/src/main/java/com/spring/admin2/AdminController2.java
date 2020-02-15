@@ -1,7 +1,10 @@
 package com.spring.admin2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ import com.spring.member.MemberService;
 import com.spring.member.MemberSubscribeVO;
 import com.spring.member.MemberVO;
 import com.spring.mypage.PStateVO;
+import com.spring.payment.SubscriptionVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -179,28 +183,64 @@ public class AdminController2 {
 
 	@RequestMapping(value = "/admin_batch.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String admin_batch() {
+	public void admin_batch() {
 		int randomPnum = 0;
 		ArrayList<Integer> wishList = null;
-		// 1. 위시리스트 넣기
-		// LIST로 email만 받아온다
-		List<String> emailList = subscribePaymentService.getEmail();
-		ArrayList<String> list = new ArrayList<String>();
-		list = (ArrayList) emailList;
-		// 해당 이메일로 위시리스트 조회해서 랜덤으로 뽑은 후 product_state 테이블에 insert한다.
-		for (String email : list) {
-			System.out.println("email is " + email);
-			//위시리스트 조회.
-			wishList = (ArrayList)subscribePaymentService.getWish(email);
-			//랜덤뽑기
-			Collections.shuffle(wishList);
-			randomPnum = wishList.get(0);
-			//위시리스트 DB 넣기
-			subscribePaymentService.insertWish(randomPnum);
-			System.out.println("foreach 도는중 쿠쿠");
+		ArrayList<SubscriptionVO> list = new ArrayList<SubscriptionVO>();
+		try {
+			List<SubscriptionVO> emailList = subscribePaymentService.getEmail();
+			list = (ArrayList) emailList;
+			for (SubscriptionVO vo : list) {
+				System.out.println("email is " + vo.getEmail());
+				wishList = (ArrayList)subscribePaymentService.getWish(vo.getEmail());
+				Collections.shuffle(wishList);
+				randomPnum = wishList.get(0);
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+				Calendar cal = Calendar.getInstance();
+				String today = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
+						+ cal.get(Calendar.DAY_OF_MONTH);
+				Date date = formatter.parse(today);
+				int dayNum = cal.get(Calendar.DAY_OF_WEEK);
+				System.out.println("today = "+date);
+				System.out.println("dayNum = "+dayNum);
+				switch (dayNum) {
+				case 1:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 4));
+					System.out.println(date);
+					break;
+				case 2:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 3));
+					System.out.println(date);
+					break;
+				case 3:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 2)); 
+					System.out.println(date);
+					break;
+				case 4:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 1)); 
+					System.out.println(date);
+					break;
+				case 5:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 7)); 
+					System.out.println(date);
+					break;
+				case 6:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 6)); 
+					System.out.println(date);
+					break;
+				case 7:
+					date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 5));
+					System.out.println(date);
+					break;
+				}
+				subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
+				System.out.println("foreach 도는중 쿠쿠");
+			}
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
 		}
-		String str = "";
-		return str;
+	
 	}
 	
 	@RequestMapping(value = "/admin_return.tz", produces = "application/json;charset=UTF-8")
@@ -216,5 +256,34 @@ public class AdminController2 {
 		}
 
 		return str;
+	}
+	
+	@RequestMapping(value = "/admin_pickuplist.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String admin_pickuplist() {
+		List<PStateVO> pickupList = subscribePaymentService.pickupList();
+		String str = "";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			str = mapper.writeValueAsString(pickupList); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+		} catch (Exception e) {
+			System.out.println("first() mapper : " + e.getMessage());
+		}
+
+		return str;
+	}
+	
+	@RequestMapping(value = "/pickAccept.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> pickAccept(int state_num) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int chk_num = 0;
+		try {
+		subscribePaymentService.pickAccept(state_num);
+			retVal.put("res", "OK");
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+		}
+		return retVal;
 	}
 }

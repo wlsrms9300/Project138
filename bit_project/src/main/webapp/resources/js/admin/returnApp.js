@@ -1,5 +1,8 @@
-	function share() {
-		
+$(document).ready(function() {
+	product_return();
+});
+
+function product_return() {
 		$.ajax({
 			url : '/bit_project/admin_return.tz',
 			type : 'post',
@@ -31,10 +34,7 @@
 				alert("ajax통신 실패 !!!");
 			}
 		});
-	
-	}
-	share();
-	
+}
 	function date_to_str(format)
     {
         var year = format.getFullYear();
@@ -56,14 +56,14 @@ $(document).on("click","#blanket",function(){
 	$.ajax({
 		url : '/bit_project/admin_batch.tz',
 		type : 'post',
+		async : false,
 		dataType : "json",
 		contentType : 'application/x-www-form-urlencoded; charset=utf-8',
-		success:function(data){
-			alert('성공');
-
-		},
-		error:function(){
-			alert("ajax통신 실패 !!!");
-		}
+		
 	});
+	product_return();
+	history.go(0);
 })
+
+
+

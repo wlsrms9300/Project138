@@ -1,11 +1,13 @@
 package com.spring.mapper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.mypage.PStateVO;
+import com.spring.payment.SubscriptionVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -16,7 +18,9 @@ public interface SubscribePaymentMapper {
 	List<ShareWatingListVO> getShareAcceptList();
 	List<SettlementVO> getSettleList();
 	List<PStateVO> getReturnList();
-	List<String> getEmail();
+	List<SubscriptionVO> getEmail();
 	List<Integer> getWish(@Param("email") String email);
-	void insertWish(@Param("randomPnum") int randomPnum);
+	void insertWish(@Param("randomPnum") int randomPnum, @Param("subscribe_num") int subscribe_num, @Param("date") Date date);
+	List<PStateVO> pickupList();
+	void pickAccept(@Param("state_num") int state_num);
 }

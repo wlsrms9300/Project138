@@ -1,6 +1,7 @@
 package com.spring.admin2;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.SubscribePaymentMapper;
 import com.spring.mypage.PStateVO;
+import com.spring.payment.SubscriptionVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -57,8 +59,8 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 	}
 
 	@Override
-	public List<String> getEmail() {
-		List<String> emailList = null;
+	public List<SubscriptionVO> getEmail() {
+		List<SubscriptionVO> emailList = null;
 		try {
 			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
 			emailList = subscribePaymentMapper.getEmail();
@@ -85,15 +87,32 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 	}
 
 	@Override
-	public void insertWish(int randomPnum) {
+	public void insertWish(int randomPnum, int subscribe_num, Date date) {
 		try {
 			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
-			subscribePaymentMapper.insertWish(randomPnum);
+			subscribePaymentMapper.insertWish(randomPnum, subscribe_num, date);
 		} catch (Exception e) {
 			e.getMessage();
 			e.printStackTrace();
 		}
 		
+	}
+	@Override
+	public List<PStateVO> pickupList() {
+		List<PStateVO> pickupList = null;
+		SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+		pickupList = subscribePaymentMapper.pickupList();
+		return pickupList;
+	}
+	@Override
+	public void pickAccept(int state_num) {
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			subscribePaymentMapper.pickAccept(state_num);
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
 	}
 
 	
