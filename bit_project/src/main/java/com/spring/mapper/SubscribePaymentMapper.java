@@ -23,4 +23,6 @@ public interface SubscribePaymentMapper {
 	void insertWish(@Param("randomPnum") int randomPnum, @Param("subscribe_num") int subscribe_num, @Param("date") Date date);
 	List<PStateVO> pickupList();
 	void pickAccept(@Param("state_num") int state_num);
+	void deleteWish(@Param("randomPnum") int randomPnum, @Param("email") String email);
+	
 }

@@ -115,6 +115,18 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		}
 	}
 
+	@Override
+	public void deleteWish(int randomPnum, String email) {
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			subscribePaymentMapper.deleteWish(randomPnum, email);
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 
 	

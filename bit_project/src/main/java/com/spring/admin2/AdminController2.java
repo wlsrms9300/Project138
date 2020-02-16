@@ -234,6 +234,7 @@ public class AdminController2 {
 					break;
 				}
 				subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
+				subscribePaymentService.deleteWish(randomPnum, vo.getEmail());
 				System.out.println("foreach 도는중 쿠쿠");
 			}
 		} catch (Exception e) {

@@ -76,4 +76,8 @@
 	<update id="pickAccept" parameterType="map">
 	update product_state set state='반납완료' where state_num=#{state_num}
 	</update>
+	
+	<delete id="deleteWish" parameterType="map">
+	delete from wishlist where email=#{email} AND product_num=#{randomPnum}
+	</delete>
 </mapper>

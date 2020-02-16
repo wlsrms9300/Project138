@@ -20,6 +20,8 @@ public interface SubscribePaymentService {
 	public List<Integer> getWish(String email);
 	public void insertWish(int randomPnum, int subscribe_num, Date date);
 	public void pickAccept(int state_num);
+	public void deleteWish(int randomPnum, String email);
+	
 	
 	
 }
