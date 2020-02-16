@@ -114,7 +114,7 @@ public class ProductController {
 
 	// 개인쉐어 등록버튼 눌렀을 떄
 	@RequestMapping("/shareAddProcess.pr")
-	public void shareAddProcess(Model model, HttpServletRequest request) throws Exception {
+	public String shareAddProcess(Model model, HttpServletRequest request) throws Exception {
 		int res = 0;
 		// Ch1. product table 등록
 		ProductVO pdVO = new ProductVO();
@@ -162,6 +162,7 @@ public class ProductController {
 		psVO.setCurrent_amount(0);
 		
 		service.shareAdd(psVO);
+		return "admin/shareOK";
 	}
 
 	// 상품등록버튼 눌렀을떄 전송했을 때 처리 부분
