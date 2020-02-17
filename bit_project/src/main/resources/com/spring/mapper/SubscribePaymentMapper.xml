@@ -80,4 +80,9 @@
 	<delete id="deleteWish" parameterType="map">
 	delete from wishlist where email=#{email} AND product_num=#{randomPnum}
 	</delete>
+	
+	<update id="updateProductAmount" parameterType="map">
+	update product set rental_amount=rental_amount+1, current_amount=current_amount-1 
+	where product_num=#{randomPnum}
+	</update>
 </mapper>

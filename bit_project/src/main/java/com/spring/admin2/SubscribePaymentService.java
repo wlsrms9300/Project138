@@ -21,7 +21,7 @@ public interface SubscribePaymentService {
 	public void insertWish(int randomPnum, int subscribe_num, Date date);
 	public void pickAccept(int state_num);
 	public void deleteWish(int randomPnum, String email);
-	
+	public void updateProductAmount(int randomPnum) throws Exception;
 	
 	
 }

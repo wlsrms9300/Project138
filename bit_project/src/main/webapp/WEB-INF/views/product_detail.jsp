@@ -699,6 +699,9 @@
                 frm.submit();
                 frm.reset();
             }
+            var scrollTop = $(window).scrollTop();
+            var captionTop = $('.reviewcssf').offset().top;
+            $('html, body').animate({ scrollTop: captionTop }, 0);
 
         });
         $('.qna_writebtn a').last().click(function () {
@@ -785,7 +788,9 @@
                 frm.submit();
                 frm.reset();
             }
-
+            var scrollTop = $(window).scrollTop();
+            var captionTop = $('.reviewcssf').offset().top;
+            $('html, body').animate({ scrollTop: captionTop }, 0);
         });
         $('.review_writebtn a').last().click(function () {
             $("body").removeClass('not_scroll');
@@ -798,9 +803,7 @@
             var frm = document.getElementById("ReviewForm");
             frm.reset();
         });
-        var scrollTop = $(window).scrollTop();
-        var captionTop = $('.reviewcssf').offset().top;
-        $('html, body').animate({ scrollTop: captionTop }, 0);
+       
     </script>
     <script>
         var bcheck = <%=bookmark%>;

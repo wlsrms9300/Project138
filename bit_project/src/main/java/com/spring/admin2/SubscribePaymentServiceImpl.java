@@ -126,7 +126,15 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		}
 		
 	}
-
+	@Override
+	public void updateProductAmount(int randomPnum) throws Exception {
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			subscribePaymentMapper.updateProductAmount(randomPnum);
+		} catch (Exception e) {
+			throw new Exception("수량 변경 실패", e);
+		}
+	}
 	
 
 	

@@ -24,5 +24,5 @@ public interface SubscribePaymentMapper {
 	List<PStateVO> pickupList();
 	void pickAccept(@Param("state_num") int state_num);
 	void deleteWish(@Param("randomPnum") int randomPnum, @Param("email") String email);
-	
+	void updateProductAmount(@Param("randomPnum") int randomPnum) throws Exception;
 }
