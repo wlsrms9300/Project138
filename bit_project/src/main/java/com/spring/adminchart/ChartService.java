@@ -19,5 +19,5 @@ public interface ChartService {
 	public VariationVO decreaseUsers(String strDate) throws Exception;
 	
 	public List<DNGraphVO> getDoughnutGraph() throws Exception; // 구독 등급별 파이
-	public List<CountingPVO> countPosts() throws Exception;
+	public CountingPVO countPosts(String strDate) throws Exception;
 }

@@ -28,5 +28,5 @@ public interface ChartMapper {
 	
 	List<RankingVO> getWishListRanking(); //위시리스트 Top5
 	List<DNGraphVO> getDoughnutGraph(); // 구독 등급별 파이 
-	List<CountingPVO> countPosts(@Param("strAWAgo") String strAWAgo, @Param("strToday") String strToday);
+	CountingPVO countPosts(@Param("strDate") String strDate);
 }

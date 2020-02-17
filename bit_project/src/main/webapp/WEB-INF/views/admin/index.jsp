@@ -334,10 +334,10 @@
 						}
 					}],
 					yAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-						}
+						 ticks: {
+			                  beginAtZero: true,
+			                  fontSize : 14,
+			               }
 					}]
 				}
 			}
