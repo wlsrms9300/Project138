@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 this.drawHeader(selectedDay.getDate());
                 }
             }
-  
         }
     };
     

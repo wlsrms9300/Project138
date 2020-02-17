@@ -425,10 +425,25 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("리뷰 평점 반영 실패.", e);
 		}
 	}
+	@Override
+	public int reviewoverflow(String email, int product_num) throws Exception {
+		try {
+			int res = 0;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			res = pdMapper.reviewoverflow(email, product_num);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("리뷰 평점 반영 실패.", e);
+		}
+	}
+
+	
+	
 	/********************** 상품리뷰 종료 **********************/
 	
 
 
+	
 	/********************** 상품문의 시작 **********************/
 	@Override
 	public void qnaWrite(QnaVO qnaVO) throws Exception {
@@ -478,8 +493,22 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("문의 수정 실패.", e);
 		}
 	}
+	@Override
+	public String qnaemailchk(String email) throws Exception {
+		String emailChk = null;
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			emailChk = pdMapper.qnaemailchk(email);
+			return emailChk;		
+		} catch (Exception e) {
+			throw new Exception("비공개 문의 이메일 체크 실패.", e);
+		}
+	
+	}
 	/********************** 상품문의 종료 **********************/
 	
+	
+
 	/********************** 상품검색 시작 **********************/
 	@Override
 	public int productListGetCount(String search_type, String search_word) throws Exception {

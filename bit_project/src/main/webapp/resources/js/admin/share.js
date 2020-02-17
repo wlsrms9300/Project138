@@ -10,7 +10,6 @@
 				$('#output').empty();
 				$.each(data, function(index, item){	//각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
 					var email = "'" + item.email + "'";
-					var sib0 = "'" + item.waiting_num + "'";
 					var sib1 = "'" + item.name + "'";
 			      	var sib2 = "'"+item.product_name+"'";
                    	var sib3 = "'"+item.amount+"'";
@@ -34,9 +33,9 @@
 					output += '<td>' + date + '</td>';
 					output += '<td>' + item.share_content + '</td>';
 					
-					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+sib0+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+');">상세보기</button>' + '</td>';
-					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+sib0+');">수락</button>';
-					output += '<button type="button" class="btn btn-sm btn-primary" onclick="deny('+sib0+');">거절</button></td>';
+					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+');">상세보기</button>' + '</td>';
+					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+item.waiting_num+');">수락</button>';
+					output += '<button type="button" class="btn btn-sm btn-primary" onclick="deny('+item.waiting_num+');">거절</button></td>';
 					
 					output += '</tr>';
 					
@@ -85,18 +84,26 @@
 		$('#share_img1').val(_img1);
 		$('#share_img2').val(_img2);
 		$('#share_img3').val(_img3);
+		$("#detailimg1").attr("src", "/bit_project/image/"+_img1);
+		$("#detailimg2").attr("src", "/bit_project/image/"+_img2);
+		$("#detailimg3").attr("src", "/bit_project/image/"+_img3);
 		$('#bank').val(_bank);
 		$('#account').val(_account);
-	
-		var pop_name = "popupDetail";
+		var modal2 = document.querySelector("#nursery-modal");
+		   modal2.classList.toggle("show-modal");
+		/*var pop_name = "popupDetail";
 		window.open("", pop_name,"width=1200,height=700, scrollbars=no, resizable=no");
 		
 		 var frmData = document.frmData;
 	        frmData.target = pop_name;
 	        frmData.action = "/bit_project/shareDetail.pr";
-	        frmData.submit();
+	        frmData.submit();*/
 	}
-	
+
+function asdad() {
+		var modal2 = document.querySelector("#nursery-modal");
+		   modal2.classList.toggle("show-modal");
+}
 function accept(_wnum) {
 	var share_Accept = confirm("쉐어 수락하시겠습니까?");
 	if(share_Accept){

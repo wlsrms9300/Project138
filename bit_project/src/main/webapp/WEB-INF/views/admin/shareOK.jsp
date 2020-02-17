@@ -11,30 +11,46 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
-	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-	<!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-    <![endif]-->
     <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
-    <!-- Latest compiled and minified CSS -->
-
-    
-    <!-- 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
-     -->
-
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script><!-- 주석 가능 -->
-    <!-- Latest compiled and minified Locales -->
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script><!-- 주석 가능 -->
-	
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
-	
+	<style>
+	@charset "utf-8";
+	@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+	* {font-family: 'S-CoreDream-4Regular';}
+   .modal1 {text-align: center; display: block;margin: 0 auto;font-size: 16px;color: #999;z-index:2;}
+     h1.title {font-size: 30px;color: #ea7475;}
+     label {width:300px;display: inline-block; margin-top: 0px; }
+     form {margin: 0 auto;width: 600px;}
+     .modal1 > .modal1-content > form > input{ width: 300px; height: 27px;background-color: #efefef;border-radius: 5px;border: 1px solid #dedede; padding: 10px;margin-top: 3px;font-size: 0.9em;color: #3a3a3a;margin-bottom: 5px;}
+     .modal1 > .modal1-content > form > input:focus{ border: 1px solid #97d6eb;}
+     .modal1 {position: absolute;left: 0;top: 0;width: 70%;height: 100%;background-color: rgba(0, 0, 0, 0.5);opacity: 0;visibility: hidden;transform: scale(1.1);transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;}
+     .modal1-content {position: absolute;width:70% !important; height:70%;top: 40%;left: 60%;transform: translate(-50%, -50%);background-color: white;padding: 1rem 1.5rem;width: 500px;border-radius: 0.5rem;margin:0 auto;}
+     .close-button1 { float: right; width: 1.5rem;line-height: 1.5rem; text-align: center; cursor: pointer; border-radius: 5px; background-color: lightgray; }
+     .close-button1:hover {background-color: darkgray;}
+     .show-modal1 { opacity: 1;  visibility: visible;  transform: scale(1.0); transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;  width: 100%;  height: 900px;}
+	.imggroup {width:100%; height:200px;}
+	.imggroup img{width:33%; height:200px;}
+     
+     
+     
+     .modal2 {text-align: center; display: block;margin: 0 auto;font-size: 16px;color: #999;z-index:2;}
+     h1.title {font-size: 30px;color: #ea7475;}
+     .modal2 > .modal2-content > form > input, .modal2 > .modal2-content > form > .button-box > input { width: 300px; height: 27px;background-color: #efefef;border-radius: 5px;border: 1px solid #dedede; padding: 10px;margin-top: 3px;font-size: 0.9em;color: #3a3a3a;margin-bottom: 5px;}
+     .modal2 > .modal2-content > form > input:focus{ border: 1px solid #97d6eb;}
+     .modal2 {position: absolute;left: 0;top: 0;width: 70%;height: 100%;background-color: rgba(0, 0, 0, 0.5);opacity: 0;visibility: hidden;transform: scale(1.1);transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;}
+     .modal2-content {position: absolute;width:70% !important; height:70%;top: 40%;left: 60%;transform: translate(-50%, -50%);background-color: white;padding: 1rem 1.5rem;width: 500px;border-radius: 0.5rem;margin:0 auto;}
+     .button-box {text-align: center;}
+     .close-button2 { float: right; width: 1.5rem;line-height: 1.5rem; text-align: center; cursor: pointer; border-radius: 5px; background-color: lightgray; }
+     .close-button2:hover {background-color: darkgray;}
+     .show-modal2 { opacity: 1;  visibility: visible;  transform: scale(1.0); transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;  width: 100%;  height: 900px;}
+	 #nsubmit{ width: 127px;  height: 48px; text-align: center; border: none;margin-top: 20px;  cursor: pointer;}
+     #nsubmit:hover{color: #fff;background-color: #ea7475;opacity: 0.9;}
+	</style>
 	
 </head>
 <script type="text/javascript">
@@ -194,7 +210,19 @@
 					</a></li>
 				</ul>
 			</li>
-			
+				<!--  반납&&배송 -->			
+			<li class="parent "><a data-toggle="collapse" href="#sub-return-1">
+				<em class="fa fa-navicon">&nbsp;</em> 반납확정&&배송관리 <span data-toggle="collapse" href="#sub-return-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-return-1">
+					<li><a class="" href="return.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 반납확정 wish
+					</a></li>
+					<li><a class="" href="returnpick.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 픽업 시 반납완료
+					</a></li>
+				</ul>
+			</li>
 			<!-- 결제 관리 -->
 			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
 
@@ -222,21 +250,6 @@
         <div class="row">
             <div class="col-lg-12">
 				<div class="board_list_wrap">
-					<form name="frmData" id="frmData" method="post">
-						<input type="hidden" name="waiting_num" id="waiting_num" value="" />
-					    <input type="hidden" name="email" id="email" value="" />
-					    <input type="hidden" name="name" id="name" value="" />
-					    <input type="hidden" name="product_name" id="product_name" value="" />
-					    <input type="hidden" name="consignment_start_date" id="consignment_start_date" value="" />
-					    <input type="hidden" name="consignment_end_date" id="consignment_end_date" value="" />
-					    <input type="hidden" name="amount" id="amount" value="" />
-					    <input type="hidden" name="share_content" id="share_content" value="" />
-					    <input type="hidden" name="share_img1" id="share_img1" value="" />
-					    <input type="hidden" name="share_img2" id="share_img2" value="" />
-					    <input type="hidden" name="share_img3" id="share_img3" value="" />
-					    <input type="hidden" name="bank" id="bank" value="" />
-					    <input type="hidden" name="account" id="account" value="" />
-					</form>
 					<table id="foo-table" class="foo-ex">
 						<h2>쉐어 관리</h2>
 						<thead>
@@ -259,8 +272,76 @@
             </div>
         </div>
 	</div>	<!--/.main-->
-	  
+	  <div class="modal1" id="nursery-modal">
+         <div class="modal1-content">
+             <span class="close-button1" id="nclose-button1" onclick="asdad();">&times;</span> 
+             <h1 class="title">쉐어 상세보기</h1>
+             <hr>
+           <form name="frmData" id="frmData" method="post">
+				<label>waiting_num</label><input type="number" name="waiting_num" id="waiting_num1" value="" />
+				<label>email</label><input type="text" name="email" id="email1" value="" />
+				<label>name</label><input type="text" name="name" id="name1" value="" />
+				<label>product_name</label><input type="text" name="product_name" id="product_name1" value="" />
+				<label>amount</label><input type="number" name="amount" id="amount1" value="" />
+				<label>share_content</label><input type="text" name="share_content" id="share_content1" value="" />
+				<input type="hidden" name="share_img1" id="share_img11" value="" />
+				<input type="hidden" name="share_img2" id="share_img21" value="" />
+				<input type="hidden" name="share_img3" id="share_img31" value="" />
+				<label>bank</label><input type="text" name="bank" id="bank1" value="" />
+				<label>account</label><input type="text" name="account" id="account1" value="" />
+		</form>
+		<div class="imggroup">
+				<img id="detailimg1" src="" />
+				<img id="detailimg2" src="" />
+				<img id="detailimg3" src="" />
+				</div>
+         </div> 
+     </div>   
 
+	<div class="modal2" id="padd-modal">
+         <div class="modal2-content">
+             <span class="close-button2" id="nclose-button" onclick="padd();">&times;</span> 
+             <h1 class="title">쉐어 상세보기</h1>
+             <hr>
+            <form id="product_add_form" class="product-form" name="product_add_form" method="POST" enctype="multipart/form-data">
+				<label>waiting_num</label><input type="number" name="waiting_num" id="waiting_num2" value="" />
+				<label>email</label><input type="text" name="email" id="email2" value="" />
+				<label>name</label><input type="text" name="name" id="name2" value="" />
+				<label>product_name</label><input type="text" name="product_name" id="product_name2" value="" />
+				<label>amount</label><input type="number" name="total_amount" id="amount2" value="" />
+				<label>share_content</label><input type="text" name="share_content" id="share_content2" value="" />
+				<input type="hidden" name="share_img1" id="share_img12" value="" />
+				<input type="hidden" name="share_img2" id="share_img22" value="" />
+				<input type="hidden" name="share_img3" id="share_img32" value="" />
+				<label>bank</label><input type="text" name="bank" id="bank2" value="" />
+				<label>account</label><input type="text" name="account" id="account2" value="" />
+				<label>manufacturer</label><input type="text" name="manufacturer" placeholder="제조사" />
+				<label>product_content</label><input type="text" name="product_content" placeholder="상품상세" value=""/>
+				<label>consignment_start_date</label><input type="text" name="consignment_start_date" id="consignment_start_date" value=""/>
+                <label>consignment_end_date</label><input type="text" name="consignment_end_date" id="consignment_end_date" value=""/>
+				<select name="category_l">
+                        <option selected value="실버">실버</option>
+                        <option value="골드">골드</option>
+                        <option value="플레티넘">플레티넘</option>
+                        <option value="개인쉐어">개인쉐어</option>
+                    </select>
+                    <select name="category_m">
+                        <option selected value="04">0~4</option>
+                        <option value="57">5~7</option>
+                    </select>
+                    <select name="category_s">
+                        <option selected value="과학박스">과학박스</option>
+                        <option value="자동차">자동차</option>
+                        <option value="로보트">로보트</option>
+                        <option value="진근박스">진근박스</option>
+               </select>
+               
+                 <div class="button-box">
+                 <input type="button" id="nsubmit" value="[상품등록하기]" onclick="prAdd('shareAddProcess.pr')" >            	
+                </div>
+                 
+		</form>
+     </div>
 <script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/chart.min.js"></script>

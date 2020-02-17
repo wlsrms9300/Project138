@@ -87,7 +87,7 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
                 exText += '<img src="/bit_project/image/'+item.rimg+'">';
                 exText += " </li>";
                 exText += "</ul>";
-                exText += "<hr style='border: 0.5px solid grey;'>";
+                exText += "<hr style='border: 0.5px solid #c5c5c5;'>";
                 exText += "</article>";
                 $(".review").append(exText);
             })
@@ -207,7 +207,7 @@ function reviewmodify(_rnum, _nickname, _content, _img, _gpa, _email) {
 			break;
 	}
 	 $("#ReviewForm input[name=review_num]").val(_rnum);
-	review_write();
+	review_write(1);
 }
 function reviewdelete(_rnum){
 	 if (confirm("정말 삭제하시겠습니까??") == true){

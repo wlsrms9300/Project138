@@ -1,4 +1,5 @@
     $("document").ready(function () {
+    	var searchemail = "";
         var totalData = 0;	// 총 데이터 수
         var dataPerPage = 10;
         var pageCount = 5;
@@ -23,6 +24,20 @@
         snsData(totalData, dataPerPage, pageCount, currentPage);
         
         $('.accordion ul li').click(function () {
+        	
+        	  $.ajax({
+		        	url: '/bit_project/qnaemailchk.pr',
+		            type: 'POST',
+		            dataType: 'json',
+		            data:{"email" : $(this).children().first().children().last().children(":eq(1)").val()},
+		            async : false,
+		            success: function (data) {             
+		            	searchemail=data;
+		            	console.log(searchemail);
+		            },
+			        error: function () {
+					}
+		        });
         	//alert($(this).children().first().children().last().children().first().text());
         	if($(this).children().first().children(":eq(2)").val()=="공개"){
         		if ($(this).children().last().css("display") == 'none') {
@@ -32,12 +47,19 @@
                 }
         	}else {
         		if ($(this).children().last().css("display") == 'none') {
+        			//nick으로 email 조회해서 email=sessionChk이면
                 	//공개면 상관없고 공개가 아닐 때 0204 추후 수정
-                	if(nick==$(this).children().first().children().last().children().first().text()){
+        			
+                	/*if(nick==$(this).children().first().children().last().children().first().text()){
                 		$(this).children().last().show();
                 	}else {
                 		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
-                	}
+                	}*/
+        			if(sessionChk!="" && sessionChk==searchemail){
+                  		$(this).children().last().show();
+                  	}else {
+                  		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
+                  	}
                     
                 } else {
                     $(this).children().last().hide();
@@ -79,6 +101,7 @@
                     
                     exText += "<div class='date'>";
                     exText += "<em>" + item.nickname + "</em>";
+                    exText += '<input type="hidden" value="'+item.email+'">';
                     var date = new Date(item.regist);
                     date = date_to_str(date);
                     exText += "<em>" + date + "</em>";

@@ -70,6 +70,8 @@ public interface PDService {
 		public void qnaDelete(@Param("question_num") int question_num, @Param("product_num") int product_num) throws Exception;
 		// 문의 수정
 		public void qnaModify(QnaVO qnaVO) throws Exception;
+		// 문의 비공개 작성자 체크
+		public String qnaemailchk(@Param("email") String email) throws Exception;
 	// 4. 상세 페이지 상품 리뷰
 		// 페이징 처리
 		public List<reviewjoinmemberVO> reviewSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
@@ -89,6 +91,9 @@ public interface PDService {
 		public void pointDetail(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
 		// 리뷰 평점 수정
 		public void reviewGpa(@Param("product_num") int product_num) throws Exception;
+		// 리뷰는 상품당 하나요~!
+		public int reviewoverflow(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
+		
 		
 	// 5. 상품 검색
 		public int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word) throws Exception;

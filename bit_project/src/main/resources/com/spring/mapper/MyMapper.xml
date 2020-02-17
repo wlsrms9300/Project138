@@ -20,6 +20,7 @@
 </resultMap>
 
 
+
 <select id="getMyPageBookMark" parameterType="map" resultType="com.spring.mypage.bookjoinproductVO">	
 	select p.product_num, p.product_name, p.MANUFACTURER, p.img_sum, b.mark_num, b.email  
 	from product p, bookmark b 

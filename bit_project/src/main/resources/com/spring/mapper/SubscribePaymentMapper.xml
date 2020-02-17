@@ -25,4 +25,64 @@
 	select * from settlement_details order by settlement_num
 	</select>
 	
+	<!--  admin 반납확정 리스트  -->
+	<!-- <select id="getReturnList" resultType="com.spring.mypage.PStateVO">
+	select * from product_state where state='반납확정' order by state_num asc
+	</select> -->
+	
+	<select id="getReturnList" resultType="com.spring.mypage.PStateVO" >
+	select * from product_state where state='반납확정' AND 
+	SUBSCRIBE_NUM NOT IN (
+        select SUBSCRIBE_NUM from product_state where state='배송전'
+    )
+	</select>
+	
+	
+	<select id="getEmail" resultType="com.spring.payment.SubscriptionVO" >
+	select email, subscribe_num from subscribe where subscribe_num IN (	
+		select subscribe_num from product_state where state='반납확정' AND 
+		SUBSCRIBE_NUM NOT IN (
+	        select SUBSCRIBE_NUM from product_state where state='배송전'
+	    )
+	)
+	</select>
+	<select id="getWish" parameterType="map" resultType="int">
+	select product_num from wishlist where email=#{email} AND product_num NOT IN (
+		select product_num from product where current_amount=0
+	)
+	</select>
+	
+	<!-- 반납확정을 배송전으로 바꾸는 쿼리. 아직 미사용 -->
+	<!-- <update id="returnBatch">
+	update (
+		select * from product_state where state='반납확정' AND SUBSCRIBE_NUM NOT IN (
+        	select SUBSCRIBE_NUM from product_state where state='배송전'
+    	)
+	)
+	set state='배송전'
+	</update> -->
+	
+	<insert id="insertWish" parameterType="map">
+	<selectKey keyProperty="num1" order="BEFORE" resultType="int">
+	select subscribe_ps_sequence.NEXTVAL from dual
+	</selectKey>
+	insert into product_state values(#{num1}, #{subscribe_num}, #{randomPnum}, '배송전', #{date}, '')
+	</insert>
+
+	<select id="pickupList" resultType="com.spring.mypage.PStateVO">
+	select * from product_state where state='반납확정' order by return_application
+	</select>
+	
+	<update id="pickAccept" parameterType="map">
+	update product_state set state='반납완료' where state_num=#{state_num}
+	</update>
+	
+	<delete id="deleteWish" parameterType="map">
+	delete from wishlist where email=#{email} AND product_num=#{randomPnum}
+	</delete>
+	
+	<update id="updateProductAmount" parameterType="map">
+	update product set rental_amount=rental_amount+1, current_amount=current_amount-1 
+	where product_num=#{randomPnum}
+	</update>
 </mapper>

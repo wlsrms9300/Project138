@@ -84,15 +84,9 @@ function allSearch() {
 				output +=
 				'<div class="infor">';
 				output +=
-				'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+				'<h3><strong>'+item.product_name+'</strong></h3>';
 				output +=
-				'<div class="infor_btn">';
-				output +=
-				'<a href="productDetail.pr">상세정보</a>';
-				output +=
-				'<a href="#">위시리스트</a>';
-				output +=
-				'</div></div></div></div>';
+				'</div></div></div>';
 				$('.chart_cont'+scnt).append(output);
 				if(cnt%4==0){
 					var output2 = '</div></div></div>';
@@ -133,15 +127,9 @@ function allSearch() {
 				output +=
 				'<div class="infor">';
 				output +=
-				'<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+				'<h3><strong>'+item.product_name+'</strong></h3>';
 				output +=
-				'<div class="infor_btn">';
-				output +=
-				'<a href="productDetail.pr">상세정보</a>';
-				output +=
-				'<a href="#">위시리스트</a>';
-				output +=
-				'</div></div></div></div>';
+				'</div></div></div>';
 				$('.chart_cont'+scnt).append(output);
 				if(cnt%2==0){
 					var output2 = '</div></div></div>';
@@ -175,7 +163,6 @@ function allSearch() {
 
 function fil() {
 	if(deviceChk==2){
-
 		  var fil = document.getElementById('mFilter_menu');
 		  if (fil.style.display == 'none') {
 			$('#mFilter label[for="menu_state"] i').css("right", "0px");
@@ -262,15 +249,9 @@ function fn_searchList() {
                    output +=
                    '<div class="infor">';
                    output +=
-                   '<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
+                   '<h3><strong>'+item.product_name+'</strong></h3>';                   
                    output +=
-                   '<div class="infor_btn">';
-                   output +=
-                   '<a href="productDetail.pr">상세정보</a>';
-                   output +=
-                   '<a href="#">위시리스트</a>';
-                   output +=
-                   '</div></div></div></div>';
+                   '</div></div></div>';
                    $('.chart_cont'+scnt).append(output);
                    if(cnt%4==0){
                       var output2 = '</div>';
@@ -312,15 +293,15 @@ function fn_searchList() {
                    output +=
                    '<div class="infor">';
                    output +=
-                   '<h3><em>'+item.manufacturer+'</em><strong>'+item.product_name+'</strong></h3>';
-                   output +=
+                   '<h3><strong>'+item.product_name+'</strong></h3>';
+               /*    output +=
                    '<div class="infor_btn">';
                    output +=
                    '<a href="productDetail.pr">상세정보</a>';
                    output +=
-                   '<a href="#">위시리스트</a>';
+                   '<a href="#">위시리스트</a>';*/
                    output +=
-                   '</div></div></div></div>';
+                   '</div></div></div>';
                    $('.chart_cont'+scnt).append(output);
                    if(cnt%2==0){
                       var output2 = '</div>';

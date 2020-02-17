@@ -49,13 +49,46 @@
 
 
 /* 2020-01-29 20:20 문용민 추가 */
-.product_line div > a > img {
+
+.product_line div img {
 	width:211px;
 	height:225px;
+	z-index: 10;
+	cursor: pointer;
 } 
 .product_line div {
+	position:relative;
     padding-bottom:40px;
     padding-left:15px;
+}
+.product_line div button {
+	width:50px;
+	height:50px;
+	text-align:center;
+	vertical-align:middle;
+	background:#1AAB8A;
+	border:0;
+	outline:0;
+	cursor:pointer;
+	display:inline;
+	position: absolute;
+	visibility:hidden;
+	top:0;
+	bottom:0;
+	left:15px;
+	right:0;
+	opacity: 0;
+	color: #fff;
+	background:rgba(29, 106, 154, 0.72);
+	z-index:999;
+} 
+
+.product_line div:hover button{
+	visibility:visible;
+	color:#fff;
+	opacity: 1;
+	z-index:999;
+	cursor: pointer;
 }
 /* 2020-01-29 20:20 문용민 추가 */
 @media(max-width:480px) {

@@ -334,6 +334,15 @@
 		content=#{content}, secret=#{secret}, regist=sysdate where
 		question_num=#{question_num}
 	</update>
+	<select id="qnaemailchk" parameterType="map" resultType="String">
+		select email FROM member where email=#{email}
+	</select>
+	
+	<select id="reviewoverflow" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from review where product_num=#{product_num} AND email=#{email}
+	</select>
+	
+	
 	<!-- 문의 -->
 
 

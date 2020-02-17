@@ -5,6 +5,7 @@ $(function(){
     	}else {
     		//alert('sessionChk은'+sessionChk);
     	}
+    	console.log(p);
         if(wcheck==0){
         	//팝업창 띄우고 확인 누르면 db삽입
             $('body').css("background", "grey");
