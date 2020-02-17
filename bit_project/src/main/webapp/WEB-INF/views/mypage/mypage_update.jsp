@@ -52,14 +52,14 @@ var nick_session = '<%=userDetail.getNickname() %>';
 				<h1>회원수정</h1>
 				<div class="member_img">
 					<div id="profilefield">
-						<div class="image-upload">
-
-							<div class="image-edit">
-								<input type="file" name="filename" id="imageUpload"
-									class="imageUpload" data-preview="imagePreview"
-									accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
-							</div>
-							<div class="preview">
+					
+						<div class="image-upload"> <!-- 이미지 올릴곳 -->
+                       <div class="image-edit">
+                           <input type="file" name="filename" id="imageUpload" class="imageUpload" data-preview="imagePreview" accept=".png, .jpg, .jpeg" style="width:100px; height: 300px; border:1px solid;"multiple />
+                           <label for="imageUpload"></label> 
+                           <div class="zz" data-preview="imagePreview" style="width:250px; height:200px;" ></div>
+                       </div>
+                       		<div class="preview" >
 								<div id="imagePreview"
 									style="background-image: url('<%=userDetail.getImg()%>');">
 
@@ -151,7 +151,7 @@ var nick_session = '<%=userDetail.getNickname() %>';
 						<!-- <td class="update_btn"><button type="button" value="N"
 								class="button3" onclick="nn_update_Chk_mypage();">회원정보
 								수정</button></td> -->
-						<td class="update_btn"><input type="button" value="회원정보"
+						<td class="update_btn"><input type="button" value="회원 정보 수정"
 							class="button3"></td>
 					</tr>
 				</table>

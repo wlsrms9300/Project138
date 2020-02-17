@@ -22,8 +22,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println(membervo.getNickname());
-			
 			dbnickname = memberMapper.nicknameCheck(membervo);
 			
 			if (dbnickname != null) {
@@ -33,7 +31,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//중복된 닉네임이 없는 것
 				
 			}
-			System.out.println(res);
 		} catch(Exception e) {
 			System.out.println("닉네임 중복 확인 실패."+  e.getMessage());
 		}
@@ -47,8 +44,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println(membervo.getNickname());
-			
 			dbnickname = memberMapper.nnupdateCheck(membervo);
 			
 			if (dbnickname != null) {
@@ -58,7 +53,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//중복된 닉네임이 없는 것
 				
 			}
-			System.out.println(res);
 		} catch(Exception e) {
 			System.out.println("닉네임 중복 확인 실패."+  e.getMessage());
 		}
@@ -72,8 +66,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println("이메일 정보" + membervo.getEmail());
-			
 			dbemail = memberMapper.emailCheck(membervo);
 			
 			if (dbemail != null) {
@@ -83,7 +75,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//중복된 이메일이 없는 것
 				
 			}
-			System.out.println(res);
 		} catch(Exception e) {
 			System.out.println("이메일 중복 확인 실패." +  e.getMessage());
 		}
@@ -142,14 +133,10 @@ public class MemberServiceImpl implements MemberService{
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 			memVO = memberMapper.findPassword(membervo);
 			String password_random = UUID.randomUUID().toString().substring(0, 8).trim();
-			System.out.println(password_random);
 			membervo.setPassword(password_random);
-			System.out.println("패스워드 업데이트 전" + membervo.getPassword());
 			
 			result = memberMapper.updatepassword(membervo);
-			System.out.println("result = " + result);
 			membervo.setPassword(membervo.getPassword());
-			System.out.println("패스워드 업데이트 후 membervo.getPassword() = " + membervo.getPassword());
 			
 			
 		} catch(Exception e) {
@@ -165,8 +152,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println("비밀번호 정보" + membervo.getPassword());
-			
 			dbpassword = memberMapper.passwordCheck(membervo);
 			
 			
@@ -177,7 +162,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//비밀번호 틀림
 				
 			}
-			System.out.println(res);
 		} catch(Exception e) {
 			System.out.println("mypage 비밀번호 확인 실패." +  e.getMessage());
 		}
@@ -191,16 +175,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println("닉네임 업데이트 정보" + membervo.getNickname());
-			
 			dbnickname = memberMapper.nicknameupdateCheck(membervo);
-			System.out.println("dbnickname (serviceImpl) = " + dbnickname);
 			if (dbnickname == 0) {	//update 실패
 				res = 1;	
 			} else {	//update 성공
 				res = 0;	
 			}
-			System.out.println("res = " + res);
 		} catch(Exception e) {
 			System.out.println("mypage nickname 중복 확인 실패." +  e.getMessage());
 		}
@@ -214,8 +194,6 @@ public class MemberServiceImpl implements MemberService{
 		
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-			System.out.println("닉네임 업데이트 정보" + membervo.getNickname());
-			
 			dbpasswordupdate = memberMapper.passwordUpdate(membervo);
 			
 			if (dbpasswordupdate != 0) {
@@ -225,7 +203,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//비밀번호 db에서 변경 실패.
 				
 			}
-			System.out.println("res = " + res);
 		} catch(Exception e) {
 			System.out.println("mypage 비밀번호 변경 실패." +  e.getMessage());
 		}
@@ -238,9 +215,6 @@ public class MemberServiceImpl implements MemberService{
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		memberList = memberMapper.getMemberList();
 		
-		System.out.println("memberList = " + memberList);
-		
-		
 		return memberList;
 	}
 
@@ -249,9 +223,6 @@ public class MemberServiceImpl implements MemberService{
 		List<MemberVO> groupList = null;
 		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 		groupList = memberMapper.getGroupList();
-		
-		System.out.println("groupList = " + groupList);
-		
 		
 		return groupList;
 	}
@@ -274,7 +245,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//변경 안됨
 				
 			}
-			System.out.println("서비스 impl res = " + res);
 		} catch(Exception e) {
 			System.out.println("서비스 impl에서 오류 => " +  e.getMessage());
 		}
@@ -299,7 +269,6 @@ public class MemberServiceImpl implements MemberService{
 				res = 0;	//변경 안됨
 				
 			}
-			System.out.println("서비스 impl res = " + res);
 		} catch(Exception e) {
 			System.out.println("서비스 impl에서 오류 => " +  e.getMessage());
 		}

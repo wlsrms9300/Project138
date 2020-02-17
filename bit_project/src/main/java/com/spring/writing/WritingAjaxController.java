@@ -34,6 +34,7 @@ public class WritingAjaxController {
 					throw new Exception("Failed to store empty file " + file.getOriginalFilename());
 				} else {
 	
+//					이미지 경로 바꾸기
 //					String uploadPath = "C:\\Project138\\upload\\";
 					String uploadPath = "/Users/nagyeom/upload/";
 					String originalFileExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.spring.login.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -79,7 +80,7 @@
         <div class="mt_6">
             <div class="mt_6_1">
                 <h3>진근이네는 연속되는 선물과 같습니다.<br><br></h3>
-                <button type="button" name="join_btn" class="join_btn banner_btn1" onclick="location.href='signup.me'">회원가입</button>
+                <button type="button" name="join_btn" class="join_btn banner_btn1" onclick="loginChk()">회원가입</button>
                 <button type="button" name="sub_btn" class="sub_btn banner_btn2" onclick="location.href='subscribestep1.me'">구독하기</button>
             </div> 
         </div>
@@ -127,6 +128,18 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/aos.js"></script>
 <script>
 AOS.init();
+</script>
+<script>
+	function loginChk(){
+		var email_a = '<%=(String)session.getAttribute("email")%>';
+		if(email_a != 'null') {
+			alert("로그아웃 후 이용해주세요");
+			return false;
+		}else {
+			window.location.href = "signup.me";	
+		}
+	}
+	
 </script>
 
 </body>
