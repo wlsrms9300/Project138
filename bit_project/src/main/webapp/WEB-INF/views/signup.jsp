@@ -34,11 +34,8 @@
                      <div class="image-upload"> <!-- 이미지 올릴곳 -->
                        <div class="image-edit">
                            <input type="file" name="img2" id="imageUpload" class="imageUpload" data-preview="imagePreview" accept=".png, .jpg, .jpeg" style="width:100px; height: 300px; border:1px solid;"multiple />
-                           <!-- <label for="imageUpload" style="width:100px; height: 300px; border:1px solid;"></label>  -->
                            <label for="imageUpload"></label> 
-                             <div class="zz" name="img2" data-preview="imagePreview" style="width:250px; height:200px;" ></div>
-<!--                            	<input type="file" name="img2" id="zz" class="zz" data-preview="imagePreview" accept=".png, .jpg, .jpeg" disabled />
-                           	<label for="zz" style="width:300px; height: 300px; border:1px solid;"></label>  -->
+                           <div class="zz" data-preview="imagePreview" style="width:250px; height:200px;" ></div>
                        </div>
                        <div class="preview" >
                            <div id="imagePreview" style="background-image: url('${pageContext.request.contextPath}/resources/img/default_profile.png');"></div>

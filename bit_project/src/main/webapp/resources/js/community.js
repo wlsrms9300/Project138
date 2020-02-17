@@ -123,7 +123,7 @@
    						}
    						
    						else { //게시글 존재하지않을때
-   							var outputnull = "<div class='community_ncontainer'  style='width:950px; margin: 0 auto; height: 200px; text-align: center; margin-top: 300px;'>";
+   							var outputnull = "<div class='community_ncontainer' >";
    							outputnull += "<div>등록된 게시글이 없습니다.</div>";
    							outputnull += "</div>";
    							$('#community_data').append(outputnull);
@@ -232,7 +232,7 @@
 			            
 	 				}
 	            		else {
-	            			var outputnull = "<div class='community_ncontainer' style='width:950px; margin: 0 auto; height: 200px; text-align: center; margin-top: 300px;'>";
+	            			var outputnull = "<div class='community_ncontainer' >";
    							outputnull += "<div>검색 결과가 없습니다.</div>";
    							outputnull += "</div>";
    							$('#community_data').append(outputnull);

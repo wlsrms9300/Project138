@@ -791,6 +791,11 @@ a.label:hover, a.label:focus {
   text-decoration: none;
   background-color: #30a5ff;
   color: #fff; }
+  
+.sidebar ul.nav li.parent ul li a.visited {
+  text-decoration: none;
+  background-color: #30a5ff;
+  color: #fff; }
 
 .sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active, .sidebar ul.nav .active > a:hover, .sidebar ul.nav li.parent a.active:hover, .sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus {
   color: #fff;

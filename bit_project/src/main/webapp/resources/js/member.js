@@ -71,11 +71,8 @@
          error : function() {
             alert("ajax통신 실패!!!");
          }
-
-
       }); //ajax
      } //else
-     
    }
    
    /*비밀번호  체크 */
@@ -120,20 +117,13 @@
    /* 프로필  */
    $(function () {
 
-//        if (
-//            window.createObjectURL ||
-//            window.URL ||
-//            window.webkitURL ||
-//            window.FileReaders
-//        ) {
-            $('.zz')
-            .on("dragover", dragOver)
-            .on("dragleave", dragOver)
-            .on("drop", uploadFiles);
-            
-            $('.browser').hide()
-            $('.preview').children().show()
-//        }
+        $('.zz')
+        .on("dragover", dragOver)
+        .on("dragleave", dragOver)
+        .on("drop", uploadFiles);
+        
+        $('.browser').hide()
+        $('.preview').children().show()
 
         function isDataURL(s) {
             return !!s.match(isDataURL.regex);
@@ -145,7 +135,7 @@
             e.preventDefault();
         }
         
-        
+        //file 업로드
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -165,9 +155,11 @@
                     }
                 } //reader.onload
                 reader.readAsDataURL(input.files[0]);
+                
             } //if
         } //function readURL
 
+        //드래그 업로드
         function uploadFiles(e) {
             e.stopPropagation();
             e.preventDefault()
@@ -177,7 +169,7 @@
             
           var files = e.target.files || e.dataTransfer.files;
           if (files.length > 1) {
-              alert('이미지 한개만 가능합니다');
+              alert('이미지는 한개만 가능합니다');
               return;
           }
 
@@ -198,16 +190,18 @@
                 }
             } //reader.onload
             reader.readAsDataURL(files[0]);
+            $("input[type='file']")
+            .prop("files", e.originalEvent.dataTransfer.files); //드래그드롭으로 올리는 이미지 input에 넣기
         } //function uploadFiles
         
+        //파일 올리기로 올렸을때
         $('.imageUpload').bind('change', function(e) {
             e.preventDefault()
-
             readURL(this)
         });
 
         
-    });
+    }); //function
    
    /*빈칸체크*/
    function inputChk(){

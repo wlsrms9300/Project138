@@ -78,9 +78,20 @@
 	
 	<!-- mypage 회원정보 update에서 닉네임 중복확인 확인 -->
 	<update id="nicknameupdateCheck" parameterType="com.spring.member.MemberVO">
-		update member set nickname=#{nickname}, postal_num=#{postal_num}, address=#{address},
-		address_detail=#{address_detail}, instagram_id=#{instagram_id},
-		children_birth=#{children_birth}, img=#{img} where email=#{email} and password=#{password}
+		update member 
+		<set>
+			<if test="img != null and img != ''">
+				nickname=#{nickname}, postal_num=#{postal_num}, address=#{address},
+				address_detail=#{address_detail}, instagram_id=#{instagram_id},
+				children_birth=#{children_birth}, img=#{img} 
+			</if>
+			<if test="img == null or img ==''">
+				nickname=#{nickname}, postal_num=#{postal_num}, address=#{address},
+				address_detail=#{address_detail}, instagram_id=#{instagram_id},
+				children_birth=#{children_birth}
+			</if>
+		</set> 
+		where email=#{email} and password=#{password}
 	</update>
 	
 	<!-- 비밀번호 변경 -->

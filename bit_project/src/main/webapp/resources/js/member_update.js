@@ -70,8 +70,6 @@ $(".button3").click(function(event) {
 		return false;
 	}
 	
-	
-	
 	var formData = new FormData($('#update_form')[0]);
 	alert(formData);
 
@@ -252,114 +250,94 @@ function password_change() {
 };
 
 
-$(function() {
-	// Hide URL/FileReader API requirement message in capable browsers:
-	if (window.createObjectURL || window.URL || window.webkitURL
-			|| window.FileReader) {
-		$('.browser').hide()
-		$('.preview').children().show()
-	}
+/* 프로필  */
+$(function () {
 
-	function isDataURL(s) {
-		return !!s.match(isDataURL.regex);
-	}
-	isDataURL.regex = /^\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*$/i;
+     $('.zz')
+     .on("dragover", dragOver)
+     .on("dragleave", dragOver)
+     .on("drop", uploadFiles);
+     
+     $('.browser').hide()
+     $('.preview').children().show()
 
-	function readURL(input) {
+     function isDataURL(s) {
+         return !!s.match(isDataURL.regex);
+     }
+     isDataURL.regex = /^\s*data:([a-z]+\/[a-z]+(;[a-z\-]+\=[a-z\-]+)?)?(;base64)?,[a-z0-9\!\$\&\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*$/i;
+     
+     function dragOver(e) {
+         e.stopPropagation();
+         e.preventDefault();
+     }
+     
+     //file 업로드
+     function readURL(input) {
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             var preview = $(input).data('preview');
+             var _invalid = $(input).parent().parent().find('.invalid-file')
 
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			var preview = $(input).data('preview');
-			var _invalid = $(input).parent().parent().find('.invalid-file')
+             reader.onload = function(e) {
+                 if( isDataURL(e.target.result) )    {
+                     _invalid.hide()
+                     $('#' + preview).css('background-image', 'url('+e.target.result +')');
+                     $('#' + preview).hide();
+                     $('#' + preview).fadeIn(650);
+                 } else {
+                     $('#' + preview).hide()
+                     _invalid.html('<div class="alert alert-false"><strong>Error!</strong> Invalid image file.</div>')
+                     _invalid.show()
+                 }
+             } //reader.onload
+             reader.readAsDataURL(input.files[0]);
+             
+         } //if
+     } //function readURL
 
-			reader.onload = function(e) {
+     //드래그 업로드
+     function uploadFiles(e) {
+         e.stopPropagation();
+         e.preventDefault()
+         dragOver(e); //1
+      
+        e.dataTransfer = e.originalEvent.dataTransfer; //2 
+         
+       var files = e.target.files || e.dataTransfer.files;
+       if (files.length > 1) {
+           alert('이미지는 한개만 가능합니다');
+           return;
+       }
 
-				if (isDataURL(e.target.result)) {
-					_invalid.hide()
-					$('#' + preview).css('background-image',
-							'url(' + e.target.result + ')');
-					$('#' + preview).hide();
-					$('#' + preview).fadeIn(650);
-				} else {
+         var reader = new FileReader();
+         var preview = $(this).data('preview');
+         var _invalid = $(this).parent().parent().find('.invalid-file')
 
-					$('#' + preview).hide()
+         reader.onload = function(e) {
+             if( isDataURL(e.target.result) )    {
+                 _invalid.hide()
+                 $('#' + preview).css('background-image', 'url('+e.target.result +')');
+                 $('#' + preview).hide();
+                 $('#' + preview).fadeIn(650);
+             } else {
+                 $('#' + preview).hide()
+                 _invalid.html('<div class="alert alert-false"><strong>Error!</strong> Invalid image file.</div>')
+                 _invalid.show()
+             }
+         } //reader.onload
+         reader.readAsDataURL(files[0]);
+         $("input[type='file']")
+         .prop("files", e.originalEvent.dataTransfer.files); //드래그드롭으로 올리는 이미지 input에 넣기
+     } //function uploadFiles
+     
+     //파일 올리기로 올렸을때
+     $('.imageUpload').bind('change', function(e) {
+         e.preventDefault()
+         readURL(this)
+     });
 
-					_invalid
-							.html('<div class="alert alert-false"><strong>Error!</strong> Invalid image file.</div>')
-					_invalid.show()
-				}
-
-			}
-
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-
-	$('.imageUpload').bind('change', function(e) {
-		e.preventDefault()
-
-		readURL(this)
-	});
-})
-
-$(function() {
-	if (
-            window.createObjectURL ||
-            window.URL ||
-            window.webkitURL ||
-            window.FileReader
-        ) {
-            $('.browser').hide()
-            $('.preview').children().show()
-        }
-
-
-//이미지 drag drop
-$('.preview')
-.on("dragover", dragOver)
-.on("dragleave", dragOver)
-.on("drop", uploadFiles);
- 
-function dragOver(e){
-  e.stopPropagation();
-  e.preventDefault();
-}
- 
-function uploadFiles(e){
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-function dragOver(e) {
-    e.stopPropagation();
-    e.preventDefault();
-}
-
-function uploadFiles(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    dragOver(e); //1
- 
-    e.dataTransfer = e.originalEvent.dataTransfer; //2
-    var files = e.target.files || e.dataTransfer.files;
- 
-    if (files.length > 1) {
-        alert('이미지는 한개만 가능합니다');
-        return;
-    }
-    if (files[0].type.match(/image.*/)) {
-        $(e.target).css({
-            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
-            "background-size": "100% 100%"
-        });
-    }else{
-      alert('이미지가 아닙니다');
-      return;
-    }
-}
-
-});
-
+     
+ }); //function
 
 
 
