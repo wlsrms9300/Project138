@@ -5,7 +5,7 @@
 <!-- 파일 업로드시 필요 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<!-- 파일 업로드시 필요 -->
+
 <%
 
 	String email = (String)session.getAttribute("email");
@@ -243,13 +243,13 @@
     <div id="right_article">
         <article id="article_main">
        	 	<%@ include file="/WEB-INF/views/mypage/mypage_calendar.jsp" %>
-            <%@ include file="/WEB-INF/views/mypage/mypage_bye.jsp" %>
-            <%@ include file="/WEB-INF/views/mypage/mypage_list.jsp" %>
-           <%@ include file="/WEB-INF/views/mypage/mypage_point.jsp" %>
-            <%@ include file="/WEB-INF/views/mypage/mypage_share.jsp" %>
+           	<%@ include file="/WEB-INF/views/mypage/mypage_bye.jsp" %>
+          	<%@ include file="/WEB-INF/views/mypage/mypage_list.jsp" %>
+       		<%@ include file="/WEB-INF/views/mypage/mypage_point.jsp" %>
+      		<%@ include file="/WEB-INF/views/mypage/mypage_share.jsp" %>
             <%@ include file="/WEB-INF/views/mypage/mypage_subscribe.jsp"%>
             <%@ include file="/WEB-INF/views/mypage/mypage_update.jsp"%>
-            <%@ include file="/WEB-INF/views/mypage/mypage_board.jsp"%>           
+          	<%@ include file="/WEB-INF/views/mypage/mypage_board.jsp"%>  
         </article>
     </div>
     <!-- main article 끝 -->

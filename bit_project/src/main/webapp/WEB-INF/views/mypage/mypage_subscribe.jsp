@@ -19,7 +19,6 @@
 <body>
 	<div class="subscribe_wrap">
                 <h2>구독</h2>
-                
                 <div class="subscribe_block">
                   <% if(userDetail_subs.getSubscribe().equals("N")) { %>
                     <div class="subscribe_content_1">

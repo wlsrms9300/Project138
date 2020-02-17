@@ -64,13 +64,16 @@ public class ChatController {
 		}
 		
 		String img = null;
-		if(usergroup == null) {
-			img = chatservice.getImg(request.getParameter("sender"));
+		if(usergroup == null || request.getParameter("sender").equals("비회원")) {
+			if(!(request.getParameter("sender").equals("비회원"))) {
+				img = chatservice.getImg(request.getParameter("sender"));
+			} else {
+				img = "${pageContext.request.contextPath}/resources/img/default_profile.png";
+			}
+				messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
+				messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
+				messagevo.setImg(img); //보내는 사람 프로필이미지
 					
-			messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
-			messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
-			messagevo.setImg(img); //보내는 사람 프로필이미지
-			
 			try {
 				result = chatservice.createRoom(messagevo);
 				room_num = chatservice.getNum(request.getParameter("sender"));

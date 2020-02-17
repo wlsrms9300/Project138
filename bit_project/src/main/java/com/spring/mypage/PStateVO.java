@@ -9,6 +9,7 @@ public class PStateVO {
 	private String state;
 	private Timestamp delivery_date;
 	private String return_application;
+	private String email;
 	
 	public int getState_num() {
 		return state_num;
@@ -45,5 +46,11 @@ public class PStateVO {
 	}
 	public void setReturn_application(String return_application) {
 		this.return_application = return_application;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
