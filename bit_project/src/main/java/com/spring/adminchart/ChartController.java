@@ -38,7 +38,6 @@ public class ChartController {
 			new_users = chartService.countNewUsers(); 
 			total_subscribers = chartService.countTotalSubscribers();
 			total_b2b = chartService.countTotalB2B();
-
 			
 			rankingList = chartService.getWishListRanking();
 			dngList = chartService.getDoughnutGraph();
