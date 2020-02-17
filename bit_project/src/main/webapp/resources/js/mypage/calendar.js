@@ -56,24 +56,35 @@ document.addEventListener('DOMContentLoaded', function(){
             days[k].className = '';
         }
         
-        for(var i  = 1; i <= nDays ; i++) {
+        for(var i  = 1; i <= nDays ; i++) {      
+        	if(del != "0" && i == 1 && (month+1 == Number(aMonth1)+1)) {    
+    			days[4].id = "delivery";	
+    		}     	
         	//반납신청일 체크
         	if(aDay1 != "0") {
         		if(i == aDay1 && (month + 1 == aMonth1)) {
-                	days[n].id = "pickup";
-                	if(n >= 4 && n < 11) {
+                	days[n].id = "pickup";       
+                	if(n >= 0 && n < 4) {
+                		days[4].id = "delivery";
+                	} else if(n >= 4 && n < 11) {               		
                 		days[11].id = "delivery";
                 	} else if( n >= 11 && n < 18) {
                 		days[18].id = "delivery";
                 	} else if( n >= 18 && n < 25) {
                 		days[25].id = "delivery";
                 	} else if( n >= 25 && n < 32) {
-                		days[32].id = "delivery";
+                		if(days[32].innerHTMl !== "" ) {
+                			days[32].id = "delivery";
+                		} else {
+                			del = "1";
+                		}
+                	} else if( n >= 32) {
+                		del = "1";
                 	}
                 }	
         	} 
         	
-            days[n].innerHTML = i; 
+            days[n].innerHTML = i;
             n++;
         }
              
@@ -81,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if(days[1].innerHTML === "") {
         	days[29].id = "payday";
         	if(aDay1 == "0") {
-        		days[33].id = "delivery";
+        		days[32].id = "delivery";
         	}
         } else {
         	days[22].id = "payday";
@@ -98,8 +109,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }else if(j === day + startDay - 1){
                 if((this.options && (month === setDate.getMonth()) && (year === setDate.getFullYear())) || (!this.options && (month === today.getMonth())&&(year===today.getFullYear()))){
                     this.drawHeader(day);
-                    days[j].id = "today"; 
-                    /*days[j].innerHTML += "<br>today";*/
+                    days[j].id = "today";           
                 }
             }
             if(selectedDay){
@@ -108,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 this.drawHeader(selectedDay.getDate());
                 }
             }
+  
         }
     };
     

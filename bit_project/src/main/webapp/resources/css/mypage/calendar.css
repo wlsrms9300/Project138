@@ -176,7 +176,7 @@
  	font-size:x-large;
  }
  
- #reserve { /*예약확정*/
+ #reserve { /*예약상품*/
  	background-color: rgb(232, 168, 102);
  	color: #fff;
  	border-radius: 50%;
@@ -186,6 +186,7 @@
      cursor: default;
      background: #fff;
  }
+ 
  /*======================================================================*/
  
  #disabled:hover {
@@ -214,6 +215,22 @@
      position: absolute;
      right: 0.5em;
      top: 10em;
+     z-index: 999;
+     color: #fff;
+     font-family: serif;
+     cursor: pointer;
+     padding: 0 0.5em;
+     height: 1.5em;
+     border: 0.1em solid #fff;
+     border-radius: 4px;
+     -webkit-transition: all 0.3s ease;
+     transition: all 0.3s ease;
+ }
+ #reserve-count {
+ 	 display: block;
+     position: absolute;
+     right: 0.5em;
+     top: 2.5em;
      z-index: 999;
      color: #fff;
      font-family: serif;

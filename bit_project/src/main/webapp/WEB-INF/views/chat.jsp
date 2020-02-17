@@ -16,6 +16,7 @@
 		usergroup = userDetail.getUsergroup();
 	} else {
 		nickname = "비회원";
+		usergroup = "비회원";
 	}	
 	
 	messagelist = (ArrayList<MessageVO>)request.getAttribute("messagelist");

@@ -16,11 +16,8 @@
    <result property="state" column="state"  />
    <result property="delivery_date" column="delivery_date"  />
    <result property="return_application" column="return_application"  />
+   <result property="email" column="email" />
 </resultMap>
-
-
-
-
 
 
 <select id="getMyPageBookMark" parameterType="map" resultType="com.spring.mypage.bookjoinproductVO">	
@@ -54,8 +51,6 @@
 	where s.email = p.email AND p.share_num=#{share_num} AND s.share_state=3
 </select>
 
-
-
 <insert id="addMyPageShareSettle" parameterType="com.spring.product.SettlementVO">
 	<selectKey order="BEFORE" keyProperty="settlement_num" resultType="int">
 	SELECT settle_sequence.NEXTVAL FROM DUAL
@@ -68,16 +63,27 @@ update product_share set total_accumulated_fund=total_accumulated_fund-#{settle}
 </update>
 
 
-<select id="getProductState" parameterType="String" resultMap="psMap">
+<select id="getProductState" parameterType="com.spring.mypage.PStateVO" resultMap="psMap">
 	SELECT P.STATE_NUM, P.SUBSCRIBE_NUM, P.PRODUCT_NUM, P.STATE, P.DELIVERY_DATE, P.RETURN_APPLICATION 
 	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P
-	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
+	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email} AND P.STATE = #{state}
 </select>
 
-<select id="checkPS" parameterType="String" resultType="int">
+<select id="checkPS" parameterType="com.spring.mypage.PStateVO" resultType="int">
 	SELECT COUNT(*)
 	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P
-	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
+	WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email} AND P.STATE = #{state}
+</select>
+
+<select id="checkReserve" parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM RESERVATION WHERE EMAIL = #{email}
+</select>
+
+<select id="getReserve" parameterType="String" resultType="int">
+	SELECT RNUM FROM 
+	(SELECT ROWNUM RNUM, EMAIL, REGIST FROM RESERVATION WHERE PRODUCT_NUM = 
+	(SELECT PRODUCT_NUM FROM RESERVATION WHERE EMAIL=#{email}) ORDER BY REGIST ASC)
+	WHERE EMAIL=#{email}
 </select>
 
 

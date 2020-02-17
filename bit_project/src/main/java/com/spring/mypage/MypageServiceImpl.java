@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MyMapper;
+import com.spring.payment.SubscriptionVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
@@ -123,26 +124,50 @@ public class MypageServiceImpl implements MypageService {
 	
 	
 	@Override
-	public PStateVO getProductState(String email) throws Exception {
+	public PStateVO getProductState(PStateVO vo) throws Exception {
 		try {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			PStateVO vo = myMapper.getProductState(email);
-			return vo;
+			PStateVO vo2 = myMapper.getProductState(vo);
+			return vo2;
 		} catch (Exception e) {
 			throw new Exception("상품상태 조회 실패", e);
 		}
 	}
 	
 	@Override
-	public int checkPS(String email) throws Exception {
+	public int checkPS(PStateVO vo) throws Exception {
 		try {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			int count = myMapper.checkPS(email);
-			return count;
+			int check = myMapper.checkPS(vo);
+			return check;
 		} catch (Exception e) {
 			throw new Exception("상품상태 카운트 조회 실패", e);
 		}
 	}
+	
+	@Override
+	public int checkReserve(String email) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			int check = myMapper.checkReserve(email);
+			return check;
+		} catch (Exception e) {
+			throw new Exception("예약상품 조회 실패", e);
+		}
+	}
+	
+	@Override
+	public int getReserve(String email) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			int rnum = myMapper.getReserve(email);
+			return rnum;
+		} catch (Exception e) {
+			throw new Exception("예약순번 조회 실패", e);
+		}
+		
+	}
+
 	
 
 	

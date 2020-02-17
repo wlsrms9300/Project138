@@ -120,6 +120,7 @@ $(document).ready(function(){
             menu4.hide();
             menu5.hide();
             menu6.hide();
+           
         }
     });
 
