@@ -205,7 +205,6 @@
 					<li><a class="" href="returnpick.se">
 						<span class="fa fa-arrow-right">&nbsp;</span> 픽업 시 반납완료
 					</a></li>
-						
 				</ul>
 			</li>
 			<!-- 결제 관리 -->

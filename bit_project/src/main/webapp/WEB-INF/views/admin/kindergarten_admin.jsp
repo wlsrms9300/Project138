@@ -177,9 +177,35 @@
 			<!--파트너 관리-->
 			<li><a href="partner_admin.se"><em class="fa fa-bar-chart">&nbsp;</em> 파트너 관리</a></li>
 			
-			<!-- 쉐어 관리 -->
-       	    <li><a href="share.se"><em class="fa fa-bar-chart">&nbsp;</em> 쉐어 관리</a></li>
-         
+		<!--쉐어 관리-->
+			<li class="parent "><a data-toggle="collapse" href="#sub-share-1">
+				<em class="fa fa-navicon">&nbsp;</em> 쉐어관리 <span data-toggle="collapse" href="#sub-share-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-share-1">
+					<li><a class="" href="share.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 쉐어 수락/거절
+					</a></li>
+					<li><a class="" href="shareOK.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 쉐어 상품 등록
+					</a></li>
+						<li><a class="" href="share_settle.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 쉐어 정산 목록
+					</a></li>
+				</ul>
+			</li>
+				<!--  반납&&배송 -->			
+			<li class="parent "><a data-toggle="collapse" href="#sub-return-1">
+				<em class="fa fa-navicon">&nbsp;</em> 반납확정&&배송관리 <span data-toggle="collapse" href="#sub-return-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-return-1">
+					<li><a class="" href="return.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 반납확정 wish
+					</a></li>
+					<li><a class="" href="returnpick.se">
+						<span class="fa fa-arrow-right">&nbsp;</span> 픽업 시 반납완료
+					</a></li>
+				</ul>
+			</li>
      	    <!-- 결제 관리 -->
      	    <li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
      	    

@@ -205,7 +205,6 @@
 					<li><a class="" href="returnpick.se">
 						<span class="fa fa-arrow-right">&nbsp;</span> 픽업 시 반납완료
 					</a></li>
-						
 				</ul>
 			</li>
 			<!-- 결제 관리 -->
@@ -245,7 +244,6 @@
 								<th>STATE</th>
 								<th>DELIVERY_DATE</th>
 								<th>RETURN_APPLICATION</th>
-								<th>상세보기</th>
 								<th>수락/거절</th>
 							</tr>
 						</thead>

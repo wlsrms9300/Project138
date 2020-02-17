@@ -79,12 +79,13 @@
         rel="stylesheet">
     <script>
         var p = <%=prVO.getProduct_num() %>;
-    	var sessionChk = "<%=email%>";    	
-    	var nick = "<%=nickname%>";
+        var sessionChk = "<%=email%>";
+        var nick = "<%=nickname%>";
     </script>
 </head>
 
 <body>
+
     <header>
         <div id="wrap">
             <div id="intro_bg">
@@ -226,9 +227,9 @@
 
 
             <!-- 상품상세 content 오른쪽 상품정보 div -->
-            <form>
                 <div class="product_right">
-                    <span class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %>
+                    <span
+                        class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %>
                         조회수 : <%=prVO.getReadcount() %></span>
                     <span class="product_cate2">
                         <input type="checkbox" id="wishlist-pid-0001">
@@ -238,98 +239,99 @@
                         </label>
                     </span>
                     <br>
-                    <hr>
+                    <hr style="border: 0.5px solid #c5c5c5;">
                     <div><%=prVO.getManufacturer() %></div>
                     <br><br><br>
-                    <hr>
+                    <hr style="border: 0.5px solid #c5c5c5;">
                     <div><%=prVO.getProduct_name() %></div>
                     <br><br><br>
-                    <hr>
+                    <hr style="border: 0.5px solid #c5c5c5;">
                     <div><%=prVO.getProduct_content() %></div>
                     <br><br><br>
-                    <hr>
-	                    <div>총수량 : <span><%=prVO.getTotal_amount()%>
-	                    <div>남은수량 : <span><%=prVO.getCurrent_amount()%>
-	                    <%if(prVO.getTotal_amount()==0 && email!=null){ %>
-	                    <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
-	                    <%} %>
-	                    </span>
-	                    </div>
+                    <hr style="border: 0.5px solid #c5c5c5;">
+                    <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div>
+                    <div>남은수량 : <span><%=prVO.getCurrent_amount()%>
+                            <%if(prVO.getTotal_amount()==0 && email!=null){ %>
+                            <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
+                            <%} %>
+                        </span>
+                    </div>
                     <br>
-                    <hr>
+                    <hr style="border: 0.5px solid #c5c5c5;">
                     <div>제품특징</div>
                     <div>
                         <span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span>
                     </div>
+                    <hr style="border: 0.5px solid #c5c5c5;">
+                    <div class="filter-search">
+                        <div><button id="wish_button">위시리스트</button></div>
+                        <div class="wishlistForm_true" style="display:none;">
+                            <h2>선택하신 상품을 위시리스트에 등록하였습니다. <br>마이페이지에서 확인하시겠습니까?</h2>
+                            <br>
+                            <div class="wishlist_true_btn">
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
+                            </div>
+                        </div>
 
-   				<div class="bookmarkForm_true" style="display:none;">
+                        <div class="wishlistForm_false" style="display:none;">
+                            <h2>위시리스트 해제되었습니다.</h2>
+                            <br>
+                            <div class="wishlist_false_btn">
+                                <a href="javascript:void(0)">확인</a>
+                            </div>
+                        </div>
+                        <div><button id="reservation_button">예약</button></div>
+                        <div class="reservationForm_true" style="display:none;">
+                            <h2>선택하신 상품이 예약되었습니다.<br>마이페이지에서 확인하시겠습니까?</h2>
+                            <br>
+                            <div class="reservation_true_btn">
+                                <a href="javascript:void(0)">예</a>
+                                <a href="javascript:void(0)">아니오</a>
+                            </div>
+                        </div>
+
+                        <div class="reservationForm_false" style="display:none;">
+                            <h2>예약 해제되었습니다.</h2>
+                            <br>
+                            <div class="reservation_false_btn">
+                                <a href="javascript:void(0)">확인</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bookmarkForm_true" style="display:none;">
                         <h2>선택하신 상품을 찜하였습니다. <br>마이페이지에서 확인하시겠습니까?</h2>
                         <br>
                         <div class="bookmark_true_btn">
-                                <a href="javascript:void(0)">예</a>
-                                <a href="javascript:void(0)">아니오</a>
+                            <a href="javascript:void(0)">예</a>
+                            <a href="javascript:void(0)">아니오</a>
                         </div>
-                </div>
-                
-                <div class="bookmarkForm_false" style="display:none;">
+                    </div>
+
+                    <div class="bookmarkForm_false" style="display:none;">
                         <h2>찜 해제되었습니다.</h2>
                         <br>
                         <div class="bookmark_false_btn">
-                                <a href="javascript:void(0)">확인</a>
+                            <a href="javascript:void(0)">확인</a>
                         </div>
-                </div>
-                </div>
-            </form>
+                    </div>
+                </div><!-- pright -->
+			
             <!-- 상품상세 content 오른쪽 상품정보 div -->
-			
-			<form id="amount_alarm" method="GET">
-				<input type="hidden" name="alert_email" value="<%=email %>" />
-				<input type="hidden" name="alert_pnum" value="<%=prVO.getProduct_num() %>" />
-				<input type="hidden" name="alert_phone" value="<%=phone %>" />
-			</form>
-			
+            <form id="amount_alarm" method="GET">
+                <input type="hidden" name="alert_email" value="<%=email %>" />
+                <input type="hidden" name="alert_pnum" value="<%=prVO.getProduct_num() %>" />
+                <input type="hidden" name="alert_phone" value="<%=phone %>" />
+            </form>
             <!-- 버튼 -->
 
-		</div>
-        </div> <!-- -->
-
-        <div class="filter-search">
-            <div><button id="wish_button">위시리스트</button></div>
-           		<div class="wishlistForm_true" style="display:none;">
-                        <h2>선택하신 상품을 위시리스트에 등록하였습니다. <br>마이페이지에서 확인하시겠습니까?</h2>
-                        <br>
-                        <div class="wishlist_true_btn">
-                                <a href="javascript:void(0)">예</a>
-                                <a href="javascript:void(0)">아니오</a>
-                        </div>
-                </div>
-                
-                <div class="wishlistForm_false" style="display:none;">
-                        <h2>위시리스트 해제되었습니다.</h2>
-                        <br>
-                        <div class="wishlist_false_btn">
-                                <a href="javascript:void(0)">확인</a>
-                        </div>
-                </div>
-            <div><button id="reservation_button">예약</button></div>
-            <div class="reservationForm_true" style="display:none;">
-                        <h2>선택하신 상품이 예약되었습니다.<br>마이페이지에서 확인하시겠습니까?</h2>
-                        <br>
-                        <div class="reservation_true_btn">
-                                <a href="javascript:void(0)">예</a>
-                                <a href="javascript:void(0)">아니오</a>
-                        </div>
-                </div>
-                
-                <div class="reservationForm_false" style="display:none;">
-                        <h2>예약 해제되었습니다.</h2>
-                        <br>
-                        <div class="reservation_false_btn">
-                                <a href="javascript:void(0)">확인</a>
-                        </div>
-                </div>
         </div>
-    
+    </div> <!-- -->
+	<br>
+	<br>
+
+
     <!-- 상품상세 content div-->
 
     <!-- 상품정보 네비게이션 바 -->
@@ -352,17 +354,23 @@
     <!-- 상품 이미지 -->
     <div class="container">
         <div class="product_content" id="#cursor_move_detail">
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product01.jpg">
-
+            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
+                <img src="/bit_project/image/<%=prVO.getImg_main()%>">
             </div>
-            <div>
-                <img src="${pageContext.request.contextPath}/resources/img/product02.jpg">
+            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
+                <img src="/bit_project/image/<%=prVO.getImg_detail()%>">
             </div>
-
+            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
+                <img src="/bit_project/image/<%=prVO.getImg_sum()%>">
+            </div>
         </div>
-
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <!-- 상품 이미지 -->
 
 
@@ -378,7 +386,6 @@
         </div>
 
         <div class="starRev">
-            <div>구매고객 총별점</div>
             <div class="star_lay">
                 <span class="starR1"></span>
                 <span class="starR2"></span>
@@ -395,7 +402,7 @@
             <div><%=String.format("%.2f", prVO.getGpa()) %>/5</div>
             <input type="hidden" id="reviewTotal" value="<%=prVO.getGpa() %>" />
         </div>
-
+        <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
 
         <div class="review">
 
@@ -440,15 +447,22 @@
     </div>
     <!-- 상품 리뷰 -->
 
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <!-- 상품 문의 -->
-    <div class="container">
+    <div class="container" id="cursor_move_qna">
         <div id="goodsQna" class="qna">
             <h3>상품Q&A&nbsp;
                 <em class="qnacssf"></em>
                 <a href="javascript:qna_write()"
                     style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>
             </h3>
+            <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
             <div class="accordion">
                 <ul>
 
@@ -494,7 +508,7 @@
 
     <!-- 상품 문의 -->
 
-
+    <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
     <!-- 배송/반납  -->
     <div class="container">
         <div class="pr_title" id="cursor_move_delivery">배송/반납</div>
@@ -507,9 +521,10 @@
 
     </div>
     <div class="container">
-    <input type="button" value="상품 수정" onclick="prModify();"/>
-    <input type="button" value="상품 삭제" onclick="prDelete();"/>
+        <input type="button" value="상품 수정" onclick="prModify();" />
+        <input type="button" value="상품 삭제" onclick="prDelete();" />
     </div>
+
     <!-- 배송/반납  -->
 
 
@@ -522,8 +537,10 @@
                         <li class="icon s1"><a href="#"><span class="ir_pm">트위터</span></a></li>
                         <li class="icon s2"><a href="#"><span class="ir_pm">페이스북</span></a></li>
                         <li class="icon s3"><a href="#"><span class="ir_pm">인스타그램</span></a></li>
-                        <li class="icon s4"><a href="#"><span class="ir_pm">구글 플레이</span></a></li>
-                        <li class="icon s5"><a href="#"><span class="ir_pm">아이폰 앱스토어</span></a></li>
+                        <li class="icon s4"><a href="#"><span class="ir_pm">구글
+                                    플레이</span></a></li>
+                        <li class="icon s5"><a href="#"><span class="ir_pm">아이폰
+                                    앱스토어</span></a></li>
                     </ul>
                     <div class="tel">
                         <a href="#">ARS <em>1544-5252</em></a>
@@ -531,12 +548,11 @@
                 </div>
             </div>
         </div>
-
         <div id="footer_infor">
             <div class="container">
                 <div class="row">
                     <div class="footer_infor">
-                        <!-- <h2><img src="s/img/logo_footer.png" alt="megabox"></h2> -->
+                        <!-- <h2><img src="assets/img/logo_footer.png" alt=""></h2> -->
                         <h2>로고1</h2>
                         <ul>
                             <li><a href="#">회사소개</a></li>
@@ -548,9 +564,11 @@
                             <li><a href="#">윤리경영</a></li>
                         </ul>
                         <address>
-                            <p>서울특별시 서초구 강남대로 459 <br><span class="bar2">대표자명 김진근</span>
-                                <br><span class="bar2">사업자등록번호
-                                    111-11-1111</span> 통신판매업신고번호 제 111호</p>
+                            <p>
+                                서울특별시 서초구 강남대로 459 <br> <span class="bar2">대표자명 김진근</span>
+                                <br> <span class="bar2">사업자등록번호 111-11-1111</span>
+                                통신판매업신고번호 제 111호
+                            </p>
                             <p>Copyright 2020 by Bit Inc. All right reserved</p>
                         </address>
                     </div>
@@ -638,26 +656,27 @@
 
     <script src="${pageContext.request.contextPath}/resources/js/product/munqna.js"></script>
     <script>
+        var revcount = 0;
         var scrollHeight = 0;
         var qnacheck = 0;
         var revcheck = 0;
         function qna_write() {
-			if(sessionChk=="" || sessionChk==null){
-				location.href="login.me";
-			}else{
-				  $('body').css("background", "grey");
-		            $(".qnaForm").show();
-		            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-		            $("body").addClass('not_scroll'); //overflow:hidden 추가
-		            $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
-		            $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-		            $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-		            //등록
-		            if ($('#QnaForm textarea').val().length == 0) {
-		                qnacheck = 1;
-		            }
-			}
-          
+            if (sessionChk == "" || sessionChk == null) {
+                location.href = "login.me";
+            } else {
+                $('body').css("background", "grey");
+                $(".qnaForm").show();
+                scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+                $("body").addClass('not_scroll'); //overflow:hidden 추가
+                $('.qnaForm').css('position', 'fixed'); //최상위 div 고정
+                $('.qnaForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                $('.qnaForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                //등록
+                if ($('#QnaForm textarea').val().length == 0) {
+                    qnacheck = 1;
+                }
+            }
+
         };
         $('.qna_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -695,23 +714,56 @@
             frm.reset();
         });
 
-        function review_write() {
-        	if(sessionChk=="" || sessionChk==null){
-				location.href="login.me";
-			}else {
-			    $('body').css("background", "grey");
-	            $(".reviewForm").show();
-	            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-	            $("body").addClass('not_scroll'); //overflow:hidden 추가
-	            $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
-	            $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-	            $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-	            //텍스트에어리어가 빈값이다 -> 리뷰등록
-	            if ($('#ReviewForm textarea').val().length == 0) {
-	                revcheck = 1;
-	            }
-			}
-        
+        function review_write(rcnt) {
+            if (sessionChk == "" || sessionChk == null) {
+                location.href = "login.me";
+            } else {
+                // 이메일과 pnum 넘겨서 이새끼 리뷰 쓴게 있나 확인. 쓴게 있으면 리뷰는 1개만 가능하다 안내.
+                $.ajax({
+                    url: '/bit_project/reviewoverflow.pr',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { "email": sessionChk, "product_num": p },
+                    async: false,
+                    success: function (data) {
+                        revcount = data;
+                    },
+                    error: function () {
+                    }
+                });
+                if (revcount == 0) {
+                    $('body').css("background", "grey");
+                    $(".reviewForm").show();
+                    scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+                    $("body").addClass('not_scroll'); //overflow:hidden 추가
+                    $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
+                    $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                    $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                    //텍스트에어리어가 빈값이다 -> 리뷰등록
+                    if ($('#ReviewForm textarea').val().length == 0) {
+                        revcheck = 1;
+                    }
+                } else {
+                    if (rcnt == 1) {
+                        $('body').css("background", "grey");
+                        $(".reviewForm").show();
+                        scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+                        $("body").addClass('not_scroll'); //overflow:hidden 추가
+                        $('.reviewForm').css('position', 'fixed'); //최상위 div 고정
+                        $('.reviewForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                        $('.reviewForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+                        //텍스트에어리어가 빈값이다 -> 리뷰등록
+                        if ($('#ReviewForm textarea').val().length == 0) {
+                            revcheck = 1;
+                        }
+                    } else {
+                        alert('리뷰는 하나만 작성가능합니다.')
+                    }
+
+                }
+
+            }
+
         };
         $('.review_writebtn a').first().click(function () {
             $("body").removeClass('not_scroll');
@@ -748,112 +800,110 @@
         });
         var scrollTop = $(window).scrollTop();
         var captionTop = $('.reviewcssf').offset().top;
-        $('html, body').animate({scrollTop : captionTop}, 0);
+        $('html, body').animate({ scrollTop: captionTop }, 0);
     </script>
     <script>
-    var bcheck = <%=bookmark%>;
-    var wcheck = <%=wishlist%>;
-    var rcheck = <%=reservation%>;
-    var acheck = <%=alarm%>;
-	if(bcheck==0){
-		$('#wishlist-pid-0001').prop('checked', false);
-	}else {
-		$('#wishlist-pid-0001').prop('checked', true);
-		//$('#wishlist-pid-0001').attr('checked', true);
-	}
-	if(wcheck==0){
-		$('#wish_button').css("background","#EA7475");
-	}else if(wcheck==1 || wcheck==11){
-		$('#wish_button').css("background","black");
-	}else {
-		$('#wish_button').css("background","#EA7475");
-	}
-	
-	if(rcheck==0 || rcheck==2){
-		$('#reservation_button').css("background","#EA7475");
-	}else {
-		$('#reservation_button').css("background","black");
-	}
-	if(acheck==0){
-		$('.alarm_btn').css("background","#EA7475");
-	}else {
-		$('.alarm_btn').css("background","black");
-	}
-	function amount_alert() {
-		 var alert_params = $("#amount_alarm").serialize();
-		 var alarm_chk = 0;
-		 
-		/*  $.ajax({
-         	url: '/bit_project/alarmCheck.pr',
-             type: 'GET',
-             dataType: 'json',
-             async:false,
-             data: alert_params,
-             success: function (data) {
-             	if(data.val=="no"){
-             		alarm_chk = 0;
-             	}else {
-             		alarm_chk = 1;
-             	}
-             },
- 	        error: function () {
- 				alert("ajax오류");
- 			}
-         });
-		  */
-		 if(acheck==0){
-			 var alarm_y = confirm("입고 알림을 신청하시겠습니까?");
-			 console.log(alert_params);
-			 if(alarm_y)
-		        {
-		            
-		            $.ajax({
-		            	url: '/bit_project/addalarm.pr',
-		                type: 'GET',
-		                dataType: 'json',
-		                async:false,
-		                data: alert_params,
-		                success: function (data) {
-		            		$('.alarm_btn').css("background","black");
-		                },
-		    	        error: function () {
-		    				alert("ajax오류");
-		    			}
-		            });
-		         
-		        }
-		 }else {
-			 var alarm_n = confirm("입고 알림을 취소하시겠습니까?");
-			 if(alarm_n)
-		        {
-		            $.ajax({
-		            	url: '/bit_project/deletealarm.pr',
-		                type: 'GET',
-		                dataType: 'json',
-		                async:false,
-		                data: alert_params,
-		                success: function (data) {
-		                	console.log("취소되었습니다.");
-		                	$('.alarm_btn').css("background","#EA7475");
-		                },
-		    	        error: function () {
-		    				alert("ajax오류");
-		    			}
-		            });
-		         
-		        }
-		 }
-	}
-	function prModify() {
-		location.href="productModifyForm.pr?num=<%=prVO.getProduct_num()%>";
-	}
-	function prDelete() {
-		var pr_delete = confirm("해당 상품을 삭제하시겠습니까?");
-		if(pr_delete){
-			location.href="productDeleteForm.pr?num=<%=prVO.getProduct_num()%>";	
-		}
-		
-	}
+        var bcheck = <%=bookmark%>;
+        var wcheck = <%=wishlist%>;
+        var rcheck = <%=reservation%>;
+        var acheck = <%=alarm%>;
+        if (bcheck == 0) {
+            $('#wishlist-pid-0001').prop('checked', false);
+        } else {
+            $('#wishlist-pid-0001').prop('checked', true);
+            //$('#wishlist-pid-0001').attr('checked', true);
+        }
+        if (wcheck == 0) {
+            $('#wish_button').css("background", "#EA7475");
+        } else if (wcheck == 1 || wcheck == 11) {
+            $('#wish_button').css("background", "black");
+        } else {
+            $('#wish_button').css("background", "#EA7475");
+        }
+
+        if (rcheck == 0 || rcheck == 2) {
+            $('#reservation_button').css("background", "#EA7475");
+        } else {
+            $('#reservation_button').css("background", "black");
+        }
+        if (acheck == 0) {
+            $('.alarm_btn').css("background", "#EA7475");
+        } else {
+            $('.alarm_btn').css("background", "black");
+        }
+        function amount_alert() {
+            var alert_params = $("#amount_alarm").serialize();
+            var alarm_chk = 0;
+
+            /*  $.ajax({
+                  url: '/bit_project/alarmCheck.pr',
+                 type: 'GET',
+                 dataType: 'json',
+                 async:false,
+                 data: alert_params,
+                 success: function (data) {
+                      if(data.val=="no"){
+                            alarm_chk = 0;
+                      }else {
+                            alarm_chk = 1;
+                      }
+                 },
+                  error: function () {
+                        alert("ajax오류");
+                    }
+             });
+              */
+            if (acheck == 0) {
+                var alarm_y = confirm("입고 알림을 신청하시겠습니까?");
+                console.log(alert_params);
+                if (alarm_y) {
+
+                    $.ajax({
+                        url: '/bit_project/addalarm.pr',
+                        type: 'GET',
+                        dataType: 'json',
+                        async: false,
+                        data: alert_params,
+                        success: function (data) {
+                            $('.alarm_btn').css("background", "black");
+                        },
+                        error: function () {
+                            alert("ajax오류");
+                        }
+                    });
+
+                }
+            } else {
+                var alarm_n = confirm("입고 알림을 취소하시겠습니까?");
+                if (alarm_n) {
+                    $.ajax({
+                        url: '/bit_project/deletealarm.pr',
+                        type: 'GET',
+                        dataType: 'json',
+                        async: false,
+                        data: alert_params,
+                        success: function (data) {
+                            console.log("취소되었습니다.");
+                            $('.alarm_btn').css("background", "#EA7475");
+                        },
+                        error: function () {
+                            alert("ajax오류");
+                        }
+                    });
+
+                }
+            }
+        }
+        function prModify() {
+            location.href = "productModifyForm.pr?num=<%=prVO.getProduct_num()%>";
+        }
+        function prDelete() {
+            var pr_delete = confirm("해당 상품을 삭제하시겠습니까?");
+            if (pr_delete) {
+                location.href = "productDeleteForm.pr?num=<%=prVO.getProduct_num()%>";
+            }
+
+        }
     </script>
 </body>
 

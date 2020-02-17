@@ -24,7 +24,6 @@
 					output += '<td>' + item.state + '</td>';
 					output += '<td>' + delivery_date + '</td>';
 					output += '<td>' + return_application + '</td>';
-					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="pickDetail('+item.state_num+','+item.subscribe_num+','+item.product_num+','+sib0+','+sib1+','+sib2+','+delivery_date+','+return_application+');">상세보기</button>' + '</td>';
 					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+item.state_num+');">완료</button>';
 					output += '</tr>';
 					

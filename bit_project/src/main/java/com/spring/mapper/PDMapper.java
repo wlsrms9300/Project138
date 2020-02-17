@@ -73,6 +73,7 @@ public interface PDMapper {
 	void qnaWrite(QnaVO qnaVO) throws Exception;
 	void qnaDelete(@Param("question_num") int question_num, @Param("product_num") int product_num);
 	void qnaModify(QnaVO qnaVO);
+	String qnaemailchk(@Param("email") String email);
 	
 	//상품 리뷰
 	void reviewWrite(ReviewVO reviewVO) throws Exception;
@@ -84,6 +85,7 @@ public interface PDMapper {
 	int addPoint(@Param("email") String email);
 	void pointDetail(@Param("email") String email, @Param("product_num") int product_num);
 	void reviewGpa(@Param("product_num") int product_num);
+	int reviewoverflow(@Param("email") String email, @Param("product_num") int product_num);
 	//상품 검색
 	int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word);
 	List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno);

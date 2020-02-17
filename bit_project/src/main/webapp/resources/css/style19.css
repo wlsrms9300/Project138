@@ -2,7 +2,7 @@
 
 /* 레이아웃 */
 #banner {position: relative; background:rgba(0,0,0,0.1);}
-#product_section {background-color: #f2f2f2;}
+#product_section {background-color: #fff;}
 #footer {background: #211f1f;}
 #testForm {display: none;}
 header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50px;}
@@ -239,9 +239,9 @@ label.round::before {border-radius:50%;}
 
 /* 슬라이드 */
 .slider {width: 100%;}
-.slider .ss1 {background: url(../img/family01.jpg) no-repeat center center; background-size: cover;}
-.slider .ss2 {background: url(../img/family02.jpg) no-repeat center center; background-size: cover;}
-.slider .ss3 {background: url(../img/family03.jpg) no-repeat center center; background-size: cover;}
+.slider .ss1 {background: url(../img/main_test2.PNG) no-repeat center center; background-size: cover;}
+.slider .ss2 {background: url(../img/main_test3.PNG) no-repeat center center; background-size: cover;}
+.slider .ss3 {background: url(../img/main_test4.PNG) no-repeat center center; background-size: cover;}
 .slider .swiper-slide {text-align: center;}
 .slider .swiper-slide.ss3 {text-align: left;} 
 .slider .swiper-slide h3 {font-size: 60px; color: #fff; margin-top: 250px; opacity: 1; }
@@ -250,18 +250,20 @@ label.round::before {border-radius:50%;}
 /* 차트 */
 .product {padding: 0 0 100px 0;}
 .product_chart {overflow: hidden; }
+.product_chart > div {margin-bottom: 2rem;}
 .product_chart > div > div > div {display: inline-block; width: 292px; margin-right: 23px; }
 .product_chart > div > div > div:last-child {margin-right: 0;}
 .product_chart > div > div > div .pr_img {position: relative;}
-.product_chart > div > div > div .pr_img figure a{position: relative; display:block;  z-index:10;}
-.product_chart > div > div > div .pr_img img {display: block;}
+.product_chart > div > div > div .pr_img figure a{position: relative; display:block;  z-index:10; height:300px;}
+.product_chart > div > div > div .pr_img img {display: block; height: 100%;}
 .product_chart > div > div > div .pr_img .rank {position: absolute; top: 0px; left: 0; width: 50px; height: 50px; line-height: 50px; background-color: #38116a; text-align: center; box-shadow: 3px 3px 8px rgba(0,0,0,0.5); z-index:11;}
 .product_chart > div > div > div .pr_img .rank strong {color: #fff; font-size: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5)}
 .product_chart > div > div > div .pr_img .mx {position: absolute; top: 17px; right: 17px;}
 .product_chart > div > div > div .pr_img .mx span {width: 103px; height: 25px; display: block;}
 .product_chart > div > div > div .pr_img .mx .m {background-position: 0 -75px;}
 .product_chart > div > div > div .pr_img .mx .b {background-position: 0 -100px;}
-.product_chart > div > div > div .infor {background: #fff; padding: 17px; border: 1px solid #d9d9d9;}
+.product_chart > div > div > div .infor {background: #fff; padding: 17px; }
+/*border: 1px solid #d9d9d9;*/
 .product_chart > div > div > div .infor h3 {color: #333; font-size: 30px; font-weight: 700; margin-bottom: 20px;}
 .product_chart > div > div > div .infor h3 strong {padding-left: 0px;}
 .product_chart > div > div > div .infor h3 span {width: 29px; height: 29px; display: inline-block; margin-top: 9px; vertical-align: -2px;}
@@ -269,9 +271,9 @@ label.round::before {border-radius:50%;}
 .product_chart > div > div > div .infor h3 span.a12 {background-position: -58px -125px;}
 .product_chart > div > div > div .infor h3 span.a15 {background-position: 0 -125px;}
 .product_chart > div > div > div .infor h3 span.a19 {background-position: -29px -125px;}
-.product_chart > div > div > div .infor .infor_btn {overflow: hidden;}
+/* .product_chart > div > div > div .infor .infor_btn {overflow: hidden;}
 .product_chart > div > div > div .infor .infor_btn a {display: block; float: left; width: 49%; margin-right: 2%; padding: 10px 0; text-align: center; background: #f2f2f2; color: #666; font-size: 18px;}
-.product_chart > div > div > div .infor .infor_btn a:last-child {margin-right: 0;}
+.product_chart > div > div > div .infor .infor_btn a:last-child {margin-right: 0;} */
 
 
 

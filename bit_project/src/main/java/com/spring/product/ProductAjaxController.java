@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.nurigo.java_sdk.api.Message;
 
 @RestController
@@ -297,6 +300,27 @@ public class ProductAjaxController {
 		}
 		return res;
 	}
+	
+	@PostMapping(value = "/qnaemailchk.pr", produces = "application/json;charset=UTF-8")
+	public String qnaemailchk(String email) {
+		String emailChk = null;
+		String str = null;
+		try {
+			emailChk = service.qnaemailchk(email);
+			System.out.println(emailChk);
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				str = mapper.writeValueAsString(emailChk); // writeValueAsString -> list객체를 json형식으로 바꿔줌.
+			} catch (Exception e) {
+				System.out.println("first() mapper : " + e.getMessage());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return str;
+	}
 	@PostMapping(value = "/reviewcount.pr", produces = "application/json;charset=UTF-8")
 	public int reviewtotalcount(int product_num) {	
 		int res=0;
@@ -348,5 +372,17 @@ public class ProductAjaxController {
 		}
 		return res;
 	}
+	@PostMapping(value = "/reviewoverflow.pr", produces = "application/json;charset=UTF-8")
+	public int reviewoverflow(String email, int product_num) {
+		int res = 0;
+		try {
+			res = service.reviewoverflow(email, product_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return res;
+	}
+	
 	/********************** 상품문의, 리뷰 종료 **********************/
 }
