@@ -110,10 +110,9 @@
  	<select id="countPosts" parameterType="String" resultMap="cpGMap">
 		select regist, count(*) as count from (
 			select trunc(regist, 'DD') as regist, board_name from board 
-			where regist between to_date(#{strAWAgo}) and to_date(#{strToday})
+			where regist = to_date(#{strDate})
 		) group by regist order by regist asc
  	</select> 
- 	<!-- 커뮤니티 게시글 수 -->
-	
+
 
 </mapper>

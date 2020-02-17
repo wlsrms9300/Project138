@@ -121,34 +121,6 @@ public class ChartServiceImpl implements ChartService {
 		}
 		return dngList;
 	}
-	
-	/* 커뮤니티 게시글 수 카운팅*/
-	@Override
-	public List<CountingPVO> countPosts()  throws Exception{
-		List<CountingPVO> countingpList = null;
-		try {
-			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
-			/*현재*/
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		    Calendar c1 = Calendar.getInstance();
-			String strToday = sdf.format(c1.getTime());
-			
-			/*일주일 전*/
-			String strAWAgo = strToday;  // 시작일
-			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
-			Calendar c = Calendar.getInstance();
-			c.setTime(sdf1.parse(strAWAgo));
-			c.add(Calendar.DATE, -6); 
-			strAWAgo = sdf1.format(c.getTime());
-			
-			countingpList = chartMapper.countPosts(strAWAgo, strToday);
-		} catch(Exception e) {
-			throw new Exception("커뮤니티 게시글 카운팅 실패", e);
-		}
-		return countingpList;
-	}
-	
-
 
 	/*회원 변동 추이*/
 	@Override
@@ -237,6 +209,19 @@ public class ChartServiceImpl implements ChartService {
 			throw new Exception("TOTAL B2B 카운트 실패", e);
 		}
 		return res;
+	}
+
+
+	@Override
+	public CountingPVO countPosts(String strDate) throws Exception {
+		CountingPVO countingpvo = null;
+		try {
+			ChartMapper chartMapper = sqlSession.getMapper(ChartMapper.class);
+			countingpvo = chartMapper.countPosts(strDate);
+		}catch(Exception e) {
+			throw new Exception("게시글 수 카운트 실패", e);
+		}
+		return countingpvo;
 	}
 
 

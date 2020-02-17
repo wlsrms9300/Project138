@@ -1,6 +1,7 @@
 package com.spring.adminchart;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +27,13 @@ public class ChartController {
 		int new_users = 0;
 		int total_subscribers = 0;
 		int total_b2b = 0;
-		List<RankingVO> rankingList = null;
-		List<EBITVO> revenueList = null;
-		List<EBITVO> expenseList = null;
-		List<DNGraphVO> dngList = null;
-		List<CountingPVO> countingpList = null;
-		List<VariationVO> variationTList = null;
+		List<RankingVO> rankingList = new ArrayList<RankingVO>();
+		List<EBITVO> revenueList = new ArrayList<EBITVO>();
+		List<EBITVO> expenseList = new ArrayList<EBITVO>();
+		List<DNGraphVO> dngList = new ArrayList<DNGraphVO>();
+		List<CountingPVO> countingpList = new ArrayList<CountingPVO>();
+		List<VariationVO> variationTList = new ArrayList<VariationVO>();
 		
-
 		try {
 			new_users = chartService.countNewUsers(); 
 			total_subscribers = chartService.countTotalSubscribers();
@@ -117,17 +117,27 @@ public class ChartController {
 				int total = variationvo2.getTotal();
 				model.addAttribute("total"+i, total);
 			}
-			
-			countingpList = chartService.countPosts(); // 커뮤니티 게시글 수 카운트
-			for(int i = 0; i < countingpList.size(); i++ ) {
-				CountingPVO countingpvo = (CountingPVO)countingpList.get(i);
-				Date cpDay = countingpvo.getRegist();
-				int totalcp = countingpvo.getCount();
+
+			/* 커뮤니티 게시글 수 카운트*/
+			for(int i = 0; i < 7; i++) {
+				/*현재*/
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			    Calendar c = Calendar.getInstance();
+				String strDate = sdf.format(c.getTime());
+				/*기준이 되는 날*/
+				c.setTime(sdf.parse(strDate));
+				c.add(Calendar.DATE, -6+i); 
+				strDate = sdf.format(c.getTime());
 				
-				model.addAttribute("cpDay"+i, cpDay);
-				model.addAttribute("totalcp"+i, totalcp);
+				CountingPVO countingpvo = new CountingPVO();
+				countingpvo = chartService.countPosts(strDate);
+				int count = 0;
+				
+				if(countingpvo != null) {
+					count = countingpvo.getCount();
+				} 
+				model.addAttribute("totalcp"+i, count);
 			}
-			
 			model.addAttribute("new_users", new_users);
 			model.addAttribute("total_subscribers", total_subscribers);
 			model.addAttribute("total_b2b", total_b2b);

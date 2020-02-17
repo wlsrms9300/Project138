@@ -396,7 +396,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -489,7 +489,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -580,7 +580,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -672,7 +672,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -763,7 +763,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -853,7 +853,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1124,7 +1124,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1216,7 +1216,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1307,7 +1307,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1397,7 +1397,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1487,7 +1487,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
@@ -1576,7 +1576,7 @@ $(document).ready(function(){
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ regist +'</td>';
-    				output += '<td>'+ item.board_name +'</td>';
+    				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
     				output += '<td>'+ item.scrap_count +'</td>';
     				output += '</tr>';
