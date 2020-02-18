@@ -62,6 +62,8 @@ public interface PDService {
 	// 3. 상세 페이지 상품 문의
 		// 페이징 처리
 		public List<QnaVO> qnaSearch(@Param("startPage") int startPage,@Param("endPage") int endPage, @Param("product_num") int product_num) throws Exception;
+		// qna 답변 가져오기
+		public List<QnaAnsVO> qnaAnsSearch(@Param("question_num") int question_num) throws Exception;
 		// 등록된 문의 개수 출력
 		public int qnaCount(@Param("product_num") int product_num) throws Exception;
 		// 문의 등록
@@ -103,4 +105,7 @@ public interface PDService {
 	    public int getPnum() throws Exception;
 	    public void shareState(int share_state, int waiting_num) throws Exception;
 	    public void shareAdd(ProductShareVO psVO) throws Exception;
+	    
+	// 7. 관리자
+	    public void ansWrite(QnaAnsVO qvo) throws Exception;
 }

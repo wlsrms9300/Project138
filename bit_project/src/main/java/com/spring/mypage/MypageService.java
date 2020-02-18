@@ -13,9 +13,7 @@ public interface MypageService {
 	public List<BookmarkVO> getMyPageBookMark(@Param("email") String email) throws Exception;
 	public List<WishlistVO> getMyPageWishList(@Param("email") String email) throws Exception;
 	public List<ReservationVO> getMyPageReservation(@Param("email") String email) throws Exception;
-	public List<ShareWatingListVO> getMyPageShare(@Param("email") String email) throws Exception;
 	public PStateVO getProductState(PStateVO vo) throws Exception;
-	public List<ProductShareVO> getMyPageShare2(@Param("email") String email) throws Exception;
 	public void getMyPageShareSettle(@Param("email") String email, @Param("settle") int settle, @Param("share_num") int share_num) throws Exception;
 	public SettlementVO getShareJoin(@Param("share_num") int share_num) throws Exception;
 	public void addMyPageShareSettle(SettlementVO sVO) throws Exception;
@@ -23,5 +21,12 @@ public interface MypageService {
 	public int checkPS(PStateVO vo) throws Exception;
 	public int checkReserve(String email) throws Exception;
 	public int getReserve(String email) throws Exception;
+	public int scount(String email) throws Exception;
+	public int hcount(String email) throws Exception;
+
+	
+	public List<ShareWatingListVO> getMyPageShare(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email) throws Exception;
+	public List<ProductShareVO> getMyPageShare2(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email) throws Exception;
+	
 	
 }

@@ -1,4 +1,14 @@
-$(document).ready(function(){	
+    	// share_waiting_list
+        var StotalData = 0;
+        var SdataPerPage = 5;
+        var SpageCount = 5;
+        var ScurrentPage = 1;
+        // product_share
+        var HtotalData = 0;
+        var HdataPerPage = 5;
+        var HpageCount = 5;
+        var HcurrentPage = 1;
+$(document).ready(function(){
     $('.member').on('click', function(){
         var submenu = $(this).next("ul");
         var submenu2 = $('#sub_list11');
@@ -155,6 +165,23 @@ $(document).ready(function(){
 
     
     $('#num3').click(function(){
+
+    	 $.ajax({
+    	    	url: '/bit_project/myShareCount.my',
+    	        type: 'POST',
+    	        dataType: 'json',
+    	        data:{"email" : myemail},
+    	        async:false,
+    	        success: function (data) {
+    	        	//HashMap으로 데이터 받아와야함.
+    	            StotalData = data.share;
+    	            HtotalData = data.sharehis;
+    	        },
+    	        error: function () {
+    				alert("실패");
+    			}
+    	    });
+    	    
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -163,6 +190,7 @@ $(document).ready(function(){
         var menu4= $('.member_update');
         var menu5= $('.member_bye');
         var menu6= $('.board_list_wrap');
+        var menu7= $('.share_history');
         if(menu3.css("display") == "none") {
             $('#num0').css('color', 'black');
             $('#num1 > b').css('color', 'black');
@@ -179,123 +207,10 @@ $(document).ready(function(){
             menu4.hide();
             menu5.hide();
             menu6.hide();
+            menu7.show();
         }
-        $('.share').empty();
-        $.ajax({
-            url: '/bit_project/mypage_share.my',
-            type: 'GET',
-            dataType: 'json',
-            data:{"email" : myemail},
-            async:false,
-            success: function (data) {
-                    var sl = "";
-                    if(data!=null){
-                    $.each(data, function (index, item) {
-                    	if(index==0){
-                    		sl += '<h2>쉐어</h2>';
-                            sl += '<div class="account">';
-                            sl += '<div class="account_title">';
-                            sl += '<h3>계좌번호</h3>';
-                            sl += '</div>';
-                            sl += '<div class="account_detail">';
-                            sl += '<p>'+item.bank+'&nbsp;&nbsp;'+item.account+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+item.name+'</p>';
-                            sl += '</div>';
-                            sl += '</div>';
-                            $('.share').append(sl);
-                            var sl_sub1 = "";
-                            sl_sub1 = '<div class="application">';
-                            sl_sub1 += '<h3>신청 내역</h3>';
-                            sl_sub1 += '<table>';
-                            sl_sub1 += '<tr class="application_line">';
-                            sl_sub1 += '<th>신청일</th>';
-                            sl_sub1 += '<th>상품명</th>';
-                            sl_sub1 += '<th>상태</th>';
-                            sl_sub1 += '</tr>';
-                            sl_sub1 += '</table>';
-                            $('.share').append(sl_sub1);
-                    	}
-                        //$('.account_title').append(sl_sub1);
-                        //$('.account_detail').append(sl_sub2);
-                        var sl_sub2 = "";
-                        sl_sub2 += '<tr class="application_line">';
-                        var date = new Date(item.consignment_start_date);
-                        date = date_to_str(date);
-                        sl_sub2 += '<td>'+date+'</td>';
-                        sl_sub2 += '<td>'+item.product_name+'</td>';
-                        if(item.share_state==0){
-                        	sl_sub2 += '<td>쉐어 대기</td>';	
-                        }else if(item.share_state==1) {
-                        	sl_sub2 += '<td>쉐어 수락</td>';
-                        }else if(item.share_state==2) {
-                        	sl_sub2 += '<td>쉐어 거절</td>';
-                        }else {
-                        	sl_sub2 += '<td>쉐어 승인</td>';
-                        }
-                        sl_sub2 += '</tr>';
-
-                        $('.application table').append(sl_sub2);
-                      
-                    })
-                    } else {
-                    	alert('데이터가 없습니다.')
-                    }
-            },
-            error: function () {
-                alert("마이페이지 쉐어 신청 리스트 출력 실패");
-            }
-        });
-        
-        $.ajax({
-            url: '/bit_project/mypage_share2.my',
-            type: 'GET',
-            dataType: 'json',
-            data:{"email" : myemail},
-            async:false,
-            success: function (data) {
-                    var sl = "";
-                    if(data!=null){
-                    $.each(data, function (index, item) {
-                    	if(index==0){
-                    	  var sh = "";
-                          sh += '<div class="share_history">';
-                          sh += '<h3>쉐어 내역</h3>';
-                          sh += '<table>';
-                          sh += '<tr class="share_line">';
-                          sh += '<th>기간</th>';
-                          sh += '<th>상품명</th>';
-                          sh += '<th>총수익</th>';
-                          sh += '<th>상태(대여 : 총수량)</th>';
-                          sh += '<th>정산</th>';
-                          sh += '</tr>';
-                          sh += '</table>';
-                          sh += '</div>';
-                          $('.share').append(sh);
-                    	}
-                    	//나머지 실제 데이터 출력 부분
-                    	var settle_sNum = "'" + item.share_num + "'";
-                    	var date1 = new Date(item.consignment_start_date);
-                    	date1 = date_to_str(date1);
-                    	var date2 = new Date(item.consignment_end_date);
-                    	date2 = date_to_str(date2);
-                    	var sh2 ="";
-                    	sh2 += '<tr class="share_line">';
-                    	sh2 += '<td>'+date1+'~'+date2+'</td>';
-                    	sh2 += '<td>'+item.product_name+'</td>';
-                    	sh2 += '<td>'+item.total_accumulated_fund+'</td>';
-                    	sh2 += '<td>'+item.share_amount+'/'+item.total_amount+'</td>';
-                    	sh2 += '<td><input type="button" value="정산" class="share_btn" onclick="settlement('+settle_sNum+');"></td>';
-                    	sh2 += '</tr>';
-                    	$('.share_history table').append(sh2);
-                    	
-                    })
-                    } else {
-                    	alert('데이터가 없습니다.');
-                    }
-            },
-            error: function () {
-                alert("마이페이지 쉐어 신청 리스트 출력 실패");
-            }
-        });
+        share_Data(StotalData, SdataPerPage, SpageCount, ScurrentPage);
+        sharehis_Data(HtotalData, HdataPerPage, HpageCount, HcurrentPage);
         
         
     });
@@ -2314,4 +2229,289 @@ function deleteBook(pNum) {
 		 });
 	}
 	book_click();
+}
+
+function share_Data(StotalData, SdataPerPage, SpageCount, ScurrentPage) {
+	alert("share");
+	  $('.share').empty();
+      $.ajax({
+          url: '/bit_project/mypage_share.my',
+          type: 'GET',
+          dataType: 'json',
+          data:{"email" : myemail, "page": ScurrentPage},
+          async:false,
+          success: function (data) {
+                  var sl = "";
+                  if(data.length!=0){
+                  $.each(data, function (index, item) {
+                  	if(index==0){
+                  		sl += '<h2>쉐어</h2>';
+                          sl += '<div class="account">';
+                          sl += '<div class="account_title">';
+                          sl += '<h3>계좌번호</h3>';
+                          sl += '</div>';
+                          sl += '<div class="account_detail">';
+                          sl += '<p>'+item.bank+'&nbsp;&nbsp;'+item.account+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+item.name+'</p>';
+                          sl += '</div>';
+                          sl += '</div>';
+                          $('.share').append(sl);
+                          var sl_sub1 = "";
+                          sl_sub1 = '<div class="application">';
+                          sl_sub1 += '<h3>신청 내역</h3>';
+                          sl_sub1 += '<table>';
+                          sl_sub1 += '<tr class="application_line">';
+                          sl_sub1 += '<th>신청일</th>';
+                          sl_sub1 += '<th>상품명</th>';
+                          sl_sub1 += '<th>상태</th>';
+                          sl_sub1 += '</tr>';
+                          sl_sub1 += '</table>';
+                          $('.share').append(sl_sub1);
+                  	}
+                      //$('.account_title').append(sl_sub1);
+                      //$('.account_detail').append(sl_sub2);
+                      var sl_sub2 = "";
+                      sl_sub2 += '<tr class="application_line">';
+                      var date = new Date(item.consignment_start_date);
+                      date = date_to_str(date);
+                      sl_sub2 += '<td>'+date+'</td>';
+                      sl_sub2 += '<td>'+item.product_name+'</td>';
+                      if(item.share_state==0){
+                      	sl_sub2 += '<td>쉐어 대기</td>';	
+                      }else if(item.share_state==1) {
+                      	sl_sub2 += '<td>쉐어 수락</td>';
+                      }else if(item.share_state==2) {
+                      	sl_sub2 += '<td>쉐어 거절</td>';
+                      }else {
+                      	sl_sub2 += '<td>쉐어 승인</td>';
+                      }
+                      sl_sub2 += '</tr>';
+
+                      $('.application table').append(sl_sub2);
+                    
+                  })
+                  share_paging(StotalData, SdataPerPage, SpageCount, ScurrentPage);
+                  } else {
+                	  sl += '<h2>쉐어</h2>';
+                      sl += '<div class="account">';
+                      sl += '<div class="account_title">';
+                      sl += '<h3>계좌번호</h3>';
+                      sl += '</div>';
+                      sl += '<div class="account_detail">';
+                      sl += '<p>'+item.bank+'&nbsp;&nbsp;'+item.account+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+item.name+'</p>';
+                      sl += '</div>';
+                      sl += '</div>';
+                      $('.share').append(sl);
+                      var sl_sub1 = "";
+                      sl_sub1 = '<div class="application">';
+                      sl_sub1 += '<h3>신청 내역</h3>';
+                      sl_sub1 += '<table>';
+                      sl_sub1 += '<tr class="application_line">';
+                      sl_sub1 += '<th>신청일</th>';
+                      sl_sub1 += '<th>상품명</th>';
+                      sl_sub1 += '<th>상태</th>';
+                      sl_sub1 += '</tr>';
+                      sl_sub1 += '</table>';
+                      $('.share').append(sl_sub1);
+                      var sl_sub2 = "";
+                      sl_sub2 += '<tr class="application_line">';
+                      sl_sub2 += '<td colspan="3">데이터가 없습니다.</td>';
+                      sl_sub2 += '</tr>';
+                      $('.application table').append(sl_sub2);
+                  }
+          },
+          error: function () {
+              alert("마이페이지 쉐어 신청 리스트 출력 실패");
+          }
+      });
+}
+function sharehis_Data(HtotalData, HdataPerPage, HpageCount, HcurrentPage) {
+	alert("sharehis");
+	 $('.share_history').empty();
+     $.ajax({
+         url: '/bit_project/mypage_share2.my',
+         type: 'GET',
+         dataType: 'json',
+         data:{"email" : myemail, "page": HcurrentPage},
+         async:false,
+         success: function (data) {
+                 var sl = "";
+                 if(data.length!=0){
+                 $.each(data, function (index, item) {
+                 	if(index==0){
+                 	  var sh = "";
+                       sh += '<h3>쉐어 내역</h3>';
+                       sh += '<table>';
+                       sh += '<tr class="share_line">';
+                       sh += '<th>기간</th>';
+                       sh += '<th>상품명</th>';
+                       sh += '<th>총수익</th>';
+                       sh += '<th>상태(대여 : 총수량)</th>';
+                       sh += '<th>정산</th>';
+                       sh += '</tr>';
+                       sh += '</table>';
+                       $('.share_history').append(sh);
+                 	}
+                 	//나머지 실제 데이터 출력 부분
+                 	var settle_sNum = "'" + item.share_num + "'";
+                 	var date1 = new Date(item.consignment_start_date);
+                 	date1 = date_to_str(date1);
+                 	var date2 = new Date(item.consignment_end_date);
+                 	date2 = date_to_str(date2);
+                 	var sh2 ="";
+                 	sh2 += '<tr class="share_line">';
+                 	sh2 += '<td>'+date1+'~'+date2+'</td>';
+                 	sh2 += '<td>'+item.product_name+'</td>';
+                 	sh2 += '<td>'+item.total_accumulated_fund+'</td>';
+                 	sh2 += '<td>'+item.share_amount+'/'+item.total_amount+'</td>';
+                 	sh2 += '<td><input type="button" value="정산" class="share_btn" onclick="settlement('+settle_sNum+');"></td>';
+                 	sh2 += '</tr>';
+                 	$('.share_history table').append(sh2);
+                 })
+                 sharehis_paging(HtotalData, HdataPerPage, HpageCount, HcurrentPage);
+                 } else {
+                	  var sh = "";
+                      sh += '<h3>쉐어 내역</h3>';
+                      sh += '<table>';
+                      sh += '<tr class="share_line">';
+                      sh += '<th>기간</th>';
+                      sh += '<th>상품명</th>';
+                      sh += '<th>총수익</th>';
+                      sh += '<th>상태(대여 : 총수량)</th>';
+                      sh += '<th>정산</th>';
+                      sh += '</tr>';
+                      sh += '</table>';
+                      $('.share_history').append(sh);
+                  	var sh2 ="";
+                 	sh2 += '<tr class="share_line">';
+                 	sh2 += '<td colspan="5">데이터가 없습니다.</td>';
+                 	sh2 += '</tr>';
+                 	$('.share_history table').append(sh2);
+                 }
+         },
+         error: function () {
+             alert("마이페이지 쉐어 신청 리스트 출력 실패");
+         }
+     });
+}
+function share_paging(StotalData, SdataPerPage, SpageCount, ScurrentPage) {
+    var totalPageDevide = StotalData / SdataPerPage;
+    var pageGroupDevide = ScurrentPage / SpageCount;
+
+
+    var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수
+    var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹
+    
+    var last = pageGroup * SpageCount;
+
+    if (last > totalPage)
+        last = totalPage;
+    var first = last - (SpageCount - 1);
+    if (first <= 0) {
+        first = 1;
+    }
+    var next = last + 1; // 다음
+    var prev = first - 1; // 이전
+    var one = 1; // 맨 처음 
+    var lastNo = totalPage; // 맨 끝
+
+    var html = "";
+
+    if (prev > 0) {
+        html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
+        html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
+
+    }
+    for (var i = first; i <= last; i++) {
+    	html += "<a href='javascript:share_Data("+StotalData+","+SdataPerPage+","+ SpageCount+", " + i + ");' id=" + i + ">" + i + "</a> ";
+        
+        
+    }
+
+    if(totalPage==0){
+    	
+    }else {
+    	  if (last < totalPage)
+    	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
+    	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
+
+    	        $(".share_paginate").html(html);    // 페이지 목록 생성
+    	        $(".share_paginate a").removeClass("page_on");
+
+    	        $(".share_paginate a#" + ScurrentPage).addClass("page_on"); // 현재 페이지 표시	
+    }
+    $(".share_paginate a").click(function () {
+        var $item = $(this);
+        var $id = $item.attr("id");
+        var selectedPage = $item.text(); // 번호 클릭.
+
+        if ($id == "one") selectedPage = one;
+        if ($id == "prev") selectedPage = prev;
+        if ($id == "next") selectedPage = next;
+        if ($id == "lastNo") selectedPage = lastNo;
+        share_Data(StotalData, SdataPerPage, SpageCount, selectedPage);
+        share_paging(StotalData, SdataPerPage, SpageCount, selectedPage);// 페이징
+       
+    })
+}
+
+
+
+function sharehis_paging(HtotalData, HdataPerPage, HpageCount, HcurrentPage) {
+    var totalPageDevide = HtotalData / HdataPerPage;
+    var pageGroupDevide = HcurrentPage / HpageCount;
+
+
+    var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수
+    var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹
+    
+    var last = pageGroup * HpageCount;
+
+    if (last > totalPage)
+        last = totalPage;
+    var first = last - (HpageCount - 1);
+    if (first <= 0) {
+        first = 1;
+    }
+    var next = last + 1; // 다음
+    var prev = first - 1; // 이전
+    var one = 1; // 맨 처음 
+    var lastNo = totalPage; // 맨 끝
+
+    var html = "";
+
+    if (prev > 0) {
+        html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
+        html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
+
+    }
+    for (var i = first; i <= last; i++) {
+    	html += "<a href='javascript:sharehis_Data("+HtotalData+","+HdataPerPage+","+ HpageCount+", " + i + ");' id=" + i + ">" + i + "</a> ";
+        
+    }
+
+    if(totalPage==0){
+    	
+    }else {
+    	  if (last < totalPage)
+    	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
+    	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
+
+    	        $(".sharehis_paginate").html(html);    // 페이지 목록 생성
+    	        $(".sharehis_paginate a").removeClass("page_on");
+
+    	        $(".sharehis_paginate a#" + HcurrentPage).addClass("page_on"); // 현재 페이지 표시	
+    }
+    $(".sharehis_paginate a").click(function () {
+        var $item = $(this);
+        var $id = $item.attr("id");
+        var selectedPage = $item.text(); // 번호 클릭.
+
+        if ($id == "one") selectedPage = one;
+        if ($id == "prev") selectedPage = prev;
+        if ($id == "next") selectedPage = next;
+        if ($id == "lastNo") selectedPage = lastNo;
+        sharehis_Data(HtotalData, HdataPerPage, HpageCount, selectedPage);
+        sharehis_paging(HtotalData, HdataPerPage, HpageCount, selectedPage);// 페이징
+       
+    })
 }

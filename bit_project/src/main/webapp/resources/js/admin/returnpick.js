@@ -61,28 +61,7 @@
         
     }
 	
-	function pickDetail() {
-		//파라미터로 받았고, 팝업창 띄움.
-		$('#waiting_num').val(_wnum);
-		$('#email').val(_email);
-		$('#name').val(_name);
-		$('#product_name').val(_pName);
-		$('#amount').val(_amount);
-		$('#share_content').val(_content);
-		$('#share_img1').val(_img1);
-		$('#share_img2').val(_img2);
-		$('#share_img3').val(_img3);
-		$('#bank').val(_bank);
-		$('#account').val(_account);
-	
-		var pop_name = "popupDetail";
-		window.open("", pop_name,"width=1200,height=700, scrollbars=no, resizable=no");
-		
-		 var frmData = document.frmData;
-	        frmData.target = pop_name;
-	        frmData.action = "/bit_project/shareDetail.pr";
-	        frmData.submit();
-	}
+
 	
 function accept(_sNum) {
 	var pick_Accept = confirm("반납완료 처리 하시겠습니까?");

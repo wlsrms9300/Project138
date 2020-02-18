@@ -10,6 +10,13 @@ public class QnaAnsVO {
 	private int product_num;
 	private String content;
 	private Date regist;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getAnswer_num() {
 		return answer_num;
 	}

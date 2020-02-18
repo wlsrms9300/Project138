@@ -66,18 +66,28 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
 	                //exText += "<div>";
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
-					//item.point_details==1인 경우 삭제 못하게 바꿔야함.
 					
 					if(item.point_details==1){
 						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:green"></i></a>';	
 					}else {
 						exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
-						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewpoint('+sib6+','+sib2+');">포인트 적립</a>';
+						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:white"></i></a>';
 					}
 					
 					exText += '</div>';
+				}else if(usergroup=='admin'){
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
+					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+					if(item.point_details==1){
+						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:green"></i></a>';	
+					}else {
+						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewpoint('+sib6+','+sib2+');">포인트 적립</a>';
+					}
+					exText += '</div>';
 				}else {
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
+					exText += '</div>';
 				}
                 
                 //exText += "</div>";

@@ -296,16 +296,27 @@
 	</select>
 	<!-- 입고 SMS 알림 서비스 관련 -->
 	<!-- 상품 문의 -->
-	<select id="qnaSearch" parameterType="map"
-		resultType="com.spring.product.QnaVO">
+	 <select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaVO">
 		select * FROM (
 		SELECT rownum rnum, question_num, question_title,
 		product_num,email,nickname,content,regist,secret,answer
 		FROM question
 		where product_num=#{product_num}
-		ORDER BY regist asc
+		ORDER BY regist desc
 		)
 	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>
+	</select> 
+<!-- 	<select id="qnaSearch" parameterType="map" resultType="com.spring.product.QnaPlusAnsVO">
+		select * FROM (
+			select rownum rnum, q.question_num, q.question_title, q.product_num, q.email, q.nickname, q.content as content, q.regist as regist, q.secret, q.answer, a.content as acontent, a.regist as aregist, a.answer_num 
+			from question q, question_answer a
+			where q.question_num= a.question_num and q.product_num=#{product_num} and a.product_num=#{product_num}
+			order by regist asc
+		)
+	<![CDATA[WHERE rnum>=#{startPage} and rnum<=#{endPage}]]>
+	</select> -->
+	<select id="qnaAnsSearch" parameterType="map" resultType="com.spring.product.QnaAnsVO">
+	select * from question_answer where question_num=#{question_num} 
 	</select>
 
 	<select id="qnaCount" parameterType="map" resultType="int">
@@ -325,10 +336,14 @@
 		#{secret}
 		)
 	</insert>
+	<delete id="qnaAnsDelete" parameterType="map">
+		delete from question_answer where question_num=#{question_num}
+	</delete>
 	<delete id="qnaDelete" parameterType="map">
 		delete from question where product_num=#{product_num} AND
 		question_num=#{question_num}
 	</delete>
+	
 	<update id="qnaModify" parameterType="com.spring.product.QnaVO">
 		update question set question_title=#{question_title}, email=#{email}, nickname=#{nickname},
 		content=#{content}, secret=#{secret}, regist=sysdate where
@@ -336,6 +351,9 @@
 	</update>
 	<select id="qnaemailchk" parameterType="map" resultType="String">
 		select email FROM member where email=#{email}
+	</select>
+	<select id="qnaadminchk" parameterType="map" resultType="String">
+		select email FROM admin where email=#{email}
 	</select>
 	
 	<select id="reviewoverflow" parameterType="map" resultType="int">
@@ -466,4 +484,19 @@
 	</select>
 	<!-- 상품 검색 -->
 
+	<!--  관리자 -->
+	<insert id="ansWrite" parameterType="com.spring.product.QnaAnsVO">
+		<selectKey keyProperty="answer_num" resultType="int" order="BEFORE">
+			SELECT question_ans_sequence.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into question_answer(answer_num, question_num, nickname, product_num, content, regist, email) 
+		values(#{answer_num}, #{question_num}, #{nickname},#{product_num}, #{content}, sysdate, #{email})
+	</insert>
+	
+	<update id="ansState" parameterType="com.spring.product.QnaAnsVO">
+		update question set answer='답변완료' where question_num=#{question_num}
+	</update>	
+	
+	<!--  관리자 -->
+	
 </mapper>

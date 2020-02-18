@@ -14,8 +14,10 @@
 </head>
 <body>
 	<div class="share">
-           
-            
     </div>
+    <div class="share_paginate" style="text-align:center;"></div>
+    <div class="share_history">
+    </div>
+    <div class="sharehis_paginate" style="text-align:center;"></div>
 </body>
 </html>

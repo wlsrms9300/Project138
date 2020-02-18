@@ -9,9 +9,13 @@
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
 	int bookmark = 0, wishlist = 0, reservation = 0, alarm = 0;
-	String email = "", phone="";
+	String email = "", phone="", usergroup="";
 	
 	try {
+		if(userDetail.getUsergroup().equals("admin")) {
+			usergroup = userDetail.getUsergroup(); //관리자인지 확인
+			System.out.println("관리자다");
+		} 
 		if((String)session.getAttribute("email")!=null){
 			email = (String)session.getAttribute("email");
 			phone = userDetail.getPhone();
@@ -81,6 +85,7 @@
         var p = <%=prVO.getProduct_num() %>;
         var sessionChk = "<%=email%>";
         var nick = "<%=nickname%>";
+        var usergroup ="<%=usergroup%>";
     </script>
 </head>
 
@@ -95,7 +100,7 @@
                     </div>
                     <ul class="nav">
                         <%
-						if(img != null) {
+						if(img != null || email!=null) {
 					%>
                         <div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
                             <p style="cursor:pointer; font-size:16px;">로그아웃</p>
@@ -234,34 +239,30 @@
                     <span class="product_cate2">
                         <input type="checkbox" id="wishlist-pid-0001">
                         <label for="wishlist-pid-0001">
-                            <i class="far fa-heart" aria-hidden="true"></i>
-                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <i class="far fa-heart fa-2x" aria-hidden="true"></i>
+                            <i class="fas fa-heart fa-2x" aria-hidden="true"></i>
                         </label>
                     </span>
+                    <hr style="border: 0.5px solid #c5c5c5; margin: 0; width:100%;">
+                    <div class="pvofamily">
+                    <div class="pvomanu"><%=prVO.getManufacturer() %></div>
                     <br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getManufacturer() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getProduct_name() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getProduct_content() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div>
-                    <div>남은수량 : <span><%=prVO.getCurrent_amount()%>
+                    <div class="pvopname"><%=prVO.getProduct_name() %></div>
+                    <br>
+                    <div class="pvopcon"><%=prVO.getProduct_content() %></div>
+                    </div>
+                    <%-- <hr style="border: 0.5px solid #c5c5c5;">
+                    <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div> --%>
+                    <div class="pvocur">남은수량 : <span><%=prVO.getCurrent_amount()%>
                             <%if(prVO.getTotal_amount()==0 && email!=null){ %>
                             <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
                             <%} %>
                         </span>
                     </div>
-                    <br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div>제품특징</div>
+               <!--      <div>제품특징</div>
                     <div>
                         <span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span>
-                    </div>
+                    </div> -->
                     <hr style="border: 0.5px solid #c5c5c5;">
                     <div class="filter-search">
                         <div><button id="wish_button">위시리스트</button></div>
@@ -494,10 +495,26 @@
 
                 <div>
                     <label for="privatecheck">공개 여부</label>
-                    <span><input type="radio" name="privatecheck" value="공개" />공개</span>
+                    <span><input type="radio" name="privatecheck" value="공개" checked/>공개</span>
                     <span><input type="radio" name="privatecheck" value="비공개" />비공개</span>
                 </div>
                 <div class="qna_writebtn">
+                    <a href="javascript:void(0)">저장</a>
+                    <a href="javascript:void(0)">취소</a>
+                </div>
+            </form>
+        </div>
+		<div class="adminAnsForm" style="display:none;">
+            <h2>관리자 상품Q&A 답변</h2>
+            <form id="AnsForm" method="post">
+                <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
+                <input type="hidden" name="nickname" value="<%=nickname %>" />
+                <input type="hidden" name="question_num" value="" />
+                <input type="hidden" name="email" value="<%=email %>" />
+                <div>
+                    <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
+                </div>
+                <div class="admin_writebtn">
                     <a href="javascript:void(0)">저장</a>
                     <a href="javascript:void(0)">취소</a>
                 </div>

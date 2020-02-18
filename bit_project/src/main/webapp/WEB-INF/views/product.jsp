@@ -53,7 +53,7 @@
                 </div>
                 <ul class="nav">
 					<%
-						if(img != null) {
+						if(img != null || email!=null) {
 					%>
 						<div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
 							<p style="cursor:pointer; font-size:16px;">로그아웃</p>
