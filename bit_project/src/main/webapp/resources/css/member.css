@@ -3,7 +3,7 @@
 
 *{font-family: S-CoreDream-4Regular;}
 /*******************************로그인(login.jsp)****************************************/
-     @media (max-width: 2000px){ 
+     @media (max-width: 2500px){ 
             #content {
             text-align: center;
             position: relative;

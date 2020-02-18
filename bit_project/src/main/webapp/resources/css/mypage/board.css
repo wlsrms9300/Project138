@@ -29,7 +29,10 @@
     padding-right: 20px;
 }
 
-
+.line3 > td, .line3 > th {
+    border-bottom:solid 1px rgb(206, 207, 205);
+    padding:10px;
+}
 
 .board_list_wrap {
 	min-height:750px;

@@ -394,7 +394,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -487,7 +487,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -578,7 +578,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -670,7 +670,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -761,7 +761,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -851,7 +851,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -938,7 +938,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td>'+ item.content +'</td>';
     				output += '</tr>';
@@ -1007,7 +1007,7 @@ $(document).ready(function(){
     	}
     	$('#foo-table-thead').empty();
     	var thead = '';
-		 thead += '<tr>';
+		 thead += '<tr class="line3">';
 		 thead += '<th>등록일</th>';
 		 thead += '<th>후기</th>';
 		 thead += '</tr>';
@@ -1122,7 +1122,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1214,7 +1214,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1305,7 +1305,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1395,7 +1395,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1485,7 +1485,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1574,7 +1574,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td><a class="community_mt_link" href="community_detail.co?board_num=' + item.board_num  + '">'+ item.board_name +'</a></td>';
     				output += '<td>'+ item.count +'</td>';
@@ -1661,7 +1661,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td>'+ item.content +'</td>';
     				output += '</tr>';
@@ -1748,7 +1748,7 @@ $(document).ready(function(){
     				var date1 = new Date(item.regist);
     				var regist = date_format(date1);
     				var output = '';
-    				output += '<tr>';
+    				output += '<tr class="line3">';
     				output += '<td>'+ regist +'</td>';
     				output += '<td>'+ item.content +'</td>';
     				output += '</tr>';
