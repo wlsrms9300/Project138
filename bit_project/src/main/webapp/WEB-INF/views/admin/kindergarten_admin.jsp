@@ -386,6 +386,7 @@
 	             </div>
 	         </div> 
 	     </div>
+	     <!--  여기 까지 modal -->
 
 	 	<script>
 	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term){

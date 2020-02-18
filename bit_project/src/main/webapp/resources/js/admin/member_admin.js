@@ -25,6 +25,22 @@
 
 			success:function(data){
 				$.each(data, function(index, item){	//각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
+				  var email = "'" + item.email + "'";           //membervo
+				  var usergroup = "'" + item.usergroup + "'"; 	//membervo
+        		  var name = "'" + item.name + "'";				//membervo
+				  var nickname = "'" + item.nickname + "'";		//membervo
+        		  var phone = "'" + item.phone + "'";			//membervo
+        		  var regist = "'" + item.regist + "'";			//membervo,date
+        		  var address = "'" + item.address + "'";		//membervo
+        		  var address_detail = "'" + item.address_detail + "'";	//membervo
+        		  var point = "'" + item.point + "'";					//membervo,int
+        		  var last_connection = "'" + item.last_connection + "'";//membervo, date
+        		  var subscribe = "'" + item.subscribe + "'";			//membervo
+        		  var grade = "'" + item.grade + "'";
+        		  
+        		 
+        		  
+			
 					var output = '';
 					output += '<tr>';
 					output += '<td>' + item.email + '</td>';
@@ -36,7 +52,11 @@
 					output += '<td>' + item.subscribe + '</td>';
 					output += '<td>' + item.grade + '</td>';
 					output += '<td>' + item.usergroup + '</td>';
+					
+					 
+					output += '<td><button type="button" class="btn btn-sm memdetail" onclick="memdetail1('+item.email+','+usergroup+','+name+','+nickname+','+phone+','+regist+','+address+','+address_detail+','+point+','+last_connection+','+subscribe+','+grade+');">상세 정보</button></td>';
 					output += '</tr>';
+					 
 					console.log("output:"+output);
 					$('#output').append(output);
 				});
