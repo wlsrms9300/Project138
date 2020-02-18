@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.menu.CompanyVO;
 import com.spring.partner.PartnerVO;
+import com.spring.product.ProductVO;
 
 public interface AdminService {
 	public List<CompanyVO> getMemberList();   //admin에서 memberList 뽑음.
@@ -16,5 +17,4 @@ public interface AdminService {
 	public void cpdelete(@Param("name") String name) throws Exception;
 	public int partneradd(PartnerVO partnerVO); 
 	public int companyadd(CompanyVO cpVO); 
-	
 }

@@ -199,13 +199,14 @@
 						<h2>회원관리</h2>
 						<thead>
 							<tr>
-								<th>Email</th>
-								<th>Nickname</th>
-								<th>Phone</th>
-								<th>RegistDate</th>
-								<th>Subscribe</th>
-								<th>Grade</th>
-								<th>UserGroup</th>
+								<th>이메일</th>
+								<th>닉네임</th> 
+								<th>연락처</th>
+								<th>가입날자</th> 
+								<th>구독여부</th>
+								<th>구독등급</th>
+								<th>사용자등급</th>
+								<th>상세정보</th>
 							</tr>
 
 						</thead>
@@ -213,6 +214,95 @@
 							
 						</tbody>
 					</table>
+					
+					 <!-- 어린이집 가입신청 모달-->
+		 
+	     <div class="modal" id="member-dtmodal">
+	         <div class="modal-content">  
+	             <span class="close-button" id="mclose-button1">&times;</span>
+	             <h1 class="title">어린이집 정보</h1>
+	            <table style="text-align: center; margin: 0 auto;">
+	            <tr style="width: 80%;">
+	            	 <th>이메일 :</th>
+	                 <th><input type=text name="email" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>사용자 등급 :</th>
+	                 <th><input type=text name="usergroup" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>이름 :</th>
+	                 <th><input type=text name="name" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>닉네임 :</th>
+	                 <th><input type=text name="nickname" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>연락처 :</th>
+	                 <th><input type=text name="phone" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>가입날자 :</th>
+	                 <th><input type=text name="regist" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>주소 :</th>
+	                 <th><input type=text name="address" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>상세주소 :</th>
+	                 <th><input type=text name="address_detail" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>포인트 :</th>
+	                 <th><input type=text name="point" readonly></th>
+	            </tr>
+	       		<tr>
+	            	 <th>마지막 접속일 :</th>
+	                 <th><input type=text name="last_connection" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>구독여부 :</th>
+	                 <th><input type=text name="subscribe" readonly></th>
+	            </tr><tr>
+	            	 <th>구독 등급 :</th>
+	                 <th><input type=text name="grade" readonly></th>
+	            </tr>
+				</table>
+	             </div>
+	         </div> 
+	     </div>
+	     
+	     <script>
+	 	function detail1(param_email, _usergroup, param_name, param_nickname, param_phone, param_regist, param_address, param_address_detail, param_point, param_last_connection, param_subscribe, param_grade){
+	 		$('input[name=email]').val(param_email);
+	 		$('input[name=usergroup]').val(param_usergroup);
+	 		$('input[name=name]').val(param_name);
+	 		$('input[name=nickname]').val(param_nickname);
+	 		$('input[name=phone]').val(param_phone);
+	 		$('input[name=regist]').val(param_regist);
+	 		$('input[name=address]').val(param_address);
+	 		$('input[name=address_detail]').val(param_address_detail);
+	 		$('input[name=point]').val(param_address_point);
+	 		$('input[name=last_connection]').val(param_last_connection);
+	 		$('input[name=subscribe]').val(param_subscribe);
+	 		$('input[name=grade]').val(param_grade);
+	 		
+	 		
+	 		var Mmodal = document.querySelector("#member-dtmodal");
+	        var Mtrigger = document.querySelector(".memdetail");
+	        var MpcloseButton = document.querySelector("#mclose-button1");
+	        Mmodal.classList.toggle("show-modal");
+	 	}
+	 	$(document).on("click", "#mclose-button1", function() {
+	 		var Mmodal = document.querySelector("#member-dtmodal");
+	 		 Mmodal.classList.toggle("show-modal");
+		
+		})
+		 </script>
+		 
+		 <!--  여기 까지 modal -->
 				</div>
             </div>
         </div>

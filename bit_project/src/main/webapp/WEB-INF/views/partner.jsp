@@ -218,6 +218,7 @@
          var pcloseButton = document.querySelector("#pclose-button");
          var cancelButton = document.querySelector("#cancel");
         console.log(modal);
+        
         function toggleModal() {
              modal.classList.toggle("show-modal");
          }

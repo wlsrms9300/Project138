@@ -123,7 +123,6 @@ public class AdminController {
 		}
 
 		return str;
-
 	}
 
 	@PostMapping(value = "/ptdelete.se", produces = "application/json;charset=UTF-8")
@@ -255,14 +254,6 @@ public class AdminController {
 
 		return save;
 	}
-	
-	@RequestMapping(value = "/return.se", method = RequestMethod.GET)
-	public String returnApp(Model model, HttpSession session) {
-		return "admin/return";
-	}
-	@RequestMapping(value = "/returnpick.se", method = RequestMethod.GET)
-	public String returnPick(Model model, HttpSession session) {
-		return "admin/returnpick";
-	}
 
 }	
+

@@ -15,7 +15,7 @@ import com.spring.partner.PartnerVO;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	@Autowired
+	@Autowired 
 	SqlSession sqlSession;
 
 	@Override

@@ -200,11 +200,11 @@ a.btn:active, button:active {
   border-color: #e9ecf2;
   color: #1b3548; }
 
-.btndetail, .btnadd, .btnDel, .btnadd, .btnDel, .ptsave, .btnmodify, .btnDel1, .cpsave, .btnmodify, .btnDel1, .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, .btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+.cpndetail, .btndetail, .btnadd, .btnDel, .btnadd, .btnDel, .ptsave, .btnmodify, .btnDel1, .cpsave, .btnmodify, .btnDel1, .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, .btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
   background-color: #30a5ff;
   border-color: #30a5ff; }
 
-.btndetail, .btnadd, .btnDel, .btnadd, .btnDel, .ptsave, .btnmodify, .btnDel1, .cpsave, .btnmodify, .btnDel1 {
+.cpndetail, .btndetail, .btnadd, .btnDel, .btnadd, .btnDel, .ptsave, .btnmodify, .btnDel1, .cpsave, .btnmodify, .btnDel1 {
     color: #fff;
 }
 
