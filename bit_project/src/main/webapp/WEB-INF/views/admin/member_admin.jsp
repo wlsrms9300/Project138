@@ -23,6 +23,10 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
+		<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+	
+	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -43,7 +47,7 @@
     <!-- Latest compiled and minified Locales -->
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script><!-- 주석 가능 -->
 	
-	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
 	<script src="${pageContext.request.contextPath}/resources/js/admin/member_admin.js"></script>
@@ -75,12 +79,62 @@
             "sortDescending" : " :  내림차순 정렬"
         }
     };
-
-        $('#foo-table').DataTable( {
-        	
-            language:lang_kor
-        });  
+		var check = true;
+        $.ajax({
+			url : '/bit_project/member_adminj.tz',
+			type : "post",
+			dataType : "json",
+			async : false,
+			contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+			success:function(data){	
+				
+				$.each(data, function(index, item){	//각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
+				 
+				  var email = "'" + item.email + "'";           
+				  var usergroup = "'" + item.usergroup + "'"; 	
+        		  var name = "'" + item.name + "'";				
+				  var nickname = "'" + item.nickname + "'";		
+        		  var phone = "'" + item.phone + "'";			
+        		  var regist = "'" + item.regist + "'";			
+        		  var address = "'" + item.address + "'";		
+        		  var address_detail = "'" + item.address_detail + "'";	
+        		  var point = "'" + item.point + "'";					
+        		  var subscribe = "'" + item.subscribe + "'";			
+        		  var grade = "'" + item.grade + "'"; 
+        		  
+				  var output = '';
+ 
+					output += '<tr>';
+					output += '<td>' + item.email + '</td>';
+					output += '<td>' + item.nickname + '</td>';
+					output += '<td>' + item.phone + '</td>';
+					
+					var date = new Date(item.regist);
+		            date = date_to_str1(date,item.regist);
+		            var date2 = "'" + date + "'";
+					output += '<td>' + date + '</td>';
+					output += '<td>' + item.subscribe + '</td>';
+					output += '<td>' + item.grade + '</td>';
+					output += '<td>' + item.usergroup + '</td>';
+					
+					output += '<td><button type="button" class="btn btn-sm memdetail" onclick="detail2('+email+','+usergroup+','+name+','+nickname+','+phone+','+date2+','+address+','+address_detail+','+item.point+','+subscribe+','+grade+');">상세 정보</button></td>';
+					output += '</tr>';
+				
+					console.log("output:"+output);
+					$('#output').append(output);
+				}); 
+			},
+			error:function(){
+				alert("ajax통신 실패 !!!");
+				check = false;
+			}
+		});
         
+        if(check == true) {
+        	$('#foo-table').DataTable( {    	
+                language:lang_kor
+            });  
+        }         
     });
    
 </script>
@@ -215,7 +269,7 @@
 						</tbody>
 					</table>
 					
-					 <!-- 어린이집 가입신청 모달-->
+					 <!-- 모달-->
 		 
 	     <div class="modal" id="member-dtmodal">
 	         <div class="modal-content">  
@@ -259,15 +313,21 @@
 	                 <th><input type=text name="point" readonly></th>
 	            </tr>
 	       		<tr>
-	            	 <th>마지막 접속일 :</th>
-	                 <th><input type=text name="last_connection" readonly></th>
-	            </tr>
-	            <tr>
 	            	 <th>구독여부 :</th>
 	                 <th><input type=text name="subscribe" readonly></th>
-	            </tr><tr>
+	            </tr>
+	            <tr>
 	            	 <th>구독 등급 :</th>
 	                 <th><input type=text name="grade" readonly></th>
+	            </tr>
+	             
+	            <tr>
+	            </tr>
+	            <tr>
+	            </tr>
+	            <tr>
+	            </tr>
+	            <tr>
 	            </tr>
 				</table>
 	             </div>
@@ -275,37 +335,37 @@
 	     </div>
 	     
 	     <script>
-	 	function detail1(param_email, _usergroup, param_name, param_nickname, param_phone, param_regist, param_address, param_address_detail, param_point, param_last_connection, param_subscribe, param_grade){
+	 	function detail2(param_email, _usergroup, param_name, param_nickname, param_phone, param_date2, param_address, param_address_detail, param_point, param_subscribe, param_grade){
 	 		$('input[name=email]').val(param_email);
-	 		$('input[name=usergroup]').val(param_usergroup);
+	 		$('input[name=usergroup]').val(_usergroup);
 	 		$('input[name=name]').val(param_name);
 	 		$('input[name=nickname]').val(param_nickname);
 	 		$('input[name=phone]').val(param_phone);
-	 		$('input[name=regist]').val(param_regist);
+	 		$('input[name=regist]').val(param_date2);
 	 		$('input[name=address]').val(param_address);
 	 		$('input[name=address_detail]').val(param_address_detail);
-	 		$('input[name=point]').val(param_address_point);
-	 		$('input[name=last_connection]').val(param_last_connection);
+	 		$('input[name=point]').val(param_point);
 	 		$('input[name=subscribe]').val(param_subscribe);
 	 		$('input[name=grade]').val(param_grade);
+	 		 
+			
 	 		
-	 		
-	 		var Mmodal = document.querySelector("#member-dtmodal");
-	        var Mtrigger = document.querySelector(".memdetail");
-	        var MpcloseButton = document.querySelector("#mclose-button1");
-	        Mmodal.classList.toggle("show-modal");
+	 		var Memmodal = document.querySelector("#member-dtmodal");
+	        //var Memtrigger = document.querySelector(".memdetail");
+	        //var MempcloseButton = document.querySelector("#mclose-button1");
+	        Memmodal.classList.toggle("show-modal");
 	 	}
 	 	$(document).on("click", "#mclose-button1", function() {
-	 		var Mmodal = document.querySelector("#member-dtmodal");
-	 		 Mmodal.classList.toggle("show-modal");
+	 		var Memmodal = document.querySelector("#member-dtmodal");
+	 		 Memmodal.classList.toggle("show-modal");
 		
 		})
+		
+	
 		 </script>
 		 
 		 <!--  여기 까지 modal -->
-				</div>
-            </div>
-        </div>
+			
 	</div>	<!--/.main-->
 	  
 
@@ -317,6 +377,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/admin/easypiechart-data.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/custom.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/partner.js"></script>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"

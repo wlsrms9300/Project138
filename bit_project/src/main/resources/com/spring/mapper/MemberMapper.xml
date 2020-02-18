@@ -118,4 +118,9 @@
 	<update id="bad_to_normal" parameterType="com.spring.member.MemberVO">
 		update member set usergroup = '일반회원' where email = #{email}
 	</update>
+ 
+	<!-- admin페이지 member -->
+	<select id="getMemberListjeon" resultType="com.spring.member.MemberAdminVO">
+		select m.*, s.grade from member m, subscribe s where m.email = s.email
+	</select>
 </mapper>

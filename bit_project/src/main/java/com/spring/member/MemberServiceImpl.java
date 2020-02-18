@@ -275,4 +275,13 @@ public class MemberServiceImpl implements MemberService{
 		return res;
 	}
 
+	@Override
+	public List<MemberAdminVO> getMemberListjeon() {
+		List<MemberAdminVO> List = null;
+		MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+		List = memberMapper.getMemberListjeon();
+		return List;
+	}
+	
+
 }

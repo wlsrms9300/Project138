@@ -121,10 +121,10 @@
     	         url : '/bit_project/partner_admin.se',
     	         type : "post",
     	         dataType : "json",
-    	         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
     	         async: false,
+    	         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
     	         success:function(data){
-    	        	 $('#output1').empty();
+    	        	//$('#output1').empty();
     	        	 
     	            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
     	            	if(item.state == 'Y') {
@@ -144,7 +144,6 @@
     	                      var output = '';
     	                      
     	                      output += '<tr>';  
-    	                      
     	                      output += '<td>' +item.name +'</td>';
     	                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
     	                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';

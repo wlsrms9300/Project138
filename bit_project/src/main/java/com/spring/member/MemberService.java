@@ -17,4 +17,5 @@ public interface MemberService {
 	public List<MemberVO> getGroupList();	//admin에서 memberList 뽑음.
 	public int normal_to_bad(MemberVO membervo);	//admin페이지 usergroup변경.
 	public int bad_to_normal(MemberVO membervo);
+	public List<MemberAdminVO> getMemberListjeon();
 }
