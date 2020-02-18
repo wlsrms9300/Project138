@@ -13,6 +13,7 @@ public class PaymentVO {
 	private String merchant_uid; //주문번호2
 	private String imp_uid; //주문번호1
 	private String state;
+	private String grade;
 	
 	public int getPay_num() {
 		return pay_num;
@@ -73,6 +74,12 @@ public class PaymentVO {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	
 

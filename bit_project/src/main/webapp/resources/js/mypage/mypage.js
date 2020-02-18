@@ -96,6 +96,84 @@ $(document).ready(function(){
     });
 
     $('#num1').click(function(){
+    	
+    	$('.pay_block table').empty();
+        $.ajax({
+            url: '/bit_project/mypage_subscribe_payment.my',
+            type: 'POST',
+            dataType: 'json',
+            data:{"email" : myemail},
+            async:false,
+            success: function (data) {       	 
+            	var output2 = "";         
+            	output2 += '<tr class="line">';
+            	output2 += '<th>'+ "결제일"+'</th>';
+            	output2 += '<th>'+ "등급"+'</th>';
+            	output2 += '<th>'+ "포인트차감"+'</th>';
+            	output2 += '<th>'+ "결제금액"+'</th>';
+            	output2 += '<th>'+ "상태"+'</th>';
+            	output2 += '</tr>';
+          	
+        		$('.pay_block table').append(output2);
+        		if(data != null) {
+            	$.each(data, function (index, item) {
+            		var before = new Date(item.pay_date);
+            		var after = date_format2(before);
+            		var output = "";
+            		output += '<tr class="line">';
+            		output += '<td>'+ after +'</td>';
+            		output += '<td>'+ item.grade +'</td>';
+            		output += '<td>'+ item.point_price +'</td>';
+            		output += '<td>'+ item.pay_price +'</td>';
+            		output += '<td>'+ item.state +'</td>';
+            		output += '</tr>';
+            		
+            		$('.pay_block table').append(output);
+            	});
+        		}
+            },
+            error: function () {
+                alert("마이페이지 구독정보 조회 실패");
+            }
+        });
+        
+        $('.product_history table').empty();
+        $.ajax({
+        	url: '/bit_project/mypage_subscribe_history.my',
+            type: 'POST',
+            dataType: 'json',
+            data:{"email" : myemail},
+            async:false,
+            success: function (data) {       	 
+            	var output2 = "";         
+            	output2 += '<tr class="line">';
+            	output2 += '<th>'+ "기간"+'</th>';
+            	output2 += '<th>'+ "상품명"+'</th>';
+            	output2 += '<th>'+ "상태"+'</th>';
+            	output2 += '</tr>';
+          	
+        		$('.product_history table').append(output2);	
+        		if(data != null) {
+            	$.each(data, function (index, item) {
+            		var before = new Date(item.delivery_date);
+            		var after = date_format2(before);
+            		
+            		var output = "";
+            		output += '<tr class="line">';
+            		output += '<td>'+ after +'</td>';
+            		output += '<td>'+ item.product_name +'</td>';
+            		output += '<td>'+ item.state +'</td>';
+            		output += '</tr>';
+            		
+            		$('.product_history table').append(output);
+            	});
+        		}
+            },
+            error: function () {
+                alert("마이페이지 상품내역 조회 실패");
+            }
+        });
+    	
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');
@@ -180,6 +258,7 @@ $(document).ready(function(){
             menu5.hide();
             menu6.hide();
         }
+        
         $('.share').empty();
         $.ajax({
             url: '/bit_project/mypage_share.my',

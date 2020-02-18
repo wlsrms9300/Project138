@@ -63,6 +63,28 @@
 
 		return year + "-" + month + "-" + date + " " + hour + ":" + min;
 	}
+
+	function date_format2(format) {
+		var year = format.getFullYear();
+	    var month = format.getMonth() + 1;
+	    if(month<10) {
+	    	month = '0' + month;
+	    }
+	    var date = format.getDate();
+	    if(date<10) {
+	    	date = '0' + date;
+	    }
+	    var hour = format.getHours();
+	    if(hour<10) {
+	    	hour = '0' + hour;
+	    }
+	    var min = format.getMinutes();
+	    if(min<10) {
+	    	min = '0' + min;
+	    }
+
+		return year + "-" + month + "-" + date;
+	}
 </script>
 
 <header>

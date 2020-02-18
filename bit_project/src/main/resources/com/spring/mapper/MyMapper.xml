@@ -17,6 +17,7 @@
    <result property="delivery_date" column="delivery_date"  />
    <result property="return_application" column="return_application"  />
    <result property="email" column="email" />
+   <result property="product_name" column="product_name" />
 </resultMap>
 
 
@@ -85,6 +86,12 @@ update product_share set total_accumulated_fund=total_accumulated_fund-#{settle}
 	(SELECT ROWNUM RNUM, EMAIL, REGIST FROM RESERVATION WHERE PRODUCT_NUM = 
 	(SELECT PRODUCT_NUM FROM RESERVATION WHERE EMAIL=#{email}) ORDER BY REGIST ASC)
 	WHERE EMAIL=#{email}
+</select>
+
+<select id="selectPS" parameterType="String" resultMap="psMap">
+	SELECT T.PRODUCT_NAME, P.STATE_NUM, P.SUBSCRIBE_NUM, P.PRODUCT_NUM, P.STATE, P.DELIVERY_DATE, P.RETURN_APPLICATION 
+	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P, PRODUCT T
+	WHERE T.PRODUCT_NUM = P.PRODUCT_NUM AND M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
 </select>
 
 

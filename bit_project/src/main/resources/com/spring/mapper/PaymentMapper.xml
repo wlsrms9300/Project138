@@ -14,6 +14,7 @@
 		<result property="merchant_uid" column="merchant_uid" />
 		<result property="imp_uid" column="imp_uid" />
 		<result property="state" column="state" />
+		<result property="grade" column="grade" />
 	</resultMap>
 	
 	<!-- 구독 정보 -->
@@ -96,7 +97,13 @@
 		WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL=#{email}
 	</select>
 	
-	
+	<!-- subscribe_payment 테이블 조회 -->
+	<select id="selectSP" parameterType="String" resultMap="PaymentResultMap">
+		SELECT S.GRADE, P.PAY_NUM, P.SUBSCRIBE_NUM, P.PAY_DATE, P.PRICE, P.POINT_PRICE, P.STATE
+		FROM MEMBER M, SUBSCRIBE S, SUBSCRIBE_PAYMENT P
+		WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL=#{email}
+		ORDER BY PAY_DATE DESC 
+	</select>
 	
 
 </mapper>

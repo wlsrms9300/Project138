@@ -1,5 +1,6 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MyMapper;
-import com.spring.payment.SubscriptionVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
@@ -162,6 +162,18 @@ public class MypageServiceImpl implements MypageService {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
 			int rnum = myMapper.getReserve(email);
 			return rnum;
+		} catch (Exception e) {
+			throw new Exception("예약순번 조회 실패", e);
+		}
+		
+	}
+	
+	@Override
+	public ArrayList<PStateVO> selectPS(String email) throws Exception {
+		try {
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			ArrayList<PStateVO> vo = myMapper.selectPS(email);
+			return vo;
 		} catch (Exception e) {
 			throw new Exception("예약순번 조회 실패", e);
 		}

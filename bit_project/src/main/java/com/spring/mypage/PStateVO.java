@@ -10,6 +10,7 @@ public class PStateVO {
 	private Timestamp delivery_date;
 	private String return_application;
 	private String email;
+	private String product_name;
 	
 	public int getState_num() {
 		return state_num;
@@ -52,5 +53,11 @@ public class PStateVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 }
