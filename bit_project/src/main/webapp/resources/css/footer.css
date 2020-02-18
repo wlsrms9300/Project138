@@ -18,7 +18,7 @@ em,address {font-style: normal;}
 .footer_sns .tel a em {color: #fff;}
 
 #footer_infor {height:100%;}
-.footer_infor {padding: 50px 0; width: 80%;}
+.footer_infor {/* padding: 50px 0; */ width: 80%;}
 .footer_infor h2 img {width: 150px;}
 .footer_infor ul {padding: 15px 0;}
 .footer_infor ul li {font-size:13px;}
@@ -29,7 +29,8 @@ em,address {font-style: normal;}
 .footer_infor li a {color: #8f8f8f;}
 .footer_infor address p {color: #8f8f8f; padding-bottom: 15px;}
 
-.container {position: relative; max-width:1280px; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
+.container {position: relative; max-width:1280px; margin: 0 auto;  /* background:rgba(0,0,0,0.1); */ }
+.row {height: 100%;}
 
 @media (max-width:480px){
     .container {width: 100%;}

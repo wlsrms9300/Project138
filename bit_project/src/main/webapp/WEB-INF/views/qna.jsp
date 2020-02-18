@@ -544,7 +544,7 @@
 				</div>
 			</div>
 			<div id="anotherQna">
-				<p style="font-size: 30px; text-align: center; padding-top: 30px;">다른 질문 있으신가요?</p>
+				<p style="font-size: 18px; text-align: center; padding-top: 30px;">다른 질문 있으신가요?</p>
 				<div class=anotherQna1>
 				<button name="button" class="subscribe-btn3" onclick="location.href='//'"
                                                     type="button">1:1 채팅</button>

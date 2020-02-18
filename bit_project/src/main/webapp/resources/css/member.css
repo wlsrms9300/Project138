@@ -231,6 +231,7 @@ ul {
 	height: 500px;
 	padding-top: 9%;
 	padding-bottom: 13%;
+	min-height: 650px;
 }
 
 .content-box {

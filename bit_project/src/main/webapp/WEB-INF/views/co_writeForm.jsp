@@ -10,7 +10,6 @@
 <title>community</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
-<link href="${pageContext.request.contextPath}/resources/css/community.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/community_writeform.css" rel="stylesheet" type="text/css" />
 <!-- summernote -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -82,6 +81,10 @@
 	
 
   <script type="text/javascript">
+  $(document).ready(function(){
+	  $("li:contains().removeClass('active')");
+  });
+  
   function insert_chk() {
 	var writingForm = document.writingForm;
 	var board_name = writingForm.board_name.value;

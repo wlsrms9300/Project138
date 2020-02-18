@@ -12,6 +12,10 @@
 	String email_co = (String)session.getAttribute("email");
 	LoginVO userDetail_co = (LoginVO)session.getAttribute("userDetail");
 	
+	String group = "일반회원";
+	if (email_co != null){ 
+		group = userDetail_co.getUsergroup();
+	}
 %>	
 
 <html>
@@ -67,7 +71,7 @@
    	</div>
    	
    	<!-- 글쓰기 버튼 -->
-   	<input type="button" onclick="write_btn('<%=email_co %>')" id="community_write" value="글쓰기">
+   	<input type="button" onclick="write_btn('<%=email_co %>','<%=group %>')" id="community_write" value="글쓰기">
    	
 		<!-- filter -->
 	    <div class="community_search">

@@ -314,6 +314,11 @@ input[id ="menuicon"]:checked +label +div {
 h1 {
 	text-align: center;
 	padding-top:50px;
+	font-size: 18px;
+}
+
+h2{
+	font-size: 18px;
 }
 	
 #contents{
@@ -367,7 +372,7 @@ h1 {
 	#question_1,#question_2,#question_3,#question_4,#question_5,#question_6,#question_7,#question_8,#question_9,#question_10 {
     font-weight: 500;
     height: 50px;
-    font-size: 20px;
+    font-size: 14px;
     display: flex;
     color: #000;
     padding-top: 15px;

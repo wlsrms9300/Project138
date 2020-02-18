@@ -135,12 +135,14 @@
 		  <ul style=" display: flex;">
 		  	<li style="flex: 8.5;">
 		  	<%
+		  	try {
 			 	for (int i = 0; i < list.size(); i++) {
 					CompanyVO cvo = list.get(i);
 			%>
 			<img src="/bit_project/image/<%=cvo.getImg() %>">
 			
-			<%} %>
+			<%} }catch(Exception e) {} %>
+			
 			</li>
 		  </ul>
 	   </div>
