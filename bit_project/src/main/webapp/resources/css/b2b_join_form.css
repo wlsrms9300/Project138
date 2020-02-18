@@ -54,6 +54,11 @@
          color: #3a3a3a;
          margin-bottom: 5px;
      }
+     
+   .modal-content > td, th {
+    padding: 5px;
+   }
+     
      .modal > .modal-content > form > input:focus{
          border: 1px solid #97d6eb;
      }

@@ -12,6 +12,9 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
+		<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/b2b.js"></script>
 	
 	
 	
@@ -110,11 +113,22 @@
 		         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 		         async: false,
 		         success:function(data){
+		        	 
 		        	 $('#output1').empty();
 		            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
 		            	if(item.state == 'Y') {
-		            		  var name = "'" + item.name + "'"; 
-		            		 
+		            		
+		           			  var license_num = "'" + item.license_num + "'"; 
+    	            		  var name = "'" + item.name + "'";
+    	            		  var phone = "'" + item.phone + "'";
+    	            		  var email = "'" + item.email + "'";
+    	            		  var homepage = "'" + item.homepage + "'";
+    	            		  var postal_num = "'" + item.postal_num + "'";
+    	            		  var address = "'" + item.address + "'";
+    	            		  var address_detail = "'" + item.address_detail + "'";
+    	            		  var term = "'" + item.term + "'";
+    	            		  
+    	            		  
 		            		  var output = '';
 
 		                     
@@ -130,18 +144,18 @@
 		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
 		   	                
 		   	               
-		                      output += '<td><button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
+		                      output += '<td><button type="button" class="btn btn-sm cpndetail" onclick="detail1('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+');">정보</button>&nbsp;<button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
 		                      
 		                      output += '</tr>';
 		               
 		             
 		            	}
 		            	
-		               console.log("output:"+output);
-		               $('#output1').append(output);
-		            });
-		         },
-		         error:function(){
+				              console.log("output:"+output);
+				              $('#output1').append(output);
+		          	  });
+		     	    },
+		     	   error:function(){
 		            alert("ajax통신 실패 !!!");
 		            check2 = false;
 		         }
@@ -324,6 +338,79 @@
 			</tbody>
     	</table>
 		
+		 <!-- 어린이집 가입신청 모달-->
+		 
+	     <div class="modal" id="company-dtmodal">
+	         <div class="modal-content">  
+	             <span class="close-button" id="pclose-button1">&times;</span>
+	             <h1 class="title">어린이집 정보</h1>
+	            <table style="text-align: center; margin: 0 auto;">
+	             <tr style="width: 80%;">
+	            	 <th>사업자 등록번호 :</th>
+	                 <th><input type=text name="license_num" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>어린이집 이름 :</th>
+	                 <th><input type=text name="name" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>연락처 :</th>
+	                 <th><input type=text name="phone" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>이메일 :</th>
+	                 <th><input type=text name="email" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>홈페이지 :</th>
+	                 <th><input type=text name="homepage" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>우편번호 :</th>
+	                 <th><input type=text name="postal_num" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>주소 :</th>
+	                 <th><input type=text name="address" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>상세주소 :</th>
+	                 <th><input type=text name="address_detail" readonly></th>
+	            </tr>
+	            <tr>
+	            	 <th>계약기간 :</th>
+	                 <th><input type=text name="term" readonly></th>
+	            </tr>
+	       		
+				</table>
+	             </div>
+	         </div> 
+	     </div>
+
+	 	<script>
+	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term){
+	 		$('input[name=license_num]').val(param_license_num);
+	 		$('input[name=name]').val(_name);
+	 		$('input[name=phone]').val(param_phone);
+	 		$('input[name=email]').val(param_email);
+	 		$('input[name=homepage]').val(param_homepage);
+	 		$('input[name=postal_num]').val(param_postal_num);
+	 		$('input[name=address]').val(param_address);
+	 		$('input[name=address_detail]').val(param_address_detail);
+	 		$('input[name=term]').val(param_term);
+	 		
+	 		
+	 		var Mmodal = document.querySelector("#company-dtmodal");
+	        var Mtrigger = document.querySelector(".cpndetail");
+	        var MpcloseButton = document.querySelector("#pclose-button1");
+	        Mmodal.classList.toggle("show-modal");
+	 	}
+	 	$(document).on("click", "#pclose-button1", function() {
+	 		var Mmodal = document.querySelector("#company-dtmodal");
+	 		 Mmodal.classList.toggle("show-modal");
+		
+		})
+		 </script>
 		
 	</div>	<!--/.main-->
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script> --%>

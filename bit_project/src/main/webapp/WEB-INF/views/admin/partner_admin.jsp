@@ -11,6 +11,9 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/b2b.js"></script>
 	
 	
 	<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -113,7 +116,7 @@
     	        	 
     	            $.each(data, function(index, item){   //각각의 데이터는 item에 저장됨. index는 parameter값 item은 실제 저장된 값.
     	            	if(item.state == 'Y') {
-    	            		
+    	            		 
     	            		  var license_num = "'" + item.license_num + "'"; 
     	            		  var name = "'" + item.name + "'";
     	            		  var phone = "'" + item.phone + "'";
@@ -140,8 +143,7 @@
     		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
     		   	                
     		   	               
-    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+ license_num + name + phone + email + homepage + postal_num + address + address_detail + term + category + content +');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
-    	                      
+    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
     	                      output += '</tr>';
     	                      	             
     	            	}
@@ -166,6 +168,7 @@
            }
     });
    
+    
 </script>
 
 
@@ -336,54 +339,95 @@
 			<tbody id = "output1">
 			
 			</tbody>
+				
+    	</table>
 				 <!-- 파트너 가입신청 모달-->
 			 
-     <div class="modal" id="partner-modal">
-         <div class="modal-content">
-             <span class="close-button" id="pclose-button">&times;</span>
+     <div class="modal" id="partner-dtmodal">
+         <div class="modal-content">  
+             <span class="close-button" id="pclose-button1">&times;</span>
              <h1 class="title">파트너 정보</h1>
-                             
-               <input type="text" name="license_num" placeholder="사업자등록번호" >
-               <input type="text" name="name" placeholder="회사명" >
-               <input type="tel" name="phone" placeholder="연락처" >
-               <input type="email" name="email" placeholder="이메일" >       
-               <input type="text" name="homepage" placeholder="홈페이지" >
-               <input type="text" name="postal_num"  placeholder="우편번호" >
-               <input type="text" name="address" placeholder="주소" >
-               <input type="text" name="address_detail" placeholder="상세주소" >
-               <input type="text" name="term" placeholder="계약기간" >
-               <input type="text" name="category" placeholder="카테고리" >
-	           <input type="text" name="content" placeholder="간단한 소개" >
-	           
-               <input type="button" id="cancel" value="확인">
-             </form>
+            <table style="text-align: center; margin: 0 auto;">
+             <tr style="width: 80%;">
+            	 <th>사업자 등록번호 :</th>
+                 <th><input type=text name="license_num" readonly></th>
+            </tr>
+            <tr>
+            	 <th>회사명 :</th>
+                 <th><input type=text name="name" readonly></th>
+            </tr>
+            <tr>
+            	 <th>연락처 :</th>
+                 <th><input type=text name="phone" readonly></th>
+            </tr>
+            <tr>
+            	 <th>이메일 :</th>
+                 <th><input type=text name="email" readonly></th>
+            </tr>
+            <tr>
+            	 <th>홈페이지 :</th>
+                 <th><input type=text name="homepage" readonly></th>
+            </tr>
+            <tr>
+            	 <th>우편번호 :</th>
+                 <th><input type=text name="postal_num" readonly></th>
+            </tr>
+            <tr>
+            	 <th>주소 :</th>
+                 <th><input type=text name="address" readonly></th>
+            </tr>
+            <tr>
+            	 <th>상세주소 :</th>
+                 <th><input type=text name="address_detail" readonly></th>
+            </tr>
+            <tr>
+            	 <th>계약기간 :</th>
+                 <th><input type=text name="term" readonly></th>
+            </tr>
+            <tr>
+            	 <th>카테고리 :</th>
+                 <th><input type=text name="category" readonly></th>
+            </tr>
+            <tr>
+            	 <th>간단한 소개 :</th>
+                 <th><input type=text name="content" readonly></th>
+            </tr>
+			
+			</table>
+             </div>
          </div> 
      </div>
 
- 	<script type="text/javascript">
-         var modal = document.querySelector("#partner-modal");
-         var btndetail = document.querySelector("#btndetail");
-         var pcloseButton = document.querySelector("#pclose-button");
-         var cancelButton = document.querySelector("#cancel"); 
-        console.log(modal);
-        function toggleModal() {
-             modal.classList.toggle("show-modal");
-         }
-        function windowOnClick(event) {
-             if (event.target === modal) {
-                 toggleModal();
-             }
-         }
-        
-         btndetail.addEventListener("click", toggleModal);
-         pcloseButton.addEventListener("click", toggleModal);
-         cancel.addEventListener("click", toggleModal);
-         window.addEventListener("click", windowOnClick);
+ 	<script>
+ 	function detail(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_category, param_content){
+ 		$('input[name=license_num]').val(param_license_num);
+ 		$('input[name=name]').val(_name);
+ 		$('input[name=phone]').val(param_phone);
+ 		$('input[name=email]').val(param_email);
+ 		$('input[name=homepage]').val(param_homepage);
+ 		$('input[name=postal_num]').val(param_postal_num);
+ 		$('input[name=address]').val(param_address);
+ 		$('input[name=address_detail]').val(param_address_detail);
+ 		$('input[name=term]').val(param_term);
+ 		$('input[name=category]').val(param_category);
+ 		$('input[name=content]').val(param_content);
+ 		
+ 		var Mmodal = document.querySelector("#partner-dtmodal");
+        var Mtrigger = document.querySelector(".btndetail");
+        var MpcloseButton = document.querySelector("#pclose-button1");
+     
+        Mmodal.classList.toggle("show-modal");
+ 	}
+ 	$(document).on("click", "#pclose-button1", function() {
+ 		var Mmodal = document.querySelector("#partner-dtmodal");
+ 		 Mmodal.classList.toggle("show-modal");
+	})
+
+ 
      </script>
      
      <!---------------------여기까지 ------------------------------------->
-			
-    	</table>
+		
 		
 		
 	</div>	<!--/.main-->

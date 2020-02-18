@@ -123,7 +123,6 @@ public class AdminController {
 		}
 
 		return str;
-
 	}
 
 	@PostMapping(value = "/ptdelete.se", produces = "application/json;charset=UTF-8")
@@ -256,3 +255,4 @@ public class AdminController {
 		return save;
 	}
 }	
+
