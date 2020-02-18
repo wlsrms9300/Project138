@@ -51,9 +51,6 @@
         }
     };
         
-       
-    
-    
     // 날짜 출력 폼
     function date_format(format) {
 		var year = format.getFullYear();

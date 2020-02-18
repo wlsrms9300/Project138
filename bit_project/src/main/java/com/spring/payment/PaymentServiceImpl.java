@@ -128,4 +128,15 @@ public class PaymentServiceImpl implements PaymentService {
 			throw new Exception("결제완료 변경 실패", e);
 		}
 	}
+	
+	@Override
+	public ArrayList<PaymentVO> selectSP(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			ArrayList<PaymentVO> list = paymentmapper.selectSP(email);
+			return list;
+		} catch(Exception e) {
+			throw new Exception("결제정보 조회 실패", e);
+		}
+	}
 }

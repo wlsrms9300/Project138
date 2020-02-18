@@ -102,9 +102,9 @@ public class PaymentController {
 		} else if (grade.equals("platinum")) {
 			model.addAttribute("price", 79000);
 		} else if (grade.equals("1month")) {
-			model.addAttribute("price", 29000);
+			model.addAttribute("price", 34000);
 		} else if (grade.equals("2month")) {
-			model.addAttribute("price", 58000);
+			model.addAttribute("price", 68000);
 		}
 		
 		
@@ -146,16 +146,19 @@ public class PaymentController {
 		
 		switch(price) {
 			case 29000 : grade = "실버";
+						 count = 1; //반납가능 횟수
 						 break;
 			case 59000 : grade = "골드";
+						 count = 2;
 						 break;
 			case 79000 : grade = "플래티넘";
+						 count = 2;
 						 break;
 			case 34000 : grade = "비정기"; 
-						 count = 1;
+						 count = 0;
 						 break;
 			case 68000 : grade = "비정기";
-						 count = 2;
+						 count = 0;
 						 break;
 		}
 		
@@ -265,7 +268,7 @@ public class PaymentController {
 			customer_uid = before[0] + before[1];
 			
 			//pay_price 설정
-			pay_price = user.getPrice() - user.getPoint_price();
+			pay_price = user.getPrice() + user.getPoint_price();
 			
 			//merchant_uid 생성할 난수 생성
 			for(int j = 0; j < 15; j++) {

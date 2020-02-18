@@ -16,4 +16,5 @@ public interface PaymentMapper {
 	PaymentVO selectCancel(String email);
 	int rePayState(PaymentVO vo);
 	int paidState(int subscribe_num);
+	ArrayList<PaymentVO> selectSP(String email);
 }

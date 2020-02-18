@@ -79,7 +79,7 @@
 			contentType:'application/x-www-form-urlencoded; charset=utf-8',
 			success:function(data) {
 				$.each(data, function(index, item) {
-					var pay_price = item.price - item.point_price; //실제 결제 금액(테스트중) --> (디비에서 job사용해서 계산해서 값구하기)
+					var pay_price = item.price + item.point_price; 
     				var output = '';
     				output += '<tr>';
     				output += '<td>'+ item.email +'</td>';

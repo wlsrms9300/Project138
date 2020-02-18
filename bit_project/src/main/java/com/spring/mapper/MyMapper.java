@@ -1,5 +1,6 @@
 package com.spring.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -8,7 +9,6 @@ import com.spring.mypage.BookmarkVO;
 import com.spring.mypage.PStateVO;
 import com.spring.mypage.ReservationVO;
 import com.spring.mypage.WishlistVO;
-import com.spring.payment.SubscriptionVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
@@ -27,5 +27,6 @@ public interface MyMapper {
 	int checkPS(PStateVO vo);
 	int checkReserve(String email);
 	int getReserve(String email);
+	ArrayList<PStateVO> selectPS(String email);
 
 }

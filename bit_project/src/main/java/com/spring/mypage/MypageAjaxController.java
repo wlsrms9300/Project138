@@ -1,5 +1,6 @@
 package com.spring.mypage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.payment.PaymentService;
+import com.spring.payment.PaymentVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
@@ -14,6 +17,9 @@ import com.spring.tazo.ShareWatingListVO;
 public class MypageAjaxController {
 	@Autowired(required = false)
 	private MypageService service;
+	
+	@Autowired(required = false)
+	private PaymentService paymentservice;
 
 	@GetMapping(value = "/mypage_bookmark.my", produces = "application/json;charset=UTF-8")
 	public List<BookmarkVO> getMyPageBookMark(String email) {
@@ -99,6 +105,32 @@ public class MypageAjaxController {
 			e.printStackTrace();
 			e.getMessage();
 		}
+	}
+	
+	@PostMapping(value = "/mypage_subscribe_payment.my", produces = "application/json;charset=UTF-8")
+	public ArrayList<PaymentVO> getMySubscribe(String email) {
+		ArrayList<PaymentVO> data = null;
+		try {
+			data = new ArrayList<PaymentVO> ();
+			data = paymentservice.selectSP(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return data;
+	}
+	
+	@PostMapping(value = "/mypage_subscribe_history.my", produces = "application/json;charset=UTF-8")
+	public ArrayList<PStateVO> getMyHistory(String email) {
+		ArrayList<PStateVO> data = null;
+		try {
+			data = new ArrayList<PStateVO> ();
+			data = service.selectPS(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return data;
 	}
 	
 	
