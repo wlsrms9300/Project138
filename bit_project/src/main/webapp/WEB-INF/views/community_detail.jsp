@@ -88,16 +88,17 @@
                     <img src="${pageContext.request.contextPath}/resources/icons/naver.png" style="border-radius: 5px;" ></a>
                     <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3" data-url="http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}"  data-color="default" data-size="small" data-count="false" style="display: none;"></div>
                 </div>
-                
-                <% if (email_e.equals(email_co)) { %>
-                <div class="community_mt_footer_btn">
-                		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
-                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
-                </div>
-                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
-                <div class="community_mt_footer_btn">
-                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
-                </div>
+                <% if(email_co != null ) { %>
+	                <% if (email_e.equals(email_co)) { %>
+	                <div class="community_mt_footer_btn">
+	                		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
+	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
+	                </div>
+	                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
+	                <div class="community_mt_footer_btn">
+	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
+	                </div>
+	                <% } %>
                 <% } %>
                 
             </div>
@@ -133,10 +134,12 @@
             <div class="community_comments_form_input">
             <input type="hidden" name="board_num" id="board_num" value="<%=cmvo.getBoard_num() %>">
                 <div class="community_comments_form_content">
-                	<%if(userDetail_co.getUsergroup().equals("비매너회원")) {%>
+                <% if(email_co != null) { %>
+                	<% if(userDetail_co.getUsergroup().equals("비매너회원")) {%>
                 		<input type="text" class="community_comments_form_comments" name="content" placeholder="의견을 남겨 보세요." readonly>
                 	<% } else { %>
                     <input type="text" class="community_comments_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">
+                <% } %>
                 <% } %>
                 </div>
                 <div class="community_comments_form_actions">

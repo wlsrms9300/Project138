@@ -1,11 +1,24 @@
 @charset "utf-8";
-a {color: #fff; text-decoration: none; outline: none}
- a:hover, a:active {text-decoration: none; color:#fff; background-color:#f59000;}
+ul.community_menubar > li:hover > a{color: #616161; text-decoration: none; outline: none}
+ul.community_menubar > li:hover > a:hover, a:active{text-decoration: none; color:#ff7276;}
+
+/*********************************************************************************/
+/* 커뮤니티 메뉴                                                            	 						  */
+/*********************************************************************************/
+#community_container_menubar{width:100%; height: 55px; border-top: #a9a9a9 solid 1px; border-bottom: #a9a9a9 solid 1px;}
+#community_container_menubar > .community_menubar{padding: 0 0 0 60px; list-style: none; text-align: center; vertical-align: middle;}
+#community_container_menubar > .community_menubar > .community_menubar_item{font-size: 17px; font-weight: bold;  line-height: 23px; margin: 10px 4px; padding: 6px 8px 4px; color: slategrey; display: inline-block; text-decoration:none;}
+ul.community_menubar > li:hover > a,
+ul.community_menubar > li:focus > a,
+ul.community_menubar > li:active > a,
+ul.community_menubar > li.active >a {color: #ff7276;}
+
 
 #community-contentbox {
 	width: 950px;
 	height: 600px;
 	margin: 0 auto;
+	margin-top: 100px;
 }
 
 #cententbox-top {

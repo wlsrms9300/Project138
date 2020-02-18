@@ -254,14 +254,15 @@
 
       //글쓰기 버튼 
       //session 없으면 로그인으로 이동, 비매너회원은 접근금지
-    	function write_btn(email){
+    	function write_btn(email,group){
+    		
     		if(email != 'null') {
-//    			if(group != "비매너회원") {
-//    				window.location.href = "co_writeForm.co";
-//    			}else {
-//    				alert("접근금지");
-//        			return false;
-//    			}
+    			if(group != "비매너회원") {
+    				window.location.href = "co_writeForm.co";
+    			}else {
+    				alert("접근금지");
+        			return false;
+    			}
     		}else{
     			alert("로그인 후 이용해주세요");
     			window.location.href = "login.me";	

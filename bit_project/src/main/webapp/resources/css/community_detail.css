@@ -4,9 +4,9 @@
 	font-family: 'S-CoreDream-4Regular';
 }
 
-      .clickable {cursor: pointer;}
-      .hover {text-decoration: underline;}
-      .active{ width:10px; height:10px; color: #FF7277;}
+    .clickable {cursor: pointer;}
+    .hover {text-decoration: underline;}
+	.active{color: #FF7277;}
       
 	body{margin: 0px; padding: 0px; font-size: 14pt; font-weight: 400; color: #000000; width: 100%;}
 

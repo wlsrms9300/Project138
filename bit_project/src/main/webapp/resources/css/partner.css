@@ -7,6 +7,10 @@ body {
 	margin: 0;
 }
 
+#container {
+	min-height: 900px;
+}
+
 .btn {
 	margin: 10px;
 }
