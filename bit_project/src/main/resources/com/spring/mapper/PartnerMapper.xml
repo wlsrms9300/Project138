@@ -17,6 +17,7 @@
 		<result property="term" column="term" />
 		<result property="category" column="category" />
 		<result property="state" column="state"  />
+		<result property="accept_date" column="accept_date"  />
 			
 	</resultMap>
 	
@@ -55,7 +56,7 @@
 	
 	<!-- admin group 변경 -->
    <update id="partneradd" parameterType="com.spring.partner.PartnerVO">
-    update partner set state = 'Y' where name = #{name}
+    update partner set state = 'Y', accept_date = #{accept_date} where name = #{name}
    </update>
    
 	<update id="ptsave"  parameterType="com.spring.partner.PartnerVO">

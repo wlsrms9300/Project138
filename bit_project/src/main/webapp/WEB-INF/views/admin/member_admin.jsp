@@ -101,16 +101,17 @@
         		  var point = "'" + item.point + "'";					
         		  var subscribe = "'" + item.subscribe + "'";			
         		  var grade = "'" + item.grade + "'"; 
-        		  
-				  var output = '';
+
+        		  var output = '';
  
 					output += '<tr>';
 					output += '<td>' + item.email + '</td>';
 					output += '<td>' + item.nickname + '</td>';
 					output += '<td>' + item.phone + '</td>';
 					
-					var date = new Date(item.regist);
-		            date = date_to_str1(date,item.regist);
+					  var date = new Date(item.regist);
+                   	date = date_to_str1(date, item.regist);
+                
 		            var date2 = "'" + date + "'";
 					output += '<td>' + date + '</td>';
 					output += '<td>' + item.subscribe + '</td>';

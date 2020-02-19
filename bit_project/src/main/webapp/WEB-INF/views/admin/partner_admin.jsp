@@ -140,6 +140,7 @@
     	            		  var term = "'" + item.term + "'";
     	            		  var category = "'" + item.category + "'";
     	            		  var content = "'" + item.content + "'";
+    	            		  var accept_date= "'" +item.accept_date + "'";
     	            		  
     	                      var output = '';
     	                      
@@ -148,13 +149,14 @@
     	                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
     	                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
     	                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
-    	   	                
-    	                      var date = new Date(item.term);
-    		                  	date = date_to_str(date,item.term);
+    	   	                  
+    	                      var date = new Date(item.accept_date);
+    	                     	date = date_to_str(date, item.term);
+    	                  
     		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
     		   	                
     		   	               
-    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
+    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
     	                      output += '</tr>';
     	                      	             
     	            	}
@@ -371,6 +373,10 @@
             	 <th>간단한 소개 :</th>
                  <th><input type=text name="content" readonly></th>
             </tr>
+            <tr>
+            	 <th>계약 시작 날자 :</th>
+                 <th><input type=text name="accept_date" readonly></th>
+            </tr>
 			
 			</table>
              </div>
@@ -378,9 +384,9 @@
      </div>
 
  	<script>
- 	function detail(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_category, param_content){
+ 	function detail(param_license_num, param_name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_category, param_content, param_accept_date){
  		$('input[name=license_num]').val(param_license_num);
- 		$('input[name=name]').val(_name);
+ 		$('input[name=name]').val(param_name);
  		$('input[name=phone]').val(param_phone);
  		$('input[name=email]').val(param_email);
  		$('input[name=homepage]').val(param_homepage);
@@ -390,6 +396,7 @@
  		$('input[name=term]').val(param_term);
  		$('input[name=category]').val(param_category);
  		$('input[name=content]').val(param_content);
+ 		$('input[name=accept_date]').val(param_accept_date);
  		
  		var Mmodal = document.querySelector("#partner-dtmodal");
         var Mtrigger = document.querySelector(".btndetail");

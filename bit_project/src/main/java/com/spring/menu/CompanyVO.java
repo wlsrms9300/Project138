@@ -1,5 +1,7 @@
 package com.spring.menu;
 
+import java.sql.Timestamp;
+
 public class CompanyVO {
 	
 	private String state;
@@ -13,6 +15,7 @@ public class CompanyVO {
 	private String address_detail;
 	private String img;
 	private String term;
+	private Timestamp accept_date;
 	public String getState() {
 		return state;
 	}
@@ -79,7 +82,12 @@ public class CompanyVO {
 	public void setTerm(String term) {
 		this.term = term;
 	}
-	
+	public Timestamp getAccept_date() {
+		return accept_date;
+	}
+	public void setAccept_date(Timestamp accept_date) {
+		this.accept_date = accept_date;
+	}
 	
 	
 	

@@ -38,7 +38,7 @@
      }
      form {
          margin: 0 auto;
-         width: 459px;
+         width: 85%;
      }
 
      /*input 텍스트 박스, 버튼*/
@@ -264,7 +264,10 @@
 	         color: #3a3a3a;
 	         margin-bottom: 5px;
 	     }
-	     
+	     form {
+         margin: 0 auto;
+         width: 100%;
+     }
 	     
 		/*계약 기간 선택*/
 	    #contract-term, #category-term {

@@ -1,5 +1,6 @@
 package com.spring.member;
 
+
 import java.util.Date;
 
 public class MemberVO {
@@ -138,14 +139,6 @@ public class MemberVO {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }

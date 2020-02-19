@@ -39,8 +39,9 @@ var state_param = null;
 	  	    	            		  var term = "'" + item.term + "'";
 	  	    	            		  var category = "'" + item.category + "'";
 	  	    	            		  var content = "'" + item.content + "'";
-	  	    	            		  
-	  	    	                      var output = '';
+	  	    	            		  var accept_date= "'" +item.accept_date + "'";
+	  	    	                     
+	  	    	            		  var output = '';
 	  	    	                      
 	  	    	                      output += '<tr>';  
 	  	    	                      
@@ -49,12 +50,12 @@ var state_param = null;
 	  	    	                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
 	  	    	                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
 	  	    	   	                
-	  	    	                      var date = new Date(item.term);
-	  	    		                  	date = date_to_str(date,item.term);
+	  	    	                    var date = new Date(item.accept_date);
+	    	                     	date = date_to_str(date, item.term);
 	  	    		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
 	  	    		   	                
 	  	    		   	               
-	  	    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
+	  	    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
 	  	    	                      output += '</tr>';
 	  	    	                      	             
 	  	    	            	}
@@ -104,6 +105,7 @@ var state_param = null;
 	         contentType : 'application/x-www-form-urlencoded; charset=utf-8',
 	         success : function(retVal){
 	            if (retVal.res == "OK") {
+	            	
 	               alert("파트너 수락 완료.");
 	               $.ajax({
 
@@ -166,9 +168,8 @@ var state_param = null;
    
    
   	
-  	function date_to_str(format, babo)
+  	function date_to_str(format, term)
     {
- 	   var format= new Date();
         var year = format.getFullYear(); 
         var month = format.getMonth() + 1;
         if(month<10) month = '0' + month;
@@ -178,9 +179,9 @@ var state_param = null;
         if(hour<10) hour = '0' + hour;
         
         var month2 = Number(month); 
-        var babo2 = Number(babo); 
+        var term2 = Number(term); 
         
-        return year + "-" + month + "-" + date + "~"+ year + "-" + (month2+babo2) + "-" + date ;
+        return year + "-" + month + "-" + date + " ~ "+ year + "-" + (month2+term2) + "-" + date ;
         
         
     }

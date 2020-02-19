@@ -1,5 +1,7 @@
 package com.spring.partner;
 
+import java.sql.Timestamp;
+
 public class PartnerVO {
 
 	private int partner_num;
@@ -16,8 +18,7 @@ public class PartnerVO {
 	private String img;
 	private String term;
 	private String category;
-	
-	
+	private Timestamp accept_date;
 	public int getPartner_num() {
 		return partner_num;
 	}
@@ -102,6 +103,14 @@ public class PartnerVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public Timestamp getAccept_date() {
+		return accept_date;
+	}
+	public void setAccept_date(Timestamp accept_date) {
+		this.accept_date = accept_date;
+	}
 	
-		
+	
+	
+	
 }

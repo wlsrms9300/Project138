@@ -1,21 +1,28 @@
 package com.spring.admin;
 
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.member.MemberVO;
 import com.spring.menu.CompanyVO;
+import com.spring.partner.PartnerService;
 import com.spring.partner.PartnerVO;
 
 @Controller
@@ -86,7 +93,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/partner_admin.se")
 	public String partner_admin(Model model, HttpSession session) {
-
+		
 		return "admin/partner_admin";
 	}
 
@@ -149,11 +156,13 @@ public class AdminController {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		System.out.println("컨트롤러 진입.");
 
-		try {
+		try { 
+			partnerVO.setAccept_date(new Timestamp(System.currentTimeMillis()));
 			int res = adminService.partneradd(partnerVO);
 
 			if (res == 1) {
 				retVal.put("res", "OK"); // 맵객체 "res"는 키 , "OK" 값
+				
 			} else if (res == 0) {
 				retVal.put("res", "FAIL"); // 맵객체 "res"는 키 , "OK" 값
 			}
@@ -191,6 +200,7 @@ public class AdminController {
 		System.out.println("컨트롤러 진입.");
 
 		try {
+			cpVO.setAccept_date(new Timestamp(System.currentTimeMillis()));
 			int res = adminService.companyadd(cpVO);
 
 			if (res == 1) {
@@ -255,5 +265,7 @@ public class AdminController {
 		return save;
 	}
 
-}	
+	}
+
+
 

@@ -16,6 +16,7 @@
    <result property="address_detail" column="address_detail"  />
    <result property="img" column="img"  />
    <result property="term" column="term"  />
+   <result property="accept_date" column="accept_date"  />
    </resultMap>
    
    
@@ -44,7 +45,7 @@
 	
 	<!-- admin group 변경 -->
    <update id="companyadd" parameterType="com.spring.menu.CompanyVO">
-   update company set state = 'Y' where name = #{name}
+   update company set state = 'Y', accept_date = #{accept_date}  where name = #{name}
      </update>
      
      <update id="cpsave"  parameterType="com.spring.menu.CompanyVO">

@@ -1,5 +1,6 @@
 package com.spring.member;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class MemberAdminVO {
@@ -23,6 +24,7 @@ public class MemberAdminVO {
 	private String receive_text;/*N, Y*/
 	private String img;
 	private String grade;
+	
 	public String getEmail() {
 		return email;
 	}
@@ -144,4 +146,5 @@ public class MemberAdminVO {
 		this.grade = grade;
 	}
 	
-}
+
+	}
