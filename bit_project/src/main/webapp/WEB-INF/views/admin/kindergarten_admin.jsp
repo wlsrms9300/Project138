@@ -150,9 +150,9 @@
 		                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
-		                     
-		                      var date = new Date(item.term);
-		                  	date = date_to_str(date,item.term);
+			                     
+			                      var date = new Date(item.term);
+			                  	date = date_to_str(date,item.term);
 		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
 		   	                
 		   	               
@@ -369,9 +369,7 @@
 	             </div>
 	         </div> 
 	     </div>
-	     <!--  여기 까지 modal -->
-
-	 	<script>
+	   	<script>
 	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term){
 	 		$('input[name=license_num]').val(param_license_num);
 	 		$('input[name=name]').val(_name);
@@ -395,6 +393,7 @@
 		
 		})
 		 </script>
+		 <!--  여기 까지 modal -->
 		
 	</div>	<!--/.main-->
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/admin/jquery-1.11.1.min.js"></script> --%>

@@ -64,12 +64,47 @@ $(function($) {
         "sortDescending" : " :  내림차순 정렬"
     }
 };
-
-    $('#foo-table').DataTable( {
-    	
-        language:lang_kor
-    });  
-    
+   var check = true;
+   $.ajax({
+	  url : '/bit_project/member_group.tz',
+	  type : 'post',
+	  dataType : 'json',
+	  contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+	  async : false,
+	  success : function(data) {
+		  $('#ouput').empty();
+		  $.each(data, function(index, item) {
+			 var email = "'" + item.email + "'";
+			 var output = '';
+			 output += '<tr>';
+			 output += '<td>' + item.email + '</td>';
+			 output += '<td>' + item.nickname + '</td>';
+			 output += '<td>' + item.usergroup + '</td>';
+			 
+			 if(item.usergroup == "일반회원") {
+				output += '<td><button type="button" class="btn btn-sm btn-primary">일반회원</button> &nbsp;';
+				output += '<button type="button" class="btn btn-sm btn-default" onclick="normal_to_bad(' + email + ');">비매너회원</button></td>';
+				normal = item.usergroup;
+			 } else {
+				output += '<td><button type="button" class="btn btn-sm btn-default" onclick="bad_to_normal(' + email + ');">일반회원</button> &nbsp;';
+				output += '<button type="button" class="btn btn-sm btn-primary">비매너회원</button></td>';
+				bad = item.usergroup;
+			 }
+			 output += '</tr>';
+			 
+			 console.log("output:"+output);
+			$('#output').append(output);
+		  });
+	  }, error:function() {
+		  alert("ajax통신 실패!!!");
+		  check = false;
+	  }
+   });
+   if(check == true) {
+	   $('#foo-table').DataTable( {   	
+	       language:lang_kor
+	   });  
+   }
 });
 </script>
 <body>

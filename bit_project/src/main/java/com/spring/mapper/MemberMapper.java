@@ -3,6 +3,7 @@ package com.spring.mapper;
 
 import java.util.List;
 
+import com.spring.member.MemberAdminVO;
 import com.spring.member.MemberSubscribeVO;
 import com.spring.member.MemberVO;
 
@@ -24,4 +25,5 @@ public interface MemberMapper {
 	List<MemberVO> getGroupList();
 	int normal_to_bad(MemberVO membervo);	//admin usergroup 변경.
 	int bad_to_normal(MemberVO membervo);
+	List<MemberAdminVO> getMemberListjeon();
 }
