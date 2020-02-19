@@ -2,6 +2,7 @@
 @import url("https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css");
 
 .subscribe_wrap {
+	padding: 0 10px;
     display:none;
     max-width:900px;
     min-height:750px;
