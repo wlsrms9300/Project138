@@ -321,15 +321,7 @@
 	                 <th><input type=text name="grade" readonly></th>
 	            </tr>
 	             
-	            <tr>
-	            </tr>
-	            <tr>
-	            </tr>
-	            <tr>
-	            </tr>
-	            <tr>
-	            </tr>
-				</table>
+	   				</table>
 	             </div>
 	         </div> 
 	     </div>

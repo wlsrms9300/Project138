@@ -45,6 +45,7 @@
 	font-size: 16px;
 }
 
+
 /* img{
             width: 45%;
             height: auto;
