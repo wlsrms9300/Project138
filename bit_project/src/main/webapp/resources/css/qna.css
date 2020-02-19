@@ -51,7 +51,7 @@ position: fixed;
 display: flex;
 width: 100%;
 margin: auto;
-height: 60px;
+height: 70px;
 z-index: 1;
 box-shadow: 0px 3px 5px rgb(216, 216, 216);
 
@@ -83,6 +83,7 @@ box-shadow: 0px 3px 5px rgb(216, 216, 216);
     position:relative;
     cursor: pointer;
     margin-right: 50px;
+    margin-bottom: 0;
 }
 
 .nav input[id = "menuicon"] + label span {
@@ -131,7 +132,7 @@ div[class="sidebar"] {
     height:60px;
     text-align: center;
     border: 0;
-    background-color: rgba(255,235,205,0.95);
+    background-color: rgba(233,236,239,0.96);
     position: relative;
     display: none;
     -webkit-transition: all 1s;
@@ -256,6 +257,7 @@ div[class="sidebar"] button {
        
     }
     .menu_m {
+    	border-spacing:0;
         display: flex;
         font-size: 1.4rem;
         margin-top: -20px;
@@ -272,13 +274,13 @@ div[class="sidebar"] button {
         width:100%;
         z-index: 1;
         position: fixed; 
-        background:  rgba(255,235,205,0.95);
+        background:  rgba(233,236,239,0.96);
         height: 10px;
        
 }
 input[id ="menuicon"]:checked +label +div {
     top:67px;
-    height: 470px;
+    height: 510px;
     display: flex;
 
 
@@ -311,7 +313,7 @@ input[id ="menuicon"]:checked +label +div {
 	width:100%;
 }
 
-h1 {
+#contents > h1 {
 	text-align: center;
 	padding-top:50px;
 	font-size: 18px;
