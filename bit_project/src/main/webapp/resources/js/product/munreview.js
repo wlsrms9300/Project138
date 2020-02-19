@@ -48,10 +48,18 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
             $.each(data, function (index, item) {
                 var exText = "";
                 var date = new Date(item.regist);
-                date = date_to_str(date);
+                alert(deviceChk);
+                if(deviceChk==2){
+                	date = mdata(date);
+                }else {
+                	date = date_to_str(date);
+                }
+                	
+                
                 exText += "<article>";
                 exText += "<ul style='display: flex;'>";
-                exText += "<li style='flex: 8.5;'>";
+                //exText += "<li style='flex: 8.5;'>";
+                exText += "<li>";
                 exText += "<div>"+item.content+"</div>";
                 //exText += '<div><img src="/bit_project/image/'+item.mimg+'">';
                 exText += '<div><img src="'+item.mimg+'">';
@@ -92,12 +100,15 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
                 
                 //exText += "</div>";
                 exText += "</li>";
-                exText += "<li style='flex: 1.5;'>";
+                
+                /*exText += "<li style='flex: 1.5;'>";*/
+                exText += "<li>";
+                
                 //exText += '<img src="/bit_project/image/'+item.mimg+'">';
                 exText += '<img src="/bit_project/image/'+item.rimg+'">';
                 exText += " </li>";
                 exText += "</ul>";
-                exText += "<hr style='border: 0.5px solid #c5c5c5;'>";
+                //exText += "<hr style='border: 1px solid #c5c5c5;'>";
                 exText += "</article>";
                 $(".review").append(exText);
             })
@@ -263,20 +274,31 @@ function reviewpoint(_email, _nickname) {
 	     }
 }
 
-function date_to_str(format)
-{
-    var year = format.getFullYear();
-    var month = format.getMonth() + 1;
-    if(month<10) month = '0' + month;
-    var date = format.getDate();
-    if(date<10) date = '0' + date;
-    var hour = format.getHours();
-    if(hour<10) hour = '0' + hour;
-    var min = format.getMinutes();
-    if(min<10) min = '0' + min;
-    var sec = format.getSeconds();
-    if(sec<10) sec = '0' + sec;
-    
-    return year + "-" + month + "-" + date + " " + hour + ":" + min;
-    
-}
+function date_to_str(format){
+	var year = format.getFullYear();
+	var month = format.getMonth() + 1;
+	if(month<10) month = '0' + month;
+	var date = format.getDate();
+	if(date<10) date = '0' + date;
+	var hour = format.getHours();
+	if(hour<10) hour = '0' + hour;
+	var min = format.getMinutes();
+	if(min<10) min = '0' + min;
+	var sec = format.getSeconds();
+	if(sec<10) sec = '0' + sec;
+			return year + "-" + month + "-" + date + " " + hour + ":" + min;	
+	}
+function mdata(format){
+	var year = format.getFullYear();
+	var month = format.getMonth() + 1;
+	if(month<10) month = '0' + month;
+	var date = format.getDate();
+	if(date<10) date = '0' + date;
+	var hour = format.getHours();
+	if(hour<10) hour = '0' + hour;
+	var min = format.getMinutes();
+	if(min<10) min = '0' + min;
+	var sec = format.getSeconds();
+	if(sec<10) sec = '0' + sec;
+			return year + "-" + month + "-" + date;	
+	}

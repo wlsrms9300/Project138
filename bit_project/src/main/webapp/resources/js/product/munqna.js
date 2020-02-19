@@ -97,10 +97,14 @@
                     exText += "<div class='title'>";
                     exText += "<span>" +item.answer+ "</span>";    
                     if(item.secret=="공개"){
-                    	exText += "<em>" + item.question_title + "</em>";
+                        	exText += "<em class='mqt'>" + item.question_title + "</em>";                    		
+
+                    	
                     	exText += '<input type="hidden" value="'+item.secret+'">';		
                     }else {
-                    	exText += "<em>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                        	exText += "<em class='mqt'>" + item.question_title + "</em>";                    		
+                    	//exText += "<em class='mqt'>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                    	//exText += "<span class='mqt'>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</span>";
                     	exText += '<input type="hidden" value="'+item.secret+'">';
                     }
                     
