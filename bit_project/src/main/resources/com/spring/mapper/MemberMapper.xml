@@ -6,7 +6,7 @@
 		<result property="email" column="email" />
 		<result property="usergroup" column="usergroup" />
 		<result property="nickname" column="nickname" />
-		<result property="name" column="name" />
+		<result property="name" column="name" /> 
 		<result property="password" column="password" />
 		<result property="phone" column="phone" />
 		<result property="address" column="address" />
@@ -21,6 +21,7 @@
 		<result property="receive_email" column="receive_email" />
 		<result property="receive_text" column="receive_text" />
 		<result property="img" column="img" />
+		
 
 	</resultMap>
 	
@@ -48,7 +49,7 @@
 	
 	<insert id="memberInsert" parameterType="com.spring.member.MemberVO" >
 		insert into member(email, usergroup, nickname, name, password, phone, address, address_detail, postal_num, birth, children_birth,  point, regist, last_connection, subscribe, instagram_id, receive_email, receive_text, img) 
-		values (#{email}, '일반회원', #{nickname}, #{name}, #{password}, #{phone},	#{address}, #{address_detail}, #{postal_num}, #{birth}, #{children_birth}, 0, sysdate, sysdate, 'N', #{instagram_id}, #{receive_email}, #{receive_text}, #{img})
+		values (#{email}, '일반회원', #{nickname}, #{name}, #{password}, #{phone}, #{address}, #{address_detail}, #{postal_num}, #{birth}, #{children_birth}, 0, sysdate, sysdate, 'N', #{instagram_id}, #{receive_email}, #{receive_text}, #{img})
 	</insert>
 	
 	<!-- 이메일 찾기 -->

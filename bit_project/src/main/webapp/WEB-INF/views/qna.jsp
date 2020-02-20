@@ -429,7 +429,7 @@
 						<ul id="question" style="display: none;">
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;회원가입은 무료입니다. 하지만 장난감을 받아보려면 구독신청을 따로 하셔야합니다.</h3>
+								<h3>&emsp;&emsp;회원가입은 무료입니다. 하지만 장난감을 받아보려면 구독신청을 따로 하셔야합니다.</h3>
 							</li>
 						</ul>
 					</div>
@@ -441,7 +441,7 @@
 						<ul id="question1" style="display: none;">
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;메인 페이지 또는 메뉴 누르시면 "구독하기" 를 찾으실수 있습니다.</h3>
+								<h3>&emsp;&emsp;메인 페이지 또는 메뉴 누르시면 "구독하기" 를 찾으실수 있습니다.</h3>
 							</li>
 						</ul>
 					</div>
@@ -453,7 +453,7 @@
 						<ul id="question2" style="display: none;">
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;매달 넷째주 목요일에 일괄 배송됩니다.</h3>
+								<h3>&emsp;&emsp;매달 넷째주 목요일에 일괄 배송됩니다.</h3>
 							</li>
 						</ul>
 					</div>
@@ -465,7 +465,7 @@
 						<ul id="question3" style="display: none;">
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;메인 페이지 우측하단에있는 채팅 기능으로 문의 주세요</h3>
+								<h3>&emsp;&emsp;메인 페이지 우측하단에있는 채팅 기능으로 문의 주세요</h3>
 							</li>
 						</ul>
 					</div>
@@ -477,7 +477,7 @@
 						<ul id="question4" style="display: none;" >
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다.</h3>
+								<h3>&emsp;&emsp;메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다.</h3>
 							</li>
 						</ul>
 					</div>
@@ -489,7 +489,7 @@
 						<ul id="question5" style="display: none;" >
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
+								<h3>&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
 							</li>
 						</ul>	
 					</div>
@@ -501,7 +501,7 @@
 						<ul id="question6" style="display: none;" >
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
+								<h3>&emsp;&emsp;로그인 버튼을 누르시고 이메일/비밀번호 찾기를 누르시면 됩니다.</h3>
 							</li>
 						</ul>
 					</div>
@@ -514,7 +514,7 @@
 						<ul id="question7" style="display: none;" >
 							<li>
 								<p></p>
-								<h3>&emsp;&emsp;&emsp;로그인을 하시고 마이페이지에 들어가면 수정이 가능합니다.</h3>						
+								<h3>&emsp;&emsp;로그인을 하시고 마이페이지에 들어가면 수정이 가능합니다.</h3>						
 							</li>
 						</ul>
 					</div>
@@ -527,7 +527,7 @@
 						<ul id="question8" style="display: none;" >
 							<li>
 								<p></p>
-						<h3>&emsp;&emsp;&emsp;상품페이지에 예약버튼이 있으면 최대 1개 예약 가능합니다.</h3>						
+						<h3>&emsp;&emsp;상품페이지에 예약버튼이 있으면 최대 1개 예약 가능합니다.</h3>						
 							</li>
 						</ul>
 					</div>
@@ -539,7 +539,7 @@
 							<ul id="question9" style="display: none;" >
 							<li>
 								<p></p>
-						<h3>&emsp;&emsp;&emsp;고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.</h3>						
+						<h3>&emsp;&emsp;고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.</h3>						
 						</li>
 					</ul>
 					</div>

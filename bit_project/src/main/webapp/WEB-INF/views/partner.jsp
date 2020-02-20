@@ -93,6 +93,13 @@
 		width: 100%;
 		height: auto;
 		margin: 0 auto;
+		
+	}
+	.snip1273 img {
+	  position: relative;
+	  width: 100%;
+	  height: 300px;
+	  vertical-align: top;
 	}
 	.snip1273 {
 		width: 95%;
@@ -147,7 +154,7 @@
 						<option value="전체선택">전체선택</option>
 						<option value="장난감">장난감</option>
 						<option value="유아용품">유아용품</option>
-						<option value="머저리">머저리</option>
+						<option value="아동복">아동복</option>
 					</select>
 					<!-- <input type = "button" class = "btn" id = "category_select" onclick = "button_click()" value = "검색" /> -->
 					<!-- <script type="text/javascript" src="partner.js"></script> -->
@@ -199,8 +206,8 @@
                <select name="category" id="category-term" required="required">
                 <option value="">카테고리</option>
                 <option value="장난감">장난감</option>
-                <option value="유아용품">유아용품</option>
-                <option value="머저리">머저리</option>
+                <option value="유아용품">유아용품</option> 
+                <option value="아동복">아동복</option>
             </select>
             </div>
             <input type="text" name="content" placeholder="간단한 소개" required="required">

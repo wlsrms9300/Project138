@@ -139,7 +139,7 @@
     	            		  var address = "'" + item.address + "'";
     	            		  var address_detail = "'" + item.address_detail + "'";
     	            		  var term = "'" + item.term + "'";
-    	            		  
+    	            		  var accept_date= "'" +item.accept_date + "'";
     	            		  
 		            		  var output = '';
 
@@ -150,13 +150,14 @@
 		                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
 		                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
-			                     
-			                      var date = new Date(item.term);
-			                  	date = date_to_str(date,item.term);
-		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
+		                      
+		                      var date = new Date(item.accept_date);
+  	                     	date = date_to_str(date, item.term);
+		  			        
+  	                     	output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
 		   	                
 		   	               
-		                      output += '<td><button type="button" class="btn btn-sm cpndetail" onclick="detail1('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+');">정보</button>&nbsp;<button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
+		                      output += '<td><button type="button" class="btn btn-sm cpndetail" onclick="detail1('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
 		                      
 		                      output += '</tr>';
 		               
@@ -364,13 +365,17 @@
 	            	 <th>계약기간 :</th>
 	                 <th><input type=text name="term" readonly></th>
 	            </tr>
+	            <tr>
+            	 <th>계약 시작 날자 :</th>
+                 <th><input type=text name="accept_date" readonly></th>
+            </tr>
 	       		
 				</table>
 	             </div>
 	         </div> 
 	     </div>
 	   	<script>
-	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term){
+	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_accept_date){
 	 		$('input[name=license_num]').val(param_license_num);
 	 		$('input[name=name]').val(_name);
 	 		$('input[name=phone]').val(param_phone);
@@ -380,7 +385,7 @@
 	 		$('input[name=address]').val(param_address);
 	 		$('input[name=address_detail]').val(param_address_detail);
 	 		$('input[name=term]').val(param_term);
-	 		
+	 		$('input[name=accept_date]').val(param_accept_date);
 	 		
 	 		var Mmodal = document.querySelector("#company-dtmodal");
 	        var Mtrigger = document.querySelector(".cpndetail");

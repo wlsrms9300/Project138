@@ -14,7 +14,7 @@
 	
 	function date_to_str1(format)
     {
-		 var format= new Date();
+		 
         var year = format.getFullYear(); 
         var month = format.getMonth() + 1;
         if(month<10) month = '0' + month;
@@ -25,7 +25,7 @@
        
         return year + "-" + month + "-" + date;
         
-    }
+    } 
 	
 	
 	

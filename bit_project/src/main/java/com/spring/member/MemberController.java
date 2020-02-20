@@ -2,6 +2,7 @@ package com.spring.member;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
@@ -123,6 +124,7 @@ public class MemberController {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer;
 		MultipartFile mf = request.getFile("img2"); // 파일
+		
 
 		try {
 			 /* default image */
@@ -157,10 +159,9 @@ public class MemberController {
 			membervo.setBirth(membervo.getBirth().replaceAll(match,"")); // 유저 생년월일
 			membervo.setChildren_birth(membervo.getChildren_birth().replaceAll(match,"")); // 자녀 생년월일
 			
-			/* DB insert */
+			/* DB insert */ 
 			int res = memberService.memberInsert(membervo);
 			writer = response.getWriter();
-
 			
 			/* 페이지 이동 */
 			if(res == 1) {
