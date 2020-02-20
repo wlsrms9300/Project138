@@ -49,15 +49,38 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main/css/user_default.css">
-
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <title>hello</title>
 
 </head>
+<script>
+$(document).ready(function(){
+   var chat = $('#chatframe');
+   $('#chat img').click(function(){
+      if(chat.is(':visible')) {
+         chat.fadeOut();
+      } else {
+         chat.fadeIn();
+      }
+         
+   });
+});
+</script>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
 	
-	
+	<!-- 채팅 -->
+    <div id="chat" style="position: fixed; right: 1%; bottom: 1%; z-index: 9999;">
+       <img src="${pageContext.request.contextPath}/resources/icons/chats.png" style="height: 70px;  width: 70px; cursor:pointer;"/>
+    </div>
+    <iframe id="chatframe" src="./index.ct" style="display:none; z-index:7777; position:fixed; width:385px; height:600px; right:3%; bottom:3%; border:1px solid #ffc9c9; border-radius:20px;"></iframe>
 	<div class="site-wrap">
+	<!-- 모바일 버전 -->
+    <div id="chatM" style="position: fixed; right: 1%; bottom: 1%; z-index: 9999;">
+        <a href="tel:0234869600">
+         <img src="${pageContext.request.contextPath}/resources/icons/phone.png" style="height: 70px;  width: 70px; cursor:pointer;"/>
+         </a>
+    </div>
 	
 			<%@ include file="/WEB-INF/views/header1.jsp" %> 
 		

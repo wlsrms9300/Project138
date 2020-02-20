@@ -42,14 +42,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/admin/chart/utils.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/css/admin/chart/Chart.css" rel="stylesheet">
 
-	<script>
-	/* 데이터 값 랜덤으로 넣을 때 */
-	var randomScalingFactor = function() {
-		return Math.round(Math.random() * 100);
-	};
-
-
-	
+	<script>	
 	/* 영업이익 그래프 ebitGraph */
 	var chartData = {
 			labels: [
@@ -605,10 +598,11 @@
 					<div class="panel-body">
 						<div class="canvas-wrapper">
 						<table>
-							<%
-								for(int i=0; i<5; i++) 
-								{
-									RankingVO rankingvo = (RankingVO)rankingList.get(i);
+                            <% 
+                                try {
+                                    for(int i=0; i<5; i++) 
+                                    {
+                                        RankingVO rankingvo = (RankingVO)rankingList.get(i);
 							%> 
 								<tr>
 									<td>&nbsp;&nbsp;&nbsp;<%=i+1 %>.&nbsp;</td>
@@ -617,7 +611,8 @@
 									</td>
 								</tr>
 							<%
-								}
+                                    }
+                                } catch(Exception e) {}
 							%> 
 	
 						</table>	

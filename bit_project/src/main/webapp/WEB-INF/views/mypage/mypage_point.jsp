@@ -90,7 +90,7 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
 		 $('.point_button').click(function(){ 
 			 var pt1 = $('#subscription').val();
 			 var pt2 = $('#gift-wrap').val();
- 			if(totalPoints < pt1 && totalPoints < pt2) {
+ 			if((totalPoints < pt1) || (totalPoints < pt2)) {
  				alert("보유포인트가 부족합니다.");
  			} else if ($('input:radio[id=subscription-check]').is(':checked') == true && pt1 != 0 && pt1 != '') { /* 구독료 차감 */
 				 window.confirm('포인트를 사용하시겠습니까?'); 
