@@ -29,6 +29,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
+	
 	<![endif]-->
 	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 	
@@ -79,6 +80,7 @@
 			contentType:'application/x-www-form-urlencoded; charset=utf-8',
 			success:function(data) {
 				$.each(data, function(index, item) {
+					if(item.state != '구독취소') {
 					var pay_price = item.price + item.point_price; 
     				var output = '';
     				output += '<tr>';
@@ -93,6 +95,7 @@
     				
     				console.log("output:" + output);
     				$('#foo-table').prepend(output);
+					}
     			});
 			},
 			error:function() {
@@ -125,7 +128,11 @@
     				output += '<td>'+ item.phone +'</td>';
     				output += '<td>'+ item.grade +'</td>';
     				output += '<td>'+ item.pay_price +'</td>';
-    				output += '<td><button type="button" class="btn btn-sm btncc" style="background-color: #30a5ff; border-color: #30a5ff; color:#fff;" value="'+ item.email +'">예약취소</button></td>';
+    				if(item.state == '구독취소') {
+    					output += '<td><button type="button" class="btn btn-sm btncc" style="background-color: #ea7475; border-color: #ea7475; color:#fff;" value="'+ item.email +'">구독취소</button></td>';
+        			} else {
+        				output += '<td><button type="button" class="btn btn-sm btncc" style="background-color: #30a5ff; border-color: #30a5ff; color:#fff;" value="'+ item.email +'">예약취소</button></td>';
+                	}
     				output += '</tr>';
     				
     				console.log("output:" + output);

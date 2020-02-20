@@ -36,11 +36,12 @@
 		<result property="price" column="price" />
 		<result property="point_price" column="point_price" />
 		<result property="pay_price" column="pay_price" />
+		<result property="state" column="state" />
 	</resultMap>
 	
-	<!-- 관리자 페이지 예약대기/완료 불러오기 -->
+	<!-- 관리자 페이지 결제테이블 불러오기 -->
 	<select id="allSubscribe" parameterType="String" resultMap="PMemberResultMap">
-		select s.subscribe_num, m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
+		select s.subscribe_num, m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price, s.state 
 		from member m, subscribe s, subscribe_payment p 
 		where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y' and p.state = #{state}
 	</select> 
@@ -105,5 +106,70 @@
 		ORDER BY PAY_DATE DESC 
 	</select>
 	
+	<select id="allSubscribe2" parameterType="map" resultMap="PMemberResultMap">
+      select s.subscribe_num, m.email, m.name, m.phone, s.grade, p.price, p.point_price, p.pay_price 
+      from member m, subscribe s, subscribe_payment p 
+      where m.email = s.email and s.subscribe_num = p.subscribe_num and m.subscribe = 'Y' and p.state = '예약완료' and merchant_uid=#{merchant_uid}
+    </select> 
+   
+    <update id="updateSubs">
+    	update subscribe set state='구독중'
+    	where subscribe_num=#{subscribe_num}
+    </update>  
+    
+    <insert id="insertProductState" parameterType="map">
+    <selectKey keyProperty="state_num" order="BEFORE" resultType="int">
+   		select subscribe_ps_sequence.NEXTVAL from dual
+   	</selectKey>
+   		insert into product_state(state_num, subscribe_num, product_num, state, delivery_date) 
+   		values(#{state_num}, #{subscribe_num}, #{product_num}, '배송전', #{date})
+    </insert>   
+    
+   <!-- <select id="getWishPnum" parameterType="map" resultType="int">
+   select product_num from wishlist where email=#{email}
+   </select> -->
+   
+   <select id="getWishPnum" parameterType="map" resultType="int">
+   select product_num from wishlist where email=#{email} AND product_num NOT IN (
+      select product_num from product where current_amount=0
+   )
+   </select>
+
+   <select id="productAmountCheck" parameterType="map" resultType="int">
+   select current_amount from product where product_num=#{product_num}
+   </select>
+   <update id="updateProductAmount" parameterType="map">
+   update product set rental_amount=rental_amount+1, current_amount=current_amount-1 
+   where product_num=#{product_num}
+   </update>
+   
+   <select id="getReser" parameterType="map" resultType="int">
+   select NVL(count(*), 0) from reservation where email=#{email} 
+   </select>
+
+   <delete id="deleteWish" parameterType="map">
+   delete from wishlist where email=#{email} AND product_num=#{randomPnum}
+   </delete>
+   
+   <!-- 반납횟수 초기화 -->
+   <update id="updateCount" parameterType="map">
+   		UPDATE SUBSCRIBE SET COUNT=#{count} WHERE EMAIL=#{email}
+   </update>
+   
+   <!-- 차감예정 -> 차감으로 수정 -->
+   <update id="updateMPstate" parameterType="String">
+   		UPDATE MEMBER_POINT SET STATE='차감' WHERE EMAIL=#{email} AND REASON='차감'
+   </update>
+   
+   <!-- 구독취소한 이용자인지 확인 -->
+   <select id="checkSubCancel" parameterType="String" resultType="int">
+   		SELECT COUNT(*) FROM SUBSCRIBE WHERE EMAIL=#{email} AND STATE='구독취소'
+   </select>
+   
+   <!-- 구독취소한 이용자일 경우 이미 subscribe테이블에 존재 -> state값만 '구독대기'로 변경 -->
+   <update id="updateRestate" parameterType="String">
+    	update subscribe set state='구독대기'
+    	where email = #{email} and state = '구독취소'
+   </update> 
 
 </mapper>

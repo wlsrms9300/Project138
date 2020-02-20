@@ -1,10 +1,10 @@
 package com.spring.payment;
 
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -130,11 +131,6 @@ public class PaymentController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		SubscriptionVO vo = new SubscriptionVO(); //Subscribe테이블 정보
 		
-		/* 예약할때 토큰 필요
-		 * 토큰 가져오기 IamportResponse<AccessToken> auth_response = client.getAuth(); String
-		 * token = auth_response.getResponse().getToken(); map.put("token",token);
-		 */
-		
 		int price = paymentvo.getPrice();
 		String imp_uid = paymentvo.getImp_uid();
 		String merchant_uid = paymentvo.getMerchant_uid();
@@ -172,15 +168,21 @@ public class PaymentController {
 				System.out.println("멤버테이블 구독 변경 실패");
 			}
 			
-			// 구독정보 저장
-			vo.setEmail(email);
-			vo.setGrade(grade);
-			vo.setCount(count);
-			int res2 = paymentService.insertSubscribe(vo);
-			if(res2 != 0) {
-				System.out.println("구독등록 성공");
+			int check = 0;
+			check = paymentService.checkSubCancel(email);
+			if(check == 0) {
+				// 구독정보 저장
+				vo.setEmail(email);
+				vo.setGrade(grade);
+				vo.setCount(count);
+				int res2 = paymentService.insertSubscribe(vo);
+					if(res2 != 0) {
+						System.out.println("구독등록 성공");
+					} else {
+						System.out.println("구독등록 실패");
+					}
 			} else {
-				System.out.println("구독등록 실패");
+				paymentService.updateRestate(email); 
 			}
 			
 			// 구독번호 가져오기
@@ -232,21 +234,15 @@ public class PaymentController {
 		Date day1 = format.parse(today);
 		Date day2 = format.parse(beforeDate);
 		System.out.println(day1);
-		System.out.println(day2);
-		/*
-		int compare = day1.compareTo(day2);
-		if(compare >= 0) {
-			map.put("res", "오류");
-			return map;
-		}
-		*/
+		System.out.println(day2);		
+		
 		//결제일 설정 (datepicker로 받아온 날의 오전 10시에 결제)
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, Integer.parseInt(date[2]));
 		cal.set(Calendar.MONTH, Integer.parseInt(date[0])-1);
 		cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[1]));
-		cal.set(Calendar.HOUR_OF_DAY, 12);
-		cal.set(Calendar.MINUTE, 35);
+		cal.set(Calendar.HOUR_OF_DAY, 10);
+		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		Date d1 = cal.getTime();
 		
@@ -263,10 +259,12 @@ public class PaymentController {
 		//결제할 사용자 목록으로 예약 (customer_uid 만들기)
 		for(int i = 0; i < member.size(); i++) {
 			PMemberVO user = member.get(i);
+
 			before = user.getEmail().split("@");
 			//customer_uid 설정
 			customer_uid = before[0] + before[1];
 			
+			if(!(user.getState().equals("구독취소"))) { 
 			//pay_price 설정
 			pay_price = user.getPrice() + user.getPoint_price();
 			
@@ -296,6 +294,9 @@ public class PaymentController {
 			
 			int res = paymentService.updatePayState(vo);
 			merchant_uid = "merchant_"; //merchant_uid 초기화
+			} else {
+				System.out.println(customer_uid + "은 구독취소했습니다.");
+			}
 		}
 			map.put("res", "OK");
 		} catch (Exception e) {
@@ -341,41 +342,136 @@ public class PaymentController {
 		return map;
 	}
 
-	@RequestMapping(value = "/callback.me", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public void callback(HttpServletRequest request) throws Exception {
-		ArrayList<PMemberVO> data = new ArrayList<PMemberVO> ();
+	@RequestMapping(value = "/yong", produces = "application/json;charset=UTF-8")
+	   @ResponseBody
+	   public void callbbb(@RequestBody HashMap<String, String> map) {
+	      int newPnum = 0, amount = 0, reser_chk = 0;
+	      boolean flag = true;
+	      System.out.println(map.get("status"));
+	      System.out.println(map.get("merchant_uid"));
+	      System.out.println(map.get("imp_uid"));
+	      String state = "예약완료";
+	      try {
+	         // Ch1. 예약완료 리스트 가져온다
+	         PMemberVO data = paymentService.allSubscribe2(map.get("merchant_uid"), state);
+	         // Ch2. 결제완료로 바꾼다.
+	         paymentService.paidState(data.getSubscribe_num());
+	         String[] before = new String[2];
+	         before = null;
+	         PaymentVO pvo = new PaymentVO();
+	         before = data.getEmail().split("@");
+	         System.out.println("before(0) : " + before[0] + "before(1) : " + before[1]);
+	         String customer_uid = null;
+	         customer_uid = before[0] + before[1];
+	         pvo.setCustomer_uid(customer_uid);
+	         pvo.setSubscribe_num(data.getSubscribe_num());
+	         pvo.setPrice(data.getPrice());
+	         pvo.setMerchant_uid("0");
+	         pvo.setImp_uid("0");
+	         int res = paymentService.insertPayment(pvo);
+	         paymentService.updateSubs(data.getSubscribe_num());
+	         
+	         // 결제완료시 반납횟수 초기화
+	         int count = 0;
+	         String check = data.getGrade();
+	         switch(check) {
+	         	case "실버" :
+	         		count = 1;
+	         		break;
+	         	case "골드" :
+	         		count = 2;
+	         		break;
+	         	case "플래티넘" :
+	         		count = 2;
+	         		break;
+	         	case "비정기" :
+	         		count = 0;
+	         		break;
+	         }
+	         paymentService.updateCount(count, data.getEmail());
+	         System.out.println(customer_uid + "의 반납횟수 초기화");
+	         
+	         // 포인트 차감예정 -> 차감으로 수정
+	         int point_check = data.getPoint_price();
+	         if(point_check != 0) {
+	        	 paymentService.updateMPstate(data.getEmail());
+	        	 System.out.println(customer_uid + "의 차감예정 수정");
+	         }
+	         
+	         if (res != 0) {
+	            System.out.println(customer_uid + "의 다음결제 목록 생성 성공");
+	         } else {
+	            System.out.println(customer_uid + "의 다음결제 목록 생성 실패");
+	         }
 
-		// 결제되면 디비에 결과 저장
-		String state = "예약완료";
-		data = paymentService.allSubscribe(state); //예약완료목록 불러와서 다음결제목록 만들기
-		
-		for(int i = 0; i < data.size(); i++) {
-			PMemberVO vo = data.get(i);
-			int res = paymentService.paidState(vo.getSubscribe_num());
-		}
-		
-		// 새 ROW 생성 (다음달 결제 목록)
-		PaymentVO pvo = null;
-		String[] before = null;
-		String customer_uid = null;
-		
-		for(int i = 0; i < data.size(); i++) {
-			PMemberVO vo = data.get(i);
-			before = vo.getEmail().split("@");
-			customer_uid = before[0] + before[1];
-			pvo.setCustomer_uid(customer_uid);
-			pvo.setSubscribe_num(vo.getSubscribe_num());
-			pvo.setPrice(vo.getPrice());
-			pvo.setMerchant_uid("0");
-			pvo.setImp_uid("0");
-			int res = paymentService.insertPayment(pvo);
-			if(res != 0) {
-				System.out.println(customer_uid + "의 다음결제 목록 생성 성공");
-			} else {
-				System.out.println(customer_uid + "의 다음결제 목록 생성 실패");
-			}
-		}
-	}
+	         // 결제완료 구독완료 새로운결제목록생성완료
+	         ArrayList<Integer> getRandomList = new ArrayList<Integer>();
+	         getRandomList = null;
+	         getRandomList = paymentService.getWishPnum(data.getEmail());
+	         System.out.println(getRandomList.size());
+	         while (flag==false || getRandomList.size()!=0) {
+	            Collections.shuffle(getRandomList);
+	            newPnum = getRandomList.get(0);
+	            // newPnum으로 product에서 current_amount 체크 후 0보다 크면 진행
+	               SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	               Calendar cal = Calendar.getInstance();
+	               String today = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
+	                     + cal.get(Calendar.DAY_OF_MONTH);
+	               Date date = formatter.parse(today); // 날짜 입력하는곳 .
+	               int dayNum = cal.get(Calendar.DAY_OF_WEEK);
+	               System.out.println("today = "+date);
+	               System.out.println("dayNum = "+dayNum);
+	               switch (dayNum) {
+	               case 1:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 4));
+	                  System.out.println(date);
+	                  break;
+	               case 2:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 3));
+	                  System.out.println(date);
+	                  break;
+	               case 3:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 2)); 
+	                  System.out.println(date);
+	                  break;
+	               case 4:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 1)); 
+	                  System.out.println(date);
+	                  break;
+	               case 5:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 7)); 
+	                  System.out.println(date);
+	                  break;
+	               case 6:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 6)); 
+	                  System.out.println(date);
+	                  break;
+	               case 7:
+	                  date = new Date(date.getTime() + (1000 * 60 * 60 * 24 * 5));
+	                  System.out.println(date);
+	                  break;
+	               }
+	               paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
+	               paymentService.updateProductAmount(newPnum);
+	               // 위시리스트 삭제할거면 여기서 newPnum 파라미터로 주고 삭제
+	               paymentService.deleteWish(newPnum, data.getEmail());
+	               // 위시리스트 삭제 안할거면, state 속성 추가하고 여기서 state 변경.
+	               getRandomList.remove(0);
+	               flag = false;
+	            
+	         }
+
+	         System.out.println("while 종료");
+
+	         // delivery_date DATE,
+	         // return_application DATE
+	      } catch (Exception e) {
+	         e.getMessage();
+	         e.printStackTrace();
+	      }
+
+
+	   }
+
 
 }

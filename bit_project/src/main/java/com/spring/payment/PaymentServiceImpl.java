@@ -1,6 +1,7 @@
 package com.spring.payment;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MemberMapper;
 import com.spring.mapper.PaymentMapper;
+import com.spring.mapper.SubscribePaymentMapper;
 import com.spring.member.MemberVO;
 
 @Service("paymentService")
@@ -139,4 +141,136 @@ public class PaymentServiceImpl implements PaymentService {
 			throw new Exception("결제정보 조회 실패", e);
 		}
 	}
+	
+	@Override
+	   public PMemberVO allSubscribe2(String merchant_uid, String state) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         PMemberVO vo = paymentmapper.allSubscribe2(merchant_uid, state);
+	         return vo;
+	      } catch (Exception e) {
+	         throw new Exception("구독자 결제 조회 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public void updateSubs(int subscribe_num) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         paymentmapper.updateSubs(subscribe_num);
+	      } catch (Exception e) {
+	         throw new Exception("구독자 상태:구독완료 변경 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public ArrayList<Integer> getWishPnum(String email) throws Exception {
+	      try {
+	         ArrayList<Integer> list = null;
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         list = paymentmapper.getWishPnum(email);
+	         return list;
+	      } catch (Exception e) {
+	         throw new Exception("getWishPnum 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public void insertProductState(int subscribe_num, int product_num, Date date) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         paymentmapper.insertProductState(subscribe_num, product_num, date);
+	      } catch (Exception e) {
+	         throw new Exception("product_state 변경 실패", e);
+	      }
+	      
+	   }
+
+	   @Override
+	   public int productAmountCheck(int product_num) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         int res = paymentmapper.productAmountCheck(product_num);
+	         return res;
+	      } catch (Exception e) {
+	         throw new Exception("랜덤 위시리스트 상품 현재 수량 체크 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public void updateProductAmount(int product_num) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         paymentmapper.updateProductAmount(product_num);
+	      } catch (Exception e) {
+	         throw new Exception("수량 변경 실패", e);
+	      }
+	   }
+
+	   @Override
+	   public int getReser(String email) throws Exception {
+	      try {
+	         PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	         int res = paymentmapper.getReser(email);
+	         return res;
+	      } catch (Exception e) {
+	         throw new Exception("수량 변경 실패", e);
+	      }
+	   }
+	   
+	   @Override
+	   public void deleteWish(int randomPnum, String email) {
+	      try {
+	    	  PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+	    	  paymentmapper.deleteWish(randomPnum, email);
+	      } catch (Exception e) {
+	         e.getMessage();
+	         e.printStackTrace();
+	      }
+	      
+	   }
+	   
+	   @Override
+	   public void updateCount(int count, String email) throws Exception {
+		   try {
+			   PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			   paymentmapper.updateCount(count, email);
+		   } catch (Exception e) {
+			   throw new Exception("반납횟수 초기화 실패", e); 
+		   }
+	   }
+	   
+	   @Override
+	   public void updateMPstate(String email) throws Exception {
+		   try {
+			   PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			   paymentmapper.updateMPstate(email);
+		   } catch (Exception e) {
+			   throw new Exception("차감예정 수정 실패", e); 
+		   }
+	   }
+	   
+	   @Override
+	   public int checkSubCancel(String email) throws Exception {
+		   try {
+			   PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			   int count = paymentmapper.checkSubCancel(email);
+			   return count;
+		   } catch (Exception e) {
+			   throw new Exception("구독취소 체크", e);
+		   }
+	   }
+	   
+	   @Override
+	   public void updateRestate(String email) throws Exception {
+		   try {
+		   PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+		   paymentmapper.updateRestate(email);
+		   } catch (Exception e) {
+			   throw new Exception("재구독 설정 실패", e);
+		   }
+	   }
+	   
+	   
+
 }

@@ -10,6 +10,7 @@ public class PMemberVO {
 	private int price;
 	private int point_price;
 	private int pay_price;
+	private String state;
 	
 	public String getEmail() {
 		return email;
@@ -58,6 +59,12 @@ public class PMemberVO {
 	}
 	public void setSubscribe_num(int subscribe_num) {
 		this.subscribe_num = subscribe_num;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }
