@@ -80,7 +80,7 @@ if('<%=usergroup%>'== 'admin') {
 </script>
 
 <body>
-<%@ include file="/WEB-INF/views/chatframe.jsp" %>
+
 
 <div class="status-bar">
     </div>
@@ -106,7 +106,7 @@ if('<%=usergroup%>'== 'admin') {
                     <%=list.getNickname() %>
                   </span>
                   <span class="friend__bottom-text">
-                    접속중(어떻게 알지?)
+                    접속중
                   </span>
                 </div>
               </div>
