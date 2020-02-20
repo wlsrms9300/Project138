@@ -30,6 +30,7 @@ public class BoardController {
 			data.setRegist(vo2.getRegist());
 		}
 
+
 		data.setBoard_count(service.getBoardCount(nickname));
 		data.setReview_count(service.getReviewCount(nickname));
 		data.setComment_count(service.getRCommentCount(nickname));

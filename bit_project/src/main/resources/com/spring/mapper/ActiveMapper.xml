@@ -65,13 +65,14 @@
    
    <!-- 스크랩 -->
    <select id="getScrapCount" parameterType="String" resultType="int">
-   		SELECT SUM(SCRAP_COUNT) FROM (SELECT SCRAP_COUNT FROM BOARD WHERE NICKNAME=#{nickname})
+   		SELECT NVL(SUM(SCRAP_COUNT), 0) FROM (SELECT SCRAP_COUNT FROM BOARD WHERE NICKNAME=#{nickname})
    </select>
    
    <!-- 게시글 -->
    <select id="getBoardCount" parameterType="String" resultType="int">
    		SELECT COUNT(*) FROM BOARD WHERE NICKNAME=#{nickname}
    </select>
+   
    
    <!-- 최근 글 등록일 -->
    <select id="getWriteDate" parameterType="String" resultMap="ActiveResultMap">

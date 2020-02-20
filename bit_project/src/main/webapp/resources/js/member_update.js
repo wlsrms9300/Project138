@@ -9,8 +9,7 @@ function nnChk_mypage() {
 
 	
 	var _str = $("#nickname").val();
-	console.log("aaaaa=>" + _str);
-	alert(_str);
+
 	$.ajax({
 
 		url : '/bit_project/nnupdateCheck.do',
@@ -42,36 +41,31 @@ $(".button3").click(function(event) {
 	
 	/* text 실제 입력 값 */
 	nick_check = document.update_form.nickname.value;
-	alert("text 실제 입력 값 = " + nick_check);
-	
-	/* 세션에서 불러온 값 */
-	alert("nick_session" + nick_session);
 	
 	if(nick_check == nick_session){
 		$("#button1").attr("value", "Y");
 	} else if($("#button1").val() == "Y"){
 		
 	} else{
-		alert("중복확인 눌러");
+		alert("중복확인을 눌러주세요.");
 		return false;
 	}
 	
 	if($("#password").val() == ""){
 		var _str = $("#password").val();
-		console.log("password=>" + _str);
-		alert(_str);
 		alert("비밀번호를 입력해주세요.");
+		
 		return false;
+		
 	} else if($("#button1").val() == "N" && $("#nickname").val() != ""){
 		var _str = $("#nickname").val();
-		console.log("nickname=>" + _str);
-		alert(_str);
 		alert("중복확인을 눌러주세요.");
+		
 		return false;
 	}
 	
 	var formData = new FormData($('#update_form')[0]);
-	alert(formData);
+
 
 	$.ajax({
 
@@ -86,13 +80,13 @@ $(".button3").click(function(event) {
 		success : function(retVal) {
 			if (retVal.res == "OK") {
 				$(".button3").attr("value", "Y");
-				alert("수정 완료.");
+				alert("수정이 완료되었습니다.");
 				/*location.href='mypage_main.my'*/
 				var frm = document.getElementById("update_form");
 				frm.reset();
 				history.go(0);
 			} else { // 실패했다면
-				alert("수정 실패.");
+				alert("수정을 실패했습니다.");
 			}
 		},
 		error : function() {
@@ -107,10 +101,7 @@ $(".button3").click(function(event) {
 function pwChk_mypage() {
 	var _str = $("#password").val();
 	var _str_email = $("#email").val();
-	console.log("password check=>" + _str);
-	console.log("email check=>" + _str_email);
-	alert(_str);
-	alert(_str_email);
+
 	$.ajax({
 
 		url : '/bit_project/passwordCheck.do',
@@ -205,11 +196,8 @@ $(function() {
 function password_change() {
 	pwd1 = document.update_form.new_password.value;
 	pwd2 = document.update_form.new_password_confirm.value;
-	alert(pwd1);
-	alert(pwd2);
+
 	var _str1 = $("#email").val();
-	console.log("이메일=>" + _str1);
-	alert(_str1);
 
 	if (pwd1.length < 8) {
 		document.update_form.new_password.focus();

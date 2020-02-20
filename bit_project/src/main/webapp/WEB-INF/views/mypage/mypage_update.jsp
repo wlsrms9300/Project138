@@ -148,9 +148,7 @@ var nick_session = '<%=userDetail.getNickname() %>';
 
 					<tr>
 						<td></td>
-						<!-- <td class="update_btn"><button type="button" value="N"
-								class="button3" onclick="nn_update_Chk_mypage();">회원정보
-								수정</button></td> -->
+
 						<td class="update_btn"><input type="button" value="회원 정보 수정"
 							class="button3"></td>
 					</tr>
