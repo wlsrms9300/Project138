@@ -420,7 +420,7 @@ $(document).ready(function(){
 
 					<div class="col-lg-6 ml-auto mb-5 order-1 order-lg-2"
 						data-aos="fade" data-aos="fade-up" data-aos-delay="">
-						<img src="${pageContext.request.contextPath}/resources/img/calender.png" alt="Image"
+						<img src="${pageContext.request.contextPath}/resources/img/calendar.png" alt="Image"
 							class="img-fluid rounded">
 					</div>
 					<div class="col-lg-6 order-2 order-lg-1" data-aos="fade">
