@@ -100,6 +100,7 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	public PaymentVO selectCancel(String email) throws Exception {
+		
 		try {
 			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
 			PaymentVO vo = paymentmapper.selectCancel(email);
@@ -132,15 +133,16 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
-	public ArrayList<PaymentVO> selectSP(String email) throws Exception {
+	public ArrayList<PaymentVO> selectSP(String email, int start, int end) throws Exception {
 		try {
 			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
-			ArrayList<PaymentVO> list = paymentmapper.selectSP(email);
+			ArrayList<PaymentVO> list = paymentmapper.selectSP(email, start, end);
 			return list;
 		} catch(Exception e) {
 			throw new Exception("결제정보 조회 실패", e);
 		}
 	}
+
 	
 	@Override
 	   public PMemberVO allSubscribe2(String merchant_uid, String state) throws Exception {
@@ -270,7 +272,16 @@ public class PaymentServiceImpl implements PaymentService {
 			   throw new Exception("재구독 설정 실패", e);
 		   }
 	   }
-	   
-	   
+
+	@Override
+	public int cancelSub(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.cancelSub(email);
+			return res;
+		} catch(Exception e) {
+			throw new Exception("구독 상태 변경 실패", e);
+		}
+	}
 
 }

@@ -88,10 +88,12 @@ update product_share set total_accumulated_fund=total_accumulated_fund-#{settle}
 	WHERE EMAIL=#{email}
 </select>
 
-<select id="selectPS" parameterType="String" resultMap="psMap">
-	SELECT T.PRODUCT_NAME, P.STATE_NUM, P.SUBSCRIBE_NUM, P.PRODUCT_NUM, P.STATE, P.DELIVERY_DATE, P.RETURN_APPLICATION 
+<select id="selectPS" parameterType="com.spring.mypage.PStateVO" resultMap="psMap">
+	SELECT * FROM 
+	(SELECT rownum rnum, T.PRODUCT_NAME, P.STATE_NUM, P.SUBSCRIBE_NUM, P.PRODUCT_NUM, P.STATE, P.DELIVERY_DATE, P.RETURN_APPLICATION 
 	FROM MEMBER M, SUBSCRIBE S, PRODUCT_STATE P, PRODUCT T
-	WHERE T.PRODUCT_NUM = P.PRODUCT_NUM AND M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email}
+	WHERE T.PRODUCT_NUM = P.PRODUCT_NUM AND M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL = #{email})
+	<![CDATA[WHERE rnum >=#{start} and rnum<=#{end}]]> 
 </select>
 
 

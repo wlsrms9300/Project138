@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.member.MemberVO;
 
 public interface PaymentService {
@@ -18,7 +20,7 @@ public interface PaymentService {
 	public PaymentVO selectCancel(String email) throws Exception;
 	public int rePayState(PaymentVO vo) throws Exception;
 	public int paidState(int subscribe_num) throws Exception;
-	public ArrayList<PaymentVO> selectSP(String email) throws Exception;
+
 	public void updateSubs(@Param("subscribe_num") int subscribe_num) throws Exception;
 	public PMemberVO allSubscribe2(String merchant_uid, String state) throws Exception;
 	public ArrayList<Integer> getWishPnum(String email) throws Exception;
@@ -31,5 +33,9 @@ public interface PaymentService {
 	public void updateMPstate(String email) throws Exception;
 	public int checkSubCancel(String email) throws Exception;
 	public void updateRestate(String email) throws Exception;
+
+	public ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end) throws Exception;
+	public int cancelSub(String email) throws Exception;
+
 	
 }

@@ -95,14 +95,28 @@ $(document).ready(function(){
         }
     });
 
+    
+    
     $('#num1').click(function(){
     	
+    	var totalData = 0; // 총 데이터 수
+        var currentPage = 1;
+        var pageCount = 5;// 한 화면에 나타낼 게시물 수
+        var dataPage = 5; // 한 화면에 나타낼 페이지 수
+    	
+       $(document).ready(function(){
+    	  sub1(totalData, currentPage, pageCount, dataPage);
+    	  sub2(totalData, currentPage, pageCount, dataPage);
+    	  
+       }); //ready
+       
+        function sub1(totalData, currentPage, pageCount, dataPage) {
     	$('.pay_block table').empty();
         $.ajax({
             url: '/bit_project/mypage_subscribe_payment.my',
             type: 'POST',
             dataType: 'json',
-            data:{"email" : myemail},
+            data:{"email" : myemail, "page" : currentPage},
             async:false,
             success: function (data) {       	 
             	var output2 = "";         
@@ -115,65 +129,215 @@ $(document).ready(function(){
             	output2 += '</tr>';
           	
         		$('.pay_block table').append(output2);
-        		if(data != null) {
+        		if(data.length != 0) {
             	$.each(data, function (index, item) {
-            		var before = new Date(item.pay_date);
-            		var after = date_format2(before);
+            		if(item.pay_date == null){ //예약 대기일시 확정날짜 없음
+            			var after = "-";
+            		}else{
+	            			var before = new Date(item.pay_date);
+	            			var after = date_format2(before);
+            		}
+            		console.log(item.pay_price);
+            		if(item.pay_price == '0'){ //예약 대기일시 확정금액 없음
+            			var Ex_price = item.price + item.point_price;
+            		}else {
+            			var Ex_price = item.pay_price;
+            		}
+            		
             		var output = "";
             		output += '<tr class="line">';
             		output += '<td>'+ after +'</td>';
             		output += '<td>'+ item.grade +'</td>';
             		output += '<td>'+ item.point_price +'</td>';
-            		output += '<td>'+ item.pay_price +'</td>';
+            		output += '<td>'+ Ex_price +'</td>';
             		output += '<td>'+ item.state +'</td>';
             		output += '</tr>';
             		
             		$('.pay_block table').append(output);
+            		totalData += 1;
             	});
+        		}else{                                                                                                                                                                                                                                                                                                                                                                               
+        			var output = "";
+        			output += '<tr class="line">';
+        			output += '<td colspan="5" style="text-align: center;">' + '내역이 없습니다.' +'</td>';
+        			output += '</tr>';
+        			
+        			$('.pay_block table').append(output);
         		}
+        		paging1(totalData, dataPage, pageCount, currentPage);
             },
             error: function () {
                 alert("마이페이지 구독정보 조회 실패");
             }
         });
+        }
         
+        function sub2(totalData, currentPage, pageCount, dataPage){
         $('.product_history table').empty();
         $.ajax({
         	url: '/bit_project/mypage_subscribe_history.my',
             type: 'POST',
             dataType: 'json',
-            data:{"email" : myemail},
+            data:{"email" : myemail, "page" : currentPage},
             async:false,
-            success: function (data) {       	 
+            success: function (data) {       	
             	var output2 = "";         
             	output2 += '<tr class="line">';
-            	output2 += '<th>'+ "기간"+'</th>';
-            	output2 += '<th>'+ "상품명"+'</th>';
-            	output2 += '<th>'+ "상태"+'</th>';
+            	output2 += '<th colspan="1">'+ "기간"+'</th>';
+            	output2 += '<th colspan="2">'+ "상품명"+'</th>';
+            	output2 += '<th colspan="2">'+ "상태"+'</th>';
             	output2 += '</tr>';
           	
         		$('.product_history table').append(output2);	
-        		if(data != null) {
+        		if(data.length != 0) {
             	$.each(data, function (index, item) {
-            		var before = new Date(item.delivery_date);
-            		var after = date_format2(before);
+            		var before1 = new Date(item.delivery_date);
+            		var after1 = date_format2(before1);
+            		
+            		var before2 = new Date(item.return_application);
+            		var after2 = date_format2(before2);
             		
             		var output = "";
             		output += '<tr class="line">';
-            		output += '<td>'+ after +'</td>';
-            		output += '<td>'+ item.product_name +'</td>';
-            		output += '<td>'+ item.state +'</td>';
+            		output += '<td colspan="1">'+ after1 + ' ~ ' + after2 + '</td>';
+            		output += '<td colspan="2">'+ item.product_name +'</td>';
+            		output += '<td colspan="2">'+ item.state +'</td>';
             		output += '</tr>';
             		
             		$('.product_history table').append(output);
+            		totalData += 1;
             	});
-        		}
+        		}else{                                                                                                                                                                                                                                                                                                                                                          
+	    			var output = "";
+	    			output += '<tr class="line">';
+	    			output += '<td colspan="5" style="text-align: center;">' + '내역이 없습니다.' +'</td>';
+	    			output += '</tr>';
+	    			
+    			$('.product_history table').append(output);
+    		}
+        		paging2(totalData, dataPage, pageCount, currentPage);
             },
             error: function () {
                 alert("마이페이지 상품내역 조회 실패");
             }
         });
+        }
+        
+        /* 페이징 */
+    	function paging1(totalData, dataPage, pageCount, currentPage) {
+            var totalPageDevide = totalData / dataPage;
+            var pageGroupDevide = currentPage / pageCount;
+            var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수
+            var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹
+            var last = pageGroup * pageCount;
+
+            if (last > totalPage)
+                last = totalPage;
+            var first = last - (pageCount - 1);
+            if (first <= 0) {
+                first = 1;
+            }
+            var next = last + 1; // 다음
+            var prev = first - 1; // 이전
+            var one = 1; // 맨 처음 
+            var lastNo = totalPage; // 맨 끝
+
+            var html = "";
+
+            if (prev > 0) {
+                html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
+                html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
+
+            }
+            for (var i = first; i <= last; i++) {
+                html += "<a href='javascript:sub1(totalData, dataPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
+            }
+            
+            if(totalPage==0){
+            	
+            }else {
+            	  if (last < totalPage)
+            	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
+            	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
+
+            	        $(".paginate1").html(html);    // 페이지 목록 생성
+            	        $(".paginate1 a").removeClass("page_on");
+            	        $(".paginate1 a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
+            }
+          
+            $(".paginate1 a").click(function () {
+                var $item = $(this);
+                var $id = $item.attr("id");
+                var selectedPage = $item.text(); // 번호 클릭.
+
+                if ($id == "one") selectedPage = one;
+                if ($id == "prev") selectedPage = prev;
+                if ($id == "next") selectedPage = next;
+                if ($id == "lastNo") selectedPage = lastNo;
+                sub1(totalData, dataPage, pageCount, selectedPage);
+                paging1(totalData, dataPage, pageCount, selectedPage);// 페이징
+           
+            })
+        }
     	
+    	 /* 페이징 */
+    	function paging2(totalData, dataPage, pageCount, currentPage) {
+            var totalPageDevide = totalData / dataPage;
+            var pageGroupDevide = currentPage / pageCount;
+            var totalPage = Math.ceil(totalPageDevide);    // 총 페이지 수
+            var pageGroup = Math.ceil(pageGroupDevide);    // 페이지 그룹
+            var last = pageGroup * pageCount;
+
+            if (last > totalPage)
+                last = totalPage;
+            var first = last - (pageCount - 1);
+            if (first <= 0) {
+                first = 1;
+            }
+            var next = last + 1; // 다음
+            var prev = first - 1; // 이전
+            var one = 1; // 맨 처음 
+            var lastNo = totalPage; // 맨 끝
+
+            var html = "";
+
+            if (prev > 0) {
+                html += "<a href=# id='one'>&lt;&lt;&nbsp;&nbsp;</a> ";
+                html += "<a href=# id='prev'>&lt;&nbsp;&nbsp;</a> ";
+
+            }
+            for (var i = first; i <= last; i++) {
+                html += "<a href='javascript:sub2(totalData, dataPage, pagecount, " + i + ")' id=" + i + ">" + i + "</a> ";
+            }
+            
+            if(totalPage==0){
+            	
+            }else {
+            	  if (last < totalPage)
+            	        html += "<a href=# id='next'>&gt;&nbsp;&nbsp;</a>";
+            	        html += "<a href='javascript:void(0);' id='lastNo'>&gt;&gt;&nbsp;&nbsp;</a> ";
+
+            	        $(".paginate2").html(html);    // 페이지 목록 생성
+            	        $(".paginate2 a").removeClass("page_on");
+            	        $(".paginate2 a#" + currentPage).addClass("page_on"); // 현재 페이지 표시	
+            }
+          
+            $(".paginate2 a").click(function () {
+                var $item = $(this);
+                var $id = $item.attr("id");
+                var selectedPage = $item.text(); // 번호 클릭.
+
+                if ($id == "one") selectedPage = one;
+                if ($id == "prev") selectedPage = prev;
+                if ($id == "next") selectedPage = next;
+                if ($id == "lastNo") selectedPage = lastNo;
+                sub2(totalData, dataPage, pageCount, selectedPage);
+                paging2(totalData, dataPage, pageCount, selectedPage);// 페이징
+           
+            })
+        }
+        
+        
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');

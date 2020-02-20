@@ -169,10 +169,10 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public ArrayList<PStateVO> selectPS(String email) throws Exception {
+	public ArrayList<PStateVO> selectPS(String email, int start, int end) throws Exception {
 		try {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			ArrayList<PStateVO> vo = myMapper.selectPS(email);
+			ArrayList<PStateVO> vo = myMapper.selectPS(email, start, end);
 			return vo;
 		} catch (Exception e) {
 			throw new Exception("예약순번 조회 실패", e);

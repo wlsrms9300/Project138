@@ -35,7 +35,7 @@
 </head>
 <body>
 
-<div style="height: 60px;">
+<div style="height: 70px;">
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>

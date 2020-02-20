@@ -1,7 +1,9 @@
 package com.spring.mypage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,11 +110,14 @@ public class MypageAjaxController {
 	}
 	
 	@PostMapping(value = "/mypage_subscribe_payment.my", produces = "application/json;charset=UTF-8")
-	public ArrayList<PaymentVO> getMySubscribe(String email) {
+	public ArrayList<PaymentVO> getMySubscribe(String email, int page) {
 		ArrayList<PaymentVO> data = null;
 		try {
 			data = new ArrayList<PaymentVO> ();
-			data = paymentservice.selectSP(email);
+			int limit = 5;
+			int start = (page - 1) * 5 + 1;
+			int end = start + limit - 1;
+			data = paymentservice.selectSP(email, start, end);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -121,11 +126,15 @@ public class MypageAjaxController {
 	}
 	
 	@PostMapping(value = "/mypage_subscribe_history.my", produces = "application/json;charset=UTF-8")
-	public ArrayList<PStateVO> getMyHistory(String email) {
+	public ArrayList<PStateVO> getMyHistory(String email, int page) {
 		ArrayList<PStateVO> data = null;
 		try {
 			data = new ArrayList<PStateVO> ();
-			data = service.selectPS(email);
+			int limit = 5;
+			int start = (page - 1) * 5 + 1;
+			int end = start + limit - 1;
+			data = service.selectPS(email, start, end);
+			System.out.println(data);
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
@@ -133,5 +142,20 @@ public class MypageAjaxController {
 		return data;
 	}
 	
+	@PostMapping(value = "/mypage_subscribe_cancel.my", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> canSubscribe(String email) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		
+		try {
+			int res = paymentservice.cancelSub(email);
+			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		
+		return retVal;
+	}
 	
 }

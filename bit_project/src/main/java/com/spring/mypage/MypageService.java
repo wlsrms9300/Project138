@@ -23,6 +23,6 @@ public interface MypageService {
 	public int checkPS(PStateVO vo) throws Exception;
 	public int checkReserve(String email) throws Exception;
 	public int getReserve(String email) throws Exception;
-	public ArrayList<PStateVO> selectPS(String email) throws Exception;
+	public ArrayList<PStateVO> selectPS(@Param("email")String email, @Param("start") int start, @Param("end") int end) throws Exception;
 	
 }

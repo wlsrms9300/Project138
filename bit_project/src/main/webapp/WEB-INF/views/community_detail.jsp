@@ -16,6 +16,11 @@
 	String img_co = (String)session.getAttribute("img");
 	LoginVO userDetail_co = (LoginVO)session.getAttribute("userDetail");
 	
+	String group = null;
+	if(userDetail_co != null) {
+		group = userDetail_co.getUsergroup();
+	}
+	
 %>
 <html>
 <head>
@@ -112,11 +117,13 @@
         <div class="community_comments_count">
             <h3>댓글</h3><div class="count_circle"><p><%=comment_count %></p></div>
         </div>
-     <form method="POST" name="commentsForm" id ="commentsForm" enctype="multipart/form-data" accept-charset="utf-8">
+     <form method="POST" name="commentsForm" id ="commentsForm" accept-charset="utf-8">
         <div class="community_comments_form">
             <div class="community_comments_form_user">
+            <% if(email_co != null) { %>
             	<input type="hidden" name="nickname" id="nickname1" value="<%=nickname_co %>">
             	<input type="hidden" name="email" id="email1" value="<%=email_co %>">
+            <% } %>
             	
             	<%
         		if(email_co == null) {
@@ -209,14 +216,15 @@ function delchk(board_num) {
 		//대댓 폼
 		$('.answer_btn').click(function () {
 			var email_co = '<%=(String)session.getAttribute("email")%>';
-			var group = '<%=userDetail_co.getUsergroup()%>';
-
+			var group1 = '<%=group%>';
+			console.log(group1);
+		
 			if(email_co == 'null') {
 				alert("로그인 후 이용해주세요");
 				window.location.href = "login.me";	
 				return false;
 			}else {
-				if(group == "비매너회원") {
+				if(group1 == "비매너회원") {
 					alert("접근금지");
 					return false;
 				}else {
@@ -238,6 +246,7 @@ function delchk(board_num) {
      	
    		$('input[id="' + num + '"]').removeAttr("readonly");
    		$('input[id="' + num + '"]').focus();
+   		$('input[id="' + num + '"]').css("border", "1px solid #ccc9c9");
    		$('div[id="' + num + '"]').html("<button type='button' onclick='comod_btn(" + num + ")'>수정하기</button></div>");
 	} 
 	
@@ -311,7 +320,6 @@ function delchk(board_num) {
 			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 			success: function(data) {
 				if(data.length!=0){ //댓글 존재할시
-					alert("댓글있니");
 					 $.each(data, function(index, item) {
 						var output = ' ';
 						var reg_date = new Date(item.regist); 
@@ -320,7 +328,6 @@ function delchk(board_num) {
 	                		var nickname = "<%=nickname_co %>";
 	                		var img = "<%=img_co %>";
 	                
-	                if (item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
 						output += '<li class="comments_container" value="' + item.comment_num + '">';	 
 	                		output += '<div class="community_comments_view_user">';
 	                		output += '<img src="' + item.profile + '">';
@@ -335,16 +342,18 @@ function delchk(board_num) {
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time">' + date + '</span>';
 	                		output += '<div class="community_comments_view_add">';
-	                		output += '<button type="button" class="answer_btn">' + "댓글달기" + '</button>';
-	                		output += '</div>';
+	                		output += '<button type="button" class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
+	                		
+	                		if(item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
 						output += '<div class="community_comments_view_modify" id="' + item.comment_num + '">';
 						output += '<button type="button" onclick="comod_form(' + item.comment_num + ')">' + "수정" + '</button>';
 						output += '<button type="button" onclick="codel_btn(' + item.comment_num + ')">' + "삭제" + '</button></div>';
+	                		}
 						output += '</div>';
 						output += '</div>';
 						
 						output += '<li class="answer_form" style="display: none;" id="' + item.comment_num + '">';
-						output += '<form id="answerForm" method="POST" enctype="multipart/form-data" accept-charset="utf-8">';
+						output += '<form id="answerForm" method="POST" accept-charset="utf-8">';
 				     	output += '<div class="community_answer_form">';
 				     	output += '<div class="community_answer_form_user">';
 				     	output += '<input type="hidden" name="nickname" id="nickname1" value="' + nickname + '">';
@@ -364,64 +373,16 @@ function delchk(board_num) {
 				     	output += '</div>';
 				     	output += '</form>';
 				     	output += '</li>';
-				     	
 						output += '</li>';
 						
 						$('.community_comments_view').append(output);
-	                }
-	                else {
-	                		output += '<li class="comments_container" value="' + item.comment_num + '">';
-	                		output += '<div class="community_comments_view_user">';
-	                		output += '<img src="' + item.profile + '">';
-	                		output += '</div>';
-	                		output += '<div class="community_comments_view_container">';
-	                		output += '<div class="community_comments_view_comments">';
-	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + '">';
-	                		output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
-	                		output += '<input type="hidden" id="email" value="' + item.email + '">';
-	                		output += '<input type="text" id="content" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
-	                		output += '</div>';
-	                		output += '<div class="community_comments_view_actions">';
-	                		output += '<span class="community_comments_view_time">' + date + '</span>';
-	                		output += '<div class="community_comments_view_add">';
-	                		output += '<button type="button" class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
-	                		output += '</div>';
-	                		output += '</div>';
-	                		output += '</div>';
- 						
- 						output += '<li class="answer_form" style="display: none;" id="' + item.comment_num + '">';
-						output += '<form id="answerForm" method="POST" enctype="multipart/form-data" accept-charset="utf-8">';
-				     	output += '<div class="community_answer_form">';
-				     	output += '<div class="community_answer_form_user">';
-				     	output += '<input type="hidden" name="nickname" id="nickname1" value="' + nickname + '">';
-				     	output += '<img src="' + img + '">';
-				     	output += '<input type="hidden" name="email" id="email" value="' + email + '">';
-				     	output += '</div>';
-				     	output += '<div class="community_answer_form_input">';
-				     	output += '<input type="hidden" name="comment_num" value="' + item.comment_num + '">';
-				     	output += '<input type="hidden" name="board_num" value="' + item.board_num + '">';
-				     	output += '<div class="community_answer_form_content">';
-				     	output += '<input type="text" class="community_answer_form_comments" name="content" contenteditable="true" placeholder="의견을 남겨 보세요.">';
-				     	output += '</div>';
-				     	output += '<div class="community_answer_form_actions">';
-				     	output += '<button class="community_answer_form_enter" id="community_answer_form_enter" type="button" onclick="answerwrite(' + item.comment_num + ')">' + "등록" + '</button>';
-				     	output += '</div>';
-				     	output += '</div>';
-				     	output += '</div>';
-				     	output += '</form>';
-				     	output += '</li>';
-				     	
-				     	output += '</li>';
- 						
- 						$('.community_comments_view').append(output);
-	                }
 	                
 	                answerList(item.comment_num);
 				});
 					 
 				} else { //댓글 없을때
 					var outputnull = "<div>";
-					outputnull += "<div style='text-align:center; width:950px; height: 50px; padding-top: 40px;'>등록된 댓글이 없습니다.</div>";
+					outputnull += "<div class='cono' style='text-align:center; height: 50px; padding-top: 40px;'>등록된 댓글이 없습니다.</div>";
 					outputnull += "</div>";
 					$('.community_comments_view').append(outputnull);
 				}
@@ -471,7 +432,7 @@ function delchk(board_num) {
             		var email = "<%=email_co %>";
             		
 					if(num == item.comment_num) {
-					 if(item.email.trim() == email) {
+					
 						answer += '<li class="answer_container" value="' + item.comment_num + '">';	 
 						answer += '<div class="community_answer_view_user">';
 						answer += '<img src="' + profile + '">';
@@ -485,34 +446,18 @@ function delchk(board_num) {
 						answer += '</div>';
 						answer += '<div class="community_answer_view_actions">';
 						answer += '<span class="community_answer_view_time">' + date + '</span>';
+						
+						if(item.email.trim() == email) {
 						answer += '<div class="community_answer_view_modify" id="' + item.answer_num + '">';
 						answer += '<button type="button" onclick="anmod_form(' + item.answer_num + ')">' + "수정" + '</button>';
 						answer += '<button type="button" onclick="andel_btn(' + item.answer_num + ')">' + "삭제" + '</button></div>';
+						}
+						
 						answer += '</div>';
 						answer += '</div>';
 						answer += '</li>';
 						
 						$(".community_comments_view_container").append(answer);
-					}
-					else {
-						answer += '<li class="answer_container" value="' + item.comment_num + '">';	 
-						answer += '<div class="community_answer_view_user">';
-						answer += '<img src="' + profile + '">';
-						answer += '</div>';
-						answer += '<div class="community_answer_view_container">';
-						answer += '<div class="community_answer_view_answer">';
-						answer += '<input type="hidden" id="answer_form" value="' + item.comment_num + ' ">';
-						answer += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
-						answer += '<input type="hidden" id="email" value="' + item.email + '">';
-						answer += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
-						answer += '</div>';
-						answer += '<div class="community_answer_view_actions">';
-						answer += '<span class="community_answer_view_time">' + date + '</span>';
-						answer += '</div>';
-						answer += '</li>';
-						
-						$(".community_comments_view_container").append(answer);
-					}
 					}
 				});
 			},
@@ -560,6 +505,7 @@ function delchk(board_num) {
      	
    		$('input[id="' + num + '"]').removeAttr("readonly");
    		$('input[id="' + num + '"]').focus();
+   		$('input[id="' + num + '"]').css("border","1px solid #ccc9c9");
    		$('div[id="' + num + '"]').html("<button type='button' onclick='anmod_btn(" + num + ")'>수정하기</button></div>");
 	} 
     
@@ -627,13 +573,13 @@ function delchk(board_num) {
 	 //session 없으면 로그인으로 이동, 비매너회원은 접근금지
 	$(".community_comments_form_content").click(function() {
 		var email_co = '<%=(String)session.getAttribute("email")%>';
-		var group = '<%= userDetail_co.getUsergroup()%>';
+		var group1 = '<%=group%>';
 		
 		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
-		}else if(group == '비매너회원') {
+		}else if(group1 == '비매너회원') {
 			alert("접근금지");
 			return false;
 		}
@@ -642,13 +588,13 @@ function delchk(board_num) {
 	//session 없을시 로그인페이지로 이동(대댓 input)
 	$(".community_answer_form_comments").click(function() {
 		var email_co = '<%=(String)session.getAttribute("email")%>';
-		var group = '<%= userDetail_co.getUsergroup()%>';
+		var group1 = '<%=group%>';
 		
 		if(email_co == 'null') {
 			alert("로그인 후 이용해주세요");
 			window.location.href = "login.me";	
 			return false;
-		   }else if(group == '비매너회원') {
+		   }else if(group1 == '비매너회원') {
 				alert("접근금지");
 				return false;
 			}

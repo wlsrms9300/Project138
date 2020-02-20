@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.payment.PMemberVO;
 import com.spring.payment.PaymentVO;
 import com.spring.payment.SubscriptionVO;
@@ -19,7 +21,6 @@ public interface PaymentMapper {
 	PaymentVO selectCancel(String email);
 	int rePayState(PaymentVO vo);
 	int paidState(int subscribe_num);
-	ArrayList<PaymentVO> selectSP(String email);
 	
 	void updateSubs(@Param("subscribe_num") int subscribe_num);
 	PMemberVO allSubscribe2(@Param("merchant_uid") String merchant_uid, @Param("state")String state);
@@ -34,5 +35,9 @@ public interface PaymentMapper {
 	void updateMPstate(String email);
 	int checkSubCancel(String email);
 	void updateRestate(String email);
+
+
+	ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end);
+	int cancelSub(String email);
 
 }
