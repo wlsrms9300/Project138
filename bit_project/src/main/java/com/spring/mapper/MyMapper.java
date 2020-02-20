@@ -10,6 +10,7 @@ import com.spring.mypage.PStateVO;
 import com.spring.mypage.ReservationVO;
 import com.spring.mypage.WishlistVO;
 import com.spring.product.ProductShareVO;
+import com.spring.product.PsharePlusWatingVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -21,7 +22,7 @@ public interface MyMapper {
 	PStateVO getProductState(PStateVO vo);
 	
 	void getMyPageShareSettle(@Param("email") String email, @Param("settle") int settle, @Param("share_num") int share_num) throws Exception;
-	SettlementVO getShareJoin(@Param("share_num") int share_num);
+	SettlementVO getShareJoin(@Param("share_num") int share_num,@Param("product_name") String product_name);
 	void addMyPageShareSettle(SettlementVO sVO);
 	void updateShareJoin(@Param("share_num") int share_num, @Param("settle") int settle);
 	int checkPS(PStateVO vo);
@@ -32,5 +33,6 @@ public interface MyMapper {
 	int hcount(@Param("email") String email);
 	List<ShareWatingListVO> getMyPageShare(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email);
 	List<ProductShareVO> getMyPageShare2(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email);
+	List<PsharePlusWatingVO> getMyPageShareDetail(@Param("share_num") int share_num, @Param("waiting_num") int waiting_num);
 
 }

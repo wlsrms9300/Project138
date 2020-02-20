@@ -22,7 +22,7 @@
 	
 	<!--  admin 개인쉐어 정산 리스트  -->
 	<select id="getSettleList" resultType="com.spring.product.SettlementVO">
-	select * from settlement_details order by settlement_num
+	select * from settlement_details where state='정산대기' order by settlement_num
 	</select>
 	
 	<!--  admin 반납확정 리스트  -->
@@ -84,5 +84,18 @@
 	<update id="updateProductAmount" parameterType="map">
 	update product set rental_amount=rental_amount+1, current_amount=current_amount-1 
 	where product_num=#{randomPnum}
+	</update>
+	<update id="settleAccept" parameterType="map">
+	update settlement_details set state='정산완료' 
+	where settlement_num=#{settlement_num}
+	</update>
+	
+	<select id="personalSharingCheck" parameterType="map" resultType="int">
+	select NVL(count(*), 0) from product_share where product_num=#{product_num}
+	</select>
+	        
+	<update id="personalSharingFund" parameterType="map">
+	update product_share set share_amount=share_amount+1, current_amount=current_amount-1, total_accumulated_fund=total_accumulated_fund+accumulated_fund
+	where product_num=#{product_num}
 	</update>
 </mapper>

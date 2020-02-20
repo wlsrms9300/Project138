@@ -156,10 +156,11 @@ public class ProductController {
 		psVO.setConsignment_end_date(end);
 		psVO.setTotal_share_count(0);
 		psVO.setTotal_accumulated_fund(0);
-		psVO.setAccumulated_fund(0);
+		psVO.setAccumulated_fund(Integer.parseInt(request.getParameter("accumulated_fund")));
 		psVO.setTotal_amount(Integer.parseInt(request.getParameter("total_amount")));
 		psVO.setShare_amount(0);
-		psVO.setCurrent_amount(0);
+		psVO.setCurrent_amount(Integer.parseInt(request.getParameter("total_amount")));
+		psVO.setWaiting_num(waiting);
 		
 		service.shareAdd(psVO);
 		return "admin/shareOK";

@@ -199,6 +199,8 @@
 								<th>이름</th>
 								<th>은행</th>
 								<th>계좌</th>
+								<th>상태</th>
+								<th>버튼</th>
 							</tr>
 						</thead>
 						<tbody id="output">

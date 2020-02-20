@@ -45,14 +45,14 @@
 <select id="getShareJoin" parameterType="map" resultType="com.spring.product.SettlementVO">
 	select p.share_num, p.product_num, p.email, p.product_name, s.bank, s.account, s.name
 	from share_waiting_list s, product_share p 
-	where s.email = p.email AND p.share_num=#{share_num} AND s.share_state=3
+	where p.share_num=#{share_num} AND p.product_name=s.product_name AND s.share_state=3
 </select>
 
 <insert id="addMyPageShareSettle" parameterType="com.spring.product.SettlementVO">
 	<selectKey order="BEFORE" keyProperty="settlement_num" resultType="int">
 	SELECT settle_sequence.NEXTVAL FROM DUAL
 	</selectKey>
-	insert into settlement_details values(#{settlement_num}, #{share_num}, #{product_num}, #{email}, #{product_name}, #{accumulated_fund}, #{name}, #{bank}, #{account}, sysdate)
+	insert into settlement_details values(#{settlement_num}, #{share_num}, #{product_num}, #{email}, #{product_name}, #{accumulated_fund}, #{name}, #{bank}, #{account}, sysdate, '정산대기')
 </insert>
 
 <update id="updateShareJoin" parameterType="map">
@@ -124,5 +124,11 @@ select NVL(count(*), 0) from product_share where email=#{email}
 		ORDER BY SHARE_NUM asc
 		)
 	<![CDATA[WHERE rnum>=#{startrow} and rnum<=#{endrow}]]>
+</select>
+
+<select id="getMyPageShareDetail" parameterType="map" resultType="com.spring.product.PsharePlusWatingVO">
+	select p.*, s.account, s.name, s.bank
+	from share_waiting_list s, product_share p 
+	where p.share_num=#{share_num} AND p.waiting_num=s.waiting_num
 </select>
 </mapper>

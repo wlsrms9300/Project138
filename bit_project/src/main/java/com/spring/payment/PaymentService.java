@@ -36,6 +36,8 @@ public interface PaymentService {
 
 	public ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end) throws Exception;
 	public int cancelSub(String email) throws Exception;
+	public int personalSharingCheck(int product_num) throws Exception;
+	public int personalSharingFund(int product_num) throws Exception;
 
 	
 }

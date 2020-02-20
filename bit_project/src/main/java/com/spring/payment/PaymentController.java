@@ -451,10 +451,21 @@ public class PaymentController {
 	                  System.out.println(date);
 	                  break;
 	               }
-	               paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
-	               paymentService.updateProductAmount(newPnum);
+	               int result = 0;
+	               result = paymentService.personalSharingCheck(newPnum);
+	               // result==1 개인쉐어
+	               if(result==1) {
+	            	   paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
+	            	   paymentService.personalSharingFund(newPnum);
+	            	   paymentService.updateProductAmount(newPnum);
+	            	   paymentService.deleteWish(newPnum, data.getEmail());
+	               }else {
+	            	   paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
+	            	   paymentService.updateProductAmount(newPnum);
+	            	   paymentService.deleteWish(newPnum, data.getEmail());
+	               }
+	               
 	               // 위시리스트 삭제할거면 여기서 newPnum 파라미터로 주고 삭제
-	               paymentService.deleteWish(newPnum, data.getEmail());
 	               // 위시리스트 삭제 안할거면, state 속성 추가하고 여기서 state 변경.
 	               getRandomList.remove(0);
 	               flag = false;

@@ -178,5 +178,12 @@
 	<update id="cancelSub" parameterType="String">
 		UPDATE SUBSCRIBE SET STATE='구독취소' WHERE EMAIL=#{email}
 	</update>
-
+	<select id="personalSharingCheck" parameterType="map" resultType="int">
+	select NVL(count(*), 0) from product_share where product_num=#{product_num}
+	</select>
+	        
+	<update id="personalSharingFund" parameterType="map">
+	update product_share set share_amount=share_amount+1, current_amount=current_amount-1, total_accumulated_fund=total_accumulated_fund+accumulated_fund
+	where product_num=#{product_num}
+	</update>
 </mapper>

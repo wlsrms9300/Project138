@@ -284,4 +284,29 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 	}
 
+	@Override
+	public int personalSharingCheck(int product_num) throws Exception {
+		int res = 0;
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			res = paymentmapper.personalSharingCheck(product_num);
+		} catch (Exception e) {
+			throw new Exception("위시리스트 담기 전 개인쉐어 여부 확인 실패", e);
+		}
+		return res;
+	}
+
+	@Override
+	public int personalSharingFund(int product_num) throws Exception {
+		int res = 0;
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			res = paymentmapper.personalSharingFund(product_num);
+		} catch (Exception e) {
+			throw new Exception("위시리스트 담기 전 개인쉐어 수량 및 포인트 적립 실패", e);
+		}
+		return res;
+	}
+	
+	
 }

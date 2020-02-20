@@ -14,7 +14,15 @@ public class SettlementVO {
 	private String bank;
 	private String account;
 	private Date settlement_day;
+	private String state;
 	
+	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public Date getSettlement_day() {
 		return settlement_day;
 	}

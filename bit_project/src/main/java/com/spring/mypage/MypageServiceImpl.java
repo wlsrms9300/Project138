@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mapper.MyMapper;
 import com.spring.product.ProductShareVO;
+import com.spring.product.PsharePlusWatingVO;
 import com.spring.product.SettlementVO;
 import com.spring.tazo.ShareWatingListVO;
 
@@ -88,11 +89,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public SettlementVO getShareJoin(int share_num) throws Exception{
+	public SettlementVO getShareJoin(int share_num, String product_name) throws Exception{
 		try {
 			SettlementVO psVO = new SettlementVO();
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			psVO = myMapper.getShareJoin(share_num);
+			psVO = myMapper.getShareJoin(share_num, product_name);
 			return psVO;
 		} catch (Exception e) {
 			throw new Exception("개인 쉐어 정산 실패", e);
@@ -205,6 +206,18 @@ public class MypageServiceImpl implements MypageService {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public List<PsharePlusWatingVO> getMyPageShareDetail(int share_num, int waiting_num) throws Exception {
+		try {
+			List<PsharePlusWatingVO> pvo = null;
+			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
+			pvo = myMapper.getMyPageShareDetail(share_num, waiting_num);
+			return pvo;
+		} catch (Exception e) {
+			throw new Exception("상세 실패", e);
+		}
 	}
 
 	

@@ -38,5 +38,7 @@ public interface PaymentMapper {
 
 	ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end);
 	int cancelSub(String email);
+	int personalSharingCheck(@Param("product_num") int product_num);
+	int personalSharingFund(@Param("product_num") int product_num);
 
 }

@@ -20,6 +20,7 @@
                    	var sib7 = "'"+item.share_img3+"'";
                    	var sib8 = "'"+item.bank+"'";
                    	var sib9 = "'"+item.account+"'";
+                   	var sib10 = "'"+item.accumulated_fund+"'";
                    	
 					var output = '';
 					output += '<tr>';
@@ -33,7 +34,7 @@
 					output += '<td>' + date + '</td>';
 					output += '<td>' + item.share_content + '</td>';
 					
-					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+');">상세보기</button>' + '</td>';
+					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+','+item.accumulated_fund+');">상세보기</button>' + '</td>';
 					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+item.waiting_num+');">수락</button>';
 					output += '<button type="button" class="btn btn-sm btn-primary" onclick="deny('+item.waiting_num+');">거절</button></td>';
 					
@@ -73,7 +74,7 @@
         
     }
 	
-	function shareDetail(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account) {
+	function shareDetail(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, _fundtier) {
 		//파라미터로 받았고, 팝업창 띄움.
 		$('#waiting_num').val(_wnum);
 		$('#email').val(_email);
@@ -89,6 +90,7 @@
 		$("#detailimg3").attr("src", "/bit_project/image/"+_img3);
 		$('#bank').val(_bank);
 		$('#account').val(_account);
+		$('#accumulated_fund').val(_fundtier);
 		var modal2 = document.querySelector("#nursery-modal");
 		   modal2.classList.toggle("show-modal");
 		/*var pop_name = "popupDetail";
