@@ -66,8 +66,7 @@ public class PointAjaxController {
 		if(reason.equals("subscription")) {
 			pointvo.setReason("차감");
 			pointvo.setState("차감예정");
-			int res =pointService.updatePointPrice((String)session.getAttribute("email"), point);
-			System.out.println("res="+res);
+            pointService.updatePointPrice((String)session.getAttribute("email"), point);
 		}else if(reason.equals("gift-wrap")) {
 			pointvo.setReason("포장");
 			pointvo.setState("포장예정");

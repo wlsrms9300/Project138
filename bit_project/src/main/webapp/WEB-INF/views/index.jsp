@@ -73,7 +73,7 @@ function connect() {
 	};
 };
 
-if('<%=usergroup%>'.equals('admin')) {
+if('<%=usergroup%>'== 'admin') {
 	connect();
 };
 

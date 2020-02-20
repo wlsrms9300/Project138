@@ -34,7 +34,7 @@ var nick_session = '<%=userDetail.getNickname() %>';
 <link
 	href="${pageContext.request.contextPath}/resources/css/profile.css"
 	rel="stylesheet">
-
+<script src="https://kit.fontawesome.com/fa509a9993.js" crossorigin="anonymous"></script> <!--icon-->
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 
 <head>
@@ -56,7 +56,7 @@ var nick_session = '<%=userDetail.getNickname() %>';
 						<div class="image-upload"> <!-- 이미지 올릴곳 -->
                        <div class="image-edit">
                            <input type="file" name="filename" id="imageUpload" class="imageUpload" data-preview="imagePreview" accept=".png, .jpg, .jpeg" style="width:100px; height: 300px; border:1px solid;"multiple />
-                           <label for="imageUpload"></label> 
+							<label for="imageUpload"><i class="fas fa-chevron-circle-up fa-2x" style="color: #757575"></i></label> 
                            <div class="zz" data-preview="imagePreview" style="width:250px; height:200px;" ></div>
                        </div>
                        		<div class="preview" >
