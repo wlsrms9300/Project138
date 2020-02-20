@@ -99,8 +99,14 @@
         		  var address = "'" + item.address + "'";		
         		  var address_detail = "'" + item.address_detail + "'";	
         		  var point = "'" + item.point + "'";					
-        		  var subscribe = "'" + item.subscribe + "'";			
-        		  var grade = "'" + item.grade + "'"; 
+        		  var subscribe = "'" + item.subscribe + "'";
+        		  /* var grade = "";
+        		  if(item.grade != null) {
+        			  grade = "'" + item.grade + "'";
+            		} else {
+						grade = "비정기";
+                		}		 */
+        		   
 
         		  var output = '';
  
@@ -115,10 +121,10 @@
 		            var date2 = "'" + date + "'";
 					output += '<td>' + date + '</td>';
 					output += '<td>' + item.subscribe + '</td>';
-					output += '<td>' + item.grade + '</td>';
+					
 					output += '<td>' + item.usergroup + '</td>';
 					
-					output += '<td><button type="button" class="btn btn-sm memdetail" onclick="detail2('+email+','+usergroup+','+name+','+nickname+','+phone+','+date2+','+address+','+address_detail+','+item.point+','+subscribe+','+grade+');">상세 정보</button></td>';
+					output += '<td><button type="button" class="btn btn-sm memdetail" onclick="detail2('+email+','+usergroup+','+name+','+nickname+','+phone+','+date2+','+address+','+address_detail+','+item.point+','+subscribe+');">상세 정보</button></td>';
 					output += '</tr>';
 				
 					console.log("output:"+output);
@@ -317,10 +323,10 @@
 	            	 <th>구독여부 :</th>
 	                 <th><input type=text name="subscribe" readonly></th>
 	            </tr>
-	            <tr>
+	            <!-- <tr>
 	            	 <th>구독 등급 :</th>
 	                 <th><input type=text name="grade" readonly></th>
-	            </tr>
+	            </tr> -->
 	             
 	   				</table>
 	             </div>
@@ -328,7 +334,7 @@
 	     </div>
 	     
 	     <script>
-	 	function detail2(param_email, _usergroup, param_name, param_nickname, param_phone, param_date2, param_address, param_address_detail, param_point, param_subscribe, param_grade){
+	 	function detail2(param_email, _usergroup, param_name, param_nickname, param_phone, param_date2, param_address, param_address_detail, param_point, param_subscribe){
 	 		$('input[name=email]').val(param_email);
 	 		$('input[name=usergroup]').val(_usergroup);
 	 		$('input[name=name]').val(param_name);
@@ -339,7 +345,7 @@
 	 		$('input[name=address_detail]').val(param_address_detail);
 	 		$('input[name=point]').val(param_point);
 	 		$('input[name=subscribe]').val(param_subscribe);
-	 		$('input[name=grade]').val(param_grade);
+	 		/* $('input[name=grade]').val(param_grade); */
 	 		 
 			
 	 		

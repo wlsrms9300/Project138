@@ -122,6 +122,7 @@
  
 	<!-- admin페이지 member -->
 	<select id="getMemberListjeon" resultType="com.spring.member.MemberAdminVO">
-		select m.*, s.grade from member m, subscribe s where m.email = s.email
+	<!-- 	select m.*, s.grade from member m, subscribe s where m.email = s.email -->
+	select * from member
 	</select>
 </mapper>
