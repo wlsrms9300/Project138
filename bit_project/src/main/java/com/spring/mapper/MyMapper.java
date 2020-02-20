@@ -27,6 +27,6 @@ public interface MyMapper {
 	int checkPS(PStateVO vo);
 	int checkReserve(String email);
 	int getReserve(String email);
-	ArrayList<PStateVO> selectPS(String email);
+	ArrayList<PStateVO> selectPS(@Param("email")String email, @Param("start") int start, @Param("end") int end);
 
 }

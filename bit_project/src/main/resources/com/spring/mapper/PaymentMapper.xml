@@ -98,12 +98,17 @@
 	</select>
 	
 	<!-- subscribe_payment 테이블 조회 -->
-	<select id="selectSP" parameterType="String" resultMap="PaymentResultMap">
-		SELECT S.GRADE, P.PAY_NUM, P.SUBSCRIBE_NUM, P.PAY_DATE, P.PRICE, P.POINT_PRICE, P.STATE
+	<select id="selectSP" parameterType="com.spring.payment.PaymentVO" resultMap="PaymentResultMap">
+		SELECT * FROM(
+		SELECT ROWNUM RNUM, S.GRADE, P.PAY_NUM, P.SUBSCRIBE_NUM, P.PAY_DATE, P.PRICE, P.POINT_PRICE, P.STATE
 		FROM MEMBER M, SUBSCRIBE S, SUBSCRIBE_PAYMENT P
 		WHERE M.EMAIL = S.EMAIL AND S.SUBSCRIBE_NUM = P.SUBSCRIBE_NUM AND M.EMAIL=#{email}
-		ORDER BY PAY_DATE DESC 
+		ORDER BY PAY_DATE DESC)
+		<![CDATA[WHERE RNUM >=#{start} and RNUM<=#{end}]]> 
 	</select>
 	
-
+	<!-- 구독 취소 신청시 STATE 변경 -->
+	<update id="cancelSub" parameterType="String">
+		UPDATE SUBSCRIBE SET STATE='구독취소' WHERE EMAIL=#{email}
+	</update>
 </mapper>

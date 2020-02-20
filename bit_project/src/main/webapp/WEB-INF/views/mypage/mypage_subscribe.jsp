@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.login.LoginVO" %>
+<%@ page import="java.util.*, com.spring.payment.*" %>
 <%
 	LoginVO userDetail_subs = (LoginVO)session.getAttribute("userDetail");
+	String email_subs = (String)session.getAttribute("email");
+	
+	SubscriptionVO sub_subs = new SubscriptionVO();
+	if(request.getAttribute("subvo") != null) {
+		sub_subs = (SubscriptionVO)request.getAttribute("subvo");
+	}
+	
+	String state_subs = null;
+	if(userDetail_subs.getSubscribe().equals("Y")) {
+		state_subs = sub_subs.getState();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -27,15 +39,21 @@
                     <div class="subscribe_content_2">
                         <a href="subscribestep1.me"><b>구독하기 ></b></a>
                     </div>
-                  <% } else { %>               
+                  <% } else { %>
+                  <% if(state_subs.equals("구독취소")) { %>
+                   <div class="subscribe_content_1">
+                        <b>구독중</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서비스를 이용중입니다</p>
+                    </div>
+                    <% } else { %>               
                     <div class="subscribe_content_1">
                         <b>구독중</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서비스를 이용중입니다</p>
                     </div>
                     <div class="subscribe_content_2">
-                        <a href="#"><b>구독취소 ></b></a>
+                        <a href="#" onclick="subCancel('<%=email_subs%>');" ><b>구독취소 ></b></a>
                     </div>
-                  <% } %>
+                  <% }} %>
                 </div>
+                
                 <div class="pay_block">
                     <h3>자동 결제 정보</h3>
                     <table>
@@ -47,6 +65,7 @@
                             <th>상태</th>
                         </tr>                   
                     </table>
+                     <div class="paginate1" style="text-align:center; margin-top: 10px;"></div>
                 </div>
                 <div class="product_history">
                     <h3>히스토리</h3>
@@ -56,20 +75,40 @@
                             <th colspan="2">상품명</th>
                             <th colspan="2">상태</th>
                         </tr>
-                        <tr class="line">
-                            <td colspan="1">2020.01.01 ~ 2020.01.20</td>
-                            <td colspan="2">장난감</td>
-                            <td colspan="2">대여</td>                           
-                        </tr>
-                        <tr class="line">
-                            <td colspan="1">2020.01.01 ~ 2020.01.20</td>
-                            <td colspan="2">장난감</td>
-                            <td colspan="2">반납</td>
-                            
-                        </tr>
                     </table>
+                    <div class="paginate2" style="text-align:center; margin-top: 10px;"></div>
                 </div>
            
             </div>
+            
+
+<script type="text/javascript">
+function subCancel(email) {
+       if (confirm("구독 취소 신청을 하시겠습니까?")) { //Y
+       	$.ajax({
+				url:'/bit_project/mypage_subscribe_cancel.my',
+				type: 'POST',
+				data:{'email' : email},
+				dataType: "json",
+				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+				success: function(retVal) {
+					if (retVal.res == "OK") {
+						alert("구독이 취소 신청이 완료되었습니다.");
+					}
+					else {
+						alert("구독 취소 신청 실패");
+					}
+				},
+				error:function(request,status,error){
+			    		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				}
+       	}); //ajax
+       } else { //N
+       		alert("구독 취소신청을 취소하였습니다.");
+       		return false;
+		}
+ }
+ 
+</script>
 </body>
 </html>

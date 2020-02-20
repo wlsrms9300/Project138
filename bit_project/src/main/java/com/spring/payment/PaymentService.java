@@ -2,6 +2,8 @@ package com.spring.payment;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.member.MemberVO;
 
 public interface PaymentService {
@@ -15,6 +17,7 @@ public interface PaymentService {
 	public PaymentVO selectCancel(String email) throws Exception;
 	public int rePayState(PaymentVO vo) throws Exception;
 	public int paidState(int subscribe_num) throws Exception;
-	public ArrayList<PaymentVO> selectSP(String email) throws Exception;
+	public ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end) throws Exception;
+	public int cancelSub(String email) throws Exception;
 	
 }

@@ -36,7 +36,7 @@ $(document).ready(function(){
 	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 
 	</header>
 	</div>
-	<div class="subContainer">
+	<div class="subContainer" style= "min-height:850px; ">
 		<div class="subscribeHeader">
 			<ul>
 				<li class="on" style="cursor: pointer;" onclick="location.href='#'">

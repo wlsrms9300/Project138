@@ -124,12 +124,12 @@
 	/*********************************************************************************/
 	/* 글게시판                                                           								          */
 	/*********************************************************************************/
-	#community_main > #community_data{width: 480px;}
-	#community_main > #community_data > .community_ncontainer{width:480px; margin-top: 150px; font-size: 15px;}
-	#community_main > #community_data > #remo{width: 480px; font-size:15px;}
+	#community_main > #community_data{width: 100%;}
+	#community_main > #community_data > .community_ncontainer{width: 100%; margin-top: 150px; font-size: 15px;}
+	#community_main > #community_data > #remo{width: 100%; font-size:15px;}
 	#community_main > #community_data > #community_container_mt{width:100%; height: 150px; display: flex; margin: 0 auto; margin-bottom: 10px; text-align: center;}
 	#community_main > #community_data > #community_container_mt > .underline{display: none;}
-	#community_main > #community_data > #community_container_mt > .community_mt_title { width: 480px; height: 135px; border-top: 1px solid #555; margin: 0 auto; padding-top: 20px;}
+	#community_main > #community_data > #community_container_mt > .community_mt_title { width: 100%; height: 135px; border-top: 1px solid #555; margin: 0 auto; padding-top: 20px;}
 	#community_main > #community_data > #community_container_mt > .community_mt_title > .community_mt_link > .community_mt_img{} 
 	#community_main > #community_data > #community_container_mt > .community_mt_title > .community_mt_link > h2{ height: 60px; width: 68%; max-height: 70px; display: -webkit-box; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; white-space:normal; -webkit-line-clamp: 2; -webkit-box-orient: vertical;  line-height: 1.44; margin: 0;} /*2줄이상쓰지마세요*/
 	#community_main > #community_data > #community_container_mt > .community_mt_title > .community_mt_link > .community_mt_mt{display: none; }
@@ -139,11 +139,11 @@
 	/*********************************************************************************/
 	/* 사진게시판                                                                   						      */
 	/*********************************************************************************/
-	#community_main > #community_data_d{width: 480px;}
-	#community_main > #community_data_d > #remo{width: 480px; font-size:15px;}
+	#community_main > #community_data_d{width: 100%;}
+	#community_main > #community_data_d > #remo{width: 100%; font-size:15px;}
 	#community_container_mi{width: 100%; display: inline-block; height: 420px;}
 	#community_container_mi > .community_mi_title{width: 100%; height: 350px;}
 	#community_container_mi > .community_mi_title > .community_mi_writer > .community_mi_writer_user > img{width:16px; height:16px;}
-	#community_container_mi > .community_mi_title > .community_mi_img > .com_img2{width: 450px; height: 300px;}
+	#community_container_mi > .community_mi_title > .community_mi_img > .com_img2{width: 95%; height: 300px;}
 
 }	

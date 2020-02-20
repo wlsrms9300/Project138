@@ -94,19 +94,21 @@ ul.community_menubar > li.active >a {color: #ff7276;}
 /*모바일 버전*/
 @media ( max-width : 480px) {
 	#community-contentbox {
-		width: 480px;
+		width: 100%;
 	}
+
 	#contentbox-top {
+		width: 100%;
 		margin-bottom: 10px;
 	}
 	#category_select {
 		margin-left: 20px;
 		border: none;
-		width: 130px;
+		width: 50%;
 	}
 	#title {
 		border: none;
-		width: 350px;
+		width: 100%;
 		padding-right: 65px;
 	}
 	#contentbox-middle {

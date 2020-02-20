@@ -272,9 +272,9 @@
     	
 		 //날짜 format
         function date_format(format) {
-        	var year = format.getFullYear();
-//            var year = format.getFullYear().toString();
-//            var year = year1.substr(2,4);
+//        	var year = format.getFullYear();
+            var year1 = format.getFullYear().toString();
+            var year = year1.substr(2,4);
             var month = format.getMonth()+1;
             var hour = format.getHours();
             var min = format.getMinutes();
