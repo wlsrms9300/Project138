@@ -283,5 +283,27 @@ public class PaymentServiceImpl implements PaymentService {
 			throw new Exception("구독 상태 변경 실패", e);
 		}
 	}
+	
+	@Override
+	public int cancelSub2(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.cancelSub2(email);
+			return res;
+		} catch(Exception e) {
+			throw new Exception("구독 상태 변경 실패", e);
+		}
+	}
+	
+	@Override
+	public int subChange(String grade, String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.subChange(grade, email);
+			return res;
+		} catch(Exception e) {
+			throw new Exception("등급 변경 실패", e);
+		}
+	}
 
 }

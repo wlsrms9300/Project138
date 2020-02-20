@@ -31,7 +31,7 @@
 <body>
 	<div class="subscribe_wrap">
                 <h2>구독</h2>
-                <div class="subscribe_block">
+                <div class="subscribe_block" style="margin-bottom:20px;">
                   <% if(userDetail_subs.getSubscribe().equals("N")) { %>
                     <div class="subscribe_content_1">
                         <b>미구독</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정기구독을 이용해보세요</p>
@@ -42,7 +42,10 @@
                   <% } else { %>
                   <% if(state_subs.equals("구독취소")) { %>
                    <div class="subscribe_content_1">
-                        <b>구독중</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서비스를 이용중입니다</p>
+                        <b>취소신청</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다음결제일까지 이용가능합니다</p>
+                    </div>
+                    <div class="subscribe_content_2">
+                        <a href="#" onclick="subCancel2('<%=email_subs%>');" ><b>취소 ></b></a>
                     </div>
                     <% } else { %>               
                     <div class="subscribe_content_1">
@@ -50,9 +53,26 @@
                     </div>
                     <div class="subscribe_content_2">
                         <a href="#" onclick="subCancel('<%=email_subs%>');" ><b>구독취소 ></b></a>
-                    </div>
+                    </div>                
                   <% }} %>
                 </div>
+                <%   
+                	if(!userDetail_subs.getSubscribe().equals("N")) {
+                %>
+                	 <div class="subscribe_block" style="margin-top: 20px;">
+                	 	<div class="subscribe_content_1">
+                        <b style="border:none; font-size:14px;">등급선택</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="cgrade" value="실버">실버&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="cgrade" value="골드">골드&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="cgrade" value="플래티넘">플래티넘
+                    </div>
+                    <div class="subscribe_content_2">
+                        <a href="#" onclick="changeGrade('<%=email_subs%>');" ><b>등급변경 ></b></a>
+                    </div>    
+                	 </div>
+                <%
+                	}
+                %>
                 
                 <div class="pay_block">
                     <h3>자동 결제 정보</h3>
@@ -108,6 +128,74 @@ function subCancel(email) {
        		return false;
 		}
  }
+
+function subCancel2(email) {
+    if (confirm("취소 하시겠습니까?")) { //Y
+    	$.ajax({
+				url:'/bit_project/mypage_subscribe_cancel2.my',
+				type: 'POST',
+				data:{'email' : email},
+				dataType: "json",
+				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+				success: function(retVal) {
+					if (retVal.res == "OK") {
+						alert("취소 신청이 완료되었습니다.");
+					}
+					else {
+						alert("취소 신청 실패");
+					}
+				},
+				error:function(request,status,error){
+			    		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				}
+    	}); //ajax
+    } else { //N
+    		return false;
+		}
+}
+
+function changeGrade(email) {
+	 
+     if (confirm("등급을 변경 하시겠습니까? 비정기로 변경은 불가능합니다.")) { //Y
+        var cgrade = document.getElementsByName('cgrade');
+        var grade;
+        for(var i = 0; i < cgrade.length; i++) {
+			if(cgrade[i].checked) {
+				grade = cgrade[i].value;
+			}
+        }       
+
+        if(grade != <%=sub_subs.getGrade()%>) {
+    	$.ajax({
+				url:'/bit_project/mypage_subscribe_change.my',
+				type: 'POST',
+				data:{'email' : email,
+					  'subscribe_num' : subscribe_num,
+					  'grade' : grade
+					},
+				dataType: "json",
+				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+				success: function(retVal) {
+					if (retVal.res == "OK") {
+						alert("변경 신청이 완료되었습니다.");
+					}
+					else {
+						alert("변경 신청 실패");
+					}
+				},
+				error:function(request,status,error){
+			    		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+				}
+    	}); //ajax
+        } else{
+            alert("현재 등급과 동일합니다.");
+			return false;
+        }
+    } else { //N
+    	return false;
+	}
+}
+ 
  
 </script>
 </body>

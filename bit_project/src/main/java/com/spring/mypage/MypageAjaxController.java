@@ -191,4 +191,37 @@ public class MypageAjaxController {
 
 	}
 	
+	@PostMapping(value = "/mypage_subscribe_cancel2.my", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> canSubscribe2(String email) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		
+		try {
+			int res = paymentservice.cancelSub2(email);
+			retVal.put("res", "OK");   //맵객체 "res"는 키 , "OK" 값  
+
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		
+		return retVal;
+
+	}
+	
+	@PostMapping(value = "/mypage_subscribe_change.my", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> subChange(String email, String subscribe_num, String grade) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		
+		try {
+			/* int res = paymentservice.insertChange(email, subscribe_num, grade); */
+			retVal.put("res", "OK");  
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		
+		return retVal;
+	}
+
+	
 }

@@ -178,5 +178,19 @@
 	<update id="cancelSub" parameterType="String">
 		UPDATE SUBSCRIBE SET STATE='구독취소' WHERE EMAIL=#{email}
 	</update>
+	
+	<!-- 취소 신청시 STATE 변경 -->
+	<update id="cancelSub2" parameterType="String">
+		UPDATE SUBSCRIBE SET STATE='구독중' WHERE EMAIL=#{email}
+	</update>
+	
+	<!-- 구독등급 변경 신청 -->
+	<insert id="insertChange" parameterType="map">
+		
+	</insert>
+
+	
+	
+	
 
 </mapper>

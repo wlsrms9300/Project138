@@ -203,9 +203,14 @@ $(document).ready(function(){
             	$.each(data, function (index, item) {
             		var before1 = new Date(item.delivery_date);
             		var after1 = date_format2(before1);
-            		
-            		var before2 = new Date(item.return_application);
-            		var after2 = date_format2(before2);
+            		var before2;
+            		var after2; 
+            		if(item.return_application != 'N') {
+            			before2 = new Date(item.return_application);
+            			after2 = date_format2(before2);
+            		} else {
+            			after2 = "";
+            		}
             		
             		var output = "";
             		output += '<tr class="line">';
