@@ -17,7 +17,7 @@
 		group = userDetail_co.getUsergroup();
 	}
 %>	
-
+<!DOCTYPE html>
 <html>
 <head>
 <title>community</title>

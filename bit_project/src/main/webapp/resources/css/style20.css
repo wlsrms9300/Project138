@@ -7,7 +7,7 @@
 header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50px; font-size:16px;}
 #movie {background-color: #f2f2f2;}
 #footer {background: #211f1f;}
-.bom {height: 55px;}       
+.bom {height: 90px;}       
 /* 가운데 영역 */
 .container {position: relative; width: 1280px; margin: 0 auto; /* background:rgba(0,0,0,0.1); */ }
 
@@ -18,29 +18,24 @@ header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50
 img { min-width: 50% !important; max-width: 50% !important; min-height: 50% !important; max-height: 50% !important; }
 */
 
-/* 상품 상세 */
-.wrap_product {position: relative; width: 100%; height: 40rem;}
-.product_left {position: relative; float: left; width: 45%; height:100%;}
-#banner {position: relative; background:rgba(0,0,0,0.1);}
-.product_right {float: right; width: 50%; font-size: 16px;height:100%;}
-.product_right .product_cate1 {float: left; height:5%;}
-.product_right .product_cate2 {float: right; height: 5%; margin-right: 3%;}
-.pvofamily {min-height: 490px !important; max-height: 490px !important;}
-.pvopname {font-size: 32px; letter-spacing: .3px; font-stretch: condensed; font-weight: 900; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
-.pvomanu {font-size: 24px; letter-spacing: .3px; font-stretch: condensed; font-weight: 900; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
-.pvopcon {}
-.pvocur {font-size: 16px; letter-spacing: .3px; font-stretch: condensed; font-weight: 400; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
-.filter-search {position: relative; text-align: center; }
-.filter-search div {position: relative; display: inline-block; }
-.filter-search div button {background: #EA7475; border-radius: 5px; font-size: 15px;border: none; text-decoration: none; width: 100px;  color: #fff; padding: 10px; margin: 20px;}
-.trashlee {position: relative; text-align: center;}
-.trashlee div {position: relative; display: inline-block; }
-.trashlee div button {background: #EA7475; border-radius: 5px; font-size: 15px;border: none; text-decoration: none; width: 100px;  color: #fff; padding: 10px; margin: 20px;}
 
-/* 새로운 헤더 */
+/* 헤더 시작 !!!!!!!!!!*/
+@font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
+*{
+    
+    list-style: none;
+    text-decoration: none;
+    border-collapse: collapse;
+    margin: 0px;
+    color: #000;
+    font-family: 'S-CoreDream-4Regular';
+}
+#rumi:hover {
+	filter:grayscale(60%);
+	transition:filter 0.5s;
+}
 #wrap{
     width: 850px;
-    height:50px;
 }
 
 .main {
@@ -49,10 +44,9 @@ img { min-width: 50% !important; max-width: 50% !important; min-height: 50% !imp
 }
 
 .main > li > img {
-    width:80px;
-    height:50px;
+    width:100px;
+    height:60px;
 }
-
 
 .header{
 background-color:white;
@@ -62,7 +56,7 @@ position: fixed;
 display: flex;
 width: 100%;
 margin: auto;
-height: 50px;
+height: 70px;
 z-index: 1;
 box-shadow: 0px 3px 5px rgb(216, 216, 216);
 
@@ -77,6 +71,8 @@ box-shadow: 0px 3px 5px rgb(216, 216, 216);
 }
 .nav li {
     margin-left: 20px;  
+    margin-top:auto;
+    margin-bottom:auto;
 } 
 
 .nav input[id ="menuicon"] {
@@ -91,8 +87,8 @@ box-shadow: 0px 3px 5px rgb(216, 216, 216);
     height: 15px;
     position:relative;
     cursor: pointer;
-    top: 17px;
     margin-right: 50px;
+    margin-bottom: 0;
 }
 
 .nav input[id = "menuicon"] + label span {
@@ -100,7 +96,7 @@ box-shadow: 0px 3px 5px rgb(216, 216, 216);
     position: absolute;
     width: 100%;
     height: 2px;
-    border-radius: 30px;
+    border-radius: 5px;
     background: #000;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
@@ -141,7 +137,7 @@ div[class="sidebar"] {
     height:60px;
     text-align: center;
     border: 0;
-    background-color: rgba(255,235,205,0.95);
+    background-color: rgba(233,236,239,0.96);
     position: relative;
     display: none;
     -webkit-transition: all 1s;
@@ -150,11 +146,11 @@ div[class="sidebar"] {
 }
 
 input[id ="menuicon"]:checked +label +div {
-    top: 60px;
+    top: 67px;
     height: 180px;
     display: flex;
     position:fixed;
-    z-index: 9999;
+    z-index: 1;
     left: 0;
     -webkit-transition: all 1s;
     transition: all 1s;
@@ -183,19 +179,19 @@ input[id ="menuicon"]:checked +label +div {
     display: none;
     text-align: center;
     padding: 10px;
-    border-radius:12px;
+    border-radius:5px;
     width:100%;
 }
 
 div[class="sidebar"] button {
     background: #ff7276;
-    border-radius:10px;
+    border-radius:5px;
     color: #fff;
     border: 0;
     width: 120px;
     height: 40px;
     line-height: 40px;
-    
+    font-size: 16px;
     font-weight: 400;   
     text-align: center;
     z-index: 1;
@@ -204,9 +200,129 @@ div[class="sidebar"] button {
 }
 
 .login_text  {
-		padding-top: 16px;
+		margin-top:auto;
+		margin-bottom:auto;
+		font-size:16px;
+		padding-left:16px;
 	}   
-/* 새로운 헤더 */
+
+.menu_w tbody tr td a {
+	font-size:16px;
+}
+
+.menu_m tbody tr td a {
+	font-size:16px;
+}
+
+/*mediaquery*/
+@media (max-width: 1220px){
+    .container {width:100%;}
+    .row{padding: 0 15px;}
+}
+
+@media (max-width: 480px){
+	
+	.login_text  {
+   	  font-size:16px;
+      padding-left:30px;
+   }   
+   
+    .header{
+          width:100%;
+    }
+    .nav li {
+    margin-left: 20px;  
+    }       
+    .nav li:first-child {
+        width: 343px;
+    }       
+    .nav{
+        display: flex;
+        justify-content: flex-end;
+        width: calc(900px - 60px);
+        line-height: 45px;
+    }
+    
+    #sidemenu {
+     margin:0 auto;
+     width:auto;
+    }
+        
+    div[class="sidebar"] {
+        height:60px;
+        z-index:9999;
+       
+    }
+    div[class="sidebar"] button {
+        width: 100px;
+        height: 40px;
+        font-weight: 100; 
+        font-size: 1rem;
+        border: 0;
+        margin-top:1px;
+       
+    }
+    .menu_m {
+        display: flex;
+        font-size: 1.4rem;
+        margin-top: -20px;
+        padding: 31px;
+    }
+    .menu_w {
+       
+        display: none;
+        
+        
+    }
+    div[class="sidebar"] {
+        background-color: #fff;
+        width:100%;
+        z-index: 1;
+        position: fixed; 
+        background:  rgba(233,236,239,0.96);
+        height: 10px;
+ 	   
+}
+input[id ="menuicon"]:checked +label +div {
+    top:67px;
+    height: 510px;
+    display: flex;
+    
+}
+
+.nav input[id="menuicon"] + label {
+	margin-right:15px;
+}
+.nav li {
+	margin-left:15px;
+}
+.main {
+	margin-left:0;
+}
+
+}
+/* 헤더 끝 !!!!!!!!!!*/
+
+/* 상품 상세 */
+.wrap_product {position: relative; width: 100%; height: 40rem;}
+.product_left {position: relative; float: left; width: 45%; height:100%;}
+#banner {position: relative; background:rgba(0,0,0,0.1);}
+.product_right {float: right; width: 50%; font-size: 16px;height:100%;}
+.product_right .product_cate1 {float: left; height:5%;}
+.product_right .product_cate2 {float: right; height: 5%; margin-right: 3%;}
+.pvofamily {min-height: 490px !important; max-height: 490px !important;}
+.pvopname {font-size: 32px; letter-spacing: .3px; font-stretch: condensed; font-weight: 900; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
+.pvomanu {font-size: 24px; letter-spacing: .3px; font-stretch: condensed; font-weight: 900; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
+.pvopcon {}
+.pvocur {font-size: 16px; letter-spacing: .3px; font-stretch: condensed; font-weight: 400; line-height: 36px; margin-bottom: 4px; text-transform: uppercase;}
+.filter-search {position: relative; text-align: center; }
+.filter-search div {position: relative; display: inline-block; }
+.filter-search div button {background: #EA7475; border-radius: 5px; font-size: 15px;border: none; text-decoration: none; width: 100px;  color: #fff; padding: 10px; margin: 20px;}
+.trashlee {position: relative; text-align: center;}
+.trashlee div {position: relative; display: inline-block; }
+.trashlee div button {background: #EA7475; border-radius: 5px; font-size: 15px;border: none; text-decoration: none; width: 100px;  color: #fff; padding: 10px; margin: 20px;}
+
+
 
 
 
@@ -463,35 +579,7 @@ colgroup {display: table-column-group;}
 }
 
 @media (max-width: 480px){
-	
-	 /* 새로운 헤더 
-   .header{width:100%;}
-    .nav li {margin-left: 20px;  }       
-    .nav li:first-child {width: 343px;}       
-    .nav{display: flex;justify-content: flex-end;width: calc(900px - 60px);line-height: 45px;}
-	.login_text  {font-size:14px;padding-top:4px;padding-left:30px;}   
-    #sidemenu {margin:0 auto;width:auto;}
-    div[class="sidebar"] {height:60px;z-index:9999;}
-    div[class="sidebar"] button {width: 100px;height: 40px;font-weight: 100; font-size: 1rem;border: 0;margin-top:1px;}
-    .menu_m {display: flex;margin-top: -20px;padding: 31px;}
-    .menu_w {display: none;}
-    div[class="sidebar"] {background-color: #fff;width:100%;position: fixed; background:  rgba(255,235,205,0.95);height: 10px;}
-	input[id ="menuicon"]:checked +label +div {top:60px;height: 430px;display: flex;}
-     */
-	
-	 .header{width:100%;}
-    .nav li {margin-left: 20px;  }       
-    .nav li:first-child {width: 343px;}       
-    .nav{display: flex;justify-content: flex-end;width: calc(900px - 60px);line-height: 45px;}
-	.login_text  {font-size:14px;padding-left:30px;}   
-    #sidemenu {margin:0 auto;width:auto;}
-    div[class="sidebar"] {height:60px;z-index:9999;}
-    div[class="sidebar"] button {width: 100px;height: 40px;font-weight: 100; font-size: 1rem;border: 0;margin-top:1px;}
-    .menu_m {display: flex;font-size: 1.4rem;margin-top: -20px;padding: 31px;}
-    .menu_w {display: none;}
-    div[class="sidebar"] {background-color: #fff;width:100%;position: fixed; background:  rgba(255,235,205,0.95);height: 10px;}
-	input[id ="menuicon"]:checked +label +div {top:67px;height: 450px;display: flex;}
-    /*1월 7일 추가한 내용 */
+
     
     .swiper-wrapper {margin-top: 10px;}
     .product_left {width: 100%; height: 375px; margin-bottom: 20px;}
@@ -557,7 +645,7 @@ div.reply {padding-right: 40px;}
 .qnaForm {width: 90%; height: 100%; }
 .wishlistForm_true {left: 0; right: 0; top: 0; bottom: 350px; height: 100%;}
 .wishlistForm_false {left: 0; right: 0; top: 0; bottom: 350px;height: 100%;}
-.bom {height: 42px;}
+.bom {height: 64px;}
 .reservationForm_true {left: 0; right: 0; top: 0; bottom: 350px;height: 100%;}
 .reservationForm_false {left: 0; right: 0; top: 0; bottom: 350px;height: 100%;}
 .bookmarkForm_false {left: 0; right: 0; top: 0; bottom: 350px;height: 100%;}

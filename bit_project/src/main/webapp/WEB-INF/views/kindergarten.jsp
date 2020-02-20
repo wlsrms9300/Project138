@@ -32,6 +32,7 @@
 		</header>
 	</div>
 	<div class="container">
+	<!-- 용의자 -->
 		<div class="info-wrapper">
 			<div class="info-rent">
 				<div class="h1">
@@ -52,6 +53,7 @@
 				<i class="fas fa-gift fa-9x"></i>
 
 			</div>
+			
 			<div class="info-buy">
 				<div class="h1">
 					<h1>매입</h1>
@@ -77,7 +79,7 @@
              <h1 class="title">어린이집 가입신청</h1>
              <h5 class="sentence">아래 사항을 작성하여 보내주시면 담당자가<br />
                 확인하여 연락 드리도록 하겠습니다.</h5>
-             <hr>
+             
              <form id="mun2" action="companyAddProcess.se" method="POST" enctype="multipart/form-data">
                 
                                 
@@ -112,6 +114,7 @@
 			
 			
 		</div>
+		<!-- 용의자 -->
 		<div class="contact-us">
 
 			<div id="contact">
