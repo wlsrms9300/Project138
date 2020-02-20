@@ -65,14 +65,14 @@
 				<div class="p">
 					<p>더 이상 필요하지 않은 장난감을 매입하여,</p>
 					<p>어린이집 뿐만 아니라 환경에도 도움이 되는 문화를 만들어 갑니다.</p>
-				</div>
+				</div>	
 
 				<i class="fas fa-hand-holding-usd fa-9x"></i>
 
 			</div>
 			<!--어린이집 가입신청 모달-->
      	<div class="modal" id="nursery-modal">
-         <div class="modal-content">
+         <div class="modal-content1">
              <span class="close-button" id="nclose-button">&times;</span> 
              <h1 class="title">어린이집 가입신청</h1>
              <h5 class="sentence">아래 사항을 작성하여 보내주시면 담당자가<br />
