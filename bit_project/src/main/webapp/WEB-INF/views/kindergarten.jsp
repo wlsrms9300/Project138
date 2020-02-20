@@ -168,7 +168,7 @@ var ncancelButton = document.querySelector("#ncancel");
 
 
 function toggleNModal() {
-   modal2.classList.toggle("show-modal");
+   modal2.classList.toggle("show-modal1");
 }
 
 document.getElementById("nursery-join-btn").onclick = function() { 

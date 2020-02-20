@@ -35,15 +35,15 @@
 			>유아용품 렌탈의 모든
 			것,</h2>
 		<h2 class="h2_style" id="h2_style_2"
-			>진근이네에서 간편하게</h2>
+			>ONEDER 에서 간편하게</h2>
 	</div>
 	<div class="intro-section">
 
 		<div class="intro_first">
 
-			<h1 class="h1_style" data-aos="fade-up" data-aos-duration="1000">진근이네란?</h1>
+			<h1 class="h1_style" data-aos="fade-up" data-aos-duration="1000">ONEDER</h1>
 			<span class="mt_1 span_style" data-aos="fade-up"
-				data-aos-duration="1000"> 진근이네는 1세부터 7세의 아이들을 대상으로 여러 장난감을
+				data-aos-duration="1000"> ONEDER는 1세부터 7세의 아이들을 대상으로 여러 장난감을
 				1달에 한 번씩 받아볼 수 있는 맞춤형 구독 서비스입니다. 구독 신청 후, 배송된 장난감을 아이들이 재밌게 가지고 논
 				후에는 선택하신 위시리스트의 다른 장난감으로 교환 가능합니다. 더는 선반 위에서 먼지만 쌓여가는 장난감을 사는 데 돈을
 				낭비하지 않으셔도 됩니다. </span>
@@ -51,15 +51,15 @@
 				대여가 왜 합리적 경제 생활인가요?</h1>
 			<span class="mt_1 span_style" data-aos="fade-up"
 				data-aos-duration="1000"> 우리 아이의 취향에 맞게 다양한 종류의 장난감을 대여되는
-				진근이네를 이용함으로써, 아이가 원하는 것을 충족시킬 수있습니다. 또한, 더는 가지고 놀지 않는 장난감을 공유 또는
-				교환함으로써 부모님의 부담을 덜며 사회적 나눔을 실천할 수 있습니다. <br> 진근이네는 공유 경제의 개념을
+				ONEDER를 이용함으로써, 아이가 원하는 것을 충족시킬 수있습니다. 또한, 더는 가지고 놀지 않는 장난감을 공유 또는
+				교환함으로써 부모님의 부담을 덜며 사회적 나눔을 실천할 수 있습니다. <br> ONEDER는 공유 경제의 개념을
 				도입하여 자원의 낭비를 막으며, 친환경에 이바지합니다.
 			</span>
 
 		</div>
 
 		<div class="intro_second">
-			<h3 class="h1_style" data-aos="fade-up" data-aos-duration="1000">진근이네 이용방법</h3>
+			<h3 class="h1_style" data-aos="fade-up" data-aos-duration="1000">ONEDER 이용방법</h3>
 			<div class="mt_box">
 				<div class="mt_box_module">
 					<div class="box_step1" data-aos="fade-up" data-aos-duration="1000"
