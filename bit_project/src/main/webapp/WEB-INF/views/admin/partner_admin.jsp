@@ -153,7 +153,8 @@
     	                      var date = new Date(item.accept_date);
     	                     	date = date_to_str(date, item.term);
     	                  
-    		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
+    		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
+    		  			       output += '<td>' + '<input type="hidden" value='+ item.term +'><span>'+ item.term +'<span>개월</span></span></td>';
     		   	                
     		   	               
     	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
@@ -313,6 +314,7 @@
                 	<th>홈페이지</th>
                 	<th>연락처</th>
                 	<th>계약기간</th>
+                	<th>텀</th>
                 	<th>상태</th>
             	</tr>        
 			</thead>

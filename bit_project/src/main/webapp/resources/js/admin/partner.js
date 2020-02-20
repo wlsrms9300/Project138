@@ -49,11 +49,13 @@ var state_param = null;
 	  	    	                      output += '<td>' + '<input type="hidden" value='+ item.license_num +'><span>'+item.license_num+'</span></td>';
 	  	    	                      output += '<td>' + '<input type="hidden" value='+ item.homepage +'><span>'+item.homepage+'</span></td>';
 	  	    	                      output += '<td>' + '<input type="hidden" value='+ item.phone +'><span>'+item.phone+'</span></td>';
+	  	    	                      
+	  	    	                      
 	  	    	   	                
 	  	    	                    var date = new Date(item.accept_date);
 	    	                     	date = date_to_str(date, item.term);
 	  	    		  			         output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>'; 
-	  	    		   	                
+	  	    		  			     output += '<td>' + '<input type="hidden" value='+ item.term +'><span>'+ item.term +'</span></td>';
 	  	    		   	               
 	  	    	                      output += '<td><button type="button" class="btn btn-sm btndetail" onclick="detail('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+','+category+','+content+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm ptsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del(' + name + ');">삭제</button></td>';
 	  	    	                      output += '</tr>';
@@ -178,10 +180,20 @@ var state_param = null;
         var hour = format.getHours();
         if(hour<10) hour = '0' + hour;
         
-        var month2 = Number(month); 
-        var term2 = Number(term); 
         
-        return year + "-" + month + "-" + date + " ~ "+ year + "-" + (month2+term2) + "-" + date ;
+        var month2 = Number(month); 
+        var term2 = Number(term);
+        let mun_date = new Date(format);
+        mun_date.setMonth(mun_date.getMonth() + 1 +term2);
+        var munyear = mun_date.getFullYear();        
+        var munmonth = mun_date.getMonth();
+        var mundate = mun_date.getDate();
+        if(munmonth<10) munmonth = '0' + munmonth;
+        if(mundate<10) mundate = '0' + mundate;
+        
+        
+        
+        return year + "-" + month + "-" + date + " ~ "+ munyear + "-" + munmonth + "-" + mundate;
         
         
     }
@@ -285,8 +297,7 @@ var state_param = null;
   		var license_num = $(this).parent().parent().children().eq(1).children('input').val();
   		var homepage =$(this).parent().parent().children().eq(2).children('input').val();
   		var phone =$(this).parent().parent().children().eq(3).children('input').val();
-  		var term =$(this).parent().parent().children().eq(4).children('input').val();
-  		
+  		var term =$(this).parent().parent().children().eq(5).children('input').val();
   		
   		
   		var save = $('.ptsave'); // 저장할 버튼을 변수에 선언	
@@ -316,6 +327,9 @@ var state_param = null;
   			$(this).parent().parent().children().eq(2).children('span').html($(this).parent().parent().children().eq(2).children('input').val());
   			$(this).parent().parent().children().eq(3).children('span').html($(this).parent().parent().children().eq(3).children('input').val());
   			$(this).parent().parent().children().eq(4).children('span').html($(this).parent().parent().children().eq(4).children('input').val());
+  			$(this).parent().parent().children().eq(5).children('span').html($(this).parent().parent().children().eq(5).children('input').val());
+  			
+  			location.href = 'partner_admin.se';
   		})
   	
     
