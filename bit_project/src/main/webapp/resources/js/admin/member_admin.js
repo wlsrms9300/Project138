@@ -50,7 +50,7 @@
 		            date = date_to_str(date);
 					output += '<td>' + date + '</td>';
 					output += '<td>' + item.subscribe + '</td>';
-					output += '<td>' + item.grade + '</td>';
+					/*output += '<td>' + item.grade + '</td>';*/
 					output += '<td>' + item.usergroup + '</td>';
 					
 					 

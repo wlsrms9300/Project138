@@ -70,6 +70,7 @@ public class ActiveServiceImpl implements ActiveService {
 		}
 	}
 	
+	
 	@Override
 	public ActiveVO getWriteDate(String nickname) throws Exception {
 		try {

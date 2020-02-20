@@ -22,5 +22,11 @@ public class TestController {
 		return "main2";
 	}
 	
+	@RequestMapping(value = "/about.tz")
+	public String about(Model model, HttpSession session) {
+		
+		return "about_test";
+	}
+	
 	
 }
