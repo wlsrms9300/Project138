@@ -191,12 +191,15 @@ $(document).ready(function(){
         		$('.product_history table').append(output2);	
         		if(data.length != 0) {
             	$.each(data, function (index, item) {
-            		var before = new Date(item.delivery_date);
-            		var after = date_format2(before);
+            		var before1 = new Date(item.delivery_date);
+            		var after1 = date_format2(before1);
+            		
+            		var before2 = new Date(item.return_application);
+            		var after2 = date_format2(before2);
             		
             		var output = "";
             		output += '<tr class="line">';
-            		output += '<td colspan="1">'+ after +'</td>';
+            		output += '<td colspan="1">'+ after1 + ' ~ ' + after2 + '</td>';
             		output += '<td colspan="2">'+ item.product_name +'</td>';
             		output += '<td colspan="2">'+ item.state +'</td>';
             		output += '</tr>';
