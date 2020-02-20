@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.product.AlarmVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.ProductVO;
+import com.spring.product.QnaAnsVO;
 import com.spring.product.QnaVO;
 import com.spring.product.ReviewVO;
 import com.spring.product.reviewjoinmemberVO;
@@ -69,11 +70,15 @@ public interface PDMapper {
 	
 	//상품 문의
 	List<QnaVO> qnaSearch(@Param("startPage") int startPage, @Param("endPage") int endPage, @Param("product_num") int product_num);
+	List<QnaAnsVO> qnaAnsSearch(@Param("question_num") int question_num);
+	
 	int qnaCount(@Param("product_num") int product_num);
 	void qnaWrite(QnaVO qnaVO) throws Exception;
 	void qnaDelete(@Param("question_num") int question_num, @Param("product_num") int product_num);
+	void qnaAnsDelete(@Param("question_num") int question_num);
 	void qnaModify(QnaVO qnaVO);
 	String qnaemailchk(@Param("email") String email);
+	String qnaadminchk(@Param("email") String email);
 	
 	//상품 리뷰
 	void reviewWrite(ReviewVO reviewVO) throws Exception;
@@ -89,4 +94,8 @@ public interface PDMapper {
 	//상품 검색
 	int productListGetCount(@Param("search_type") String search_type, @Param("search_word") String search_word);
 	List<ProductVO> selectProductList(@Param("search_type") String search_type, @Param("search_word") String search_word, @Param("pno") int pno);
+	
+	// 관리자
+	void ansWrite(QnaAnsVO qvo);
+	void ansState(@Param("question_num") int question_num);
 }

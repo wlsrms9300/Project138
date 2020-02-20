@@ -1,6 +1,8 @@
 package com.spring.mypage;
 
+
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import com.spring.payment.PaymentService;
 import com.spring.payment.PaymentVO;
 import com.spring.product.ProductShareVO;
 import com.spring.product.SettlementVO;
+import com.spring.product.reviewjoinmemberVO;
 import com.spring.tazo.ShareWatingListVO;
 @RestController
 public class MypageAjaxController {
@@ -64,24 +67,32 @@ public class MypageAjaxController {
 	}
 	
 	@GetMapping(value = "/mypage_share.my", produces = "application/json;charset=UTF-8")
-	public List<ShareWatingListVO> getMyPageShare(String email) {
-		System.out.println("컨트롤러"+email);
+	public List<ShareWatingListVO> getMyPageShare(String email, int page) {
 		List<ShareWatingListVO> shareList = null;
+		int limit = 5;
+		int startrow = (page - 1) * 5 + 1;
+		int endrow = startrow + limit - 1;
 		try {
-			shareList = service.getMyPageShare(email);
+			shareList = service.getMyPageShare(startrow, endrow, email);
 			System.out.println(shareList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
 		return shareList;
+		
+		
+			
 	}
 	@GetMapping(value = "/mypage_share2.my", produces = "application/json;charset=UTF-8")
-	public List<ProductShareVO> getMyPageShare2(String email) {
+	public List<ProductShareVO> getMyPageShare2(String email, int page) {
 		System.out.println("컨트롤러"+email);
+		int limit = 5;
+		int startrow = (page - 1) * 5 + 1;
+		int endrow = startrow + limit - 1;
 		List<ProductShareVO> shareList = null;
 		try {
-			shareList = service.getMyPageShare2(email);
+			shareList = service.getMyPageShare2(startrow, endrow, email);
 			System.out.println(shareList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,7 +133,28 @@ public class MypageAjaxController {
 			e.printStackTrace();
 			e.getMessage();
 		}
+
 		return data;
+	}
+
+	@PostMapping(value = "/myShareCount.my", produces = "application/json;charset=UTF-8")
+	public HashMap<String, Object> myShareCount(String email) {
+		int result_share = 0, result_sharehis = 0;
+		System.out.println(email);
+		HashMap<String, Object> map = new HashMap<String, Object>(); 
+		map.clear();
+		try {
+			result_share = service.scount(email);
+			result_sharehis = service.hcount(email);
+			map.put("share", result_share);
+			map.put("sharehis", result_sharehis);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+
+		return map;
 	}
 	
 	@PostMapping(value = "/mypage_subscribe_history.my", produces = "application/json;charset=UTF-8")
@@ -156,6 +188,7 @@ public class MypageAjaxController {
 		}
 		
 		return retVal;
+
 	}
 	
 }

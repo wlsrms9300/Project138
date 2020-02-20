@@ -465,6 +465,20 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("qna 리스트 출력 실패.", e);
 		}
 	}
+	
+	
+	@Override
+	public List<QnaAnsVO> qnaAnsSearch(int question_num) throws Exception {
+		try {
+			List<QnaAnsVO> list = null;
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			list = pdMapper.qnaAnsSearch(question_num);
+			return list;
+		} catch (Exception e) {
+			throw new Exception("qna ans 리스트 출력 실패.", e);
+		}
+	}
+
 	@Override
 	public int qnaCount(int product_num) throws Exception {
 		try {
@@ -479,6 +493,7 @@ public class PDServiceImpl implements PDService {
 	public void qnaDelete(int question_num, int product_num) throws Exception {
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.qnaAnsDelete(question_num);
 			pdMapper.qnaDelete(question_num, product_num);
 		} catch (Exception e) {
 			throw new Exception("qna 삭제실패.", e);
@@ -495,11 +510,18 @@ public class PDServiceImpl implements PDService {
 	}
 	@Override
 	public String qnaemailchk(String email) throws Exception {
-		String emailChk = null;
+		String userChk = null;
+		String adminChk = null;
 		try {
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			emailChk = pdMapper.qnaemailchk(email);
-			return emailChk;		
+			userChk = pdMapper.qnaemailchk(email);
+			adminChk = pdMapper.qnaadminchk(email);
+			System.out.println(userChk+"asdf"+adminChk);
+			if(userChk==null) {
+				return adminChk;
+			}else {
+				return userChk;
+			}
 		} catch (Exception e) {
 			throw new Exception("비공개 문의 이메일 체크 실패.", e);
 		}
@@ -561,8 +583,24 @@ public class PDServiceImpl implements PDService {
 		}
 		
 	}
-	
-	
-	
 	/********************** 개인쉐어 상품 등록 종료 **********************/
+	
+	
+	/********************** 관리자 시작 **********************/
+	
+	@Override
+	public void ansWrite(QnaAnsVO qvo) throws Exception {
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			pdMapper.ansWrite(qvo);	
+			pdMapper.ansState(qvo.getQuestion_num());
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		
+	}
+	
+	
+	/********************** 관리자 종료 **********************/
 }

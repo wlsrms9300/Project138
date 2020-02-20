@@ -428,7 +428,7 @@ textarea.form-control {
     #product_section {background-color: transparent; min-height: 40rem !important; max-height: 100% !important;}
     #product_section .ir_so {position: static; width: auto; height: auto; line-height: normal; text-indent: 0; font-size: 18px; padding-bottom: 10px; font-weight: bold;}
     #product_section .container {position: relative;}
-    #product_section .container:after {content: ''; position: absolute; z-index: 20; top: 0; right: 0; width: 8px; height: 100%; background: #d9d7e0;}
+    #product_section .container:after {content: ''; position: absolute; z-index: 20; top: 0; right: 0; width: 8px; height: 100%; /* background: #d9d7e0; */}
     /* #product_section .row {position: relative; margin: 8px; padding: 16px; background: #fff; margin-right: 0; padding-right: 0;}*/
     #product_section .row {position: relative; margin: 0px; padding: 0px; background: #fff; margin-right: 0; padding-right: 0;}
     #product_section .row:after {content: ''; position: absolute; top: 0; right: 0; z-index: 10; width: 24px; height: 100%; background: #fff;}

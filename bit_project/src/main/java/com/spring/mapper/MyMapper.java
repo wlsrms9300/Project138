@@ -17,9 +17,9 @@ public interface MyMapper {
 	List<BookmarkVO> getMyPageBookMark(@Param("email") String email);
 	List<WishlistVO> getMyPageWishList(@Param("email") String email);
 	List<ReservationVO> getMyPageReservation(@Param("email") String email);
-	List<ShareWatingListVO> getMyPageShare(@Param("email") String email);
+	
 	PStateVO getProductState(PStateVO vo);
-	List<ProductShareVO> getMyPageShare2(@Param("email") String email);
+	
 	void getMyPageShareSettle(@Param("email") String email, @Param("settle") int settle, @Param("share_num") int share_num) throws Exception;
 	SettlementVO getShareJoin(@Param("share_num") int share_num);
 	void addMyPageShareSettle(SettlementVO sVO);
@@ -28,5 +28,9 @@ public interface MyMapper {
 	int checkReserve(String email);
 	int getReserve(String email);
 	ArrayList<PStateVO> selectPS(@Param("email")String email, @Param("start") int start, @Param("end") int end);
+	int scount(@Param("email") String email);
+	int hcount(@Param("email") String email);
+	List<ShareWatingListVO> getMyPageShare(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email);
+	List<ProductShareVO> getMyPageShare2(@Param("startrow") int startrow, @Param("endrow") int endrow, @Param("email") String email);
 
 }

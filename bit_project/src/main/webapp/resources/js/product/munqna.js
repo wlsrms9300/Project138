@@ -55,7 +55,7 @@
                 	}else {
                 		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
                 	}*/
-        			if(sessionChk!="" && sessionChk==searchemail){
+        			if((sessionChk!="" && sessionChk==searchemail) || usergroup=='admin'){
                   		$(this).children().last().show();
                   	}else {
                   		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
@@ -87,15 +87,24 @@
                 //totalData = data.length;               
                 if(data.length!=0){
                 $.each(data, function (index, item) {
+                	var sib1 = "'"+item.question_title+"'";
+                  	 var sib2 = "'"+item.content+"'";
+                  	 var sib3 = "'"+item.nickname+"'";
+                  	 var sib4 = "'"+item.secret+"'";
+                  	 var sib5 = "'"+item.email+"'";
                     var exText = "";
                     exText += "<li>";
                     exText += "<div class='title'>";
                     exText += "<span>" +item.answer+ "</span>";    
                     if(item.secret=="공개"){
-                    	exText += "<em>" + item.question_title + "</em>";
+                        	exText += "<em class='mqt'>" + item.question_title + "</em>";                    		
+
+                    	
                     	exText += '<input type="hidden" value="'+item.secret+'">';		
                     }else {
-                    	exText += "<em>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                        	exText += "<em class='mqt'>" + item.question_title + "</em>";                    		
+                    	//exText += "<em class='mqt'>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</em>";
+                    	//exText += "<span class='mqt'>" + item.question_title + "&nbsp;&nbsp;<i class='fas fa-key'></i>"+ "</span>";
                     	exText += '<input type="hidden" value="'+item.secret+'">';
                     }
                     
@@ -109,48 +118,54 @@
                     exText += "<div class='content' style='display:none;'>";
                     exText += item.content;
                     exText += "<p class='txt-right'>";
-                    if(sessionChk==item.email && sessionChk!=null){
+                    if((sessionChk==item.email && sessionChk!=null) || usergroup=='admin'){
                     	if(item.answer=="답변대기"){
-                       	 var sib1 = "'"+item.question_title+"'";
-                       	 var sib2 = "'"+item.content+"'";
-                       	 var sib3 = "'"+item.nickname+"'";
-                       	 var sib4 = "'"+item.secret+"'";
-                       	 var sib5 = "'"+item.email+"'"; 
+                       	 
+                       	 if(usergroup=='admin'){
+                       		exText += '<a href="javascript:void(0)"'+' onclick="ansModal('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">답변</a>';	 
+                       	 }
                        	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
                          exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
                          exText += "</p>";
                        }else {
-                    	   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
+                    	   exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
+                    	   if(usergroup=='admin'){
+                    		   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";   
+                    	   }
                     	   exText += "</p>";
-                           exText += "<div class='reply'>";
-                           exText += "<span class='re'>re.</span>";
-                           exText += "<span class='date'>관리자가 답글 단 날짜</span>";
-                           exText += "관리자의 답글내용"+"</div>";
+                    	   //답변완료 시.
+                    	   $.ajax({
+           		        	url: '/bit_project/qna2.pr',
+           		            type: 'POST',
+           		            dataType: 'json',
+           		            data:{"question_num" : item.question_num},
+           		            async : false,
+           		            success: function (res) {    
+           		            $.each(res, function (i, v) {
+           		             var date = new Date(v.regist);
+           		             date = date_to_str(date);
+           		             exText += "<div class='reply'>";
+                             exText += "<span class='re'>re.</span>";
+                             exText += "<span class='date'>"+date+"</span>";
+                             exText += v.content+""+"</div>";
+                             console.log(v.answer_num, v.question_num, v.email, v.nickname, v.product_num, v.content);
+           		            })
+           		            },
+           			        error: function () {
+           					}
+                    	   });
+                    	   
+                    	  
+                          
                        }
-                   	} else {
-                   		if(item.answer=="답변대기"){
-                            exText += "</p>";
-                        }else {
-                           if(item.secret!="공개"){
-                        	   
-                           }else {
-                        	   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
-                           	   exText += "</p>";
-                               exText += "<div class='reply'>";
-                               exText += "<span class='re'>re.</span>";
-                               exText += "<span class='date'>관리자가 답글 단 날짜</span>";
-                               exText += "관리자의 답글내용"+"</div>";
-                           }
-                       	   
-                        }
-                   	}
-                    
+                   	} 
+                   
                     exText += "</div></li>";
                     $(".accordion ul").append(exText);
-                })
+                })//each
                 paging(totalData, dataPerPage, pageCount, currentPage);
                 
-                }
+                }//ifsize
                 else {
                 	 var exTextnull = "<li style='text-align:cetner;'>";
                 	 exTextnull += "<div>등록된 상품문의가 없습니다.</div>";
@@ -158,7 +173,7 @@
                      $(".accordion ul").append(exTextnull);
                 }
                 
-            },
+            },//suc
 	        error: function () {
 				alert("ajax오류");
 			}
@@ -295,4 +310,63 @@ function qnadelete(qnum){
 	     return false;
 	 }
 	
+}
+
+$('.admin_writebtn a').first().click(function () {
+    $("body").removeClass('not_scroll');
+    $('.adminAnsForm').css('position', 'relative');//top값 해제
+    $('.adminAnsForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    $('.adminAnsForm').css('top', 0);//최상위 div 고정해제
+    $(".adminAnsForm").hide();
+    $('body').css("background", "none");
+    $('body').scrollTop(scrollHeight);
+    //등록
+    var frm = document.getElementById("AnsForm");
+    var ansparams = $("#AnsForm").serialize();
+    $.ajax({
+		 url:'/bit_project/ansWrite.pr',
+		 type:'POST',
+		 data:ansparams,
+		 dataType:'JSON',
+		 success:function (data) {
+			 alert('삽입 성공');
+		 },
+		 error:function() {
+			alert('삽입 실패');
+		 }
+	 });
+    frm.reset();
+    history.go(0);
+    var scrollTop = $(window).scrollTop();
+    var captionTop = $('.qnacssf').offset().top;
+    $('html, body').animate({ scrollTop: captionTop }, 0);
+
+});
+$('.admin_writebtn a').last().click(function () {
+    $("body").removeClass('not_scroll');
+    $('.adminAnsForm').css('position', 'relative');//top값 해제
+    $('.adminAnsForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+    $('.adminAnsForm').css('top', 0);//최상위 div 고정해제
+    $(".adminAnsForm").hide();
+    $('body').css("background", "none");
+    $('body').scrollTop(scrollHeight);
+    var frm = document.getElementById("AnsForm");
+    frm.reset();
+});
+
+function ansModal(_qnum, _title, _content, _nickname, _secret, _email) {
+	 $("#AnsForm textarea[name=content]").html("");
+	 $("#AnsForm input[name=question_num]").val(_qnum);
+	 if (sessionChk == "" || sessionChk == null) {
+	        location.href = "login.me";
+	 } else {
+	        $('body').css("background", "grey");
+	        $(".adminAnsForm").show();
+	        scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+	        $("body").addClass('not_scroll'); //overflow:hidden 추가
+	        $('.adminAnsForm').css('position', 'fixed'); //최상위 div 고정
+	        $('.adminAnsForm').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	        $('.adminAnsForm').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
+	        
+	 }
 }

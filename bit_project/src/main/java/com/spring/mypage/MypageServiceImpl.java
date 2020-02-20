@@ -54,11 +54,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<ShareWatingListVO> getMyPageShare(String email) throws Exception {
+	public List<ShareWatingListVO> getMyPageShare(int startrow, int endrow, String email) throws Exception {
 		List<ShareWatingListVO> shareList = null;
 		try {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			shareList = myMapper.getMyPageShare(email);
+			shareList = myMapper.getMyPageShare(startrow, endrow, email);
 			return shareList;
 		} catch (Exception e) {
 			throw new Exception("개인 쉐어 리스트 출력 실패", e);
@@ -66,11 +66,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<ProductShareVO> getMyPageShare2(String email) throws Exception {
+	public List<ProductShareVO> getMyPageShare2(int startrow, int endrow, String email) throws Exception {
 		List<ProductShareVO> shareList = null;
 		try {
 			MyMapper myMapper = sqlSession.getMapper(MyMapper.class);
-			shareList = myMapper.getMyPageShare2(email);
+			shareList = myMapper.getMyPageShare2(startrow, endrow, email);
 			return shareList;
 		} catch (Exception e) {
 			throw new Exception("개인 쉐어 리스트 출력 실패", e);
@@ -180,6 +180,34 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 
+	@Override
+	public int scount(String email) throws Exception {
+		int res = 0;
+		try {
+			MyMapper mp = sqlSession.getMapper(MyMapper.class);
+			res = mp.scount(email);
+			
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int hcount(String email) throws Exception {
+		int res = 0;
+		try {
+			MyMapper mp = sqlSession.getMapper(MyMapper.class);
+			res = mp.hcount(email);
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	
 	
 
 	

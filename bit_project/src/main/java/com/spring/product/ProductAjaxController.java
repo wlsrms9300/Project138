@@ -276,6 +276,17 @@ public class ProductAjaxController {
 		}
 		return list;
 	}
+	@PostMapping(value = "/qna2.pr", produces = "application/json;charset=UTF-8")
+	public List<QnaAnsVO> qnaSearch2(int question_num) {
+		List<QnaAnsVO> list = null;
+		try {
+			list = service.qnaAnsSearch(question_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	@PostMapping(value = "/qnacount.pr", produces = "application/json;charset=UTF-8")
 	public int qnatotalcount(int product_num) {	
 		int res=0;
@@ -303,6 +314,7 @@ public class ProductAjaxController {
 	
 	@PostMapping(value = "/qnaemailchk.pr", produces = "application/json;charset=UTF-8")
 	public String qnaemailchk(String email) {
+		System.out.println("컨트롤러"+email);
 		String emailChk = null;
 		String str = null;
 		try {
@@ -321,6 +333,18 @@ public class ProductAjaxController {
 		}
 		return str;
 	}
+	@PostMapping(value = "/ansWrite.pr", produces = "application/json;charset=UTF-8")
+	public int ansWrite(QnaAnsVO qvo) {
+		try {
+			service.ansWrite(qvo);
+			//qna 답변상태 바꿔야함
+		} catch (Exception e) {
+			e.printStackTrace();
+			e.getMessage();
+		}
+		return 1;
+	}
+	
 	@PostMapping(value = "/reviewcount.pr", produces = "application/json;charset=UTF-8")
 	public int reviewtotalcount(int product_num) {	
 		int res=0;

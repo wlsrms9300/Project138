@@ -9,9 +9,13 @@
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
 	int bookmark = 0, wishlist = 0, reservation = 0, alarm = 0;
-	String email = "", phone="";
+	String email = "", phone="", usergroup="";
 	
 	try {
+		if(userDetail.getUsergroup().equals("admin")) {
+			usergroup = userDetail.getUsergroup(); //관리자인지 확인
+			System.out.println("관리자다");
+		} 
 		if((String)session.getAttribute("email")!=null){
 			email = (String)session.getAttribute("email");
 			phone = userDetail.getPhone();
@@ -81,11 +85,11 @@
         var p = <%=prVO.getProduct_num() %>;
         var sessionChk = "<%=email%>";
         var nick = "<%=nickname%>";
+        var usergroup ="<%=usergroup%>";
     </script>
 </head>
 
 <body>
-
     <header>
         <div id="wrap">
             <div id="intro_bg">
@@ -95,7 +99,7 @@
                     </div>
                     <ul class="nav">
                         <%
-						if(img != null) {
+						if(img != null || email!=null) {
 					%>
                         <div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
                             <p style="cursor:pointer; font-size:16px;">로그아웃</p>
@@ -191,12 +195,7 @@
             </div>
         </div>
     </header>
-    <br>
-    <br>
-    <br>
-
-    <br>
-
+    <div class="bom"></div>
     <!-- 상품상세 content div-->
     <div class="container">
         <div class="wrap_product">
@@ -206,14 +205,11 @@
                 <div class="slider">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"
-                                style="background: url(/bit_project/image/<%=prVO.getImg_sum() %>) no-repeat center center; background-size: cover;">
+                            <div class="swiper-slide ss1" style="background: url(/bit_project/image/<%=prVO.getImg_sum() %>) no-repeat center center; background-size: cover;">
                             </div>
-                            <div class="swiper-slide"
-                                style="background: url(/bit_project/image/<%=prVO.getImg_main() %>) no-repeat center center; background-size: cover;">
+                            <div class="swiper-slide ss2" style="background: url(/bit_project/image/<%=prVO.getImg_main() %>) no-repeat center center; background-size: cover;">
                             </div>
-                            <div class="swiper-slide"
-                                style="background: url(/bit_project/image/<%=prVO.getImg_detail() %>) no-repeat center center; background-size: cover;">
+                            <div class="swiper-slide ss3" style="background: url(/bit_project/image/<%=prVO.getImg_detail() %>) no-repeat center center; background-size: cover;">
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -221,7 +217,6 @@
                         <div class="swiper-button-next"></div>
                     </div>
                 </div>
-
             </div>
             <!-- 상품상세 content 왼쪽 이미지 div -->
 
@@ -234,35 +229,31 @@
                     <span class="product_cate2">
                         <input type="checkbox" id="wishlist-pid-0001">
                         <label for="wishlist-pid-0001">
-                            <i class="far fa-heart" aria-hidden="true"></i>
-                            <i class="fas fa-heart" aria-hidden="true"></i>
+                            <i class="far fa-heart fa-2x" aria-hidden="true"></i>
+                            <i class="fas fa-heart fa-2x" aria-hidden="true"></i>
                         </label>
                     </span>
+                    <hr style="width:100%; border: 1px solid #c6c6c6;">
+                    <div class="pvofamily">
+                    <div class="pvomanu"><%=prVO.getManufacturer() %></div>
                     <br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getManufacturer() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getProduct_name() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div><%=prVO.getProduct_content() %></div>
-                    <br><br><br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div>
-                    <div>남은수량 : <span><%=prVO.getCurrent_amount()%>
+                    <div class="pvopname"><%=prVO.getProduct_name() %></div>
+                    <br>
+                    <div class="pvopcon"><%=prVO.getProduct_content() %></div>
+                    </div>
+                    <%-- <hr style="border: 0.5px solid #c5c5c5;">
+                    <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div> --%>
+                    <div class="pvocur">남은수량 : <span><%=prVO.getCurrent_amount()%>
                             <%if(prVO.getTotal_amount()==0 && email!=null){ %>
                             <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
                             <%} %>
                         </span>
                     </div>
-                    <br>
-                    <hr style="border: 0.5px solid #c5c5c5;">
-                    <div>제품특징</div>
+               <!--      <div>제품특징</div>
                     <div>
                         <span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span><span>#펭수&nbsp;&nbsp;</span>
-                    </div>
-                    <hr style="border: 0.5px solid #c5c5c5;">
+                    </div> -->
+                    <hr style="border: 1px solid #c6c6c6;">
                     <div class="filter-search">
                         <div><button id="wish_button">위시리스트</button></div>
                         <div class="wishlistForm_true" style="display:none;">
@@ -329,13 +320,12 @@
         </div>
     </div> <!-- -->
 	<br>
-	<br>
 
 
     <!-- 상품상세 content div-->
 
     <!-- 상품정보 네비게이션 바 -->
-    <section class="product_nav">
+   <section class="product_nav">
         <div class="container">
             <div class="pnav">
                 <nav class="nav_bar">
@@ -343,12 +333,14 @@
                         <li><a href="#cursor_move_detail">상품상세</a></li>
                         <li><a href="#cursor_move_review">상품리뷰</a></li>
                         <li><a href="#cursor_move_qna">상품문의</a></li>
-                        <li><a href="#cursor_move_delivery">배송/반납 안내</a></li>
+                        <li><a href="#cursor_move_delivery">배송/반납</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
-    </section>
+    </section> 
+    
+    
     <!-- 상품정보 네비게이션 바 -->
     <!--  -->
     <!-- 상품 이미지 -->
@@ -402,13 +394,13 @@
             <div><%=String.format("%.2f", prVO.getGpa()) %>/5</div>
             <input type="hidden" id="reviewTotal" value="<%=prVO.getGpa() %>" />
         </div>
-        <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
+        <hr style="border: 1px solid #c6c6c6;">
 
-        <div class="review">
+		<div class="review">
 
         </div>
-        <div class="review_paginate" style="text-align:center;">
-        </div>
+        <br><br>
+        <div class="review_paginate" style="text-align:center;"></div>
 
         <div class="reviewForm" style="display:none;">
             <h2>상품리뷰 작성</h2>
@@ -462,13 +454,14 @@
                 <a href="javascript:qna_write()"
                     style="float:right; background:#444; color:#fff; border:1px solid #444; font-size:14px; line-height:25px; height:25px; padding:5px 20px; text-align:center;">작성하기</a>
             </h3>
-            <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
+            <hr style="border: 1px solid #c6c6c6;">
             <div class="accordion">
                 <ul>
 
                 </ul>
             </div>
         </div>
+        <br><br>
         <div class="qna_paginate" style="text-align:center;">
 
         </div>
@@ -494,10 +487,26 @@
 
                 <div>
                     <label for="privatecheck">공개 여부</label>
-                    <span><input type="radio" name="privatecheck" value="공개" />공개</span>
+                    <span><input type="radio" name="privatecheck" value="공개" checked/>공개</span>
                     <span><input type="radio" name="privatecheck" value="비공개" />비공개</span>
                 </div>
                 <div class="qna_writebtn">
+                    <a href="javascript:void(0)">저장</a>
+                    <a href="javascript:void(0)">취소</a>
+                </div>
+            </form>
+        </div>
+		<div class="adminAnsForm" style="display:none;">
+            <h2>관리자 상품Q&A 답변</h2>
+            <form id="AnsForm" method="post">
+                <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>" />
+                <input type="hidden" name="nickname" value="<%=nickname %>" />
+                <input type="hidden" name="question_num" value="" />
+                <input type="hidden" name="email" value="<%=email %>" />
+                <div>
+                    <textarea rows="20" cols="20" name="content" placeholder="내용을 작성해주세요."></textarea>
+                </div>
+                <div class="admin_writebtn">
                     <a href="javascript:void(0)">저장</a>
                     <a href="javascript:void(0)">취소</a>
                 </div>
@@ -508,9 +517,10 @@
 
     <!-- 상품 문의 -->
 
-    <hr style="width:1280px; border: 0.5px solid #c5c5c5;">
+    <br><br>
     <!-- 배송/반납  -->
     <div class="container">
+    <hr style="border: 1px solid #c6c6c6;">
         <div class="pr_title" id="cursor_move_delivery">배송/반납</div>
         <div class="baesong">
             1. 정기 구독에 의한 배송은 매 월 넷 째주 목요일에 발송됩니다. <br>
@@ -655,11 +665,11 @@
 
     <script src="${pageContext.request.contextPath}/resources/js/product/munqna.js"></script>
     <script>
-        var revcount = 0;
+      /*   var revcount = 0;
         var scrollHeight = 0;
         var qnacheck = 0;
-        var revcheck = 0;
-        function qna_write() {
+        var revcheck = 0; 
+        /* function qna_write() {
             if (sessionChk == "" || sessionChk == null) {
                 location.href = "login.me";
             } else {
@@ -802,7 +812,7 @@
             var frm = document.getElementById("ReviewForm");
             frm.reset();
         });
-       
+        */
     </script>
     <script>
         var bcheck = <%=bookmark%>;
@@ -907,6 +917,7 @@
 
         }
     </script>
+     <script src="${pageContext.request.contextPath}/resources/js/product/pdetail.js"></script> 
 </body>
 
 </html>

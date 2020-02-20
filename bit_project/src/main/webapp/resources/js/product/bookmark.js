@@ -3,55 +3,56 @@ $(function(){
     	if(sessionChk==""){
     	    location.href = 'login.me';
     	}else {
-    		//alert('sessionChk은'+sessionChk);
+    		  var book = $(this).is(":checked");
+    	        if(book==true){
+    	        	//팝업창 띄우고 확인 누르면 db삽입
+    	            $('body').css("background", "grey");
+    	            $(".bookmarkForm_true").show();
+    	            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+    	            $("body").addClass('not_scroll'); //overflow:hidden 추가
+    	            $('.bookmarkForm_true').css('position', 'fixed'); //최상위 div 고정
+    	            $('.bookmarkForm_true').css('top', '50px');
+    	            $('.bookmarkForm_true').css('left', 0);
+    	            //$('.bookmarkForm_true').css('top', - scrollHeight + 100);
+    	            //$('.bookmarkForm_true').css('left', 700);
+    	            $.ajax({
+    	        		url: '/bit_project/addbookmark.pr',
+    	        		type: 'post',
+    	        		data:{"product_num" : p, "email" : sessionChk}, 
+    	        		dataType: "json",
+    	        		async:false,
+    	        		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    	        		success: function (data) {
+    	       			},
+    	        		error: function () {
+    	        		}
+    	        		
+    	        	});
+    	        }else {
+    	        	$('body').css("background", "grey");
+    	            $(".bookmarkForm_false").show();
+    	            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
+    	            $("body").addClass('not_scroll'); //overflow:hidden 추가
+    	            $('.bookmarkForm_false').css('position', 'fixed'); //최상위 div 고정
+    	            $('.bookmarkForm_false').css('top', '50px');
+    	            $('.bookmarkForm_false').css('left', 0);
+    	        	//팝업창 띄우고 확인 누르면 db삭제
+    	            $.ajax({
+    	        		url: '/bit_project/deletebookmark.pr',
+    	        		type: 'post',
+    	        		data:{"product_num" : p, "email" : sessionChk}, 
+    	        		dataType: "json",
+    	        		async:false,
+    	        		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+    	        		success: function (data) {
+    	       			},
+    	        		error: function () {
+    	        		}
+    	        		
+    	        	});
+    	        }
     	}
-        var book = $(this).is(":checked");
-        if(book==true){
-        	//팝업창 띄우고 확인 누르면 db삽입
-            $('body').css("background", "grey");
-            $(".bookmarkForm_true").show();
-            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-            $("body").addClass('not_scroll'); //overflow:hidden 추가
-            $('.bookmarkForm_true').css('position', 'fixed'); //최상위 div 고정
-            $('.bookmarkForm_true').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            $('.bookmarkForm_true').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            alert(""+p+""+sessionChk);
-            $.ajax({
-        		url: '/bit_project/addbookmark.pr',
-        		type: 'post',
-        		data:{"product_num" : p, "email" : sessionChk}, 
-        		dataType: "json",
-        		async:false,
-        		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        		success: function (data) {
-       			},
-        		error: function () {
-        		}
-        		
-        	});
-        }else {
-        	$('body').css("background", "grey");
-            $(".bookmarkForm_false").show();
-            scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
-            $("body").addClass('not_scroll'); //overflow:hidden 추가
-            $('.bookmarkForm_false').css('position', 'fixed'); //최상위 div 고정
-            $('.bookmarkForm_false').css('top', - scrollHeight + 100);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-            $('.bookmarkForm_false').css('left', 700);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값 추가
-        	//팝업창 띄우고 확인 누르면 db삭제
-            $.ajax({
-        		url: '/bit_project/deletebookmark.pr',
-        		type: 'post',
-        		data:{"product_num" : p, "email" : sessionChk}, 
-        		dataType: "json",
-        		async:false,
-        		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        		success: function (data) {
-       			},
-        		error: function () {
-        		}
-        		
-        	});
-        }
+      
     });
 });
 

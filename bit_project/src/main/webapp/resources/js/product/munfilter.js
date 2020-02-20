@@ -8,12 +8,10 @@ $(document).ready(function () {
 	var filter = "win16|win32|win64|mac|macintel";
 	if ( navigator.platform ) {
 		if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 ) {
-			alert('mobile 접속');
 			deviceChk=2;
 			allSearch();
 		}
 		else { 
-			alert('pc 접속');
 			deviceChk=1;
 			allSearch();
 		}
@@ -201,7 +199,6 @@ function fil() {
 
 $(window).scroll(function(){
 		if($(window).scrollTop() == $(document).height() - $(window).height()){
-			
 			allSearch();
 		}
 })
