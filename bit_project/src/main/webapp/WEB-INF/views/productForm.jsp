@@ -12,7 +12,7 @@
 </head>
 
 <body>
-
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
     <form id="product_add_form" method="post" enctype="multipart/form-data" >
         <div>
             <!-- 상품번호 : -->

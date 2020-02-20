@@ -53,7 +53,7 @@
 <title>hello</title>
 
 </head>
-<script>
+<!-- <script>
 $(document).ready(function(){
    var chat = $('#chatframe');
    $('#chat img').click(function(){
@@ -65,11 +65,11 @@ $(document).ready(function(){
          
    });
 });
-</script>
+</script> -->
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
 	
-	<!-- 채팅 -->
+	<%-- <!-- 채팅 -->
     <div id="chat" style="position: fixed; right: 1%; bottom: 1%; z-index: 9999;">
        <img src="${pageContext.request.contextPath}/resources/icons/chats.png" style="height: 70px;  width: 70px; cursor:pointer;"/>
     </div>
@@ -80,7 +80,9 @@ $(document).ready(function(){
         <a href="tel:0234869600">
          <img src="${pageContext.request.contextPath}/resources/icons/phone.png" style="height: 70px;  width: 70px; cursor:pointer;"/>
          </a>
-    </div>
+    </div> --%>
+    
+   <%@ include file="/WEB-INF/views/chatframe.jsp" %> 
 	
 			<%@ include file="/WEB-INF/views/header1.jsp" %> 
 		
@@ -95,7 +97,7 @@ $(document).ready(function(){
 
 					<div class="col-md-8 mt-lg-5 text-center">
 						<h1 class="text-uppercase mb-5" data-aos="fade-up">
-							JUST JINKEUN'S <BR> THAT'S FUCKIN ENOUGH
+							WONDERFUL <BR> OF ONEDER
 						</h1>
 
 						<div data-aos="fade-up" data-aos-delay="100">

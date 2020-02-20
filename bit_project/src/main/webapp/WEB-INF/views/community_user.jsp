@@ -24,6 +24,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 <body>
 
 <div style="height: 60px;">
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>

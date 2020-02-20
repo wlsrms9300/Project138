@@ -80,6 +80,7 @@ if('<%=usergroup%>'== 'admin') {
 </script>
 
 <body>
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 
 <div class="status-bar">
     </div>

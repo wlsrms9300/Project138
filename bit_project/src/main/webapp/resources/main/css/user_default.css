@@ -11,11 +11,11 @@
         padding-top: 100px;
     }
 }
-@media (min-width: 481px){
+/* @media (min-width: 481px){
     #chatM{
         display: none;
     }
-}
+} */
 
 .nav_hov{color: black;
   -webkit-transition: .0s all ease;
@@ -36,8 +36,8 @@
 	background-color: white;
 	border-color: white;
 }
-@media (max-width: 480px){
+/* @media (max-width: 480px){
     #chat{
         display: none;
     }
-}    
+}     */

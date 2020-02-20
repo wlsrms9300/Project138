@@ -34,8 +34,9 @@
 
 </head>
 <body>
-
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 <div style="height: 70px;">
+
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 </header>

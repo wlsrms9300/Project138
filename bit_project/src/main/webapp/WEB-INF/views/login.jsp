@@ -50,6 +50,7 @@
 <body>
 <!-- <img src="${image.filepath }"/>  로그인시 프로필이미지 불러오기 // 로그인성공시 정보 session에 저장하는걸로 수정해야함--> 
 	<div style="height: 50px;">
+	<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<header >
 	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 
 	</header>

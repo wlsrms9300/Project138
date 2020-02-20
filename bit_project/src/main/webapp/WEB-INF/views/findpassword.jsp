@@ -13,6 +13,7 @@
 <title>Document</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<div style="height: 50px;">
 	<header >
 	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 

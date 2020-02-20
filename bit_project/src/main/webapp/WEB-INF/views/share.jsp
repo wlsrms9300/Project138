@@ -21,6 +21,7 @@
 
 </head>
 <body>
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<div style="height: 50px;">
 		<%@ include file="/WEB-INF/views/header3.jsp"%>
 	</div>

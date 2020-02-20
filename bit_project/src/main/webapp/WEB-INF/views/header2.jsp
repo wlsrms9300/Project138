@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.spring.login.*" %>
 <%
 	String email = (String)session.getAttribute("email");
 	String img = (String)session.getAttribute("img");
+	LoginVO userDetail_h = (LoginVO)session.getAttribute("userDetail");
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +31,11 @@
 							<p style="cursor:pointer; font-size:16px; color:black;">로그아웃</p>
 						</div>
 						<div class="header_img" style="margin-top:6.5px; margin-right:5px;">
+							<% if(userDetail_h.getUsergroup().equals("admin")) { %>
+							<img src="<%=img %>" id="rumi" onclick="location.href='index.se'" style="box-sizing:border-box; border-radius:50px; width:55px; height:55px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+						<% }else { %>
 							<img src="<%=img %>" id="rumi" onclick="location.href='mypage_main.my'" style="box-sizing:border-box; border-radius:50px; width:55px; height:55px; border:2px solid #EA7475; margin:0; cursor:pointer;">
+						<% } %>
 						</div>
 					<%
 						} else {

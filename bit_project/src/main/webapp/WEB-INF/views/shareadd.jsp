@@ -41,6 +41,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <form  id="product_add_form" class="product-form" name="product_add_form" method="POST" enctype="multipart/form-data">
             <h3>기본정보</h3>

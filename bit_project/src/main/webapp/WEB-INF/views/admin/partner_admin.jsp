@@ -187,6 +187,7 @@
 
 
 <body>
+<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
