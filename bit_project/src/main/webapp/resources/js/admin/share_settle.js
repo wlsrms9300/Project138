@@ -19,6 +19,8 @@
 					output += '<td>'+item.name+'</td>';
 					output += '<td>'+item.bank+'</td>';
 					output += '<td>'+item.account+'</td>';
+					output += '<td>'+item.state+'</td>';
+					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="accept('+item.settlement_num+');">완료</button>';
 					output += '</tr>';
 					$('#output').append(output);
 					
@@ -52,3 +54,24 @@
         return year + "-" + month + "-" + date + " " + hour + ":" + min;
         
     }
+	
+
+	function accept(_snum) {
+		var settle_Accept = confirm("입금 완료 시 확인 버튼 눌러주세요");
+		if(settle_Accept){
+			$.ajax({
+				url : '/bit_project/settleAccept.tz',
+				type : 'post',
+				dataType : "json",
+				data : {"settlement_num" : _snum},
+				contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+				success:function(data){
+					console.log('수락완료');
+				},
+				error:function(){
+					alert("ajax통신 실패 !!!");
+				}
+			});
+		}
+		share();
+	}

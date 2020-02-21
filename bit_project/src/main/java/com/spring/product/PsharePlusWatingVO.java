@@ -2,7 +2,7 @@ package com.spring.product;
 
 import java.util.Date;
 
-public class ProductShareVO {
+public class PsharePlusWatingVO {
 	private int share_num;
 	private int waiting_num;
 	private int product_num;
@@ -16,8 +16,9 @@ public class ProductShareVO {
 	private int total_amount;
 	private int share_amount;
 	private int current_amount;
-	
-	
+	private String name;
+	private String bank;
+	private String account;
 	
 	public int getWaiting_num() {
 		return waiting_num;
@@ -97,5 +98,28 @@ public class ProductShareVO {
 	public void setCurrent_amount(int current_amount) {
 		this.current_amount = current_amount;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	
+	
+	
+	
+	
 	
 }

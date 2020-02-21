@@ -253,9 +253,20 @@ public class AdminController2 {
 					System.out.println(date);
 					break;
 				}
-				subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
-				subscribePaymentService.updateProductAmount(randomPnum);
-				subscribePaymentService.deleteWish(randomPnum, vo.getEmail());
+				// 개인쉐어일 경우, product, product_share 두 테이블의 수량 바꿔야되고, 적립금 줘야됨.
+				int res = 0;
+				res = subscribePaymentService.personalSharingCheck(randomPnum);
+				if(res==1) {
+					subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
+					subscribePaymentService.personalSharingFund(randomPnum);
+					subscribePaymentService.updateProductAmount(randomPnum);
+					subscribePaymentService.deleteWish(randomPnum, vo.getEmail());	
+				}else {
+					subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
+					subscribePaymentService.updateProductAmount(randomPnum);
+					subscribePaymentService.deleteWish(randomPnum, vo.getEmail());
+				}
+				
 				System.out.println("foreach 도는중 쿠쿠");
 			}
 		} catch (Exception e) {
@@ -302,6 +313,21 @@ public class AdminController2 {
 		int chk_num = 0;
 		try {
 		subscribePaymentService.pickAccept(state_num);
+			retVal.put("res", "OK");
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+		}
+		return retVal;
+	}
+	
+	@RequestMapping(value = "/settleAccept.tz", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> settleAccept(int settlement_num) {
+		System.out.println("settlement_num : " + settlement_num);
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int chk_num = 0;
+		try {
+			subscribePaymentService.settleAccept(settlement_num);
 			retVal.put("res", "OK");
 		} catch (Exception e) {
 			retVal.put("res", "FAIL");

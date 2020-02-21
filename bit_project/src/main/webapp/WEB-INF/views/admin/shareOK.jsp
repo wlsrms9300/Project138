@@ -274,6 +274,7 @@
 				<label>product_content</label><input type="text" name="product_content" placeholder="상품상세" value=""/>
 				<label>consignment_start_date</label><input type="text" name="consignment_start_date" id="consignment_start_date" value=""/>
                 <label>consignment_end_date</label><input type="text" name="consignment_end_date" id="consignment_end_date" value=""/>
+                <label>쉐어 당 지급 될 금액</label><input type="text" name=accumulated_fund id="accumulated_fund" value=""/>
 				<select name="category_l">
                         <option selected value="실버">실버</option>
                         <option value="골드">골드</option>

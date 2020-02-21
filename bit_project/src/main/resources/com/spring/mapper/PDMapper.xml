@@ -74,7 +74,7 @@
 		<selectKey keyProperty="share_num" resultType="int" order="BEFORE">
 			SELECT share_sequence.NEXTVAL FROM DUAL
 		</selectKey>
-	insert into product_share values(#{share_num}, #{product_num}, #{product_name},#{email},#{consignment_start_date},#{consignment_end_date},
+	insert into product_share values(#{share_num}, #{waiting_num}, #{product_num}, #{product_name},#{email},#{consignment_start_date},#{consignment_end_date},
 	#{total_share_count},#{total_accumulated_fund},#{accumulated_fund},#{total_amount},#{share_amount},#{current_amount})
 	</insert>
 	

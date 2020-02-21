@@ -22,6 +22,8 @@ public interface SubscribePaymentService {
 	public void pickAccept(int state_num);
 	public void deleteWish(int randomPnum, String email);
 	public void updateProductAmount(int randomPnum) throws Exception;
-	
+	public void settleAccept(int settlement_num) throws Exception;
+	public int personalSharingCheck(int product_num) throws Exception;
+	public int personalSharingFund(int product_num) throws Exception;
 	
 }

@@ -24,5 +24,9 @@ public interface SubscribePaymentMapper {
 	List<PStateVO> pickupList();
 	void pickAccept(@Param("state_num") int state_num);
 	void deleteWish(@Param("randomPnum") int randomPnum, @Param("email") String email);
-	void updateProductAmount(@Param("randomPnum") int randomPnum) throws Exception;
+	void updateProductAmount(@Param("randomPnum") int randomPnum);
+	void settleAccept(@Param("settlement_num") int settlement_num);
+	int personalSharingCheck(@Param("product_num") int product_num);
+	int personalSharingFund(@Param("product_num") int product_num);
+	
 }

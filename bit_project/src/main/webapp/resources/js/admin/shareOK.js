@@ -18,6 +18,7 @@
                    	var sib7 = "'"+item.share_img3+"'";
                    	var sib8 = "'"+item.bank+"'";
                    	var sib9 = "'"+item.account+"'";
+                   	var sib12 = "'"+item.accumulated_fund+"'";
                    	
 					var output = '';
 					output += '<tr>';
@@ -34,8 +35,8 @@
 					output += '<td>' + date2 + '</td>';
 					output += '<td>' + item.share_content + '</td>';
 					
-					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+');">상세보기</button>' + '</td>';
-					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="add('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+','+sib10+','+sib11+');">등록</button>'
+					output += '<td>' + '<button type="button" class="btn btn-sm btn-primary" onclick="shareDetail('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+','+item.accumulated_fund+');">상세보기</button>' + '</td>';
+					output += '<td><button type="button" class="btn btn-sm btn-primary" onclick="add('+item.waiting_num+','+email+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+','+sib7+','+sib8+','+sib9+','+sib10+','+sib11+','+item.accumulated_fund+');">등록</button>'
 					output += '</td>';
 					
 					output += '</tr>';
@@ -74,7 +75,7 @@
 	
 	
 
-	function shareDetail(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account) {
+	function shareDetail(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, _fundtier) {
 		//파라미터로 받았고, 팝업창 띄움.
 		$('#waiting_num1').val(_wnum);
 		$('#email1').val(_email);
@@ -90,6 +91,7 @@
 		$("#detailimg1").attr("src", "/bit_project/image/"+_img1);
 		$("#detailimg2").attr("src", "/bit_project/image/"+_img2);
 		$("#detailimg3").attr("src", "/bit_project/image/"+_img3);
+		//$('#accumulated_fund').val(_fundtier);
 		var modal2 = document.querySelector("#nursery-modal");
 		   modal2.classList.toggle("show-modal1");
 		/*var pop_name = "popupDetail";
@@ -105,7 +107,7 @@ function asdad() {
 		var modal2 = document.querySelector("#nursery-modal");
 		   modal2.classList.toggle("show-modal1");
 }	
-function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, start, end) {
+function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img3, _bank, _account, start, end, _fundtier) {
 	$('#waiting_num2').val(_wnum);
 	$('#email2').val(_email);
 	$('#name2').val(_name);
@@ -119,6 +121,7 @@ function add(_wnum, _email, _name, _pName, _amount, _content, _img1, _img2, _img
 	$('#share_img32').val(_img3);
 	$('#bank2').val(_bank);
 	$('#account2').val(_account);
+	//$('#accumulated_fund').val(_fundtier);
 	var modal3 = document.querySelector("#padd-modal");
 	   modal3.classList.toggle("show-modal2");
 	/*var pop_name = "popupAdd";
