@@ -82,6 +82,7 @@
     <!-- 웹 폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean"
         rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
         var p = <%=prVO.getProduct_num() %>;
         var sessionChk = "<%=email%>";
