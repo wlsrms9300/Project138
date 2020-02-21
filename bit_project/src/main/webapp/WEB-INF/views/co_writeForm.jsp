@@ -24,21 +24,11 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
-<div style="height: 60px;">
+	<div style="height: 90px;">
+
 		<header >
  			<%@ include file="/WEB-INF/views/header2.jsp" %> 
 		</header>
-	</div>
-
-	<div id="community_container_menubar">
-		<ul class="community_menubar">
-        	<li data-tab="자유게시판" class="community_menubar_item"><a href="#">자유게시판</a></li>
-        	<li data-tab="육아사진게시판" class="community_menubar_item"><a href="#">육아사진게시판</a></li>
-        	<li data-tab="정보공유(팁)" class="community_menubar_item"><a href="#">정보공유(팁)</a></li>
-        	<li data-tab="공구게시판" class="community_menubar_item"><a href="#">공구게시판</a></li>
-        	<li data-tab="육아게시판" class="community_menubar_item"><a href="#">육아게시판</a></li>
-        	<li data-tab="이슈,토론게시판" class="community_menubar_item"><a href="#">이슈,토론게시판</a></li>
-        </ul>
 	</div>
 
 	<div id="community_container_header">

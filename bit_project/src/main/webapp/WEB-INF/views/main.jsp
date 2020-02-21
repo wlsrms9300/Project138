@@ -79,10 +79,10 @@
 
 						<div data-aos="fade-up" data-aos-delay="100">
 							<a onclick="loginChk();" href="#"
-								class="btn smoothscroll btn-primary mr-2 mb-2 btn-hover"
+								class="btn smoothscroll mr-2 mb-2 btn-hover"
 								style="">회원가입</a> <a
 								href="subscribestep1.me"
-								class="btn smoothscroll btn-primary mr-2 mb-2 btn-hover"
+								class="btn smoothscroll mr-2 mb-2 btn-hover"
 								style="">구독하기</a>
 						</div>
 					</div>
@@ -205,7 +205,7 @@
 								<li>실버 상품</li>
 							</ul>
 							<p class="text-center">
-								<a href="subscribestep1.me" class="btn btn-secondary btn-hover">Buy Now</a>
+								<a href="subscribestep1.me" class="btn btn-secondary">Buy Now</a>
 							</p>
 						</div>
 					</div>
@@ -225,8 +225,8 @@
 								<li>골드 상품</li>
 							</ul>
 							<p class="text-center">
-								<a href="subscribestep1.me" class="btn btn-primary btn-hover"
-									style="background: #EA7475; border-color: #EA7475;">Buy Now</a>
+								<a href="subscribestep1.me" class="btn btn-hover"
+									style="">Buy Now</a>
 							</p>
 						</div>
 					</div>
@@ -277,8 +277,8 @@
 
 							</ul>
 							<p class="text-center">
-								<a href="subscribestep1.me" class="btn btn-primary"
-									style="background: #EA7475; border-color: #EA7475;">Buy Now</a>
+								<a href="subscribestep1.me" class="btn btn-hover"
+									style="">Buy Now</a>
 							</p>
 						</div>
 					</div>
@@ -377,11 +377,11 @@
 							<div>
 								<div data-aos="fade-up" data-aos-delay="100">
 									<a onclick="loginChk();" href="#"
-										class="btn smoothscroll btn-primary mr-2 mb-2"
-										style="background: #EA7475; border-color: #EA7475;">회원가입</a> <a
+										class="btn btn-hover"
+										style="">회원가입</a> <a
 										href="subscribestep1.me"
-										class="btn smoothscroll btn-primary mr-2 mb-2"
-										style="background: #EA7475; border-color: #EA7475;">구독하기</a>
+										class="btn btn-hover"
+										style="">구독하기</a>
 								</div>
 							</div>
 						</figure>

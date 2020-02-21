@@ -38,7 +38,7 @@
 
 <body>
 <!-- header 시작 -->
-<div style="height: 60px;">
+<div style="height: 90px;">
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
 <header >
  	<%@ include file="/WEB-INF/views/header1.jsp" %>  
@@ -59,7 +59,7 @@
 
     <div id="community_container_header_d">
         <div class="community_title_d">
-            <h2><%=cmvo.getCategory() %></h2>
+            <h2 class="category_detail"><%=cmvo.getCategory() %></h2>
         </div>
     </div>
 
@@ -67,7 +67,7 @@
     <!--게시글 시작-->
     <div id="community_container_mt_d">
         <div class="community_mt_title_d">
-            <h1><%=cmvo.getBoard_name() %></h1>
+            <h1 class="detail_subject"><%=cmvo.getBoard_name() %></h1>
         </div>
         <div class="community_mt_title">
         	<img src="<%=img_e %>">
@@ -116,7 +116,7 @@
     <!-- 댓글입력창 시작 -->
     <div id="community_container_comments">
         <div class="community_comments_count">
-            <h3>댓글</h3><div class="count_circle"><p><%=comment_count %></p></div>
+            <h3>댓글</h3><div class="count_circle"><p class="count_circle_num"><%=comment_count %></p></div>
         </div>
      <form method="POST" name="commentsForm" id ="commentsForm" accept-charset="utf-8">
         <div class="community_comments_form">
