@@ -2,6 +2,7 @@
 @font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
 * {
 	font-family: 'S-CoreDream-4Regular';
+	color: #616161;
 }
 
     .clickable {cursor: pointer;}
@@ -16,7 +17,7 @@
 	#comments {border-radius: 5px;}	
 	
 	#community_container_mt_d > .community_mt_footer > .community_mt_footer_caption > .community_mt_footer_btn{width: 300px; float: right;}
-	#community_container_header_d{width:1200px; display: flex; margin:0 auto; height: 50px; padding-top: 30px;}
+	#community_container_header_d{width:1200px; display: flex; margin:0 auto; height: 50px; padding-top: 75px;}
 	#community_container_header_d > .community_title_d{width:950px; margin:0 auto;}
 	#community_container_mt_d > .community_mt_title_d{width:950px; height: 50px; margin: 0 auto; padding: 10px 0;}
 	#community_container_mt_d > .community_mt_title{display: flex; width: 950px; margin: 0 auto;}
@@ -45,7 +46,7 @@
 	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_actions{display: flex; flex:0 0 auto; padding: 7px 15px 7px 0; margin: 0 -7.5px;}
 	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_photo{border: none; margin:0 7.5px; padding: 0;}
 	#community_container_comments > form >  .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_photo:focus{outline: none;}
-	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter{border: none; width: 40px; font-size:13px; color: #ff7276;  background: none;}
+	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter{border: none; width: 40px; font-size:13px; color: #ff7276;  background: none; cursor: pointer;}
 	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_actions > .community_comments_form_enter:focus{outline: none;}
 	#community_container_comments > .community_comments_view{display: grid; }
 	/*댓글*/
@@ -91,15 +92,21 @@
 	/*********************************************************************************/
 	/* 커뮤니티 메뉴                                                            	 						  */
 	/*********************************************************************************/
-	#community_container_menubar{width:100%; height: 55px; border-top: #a9a9a9 solid 1px; border-bottom: #a9a9a9 solid 1px;}
+	#community_container_menubar{width:100%; height: 55px;}
 	#community_container_menubar > .community_menubar{padding: 0 0 0 60px; list-style: none; text-align: center; vertical-align: middle;}
 	#community_container_menubar > .community_menubar > .community_menubar_item{font-size: 17px; font-weight: bold;  line-height: 23px; margin: 10px 4px; padding: 6px 8px 4px; color: slategrey; display: inline-block; text-decoration:none;}
-	.community_menubar_item:hover > a,
+
 	.community_menubar_item:focus > a,
-	.community_menubar_item:active > a,
-	.community_menubar_item:visited > a,
-	.community_menubar_item.active > a,
-	.community_menubar_item > a.active{color: #ff7276;}
+	.community_menubar_item:visited > a{color: #616161;}
+	.community_menubar_item > a:hover{color: #ff7276;}
+	.community_menubar_item > a > span:hover{color: #ff7276;}
+	
+	/* 성현 추가 */
+	.category_detail{font-size: 20px; margin: 0; color: #616161;}
+	.detail_subject{font-size: 25px; color: #616161;}
+	.count_circle_num{font-size: 15px; color: white;}
+	.community_menubar_item:hover{color: #ff7276;}
+	
 	
 /*모바일*/
 @media (max-width:480px) {

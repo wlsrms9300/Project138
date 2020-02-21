@@ -35,8 +35,8 @@ public class WritingAjaxController {
 				} else {
 	
 //					이미지 경로 바꾸기
-//					String uploadPath = "C:\\Project138\\upload\\";
-					String uploadPath = "/Users/nagyeom/upload/";
+					String uploadPath = "C:\\Project138\\upload\\";
+//					String uploadPath = "/Users/nagyeom/upload/";
 					String originalFileExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 					String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 	

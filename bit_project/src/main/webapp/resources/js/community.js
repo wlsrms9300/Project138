@@ -87,7 +87,7 @@
        							output += '</span>';
        							output += '</footer>';
        							output += '</a>';
-       							output += '</div><br>';
+       							output += '</div>';
        							output += '</div>';
        							
        							$('#community_data').append(output);

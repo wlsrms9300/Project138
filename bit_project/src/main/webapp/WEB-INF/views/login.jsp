@@ -58,7 +58,7 @@
 	<div id="content">
 		<div id="login-content">
 			<p id="pc-text" style="text-align: center;">
-				아직 ㅇㅇㅇㅇ 회원이 아니신가요?<br /> 지금 바로 가입하시고 다양한 혜택을 누리세요!
+				아직 ONEDER 회원이 아니신가요?<br /> 지금 바로 가입하시고 다양한 혜택을 누리세요!
 			</p>
 
 			<h1>로그인</h1>
