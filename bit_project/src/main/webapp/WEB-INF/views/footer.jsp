@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <!-- 폰트어썸 아이콘 -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-
  <!-- 페이스북 메타 태그 -->
  <meta property="og:title" content="" />
  <meta property="og:url" content="https://" />
@@ -19,9 +18,17 @@
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean" rel="stylesheet">
 
 <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet" type="text/css" />
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>	
+$(document).ready(function() {
+	$('#oneder').click(function() {
+		 
+		location.href="main.ma";
+	});
+});
+</script>
 
-
-
+<body>
 <footer id="footer">
         <div id="footer_sns">
             <div class="container">
@@ -44,8 +51,8 @@
                 <div class="row">
                     <div class="footer_infor">
                         <!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
-                        <h2>로고1</h2>
-                        <ul>
+              <h2 id="oneder" style="color: #8f8f8f; font-size: 30px; margin: 0 10px; cursor:pointer; font-weight: normal; font-family: 'S-CoreDream-4Regular';">ONEDER</h2>  
+                        <ul style="margin-bottom: 0px;">  
                            		<li><a href="kindergarten.ms">어린이집</a></li>
 								<li><a href="partner.ms">파트너</a></li>
 								<li><a href="contactus.ms">고객센터</a></li>
@@ -54,8 +61,8 @@
 							
                         </ul>
                         <address>
-                            <p>서울특별시 서초구 강남대로 459 <br><span class="bar2">대표자명 김진근</span>
-                                <br><span class="bar2">사업자등록번호
+                            <p style="margin-bottom: 0px;">서울특별시 서초구 강남대로 459 <br><span class="bar2" style="color: #8f8f8f;">대표자명 김진근</span>
+                                <br><span class="bar2" style="color: #8f8f8f;">사업자등록번호
                                     111-11-1111</span> 통신판매업신고번호 제 111호</p>
                             <p>Copyright 2020 by Bit Inc. All right reserved</p>
                         </address>
@@ -64,4 +71,5 @@
             </div>
         </div>
     </footer>
+    </body>
     

@@ -91,8 +91,12 @@ h1 {
     padding: 40px 0 40px 0;
 }
 
-.kindergarten-list {padding: 0;  text-align: center; vertical-align: middle; white-space:nowrap;
- overflow-y:auto;
+.kindergarten-list {
+	padding: 0;  
+	text-align: center; 
+	vertical-align: middle; 
+	white-space:nowrap;
+ 	overflow-y:auto;
  }
 .kindergarten-list img {
 	
@@ -121,9 +125,11 @@ h1 {
     p {
         word-break: keep-all;
     }
+    
     .kindergarten-list > ul {
     width: 350%;
     padding-left: 28px;
+    text-align: -webkit-auto; 
     }
     .kindergarten-list img {
      margin-top: 27px;

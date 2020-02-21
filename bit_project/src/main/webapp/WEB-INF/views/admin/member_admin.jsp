@@ -280,7 +280,7 @@
 					 <!-- 모달-->
 		 
 	     <div class="modal" id="member-dtmodal">
-	         <div class="modal-content">  
+	         <div class="modal-content2">  
 	             <span class="close-button" id="mclose-button1">&times;</span>
 	             <h1 class="title">어린이집 정보</h1>
 	            <table style="text-align: center; margin: 0 auto;">

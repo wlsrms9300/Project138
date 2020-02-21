@@ -22,6 +22,14 @@
 <script>
 
 </script>
+<script>
+$(document).ready(function() {
+	$('#oneder').click(function() {
+		
+		location.href="main.ma";
+	});
+});
+</script>
 
 <body>
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
@@ -87,13 +95,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
         <div id="footer_infor">
             <div class="container">
                 <div class="row">
                     <div class="footer_infor">
                         <!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
-                        <h2>로고1</h2>
+              <h2 id="oneder" style="color: #8f8f8f; font-size: 30px; margin: 0 10px; cursor:pointer; font-weight: normal; font-family: 'S-CoreDream-4Regular';">ONEDER</h2>  
                         <ul>
                       		    <li><a href="kindergarten.ms">어린이집</a></li>
 								<li><a href="partner.ms">파트너</a></li>

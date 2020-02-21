@@ -14,6 +14,16 @@
 	href="${pageContext.request.contextPath}/resources/css/aos.css">
 <title>about</title>
 </head>
+
+<script>
+$(document).ready(function() {
+	$('#oneder').click(function() {
+		
+		location.href="main.ma";
+	}); 
+});
+</script>
+
 <body>
 	<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<div style="height: 60px;">
@@ -132,7 +142,7 @@
 	<footer>
 		<%@ include file="/WEB-INF/views/footer.jsp"%>
 	</footer>
-
+ 
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/aos.js"></script>
 	<script>

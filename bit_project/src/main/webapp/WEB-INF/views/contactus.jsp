@@ -33,7 +33,9 @@
 <link href="<%=request.getContextPath()%>/resources/css/footer.css"
 	rel="stylesheet" type="text/css" />
 </head>
+
 <body>
+
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<div style="height: 60px;">
 		<header>
@@ -174,6 +176,15 @@
 		</div>
 	</div>
 </body>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#oneder').click(function() {
+		
+		location.href="main.ma";
+	});
+});
+</script>
 <footer id="footer">
 	<div id="footer_sns">
 		<div class="container">
@@ -198,7 +209,7 @@
 			<div class="row">
 				<div class="footer_infor">
 					<!-- <h2><img src="assets/img/logo_footer.png" alt="megabox"></h2> -->
-					<h2>로고1</h2>
+              <h2 id="oneder" style="color: #8f8f8f; font-size: 30px; margin: 0 10px; cursor:pointer; font-weight: normal; font-family: 'S-CoreDream-4Regular';">ONEDER</h2>  
 					<ul>
 								<li><a href="kindergarten.ms">어린이집</a></li>
 								<li><a href="partner.ms">파트너</a></li>
