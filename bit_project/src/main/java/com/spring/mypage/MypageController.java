@@ -31,9 +31,16 @@ public class MypageController {
 	public String home(Model model, HttpSession session) throws Exception {
 		String email = (String)session.getAttribute("email");
 		PStateVO vo = new PStateVO();
+		String regrade = "";
 		
-		int reserve = service.checkReserve(email); 
-		if(reserve != 0) { //예약목록 체크
+		int co = paymentService.checkCgrade(email); //등급변경 목록이 있는지 체크
+		if(co != 0) {
+			regrade = paymentService.getCgrade(email);
+			model.addAttribute("regrade", regrade);
+		}
+		
+		int reserve = service.checkReserve(email); //예약목록 체크
+		if(reserve != 0) { 
 			int rnum = service.getReserve(email);
 			model.addAttribute("rnum", rnum);
 		} else {

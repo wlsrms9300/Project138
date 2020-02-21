@@ -209,11 +209,38 @@ public class MypageAjaxController {
 	}
 	
 	@PostMapping(value = "/mypage_subscribe_change.my", produces = "application/json;charset=UTF-8")
-	public Map<String, Object> subChange(String email, String subscribe_num, String grade) {
+	public Map<String, Object> subChange(String email, int subscribe_num, String grade) {
+		Map<String, Object> retVal = new HashMap<String, Object>();
+		int price = 0;
+			switch(grade) {
+				case "실버" :
+					price = 29000;
+					break;
+				case "골드" :
+					price = 59000;
+					break;
+				case "플래티넘" :
+					price = 79000;
+					break;
+			}
+		
+		try {
+			int res = paymentservice.insertChange(subscribe_num, grade, price);
+			retVal.put("res", "OK");  
+		} catch (Exception e) {
+			retVal.put("res", "FAIL");
+			retVal.put("message", "Failure");
+		}
+		
+		return retVal;
+	}
+	
+	@PostMapping(value = "/mypage_subscribe_changecancel.my", produces = "application/json;charset=UTF-8")
+	public Map<String, Object> changeCancel(String email) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
 		
 		try {
-			/* int res = paymentservice.insertChange(email, subscribe_num, grade); */
+			paymentservice.deleteCancel(email);
 			retVal.put("res", "OK");  
 		} catch (Exception e) {
 			retVal.put("res", "FAIL");

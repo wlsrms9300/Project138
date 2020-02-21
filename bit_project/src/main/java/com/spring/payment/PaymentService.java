@@ -37,7 +37,10 @@ public interface PaymentService {
 	public ArrayList<PaymentVO> selectSP(@Param("email")String email, @Param("start") int start, @Param("end") int end) throws Exception;
 	public int cancelSub(String email) throws Exception;
 	public int cancelSub2(String email) throws Exception;
-	public int subChange(@Param("grade") String grade, @Param("email") String email) throws Exception;
+	public int insertChange(@Param("subscribe_num") int subscribe_num, @Param("grade") String grade, @Param("price") int price) throws Exception;
+	public int checkCgrade(String email) throws Exception;
+	public String getCgrade(String email) throws Exception;
+	public void deleteCancel(String email) throws Exception;
 
 	
 }

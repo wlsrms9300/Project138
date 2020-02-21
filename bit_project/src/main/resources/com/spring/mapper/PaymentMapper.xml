@@ -26,6 +26,7 @@
 		<result property="count" column="count" />
 	</resultMap>
 	
+	
 	<!-- 구독자 정보(결제) -->
 	<resultMap type="com.spring.payment.PMemberVO" id="PMemberResultMap">
 		<result property="subscribe_num" column="subscribe_num" />
@@ -185,10 +186,27 @@
 	</update>
 	
 	<!-- 구독등급 변경 신청 -->
-	<insert id="insertChange" parameterType="map">
-		
+	<insert id="insertChange" parameterType="map">		
+		INSERT INTO C_GRADE
+		VALUES(#{subscribe_num}, #{grade}, #{price})
 	</insert>
 
+	<!-- 등급변경 체크 -->
+	<select id="checkCgrade" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM C_GRADE 
+		WHERE SUBSCRIBE_NUM = (SELECT SUBSCRIBE_NUM FROM SUBSCRIBE WHERE EMAIL=#{email})
+	</select>
+	
+	<!-- 등급변경 내역 조회 -->
+	<select id="getCgrade" parameterType="String" resultType="String">
+		SELECT GRADE FROM C_GRADE
+		WHERE SUBSCRIBE_NUM = (SELECT SUBSCRIBE_NUM FROM SUBSCRIBE WHERE EMAIL=#{email})
+	</select>
+	
+	<!-- 등급변경 취소 -->
+	<delete id="deleteCancel" parameterType="String">
+		DELETE C_GRADE WHERE SUBSCRIBE_NUM = (SELECT SUBSCRIBE_NUM FROM SUBSCRIBE WHERE EMAIL=#{email})
+	</delete>
 	
 	
 	

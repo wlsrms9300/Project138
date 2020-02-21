@@ -295,14 +295,47 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 	}
 	
+	
 	@Override
-	public int subChange(String grade, String email) throws Exception {
+	public int insertChange(int subscribe_num, String grade, int price) throws Exception {
 		try {
 			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
-			int res = paymentmapper.subChange(grade, email);
+			int res = paymentmapper.insertChange(subscribe_num, grade, price);
 			return res;
-		} catch(Exception e) {
-			throw new Exception("등급 변경 실패", e);
+		} catch (Exception e) {
+			throw new Exception("등급변경 신청 실패", e);
+		}
+	}
+	
+	@Override
+	public int checkCgrade(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int count = paymentmapper.checkCgrade(email);
+			return count;
+		} catch (Exception e) {
+			throw new Exception("변경내역 조회 실패", e);
+		}
+	}
+	
+	@Override
+	public String getCgrade(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			String grade = paymentmapper.getCgrade(email);
+			return grade;
+		} catch (Exception e) {
+			throw new Exception("변경등급 조회 실패", e);
+		}
+	}
+	
+	@Override
+	public void deleteCancel(String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			paymentmapper.deleteCancel(email);
+		} catch (Exception e) {
+			throw new Exception("변경취소 실패", e);
 		}
 	}
 

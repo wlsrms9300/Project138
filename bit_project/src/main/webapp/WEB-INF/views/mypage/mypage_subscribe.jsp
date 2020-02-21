@@ -15,6 +15,11 @@
 	if(userDetail_subs.getSubscribe().equals("Y")) {
 		state_subs = sub_subs.getState();
 	}
+	
+	String regrade = "";
+	if(request.getAttribute("regrade") != null) {
+		regrade = (String)request.getAttribute("regrade");
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -47,19 +52,31 @@
                     <div class="subscribe_content_2">
                         <a href="#" onclick="subCancel2('<%=email_subs%>');" ><b>취소 ></b></a>
                     </div>
-                    <% } else { %>               
+                    <% } else if(!regrade.equals("")) { %>               
                     <div class="subscribe_content_1">
+                        <b>변경신청</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다음결제부터 <b style="color:#ea7475;"><%=regrade %></b>등급으로 변경됩니다.</p>
+                    </div>
+                    <div class="subscribe_content_2">
+                        <a href="#" onclick="regradeCancel('<%=email_subs%>');" ><b>변경취소 ></b></a>
+                    </div>                
+                  <% 
+                  	   } else {             
+                   %>
+                   		<div class="subscribe_content_1">
                         <b>구독중</b><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서비스를 이용중입니다</p>
                     </div>
                     <div class="subscribe_content_2">
                         <a href="#" onclick="subCancel('<%=email_subs%>');" ><b>구독취소 ></b></a>
-                    </div>                
-                  <% }} %>
+                    </div>   
+                   <%
+                  	   }
+                  	}
+                   %>
                 </div>
                 <%   
-                	if(!userDetail_subs.getSubscribe().equals("N")) {
+                	if(!userDetail_subs.getSubscribe().equals("N") && regrade.equals("") && !state_subs.equals("구독취소")) {
                 %>
-                	 <div class="subscribe_block" style="margin-top: 20px;">
+                	 <div class="subscribe_block" style="margin-top: 20px; margin-bottom: 10px;">
                 	 	<div class="subscribe_content_1">
                         <b style="border:none; font-size:14px;">등급선택</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="cgrade" value="실버">실버&nbsp;&nbsp;&nbsp;
@@ -68,8 +85,11 @@
                     </div>
                     <div class="subscribe_content_2">
                         <a href="#" onclick="changeGrade('<%=email_subs%>');" ><b>등급변경 ></b></a>
-                    </div>    
+                    </div>   
                 	 </div>
+                	 <div style="margin-bottom:40px;">
+                	 	<p style="font-size:13px;"> - 등급변경은 결제일 일주일전까지 가능합니다.&nbsp;&nbsp;&nbsp;(결제예약전)</p>
+                	</div> 
                 <%
                 	}
                 %>
@@ -113,10 +133,10 @@ function subCancel(email) {
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function(retVal) {
 					if (retVal.res == "OK") {
-						alert("구독이 취소 신청이 완료되었습니다.");
+						alert("구독취소 신청이 완료되었습니다.");
 					}
 					else {
-						alert("구독 취소 신청 실패");
+						alert("구독취소 신청 실패");
 					}
 				},
 				error:function(request,status,error){
@@ -124,9 +144,10 @@ function subCancel(email) {
 				}
        	}); //ajax
        } else { //N
-       		alert("구독 취소신청을 취소하였습니다.");
+       		alert("구독취소 신청을 취소하였습니다.");
        		return false;
 		}
+   	location.href="mypage_main.ma";
  }
 
 function subCancel2(email) {
@@ -152,6 +173,7 @@ function subCancel2(email) {
     } else { //N
     		return false;
 		}
+	location.href="mypage_main.ma";
 }
 
 function changeGrade(email) {
@@ -164,36 +186,65 @@ function changeGrade(email) {
 				grade = cgrade[i].value;
 			}
         }       
-
-        if(grade != <%=sub_subs.getGrade()%>) {
+		
+        if(grade != '<%=sub_subs.getGrade()%>') {
     	$.ajax({
 				url:'/bit_project/mypage_subscribe_change.my',
 				type: 'POST',
-				data:{'email' : email,
-					  'subscribe_num' : subscribe_num,
+				data:{
+					  'email' : email,
+					  'subscribe_num' : '<%=sub_subs.getSubscribe_num()%>',
 					  'grade' : grade
 					},
 				dataType: "json",
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				success: function(retVal) {
 					if (retVal.res == "OK") {
-						alert("변경 신청이 완료되었습니다.");
+						alert("변경신청이 완료되었습니다.");
 					}
 					else {
-						alert("변경 신청 실패");
+						alert("변경신청 실패");
 					}
 				},
 				error:function(request,status,error){
 			    		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 				}
-    	}); //ajax
+    	}); // ajax
         } else{
             alert("현재 등급과 동일합니다.");
-			return false;
         }
-    } else { //N
+    } else { // N
     	return false;
 	}
+ 	location.href="mypage_main.ma";
+}
+
+function regradeCancel(email) {
+	if (confirm("구독등급 변경을 취소하시겠습니까?")) { //Y
+		$.ajax({
+			url:'/bit_project/mypage_subscribe_changecancel.my',
+			type: 'POST',
+			data:{
+				  'email' : email,
+				},
+			dataType: "json",
+			contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+			success: function(retVal) {
+				if (retVal.res == "OK") {
+					alert("변경취소했습니다.");
+				}
+				else {
+					alert("변경취소 실패");
+				}
+			},
+			error:function(request,status,error){
+		    		alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			}
+		});
+	} else {
+		return false;
+	}
+	location.href="mypage_main.ma";
 }
  
  
