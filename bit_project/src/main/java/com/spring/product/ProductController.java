@@ -32,7 +32,6 @@ public class ProductController {
 
 	@RequestMapping(value = "/product.pr")
 	public String productPage(Model model, HttpSession session) {
-		System.out.println("product.pr : " + session.getAttribute("email"));
 		return "product";
 	}
 
@@ -44,7 +43,7 @@ public class ProductController {
 	@RequestMapping("/productDetail.pr")
 	public String productDetail(Model model, HttpSession session, HttpServletRequest request) {
 		int bookmark_chk = 0, wishlist_chk = 0, reservation_chk = 0, alarm_chk = 0;
-		String email = "";
+		String email = "", subsCheck = "";
 		int pNum = Integer.parseInt(request.getParameter("num"));
 		ProductVO prVO = new ProductVO();
 		try {
@@ -56,13 +55,16 @@ public class ProductController {
 				wishlist_chk = service.getWishList(pNum, email);
 				reservation_chk = service.getReservation(pNum, email);
 				alarm_chk = service.getAlarm2(email, pNum);
+				// 구독을 했다면 등급을 얻어와야함
+				subsCheck = service.getMemberSubsState(email);
+				
 			}
-			System.out.println("productDetail.pr : " + session.getAttribute("email"));
 			model.addAttribute("prVO", prVO);
 			model.addAttribute("bookmark", bookmark_chk);
 			model.addAttribute("wishlist", wishlist_chk);
 			model.addAttribute("reservation", reservation_chk);
 			model.addAttribute("alarm", alarm_chk);
+			model.addAttribute("subsGrade", subsCheck);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("컨트롤러 내부 메소드입니다. 메시지는 : " + e.getMessage());
@@ -100,12 +102,10 @@ public class ProductController {
 	@RequestMapping("/productDeleteForm.pr")
 	public String productDeleteForm(HttpSession session, HttpServletRequest request) {
 		int pNum = Integer.parseInt(request.getParameter("num"));
-		System.out.println(pNum);
 		try {
 			// 리뷰, 문의 삭제
 			service.prDelete(pNum);
 			
-			System.out.println("1");
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -139,16 +139,10 @@ public class ProductController {
 		// Ch3. product_share table 등록
 		ProductShareVO psVO = new ProductShareVO();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(request.getParameter("consignment_start_date"));
-		System.out.println(request.getParameter("consignment_end_date"));
 		String subs1 = request.getParameter("consignment_start_date").substring(0, 10);
 		String subs2 = request.getParameter("consignment_end_date").substring(0, 10);
-		System.out.println(subs1);
-		System.out.println(subs2);
 		Date start = fm.parse(subs1);
 		Date end = fm.parse(subs2);
-		System.out.println(start);
-		System.out.println(end);
 		psVO.setProduct_num(res);
 		psVO.setProduct_name(request.getParameter("product_name"));
 		psVO.setEmail(request.getParameter("email"));
@@ -183,17 +177,11 @@ public class ProductController {
 		pdVO.setCategory_s(request.getParameter("category_s"));
 		List<MultipartFile> fileList = request.getFiles("img_list");
 		String uploadPath = "C:\\Project138\\upload\\";
-		System.out.println(fileList.size());
 		for (MultipartFile mf : fileList) {
-			System.out.println("향상된for문 내부");
 			String originalFileExtension = mf.getOriginalFilename()
 					.substring(mf.getOriginalFilename().lastIndexOf("."));
 			String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 			long fileSize = mf.getSize(); // 파일 사이즈
-
-			System.out.println("originFileName : " + storedFileName);
-			System.out.println("fileSize : " + fileSize);
-
 			try {
 				mf.transferTo(new File(uploadPath + storedFileName));
 				switch (cnt) {
@@ -212,10 +200,8 @@ public class ProductController {
 				cnt++;
 
 			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -322,14 +308,12 @@ public class ProductController {
 	// 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
 	@RequestMapping("/reviewWrite.pr")
 	public String reviewWrite(MultipartHttpServletRequest request) {
-		System.out.println("췍");
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setProduct_num(Integer.parseInt(request.getParameter("product_num")));
 		reviewVO.setNickname(request.getParameter("nickname"));
 		reviewVO.setContent(request.getParameter("content"));
 		reviewVO.setEmail(request.getParameter("email"));
 		reviewVO.setGpa(Integer.parseInt(request.getParameter("reviewcheck")));
-
 		try {
 			if (request.getFile("img").getSize() == 0) {
 				reviewVO.setImg("mun.jpg");

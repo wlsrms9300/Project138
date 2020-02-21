@@ -49,14 +49,15 @@ public interface PDService {
 		// 예약 off
 		public void deleteReservation(@Param("product_num") int product_num, @Param("email") String email) throws Exception;
 		// 알람 여부
-		int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		public int getAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
 		// 알람 여부 v2
-		int getAlarm2(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
+		public int getAlarm2(@Param("email") String email, @Param("product_num") int product_num) throws Exception;
 		// 알람 등록
-		void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		public void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
 		// 알람 삭제
-		void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
-		
+		public void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone) throws Exception;
+		// 구독 등급 체크. 위시리스트나 예약 시 권한 부여
+		public String getMemberSubsState(@Param("email") String email) throws Exception;
 		
 		
 	// 3. 상세 페이지 상품 문의

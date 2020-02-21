@@ -48,7 +48,6 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
             $.each(data, function (index, item) {
                 var exText = "";
                 var date = new Date(item.regist);
-                alert(deviceChk);
                 if(deviceChk==2){
                 	date = mdata(date);
                 }else {

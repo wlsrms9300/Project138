@@ -101,9 +101,9 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 	@Override
-	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2,
-			HashMap<String, String> cateMap3) throws Exception {
+	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3) throws Exception {
 		try {
+			System.out.println(cateMap1.size()+"\t"+cateMap2.size()+"\t"+cateMap3.size());
 			List<ProductVO> list = null;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
 			list = pdMapper.filterScroll(pno, cateMap1, cateMap2, cateMap3);
@@ -157,8 +157,29 @@ public class PDServiceImpl implements PDService {
 			throw new Exception("상품상세 조회수 증가 실패.", e);
 		}
 	}
+	
+	@Override
+	public String getMemberSubsState(String email) throws Exception {
+		int res = 0;
+		String subsCheck = "";
+		try {
+			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
+			res = pdMapper.getMemberSubsState(email);
+			if(res==1) {
+				subsCheck = pdMapper.getMemberSubsGrade(email);
+			}
+			
+		} catch (Exception e) {
+			throw new Exception("getMemberSubsState 실패.", e);
+		}
+		return subsCheck;
+	}
+	
+	
 	/********************** 상품상세 페이지 종료 **********************/
 	
+
+
 	/********************** 알람 시작 **********************/
 	@Override
 	public int getAlarm(String email, int product_num, String phone) throws Exception {

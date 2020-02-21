@@ -46,7 +46,6 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 <header>
 <div id="wrap">
         <div id="intro_bg">
@@ -137,34 +136,34 @@
     </div>
 </header>
 	
-	
-	<section id="banner">
+	<div class="bom"></div>
+	<!-- <section id="banner">
 		<div class="slider">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide ss1">
-						<div class="container">
+						 <div class="container">
 							<div class="row">
 								<h3>텍스트</h3>
 								<p>텍스트</p>
 							</div>
-						</div>
+						</div> 
 					</div>
 					<div class="swiper-slide ss2">
 						<div class="container">
-							<div class="row">
+							 <div class="row">
 								<h3>텍스트</h3>
 								<p>텍스트</p>
 							</div>
-						</div>
+						</div> 
 					</div>
 					<div class="swiper-slide ss3">
 						<div class="container">
 							<div class="row">
 								<h3>텍스트</h3>
 								<p>텍스트</p>
-							</div>
-						</div>
+							</div> 
+						</div> 
 					</div>
 				</div>
 				<div class="swiper-pagination"></div>
@@ -172,7 +171,7 @@
 				<div class="swiper-button-next"></div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<div class="testsearch">
    <div class="container">
@@ -456,6 +455,7 @@
 	</script>
 	
 	<script src="${pageContext.request.contextPath}/resources/js/product/munfilter.js"></script>
+	<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 </body>
 
 </html>

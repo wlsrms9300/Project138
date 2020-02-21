@@ -64,6 +64,10 @@ public interface PDMapper {
 	int getAlarm2(@Param("email") String email, @Param("product_num") int product_num);
 	void addAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
 	void deleteAlarm(@Param("email") String email, @Param("product_num") int product_num, @Param("phone") String phone);
+	//상품 상세 구독 등급
+	int getMemberSubsState(@Param("email") String email);
+	String getMemberSubsGrade(@Param("email") String email);
+	
 	//SMS 서비스 관련
 	int amountCheck(@Param("product_num") int product_num);
 	List<AlarmVO> SMSalarm(@Param("product_num") int product_num);
