@@ -24,7 +24,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
-	<div style="height: 60px;">
+<div style="height: 60px;">
 		<header >
  			<%@ include file="/WEB-INF/views/header2.jsp" %> 
 		</header>
@@ -78,6 +78,7 @@
 			</div>
 		</form>
 	</div> 
+	
 	
 
   <script type="text/javascript">

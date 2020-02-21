@@ -68,7 +68,7 @@ $(document).ready(function() {
             <label for="choiceTerm01">
               <span class="Kinds">
                <% if(grade.equals("1month") || grade.equals("2month")) { %>체험판 <% }else{ %>정기결제<%} %></span>
-              <span class="loop">첫 배달일은 mm월 dd일입니다.</span>
+              <span class="loop">첫배송은 넷째주 목요일입니다.</span>
               <input type="hidden" name="SubPrice" value="<%=price%>">
               <div class="option">
                 <span id="pwcomma">39,000원</span>

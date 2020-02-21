@@ -19,8 +19,8 @@
         <div id="intro_bg">
             <div class="header">
                 <div class="main">
-                    <h1 class="" style="font-weight: 900; text-transform: uppercase; margin-top:10px; font-size: 2.5rem; line-height: 1.2;">
-						<a href="main.ma" class="" style="color: #ea7475;">Oneder</a>
+                    <h1 class="" style="font-weight: 900; text-transform: uppercase; margin-top:10px;  line-height: 1.2;">
+						<a href="main.ma" class="" style="color: #ea7475; text-decoration:none; ">Oneder</a>
 				   </h1>
                 </div>
                 <ul class="nav">
@@ -28,7 +28,7 @@
 						if(email != null) {
 					%>
 						<div class="logout_text" style="margin:auto 20px auto 0;" onclick="location.href='logout.me'">
-							<p style="cursor:pointer; font-size:16px; color:black;">로그아웃</p>
+							<p style="cursor:pointer; font-size:16px; color:black; margin:0;">로그아웃</p>
 						</div>
 						<div class="header_img" style="margin-top:6.5px; margin-right:5px;">
 							<% if(userDetail_h.getUsergroup().equals("admin")) { %>
