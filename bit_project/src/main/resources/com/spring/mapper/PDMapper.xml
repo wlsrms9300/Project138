@@ -148,36 +148,32 @@
 
 
 	<!-- 필터설정 이후 스크롤 시. 1. 해당 필터로 조회. 그 중 8개만 -->
-	<select id="filterScroll" parameterType="map"
-		resultType="com.spring.product.ProductVO">
+	<select id="filterScroll" parameterType="map" resultType="com.spring.product.ProductVO">
 		select * from (
 		select rownum rnum, product_num, product_name,
 		total_amount, rental_amount, current_amount, manufacturer,
 		product_content,
-		gpa, category_l, category_m, category_s, img_sum,
+		gpa, CATEGORY_L, CATEGORY_M, CATEGORY_S, img_sum,
 		img_main, img_detail, regist, readcount FROM (
 		SELECT *
 		FROM product
 		where 1=1
 		<if test="cateMap1.size != 0">
-			AND category_l IN
-			<foreach collection="cateMap1" item='item' index='i' open="("
-				close=")" separator=",">
-				#{i}
+			AND CATEGORY_L IN
+			<foreach collection="cateMap1" item='item' index='i' open="(" close=")" separator=",">
+			#{i}
 			</foreach>
 		</if>
 		<if test="cateMap2.size != 0">
-			AND category_m IN
-			<foreach collection="cateMap2" item='item' index='i' open="("
-				close=")" separator=",">
-				#{i}
+			AND CATEGORY_M IN
+			<foreach collection="cateMap2" item='item' index='j' open="(" close=")" separator=",">
+			#{j}
 			</foreach>
 		</if>
 		<if test="cateMap3.size != 0">
-			AND category_s IN
-			<foreach collection="cateMap3" item='item' index='i' open="("
-				close=")" separator=",">
-				#{i}
+			AND CATEGORY_S IN
+			<foreach collection="cateMap3" item='item' index='z' open="(" close=")" separator=",">
+			#{z}
 			</foreach>
 		</if>
 		order by product_num asc
@@ -194,6 +190,15 @@
 	<update id="getProductReadCount" parameterType="map">
 		update product set readcount=#{readcount}+1 where product_num=#{product_num}
 	</update>
+	
+	<!-- 구독 등급에 따라 위시리스트나 예약을 할 수 있게 -->
+	
+	<select id="getMemberSubsState" parameterType="map" resultType="int">
+		select NVL(count(*), 0) from member where email=#{email} AND subscribe='Y'
+	</select>
+	<select id="getMemberSubsGrade" parameterType="map" resultType="String">
+		select grade from subscribe where email=#{email}
+	</select>
 	
 	<!--  알람  -->
 	<insert id="addAlarm" parameterType="map">

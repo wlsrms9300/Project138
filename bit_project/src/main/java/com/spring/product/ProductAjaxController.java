@@ -165,6 +165,9 @@ public class ProductAjaxController {
 		HashMap<String, String> cateMap1 = new HashMap<String, String>();
 		HashMap<String, String> cateMap2 = new HashMap<String, String>();
 		HashMap<String, String> cateMap3 = new HashMap<String, String>();
+		cateMap1.clear();
+		cateMap2.clear();
+		cateMap3.clear();
 		List<ProductVO> list = null;
 		try {
 			if (category_l == null && category_m == null && category_s == null) {
@@ -173,9 +176,10 @@ public class ProductAjaxController {
 			} else {
 				// 문자열 끝만 지우기string=string.substring(0, string.length()-1);
 				if (category_l != null) {
+					System.out.println(category_l.length);
 					for (int i = 0; i < category_l.length; i++) {
 						if (i == 0) {
-							if (category_l[i + 1] != null) {
+							//if (category_l[i + 1] != null) {
 							category_l[i] = category_l[i].substring(9);
 							if (category_l[i].equals("실버")) {
 								cateMap1.put("실버", "category_l");
@@ -187,7 +191,7 @@ public class ProductAjaxController {
 								cateMap1.put("개인쉐어", "category_l");
 							}
 							System.out.println(category_l[i]);
-							}
+							//}
 						} else {
 							if (category_l[i].equals("실버")) {
 								cateMap1.put("실버", "category_l");

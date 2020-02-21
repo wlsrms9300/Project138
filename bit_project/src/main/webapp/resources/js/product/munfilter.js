@@ -31,7 +31,7 @@ function allSearch() {
 					 if (chkbox[i].checked == true) {
 						 chkcnt++;
 					      fil[j-1] += chkbox[i].value;
-					      fil[j-1] += ",";				      
+					      //fil[j-1] += ",";				      
 					 }
 				 }
 			}
@@ -42,7 +42,7 @@ function allSearch() {
 					 if (chkbox[i].checked == true) {
 						 chkcnt++;
 					      fil[j-1] += chkbox[i].value;
-					      fil[j-1] += ",";				      
+					     // fil[j-1] += ",";				      
 					 }
 				 }
 			}
@@ -328,3 +328,7 @@ function fn_searchList() {
          }
         });
 }
+
+$('.total_count').click(function() {
+	// 필터 초기화 후 allsearch();
+})

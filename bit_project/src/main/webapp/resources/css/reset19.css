@@ -6,6 +6,7 @@ body,div,ul,li,dl,dd,dt,ol,h1,h2,h3,h4,h5,h6,input,fieldset,legend,p,select,tabl
 /* a 링크 초기화 */
 a {color: #222; text-decoration: none;}
 a:hover {color: #2698cb;}
+.wrap a:hover {color: #222;}
 
 /* 폰트 초기화 */
 @font-face { font-family: 'S-CoreDream-4Regular'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -75,7 +76,7 @@ input:checked[type=checkbox] {
 
 
 /* 상품 list h3 폰트 사이즈 */
-.product-normal {font-size: 45px;}
+.product-normal {font-size: 30px;}
 
 
 

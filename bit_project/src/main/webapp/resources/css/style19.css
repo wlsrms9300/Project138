@@ -1,5 +1,5 @@
 @charset "utf-8";
-
+.bom {height: 90px;} 
 /* 레이아웃 */
 #banner {position: relative; background:rgba(0,0,0,0.1);}
 #product_section {background-color: #fff;}
@@ -425,7 +425,7 @@ textarea.form-control {
 .product_chart > div > div > div .infor {background: #fff; padding: 17px; }
 /*border: 1px solid #d9d9d9;*/
 .product_chart > div > div > div .infor h3 {color: #333; font-size: 30px; font-weight: 700; margin-bottom: 20px;}
-.product_chart > div > div > div .infor h3 strong {padding-left: 0px;}
+.product_chart > div > div > div .infor h3 strong {padding-left: 0px; font-size: 20px;}
 .product_chart > div > div > div .infor h3 span {width: 29px; height: 29px; display: inline-block; margin-top: 9px; vertical-align: -2px;}
 .product_chart > div > div > div .infor h3 span.all {background-position: -87px -125px;}
 .product_chart > div > div > div .infor h3 span.a12 {background-position: -58px -125px;}
@@ -540,6 +540,6 @@ textarea.form-control {
     .product_chart > div > div > div .infor .infor_btn a {display: none;}
     .product_chart > div > div > div .infor .infor_btn a:last-child {width: 60%; margin-left: 20%; display: block; margin-right: 0; padding: 5px; color: #777; margin-bottom: 5px; box-sizing: border-box; font-size: 14px; background: none; border: 1px solid #ddd;}
     
-
+.bom {height: 64px;} 
 }
 

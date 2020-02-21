@@ -9,8 +9,8 @@
 	
 	String img = (String)session.getAttribute("img");
 	String nickname = (String)session.getAttribute("nickname");
-	int bookmark = 0, wishlist = 0, reservation = 0, alarm = 0;
-	String email = "", phone="", usergroup="";
+	int bookmark = 0, wishlist = 0, reservation = 0, alarm = 0, _grade = 0;
+	String email = "", phone="", usergroup="", subs_grade = "";
 	
 	try {
 		if(userDetail.getUsergroup().equals("admin")) {
@@ -34,17 +34,39 @@
 		if((int)request.getAttribute("alarm")!=0){
 			alarm = 1;
 		}
-		
+		if((String)request.getAttribute("subsGrade")!=null){
+			subs_grade = (String)request.getAttribute("subsGrade"); 
+			if(subs_grade.equals("실버")){
+				if(prVO.getCategory_l().equals("실버") || prVO.getCategory_l().equals("개인쉐어")){
+					_grade = 0;
+				}else {
+					_grade = 1;
+					
+				}
+			}else if(subs_grade.equals("골드")){
+				if(prVO.getCategory_l().equals("플레티넘")){
+					_grade = 0;
+				}else {
+					_grade = 1;
+				}
+			}else{
+				_grade = 0;
+			}
+		}
 	}catch (NullPointerException e) {
 		e.getMessage();
 	}finally {
-		System.out.println("닉네임 : "+nickname);
+		/* System.out.println("닉네임 : "+nickname);
 		System.out.println("북마크 : "+bookmark);
 		System.out.println("위시 : "+wishlist);
 		System.out.println("레저 : "+reservation);
 		System.out.println("이메일 : "+email);
 		System.out.println("폰 : "+phone);
 		System.out.println("알람 : "+alarm);
+		System.out.println("구독등급 : "+subs_grade);
+		System.out.println("상품등급 : "+prVO.getCategory_l());
+		System.out.println("구독가능여부 : "+_grade); */
+		
 	}
 	
     %>
@@ -88,6 +110,8 @@
         var sessionChk = "<%=email%>";
         var nick = "<%=nickname%>";
         var usergroup ="<%=usergroup%>";
+        var mgrade = 0;
+        mgrade = <%=_grade%>;
     </script>
 </head>
 
