@@ -207,9 +207,10 @@ $(document).ready(function() {
 	            	contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 	            	success: function(map) {	
 	            		if(map.res == "OK") {
-	            			alert("DB작성 성공");
+	            			
 	            		} else {
-	            			alert("실패");
+		            		alert("결제정보 등록에 실패했습니다.")
+	            			location.href='subscribestep1.me';
 	            		}
 	            	}, 
 	            	error:function() {
