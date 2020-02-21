@@ -23,6 +23,9 @@
 	<link href="${pageContext.request.contextPath}/resources/css/admin/font-awesome.min.css" rel="stylesheet">
 	<%-- <link href="${pageContext.request.contextPath}/resources/css/admin/datepicker3.css" rel="stylesheet"> --%>
 	<link href="${pageContext.request.contextPath}/resources/css/admin/styles.css" rel="stylesheet">
+	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+	
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -251,7 +254,7 @@
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<a class="navbar-brand" href="index.se"><span>ONEDER</span>Admin</a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -333,6 +336,8 @@
 			<!-- 결제 관리 -->
 			<li class="active"><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
 
+			<!--사이트 이동-->
+			<li><a href="main.ma"><em class="fa fa-power-off">&nbsp;</em> 사이트 이동</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		

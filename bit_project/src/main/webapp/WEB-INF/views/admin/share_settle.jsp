@@ -31,7 +31,8 @@
     <![endif]-->
     <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
-
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+	
     
     <!-- 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -89,7 +90,7 @@
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<a class="navbar-brand" href="index.se"><span>ONEDER</span>Admin</a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -166,7 +167,8 @@
 			</li>
 			<!-- 결제 관리 -->
 			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
-
+			<!--사이트 이동-->
+			<li><a href="main.ma"><em class="fa fa-power-off">&nbsp;</em> 사이트 이동</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		

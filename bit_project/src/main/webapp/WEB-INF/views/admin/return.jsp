@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.*, com.spring.login.*" %>
+<%
+	String nickname = (String)session.getAttribute("nickname");
+	String img = (String)session.getAttribute("img");	
+	LoginVO userDetail = (LoginVO)session.getAttribute("userDetail");
+	
+	if((String)session.getAttribute("email") == null || !(userDetail.getUsergroup().equals("admin"))) {
+		out.println("<script>");
+		out.println("alert('관리자만 접근할수있습니다')");
+		out.println("location.href='main.ma'");
+		out.println("</script>");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +32,8 @@
     <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
 
+<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+	
     
     <!-- 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -81,71 +95,20 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
-				<ul class="nav navbar-top-links navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-envelope"></em><span class="label label-danger">15</span>
-					</a>
-						<ul class="dropdown-menu dropdown-messages">
-							<li>
-								<div class="dropdown-messages-box"><a href="profile.se" class="pull-left">
-									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
-									</a>
-									<div class="message-body"><small class="pull-right">3 mins ago</small>
-										<a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
-									<br /><small class="text-muted">1:24 pm - 25/03/2015</small></div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="dropdown-messages-box"><a href="profile.se" class="pull-left">
-									<img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
-									</a>
-									<div class="message-body"><small class="pull-right">1 hour ago</small>
-										<a href="#">New message from <strong>Jane Doe</strong>.</a>
-									<br /><small class="text-muted">12:27 pm - 25/03/2015</small></div>
-								</div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<div class="all-button"><a href="#">
-									<em class="fa fa-inbox"></em> <strong>All Messages</strong>
-								</a></div>
-							</li>
-						</ul>
-					</li>
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info">5</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="#">
-								<div><em class="fa fa-envelope"></em> 1 New Message
-									<span class="pull-right text-muted small">3 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="#">
-								<div><em class="fa fa-heart"></em> 12 New Likes
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<li><a href="#">
-								<div><em class="fa fa-user"></em> 5 New Followers
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
+				<a class="navbar-brand" href="index.se"><span>ONEDER</span>Admin</a>
+			
+			
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="<%=img %>" class="img-responsive" alt="" style="box-sizing:border-box; border-radius:100px; border:2px solid #EA7475;">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+				<div class="profile-usertitle-status"></div>
+				<div class="profile-usertitle-name"><%=nickname %></div> 
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -211,8 +174,8 @@
 			<!-- 결제 관리 -->
 			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
 
-			<!--로그인-->
-			<li><a href="login.se"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<!--사이트 이동-->
+			<li><a href="main.ma"><em class="fa fa-power-off">&nbsp;</em> 사이트 이동</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -236,7 +199,7 @@
             <div class="col-lg-12">
 				<div class="board_list_wrap">
 					<table id="foo-table" class="foo-ex">
-						<h2>반납확정&&배송관리<button id="blanket" style="float:right;">일괄처리</button></h2>
+						<h2>반납확정&&배송관리<button type="button" class="btn btn-sm btnjeon" style="float:right; font-size: large;">일괄처리</button></h2>
 						<thead>
 							<tr>
 								<th>STATE_NUM</th>
