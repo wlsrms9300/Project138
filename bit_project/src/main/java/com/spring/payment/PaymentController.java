@@ -254,6 +254,7 @@ public class PaymentController {
 		String customer_uid = null;
 		//결제일, merchant_uid, amount 설정 
 		ScheduleData schedule_data = null;
+		String regrade = "";
 		
 		try {
 		//결제할 사용자 목록으로 예약 (customer_uid 만들기)
@@ -266,7 +267,31 @@ public class PaymentController {
 			
 			if(!(user.getState().equals("구독취소"))) { 
 			//pay_price 설정
-			pay_price = user.getPrice() + user.getPoint_price();
+			int ch = paymentService.checkCgrade(user.getEmail());
+			if(ch != 0) {
+				regrade = paymentService.getCgrade(user.getEmail());
+				switch(regrade) {
+				case "실버" :
+					pay_price = 29000;
+					break;
+				case "골드" :
+					pay_price = 59000;
+					break;
+				case "플래티넘" : 
+					pay_price = 79000;
+					break;
+				}
+				int ch2 = paymentService.updateSgrade(user.getEmail(), regrade);
+				if(ch2 != 0) {
+					System.out.println(customer_uid + "의 구독등급 변경 성공");
+					paymentService.deleteCancel(user.getEmail());
+					System.out.println(customer_uid + "의 변경내역 삭제 성공");
+				} else {
+					System.out.println(customer_uid + "의 구독등급 변경 실패");
+				}
+			} else {
+				pay_price = user.getPrice() + user.getPoint_price();
+			}
 			
 			//merchant_uid 생성할 난수 생성
 			for(int j = 0; j < 15; j++) {
@@ -354,7 +379,7 @@ public class PaymentController {
 	      try {
 	         // Ch1. 예약완료 리스트 가져온다
 	         PMemberVO data = paymentService.allSubscribe2(map.get("merchant_uid"), state);
-	         // Ch2. 결제완료로 바꾼다.
+	         // Ch2. 결제완료로 바꾼다 / 결제목록생성                                             
 	         paymentService.paidState(data.getSubscribe_num());
 	         String[] before = new String[2];
 	         before = null;
@@ -362,10 +387,27 @@ public class PaymentController {
 	         before = data.getEmail().split("@");
 	         System.out.println("before(0) : " + before[0] + "before(1) : " + before[1]);
 	         String customer_uid = null;
+	         int price = 0;
+	         String grade = paymentService.selectSgrade(data.getSubscribe_num()); //구독테이블에서 회원등급가져와서 결제금액 설정
+	         switch(grade) {
+				case "실버" :
+					price = 29000;
+					break;
+				case "골드" :
+					price = 59000;
+					break;
+				case "플래티넘" : 
+					price = 79000;
+					break;
+				case "비정기" :
+					price = 34000;
+					break;
+				}
+	         
 	         customer_uid = before[0] + before[1];
 	         pvo.setCustomer_uid(customer_uid);
 	         pvo.setSubscribe_num(data.getSubscribe_num());
-	         pvo.setPrice(data.getPrice());
+	         pvo.setPrice(price);
 	         pvo.setMerchant_uid("0");
 	         pvo.setImp_uid("0");
 	         int res = paymentService.insertPayment(pvo);
@@ -404,7 +446,7 @@ public class PaymentController {
 	            System.out.println(customer_uid + "의 다음결제 목록 생성 실패");
 	         }
 
-	         // 결제완료 구독완료 새로운결제목록생성완료
+	         // 결제완료 구독완료
 	         ArrayList<Integer> getRandomList = new ArrayList<Integer>();
 	         getRandomList = null;
 	         getRandomList = paymentService.getWishPnum(data.getEmail());

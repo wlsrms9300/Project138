@@ -363,5 +363,27 @@ public class PaymentServiceImpl implements PaymentService {
 		return res;
 	}
 	
+	@Override
+	public int updateSgrade(String email, String regrade) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			int res = paymentmapper.updateSgrade(email, regrade);
+			return res;
+		} catch (Exception e) {
+			throw new Exception("구독등급 변경 실패", e);
+		}
+	}
+	
+	@Override
+	public String selectSgrade(int subscribe_num) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			String grade = paymentmapper.selectSgrade(subscribe_num);
+			return grade;
+		} catch (Exception e) {
+			throw new Exception("현재등급 조희 실패", e);
+		}
+	}
+	
 	
 }

@@ -209,6 +209,16 @@
 		DELETE C_GRADE WHERE SUBSCRIBE_NUM = (SELECT SUBSCRIBE_NUM FROM SUBSCRIBE WHERE EMAIL=#{email})
 	</delete>
 	
+	<!-- subscribe테이블 grade 등급 변경 -->
+	<update id="updateSgrade" parameterType="map">
+		UPDATE SUBSCRIBE SET GRADE=#{regrade} WHERE EMAIL=#{email}
+	</update>
+	
+	<!-- subscribe테이블 grade 조회 -->
+	<select id="selectSgrade" parameterType="map">
+		SELECT GRADE FROM SUBSCRIBE WHERE SUBSCRIBE_NUM=#{subscribe_num}
+	</select>
+	
 	
 	
 

@@ -42,6 +42,8 @@ public interface PaymentService {
 	public int checkCgrade(String email) throws Exception;
 	public String getCgrade(String email) throws Exception;
 	public void deleteCancel(String email) throws Exception;
+	public int updateSgrade(@Param("email") String email, @Param("regrade") String regrade) throws Exception;
+	public String selectSgrade(@Param("subscribe_num") int subscribe_num) throws Exception;
 
 	public int personalSharingCheck(int product_num) throws Exception;
 	public int personalSharingFund(int product_num) throws Exception;

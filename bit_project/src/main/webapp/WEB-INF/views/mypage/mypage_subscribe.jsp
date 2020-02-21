@@ -147,7 +147,7 @@ function subCancel(email) {
        		alert("구독취소 신청을 취소하였습니다.");
        		return false;
 		}
-   	location.href="mypage_main.ma";
+   	location.href="mypage_main.my";
  }
 
 function subCancel2(email) {
@@ -173,7 +173,7 @@ function subCancel2(email) {
     } else { //N
     		return false;
 		}
-	location.href="mypage_main.ma";
+	location.href="mypage_main.my";
 }
 
 function changeGrade(email) {
@@ -212,11 +212,12 @@ function changeGrade(email) {
     	}); // ajax
         } else{
             alert("현재 등급과 동일합니다.");
+            location.href="mypage_main.my";
         }
     } else { // N
     	return false;
 	}
- 	location.href="mypage_main.ma";
+ 	location.href="mypage_main.my";
 }
 
 function regradeCancel(email) {
@@ -244,7 +245,7 @@ function regradeCancel(email) {
 	} else {
 		return false;
 	}
-	location.href="mypage_main.ma";
+	location.href="mypage_main.my";
 }
  
  

@@ -45,6 +45,8 @@ public interface PaymentMapper {
 	int checkCgrade(String email);
 	String getCgrade(String email);
 	void deleteCancel(String email);
+	int updateSgrade(@Param("email") String email, @Param("regrade") String regrade);
+	String selectSgrade(@Param("subscribe_num") int subscribe_num);
 
 	int personalSharingCheck(@Param("product_num") int product_num);
 	int personalSharingFund(@Param("product_num") int product_num);
