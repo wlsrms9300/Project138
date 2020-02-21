@@ -28,7 +28,7 @@ $(document).ready(function() {
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
    <div style="height: 50px;">
       <header>
-         <%@ include file="/WEB-INF/views/header2.jsp"%>
+         <%@ include file="/WEB-INF/views/header1.jsp"%>
       </header>
    </div>
    <div id="contentbox">

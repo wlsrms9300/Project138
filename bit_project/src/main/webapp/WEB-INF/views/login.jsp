@@ -60,13 +60,13 @@ $(document).ready(function() {
 	<div style="height: 50px;">
 	<%@ include file="/WEB-INF/views/chatframe.jsp" %>
 	<header >
-	 	<%@ include file="/WEB-INF/views/header2.jsp" %> 
+	 	<%@ include file="/WEB-INF/views/header1.jsp" %> 
 	</header>
 	</div>
 	<div id="content">
 		<div id="login-content">
 			<p id="pc-text" style="text-align: center;">
-				아직 ㅇㅇㅇㅇ 회원이 아니신가요?<br /> 지금 바로 가입하시고 다양한 혜택을 누리세요!
+				아직 <b style="color:#ea7475; font-size:20px;">ONEDER</b> 회원이 아니신가요?<br /> 지금 바로 가입하시고 다양한 혜택을 누리세요!
 			</p>
 
 			<h1>로그인</h1>
@@ -99,14 +99,14 @@ $(document).ready(function() {
 					<span>
 						<button type="button" onclick="location.href='${naver_Url}'" id="btn-left">
 							<img
-								src="${pageContext.request.contextPath}/resources/img/naver.png"
-								style="width: 167px; height: 36px;" />	
+								src="${pageContext.request.contextPath}/resources/img/naverLogin.png"
+								style="width: 167px; height: 36px; border-radius:5px;" />	
 						</button>					
 					</span> <span>
 						<button type="button" onclick="location.href='${kakao_Url}'" id="btn-right">
 							<img
-								src="${pageContext.request.contextPath}/resources/img/kakao.png"
-								style="width: 167px; height: auto;" />
+								src="${pageContext.request.contextPath}/resources/img/kakaoLogin.png"
+								style="width: 167px; height: 36px; border-radius:5px;" />
 						</button> <br />
 					<br />
 					</span>

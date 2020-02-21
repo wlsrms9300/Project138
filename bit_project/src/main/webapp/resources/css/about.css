@@ -25,12 +25,12 @@ hr {margin: 50px;}
 .mt_box > .mt_box_module > .box_step4{background: #f89e9e;}
 .mt_box > .mt_box_module > div{width: 130px; height: 130px; border-radius: 50%; margin: 10px auto 10px auto;}
 .mt_box > .mt_box_module > div > h4{margin-top: 30%;}
-.intro_second{width: 100%; background-color: #f8f9fa; padding-top: 50px; padding-bottom: 150px;}
+.intro_second{width: 100%; background-color: #eaebec; padding-top: 50px; padding-bottom: 150px;}
 .span_style > span{margin: 0 auto; display:block; line-height: 28px; font-size: 14px; width: 600px; }
 .span_style{margin: 30px auto 0 auto; display:block; line-height: 35px; font-size: 20px; width: 800px; color: #666666;}
 .intro-section1 > div {text-align: center;}
 .intro-section1 {margin-top: 200px; margin-bottom: 200px;}
-.mt_6{background-color: #f8f9fa; height: 400px; display: flex; text-align: center;}
+.mt_6{background-color: #eaebec; height: 400px; display: flex; text-align: center;}
 .mt_6 > .mt_6_1{align-self: center; margin: auto;}
 
 .sub_btn{background:#ff7276; color:#fff; border:0.5px; width:150px; height:50px; font-size:18px; font-weight: normal; border-radius: 5px; -webkit-transition: .3s all ease;
