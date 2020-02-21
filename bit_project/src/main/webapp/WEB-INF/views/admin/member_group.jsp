@@ -33,6 +33,8 @@
 
 	<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link href="${pageContext.request.contextPath}/resources/css/b2b_join_form.css" rel="stylesheet">
+	
 	<script src="${pageContext.request.contextPath}/resources/js/admin/member_group.js"></script>
 	<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
@@ -112,7 +114,7 @@ $(function($) {
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><span>Lumino</span>Admin</a>
+				<a class="navbar-brand" href="index.se"><span>ONEDER</span>Admin</a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -193,7 +195,8 @@ $(function($) {
 
 			<!-- 결제 관리 -->
 			<li><a href="payment.se"><em class="fa fa-bar-chart">&nbsp;</em> 결제 관리</a></li>
-
+			<!--사이트 이동-->
+			<li><a href="main.ma"><em class="fa fa-power-off">&nbsp;</em> 사이트 이동</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
