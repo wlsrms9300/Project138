@@ -53,16 +53,9 @@
 	    if(date<10) {
 	    	date = '0' + date;
 	    }
-	    var hour = format.getHours();
-	    if(hour<10) {
-	    	hour = '0' + hour;
-	    }
-	    var min = format.getMinutes();
-	    if(min<10) {
-	    	min = '0' + min;
-	    }
+	
 
-		return year + "-" + month + "-" + date + " " + hour + ":" + min;
+		return year + "-" + month + "-" + date;
 	}
 
 	function date_format2(format) {
@@ -75,14 +68,7 @@
 	    if(date<10) {
 	    	date = '0' + date;
 	    }
-	    var hour = format.getHours();
-	    if(hour<10) {
-	    	hour = '0' + hour;
-	    }
-	    var min = format.getMinutes();
-	    if(min<10) {
-	    	min = '0' + min;
-	    }
+	  
 
 		return year + "-" + month + "-" + date;
 	}

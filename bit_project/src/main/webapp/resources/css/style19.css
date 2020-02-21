@@ -23,6 +23,14 @@ header {position: fixed; left: 0; top: 0; z-index: 9999; width: 100%; height: 50
     color: #000;
     font-family: 'S-CoreDream-4Regular';
 }
+.jeon1{
+	background-color: #30a5ff;
+	border-color: #30a5ff; 
+}
+.jeon1{
+	color: #fff;
+}
+
 #rumi:hover {
 	filter:grayscale(60%);
 	transition:filter 0.5s;
