@@ -457,7 +457,7 @@
 		src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
 </body>
 <style>
-	#footer{height: 369px;}
+	#footer{height: 300px;}
 </style>
 <script>
 	function loginChk(){

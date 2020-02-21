@@ -112,7 +112,7 @@
          margin-top: 20px;
          cursor: pointer;
      }
-     #submit:hover{
+	 #submit:hover{
          color: #fff;
          background-color: #ea7475;
          opacity: 0.9;
@@ -189,6 +189,19 @@
  	.modal-content1 {
          position: absolute;
          top: 51%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: white;
+         padding: 1rem 1.5rem;
+         width: 500px;
+         border-radius: 0.5rem;
+         margin:0 auto;
+  
+     }
+   /*관리자 페이지 회원 모달*/
+     .modal-content2 {
+         position: absolute;
+         top: 29%; 
          left: 50%;
          transform: translate(-50%, -50%);
          background-color: white;
