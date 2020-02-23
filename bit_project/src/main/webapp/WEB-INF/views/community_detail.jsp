@@ -97,9 +97,9 @@
                 <% if(email_co != null ) { %>
 	                <% if (email_e.equals(email_co)) { %>
 	                <div class="community_mt_footer_btn">
-	                		<button class="community_mt_footer_update_btn" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">수정</button>
-	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
-	                </div>
+	                		<input type="button" value="수정" class="community_mt_footer_update_btn" style="border-radius: 5px; color: #fff; background: #ea7475; font-size: large" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">
+	                		<button class="community_mt_footer_update_btn" style="border-radius: 5px; color: #fff; background: #444444; font-size: large" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
+	                </div> 
 	                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
 	                <div class="community_mt_footer_btn">
 	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
