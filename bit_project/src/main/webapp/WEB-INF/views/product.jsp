@@ -4,7 +4,19 @@
 <%
 	String img = (String)session.getAttribute("img");
 	String email = (String)session.getAttribute("email");
+	String usergroup="";
 	LoginVO userDetail_h = (LoginVO)session.getAttribute("userDetail");
+	try {
+		
+		
+		if(userDetail_h.getUsergroup().equals("admin")){
+			usergroup="admin";
+		}
+	}catch (Exception e){
+		e.getMessage();
+		e.printStackTrace();
+	}
+	
 %>
 
 <!DOCTYPE html>
@@ -260,7 +272,7 @@
 						</div>
 					</li>
 					<li class="product_sort"><a href="javascript:void(0)" id="select4" onclick="select(4)"> 등급 <span
-								id="sort">신상품</span>
+								id="sort"></span>
 							<span><i class="fas fa-angle-down"></i></span>
 						</a>
 						<div id="list4" style="display: none;">
@@ -268,13 +280,10 @@
 
 								<li><a href="javascript:productSort('NEW','신상품');">신상품</a>
 								</li>
-
-								<li><a href="javascript:productSort('SALES','판매순');">인기순</a>
+								<li><a href="javascript:productSort('SALES','인기순');">인기순</a>
 								</li>
 								<li><a href="javascript:productSort('REVIEW','평점순');">평점순</a>
-								</li>
-								<li><a href="javascript:productSort('QNA','후기순');">후기순</a>
-								</li>
+
 							</ul>
 						</div>
 					</li>
@@ -384,8 +393,10 @@
 		</div>
 	</section>
 	<!-- //product -->
+	<% if(usergroup.equals("admin")) { %>
 	<button onclick="location.href='productForm.pr'">상품등록하기</button>
 	<button onclick="location.href='main.pr'">메인</button>
+	<%} %>
 	<footer id="footer">
 		<div id="footer_sns">
 			<div class="container">

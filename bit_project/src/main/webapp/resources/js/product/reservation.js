@@ -11,8 +11,14 @@ $(function(){
                     scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
                     $("body").addClass('not_scroll'); //overflow:hidden 추가
                     $('.reservationForm_true').css('position', 'fixed'); //최상위 div 고정
-                    $('.reservationForm_true').css('top', '50px');
-                    $('.reservationForm_true').css('left', 0);
+                    if(deviceChk==1){
+                    	  $('.reservationForm_true').css('top', - scrollHeight + 100);
+                          $('.reservationForm_true').css('left', 700);
+                    }else {
+                    	  $('.reservationForm_true').css('top', '70px');
+                          $('.reservationForm_true').css('left', 0);
+                    }
+                  
                     //$('.reservationForm_true').css('top', - scrollHeight + 100);
                     //$('.reservationForm_true').css('left', 700);
                     $.ajax({
@@ -36,8 +42,13 @@ $(function(){
                     scrollHeight = $("body").scrollTop(); // [var사용하지 않았으므로 전역스코프로 정의됨]열렸을떄 scrollTop 체크
                     $("body").addClass('not_scroll'); //overflow:hidden 추가
                     $('.reservationForm_false').css('position', 'fixed'); //최상위 div 고정
-                    $('.reservationForm_false').css('top', '50px');
-                    $('.reservationForm_false').css('left', 0);
+                    if(deviceChk==1){
+                  	  $('.reservationForm_false').css('top', - scrollHeight + 100);
+                        $('.reservationForm_false').css('left', 700);
+                  }else {
+                  	  $('.reservationForm_false').css('top', '70px');
+                        $('.reservationForm_false').css('left', 0);
+                  }
                     //$('.reservationForm_false').css('top', - scrollHeight + 100);
                     //$('.reservationForm_false').css('left', 700);
                 	//팝업창 띄우고 확인 누르면 db삭제

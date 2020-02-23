@@ -24,51 +24,53 @@
         snsData(totalData, dataPerPage, pageCount, currentPage);
         
         $('.accordion ul li').click(function () {
-        	
-        	  $.ajax({
-		        	url: '/bit_project/qnaemailchk.pr',
-		            type: 'POST',
-		            dataType: 'json',
-		            data:{"email" : $(this).children().first().children().last().children(":eq(1)").val()},
-		            async : false,
-		            success: function (data) {             
-		            	searchemail=data;
-		            	console.log(searchemail);
-		            },
-			        error: function () {
-					}
-		        });
-        	//alert($(this).children().first().children().last().children().first().text());
-        	if($(this).children().first().children(":eq(2)").val()=="공개"){
-        		if ($(this).children().last().css("display") == 'none') {
-                		$(this).children().last().show();
-                } else {
-                    $(this).children().last().hide();
-                }
-        	}else {
-        		if ($(this).children().last().css("display") == 'none') {
-        			//nick으로 email 조회해서 email=sessionChk이면
-                	//공개면 상관없고 공개가 아닐 때 0204 추후 수정
-        			
-                	/*if(nick==$(this).children().first().children().last().children().first().text()){
-                		$(this).children().last().show();
-                	}else {
-                		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
-                	}*/
-        			if((sessionChk!="" && sessionChk==searchemail) || usergroup=='admin'){
+        	if($(this).text()=="등록된 상품문의가 없습니다."){
+        		
+        	} else {
+        		  $.ajax({
+  		        	url: '/bit_project/qnaemailchk.pr',
+  		            type: 'POST',
+  		            dataType: 'json',
+  		            data:{"email" : $(this).children().first().children().last().children(":eq(1)").val()},
+  		            async : false,
+  		            success: function (data) {             
+  		            	searchemail=data;
+  		            	console.log(searchemail);
+  		            },
+  			        error: function () {
+  					}
+  		        });
+          	//alert($(this).children().first().children().last().children().first().text());
+          	if($(this).children().first().children(":eq(2)").val()=="공개"){
+          		if ($(this).children().last().css("display") == 'none') {
+                  		$(this).children().last().show();
+                  } else {
+                      $(this).children().last().hide();
+                  }
+          	}else {
+          		if ($(this).children().last().css("display") == 'none') {
+          			//nick으로 email 조회해서 email=sessionChk이면
+                  	//공개면 상관없고 공개가 아닐 때 0204 추후 수정
+          			
+                  	/*if(nick==$(this).children().first().children().last().children().first().text()){
                   		$(this).children().last().show();
                   	}else {
                   		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
-                  	}
-                    
-                } else {
-                    $(this).children().last().hide();
-                }
-        		
+                  	}*/
+          			if((sessionChk!="" && sessionChk==searchemail) || usergroup=='admin'){
+                    		$(this).children().last().show();
+                    	}else {
+                    		alert('해당 글은 비공개 글로 작성자와 관리자만 확인할 수 있습니다.');
+                    	}
+                      
+                  } else {
+                      $(this).children().last().hide();
+                  }
+          		
+          	}
+          	
+          	//console.log($(this).children().first().children(":eq(2)").val());
         	}
-        	
-        	//console.log($(this).children().first().children(":eq(2)").val());
-            
 
         });
     });
@@ -127,13 +129,14 @@
                        	 exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
                          exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";
                          exText += "</p>";
-                       }else {
+                       }else{
                     	   exText += '<a href="javascript:void(0)"'+' onclick="qnamodify('+item.question_num+','+sib1+','+sib2+','+sib3+','+sib4+','+sib5+');">수정</a>';
                     	   if(usergroup=='admin'){
                     		   exText += "<a href='javascript:void(0)'"+" onclick='qnadelete("+item.question_num+");'>삭제</a>";   
                     	   }
                     	   exText += "</p>";
                     	   //답변완료 시.
+                    	   
                     	   $.ajax({
            		        	url: '/bit_project/qna2.pr',
            		            type: 'POST',
@@ -154,10 +157,8 @@
            			        error: function () {
            					}
                     	   });
-                    	   
-                    	  
-                          
                        }
+    
                    	} 
                    
                     exText += "</div></li>";
@@ -171,6 +172,8 @@
                 	 exTextnull += "<div>등록된 상품문의가 없습니다.</div>";
                 	 exTextnull += "</li>";
                      $(".accordion ul").append(exTextnull);
+                     $('.accordion').css('margin-top', '0px');
+                     $('.accordion ul li').css('border-bottom', 'none');
                 }
                 
             },//suc

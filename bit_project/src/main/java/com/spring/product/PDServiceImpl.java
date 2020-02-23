@@ -101,12 +101,12 @@ public class PDServiceImpl implements PDService {
 		}
 	}
 	@Override
-	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3) throws Exception {
+	public List<ProductVO> filterScroll(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3, String special) throws Exception {
 		try {
 			System.out.println(cateMap1.size()+"\t"+cateMap2.size()+"\t"+cateMap3.size());
 			List<ProductVO> list = null;
 			PDMapper pdMapper = sqlSession.getMapper(PDMapper.class);
-			list = pdMapper.filterScroll(pno, cateMap1, cateMap2, cateMap3);
+			list = pdMapper.filterScroll(pno, cateMap1, cateMap2, cateMap3, special);
 			return list;
 		} catch (Exception e) {
 			throw new Exception("필터설정 후 스크롤 실패.", e);

@@ -18,7 +18,7 @@ public interface PDService {
 		// 필터값이 null인 상태에서 스크롤 시 추가 데이터 8개 출력
 		public List<ProductVO> scrollSearch(@Param("pno") int pno) throws Exception;	
 		// 필터설정 후 조회하거나, 필터설정 후 스크롤 내릴 경우.
-		public List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3) throws Exception;
+		public List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3, @Param("special") String special) throws Exception;
 		//public List<ProductVO> filterSearch(@Param("category_l") String category_l, @Param("category_m") String category_m, @Param("category_s") String category_s) throws Exception;
 		//public List<ProductVO> selectList(int pno, HashMap<String, String> cateMap1, HashMap<String, String> cateMap2, HashMap<String, String> cateMap3) throws Exception;
 		// 수량 체크
