@@ -68,8 +68,8 @@ function connect() {
 	};
 };
 
-function addMsg(msg) { //원래 채팅 메시지에 방금 받은 메시지 더해서 설정하기 
-	var receiveText = '<li class="incoming-message message"><img src="lulu.jpg" class="m-avatar message__avatar" /><div class="message__content"><span class="message__bubble">'+ msg +'</span><span class="message__author">'+'${target}'+'</span></div></li>';
+function addMsg(msg) { //원래 채팅 메시지에 방금 받은 메시지 더해서 설정하기
+	var receiveText = '<li class="incoming-message message"><img src="${img}" class="m-avatar message__avatar" /><div class="message__content"><span class="message__bubble">'+ msg +'</span><span class="message__author">'+'${target}'+'</span></div></li>';
 	$('.chat__messages').append(receiveText);
 	$(".chat-screen").scrollTop($(".chat-screen")[0].scrollHeight);
 };
@@ -146,7 +146,6 @@ $(function() {
  					String state = list.getState();
  					if(state.equals("1")) {
  		%>
- 		
  			<li class="incoming-message message">
           <img src="${img}" class="m-avatar message__avatar" />
           <div class="message__content">

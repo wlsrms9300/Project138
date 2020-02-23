@@ -281,49 +281,49 @@
 					 <!-- 모달-->
 		 
 	     <div class="modal" id="member-dtmodal">
-	         <div class="modal-content2">  
+	         <div class="modal-content2" style="height:600px;">  
 	             <span class="close-button" id="mclose-button1">&times;</span>
 	             <h1 class="title">어린이집 정보</h1>
 	            <table style="text-align: center; margin: 0 auto;">
 	            <tr style="width: 80%;">
 	            	 <th>이메일 :</th>
-	                 <th><input type=text name="email" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="email" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>사용자 등급 :</th>
-	                 <th><input type=text name="usergroup" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="usergroup" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>이름 :</th>
-	                 <th><input type=text name="name" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="name" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>닉네임 :</th>
-	                 <th><input type=text name="nickname" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="nickname" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>연락처 :</th>
-	                 <th><input type=text name="phone" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="phone" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>가입날자 :</th>
-	                 <th><input type=text name="regist" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="regist" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>주소 :</th>
-	                 <th><input type=text name="address" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="address" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>상세주소 :</th>
-	                 <th><input type=text name="address_detail" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="address_detail" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>포인트 :</th>
-	                 <th><input type=text name="point" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="point" readonly></th>
 	            </tr>
 	       		<tr>
 	            	 <th>구독여부 :</th>
-	                 <th><input type=text name="subscribe" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="subscribe" readonly></th>
 	            </tr>
 	            <!-- <tr>
 	            	 <th>구독 등급 :</th>

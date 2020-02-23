@@ -14,4 +14,5 @@ public interface ChatService {
 	public String getImg(String sender) throws Exception;
 	public void deleteMessage(int room_num) throws Exception;
 	public int ckRoom(String sender) throws Exception;
+	public ArrayList<String> getAdmin() throws Exception;
 }

@@ -132,4 +132,15 @@ public class ChatServiceImpl implements ChatService {
 			throw new Exception("채팅방 체크 실패(유저)", e);
 		}
 	}
+	
+	@Override
+	public ArrayList<String> getAdmin() throws Exception {
+		try {
+			ChatMapper chatmapper = sqlSession.getMapper(ChatMapper.class);
+			ArrayList<String> nickname = chatmapper.getAdmin();
+			return nickname;
+		} catch (Exception e) {
+			throw new Exception("관리자 목록조회 실패", e);
+		}
+	}
 }

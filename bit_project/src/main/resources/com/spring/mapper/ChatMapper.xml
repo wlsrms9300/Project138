@@ -43,7 +43,7 @@
    
    <!-- 채팅방 메시지 불러오기 (관리자) -->
    <select id="getMessage" parameterType="int" resultMap="MessageMap">
-   		SELECT * FROM CHATMESSAGE WHERE ROOM_NUM=#{room_num}
+   		SELECT * FROM CHATMESSAGE WHERE ROOM_NUM=#{room_num} ORDER BY MESSAGE_NUM ASC
    </select>
    
    <!-- 채팅방 만들기 (일반사용자) -->
@@ -87,6 +87,11 @@
    <!-- 방체크 -->
    <select id="ckRoom" parameterType="String" resultType="int">
     	SELECT COUNT(*) FROM CHATROOM WHERE SENDER=#{key}
+   </select>
+   
+   <!-- 관리자 닉네임 불러오기 -->
+   <select id="getAdmin" resultType="String">
+   		SELECT NICKNAME FROM ADMIN
    </select>
    
 </mapper>

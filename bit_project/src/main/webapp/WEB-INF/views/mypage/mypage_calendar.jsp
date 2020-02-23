@@ -256,16 +256,17 @@ $(document).ready(function(){
         	<p id="true"><%=pstate_cal.getReturn_application() %></p>
         <%
         	} 
-        	if(!(pstate_cal.getState().equals("반납확정"))) {
         %>
             </div>
+        <%
+        	if(!(pstate_cal.getState().equals("반납확정"))) {
+        %>
             <div class="return-false">
             	<p id="false">반납취소</p>
             </div>
         <%
  			} else { 
         %>
-        	</div>
             <div class="return-false">
             	<p id="false">반납확정</p>
             </div>

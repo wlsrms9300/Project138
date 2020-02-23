@@ -153,11 +153,11 @@
 		                      
 		                      var date = new Date(item.accept_date);
   	                     	date = date_to_str(date, item.term);
-		  			        
+		  			        var date2 = "'" + date + "'";
   	                     	output += '<td>' + '<input type="hidden" value='+ date +'><span>'+ date +'</span></td>';
 		   	                
 		   	               
-		                      output += '<td><button type="button" class="btn btn-sm cpndetail" onclick="detail1('+item.license_num+', '+name+','+phone+','+email+','+homepage+','+phone+','+item.postal_num+','+address+','+address_detail+','+term+', '+accept_date+');">정보</button>&nbsp;<button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
+		                      output += '<td><button type="button" class="btn btn-sm cpndetail" onclick="detail1('+license_num+', '+name+','+phone+','+email+','+homepage+','+item.postal_num+','+address+','+address_detail+','+term+', '+date2+');">정보</button>&nbsp;<button type="button" class="btn btn-sm cpsave" style="display:none;">저장<button type="button" class="btn btn-sm btnmodify">수정</button>&nbsp;<button type="button" class="btn btn-sm btnDel1"onclick="del1(' + name + ');">삭제</button></td>';
 		                      
 		                      output += '</tr>';
 		               
@@ -327,49 +327,49 @@
 		 <!-- 어린이집 가입신청 모달-->
 		 
 	     <div class="modal" id="company-dtmodal">
-	         <div class="modal-content">  
+	         <div class="modal-content" style="top:35%; height:600px;">  
 	             <span class="close-button" id="pclose-button1">&times;</span>
 	             <h1 class="title">어린이집 정보</h1>
 	            <table style="text-align: center; margin: 0 auto;">
 	             <tr style="width: 80%;">
 	            	 <th>사업자 등록번호 :</th>
-	                 <th><input type=text name="license_num" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="license_num" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>어린이집 이름 :</th>
-	                 <th><input type=text name="name" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="name" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>연락처 :</th>
-	                 <th><input type=text name="phone" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="phone" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>이메일 :</th>
-	                 <th><input type=text name="email" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="email" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>홈페이지 :</th>
-	                 <th><input type=text name="homepage" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="homepage" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>우편번호 :</th>
-	                 <th><input type=text name="postal_num" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="postal_num" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>주소 :</th>
-	                 <th><input type=text name="address" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;"name="address" readonly></th>
 	            </tr>
 	            <tr>
 	            	 <th>상세주소 :</th>
-	                 <th><input type=text name="address_detail" readonly></th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="address_detail" readonly></th>
 	            </tr>
 	            <tr>
-	            	 <th>계약기간 :</th>
-	                 <th><input type=text name="term" readonly></th>
+	            	 <th>계약개월 :</th>
+	                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="term" readonly></th>
 	            </tr>
 	            <tr>
-            	 <th>계약 시작 날자 :</th>
-                 <th><input type=text name="accept_date" readonly></th>
+            	 <th>계약기간 :</th>
+                 <th><input type=text style="border-radius:5px; height:35px; width:250px;" name="date2" readonly></th>
             </tr>
 	       		
 				</table>
@@ -377,7 +377,7 @@
 	         </div> 
 	     </div>
 	   	<script>
-	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_accept_date){
+	 	function detail1(param_license_num, _name, param_phone, param_email, param_homepage, param_postal_num, param_address, param_address_detail, param_term, param_date2){
 	 		$('input[name=license_num]').val(param_license_num);
 	 		$('input[name=name]').val(_name);
 	 		$('input[name=phone]').val(param_phone);
@@ -387,7 +387,7 @@
 	 		$('input[name=address]').val(param_address);
 	 		$('input[name=address_detail]').val(param_address_detail);
 	 		$('input[name=term]').val(param_term);
-	 		$('input[name=accept_date]').val(param_accept_date);
+	 		$('input[name=date2]').val(param_date2);
 	 		
 	 		var Mmodal = document.querySelector("#company-dtmodal");
 	        var Mtrigger = document.querySelector(".cpndetail");
@@ -412,32 +412,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/admin/bootstrap-datepicker.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/custom.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/admin/kindergarten.js"></script>
-	<script>
-		window.onload = function () {
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-	responsive: true,
-	scaleLineColor: "rgba(0,0,0,.2)",
-	scaleGridLineColor: "rgba(0,0,0,.05)",
-	scaleFontColor: "#c5c7cc"
-	});
-	var chart2 = document.getElementById("doughnut-chart1").getContext("2d");
-	window.myDoughnut = new Chart(chart2).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-	var chart3 = document.getElementById("doughnut-chart2").getContext("2d");
-	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-	var chart4 = document.getElementById("doughnut-chart3").getContext("2d");
-	window.myDoughnut = new Chart(chart4).Doughnut(doughnutData, {
-	responsive: true,
-	segmentShowStroke: false
-	});
-};
-	</script>
+	
 		
 </body>
 </html>

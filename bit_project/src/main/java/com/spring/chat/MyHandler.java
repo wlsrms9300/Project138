@@ -67,17 +67,28 @@ public class MyHandler extends TextWebSocketHandler {
 			int room_num = Integer.parseInt(object.getString("room_num"));
 			messagevo.setContent(msg);
 			messagevo.setRoom_num(room_num);
+			messagevo.setState("0");
 			
 			//타겟이 관리자중 한명인지 체크 -- 관리자면 state값 0 아니면 state값 1
-			if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) {
-				messagevo.setState("1");
-			} else {
-				messagevo.setState("0");
-			}			
+			ArrayList<String> anickname = chatservice.getAdmin(); //관리자 닉네임 불러오기
+			for(int i = 0; i < anickname.size(); i++) {
+				String anick = anickname.get(i);
+				if(target.equals(anick)) {
+					messagevo.setState("1");
+				}
+			}
+			
+			/* 관리자 체크수정
+			 * if(target.equals(anickname.get(0)) || target.equals("관리자2") ||
+			 * target.equals("관리자3")) { messagevo.setState("1"); } else {
+			 * messagevo.setState("0"); }
+			 */	
 			
 			//DB에 메시지 내용 저장
+			
+			
 			try {
-				if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) { 
+				if(target.equals(anickname.get(0)) || target.equals(anickname.get(1)) || target.equals(anickname.get(2))) { 
 					result = chatservice.insertContent(messagevo);
 				} else {
 					if(ws == null) {
@@ -87,8 +98,8 @@ public class MyHandler extends TextWebSocketHandler {
 						result = chatservice.insertContent(messagevo);
 					}
 				}
+			
 				
-			//전송!!!
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -17,4 +17,5 @@ public interface ChatMapper {
 	String getImg(String sender);
 	void deleteMessage(int room_num);
 	int ckRoom(String sender);
+	ArrayList<String> getAdmin();
 }

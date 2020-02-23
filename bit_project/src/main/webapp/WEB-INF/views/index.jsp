@@ -100,7 +100,7 @@ if('<%=usergroup%>'== 'admin') {
           <a href="chatstart.ct?nickname=<%=list.getNickname() %>&sender=<%=sender %>">
             <div class="chats__chat friend friend--lg">
               <div class="friend__column">
-                <img src="/bit_project/image/<%=list.getImg() %>" class="m-avatar friend__avatar" />
+                <img src="<%=list.getImg() %>" class="m-avatar friend__avatar" />
                 <div class="friend__content">
                   <span class="friend__name">
                     <%=list.getNickname() %>

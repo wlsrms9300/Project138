@@ -12,7 +12,9 @@
 	href="${pageContext.request.contextPath}/resources/css/about.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/aos.css">
+	<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 <title>about</title>
+
 </head>
 
 <script>
