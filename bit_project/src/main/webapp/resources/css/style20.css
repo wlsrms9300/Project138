@@ -30,6 +30,15 @@ img { min-width: 50% !important; max-width: 50% !important; min-height: 50% !imp
     color: #000;
     font-family: 'S-CoreDream-4Regular';
 }
+
+
+.jeon2, .jeon3{
+	background-color: #30a5ff;
+	border-color: #30a5ff; 
+}  
+.jeon2, .jeon3{
+	color: #fff;
+}
 #rumi:hover {
 	filter:grayscale(60%);
 	transition:filter 0.5s;

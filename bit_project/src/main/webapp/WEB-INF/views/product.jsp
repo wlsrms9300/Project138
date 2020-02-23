@@ -385,8 +385,7 @@
 		</div>
 	</section> 
 	<!-- //product -->
-	<button onclick="location.href='productForm.pr'">상품등록하기</button>
-	<button onclick="location.href='main.pr'">메인</button>
+	<button type="button" class="btn btn-sm jeon1"  style="float:right; font-size: x-large;" onclick="location.href='productForm.pr'">상품등록하기 </button>
 		<footer>
 			<%@ include file="/WEB-INF/views/footer.jsp"%>
 		</footer>

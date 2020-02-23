@@ -534,19 +534,17 @@
     <hr style="border: 1px solid #c6c6c6;">
         <div class="pr_title" id="cursor_move_delivery">배송/반납</div>
         <div class="baesong">
-            1. 정기 구독에 의한 배송은 매 월 넷 째주 목요일에 발송됩니다. <br>
-            2. 단순 고객 변심으로 인한 반납의 경우 신청한 주의 일요일에 반납 확정, 다음날인 월요일에 택배기사가 물건 회수를 하며 타 제품 쉐어/예약 요청 시 반납한 주 목요일에
-            발송됩니다.<br>
-            3. 앵간하면 그냥 쓰세요.<br>
+  	        1.  배송은 매달 넷째주 목요일에 일괄 배송됩니다.  <br>
+  	        2.  교환 또는 반납을 원하실때에는 메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다. <br>
+          	3.  고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.<br>
         </div>
-
     </div>
     <div class="container">
-        <input type="button" value="상품 수정" onclick="prModify();" />
-        <input type="button" value="상품 삭제" onclick="prDelete();" />
+        <input type="button" class="btn btn-sm jeon2" style="float:right; font-size: x-large;"value="상품 수정" onclick="prModify();" />
+        <input type="button" class="btn btn-sm jeon3" style="float:right; font-size: x-large;"value="상품 삭제" onclick="prDelete();" />
     </div>
 
-    <!-- 배송/반납  -->
+    <!-- 배송/반납  --> 
 
 
 
