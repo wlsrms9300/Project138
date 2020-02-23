@@ -71,6 +71,18 @@ function connect() {
 	ws.onclose = function() {
 		console.log('연결 끊김');
 	};
+
+	ws.onmessage = function(e) {
+		console.log('메시지 받음');
+		var data = e.data;
+		addMsg(data);
+	};
+};
+
+function addMsg(msg) { //받은 메시지 미리보기
+	$('.friend__bottom-text').text("");
+	$('.newcheck').css("background-color", "rgb(255,100,100,0.92)");
+	$('.friend__bottom-text').text(msg);
 };
 
 if('<%=usergroup%>'== 'admin') {
@@ -132,8 +144,9 @@ if('<%=usergroup%>'== 'admin') {
                   <span class="friend__name">
                     <%=mlist.getSender() %>
                   </span>
+                  <div class="newcheck" style="width:7px; height:7px; border-radius:50%; background-color:rgb(31,177,31,0.79); margin-top:3px; display:inline-block;" ></div>
                   <span class="friend__bottom-text">
-                 
+               			답변완료
                   </span>
                 </div>
               </div>
