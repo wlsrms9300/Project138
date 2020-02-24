@@ -340,15 +340,15 @@ function delchk(board_num) {
 	                		output += '<img src="' + item.profile + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_container">';
-	                		output += '<div class="community_comments_view_comments">';
+	                		output += '<div class="community_comments_view_comments">'; 
 	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + '">';
 	                		output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
 	                		output += '<input type="hidden" id="email" value="' + item.email + '">';
 	                		output += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_actions">';
-	                		output += '<span class="community_comments_view_time">' + date + '</span>';
-	                		output += '<div class="community_comments_view_add">';
+	                		output += '<span class="community_comments_view_time" style="margin-top:3px; margin-right:10px;">' + date + '</span>';
+	                		output += '<div class="community_comments_view_add">'; 
 	                		output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;"class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
 	                		
 	                		if(item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능

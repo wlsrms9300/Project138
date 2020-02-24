@@ -71,7 +71,7 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
 				if(sessionChk==item.email){
 					//exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
 	                //exText += "<div>";
-					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;'&nbsp;&nbsp;&nbsp;&nbsp;'
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
 					exText += "<button type='button' style='border: 1px solid; margin-left:20px; color: #fff; border-radius: 5px; background-color: #ffb0b1; width: 55px; text-align: end;height: 25px; font-size: 13px;' onclick='reviewmodify("+item.review_num+","+sib2+","+sib3+","+sib4+","+sib5+","+sib6+");'>수정</a>";
 
 					if(item.point_details==1){
