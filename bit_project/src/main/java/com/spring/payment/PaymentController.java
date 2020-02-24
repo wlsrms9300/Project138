@@ -53,7 +53,7 @@ public class PaymentController {
 		try {
 			String state = "예약대기";
 			data = paymentService.allSubscribe(state);
-			System.out.println("관리자 페이지 예약대기 불러오기");
+			/* System.out.println("관리자 페이지 예약대기 불러오기"); */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -68,7 +68,7 @@ public class PaymentController {
 		try {
 			String state = "예약완료";
 			data = paymentService.allSubscribe(state);
-			System.out.println("관리자 페이지 예약완료 불러오기");
+			/* System.out.println("관리자 페이지 예약완료 불러오기"); */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -83,7 +83,7 @@ public class PaymentController {
 			try {
 				String state = "결제완료";
 				data = paymentService.allSubscribe(state);
-				System.out.println("관리자 페이지 결제완료 불러오기");
+			/* System.out.println("관리자 페이지 결제완료 불러오기"); */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	

@@ -154,7 +154,7 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> partneradd(PartnerVO partnerVO) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("컨트롤러 진입.");
+		/*System.out.println("컨트롤러 진입.");*/
 
 		try { 
 			partnerVO.setAccept_date(new Timestamp(System.currentTimeMillis()));
@@ -178,7 +178,7 @@ public class AdminController {
 	@PostMapping(value = "/cpdelete.se", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 		  	public Map<String, Object> cpdelete(String name) throws Exception {
-			System.out.println("컨트롤러 내부 파라미터 name"+name);
+			/*System.out.println("컨트롤러 내부 파라미터 name"+name);*/
 		  		//adminService.ptdelete(partnerVO);
 		  		Map<String, Object> result = new HashMap<String, Object>();
 		  		try {
@@ -197,7 +197,7 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> companyadd(CompanyVO cpVO) {
 		Map<String, Object> retVal = new HashMap<String, Object>();
-		System.out.println("컨트롤러 진입.");
+		/*System.out.println("컨트롤러 진입.");*/
 
 		try {
 			cpVO.setAccept_date(new Timestamp(System.currentTimeMillis()));
@@ -222,11 +222,11 @@ public class AdminController {
 	
 	public Map<String, Object> ptsave(PartnerVO partnerVO) {
 		Map<String, Object> save = new HashMap<String, Object>();
-		System.out.println("컨트롤러 진입.");
+		/*System.out.println("컨트롤러 진입.");*/
 		
 		try {
 			int res = adminService.ptsave(partnerVO);
-			System.out.println(res);
+			/*System.out.println(res);*/
 			if (res >= 1 ) {
 				save.put("res", "OK"); // 맵객체 "res"는 키 , "OK" 값
 			} else if (res <= 0) {
@@ -250,7 +250,7 @@ public class AdminController {
 		
 		try {
 			int res = adminService.cpsave(cpVO);
-			System.out.println(res);
+			/*System.out.println(res);*/
 			if (res >= 1 ) {
 				save.put("res", "OK"); // 맵객체 "res"는 키 , "OK" 값
 			} else if (res <= 0) {

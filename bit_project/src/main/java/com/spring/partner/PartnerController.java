@@ -53,7 +53,7 @@ public class PartnerController {
 			ptVO.setTerm(request.getParameter("term"));
 			
 
-			System.out.println(request.getParameter("postal_num"));		
+			/* System.out.println(request.getParameter("postal_num")); */
 			
 			
 			MultipartFile ptmf = request.getFile("img"); // 파일
@@ -71,11 +71,11 @@ public class PartnerController {
 			int result =service.ptcheckLicenseExist(ptVO);
 			
 			if(result == 1) {
-				System.out.println("가입실패");
+				/* System.out.println("가입실패"); */
 				writer.write("<script>alert('사업자 번호를 확인해주세요.'); location.href='partner.ms';</script>");
 				
 			}else{
-				System.out.println("가입성공");
+				/* System.out.println("가입성공"); */
 				writer.write("<script>alert('가입성공.'); location.href='partner.ms';</script>");
 				service.ptAdd(ptVO);
 			}

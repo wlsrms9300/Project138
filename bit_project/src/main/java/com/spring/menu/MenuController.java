@@ -65,11 +65,11 @@ public class MenuController {
 			int result =service.checkLicenseExist(cpVO);
 			
 			if(result == 1) {
-				System.out.println("가입실패");
+				/*System.out.println("가입실패");*/
 				writer.write("<script>alert('사업자 번호를 확인해주세요.'); location.href='kindergarten.ms';</script>");
 				
 			}else{
-				System.out.println("가입성공");
+				/*System.out.println("가입성공");*/
 				writer.write("<script>alert('가입성공.'); location.href='kindergarten.ms';</script>");
 				service.cpAdd(cpVO);
 			}

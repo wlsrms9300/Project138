@@ -37,15 +37,17 @@ public class MyHandler extends TextWebSocketHandler {
 	@Override
 	//소켓 연결 생성 후 실행 메서드
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("TextWebSocketHandler : 연결 생성! ");
+		/* System.out.println("TextWebSocketHandler : 연결 생성! "); */
 		users.add(session);
 	}
 	
 	@Override
 	//메시지 수신 후 실행 메서드
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("TextWebSocketHandler : 메시지 수신! ");
-		System.out.println("메시지 : " + message.getPayload());
+		/*
+		 * System.out.println("TextWebSocketHandler : 메시지 수신! ");
+		 * System.out.println("메시지 : " + message.getPayload());
+		 */
 		JSONObject object = new JSONObject(message.getPayload());
 		String type = object.getString("type");
 		MessageVO messagevo = new MessageVO();
@@ -88,12 +90,11 @@ public class MyHandler extends TextWebSocketHandler {
 			
 			
 			try {
-				if(target.equals(anickname.get(0)) || target.equals(anickname.get(1)) || target.equals(anickname.get(2))) { 
+				if(target.equals(anickname.get(0)) || target.equals(anickname.get(1)) || target.equals(anickname.get(2)) || target.equals(anickname.get(3))) { 
 					result = chatservice.insertContent(messagevo);
 				} else {
 					if(ws == null) {
-						System.out.println("채팅상대가 나갔습니다");
-						
+						/* System.out.println("채팅상대가 나갔습니다"); */		
 					} else {
 						result = chatservice.insertContent(messagevo);
 					}
@@ -107,9 +108,9 @@ public class MyHandler extends TextWebSocketHandler {
 				ws.sendMessage(new TextMessage(msg));
 			} else {
 				if(target.equals("관리자1") || target.equals("관리자2") || target.equals("관리자3")) {
-					System.out.println("관리자가 없다");
+					/* System.out.println("관리자가 없다"); */
 				} else {
-					System.out.println("채팅방 없음");
+					/* System.out.println("채팅방 없음"); */
 				}
 				
 			}
@@ -121,12 +122,13 @@ public class MyHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		Set set = userMap.keySet();
 		Iterator iterator = set.iterator();
+		String imp = null;
 		String key = null;
 		//DB에서 채팅방 삭제후 연결 종료
 		while(iterator.hasNext()) {
 			key = (String)iterator.next();
-			if(session == userMap.get(key)) {
-				userMap.remove(key);
+			if(session == userMap.get(key)) {			
+				imp = key;
 				int count = chatservice.ckRoom(key);
 				if(count != 0) {
 					int room_num = chatservice.getNum(key); //방번호 조회
@@ -136,8 +138,7 @@ public class MyHandler extends TextWebSocketHandler {
 				}
 			} 
 		}
-		
-		System.out.println("TextWebSocketHandler : 연결 종료! ");
+		userMap.remove(imp);		
 		users.remove(session);
 	}
 	

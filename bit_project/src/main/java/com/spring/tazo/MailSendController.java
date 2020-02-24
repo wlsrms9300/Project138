@@ -22,7 +22,7 @@ public class MailSendController {
 	@RequestMapping(value = "/contactus_mailsend.ms")
 	public String mailsend_contactus(Model model) {
 
-		System.out.println("contactus_mailsend.jsp 로 보냄");
+		/* System.out.println("contactus_mailsend.jsp 로 보냄"); */
 
 		return "contactus_mailsend";
 	}
@@ -30,7 +30,7 @@ public class MailSendController {
 	@RequestMapping(value = "/contactus.ms")
 	public String contactus(Model model) {
 
-		System.out.println("contactus.jsp 로 보냄");
+		/* System.out.println("contactus.jsp 로 보냄"); */
 
 		return "contactus";
 	}
@@ -38,7 +38,7 @@ public class MailSendController {
 	@RequestMapping(value = "/sellanddonation_mailsend.ms")
 	public String mailsend_sellanddonation(Model model) {
 
-		System.out.println("sellanddonation_mailsend.jsp 로 보냄");
+		/* System.out.println("sellanddonation_mailsend.jsp 로 보냄"); */
 
 		return "sellanddonation_mailsend";
 	}
@@ -46,7 +46,7 @@ public class MailSendController {
 	@RequestMapping(value = "/sellanddonation.ms")
 	public String sellanddonation(Model model) {
 
-		System.out.println("sellanddonation.jsp 로 보냄");
+		/* System.out.println("sellanddonation.jsp 로 보냄"); */
 
 		return "sellanddonation";
 	}
@@ -54,7 +54,7 @@ public class MailSendController {
 	@RequestMapping(value = "/share_mailsend.ms")
 	public String mailsend_share(Model model) {
 
-		System.out.println("share_mailsend.jsp 로 보냄");
+		/* System.out.println("share_mailsend.jsp 로 보냄"); */
 
 		return "share_mailsend";
 	}
@@ -62,7 +62,7 @@ public class MailSendController {
 	@RequestMapping(value = "/share.ms")
 	public String share(Model model) {
 
-		System.out.println("share.jsp 로 보냄");
+		/* System.out.println("share.jsp 로 보냄"); */
 
 		return "share";
 	}
@@ -98,7 +98,7 @@ public class MailSendController {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf1.transferTo(new File(uploadPath + storedFileName));
 					}
-					System.out.println("mf1 :"+storedFileName);
+				/* System.out.println("mf1 :"+storedFileName); */
 				}
 				if (req.getFile("share_img2").getSize() != 0) {
 					MultipartFile mf2 = req.getFile("share_img2"); // 파일
@@ -109,7 +109,7 @@ public class MailSendController {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf2.transferTo(new File(uploadPath + storedFileName));
 					}
-					System.out.println("mf2 :"+storedFileName);
+				/* System.out.println("mf2 :"+storedFileName); */
 				}
 				if (req.getFile("share_img3").getSize() != 0) {
 					MultipartFile mf3 = req.getFile("share_img3"); // 파일
@@ -120,7 +120,7 @@ public class MailSendController {
 						// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
 						mf3.transferTo(new File(uploadPath + storedFileName));
 					}
-					System.out.println("mf3 :"+storedFileName);
+				/* System.out.println("mf3 :"+storedFileName); */
 				}
 			
 

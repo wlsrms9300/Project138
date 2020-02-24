@@ -64,16 +64,16 @@ function connect() {
 	ws = new WebSocket('ws://localhost:8080/bit_project/chat');
 	
 	ws.onopen = function() {
-		console.log('연결 생성');
+		/* console.log('연결 생성'); */
 		register();
 	};
 	
 	ws.onclose = function() {
-		console.log('연결 끊김');
+		/* console.log('연결 끊김'); */
 	};
 
 	ws.onmessage = function(e) {
-		console.log('메시지 받음');
+		/* console.log('메시지 받음'); */
 		var data = e.data;
 		addMsg(data);
 	};
@@ -146,7 +146,7 @@ if('<%=usergroup%>'== 'admin') {
                   </span>
                   <div class="newcheck" style="width:7px; height:7px; border-radius:50%; background-color:rgb(31,177,31,0.79); margin-top:3px; display:inline-block;" ></div>
                   <span class="friend__bottom-text">
-               			답변완료
+               			
                   </span>
                 </div>
               </div>

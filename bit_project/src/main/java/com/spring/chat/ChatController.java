@@ -37,7 +37,7 @@ public class ChatController {
 						roomlist = chatservice.getRoom(userDetail.getNickname());
 						model.addAttribute("roomlist", roomlist);
 					} else {
-						System.out.println("생성된 방이 없습니다");
+							/* System.out.println("생성된 방이 없습니다"); */
 					}
 				}
 				}
@@ -55,7 +55,7 @@ public class ChatController {
 	@RequestMapping(value = "/chatstart.ct", method = { RequestMethod.GET , RequestMethod.POST })
 	public String chatstart(Model model, HttpServletRequest request) throws Exception {
 		MessageVO messagevo = new MessageVO();
-		System.out.println(request.getParameter("nickname"));
+		
 		String usergroup = null; //관리자인지 확인
 		int room_num;
 		int result;
@@ -68,7 +68,7 @@ public class ChatController {
 			if(!(request.getParameter("sender").equals("비회원"))) {
 				img = chatservice.getImg(request.getParameter("sender"));
 			} else {
-				img = "${pageContext.request.contextPath}/resources/img/default_profile.png";
+				img = "/bit_project/image/0c57c52f289644ceb799d673566eed91.png";
 			}
 				messagevo.setReceiver(request.getParameter("nickname")); //메시지 받을 관리자 닉네임
 				messagevo.setSender(request.getParameter("sender")); //보내는 사람 닉네임
@@ -78,12 +78,12 @@ public class ChatController {
 				result = chatservice.createRoom(messagevo);
 				room_num = chatservice.getNum(request.getParameter("sender"));
 				model.addAttribute("room_num", room_num);
-				System.out.println(room_num);
+				/* System.out.println(room_num); */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("관리자입니다");
+			/* System.out.println("관리자입니다"); */
 			room_num = chatservice.getNum(request.getParameter("sender"));
 			img = chatservice.getImg(request.getParameter("sender"));
 			
