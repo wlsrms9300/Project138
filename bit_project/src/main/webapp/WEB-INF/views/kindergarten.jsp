@@ -42,7 +42,7 @@
 
 				<div class="h3">
 					<h3>장난감이 필요한 순간,</h3>
-					<h3>진근이네로 충분합니다.</h3>
+					<h3>ONEDER 충분합니다.</h3>
 				</div>
 
 				<div class="p">
@@ -92,7 +92,7 @@
                <input type="text" name="postal_num" id="mun" placeholder="우편번호" required="required"> 
                <input type="text" name="address" id="address" placeholder="주소" required="required">
                <input type="text" name="address_detail" id="address_detail" placeholder="상세주소" required="required">
-               
+                
                <div>
                <select name="term" id="contract-term">  
 				    <option value="">계약기간 선택</option>
@@ -120,7 +120,7 @@
 
 			<div id="contact">
 				<div class="h1">
-					<h1>진근이네와 함께할</h1>
+					<h1>ONEDER와 함께할</h1>
 					<h1>어린이집을 찾습니다.</h1>
 				</div>
 	

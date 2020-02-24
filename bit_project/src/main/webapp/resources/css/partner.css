@@ -39,15 +39,9 @@ body {
     height: 36px;
     font-size: 16px;
     background-color: #ffb0b1;
-    color:  rgb(235, 235, 235);
+    color:#fff; 
 }
-.btn-partner:hover{
-	 background-color: #ffffff;
-	 color: #ea7475;
-	 -webkit-transition: all 0.2s ease-in;
-  	transition: all 0.2s ease-in;
-	
-}
+
 .snip1273 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
