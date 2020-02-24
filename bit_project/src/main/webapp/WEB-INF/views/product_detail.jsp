@@ -259,6 +259,9 @@
                             <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
                             <%} %>
                         </span>
+                    <button type="button" class="btn btn-sm jeon2"  style="margin: 3px; float:right; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="prModify();">상품수정</button>
+      				<button type="button" class="btn btn-sm jeon3"  style="margin: 3px; float:right; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="prDelete();">상품삭제</button>
+         
                     </div>
                <!--      <div>제품특징</div>
                     <div>
@@ -539,11 +542,9 @@
           	3.  고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.<br>
         </div>
     </div>
-    <div class="container">
-        <input type="button" class="btn btn-sm jeon2" style="float:right; font-size: x-large;"value="상품 수정" onclick="prModify();" />
-        <input type="button" class="btn btn-sm jeon3" style="float:right; font-size: x-large;"value="상품 삭제" onclick="prDelete();" />
-    </div>
-
+   
+    
+ 
     <!-- 배송/반납  --> 
 
 

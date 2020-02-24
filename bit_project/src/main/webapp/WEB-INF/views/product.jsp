@@ -182,7 +182,9 @@
             <option value="no">상품번호</option>
          </select>
          <input type="text" name="searchword" id="searchword" class="form-control" />
-         <a href="javascript:fn_searchList()" class="searchbtn form-control">검색</a>
+         <a href="javascript:fn_searchList()" class="searchbtn form-control">검색</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               	<button type="button" class="btn btn-sm jeon1"  style="margin: 15px 5px 15px 5px; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="location.href='productForm.pr'">상품등록</button>
+         
       </div>
    </div>
    </div>
@@ -385,7 +387,6 @@
 		</div>
 	</section> 
 	<!-- //product -->
-	<button type="button" class="btn btn-sm jeon1"  style="float:right; font-size: x-large;" onclick="location.href='productForm.pr'">상품등록하기 </button>
 		<footer>
 			<%@ include file="/WEB-INF/views/footer.jsp"%>
 		</footer>
