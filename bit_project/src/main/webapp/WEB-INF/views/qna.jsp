@@ -398,7 +398,7 @@ $(document).ready(function() {
 
 		<div id="contents">
 
-			<h1>자주묻는 질문</h1>
+			<h1 style="font-size:30px;">자주묻는 질문</h1>
 
 			<div class="contents1">
 				<table>
