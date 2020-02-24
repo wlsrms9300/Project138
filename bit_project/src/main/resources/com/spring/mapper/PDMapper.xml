@@ -177,10 +177,10 @@
 			</foreach>
 		</if>
 		<if test="special=='신상품'">
-		order by regist desc
+		order by regist desc, product_num asc
 		</if>
 		<if test="special=='인기순'">
-		order by readcount desc
+		order by readcount desc, product_num asc
 		</if>
 		<if test="special=='평점순'">
 		order by gpa desc, product_num asc

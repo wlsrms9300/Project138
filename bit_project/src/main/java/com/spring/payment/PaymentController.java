@@ -345,7 +345,7 @@ public class PaymentController {
 	@RequestMapping(value = "/yong", produces = "application/json;charset=UTF-8")
 	   @ResponseBody
 	   public void callbbb(@RequestBody HashMap<String, String> map) {
-	      int newPnum = 0, amount = 0, reser_chk = 0;
+	      int newPnum = 0, amount = 0, reser_chk = 0, pnum = 0;
 	      boolean flag = true;
 	      System.out.println(map.get("status"));
 	      System.out.println(map.get("merchant_uid"));
@@ -408,6 +408,14 @@ public class PaymentController {
 	         ArrayList<Integer> getRandomList = new ArrayList<Integer>();
 	         getRandomList = null;
 	         getRandomList = paymentService.getWishPnum(data.getEmail());
+	         //getRandomList 이메일로 상품번호 가져옴.
+	         if(getRandomList.size()==0) {
+	        	 pnum = paymentService.adminSelectWish(data.getGrade());
+	        	 paymentService.adminInsertWish(pnum, data.getEmail());
+	        	 getRandomList = paymentService.getWishPnum(data.getEmail());
+	         }
+	         
+	         
 	         System.out.println(getRandomList.size());
 	         while (flag==false || getRandomList.size()!=0) {
 	            Collections.shuffle(getRandomList);
@@ -453,20 +461,14 @@ public class PaymentController {
 	               }
 	               int result = 0;
 	               result = paymentService.personalSharingCheck(newPnum);
+	               
+	               paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
 	               // result==1 개인쉐어
 	               if(result==1) {
-	            	   paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
 	            	   paymentService.personalSharingFund(newPnum);
-	            	   paymentService.updateProductAmount(newPnum);
-	            	   paymentService.deleteWish(newPnum, data.getEmail());
-	               }else {
-	            	   paymentService.insertProductState(data.getSubscribe_num(), newPnum, date);
-	            	   paymentService.updateProductAmount(newPnum);
-	            	   paymentService.deleteWish(newPnum, data.getEmail());
 	               }
-	               
-	               // 위시리스트 삭제할거면 여기서 newPnum 파라미터로 주고 삭제
-	               // 위시리스트 삭제 안할거면, state 속성 추가하고 여기서 state 변경.
+	               paymentService.updateProductAmount(newPnum);
+	               paymentService.deleteWish(newPnum, data.getEmail());
 	               getRandomList.remove(0);
 	               flag = false;
 	            

@@ -25,5 +25,7 @@ public interface SubscribePaymentService {
 	public void settleAccept(int settlement_num) throws Exception;
 	public int personalSharingCheck(int product_num) throws Exception;
 	public int personalSharingFund(int product_num) throws Exception;
+	public int adminSelectWish(String grade) throws Exception;
+	public void adminInsertWish(int product_num, String email) throws Exception;
 	
 }

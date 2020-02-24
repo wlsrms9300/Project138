@@ -48,6 +48,7 @@ public interface PaymentMapper {
 
 	int personalSharingCheck(@Param("product_num") int product_num);
 	int personalSharingFund(@Param("product_num") int product_num);
-
+	int adminSelectWish(@Param("grade") String grade);
+	void adminInsertWish(@Param("product_num") int product_num, @Param("email") String email);
 
 }

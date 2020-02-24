@@ -169,6 +169,30 @@ public class SubscribePaymentServiceImpl implements SubscribePaymentService{
 		}
 		return res;
 	}
+
+	@Override
+	public int adminSelectWish(String grade) throws Exception {
+		int res = 0;
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			res = subscribePaymentMapper.adminSelectWish(grade);
+		} catch (Exception e) {
+			throw new Exception("SubscribePaymentMapper adminSelectWish 실패", e);
+		}
+		return res;
+	}
+
+	@Override
+	public void adminInsertWish(int product_num, String email) throws Exception {
+		try {
+			SubscribePaymentMapper subscribePaymentMapper = sqlSession.getMapper(SubscribePaymentMapper.class);
+			subscribePaymentMapper.adminInsertWish(product_num, email);
+		} catch (Exception e) {
+			throw new Exception("위시리스트가 없는 경우 랜덤으로 wish 등록 실패", e);
+		}
+	}
+	
+	
 	
 	
 	
