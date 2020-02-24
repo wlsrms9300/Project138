@@ -65,21 +65,22 @@
 
 <!--     </div> -->
     <!--게시글 시작-->
-    <div id="community_container_mt_d">
+    <div id="community_container_mt_d" style="max-width:950px; margin:0 auto;">
         <div class="community_mt_title_d">
             <h1 class="detail_subject"><%=cmvo.getBoard_name() %></h1>
         </div>
-        <div class="community_mt_title">
+        <div class="community_mt_title" style="border-bottom:2px solid rgba(27,25,25,0.26); padding-bottom:10px;">
+        	
         	<img src="<%=img_e %>">
-        	<p style="margin-right: 750px;"><%=cmvo.getNickname() %></p>
+        	<p style="margin-left:10px; margin-right:10px; margin-top:5px; font-size:1.2rem;"><%=cmvo.getNickname() %></p>
         	
         	  <% if(email_co != null ) { %>
 	                <% if (email_e.equals(email_co)) { %>
 	                <div class="community_mt_footer_btn">
 	                	
 	                
-	                <button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:#ffb0b1; width:60px; height:30px; font-size:15px;" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">글수정</button>
-	           		<button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:black; width:60px; height:30px; font-size:15px;" onclick="delchk('<%=cmvo.getBoard_num() %>');">글삭제</button>
+	                <button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:#ffb0b1; width:60px; height:30px; font-size:15px; margin-top:5px;" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">글수정</button>
+	           		<button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:black; width:60px; height:30px; font-size:15px; margin-top:5px;" onclick="delchk('<%=cmvo.getBoard_num() %>');">글삭제</button>
 	                
 	                
 	                </div> 
@@ -91,7 +92,7 @@
                 <% } %>
                 
         </div>
-        <hr>
+       
         <div class="community_mt_mt">
             <%=cmvo.getContent() %>
         </div>
@@ -115,7 +116,7 @@
               
             </div>
         </footer>
-        <hr>
+       
     </div>
     <!-- 게시글  끝 -->
     
@@ -221,7 +222,7 @@ function delchk(board_num) {
 		
 		
 		//대댓 폼
-		$('.answer_btn').click(function () {
+		$('.answer_btn').click(function() {
 			var email_co = '<%=(String)session.getAttribute("email")%>';
 			var group1 = '<%=group%>';
 			console.log(group1);
@@ -236,9 +237,9 @@ function delchk(board_num) {
 					return false;
 				}else {
 	        		if ($(this).parents("li").next().css("display") == 'none') {
-	                		$(this).parents("li").next().show();
+	                		$(this).parents("li").slidDown();
 	                } else {
-	                    $(this).parents("li").next().hide();
+	                    $(this).parents("li").slideUp();
 	                }
 				}
 			}
@@ -335,7 +336,7 @@ function delchk(board_num) {
 	                		var nickname = "<%=nickname_co %>";
 	                		var img = "<%=img_co %>";
 	                
-						output += '<li class="comments_container" value="' + item.comment_num + '">';	 
+						output += '<div class="comments_container" value="' + item.comment_num + '">';	 
 	                		output += '<div class="community_comments_view_user">';
 	                		output += '<img src="' + item.profile + '">';
 	                		output += '</div>';
@@ -359,7 +360,7 @@ function delchk(board_num) {
 						output += '</div>';
 						output += '</div>';
 						
-						output += '<li class="answer_form" style="display: none;" id="' + item.comment_num + '">';
+						output += '<div class="answer_form" style="display: none;" id="' + item.comment_num + '">';
 						output += '<form id="answerForm" method="POST" accept-charset="utf-8">';
 				     	output += '<div class="community_answer_form">';
 				     	output += '<div class="community_answer_form_user">';
@@ -379,8 +380,8 @@ function delchk(board_num) {
 				     	output += '</div>';
 				     	output += '</div>';
 				     	output += '</form>';
-				     	output += '</li>';
-						output += '</li>';
+				     	output += '</div>';
+						output += '</div>';
 						
 						$('.community_comments_view').append(output);
 	                
@@ -440,7 +441,7 @@ function delchk(board_num) {
             		
 					if(num == item.comment_num) {
 					
-						answer += '<li class="answer_container" value="' + item.comment_num + '">';	 
+						answer += '<div class="answer_container" value="' + item.comment_num + '">';	 
 						answer += '<div class="community_answer_view_user">';
 						answer += '<img src="' + profile + '">';
 						answer += '</div>';
@@ -462,7 +463,7 @@ function delchk(board_num) {
 						
 						answer += '</div>';
 						answer += '</div>';
-						answer += '</li>';
+						answer += '</div>';
 						
 						$(".community_comments_view_container").append(answer);
 					}
