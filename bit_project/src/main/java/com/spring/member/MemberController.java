@@ -97,10 +97,11 @@ public class MemberController {
 
 				model.addAttribute("findPassword", memVO.getPassword());
 
-				String setfrom = "suminnjeong@gmail.com"; // host 메일 주소
-//			    String email  = request.getParameter("email");     // 받는 사람 이메일
-				String title = "진근이네 비밀번호"; // 제목
-				String content = "새로운 비밀번호는 " + membervo.getPassword(); // 메일 내용
+			String setfrom = "onedershop@gmail.com"; // host 메일 주소
+//		    String email  = request.getParameter("email");     // 받는 사람 이메일
+			String title = "ONEDER 비밀번호"; // 제목
+			String content = "새로운 비밀번호는 " + membervo.getPassword(); // 메일 내용
+
 
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -201,9 +202,9 @@ public class MemberController {
 	  @RequestMapping(value = "/mailSending.me")
 	  public String mailSending(HttpServletRequest request, HttpServletResponse response, @RequestParam("email") String email) throws Exception {
 	   
-	    String setfrom = "suminnjeong@gmail.com";  //host 메일 주소       
+	    String setfrom = "onedershop@gmail.com";  //host 메일 주소       
 //	    String email  = request.getParameter("email");     // 받는 사람 이메일
-	    String title = "진근이네 인증메일"; //제목
+	    String title = "ONEDER 회원가입 인증메일"; //제목
 	    String content= "http://localhost:8080/bit_project/verifyEmail.me?id="+ email; //메일 내용
 	   
 	    response.setCharacterEncoding("utf-8");
