@@ -1,11 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.spring.member.MemberVO" %>
+<%@ page import="java.util.Calendar"%>
 <%
 	String user_email = (String)session.getAttribute("email");
 	MemberVO membervo = (MemberVO)request.getAttribute("membervo");
 	String grade = (String)request.getAttribute("grade");
 	int price = (int)request.getAttribute("price");
+	
+	Calendar cal = Calendar.getInstance();
+	int date = cal.get(Calendar.DATE);	//날짜
+	int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);	//요일
+
+	String korDayOfWeek = "";
+	switch (dayOfWeek) {
+		case 1 :
+			korDayOfWeek = "일";
+			break;
+		case 2 :
+			korDayOfWeek = "월";
+			break;
+		case 3 :
+			korDayOfWeek = "화";
+			break;
+		case 4 :
+			korDayOfWeek = "수";
+			break;
+		case 5 :
+			korDayOfWeek = "목";
+			break;
+		case 6 :
+			korDayOfWeek = "금";
+			break;
+		case 7 :
+			korDayOfWeek = "토";
+			break;
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">

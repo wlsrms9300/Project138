@@ -234,7 +234,7 @@
                         <a href="#8" class="activity"><b class="oh">나의활동&nbsp;&nbsp;</b><b class="o2">▼</b></a>
                         <ul class="sub_list2">
                             <li><a href="#9" id="m1" class="oh"><b>자유게시판</b></a></li>
-                            <li><a href="#10" id="m2" class="oh"><b>육아사진</b></a></li>
+                            <li><a href="#10" id="m2" class="oh"><b>육아사진게시판</b></a></li>
                             <li><a href="#11" id="m3" class="oh"><b>정보공유(팁)</b></a></li>
                             <li><a href="#12" id="m4" class="oh"><b>공구게시판</b></a></li>
                             <li><a href="#13" id="m5" class="oh"><b>육아관련질문</b></a></li>

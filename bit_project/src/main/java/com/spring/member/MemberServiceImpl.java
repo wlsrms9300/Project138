@@ -1,7 +1,10 @@
 package com.spring.member;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,11 +135,16 @@ public class MemberServiceImpl implements MemberService{
 		try {
 			MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
 			memVO = memberMapper.findPassword(membervo);
-			String password_random = UUID.randomUUID().toString().substring(0, 8).trim();
-			membervo.setPassword(password_random);
+			if(memberMapper.findPassword(membervo) != null) {
+				String password_random = UUID.randomUUID().toString().substring(0, 8).trim();
+				membervo.setPassword(password_random);
+				
+				result = memberMapper.updatepassword(membervo);
+				membervo.setPassword(membervo.getPassword());
+			} else {
+				membervo.setPassword("WrongPw");
+			}
 			
-			result = memberMapper.updatepassword(membervo);
-			membervo.setPassword(membervo.getPassword());
 			
 			
 		} catch(Exception e) {
