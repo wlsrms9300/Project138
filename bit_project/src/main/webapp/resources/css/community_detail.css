@@ -108,6 +108,7 @@
 	.community_menubar_item:hover{color: #ff7276;}
 	
 	
+	
 /*모바일*/
 @media (max-width:480px) {
 	body{font-size: 13px;}
@@ -121,7 +122,7 @@
 	#community_container_header > .community_title{text-align: center; font-size: 14px;}
 	#community_search{width: 100%; margin: 0 auto; height: 35px;}
 
-	#community_container_header_d{width: 100%; text-align: left;}
+	#community_container_header_d{width: 100%; text-align: left; margin-left: 38px;}
 	#community_container_header_d > .community_title_d {width: 100%; margin-left: 10px;}
 	#community_container_mt_d > .community_mt_title_d{width: 80%;}
 	#community_container_mt_d > .community_mt_mt_d{width: 100%; padding: 15px 0 30px 0;}
@@ -146,7 +147,7 @@
 	#community_container_comments > form > .community_comments_form > .community_comments_form_input > .community_comments_form_content{width: 100%; }
 	#community_container_comments > .community_comments_count{display: flex; margin:10px auto; width: 90%;}
 	#community_container_mt_d > .community_mt_footer{width: 100%; }
-	#community_container_mt_d > .community_mt_footer > .community_mt_footer_caption{width: 90%; margin: 0 auto; padding: 0 10px;}
+	#community_container_mt_d > .community_mt_footer > .community_mt_footer_caption{width: 85%; margin: 0 auto; padding: 0 10px;}
 	
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .community_comments_view_comments > input{width: 75%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer > input{}
@@ -175,15 +176,13 @@
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer > input{width: 100%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container{width: 100%;}
 
-.answer1, .answer2, .answer3 {
-    cursor: pointer;
-    margin: 0 auto;
-    border-radius: 3px;
-    color: #fff;
-    border: 0;
-    width: 120px;
-    height: 36px;
-    font-size: 14px;
-    font-weight: 800;
-    text-align: center;
-    background: #ff7276;}
+	/* 성현 추가 */
+	
+	.community_mt_title{font-size: 18px;}
+	.community_mt_title > p {margin: 0 10px;}
+	.community_mt_mt {font-size: 18px;}
+	#commentsForm{padding-left: 20px;}
+	.community_mt_footer_time{padding-right: 15px;}
+	hr{width: 90%;}
+}
+

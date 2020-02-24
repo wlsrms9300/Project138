@@ -62,13 +62,22 @@ public class MemberController {
 		try {
 
 			memVO = memberService.findEmail(membervo);
-
-			model.addAttribute("findEmail", memVO.getEmail());
+			if(memberService.findEmail(membervo) != null) {
+				model.addAttribute("findEmail", memVO.getEmail());
+				
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('일치하는 ID가 없습니다.'); history.go(-1);</script>");
+				out.flush();
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return "findemail";
+
 	}
 
 	@RequestMapping(value = "/findpassword.me", method = RequestMethod.GET)
@@ -77,25 +86,33 @@ public class MemberController {
 		MemberVO memVO = new MemberVO();
 
 		try {
+			if(memberService.findPassword(membervo).getPassword().equals("WrongPw")) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('입력하신 정보가 일치하지 않습니다.'); history.go(-1);</script>");
+				out.flush();
+				
+			} else {
+				System.out.println("Controller if문 진입.");
+				memVO = memberService.findPassword(membervo);
 
-			memVO = memberService.findPassword(membervo);
+				model.addAttribute("findPassword", memVO.getPassword());
 
-			model.addAttribute("findPassword", memVO.getPassword());
+				String setfrom = "suminnjeong@gmail.com"; // host 메일 주소
+//			    String email  = request.getParameter("email");     // 받는 사람 이메일
+				String title = "진근이네 비밀번호"; // 제목
+				String content = "새로운 비밀번호는 " + membervo.getPassword(); // 메일 내용
 
-			String setfrom = "suminnjeong@gmail.com"; // host 메일 주소
-//		    String email  = request.getParameter("email");     // 받는 사람 이메일
-			String title = "진근이네 비밀번호"; // 제목
-			String content = "새로운 비밀번호는 " + membervo.getPassword(); // 메일 내용
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				messageHelper.setFrom(setfrom); // 보내는 사람 생략하면 정상작동 안함
+				messageHelper.setTo(membervo.getEmail()); // 받는사람 이메일
+				messageHelper.setSubject(title); // 메일 제목은 생략 가능
+				messageHelper.setText(content); // 메일 내용
 
-			messageHelper.setFrom(setfrom); // 보내는 사람 생략하면 정상작동 안함
-			messageHelper.setTo(membervo.getEmail()); // 받는사람 이메일
-			messageHelper.setSubject(title); // 메일 제목은 생략 가능
-			messageHelper.setText(content); // 메일 내용
-
-			mailSender.send(message);
+				mailSender.send(message);
+			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

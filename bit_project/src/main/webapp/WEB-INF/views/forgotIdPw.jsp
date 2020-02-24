@@ -20,7 +20,7 @@
 	</header>
 	</div>
 	<div id="content">
-		<h1>진근이네 이메일/비밀번호 찾기</h1>
+		<h1>ONEDER 이메일/비밀번호 찾기</h1>
 		<div class="content-box">
 
 			<ul class="tabs">
