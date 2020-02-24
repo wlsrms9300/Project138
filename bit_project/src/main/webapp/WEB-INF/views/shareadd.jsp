@@ -67,10 +67,11 @@
                         <option value="57">5~7</option>
                     </select>
                     <select name="category_s">
-                        <option selected value="과학박스">과학박스</option>
-                        <option value="자동차">자동차</option>
-                        <option value="로보트">로보트</option>
-                        <option value="진근박스">진근박스</option>
+                        <option selected value="장난감">장난감</option>
+                        <option value="나무 장난감">나무 장난감</option>
+                        <option value="역할놀이">역할놀이</option>
+                        <option value="놀이">놀이</option>
+                        <option value="기타">기타</option>
                     </select>
                 </div>
             </div>
@@ -81,7 +82,7 @@
                 <input type="text" name="manufacturer" placeholder="제조사" />
             </div>
             <div>
-                <input type="text" name="product_content" placeholder="상품상세" value="<%=share_content%>"/>
+            <textarea name="product_content" maxlength="100" rows="12" placeholder="상품상세"><%=share_content%></textarea>
             </div>
              <div>
                 <input type="hidden" name="waiting_num" value="<%=waiting_num%>"/>

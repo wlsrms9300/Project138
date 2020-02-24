@@ -286,12 +286,13 @@
                         <option selected value="04">0~4</option>
                         <option value="57">5~7</option>
                     </select>
-                    <select name="category_s">
-                        <option selected value="과학박스">과학박스</option>
-                        <option value="자동차">자동차</option>
-                        <option value="로보트">로보트</option>
-                        <option value="진근박스">진근박스</option>
-               </select>
+                   <select name="category_s">
+                        <option selected value="장난감">장난감</option>
+                        <option value="나무 장난감">나무 장난감</option>
+                        <option value="역할놀이">역할놀이</option>
+                        <option value="놀이">놀이</option>
+                        <option value="기타">기타</option>
+                    </select>
                
                  <div class="button-box">
                  <input type="button" id="nsubmit" value="[상품등록하기]" onclick="prAdd('shareAddProcess.pr')" >            	

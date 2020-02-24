@@ -39,7 +39,7 @@
                 <input type="text" name="manufacturer" placeholder="제조사" />
             </div>
             <div>
-                <input type="text" name="product_content" placeholder="상품상세" />
+                <textarea name="product_content" maxlength="100" rows="12" placeholder="상품상세"></textarea>
             </div>
 
             <div>
@@ -58,22 +58,26 @@
 
             </div>
             <div>
-                <select name="category_s">
-                    <option selected value="과학박스">과학박스</option>
-                    <option value="자동차">자동차</option>
-                    <option value="로보트">로보트</option>
-                    <option value="진근박스">진근박스</option>
-                </select>
+                 <select name="category_s">
+                        <option selected value="장난감">장난감</option>
+                        <option value="나무 장난감">나무 장난감</option>
+                        <option value="역할놀이">역할놀이</option>
+                        <option value="놀이">놀이</option>
+                        <option value="기타">기타</option>
+                    </select>
 
             </div>
             <div>
-                <input type="file" name="img_sum" placeholder="썸네일" />
+                <input type="file" name="img_sum" placeholder="슬라이드 1" />
             </div>
             <div>
-                <input type="file" name="img_main" placeholder="메인" />
+                <input type="file" name="img_main" placeholder="슬라이드 2" />
             </div>
             <div>
-                <input type="file" name="img_detail" placeholder="상품상세쪽 이미지" />
+                <input type="file" name="img_detail" placeholder="슬라이드 3" />
+            </div>
+            <div>
+                <input type="file" name="main_img" placeholder="상품상세쪽 이미지" />
             </div>
 
         </div>

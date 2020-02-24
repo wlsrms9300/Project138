@@ -30,30 +30,30 @@
 		</selectKey>
 		insert into product(product_num, product_name, total_amount,
 		rental_amount, current_amount, manufacturer,
-		product_content, category_l, category_m, category_s,
+		product_content, category_l, category_m, category_s, main_img,
 		<choose>
 			<when test="img_sum == null and img_main == null and img_detail == null">
 					regist) values(
 			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount}, #{current_amount},
-			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s}, #{main_img},
 			sysdate)
 			</when>
 			<when test="img_sum != null and img_main != null and img_detail == null">
 					img_sum, img_main, regist) values(
 			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
-			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s}, #{main_img},
 			#{img_sum}, #{img_main},sysdate)
 			</when>
 			<when test="img_sum != null and img_main == null and img_detail == null">
 					img_sum, regist) values(
 			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
-			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s}, #{main_img},
 			#{img_sum}, sysdate)
 			</when>
 				<when test="img_sum != null and img_main != null and img_detail != null">
 					img_sum, img_main, img_detail, regist) values(
 			#{product_num}, #{product_name}, #{total_amount}, #{rental_amount},#{current_amount},
-			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s},
+			#{manufacturer}, #{product_content}, #{category_l}, #{category_m}, #{category_s}, #{main_img},
 			#{img_sum}, #{img_main}, #{img_detail},sysdate)
 			</when>
 		</choose>
@@ -91,6 +91,9 @@
 			</if>
 			<if test="img_detail != null">
 			,img_detail=#{img_detail}
+			</if>
+			<if test="main_img != null">
+			,main_img=#{main_img}
 			</if>
 		where product_num=#{product_num}
 	</update>

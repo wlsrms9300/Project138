@@ -38,7 +38,14 @@ public class ProductVO {
 	private String img_detail;
 	private Date regist;
 	private int readcount;
-	
+    private String main_img;
+    
+	public String getMain_img() {
+		return main_img;
+	}
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
 	public int getReadcount() {
 		return readcount;
 	}

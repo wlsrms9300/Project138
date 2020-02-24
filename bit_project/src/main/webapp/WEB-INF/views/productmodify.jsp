@@ -69,6 +69,7 @@
                     <input type="file"  class="img_set" name="img_sum" />
                     <input type="file"  class="img_set" name="img_main" />
                     <input type="file"  class="img_set" name="img_detail" />
+                    <input type="file" name="main_img" placeholder="상품상세쪽 이미지" />
                     <input type="button" onclick="clsimg();" value="이미지 초기화" />
                     <div class="imgs_wrap">
                     </div>
@@ -101,10 +102,11 @@
                         <option value="57">5~7</option>
                     </select>
                     <select name="category_s">
-                        <option value="과학박스">과학박스</option>
-                        <option value="자동차">자동차</option>
-                        <option value="로보트">로보트</option>
-                        <option value="진근박스">진근박스</option>
+                        <option selected value="장난감">장난감</option>
+                        <option value="나무 장난감">나무 장난감</option>
+                        <option value="역할놀이">역할놀이</option>
+                        <option value="놀이">놀이</option>
+                        <option value="기타">기타</option>
                     </select>
                 </div>
             </div>
@@ -119,7 +121,7 @@
                 <input type="text" name="manufacturer" value="<%=prVO.getManufacturer() %>" />
             </div>
             <div>
-                <input type="text" name="product_content" value="<%=prVO.getProduct_content() %>" />
+                <textarea name="product_content" maxlength="100" rows="12" ><%=prVO.getProduct_content() %></textarea>
                 <input type="hidden" name="product_num" value="<%=prVO.getProduct_num() %>"  />
             </div>
   			

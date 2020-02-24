@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.spring.login.*" %>
 <%@ page import="java.util.*, com.spring.payment.*" %>
+<%@ page buffer="8192kb" autoFlush="true" %>
 <!-- 파일 업로드시 필요 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>

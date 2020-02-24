@@ -8,23 +8,33 @@
 	LoginVO userDetail_cal = (LoginVO)session.getAttribute("userDetail"); //유저정보
 	String subscribe_cal = userDetail_cal.getSubscribe(); //구독여부 체크
 	String email_cal = (String)session.getAttribute("email");
-	
-	//예약순번 체크
-	int rnum_cal = 0;
-	if(request.getAttribute("rnum") != null) {
-		rnum_cal = (int)request.getAttribute("rnum");
-	}
-	
-	//구독대기 여부 체크
 	SubscriptionVO sub_cal = new SubscriptionVO();
-	if(request.getAttribute("subvo") != null) {
-		sub_cal = (SubscriptionVO)request.getAttribute("subvo");
-	}
-	//대여중인 상품 정보
 	PStateVO pstate_cal = new PStateVO();
-	if(request.getAttribute("pstate") != null) {
-		pstate_cal = (PStateVO)request.getAttribute("pstate");	
-	} 
+	int rnum_cal = 0;
+	try {
+		//예약순번 체크
+		if(request.getAttribute("rnum") != null) {
+			rnum_cal = (int)request.getAttribute("rnum");
+		}
+		
+		//구독대기 여부 체크
+		
+		if(request.getAttribute("subvo") != null) {
+			sub_cal = (SubscriptionVO)request.getAttribute("subvo");
+		}
+		//대여중인 상품 정보
+		
+		if(request.getAttribute("pstate") != null) {
+			pstate_cal = (PStateVO)request.getAttribute("pstate");	
+		}
+		
+		System.out.println(pstate_cal.getReturn_application()+"캘린더");
+	}catch(Exception e){
+		e.getMessage();
+		e.printStackTrace();
+	}
+	
+	
 %>
 <html>
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
@@ -60,7 +70,8 @@
 			}
 		}
 	}
-
+	
+	
 $(document).ready(function(){
 	window.onload = function() {
 	var line = $('.calendar_line > td');

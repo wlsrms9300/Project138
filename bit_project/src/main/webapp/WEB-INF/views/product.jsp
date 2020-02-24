@@ -195,8 +195,9 @@
          </select>
          <input type="text" name="searchword" id="searchword" class="form-control" />
          <a href="javascript:fn_searchList()" class="searchbtn form-control">검색</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <% if(usergroup.equals("admin")) { %>
                	<button type="button" class="btn btn-sm jeon1"  style="margin: 15px 5px 15px 5px; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="location.href='productForm.pr'">상품등록</button>
-         
+             <%} %>
       </div>
    </div>
    </div>
@@ -264,13 +265,17 @@
 						</a>
 						<div id="list3" style="display: none;">
 							<ul>
-								<li><input type="checkbox" name="check3" class="c3" value="과학박스" onclick="Chk(3);" />
-									<label for="c3">과학박스</label>
+								<li><input type="checkbox" name="check3" class="c3" value="장난감" onclick="Chk(3);" />
+									<label for="c3">장난감</label>
 								</li>
-								<li><input type="checkbox" name="check3" class="c3" value="자동차" onclick="Chk(3);" />
-									<label for="c3">자동차</label></li>
-								<li><input type="checkbox" name="check3" class="c3" value="로보트" onclick="Chk(3);" />
-									<label for="c3">로보트</label></li>
+								<li><input type="checkbox" name="check3" class="c3" value="나무 장난감" onclick="Chk(3);" />
+									<label for="c3">나무 장난감</label></li>
+								<li><input type="checkbox" name="check3" class="c3" value="역할놀이" onclick="Chk(3);" />
+									<label for="c3">역할놀이</label></li>
+									<li><input type="checkbox" name="check3" class="c3" value="놀이" onclick="Chk(3);" />
+									<label for="c3">놀이</label></li>
+									<li><input type="checkbox" name="check3" class="c3" value="기타" onclick="Chk(3);" />
+									<label for="c3">기타</label></li>
 							</ul>
 						</div>
 					</li>
@@ -354,13 +359,17 @@
 					</a></li>
 				<div id="mFilter_menu_list3" style="display: none;">
 					<ul>
-						<li><input type="checkbox" name="check3" class="m3" value="과학박스" onclick="mChk(3);" /> <label
-								for="c3">과학박스</label>
-						</li>
-						<li><input type="checkbox" name="check3" class="m3" value="자동차" onclick="mChk(3);" /> <label
-								for="c3">자동차</label></li>
-						<li><input type="checkbox" name="check3" class="m3" value="로보트" onclick="mChk(3);" /> <label
-								for="c3">로보트</label></li>
+								<li><input type="checkbox" name="check3" class="m3" value="장난감" onclick="mChk(3);" />
+									<label for="c3">장난감</label>
+								</li>
+								<li><input type="checkbox" name="check3" class="m3" value="나무 장난감" onclick="mChk(3);" />
+									<label for="c3">나무 장난감</label></li>
+								<li><input type="checkbox" name="check3" class="m3" value="역할놀이" onclick="mChk(3);" />
+									<label for="c3">역할놀이</label></li>
+									<li><input type="checkbox" name="check3" class="m3" value="놀이" onclick="mChk(3);" />
+									<label for="c3">놀이</label></li>
+									<li><input type="checkbox" name="check3" class="m3" value="기타" onclick="mChk(3);" />
+									<label for="c3">기타</label></li>
 					</ul>
 				</div>
 

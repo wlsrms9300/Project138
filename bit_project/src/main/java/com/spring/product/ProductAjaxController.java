@@ -213,12 +213,16 @@ public class ProductAjaxController {
 						if (i == 0) {
 							category_s[i] = category_s[i].substring(9);
 						}
-							if (category_s[i].equals("과학박스")) {
-								cateMap3.put("과학박스", "category_s");
-							} else if (category_s[i].equals("자동차")) {
-								cateMap3.put("자동차", "category_s");
-							} else if (category_s[i].equals("로보트")) {
-								cateMap3.put("로보트", "category_s");
+							if (category_s[i].equals("장난감")) {
+								cateMap3.put("장난감", "category_s");
+							} else if (category_s[i].equals("나무 장난감")) {
+								cateMap3.put("나무 장난감", "category_s");
+							} else if (category_s[i].equals("역할놀이")) {
+								cateMap3.put("역할놀이", "category_s");
+							} else if (category_s[i].equals("놀이")) {
+								cateMap3.put("놀이", "category_s");
+							} else if (category_s[i].equals("기타")) {
+								cateMap3.put("기타", "category_s");
 							}
 					}
 				}
