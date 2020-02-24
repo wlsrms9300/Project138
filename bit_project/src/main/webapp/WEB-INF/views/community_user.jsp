@@ -113,7 +113,7 @@ String nickname1 = (String)request.getAttribute("nickname");
 							output += '<a class="community_mt_footer_user" href="community_user.co?nickname=' + item.nickname + ' ">';
 							output += '<img src="' + item.profile + '">';
 							output += '<span class="community_mt_footer_users">' +  item.nickname + ' </span>';
-							output += '</a><br />';
+							output += '</a>';
 							output += '<span class="community_mt_footer_caption">';
 							output += '<span class="community_mt_footer_time">' + date + ' </span>';
 							output += '<span class="community_mt_footer_comments">' + "댓글 " + item.co_count + ' </span>';
