@@ -71,26 +71,28 @@ function review_snsData(totalData, dataPerPage, pageCount, currentPage) {
 				if(sessionChk==item.email){
 					//exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
 	                //exText += "<div>";
-					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
-					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
-					
+					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;'&nbsp;&nbsp;&nbsp;&nbsp;'
+					exText += "<button type='button' style='border: 1px solid; margin-left:20px; color: #fff; border-radius: 5px; background-color: #ffb0b1; width: 55px; text-align: end;height: 25px; font-size: 13px;' onclick='reviewmodify("+item.review_num+","+sib2+","+sib3+","+sib4+","+sib5+","+sib6+");'>수정</a>";
+
 					if(item.point_details==1){
 						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:green"></i></a>';	
 					}else {
-						exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+
+						exText += "<button type='button' style='border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; width: 55px; text-align: end;height: 25px; font-size: 13px;' onclick='reviewdelete("+item.review_num+");'>삭제</a>";
 						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:white"></i></a>';
 					}
 					
 					exText += '</div>';
 				}else if(usergroup=='admin'){
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date;
-					exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewmodify('+item.review_num+','+sib2+','+sib3+','+sib4+','+sib5+','+sib6+');">수정</a>';
-					exText += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'"+" onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+					exText += "<button type='button' style='border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; width: 35px; text-align: center; height: 21px; font-size: 13px;' onclick='reviewmodify("+item.review_num+","+sib2+","+sib3+","+sib4+","+sib5+","+sib6+");'>수정</a>";
+					exText += "<button type='button' style='border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; width: 35px; text-align: center; height: 21px; font-size: 13px;' onclick='reviewdelete("+item.review_num+");'>삭제</a>";
+
 					if(item.point_details==1){
 						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+'><i class="fas fa-check-circle" style="color:green"></i></a>';	
 					}else {
-						exText += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)"'+' onclick="reviewpoint('+sib6+','+sib2+');">포인트 적립</a>';
-					}
+						exText += "<button type='button' style='border: 1px solid;background-color: #30a5ff; border-color: #30a5ff; color: #fff; border-radius: 5px;  width:76px; height:21px; font-size: 13px;' onclick='reviewpoint("+sib6+","+sib2+");'>포인트 적립</a>";
+					}	
 					exText += '</div>';
 				}else {
 					exText += '&nbsp;&nbsp;&nbsp;&nbsp;'+item.nickname+'&nbsp;&nbsp;&nbsp;&nbsp;'+date+'</div>';
