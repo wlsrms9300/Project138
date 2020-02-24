@@ -254,9 +254,9 @@ function delchk(board_num) {
    		$('input[id="' + num + '"]').removeAttr("readonly");
    		$('input[id="' + num + '"]').focus();
    		$('input[id="' + num + '"]').css("border", "1px solid #ccc9c9");
-   		$('div[id="' + num + '"]').html("<button type='button' onclick='comod_btn(" + num + ")'>수정하기</button></div>");
+   		$("div[id='" + num + "']").html('<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;" onclick="comod_btn(' + num + ')">수정하기</button></div>');
 	} 
-	
+
     //댓글 수정
     function comod_btn($num) {
     	var num1 = $num;
@@ -513,9 +513,9 @@ function delchk(board_num) {
    		$('input[id="' + num + '"]').removeAttr("readonly");
    		$('input[id="' + num + '"]').focus();
    		$('input[id="' + num + '"]').css("border","1px solid #ccc9c9");
-   		$('div[id="' + num + '"]').html("<button type='button' onclick='anmod_btn(" + num + ")'>수정하기</button></div>");
+   		$('div[id="' + num + '"]').html('<button type="button"style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;"  onclick="anmod_btn(' + num + ')">수정하기</button></div>');
 	} 
-    
+
     //대댓 수정
     function anmod_btn(num) {
     	if($.trim($('.answer_form').val()) == "") {
@@ -801,7 +801,7 @@ function delchk(board_num) {
     	   $table.trigger('repaginate');
     	 });
     	}
-
+ 
 </script>
 
 <!-- 라인 공유 -->
