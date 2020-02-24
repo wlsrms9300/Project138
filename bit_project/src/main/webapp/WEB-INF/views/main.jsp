@@ -411,9 +411,17 @@
 								<div class="unit-4">
 									<i class="far fa-lightbulb fa-7x" style="padding: 30px;"></i>
 									<div>
-										<h1>매주 목요일 배송</h1>
-										<br>
-										<h4>다양한 장난감을 경험하세요.</h4>
+										<h1>매월 넷째주 목요일 첫배송</h1>
+										<br>			
+										<h4>셋째주 일요일까지 구독신청을 해주세요!</h4>
+										<h4 class="title" style="font-size:20px;"></h4>
+										<div id="countDay">
+											<span class="day" style="font-size:20px;"></span>
+											<span class="time" style="font-size:20px;"></span>
+											<span class="minute" style="font-size:20px;"></span>
+											<span class="second" style="font-size:20px;"></span>
+											<span class="endday" style="font-size:20px;"></span>
+										</div>
 										
 									</div>
 								</div>
@@ -469,5 +477,33 @@
 			window.location.href = "signup.me";	
 		}
 	}
+
+	function CountDownTimer(dday) {
+		var countDownDate = new Date(dday).getTime();
+		var x = setInterval(function() {
+			var now = new Date().getTime();
+			var distance = countDownDate - now;
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			function showRemaining() {
+				if(days < 0) {
+					days = 0;
+					hours = 0;
+					minuts = 0;
+					seconds = 0;
+					clearInterval(x);
+				}
+				$('#countDay').find('.day').html(days + "일");
+				$('#countDay').find('.hour').html(hours + "시");
+				$('#countDay').find('.minute').html(minutes + "분");
+				$('#countDay').find('.second').html(seconds + "초");
+			}
+			showRemaining();
+		}, 1000);
+	}
+	CountDownTimer('2020/03/22 24:00:00');
 </script>
 </html>

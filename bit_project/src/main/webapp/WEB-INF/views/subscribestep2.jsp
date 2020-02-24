@@ -172,7 +172,9 @@ $(document).ready(function() {
     
 	  $("#subscribe-btn").on("click", function(){
 		  	/*메일 아이디 추출 */
+		  	
 		  	var email = '<%=user_email%>';
+		  	alert(email);
 		  	if(email != null) {
 		    var beforeStr = $('#user_email').val();
 			var afterStr = beforeStr.split('@');

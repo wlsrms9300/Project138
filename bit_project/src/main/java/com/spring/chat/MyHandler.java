@@ -136,6 +136,7 @@ public class MyHandler extends TextWebSocketHandler {
 				}
 			} 
 		}
+		
 		System.out.println("TextWebSocketHandler : 연결 종료! ");
 		users.remove(session);
 	}
