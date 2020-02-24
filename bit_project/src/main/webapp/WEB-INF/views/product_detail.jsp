@@ -216,12 +216,18 @@
                 <div class="slider">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
+                        <%if(prVO.getImg_sum()!=null){ %>
                             <div class="swiper-slide ss1" style="background: url(/bit_project/image/<%=prVO.getImg_sum() %>) no-repeat center center; background-size: cover;">
                             </div>
+                        <%} %>
+                        <%if(prVO.getImg_main()!=null){ %>
                             <div class="swiper-slide ss2" style="background: url(/bit_project/image/<%=prVO.getImg_main() %>) no-repeat center center; background-size: cover;">
                             </div>
+                        <%} %>
+                        <%if(prVO.getImg_detail()!=null){ %>
                             <div class="swiper-slide ss3" style="background: url(/bit_project/image/<%=prVO.getImg_detail() %>) no-repeat center center; background-size: cover;">
                             </div>
+                        <%} %>
                         </div>
                         <div class="swiper-pagination"></div>
                         <div class="swiper-button-prev"></div>
@@ -250,7 +256,7 @@
                     <br>
                     <div class="pvopname"><%=prVO.getProduct_name() %></div>
                     <br>
-                    <div class="pvopcon"><%=prVO.getProduct_content() %></div>
+                    <div class="pvopcon"><textarea name="product_content" maxlength="100" rows="12" ><%=prVO.getProduct_content() %></textarea></div>
                     </div>
                     <%-- <hr style="border: 0.5px solid #c5c5c5;">
                     <div>총수량 : <span><%=prVO.getTotal_amount()%></span></div> --%>
@@ -259,10 +265,10 @@
                             <a href="javascript:void(0)" onclick="amount_alert();" class="alarm_btn">입고알림</a>
                             <%} %>
                         </span>
-                      
+                    <% if(usergroup.equals("admin")) { %>
                     <button type="button" class="btn btn-sm jeon2"  style="margin: 3px; float:right; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="prModify();">상품수정</button>
       				<button type="button" class="btn btn-sm jeon3"  style="margin: 3px; float:right; font-size: 14px; width: 75px; height: 33px; border-radius: 5PX;" onclick="prDelete();">상품삭제</button>
-		         
+             		<%} %>
                     </div>
                <!--      <div>제품특징</div>
                     <div>
@@ -361,14 +367,8 @@
     <!-- 상품 이미지 -->
     <div class="container">
         <div class="product_content" id="#cursor_move_detail">
-            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
-                <img src="/bit_project/image/<%=prVO.getImg_main()%>">
-            </div>
-            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
-                <img src="/bit_project/image/<%=prVO.getImg_detail()%>">
-            </div>
-            <div style="text-align: center; width:65%; height:65%; margin-left: auto; margin-right: auto">
-                <img src="/bit_project/image/<%=prVO.getImg_sum()%>">
+            <div style="text-align: center; width:65%;  margin-left: auto; margin-right: auto">
+                <img src="/bit_project/image/<%=prVO.getMain_img()%>">
             </div>
         </div>
     </div>
@@ -536,42 +536,19 @@
     <!-- 배송/반납  -->
     <div class="container">
     <hr style="border: 1px solid #c6c6c6;">
-    <br>
-        <div class="pr_title" id="cursor_move_delivery" style="font-size: 24px">배송/반납</div>
-        <div class="baesong" style="font-size: 15px;"> 
-        <br>
-        <br>
-		        ㆍ대한민국택배(1588-1233)을 통한 배송 업무를 보고 있습니다.<br>
-		     <br>
-			ㆍ첫 배송일은 4쨋주 목요일날 일괄 배송 되고 있습니다.(비정기구독자 분들은 고정입니다.)<br>
-			<br>
-			ㆍ구독중이신 고객님들은 한달에 1회 혹은 2회(구독 등급에 따라)반납 신청이 가능합니다. 반납 신청하시면 돌아오는 목요일에 배송됩니다.<br>
-			<br>
-			ㆍ고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.<br>
-			<br>
-			ㆍ교환 또는 반납을 원하실때에는 메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다.<br>
-			<br>
-			ㆍ반납신청이나 배송내역은 마이페이지에서 확인이 가능하며 대한민국택배 주문 조회를 통해서도 확인이 가능합니다.<br>
-			  	   
+        <div class="pr_title" id="cursor_move_delivery">배송/반납</div>
+        <div class="baesong">
+  	        1.  배송은 매달 넷째주 목요일에 일괄 배송됩니다.  <br>
+  	        2.  교환 또는 반납을 원하실때에는 메뉴안에 Contact Us에서 문의사항에 작성 해주시면 됩니다. <br>
+          	3.  고객님의 등급이 실버일경우 1달에 1번 교환 가능하시고 골드, 플레티넘은 매달 2번씩 가능합니다. 반품은 상품에 문제가 있을시 가능합니다.<br>
         </div>
     </div>
    
     
     <!-- 배송/반납  --> 
 
-    <% if(usergroup.equals("admin")) { %>
-    <div class="container">
-        <input type="button" value="상품 수정" onclick="prModify();" />
-        <input type="button" value="상품 삭제" onclick="prDelete();" />
-    </div>
-    <%} %>
 
-
-
-
-   	<footer>
-			<%@ include file="/WEB-INF/views/footer.jsp"%>
-		</footer>
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
 
     <!-- //footer -->
     <!-- 자바스크립트 라이브러리 -->

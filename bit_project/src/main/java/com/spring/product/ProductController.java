@@ -130,6 +130,7 @@ public class ProductController {
 		pdVO.setImg_sum(request.getParameter("share_img1"));
 		pdVO.setImg_main(request.getParameter("share_img2"));
 		pdVO.setImg_detail(request.getParameter("share_img3"));
+		
 		service.prAdd(pdVO);
 		res = service.getPnum();
 		// Ch2. share_waiting_list 테이블의 state값 1로 변경(쉐어수락)
@@ -175,8 +176,9 @@ public class ProductController {
 		pdVO.setCategory_l(request.getParameter("category_l"));
 		pdVO.setCategory_m(request.getParameter("category_m"));
 		pdVO.setCategory_s(request.getParameter("category_s"));
+		
 		List<MultipartFile> fileList = request.getFiles("img_list");
-		String uploadPath = "C:\\Project138\\upload\\";
+        String uploadPath = "C:\\Project138\\upload\\";
 		for (MultipartFile mf : fileList) {
 			String originalFileExtension = mf.getOriginalFilename()
 					.substring(mf.getOriginalFilename().lastIndexOf("."));
@@ -198,17 +200,32 @@ public class ProductController {
 					break;
 				}
 				cnt++;
+				
+				
 
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (Exception e) {
+				e.getMessage();
 				e.printStackTrace();
 			}
 		}
+		
+
+		if (request.getFile("main_img").getSize() != 0) {
+			MultipartFile mf1 = request.getFile("main_img"); // 파일
+			String originalFileExtension1 = mf1.getOriginalFilename().substring(mf1.getOriginalFilename().lastIndexOf("."));
+			String storedFileName1 = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension1;
+			pdVO.setMain_img(storedFileName1);
+			if (mf1.getSize() != 0) {
+				// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+				mf1.transferTo(new File(uploadPath + storedFileName1));
+			}
+			System.out.println("mf1 :" + storedFileName1);
+		}
+		
 		service.prAdd(pdVO);
 
 		// return "product";
-		return "redirect:/";
+		return "redirect:/product.pr";
 	}
 
 	// 상품수정버튼 눌렀을떄 전송했을 때 처리 부분
@@ -235,7 +252,7 @@ public class ProductController {
 		pdVO.setCategory_l(request.getParameter("category_l"));
 		pdVO.setCategory_m(request.getParameter("category_m"));
 		pdVO.setCategory_s(request.getParameter("category_s"));
-		String uploadPath = "C:\\Project138\\upload\\";
+        String uploadPath = "C:\\Project138\\upload\\";
 		String originalFileExtension = "";
 		String storedFileName = "";
 		try {
@@ -272,6 +289,17 @@ public class ProductController {
 				}
 				System.out.println("mf3 :" + storedFileName);
 			}
+			if (request.getFile("main_img").getSize() != 0) {
+				MultipartFile mf4 = request.getFile("main_img"); // 파일
+				originalFileExtension = mf4.getOriginalFilename().substring(mf4.getOriginalFilename().lastIndexOf("."));
+				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+				pdVO.setMain_img(storedFileName);
+				if (mf4.getSize() != 0) {
+					// mf.transferTo(new File(uploadPath+"/"+mf.getOriginalFilename()));
+					mf4.transferTo(new File(uploadPath + storedFileName));
+				}
+				System.out.println("mf4 :" + storedFileName);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -302,7 +330,7 @@ public class ProductController {
 		}
 
 		// return "product";
-		return "redirect:/";
+		return "redirect:/product.pr";
 	}
 
 	// 상품 리뷰 작성 후 form 데이터 받아서 처리 redirect 후 커서 위치 조정 가능하면 ㄱㄱ
@@ -320,7 +348,7 @@ public class ProductController {
 
 			} else {
 				MultipartFile mf = request.getFile("img"); // 파일
-				String uploadPath = "C:\\Project138\\upload\\";
+		        String uploadPath = "C:\\Project138\\upload\\";
 				String originalFileExtension = mf.getOriginalFilename()
 						.substring(mf.getOriginalFilename().lastIndexOf("."));
 				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
@@ -353,7 +381,7 @@ public class ProductController {
 				service.reviewGpa(reviewVO.getProduct_num());
 			} else {
 				MultipartFile mf = request.getFile("img"); // 파일
-				String uploadPath = "C:\\Project138\\upload\\";
+		        String uploadPath = "C:\\Project138\\upload\\";
 				String originalFileExtension = mf.getOriginalFilename()
 						.substring(mf.getOriginalFilename().lastIndexOf("."));
 				String storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
