@@ -88,7 +88,7 @@
                     </div>   
                 	 </div>
                 	 <div style="margin-bottom:40px;">
-                	 	<p style="font-size:13px;"> - 등급변경은 결제일 일주일전까지 가능합니다.&nbsp;&nbsp;&nbsp;(결제예약전)</p>
+                	 	<p style="font-size:13px;">&nbsp;ㆍ등급변경은 결제일 일주일전까지 가능합니다.&nbsp;&nbsp;&nbsp;(결제예약전)</p>
                 	</div> 
                 <%
                 	}

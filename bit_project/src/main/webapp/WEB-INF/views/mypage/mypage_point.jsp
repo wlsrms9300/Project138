@@ -338,7 +338,7 @@ var dataPage = 5; // 한 화면에 나타낼 페이지 수
                 <div class="paginate" style="text-align:center;"></div>
                 <div class="point_use">
                     <h3>포인트 사용</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;(다음결제 또는 배송시 적용됩니다.)</p>
-                    <form id="point_form" name="point_form" method="POST" action="#">
+                    <form id="point_form" name="point_form" method="POST" action="#" style="width:100%;">
                     <input type="hidden" id="user_email" name="email" value="<%=user_email %>">
                     <table>
                         <tr class="use_line">

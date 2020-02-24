@@ -396,6 +396,7 @@ $(document).ready(function(){
     });
 
     $('#num2').click(function(){
+    	$('#point_form')[0].reset();
         var list= $('.list');
         var menu0= $('.calendar-wrap');
         var menu1= $('.subscribe_wrap');

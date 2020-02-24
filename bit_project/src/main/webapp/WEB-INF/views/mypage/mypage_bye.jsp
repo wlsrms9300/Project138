@@ -19,20 +19,20 @@
 <body>
 	<div class="member_bye">
             <h2>회원탈퇴</h2>
-            <form id="pass_confirm_form" name="pass_confirm_form" method="POST" action="deleteMyAccount.ac">
+            <form id="pass_confirm_form" name="pass_confirm_form" method="POST" action="deleteMyAccount.ac" style="width:100%;">
             <input type="hidden" id="user_email1" name="email" value="<%=user_email1 %>">
             
             <div class="pass_confirm">
                 <table>
                     <tr class="pass_line">
                         <th>비밀번호</th>
-                        <th><input type="password" id="pw" name="password" class="pw" placeholder="비밀번호 입력"></th>
+                        <th><input type="password" id="pw" name="password" class="pw" placeholder="비밀번호 입력" style="height:30px; border-radius:5px;"></th>
                     </tr>
                 </table>
             </div>
             <div class="content">
-                <p>- 포인트, 적립금, 회원등급 등의 정보는 모두 삭제됩니다.</p><br>
-                <p>- 게시판의 게시글, 댓글 등의 정보는 삭제되지 않습니다.</p><br>
+                <p>ㆍ포인트, 적립금, 회원등급 등의 정보는 모두 삭제됩니다.</p><br>
+                <p>ㆍ게시판의 게시글, 댓글 등의 정보는 삭제되지 않습니다.</p><br>
                 <p>&nbsp;&nbsp;&nbsp;(탈퇴 전 직접 삭제)</p>
             <div class="content_block"></div>
             </div>
