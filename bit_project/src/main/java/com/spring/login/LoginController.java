@@ -86,7 +86,7 @@ public class LoginController {
 						session.setAttribute("nickname", admindbvo.getNickname());
 						session.setAttribute("img", admindbvo.getImg());
 						session.setAttribute("userDetail", admindbvo);
-						writer.write("<script>location.href='./"+url1+"';</script>");
+						writer.write("<script>alert('관리자로 로그인했습니다.');location.href='./"+url1+"';</script>");
 					} else {
 						writer.write("<script>alert('잘못된 비밀번호입니다.');location.href='./login.me?pre_url="+pre_url+"';</script>");
 					}

@@ -82,5 +82,4 @@ public class CommunityController {
 		return "community_detail";
 	}
 	
-
 }

@@ -280,7 +280,18 @@ $(document).ready(function() {
 		
 		location.href="main.ma";
 	});
+
+	$('#connection-chat').click(function() {
+		var chat = $('#chatframe');
+		if(chat.is(':visible')) {
+	         chat.fadeOut();
+	      } else {
+	         chat.fadeIn();
+	      }
+	});
+	
 });
+
 </script>
 <body>
 <%@ include file="/WEB-INF/views/chatframe.jsp" %>
@@ -562,7 +573,7 @@ $(document).ready(function() {
 			<div id="anotherQna">
 				<p style="font-size: 18px; text-align: center; padding-top: 30px;">다른 질문 있으신가요?</p>
 				<div class=anotherQna1>
-				<button name="button" class="subscribe-btn3" onclick="location.href='//'"
+				<button name="button" class="subscribe-btn3" id="connection-chat"
                                                     type="button">1:1 채팅</button>
 				<button name="button" class="subscribe-btn4" onclick="location.href='contactus.ms'"
                                                     type="button">이메일 문의</button>

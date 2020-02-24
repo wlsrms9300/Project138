@@ -5,6 +5,7 @@
     cursor: pointer;
 }
 .list {
+	padding: 0 10px;
     display:none;
     max-width:1020px;
     box-shadow:3px 3px 5px 0 rgb(172, 171, 171);

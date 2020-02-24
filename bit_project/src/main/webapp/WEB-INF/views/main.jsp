@@ -267,7 +267,7 @@
 						<div class="pricing">
 							<h3 class="text-center text-black">비정기</h3>
 							<div class="price text-center mb-4 ">
-								<span><span style="color: #EA7475;">29000</span> / month</span>
+								<span><span style="color: #EA7475;">34000</span> / month</span>
 							</div>
 							<ul class="list-unstyled ul-check success mb-5">
 
