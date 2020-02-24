@@ -342,9 +342,9 @@ function delchk(board_num) {
 	                		output += '<div class="community_comments_view_container">';
 	                		output += '<div class="community_comments_view_comments">'; 
 	                		output += '<input type="hidden" id="comment_num" value="' + item.comment_num + '">';
-	                		output += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+	                		output += '<span class="community_mt_footer_users"><b>' + item.nickname + '</b></span>';
 	                		output += '<input type="hidden" id="email" value="' + item.email + '">';
-	                		output += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
+	                		output += '<input type="text" id="' + item.comment_num + '" class="comment_form" readonly onfocus:"this.blur()"; value="' + item.content + '" style="padding-left:10px;">';
 	                		output += '</div>';
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time" style="margin-top:3px; margin-right:10px;">' + date + '</span>';
@@ -447,12 +447,12 @@ function delchk(board_num) {
 						answer += '<div class="community_answer_view_container">';
 						answer += '<div class="community_answer_view_answer">';
 						answer += '<input type="hidden" id="answer_num" value="' + item.answer_num + '">';
-						answer += '<span class="community_mt_footer_users">' + item.nickname + '</span>';
+						answer += '<span class="community_mt_footer_users" style="font-size:14px;"><b>' + item.nickname + '</b></span>';
 						answer += '<input type="hidden" id="email" value="' + item.email + '">';
-						answer += '<input type="text" id="' + item.answer_num + '" class="answer_form" readonly onfocus:"this.blur()"; value="' + item.content + '">';
+						answer += '<input type="text" id="' + item.answer_num + '" class="answer_form" readonly onfocus:"this.blur()"; value="' + item.content + '" style="padding-left:10px;">';
 						answer += '</div>';
 						answer += '<div class="community_answer_view_actions">';
-						answer += '<span class="community_answer_view_time">' + date + '</span>';
+						answer += '<span class="community_answer_view_time" style="margin-top:3px; margin-right:10px;">' + date + '</span>';
 						
 						if(item.email.trim() == email) {
 						answer += '<div class="community_answer_view_modify" id="' + item.answer_num + '">';
@@ -632,7 +632,7 @@ function delchk(board_num) {
         if(min<10) {
            min = '0' + min;
         }
-        return year + "." + month + "." + date + "." + hour +":" + min;
+        return year + "." + month + "." + date + "&nbsp; " + hour +":" + min;
      }
 
 <%-- 	

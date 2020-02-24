@@ -52,7 +52,7 @@
 	/*댓글*/
 	#community_container_comments > .community_comments_view > .comments_container{width: 880px; margin-bottom: 30px; padding-left: 40px;}
 	#community_container_comments > .community_comments_view > .comments_container > .community_comments_view_user{position: absolute; }
-	#community_container_comments > .community_comments_view > .comments_container > .community_comments_view_user > img{width: 40px; height: 40px; margin: 5px 5px; border-radius: 50%; border: none;}
+	#community_container_comments > .community_comments_view > .comments_container > .community_comments_view_user > img{width: 40px; height: 40px; margin: 10px 5px; border-radius: 50%; border: none;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container{margin-bottom: 20px; padding-left: 55px; width: 80%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container >  .community_comments_view_comments{width: 850px; border-radius: 5px;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container >  .community_comments_view_comments > span{font-size: 14px;}
@@ -63,9 +63,9 @@
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .community_comments_view_actions > button:hover{outline: none; }
 
 	/*대댓*/
-	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container{width: 850px; height: 80px;}
+	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container{width: 850px; height: 80px; display:inline-table;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_user{width: 50px; height: 50px; position: absolute;}
-	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_user > img{border-radius: 100%; width: 40px; height: 40px;}
+	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_user > img{border-radius: 100%; width: 40px; height: 40px; margin-top:10px;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container{width: 800px; float: right; }
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer > span{font-size: 14px;}
@@ -152,7 +152,7 @@
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .community_comments_view_comments > input{width: 75%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer > input{}
 	
-	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container{width: 39%; padding-left: 40px; border-bottom: 1px solid #e0dddd;}
+	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container{width: 39%; padding-left: 40px;}
 	#community_container_comments > .community_comments_view > .comments_container{width: 89%; }
 	#community_container_mt_d > .community_mt_footer > .community_mt_footer_caption > .community_mt_footer_btn{width:39%;}
 	#community_container_comments > .community_comments_view{width: 100%;}
