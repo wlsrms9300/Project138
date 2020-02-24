@@ -131,7 +131,7 @@ function formReset() {
   document.getElementById("tier").innerHTML = '';
   document.getElementById("age").innerHTML = '';
   document.getElementById("type").innerHTML = '';
-  document.getElementById("sort").innerHTML = '신상품';
+  document.getElementById("sort").innerHTML = '';
 
 }
 function productSort(param1, param2) {

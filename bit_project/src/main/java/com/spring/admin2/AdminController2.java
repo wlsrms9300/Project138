@@ -204,7 +204,7 @@ public class AdminController2 {
 	@RequestMapping(value = "/admin_batch.tz", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public void admin_batch() {
-		int randomPnum = 0;
+		int randomPnum = 0,pnum = 0;
 		ArrayList<Integer> wishList = null;
 		ArrayList<SubscriptionVO> list = new ArrayList<SubscriptionVO>();
 		try {
@@ -213,6 +213,11 @@ public class AdminController2 {
 			for (SubscriptionVO vo : list) {
 				System.out.println("email is " + vo.getEmail());
 				wishList = (ArrayList)subscribePaymentService.getWish(vo.getEmail());
+				if(wishList.size()==0) {
+					pnum = subscribePaymentService.adminSelectWish(vo.getGrade());
+					subscribePaymentService.adminInsertWish(pnum, vo.getEmail());
+					wishList = (ArrayList)subscribePaymentService.getWish(vo.getEmail());
+				}
 				Collections.shuffle(wishList);
 				randomPnum = wishList.get(0);
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -256,17 +261,12 @@ public class AdminController2 {
 				// 개인쉐어일 경우, product, product_share 두 테이블의 수량 바꿔야되고, 적립금 줘야됨.
 				int res = 0;
 				res = subscribePaymentService.personalSharingCheck(randomPnum);
+				subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
 				if(res==1) {
-					subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
-					subscribePaymentService.personalSharingFund(randomPnum);
-					subscribePaymentService.updateProductAmount(randomPnum);
-					subscribePaymentService.deleteWish(randomPnum, vo.getEmail());	
-				}else {
-					subscribePaymentService.insertWish(randomPnum, vo.getSubscribe_num(), date);
-					subscribePaymentService.updateProductAmount(randomPnum);
-					subscribePaymentService.deleteWish(randomPnum, vo.getEmail());
+				subscribePaymentService.personalSharingFund(randomPnum);
 				}
-				
+				subscribePaymentService.updateProductAmount(randomPnum);
+				subscribePaymentService.deleteWish(randomPnum, vo.getEmail());
 				System.out.println("foreach 도는중 쿠쿠");
 			}
 		} catch (Exception e) {

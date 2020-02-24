@@ -235,8 +235,8 @@
             <!-- 상품상세 content 오른쪽 상품정보 div -->
                 <div class="product_right">
                     <span
-                        class="product_cate1"><%=prVO.getCategory_l() %>><%=prVO.getCategory_m() %>><%=prVO.getCategory_s() %>
-                        조회수 : <%=prVO.getReadcount() %></span>
+                        class="product_cate1"><%=prVO.getCategory_l() %>&nbsp;>&nbsp;<%=prVO.getCategory_m() %>&nbsp;>&nbsp;<%=prVO.getCategory_s() %>
+                        <%-- 조회수 : <%=prVO.getReadcount() %> --%></span>
                     <span class="product_cate2">
                         <input type="checkbox" id="wishlist-pid-0001">
                         <label for="wishlist-pid-0001">
@@ -544,8 +544,15 @@
     </div>
    
     
- 
     <!-- 배송/반납  --> 
+
+    <% if(usergroup.equals("admin")) { %>
+    <div class="container">
+        <input type="button" value="상품 수정" onclick="prModify();" />
+        <input type="button" value="상품 삭제" onclick="prDelete();" />
+    </div>
+    <%} %>
+
 
 
 

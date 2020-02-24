@@ -34,7 +34,7 @@ public interface PDMapper {
 	List<ProductVO> scrollSearch(@Param("pno") int pno);//카테고리 null일 경우 pno만 받아서 전체 출력
 	
 	//스크롤 내리면 카테고리 읽어온 뒤 파라미터로 받은 pno+1 ~ pno+8까지 데이터 추가
-	List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3);
+	List<ProductVO> filterScroll(@Param("pno") int pno, @Param("cateMap1") HashMap<String, String> cateMap1, @Param("cateMap2") HashMap<String, String> cateMap2, @Param("cateMap3") HashMap<String, String> cateMap3, @Param("special") String special);
 	
 	
 	//카테고리 선택 후 적용 시 해당 카테고리 데이터 8개 출력

@@ -22,7 +22,7 @@ function allSearch() {
 //pNum = 0;
 //document.getElementById('printNumber').value = 0;
 	var chkcnt = 0;
-	var fil = new Array(3);
+	var fil = new Array();
 	
 	if(deviceChk==1){
 		for(var j=1; j<4;j++){		
@@ -31,7 +31,7 @@ function allSearch() {
 					 if (chkbox[i].checked == true) {
 						 chkcnt++;
 					      fil[j-1] += chkbox[i].value;
-					      //fil[j-1] += ",";				      
+					      fil[j-1] += ",";				      
 					 }
 				 }
 			}
@@ -47,11 +47,10 @@ function allSearch() {
 				 }
 			}
 	}
-			
 	$.ajax({
 		url: '/bit_project/filterSearch.pr',
 		type: 'post',
-		data:{pno : pNum, category_l : fil[0], category_m : fil[1], category_s : fil[2]}, 
+		data:{pno : pNum, category_l : fil[0], category_m : fil[1], category_s : fil[2], "special" : $('#sort').text()}, 
 		dataType: "json",
 		async:false,
 		contentType: 'application/x-www-form-urlencoded; charset=utf-8',

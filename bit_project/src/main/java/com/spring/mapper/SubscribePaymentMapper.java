@@ -28,5 +28,7 @@ public interface SubscribePaymentMapper {
 	void settleAccept(@Param("settlement_num") int settlement_num);
 	int personalSharingCheck(@Param("product_num") int product_num);
 	int personalSharingFund(@Param("product_num") int product_num);
+	int adminSelectWish(@Param("grade") String grade);
+	void adminInsertWish(@Param("product_num") int product_num, @Param("email") String email);
 	
 }

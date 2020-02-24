@@ -362,6 +362,7 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 		return res;
 	}
+
 	
 	@Override
 	public int updateSgrade(String email, String regrade) throws Exception {
@@ -385,5 +386,28 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 	}
 	
+
+	@Override
+	public int adminSelectWish(String grade) throws Exception {
+		int res = 0;
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			res = paymentmapper.adminSelectWish(grade);
+		} catch (Exception e) {
+			throw new Exception("SubscribePaymentMapper adminSelectWish 실패", e);
+		}
+		return res;
+	}
+
+	@Override
+	public void adminInsertWish(int product_num, String email) throws Exception {
+		try {
+			PaymentMapper paymentmapper = sqlSession.getMapper(PaymentMapper.class);
+			paymentmapper.adminInsertWish(product_num, email);
+		} catch (Exception e) {
+			throw new Exception("위시리스트가 없는 경우 랜덤으로 wish 등록 실패", e);
+		}
+	}
+
 	
 }

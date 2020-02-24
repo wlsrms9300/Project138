@@ -37,6 +37,18 @@
 
         };
         $('.qna_writebtn a').first().click(function () {
+        	if($("#QnaForm input:text[name=question_title]").val().length<10){
+        		alert('제목은 최소 10 자 이상 작성해주세요.');
+        		return false;
+        	}
+        	
+        	if($("#QnaForm textarea[name=content]").val().length<10){
+        		alert('문의내용은 최소 10자 이상 작성해주세요.');
+        		return false;
+        	}
+        	
+         	
+        	
             $("body").removeClass('not_scroll');
             $('.qnaForm').css('position', 'relative');// top값 해제
             $('.qnaForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값
@@ -141,6 +153,18 @@
 
         };
         $('.review_writebtn a').first().click(function () {
+        	var tf = false;
+        	tf = $('input:radio[name=reviewcheck]').is(':checked');
+        	if(tf==false){
+        		alert('평점을 선택해주세요.');
+        		return false;
+        	}
+        	if($("#ReviewForm textarea[name=content]").val().length<20){
+        		alert('리뷰내용은 최소 20자 이상 작성해주세요.');
+        		return false;
+        	}
+        	
+        	
             $("body").removeClass('not_scroll');
             $('.reviewForm').css('position', 'relative');// top값 해제
             $('.reviewForm').css('left', 0);// 최상위 div에 현재 스크롤된값 = 보이는화면만큼 top값

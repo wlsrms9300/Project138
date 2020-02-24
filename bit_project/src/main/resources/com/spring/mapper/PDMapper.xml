@@ -176,8 +176,21 @@
 			#{z}
 			</foreach>
 		</if>
+		<if test="special=='신상품'">
+		order by regist desc, product_num asc
+		</if>
+		<if test="special=='인기순'">
+		order by readcount desc, product_num asc
+		</if>
+		<if test="special=='평점순'">
+		order by gpa desc, product_num asc
+		</if>
+		<if test="special==null">
 		order by product_num asc
+		</if>
+		
 		)
+		
 		)
 	<![CDATA[WHERE rnum>=#{pno}+1 and rnum<=#{pno}+8]]>
 	</select>
