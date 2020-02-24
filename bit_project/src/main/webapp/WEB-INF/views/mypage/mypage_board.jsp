@@ -16,7 +16,7 @@
 <!-- 웹 폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&amp;subset=korean" rel="stylesheet"/>
 <link href="${pageContext.request.contextPath}/resources/css/mypage/board.css" rel="stylesheet">
-<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
+
 <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/> <!-- 테이블 css -->
 
 <head>
@@ -196,5 +196,6 @@
 			</tbody>
     	</table>
      </div>
+     
 </body>
 </html>

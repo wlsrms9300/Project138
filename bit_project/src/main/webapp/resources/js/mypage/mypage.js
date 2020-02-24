@@ -8,6 +8,7 @@
         var HdataPerPage = 5;
         var HpageCount = 5;
         var HcurrentPage = 1;
+        
 $(document).ready(function(){
     $('.member').on('click', function(){
         var submenu = $(this).next("ul");

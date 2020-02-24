@@ -295,5 +295,6 @@
 var myemail = "<%=email%>";
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/mypage/mypage.js"></script>
+<script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> <!-- 테이블 js -->
 </body>
 </html>

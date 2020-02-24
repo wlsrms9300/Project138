@@ -270,7 +270,7 @@ function delchk(board_num) {
           dataType : "json",
           success : function(retVal) {
              if(retVal.res == "OK") {
-            	 alert("댓글 수정이 완료되었습니다");
+            	 
             	 coList();
              }
              else {
@@ -349,7 +349,7 @@ function delchk(board_num) {
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time" style="margin-top:3px; margin-right:10px;">' + date + '</span>';
 	                		output += '<div class="community_comments_view_add">'; 
-	                		output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;"class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
+	                		output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;" class="answer_btn">' + "답글작성" + '</button>' + '</div>';
 	                		
 	                		if(item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
 						output += '<div class="community_comments_view_modify" id="' + item.comment_num + '">';
@@ -532,7 +532,7 @@ function delchk(board_num) {
           dataType : "json",
           success : function(retVal) {
              if(retVal.res == "OK") {
-            	 alert("댓글 수정이 완료되었습니다");
+            	 
             	 coList();
              }
              else {
