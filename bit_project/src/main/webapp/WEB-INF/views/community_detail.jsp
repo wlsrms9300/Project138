@@ -71,7 +71,25 @@
         </div>
         <div class="community_mt_title">
         	<img src="<%=img_e %>">
-        	<p><%=cmvo.getNickname() %></p>
+        	<p style="margin-right: 750px;"><%=cmvo.getNickname() %></p>
+        	
+        	  <% if(email_co != null ) { %>
+	                <% if (email_e.equals(email_co)) { %>
+	                <div class="community_mt_footer_btn">
+	                	
+	                
+	                <button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:#ffb0b1; width:60px; height:30px; font-size:15px;" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">글수정</button>
+	           		<button type="button" class="community_mt_footer_update_btn" style="border:1px solid; color:#fff; border-radius:5px; background-color:black; width:60px; height:30px; font-size:15px;" onclick="delchk('<%=cmvo.getBoard_num() %>');">글삭제</button>
+	                
+	                
+	                </div> 
+	                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
+	                <div class="community_mt_footer_btn">
+	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
+	                </div>
+	                <% } %>
+                <% } %>
+                
         </div>
         <hr>
         <div class="community_mt_mt">
@@ -94,19 +112,7 @@
                     <img src="${pageContext.request.contextPath}/resources/icons/naver.png" style="border-radius: 5px;" ></a>
                     <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3" data-url="http://localhost:8080/bit_project/community_detail.co?board_num=${cmvo.getBoard_num()}"  data-color="default" data-size="small" data-count="false" style="display: none;"></div>
                 </div>
-                <% if(email_co != null ) { %>
-	                <% if (email_e.equals(email_co)) { %>
-	                <div class="community_mt_footer_btn">
-	                		<input type="button" value="수정" class="community_mt_footer_update_btn" style="border-radius: 5px; color: #fff; background: #ea7475; font-size: large" onclick="location.href='updateForm.cw?board_num=<%=cmvo.getBoard_num() %>'">
-	                		<button class="community_mt_footer_update_btn" style="border-radius: 5px; color: #fff; background: #444444; font-size: large" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
-	                </div> 
-	                <% } else if(userDetail_co.getUsergroup().equals("admin")) { %>
-	                <div class="community_mt_footer_btn">
-	                		<button class="community_mt_footer_update_btn" onclick="delchk('<%=cmvo.getBoard_num() %>');">삭제</button>
-	                </div>
-	                <% } %>
-                <% } %>
-                
+              
             </div>
         </footer>
         <hr>
@@ -343,12 +349,12 @@ function delchk(board_num) {
 	                		output += '<div class="community_comments_view_actions">';
 	                		output += '<span class="community_comments_view_time">' + date + '</span>';
 	                		output += '<div class="community_comments_view_add">';
-	                		output += '<button type="button" class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
+	                		output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;"class="answer_btn" >' + "댓글달기" + '</button>' + '</div>';
 	                		
 	                		if(item.email == email) { //로그인한사람과 댓글쓴사람이 같을 경우 수정 삭제 가능
 						output += '<div class="community_comments_view_modify" id="' + item.comment_num + '">';
-						output += '<button type="button" onclick="comod_form(' + item.comment_num + ')">' + "수정" + '</button>';
-						output += '<button type="button" onclick="codel_btn(' + item.comment_num + ')">' + "삭제" + '</button></div>';
+						output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;" onclick="comod_form(' + item.comment_num + ')">' + "수정" + '</button>';
+						output += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px;" onclick="codel_btn(' + item.comment_num + ')">' + "삭제" + '</button></div>';
 	                		}
 						output += '</div>';
 						output += '</div>';
@@ -450,8 +456,8 @@ function delchk(board_num) {
 						
 						if(item.email.trim() == email) {
 						answer += '<div class="community_answer_view_modify" id="' + item.answer_num + '">';
-						answer += '<button type="button" onclick="anmod_form(' + item.answer_num + ')">' + "수정" + '</button>';
-						answer += '<button type="button" onclick="andel_btn(' + item.answer_num + ')">' + "삭제" + '</button></div>';
+						answer += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px; "onclick="anmod_form(' + item.answer_num + ')">' + "수정" + '</button>';
+						answer += '<button type="button" style=" border: 1px solid; color: #fff; border-radius: 5px; background-color: #ffb0b1; height: 24px; font-size: 13px; "onclick="andel_btn(' + item.answer_num + ')">' + "삭제" + '</button></div>';
 						}
 						
 						answer += '</div>';

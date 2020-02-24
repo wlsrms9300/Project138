@@ -174,4 +174,16 @@
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_user > img{margin: 5px 5px;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container > .community_answer_view_answer > input{width: 100%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container{width: 100%;}
-}
+
+.answer1, .answer2, .answer3 {
+    cursor: pointer;
+    margin: 0 auto;
+    border-radius: 3px;
+    color: #fff;
+    border: 0;
+    width: 120px;
+    height: 36px;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+    background: #ff7276;}

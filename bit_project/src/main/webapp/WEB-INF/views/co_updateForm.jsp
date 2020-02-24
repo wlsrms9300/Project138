@@ -65,9 +65,10 @@
 			<div id="contentbox-middle">
 				<textarea class="summernote" id="summernote" name="content" maxlength="140" rows="7"></textarea>
 			</div>
-			<div id="contentbox-bottom">
-				<input type ="button" id="submit-btn" onclick="update_chk()" value="수정">
+			<div id="contentbox-bottom"> 
 				<input type="button" id="cancel-btn" onclick="history.back(-1);" value="취소">
+				<input type ="button" style="background-color: #ffb0b1;"   id="submit-btn" onclick="update_chk()" value="수정">
+				
 			</div>
 		</form>
 	</div> 
