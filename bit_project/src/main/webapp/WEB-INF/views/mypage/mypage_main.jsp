@@ -272,23 +272,7 @@
     </div>
 
     <!-- footer 시작 -->
-    <footer id="footer">
-        <div id="footer_sns">
-            <div class="container">
-                <div class="footer_sns">
-                    <ul>
-                        <li class="icon s1"><a href="#"><span class="ir_pm">트위터</span></a></li>
-                        <li class="icon s2"><a href="#"><span class="ir_pm">페이스북</span></a></li>
-                        <li class="icon s3"><a href="#"><span class="ir_pm">인스타그램</span></a></li>
-                        <li class="icon s4"><a href="#"><span class="ir_pm">구글 플레이</span></a></li>
-                        <li class="icon s5"><a href="#"><span class="ir_pm">아이폰 앱스토어</span></a></li>
-                    </ul>
-                    <div class="tel">
-                        <a href="#">ARS <em>1544-5252</em></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
        <footer>
 			<%@ include file="/WEB-INF/views/footer.jsp"%>
 		</footer>

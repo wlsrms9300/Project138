@@ -120,9 +120,11 @@
 		}
 	}
 </script>
+<div style="height: 50px;">
 <footer>
+
 	 <%@ include file="/WEB-INF/views/footer.jsp" %> 
 </footer>
-
+</div>
 </body>
 </html>

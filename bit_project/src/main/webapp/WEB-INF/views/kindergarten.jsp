@@ -131,7 +131,7 @@
 			<div id="icon">
 				<i class="fas fa-home fa-9x"></i>
 
-			</div>
+			</div> 
 			</div>
  
 		

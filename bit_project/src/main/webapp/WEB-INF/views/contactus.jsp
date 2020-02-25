@@ -96,7 +96,7 @@
 		</div>
 
 		<hr>
-		<div id="map-wrapper">
+		<div id="map-wrapper"style="width: 1280px; margin: 0 auto;">
 			<div id="map"></div>
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bbb3254cd74d562e441c933eb6805411"></script>
@@ -174,18 +174,7 @@
 				</table>
 			</div>
 		</div>
-	</div>
-</body>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-$(document).ready(function() {
-	$('#oneder').click(function() {
-		
-		location.href="main.ma";
-	});
-});
-</script>
-<footer id="footer">
+		<footer id="footer">
 	<div id="footer_sns">
 		<div class="container">
 			<div class="footer_sns">
@@ -230,4 +219,17 @@ $(document).ready(function() {
 		</div>
 	</div>
 </footer>
+	</div>
+	
+</body>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('#oneder').click(function() {
+		
+		location.href="main.ma";
+	}); 
+});
+</script>
+
 </html>

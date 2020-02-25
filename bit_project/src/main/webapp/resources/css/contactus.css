@@ -133,13 +133,12 @@ body {
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
-		display: block;
-		float: left;
+	
 	}
 	#information {
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
-		float: left;
+		
 	}
 }
