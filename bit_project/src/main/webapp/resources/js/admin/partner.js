@@ -165,6 +165,7 @@ var state_param = null;
 
 	      });
 	      }
+	      location.href="";
 	   }
 
    

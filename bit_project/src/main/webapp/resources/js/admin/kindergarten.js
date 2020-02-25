@@ -94,7 +94,7 @@ var state_param = null;
 	      var input = confirm("수락 하시겠습니까?");
 	 	 if(input){
 	      
-	      alert(param_name);
+	     
 	      $.ajax({
 
 	         url : '/bit_project/companyadd.se',   
@@ -160,6 +160,7 @@ var state_param = null;
 
 	      });
 	 	 }
+	 	 location.href="";
 	 	}
 	   
    
