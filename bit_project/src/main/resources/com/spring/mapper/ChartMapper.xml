@@ -110,7 +110,7 @@
  	<select id="countPosts" parameterType="String" resultMap="cpGMap">
 		select regist, count(*) as count from (
 			select trunc(regist, 'DD') as regist, board_name from board 
-			where regist = to_date(#{strDate})
+			where trunc(regist) = to_date(#{strDate})
 		) group by regist order by regist asc
  	</select> 
 

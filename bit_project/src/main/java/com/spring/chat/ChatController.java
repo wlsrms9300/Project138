@@ -24,10 +24,11 @@ public class ChatController {
 		ArrayList<ChatVO> adminlist = null;
 		ArrayList<MessageVO> roomlist = null;
 		LoginVO userDetail = null;
+		
 		int check;
 		try {
 			adminlist = chatservice.allAdmin(); //일반유저일 경우 관리자목록 불러온다
-			
+		
 			if(session.getAttribute("email") != null) { //세션이 null이 아니라면 유저정보 받아오기
 				userDetail = (LoginVO)session.getAttribute("userDetail");
 				if(userDetail.getUsergroup() != null) {

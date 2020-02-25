@@ -106,7 +106,7 @@
 	.detail_subject{font-size: 1.8rem; color: #616161;}
 	.count_circle_num{font-size: 15px; color: white;}
 	.community_menubar_item:hover{color: #ff7276;}
-	.community_mt_footer_btn{margin-left:75%;}
+	
 	
 	
 /*모바일*/
@@ -114,7 +114,7 @@
 	body{font-size: 13px;}
 	hr{ width: 85%; border: #a9a9a9 solid 1px; margin: 10px auto;}
 	#community_container_mt_d{width:100%;}
-	.community_mt_footer_btn{margin-left:40%;}
+	
 	.community_mt_title > img {margin-left:10px;}
 	.community_answer_form{width:80%;}
 	#community_container_comments > .community_comments_view > .comments_container >.community_comments_view_container > .answer_container > .community_answer_view_container {width:82%;}

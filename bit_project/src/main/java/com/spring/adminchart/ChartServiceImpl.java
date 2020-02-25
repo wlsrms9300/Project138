@@ -36,6 +36,7 @@ public class ChartServiceImpl implements ChartService {
 			c.setTime(sdf1.parse(strTomorrow));
 			c.add(Calendar.DATE, 1); 
 			strTomorrow = sdf1.format(c.getTime()); 
+			System.out.println(strTomorrow+","+strToday);
 			
 			res = chartMapper.countNewUsers(strToday, strTomorrow);
 		}catch(Exception e) {

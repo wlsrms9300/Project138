@@ -7,7 +7,7 @@ $(document).on("touchstart", function(){ });
 
 
 $(document).ready(function() { // 제일 아래 selectData() 먼저 실행.
-	
+
 	
 	// 목록
 	function selectData() {
@@ -34,7 +34,8 @@ $(document).ready(function() { // 제일 아래 selectData() 먼저 실행.
 					'<figcaption>' + 
 					'<h3>' + item.name + '</h3>' + 
 					'<p>' + item.content + '</p>' + 
-					'<a href="' + item.homepage + '/" target="_blank" style="text-align: right;">' +
+					'<a href="' + item.homepage+ + '/" target="_blank" style="text-align:right;">' +
+					/*'<p onClick="open(' +homepage +');" style="cursor:pointer;">' +*/
 					'GO!' + 
 					'</a>' +
 					'</figurecaption>' +

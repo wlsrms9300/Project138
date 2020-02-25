@@ -25,7 +25,7 @@
 	}
 	
 	ArrayList<MessageVO> roomlist = (ArrayList<MessageVO>)request.getAttribute("roomlist"); //관리자일 경우 채팅방 정보
-	ArrayList<ChatVO> adminlist = (ArrayList<ChatVO>)request.getAttribute("adminlist"); //관리자 목록 
+	ArrayList<ChatVO> adminlist = (ArrayList<ChatVO>)request.getAttribute("adminlist"); //모든관리자 목록 
 	
 %>
 <!DOCTYPE html>
